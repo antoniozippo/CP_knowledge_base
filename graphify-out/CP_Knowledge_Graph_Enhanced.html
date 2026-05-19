@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronic Pain Knowledge Graph — CP_knowledge_base</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0a0a14;
+  color: #d0d0e0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+#graph-container { flex: 1; position: relative; }
+#graph-container svg { width: 100%; height: 100%; }
+#sidebar {
+  width: 340px;
+  background: #12122a;
+  border-left: 1px solid #2a2a4e;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 12px;
+}
+#panel-tabs {
+  display: flex;
+  border-bottom: 1px solid #2a2a4e;
+}
+#panel-tabs button {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+#panel-tabs button.active { color: #d0d0e0; border-bottom: 2px solid #4E79A7; background: #1a1a35; }
+#panel-tabs button:hover { color: #d0d0e0; }
+.panel { display: none; flex: 1; overflow-y: auto; padding: 12px; }
+.panel.active { display: block; }
+#search-wrap { padding: 8px 12px; border-bottom: 1px solid #2a2a4e; }
+#search {
+  width: 100%;
+  background: #0a0a14;
+  border: 1px solid #3a3a5e;
+  color: #d0d0e0;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  outline: none;
+}
+#search:focus { border-color: #4E79A7; }
+#search-results { max-height: 150px; overflow-y: auto; display: none; }
+.search-item { padding: 4px 8px; cursor: pointer; border-radius: 3px; font-size: 11px; }
+.search-item:hover { background: #2a2a4e; }
+
+.node-label { font-size: 9px; pointer-events: none; text-shadow: 0 0 3px rgba(0,0,0,0.8); fill: #d0d0e0; }
+.node-label.god { font-weight: bold; font-size: 10px; fill: #ffd700; }
+
+.tooltip {
+  position: absolute;
+  background: #1a1a35;
+  border: 1px solid #3a3a5e;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  pointer-events: none;
+  max-width: 320px;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.tooltip h4 { color: #ffd700; margin-bottom: 4px; font-size: 13px; }
+.tooltip .field { margin: 2px 0; }
+.tooltip .field b { color: #aaa; }
+.tooltip .hyperedges-section { margin-top: 8px; border-top: 1px solid #3a3a5e; padding-top: 6px; }
+.tooltip .cascade-item { color: #76B7B2; font-size: 11px; margin: 2px 0; }
+
+#cascade-panel { padding: 0; }
+.cascade-block {
+  margin: 8px 12px;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid;
+  background: #0f0f20;
+}
+.cascade-block h4 { font-size: 13px; margin-bottom: 6px; }
+.cascade-block .cascade-nodes { display: flex; flex-wrap: wrap; gap: 4px; }
+.cascade-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  background: #1a1a35;
+  border: 1px solid #3a3a5e;
+  cursor: pointer;
+}
+.cascade-badge:hover { background: #2a2a4e; }
+
+.comm-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+.comm-item:hover { background: #2a2a3e; }
+.comm-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.comm-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.comm-count { color: #666; font-size: 10px; }
+
+#stats-footer {
+  padding: 10px 14px;
+  border-top: 1px solid #2a2a4e;
+  font-size: 10px;
+  color: #555;
+  background: #0a0a16;
+}
+.stat-row { display: flex; justify-content: space-between; margin: 2px 0; }
+
+#network-map {
+  margin: 12px;
+  overflow-x: auto;
+}
+#network-map table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+#network-map th {
+  background: #1a1a35;
+  padding: 6px 8px;
+  text-align: left;
+  color: #aaa;
+  font-weight: 500;
+  border-bottom: 1px solid #3a3a5e;
+}
+#network-map td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #1a1a35;
+  vertical-align: top;
+}
+#network-map td:first-child { color: #F28E2B; }
+#network-map td:nth-child(2) { color: #E15759; font-weight: 500; }
+#network-map td:nth-child(3) { color: #76B7B2; }
+#network-map td:last-child { color: #EDC948; }
+
+.legend-controls { display: flex; align-items: center; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+.legend-controls button {
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid #3a3a5e;
+  background: #0f0f20;
+  color: #aaa;
+  font-size: 10px;
+  cursor: pointer;
+}
+.legend-controls button:hover { background: #2a2a4e; color: #d0d0e0; }
+
+#title-bar {
+  padding: 10px 14px;
+  border-bottom: 1px solid #2a2a4e;
+  background: #0a0a16;
+}
+#title-bar h2 { font-size: 14px; font-weight: 600; color: #d0d0e0; }
+#title-bar .subtitle { font-size: 10px; color: #666; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div id="graph-container">
+  <svg id="graph-svg"></svg>
+  <div id="tooltip" class="tooltip" style="display:none;"></div>
+</div>
+<div id="sidebar">
+  <div id="title-bar">
+    <h2>CP Knowledge Graph</h2>
+    <div class="subtitle">Chronic Neuropathic Pain — Multi-Level Mechanistic Map</div>
+  </div>
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search 162 nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="panel-tabs">
+    <button class="active" data-panel="comm-panel">Communities</button>
+    <button data-panel="cascade-panel">Cascades</button>
+    <button data-panel="map-panel">Pathways</button>
+    <button data-panel="about-panel">About</button>
+  </div>
+  <div id="comm-panel" class="panel active">
+    <div class="legend-controls">
+      <button onclick="showAllCommunities()">All</button>
+      <button onclick="showMajorCommunities()">Majors</button>
+      <button onclick="showGodNodes()">God Nodes</button>
+      <button onclick="resetGraph()">Reset</button>
+    </div>
+    <div id="community-list"></div>
+  </div>
+  <div id="cascade-panel" class="panel"></div>
+  <div id="map-panel" class="panel">
+    <div id="network-map"></div>
+  </div>
+  <div id="about-panel" class="panel">
+    <div style="line-height:1.8">
+      <p><b>PRIN PNRR 2022</b> (P2022C5P3F) — PI: Zippo</p>
+      <p style="margin-top:8px"><b>Cortical lateral connectivity in chronic pain with MRT</b></p>
+      <p style="margin-top:8px;color:#888">
+        This knowledge graph integrates 18 mechanistic dossiers covering the molecular,
+        cellular, circuit, and vascular mechanisms of spinal disinhibition in chronic
+        neuropathic pain. Built with graphify and enhanced with deep research synthesis.
+      </p>
+      <p style="margin-top:12px;color:#aaa"><b>God Nodes (top 10 most-connected):</b></p>
+      <ol id="god-node-list" style="padding-left:16px;margin-top:4px;color:#aaa;font-size:11px"></ol>
+      <p style="margin-top:12px;color:#888;font-size:10px">
+        162 nodes · 197 edges · 172 EXTRACTED + 25 INFERRED · 11 hyperedges<br>
+        Updated: 2026-05-18 · Tools: graphify + D3.js
+      </p>
+    </div>
+  </div>
+  <div id="stats-footer">
+    <div class="stat-row"><span>Nodes</span><span id="stat-nodes">162</span></div>
+    <div class="stat-row"><span>Edges</span><span id="stat-edges">197</span></div>
+    <div class="stat-row"><span>Hyperedges</span><span id="stat-he">11</span></div>
+    <div class="stat-row"><span>Communities</span><span id="stat-comm">18</span></div>
+    <div class="stat-row"><span>Extracted</span><span>172 (87%)</span></div>
+    <div class="stat-row"><span>Inferred</span><span>25 (13%)</span></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const GRAPH_DATA = {"nodes": [{"id": "PNN_ECM_perineuronal_nets", "label": "Perineuronal Nets (PNNs)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_extracellular_matrix", "label": "Extracellular Matrix (ECM)", "community": 14, "size": 7, "color": "#B6992D", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_CSPGs", "label": "Chondroitin Sulfate Proteoglycans (CSPGs)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_hyaluronan", "label": "Hyaluronan (HA)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_MMP9", "label": "Matrix Metalloproteinase-9 (MMP-9)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_MMP2", "label": "Matrix Metalloproteinase-2 (MMP-2)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_ADAMTS", "label": "ADAMTS Proteases", "community": 15, "size": 7, "color": "#499894", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_chondroitinase_ABC", "label": "Chondroitinase ABC", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_tenascin_R", "label": "Tenascin-R", "community": 16, "size": 7, "color": "#E15759", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_HAPLN1", "label": "Link Protein HAPLN1/Crtl1", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_SB3CT", "label": "SB-3CT (MMP Inhibitor)", "community": 17, "size": 7, "color": "#F28E2B", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_TIMP1", "label": "TIMP-1 (Endogenous MMP Inhibitor)", "community": 18, "size": 7, "color": "#555555", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "PNN_ECM_rationale_PNN_normal_function", "label": "Rationale: PNNs are critical for normal brain function", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "NogoA_NgR1_NogoA", "label": "Nogo-A", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_NgR1", "label": "Nogo-66 Receptor 1 (NgR1)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_LINGO1", "label": "LINGO-1", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_p75NTR", "label": "p75 Neurotrophin Receptor (p75NTR)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_MAG", "label": "Myelin-Associated Glycoprotein (MAG)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_OMgp", "label": "Oligodendrocyte Myelin Glycoprotein (OMgp)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_TRPV1", "label": "TRPV1 Channel", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_LIMK_cofilin", "label": "LIMK/Cofilin Pathway", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_NG101", "label": "NG101 (Anti-Nogo-A Antibody)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_846_861PE", "label": "846-861PE (NgR1 Antagonist Peptide)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "NogoA_NgR1_rationale_physiological_roles", "label": "Rationale: Nogo-A/NgR1 have physiological circuit-stabilizing roles", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "NogoA-NgR1.md", "type": "document"}, {"id": "SST_somatostatin_interneurons", "label": "Somatostatin (SST) Interneurons", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "SST.md", "type": "document"}, {"id": "SST_SSTR2a", "label": "SSTR2a Receptor", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "SST.md", "type": "document"}, {"id": "SST_Prdm12", "label": "Prdm12 Transcription Factor", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "SST.md", "type": "document"}, {"id": "RhoA_ROCK_RhoA", "label": "RhoA GTPase", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_ROCK", "label": "ROCK (ROCK1/ROCK2)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_p38_MAPK", "label": "p38 MAPK", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_MARCKS", "label": "MARCKS Protein", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_EphA1", "label": "EphA1 Receptor", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_fasudil", "label": "Fasudil (ROCK Inhibitor)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_Y27632", "label": "Y-27632 (ROCK Inhibitor)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_simvastatin", "label": "Simvastatin (RhoA Inhibitor)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_C3_exoenzyme", "label": "C3 Exoenzyme (RhoA Inhibitor)", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_miR_488_3p", "label": "miR-488-3p (ROCK1-Targeting miRNA)", "community": 19, "size": 7, "color": "#555555", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "RhoA_ROCK_rationale_dual_role", "label": "Rationale: RhoA/ROCK has context-dependent roles in regeneration vs pain", "community": 2, "size": 12, "color": "#4E79A7", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "BDNF_TrkB_BDNF", "label": "Brain-Derived Neurotrophic Factor (BDNF)", "community": 1, "size": 18, "color": "#F28E2B", "isGod": true, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_TrkB", "label": "TrkB Receptor (TrkB.FL)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_KCC2", "label": "KCC2 (Potassium-Chloride Cotransporter)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_proBDNF", "label": "proBDNF", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_TrkB_T1", "label": "TrkB.T1 (Truncated Isoform)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_ANA_12", "label": "ANA-12 (TrkB Kinase Inhibitor)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_CLP257", "label": "CLP257 (KCC2 Enhancer)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "BDNF_TrkB_rationale_dual_roles", "label": "Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "TNF_TNF_alpha", "label": "Tumor Necrosis Factor Alpha (TNF-\u03b1)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "TNF_TNFR1", "label": "TNFR1 Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "TNF_TNFR2", "label": "TNFR2 Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "TNF_XPro1595", "label": "XPro1595 (solTNF/TNFR1 Blocker)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "TNF_infliximab", "label": "Infliximab (Anti-TNF Antibody)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "TNF_rationale_paradox", "label": "Rationale: Anti-TNF can paradoxically trigger neuropathies", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "TNF.md", "type": "document"}, {"id": "IGF1_2_IGF1", "label": "Insulin-like Growth Factor 1 (IGF1)", "community": 12, "size": 7, "color": "#D37295", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "IGF1_2_IGF2", "label": "Insulin-like Growth Factor 2 (IGF2)", "community": 13, "size": 7, "color": "#8CD17D", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "IGF1_2_IGF1R", "label": "IGF1 Receptor (IGF1R)", "community": 12, "size": 7, "color": "#D37295", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "IGF1_2_NTRK1", "label": "NTRK1 Receptor", "community": 13, "size": 7, "color": "#8CD17D", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "IGF1_2_follistatin", "label": "Follistatin (FST)", "community": 12, "size": 7, "color": "#D37295", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "IGF1_2_rationale_IGF1_dual_nature", "label": "Rationale: IGF1 has dual neuroprotective and pain-promoting roles", "community": 12, "size": 7, "color": "#D37295", "isGod": false, "source": "IGF1-2.md", "type": "document"}, {"id": "BBB_blood_brain_barrier", "label": "Blood-Brain Barrier (BBB)", "community": 3, "size": 18, "color": "#76B7B2", "isGod": true, "source": "BBB.md", "type": "document"}, {"id": "BBB_blood_spinal_cord_barrier", "label": "Blood-Spinal Cord Barrier (BSCB)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_blood_nerve_barrier", "label": "Blood-Nerve Barrier (BNB)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_neurovascular_unit", "label": "Neurovascular Unit (NVU)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_tight_junction_proteins", "label": "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_CypA_MMP9_pathway", "label": "CypA-MMP-9 Pathway", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_resolvin_D1", "label": "Resolvin D1 (Pro-Resolving Mediator)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "BBB_rationale_balancing_act", "label": "Rationale: Balancing barrier repair with drug delivery is critical", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "BBB.md", "type": "document"}, {"id": "hif1a_HIF1alpha", "label": "Hypoxia-Inducible Factor 1 Alpha (HIF1\u03b1)", "community": 10, "size": 18, "color": "#AF7AA1", "isGod": true, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_PHD_enzymes", "label": "Prolyl Hydroxylase Domain (PHD) Enzymes", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_VHL", "label": "Von Hippel-Lindau (VHL) Protein", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_NF_kB", "label": "NF-\u03baB", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_2_deoxy_D_glucose", "label": "2-Deoxy-D-Glucose (2-DG)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_YC1", "label": "YC-1 (HIF1\u03b1 Inhibitor)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_PX478", "label": "PX-478 (HIF1\u03b1 Inhibitor)", "community": 20, "size": 7, "color": "#555555", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "hif1a_rationale_caution", "label": "Rationale: HIF1\u03b1 has isoform specificity and systemic risks", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "hif1a.md", "type": "document"}, {"id": "vegf_VEGFA", "label": "Vascular Endothelial Growth Factor A (VEGFA)", "community": 3, "size": 18, "color": "#76B7B2", "isGod": true, "source": "vegf.md", "type": "document"}, {"id": "vegf_VEGFR2", "label": "VEGFR2 (Flk-1/KDR)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "vegf_neuropilin_1", "label": "Neuropilin-1 (NRP-1)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "vegf_semaphorin_3A", "label": "Semaphorin-3A", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "vegf_bevacizumab", "label": "Bevacizumab (Anti-VEGF Antibody)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "vegf_VEGF_Trap", "label": "VEGF-Trap (Aflibercept)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "vegf_rationale_dual_role", "label": "Rationale: VEGFA is crucial for repair but drives pain when excessive", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "vegf.md", "type": "document"}, {"id": "AngPt_angiopoietin_1", "label": "Angiopoietin-1 (Ang-1)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "AngPt.md", "type": "document"}, {"id": "AngPt_angiopoietin_2", "label": "Angiopoietin-2 (Ang-2)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "AngPt.md", "type": "document"}, {"id": "AngPt_Tie2", "label": "Tie2 Receptor", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "AngPt.md", "type": "document"}, {"id": "AngPt_COMP_Ang1", "label": "COMP-Ang-1 (Stabilized Ang-1)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "AngPt.md", "type": "document"}, {"id": "AngPt_fumagillin", "label": "Fumagillin (Ang-2 Inhibitor)", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "AngPt.md", "type": "document"}, {"id": "rbfox1_Rbfox1", "label": "Rbfox1 (A2BP1)", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "rbfox1_NrCAM", "label": "NrCAM (Neuronal Cell Adhesion Molecule)", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "rbfox1_SCN9A_Nav1_7", "label": "Nav1.7 (SCN9A) Voltage-Gated Sodium Channel", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "rbfox1_circRbfox1", "label": "circRbfox1 (Circular RNA)", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "rbfox1_AAV5_Rbfox1", "label": "AAV5-Rbfox1 Gene Therapy", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "rbfox1_rationale_caution", "label": "Rationale: Rbfox1 has pleiotropic effects across the nervous system", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "rbfox1.md", "type": "document"}, {"id": "PV_interneurons_PV_interneurons", "label": "Parvalbumin (PV) Interneurons", "community": 5, "size": 18, "color": "#EDC948", "isGod": true, "source": "PV+_interneurons.md", "type": "document"}, {"id": "PV_interneurons_CP_AMPARs", "label": "Calcium-Permeable AMPA Receptors (CP-AMPARs)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PV+_interneurons.md", "type": "document"}, {"id": "PV_interneurons_IEM_1460", "label": "IEM-1460 (CP-AMPAR Antagonist)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PV+_interneurons.md", "type": "document"}, {"id": "PV_interneurons_CLP257", "label": "CLP257 (KCC2 Enhancer)", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PV+_interneurons.md", "type": "document"}, {"id": "shared_microglia", "label": "Microglia", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "shared_astrocytes", "label": "Astrocytes", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "RhoA-ROCK.md", "type": "document"}, {"id": "shared_central_sensitization", "label": "Central Sensitization", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "shared_neuroinflammation", "label": "Neuroinflammation", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "shared_mechanical_allodynia", "label": "Mechanical Allodynia", "community": 5, "size": 12, "color": "#EDC948", "isGod": false, "source": "PNN_ECM.md", "type": "document"}, {"id": "shared_P2X4_receptor", "label": "P2X4 Purinergic Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "BDNF-TrkB.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Bcl_xL", "label": "Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)", "community": 0, "size": 18, "color": "#E15759", "isGod": true, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_S5E2_enhancer", "label": "S5E2 Enhancer (PV+ Neuron-Specific Regulatory Element)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Beclin_1", "label": "Beclin-1 (Autophagosome Nucleation Protein)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_mPTP", "label": "Mitochondrial Permeability Transition Pore (mPTP)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_LAMP2A", "label": "LAMP2A (Chaperone-Mediated Autophagy Receptor)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Gibson_Assembly", "label": "Gibson Assembly Cloning Strategy", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Vormstein_Schneider_2020", "label": "Vormstein-Schneider et al. (2020)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_goldilocks_rationale", "label": "Rationale: Long-Term Autophagy Blockade Risk (Goldilocks Problem)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_dual_lock_aav", "label": "Dual-Lock AAV Strategy for Apoptosis/Autophagy Inhibition", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_myr_Akt", "label": "myr-Akt (Constitutively Active PKB / Alternative Payload)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_min_hSyn", "label": "Minimal Human Synapsin (min-hSyn) Promoter", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Kozak_sequence", "label": "Kozak Sequence (Ribosome Binding Site)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_mDlx_enhancer", "label": "mDlx Enhancer (Broad GABAergic Neuron Targeting)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "autophagy-apoptosis_inhibition_Bax_Bak", "label": "Bax/Bak (Pro-Apoptotic Pore-Forming Proteins)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "autophagy-apoptosis_inhibition.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_structural_plasticity", "label": "Structural Plasticity in the Brain", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "label": "Synaptic Plasticity (LTP/LTD)", "community": 7, "size": 18, "color": "#FF9DA7", "isGod": true, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_NMDAR", "label": "N-Methyl-D-Aspartate Receptor (NMDAR)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_AMPAR", "label": "\u03b1-Amino-3-Hydroxy-5-Methyl-4-Isoxazolepropionic Acid Receptor (AMPAR)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_CaMKII", "label": "Ca2+/Calmodulin-Dependent Protein Kinase II (CaMKII)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_BDNF", "label": "Brain-Derived Neurotrophic Factor (BDNF)", "community": 7, "size": 18, "color": "#FF9DA7", "isGod": true, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_TrkB", "label": "Tropomyosin Receptor Kinase B (TrkB)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_neurogenesis", "label": "Adult Neurogenesis", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_dendritic_spines", "label": "Dendritic Spine Dynamics", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_Arc", "label": "Arc (Activity-Regulated Cytoskeleton-Associated Protein)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_PSD95", "label": "PSD-95 (Postsynaptic Density Scaffold Protein)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "assaying_molecularly_structural_plasticity_DCX", "label": "Doublecortin (DCX) \u2014 Neurogenesis Marker", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "assaying_molecularly_structural_plasticity.md", "type": "document"}, {"id": "ana_12_ANA_12", "label": "ANA-12 (Selective TrkB Antagonist)", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_TrkB_signaling_pain", "label": "TrkB Signaling in Neuropathic Pain", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_TrkB_T1", "label": "TrkB.T1 (Truncated TrkB Isoform)", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_KCC2_dysregulation", "label": "KCC2 Downregulation (Impaired GABAergic Inhibition)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_central_sensitization", "label": "Central Sensitization", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_CIPN", "label": "Chemotherapy-Induced Peripheral Neuropathy (CIPN)", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_neuropathic_pain", "label": "Neuropathic Pain", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_MAPK_pathway", "label": "MAPK Pathway (TrkB Downstream Effector)", "community": 7, "size": 7, "color": "#FF9DA7", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "ana_12_NLRP3_inflammasome", "label": "NLRP3 Inflammasome", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "ana-12.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_skill", "label": "Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation for Neuropathic Pain", "community": 6, "size": 18, "color": "#B07AA1", "isGod": true, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_technical_pillars", "label": "Four Technical Pillars (Recording, Behavior, Intervention, Decoding)", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_closed_loop_intervention", "label": "Closed-Loop Neuromodulation Intervention", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "label": "13 Integrative Preclinical Therapeutic Appraisals", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_cross_pathway_map", "label": "Cross-Pathway Network Map", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_design_principles", "label": "Cross-Cutting Design Principles", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_god_nodes", "label": "Graphify-Derived God Nodes", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "Skill_neuroscientific_insights_seeker_experimental_workflow", "label": "6-Step In Vivo Experimental Workflow", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "Skill_neuroscientific_insights_seeker.md", "type": "document"}, {"id": "GABA_apoptosis_calcium_overload", "label": "Neuronal Calcium (Ca\u00b2\u207a) Overload", "community": 0, "size": 18, "color": "#E15759", "isGod": true, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_mitochondrial_dysfunction", "label": "Mitochondrial Dysfunction in GABAergic Neurons", "community": 0, "size": 18, "color": "#E15759", "isGod": true, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_CP_AMPARs", "label": "Calcium-Permeable AMPA Receptors (CP-AMPARs)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_ROS_oxidative_stress", "label": "Reactive Oxygen Species (ROS) and Oxidative Stress", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_Calpain", "label": "Calpain (Ca\u00b2\u207a-Dependent Cysteine Protease)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_mTORC1", "label": "mTORC1 (Mammalian Target of Rapamycin Complex 1)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_PINK1_Parkin_mitophagy", "label": "PINK1/Parkin Mitophagy Pathway", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_caspase_cascade", "label": "Caspase Apoptotic Cascade (Caspase-3, -9, -12)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_BCL2_family", "label": "BCL-2 Family Proteins (BAX, BAK, BIM, BCL-2, BCL-xL)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_ER_stress_UPR", "label": "ER Stress and Unfolded Protein Response (UPR)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_Rapamycin", "label": "Rapamycin (mTOR Inhibitor / Autophagy Enhancer)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_therapeutic_strategies", "label": "Therapeutic Strategies Targeting GABAergic Neuron Survival", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_caution_autophagy_rationale", "label": "Rationale: Double-Edged Sword of Autophagy Modulation", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_HIF1alpha", "label": "HIF1\u03b1 (Hypoxia-Inducible Factor 1 Alpha)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_RhoA_ROCK", "label": "RhoA/ROCK Signalling Pathway", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_TNF_alpha", "label": "TNF-\u03b1 (Pro-Inflammatory Cytokine)", "community": 6, "size": 12, "color": "#B07AA1", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "GABA_apoptosis_PNN_loss", "label": "Perineuronal Net (PNN) Loss and GABAergic Hyperactivity", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "GABA_apoptosis.md", "type": "document"}, {"id": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "label": "KCC2 Cryo-EM Structure (2024)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_arn23746_next_gen_kcc2_activator", "label": "ARN23746 (Next-Gen KCC2 Activator)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_clp290_kcc2_activator_prodrug", "label": "CLP290 (KCC2 Activator Prodrug)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_vu0463271_thiazolidinone_kcc2_activator", "label": "VU0463271 (Thiazolidinone KCC2 Activator)", "community": 21, "size": 7, "color": "#555555", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_kcc2_stabilizer_stab_1", "label": "KCC2 Stabilizer STAB-1", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_bum_9082_brain_penetrant_nkcc1_inhibitor", "label": "BUM-9082 (Brain-Penetrant NKCC1 Inhibitor)", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_wnk_spak_kinase_pathway", "label": "WNK-SPAK Kinase Pathway", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "KCC2_enhancers_new_aav9_kcc2_gene_therapy", "label": "AAV9-KCC2 Gene Therapy", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "KCC2_enhancers_new.md", "type": "document"}, {"id": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "label": "TREM2 (Triggering Receptor on Myeloid Cells 2)", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_al002a_trem2_agonistic_antibody", "label": "AL002a (TREM2 Agonistic Antibody)", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_p2x4_p2x7_heteromerization", "label": "P2X4-P2X7 Heteromerization", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_nc_2600_p2x4_antagonist", "label": "NC-2600 (P2X4 Antagonist)", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_pkm2_pyruvate_kinase_m2", "label": "PKM2 (Pyruvate Kinase M2)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_tepp_46_pkm2_activator", "label": "TEPP-46 (PKM2 Activator)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_h3k18la_histone_lactylation", "label": "H3K18la (Histone Lactylation)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_urolithin_a_mitophagy_enhancer", "label": "Urolithin A (Mitophagy Enhancer)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_nad_precursors_nr_nmn", "label": "NAD+ Precursors (NR/NMN)", "community": 0, "size": 12, "color": "#E15759", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_apoe_trem2_signaling_axis", "label": "APOE-TREM2 Signaling Axis", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_microglial_sexual_dimorphism_in_pain", "label": "Microglial Sexual Dimorphism in Pain", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "microglial_biology_pain_update_dam_like_microglia_in_chronic_pain", "label": "DAM-like Microglia in Chronic Pain", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "microglial_biology_pain_update.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_h3k18la_histone_lactylation_at_pain_genes", "label": "H3K18la (Histone Lactylation at Pain Genes)", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "label": "METTL3-m6A-IGF2BP2 Writer-Reader Axis", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_stm2457_mettl3_inhibitor", "label": "STM2457 (METTL3 Inhibitor)", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_hdac4_mediated_kcc2_repression", "label": "HDAC4-Mediated KCC2 Repression", "community": 8, "size": 7, "color": "#9C755F", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_ctcf_mediated_scn9a_scn10a_chromatin_looping", "label": "CTCF-Mediated Scn9a-Scn10a Chromatin Looping", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_brd4_bet_bromodomain_pain_pathway", "label": "BRD4-BET Bromodomain Pain Pathway", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_ezh2_prc2_h3k27me3_silencing", "label": "EZH2/PRC2 H3K27me3 Silencing", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_fto_m6a_eraser_in_pain", "label": "FTO (m6A Eraser) in Pain", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_p300_cbp_histone_lactyltransferase", "label": "p300/CBP Histone Lactyltransferase", "community": 10, "size": 7, "color": "#AF7AA1", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "epigenetic_mechanisms_pain_ap_1_pioneer_factor_chromatin_opening", "label": "AP-1 Pioneer Factor Chromatin Opening", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "epigenetic_mechanisms_pain.md", "type": "document"}, {"id": "SPM_resolution_mediators_resolvin_d1_rvd1", "label": "Resolvin D1 (RvD1)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_resolvin_e1_rve1", "label": "Resolvin E1 (RvE1)", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_maresin_1_mar1", "label": "Maresin 1 (MaR1)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_lipoxin_a4_lxa4", "label": "Lipoxin A4 (LXA4)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_alx_fpr2_receptor", "label": "ALX/FPR2 Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_chemr23_cmklr1_receptor", "label": "ChemR23 (CMKLR1) Receptor", "community": 9, "size": 7, "color": "#BAB0AC", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_spm_blood_nerve_barrier_repair", "label": "SPM Blood-Nerve Barrier Repair", "community": 3, "size": 12, "color": "#76B7B2", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_spm_microglial_m1\u2192m2_switch", "label": "SPM Microglial M1\u2192M2 Switch", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "SPM_resolution_mediators_benzo_lipoxin_a4_blxa4", "label": "Benzo-Lipoxin A4 (BLXA4)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "SPM_resolution_mediators.md", "type": "document"}, {"id": "S100A8-A9_s100a8_a9_calprotectin_damp", "label": "S100A8/A9 (Calprotectin DAMP)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_tlr4_toll_like_receptor_4", "label": "TLR4 (Toll-Like Receptor 4)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_rage_receptor_for_advanced_glycation_end_products", "label": "RAGE (Receptor for Advanced Glycation End-products)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_tak_242_tlr4_inhibitor", "label": "TAK-242 (TLR4 Inhibitor)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_kir4.1_potassium_channel", "label": "Kir4.1 Potassium Channel", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_cd47_blocking_antibody", "label": "CD47-Blocking Antibody", "community": 22, "size": 7, "color": "#555555", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_fra_1_\u2192_s100a8_transcriptional_axis", "label": "Fra-1 \u2192 S100A8 Transcriptional Axis", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "S100A8-A9_azeliragon_rage_inhibitor", "label": "Azeliragon (RAGE Inhibitor)", "community": 11, "size": 7, "color": "#86BCB6", "isGod": false, "source": "S100A8-A9.md", "type": "document"}, {"id": "prostaglandins_cox_1_in_neuropathic_pain", "label": "COX-1 in Neuropathic Pain", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_cox_2_in_spinal_endothelial_cells", "label": "COX-2 in Spinal Endothelial Cells", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_prostaglandin_e2_pge2", "label": "Prostaglandin E2 (PGE2)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_prostaglandin_d2_pgd2", "label": "Prostaglandin D2 (PGD2)", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_prostacyclin_pgi2", "label": "Prostacyclin (PGI2)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_prostaglandin_f2\u03b1_pgf2\u03b1", "label": "Prostaglandin F2\u03b1 (PGF2\u03b1)", "community": 23, "size": 7, "color": "#555555", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_ep1_prostaglandin_receptor", "label": "EP1 Prostaglandin Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_ep3_prostaglandin_receptor", "label": "EP3 Prostaglandin Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_ep4_prostaglandin_receptor", "label": "EP4 Prostaglandin Receptor", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_dp2_crth2_prostaglandin_receptor", "label": "DP2/CRTH2 Prostaglandin Receptor", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_ono_8711_ep1_antagonist", "label": "ONO-8711 (EP1 Antagonist)", "community": 1, "size": 12, "color": "#F28E2B", "isGod": false, "source": "prostaglandins.md", "type": "document"}, {"id": "prostaglandins_microglia_derived_pgd2_\u2192_dp2_pain_signaling", "label": "Microglia-Derived PGD2 \u2192 DP2 Pain Signaling", "community": 4, "size": 12, "color": "#59A14F", "isGod": false, "source": "prostaglandins.md", "type": "document"}], "links": [{"source": "PNN_ECM_perineuronal_nets", "target": "PV_interneurons_PV_interneurons", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_MMP9", "target": "PNN_ECM_perineuronal_nets", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_chondroitinase_ABC", "target": "PNN_ECM_perineuronal_nets", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_perineuronal_nets", "target": "PNN_ECM_CSPGs", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_perineuronal_nets", "target": "PNN_ECM_hyaluronan", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_perineuronal_nets", "target": "PNN_ECM_HAPLN1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_rationale_PNN_normal_function", "target": "PNN_ECM_perineuronal_nets", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_MMP9", "target": "BDNF_TrkB_BDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PNN_ECM_MMP9", "target": "PNN_ECM_MMP2", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "TNF_TNF_alpha", "target": "PNN_ECM_MMP9", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_CypA_MMP9_pathway", "target": "PNN_ECM_MMP9", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "PNN_ECM_MMP9", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "PNN_ECM_MMP9", "relation": "suppresses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NogoA", "target": "NogoA_NgR1_NgR1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NogoA", "target": "NogoA_NgR1_TRPV1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NogoA", "target": "NogoA_NgR1_LIMK_cofilin", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NG101", "target": "NogoA_NgR1_NogoA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_rationale_physiological_roles", "target": "NogoA_NgR1_NogoA", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_maresin_1_mar1", "target": "NogoA_NgR1_NogoA", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "NogoA_NgR1_NgR1", "target": "NogoA_NgR1_LINGO1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NgR1", "target": "NogoA_NgR1_p75NTR", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NgR1", "target": "RhoA_ROCK_RhoA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NgR1", "target": "NogoA_NgR1_MAG", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_NgR1", "target": "NogoA_NgR1_OMgp", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "NogoA_NgR1_846_861PE", "target": "NogoA_NgR1_NgR1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_BDNF", "target": "NogoA_NgR1_p75NTR", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "target": "NogoA_NgR1_TRPV1", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_e1_rve1", "target": "NogoA_NgR1_TRPV1", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_ROCK", "target": "NogoA_NgR1_LIMK_cofilin", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SST_somatostatin_interneurons", "target": "PV_interneurons_PV_interneurons", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SST_somatostatin_interneurons", "target": "SST_SSTR2a", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SST_somatostatin_interneurons", "target": "SST_Prdm12", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SST_somatostatin_interneurons", "target": "shared_mechanical_allodynia", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_RhoA", "target": "RhoA_ROCK_ROCK", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_RhoA", "target": "RhoA_ROCK_EphA1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_simvastatin", "target": "RhoA_ROCK_RhoA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_C3_exoenzyme", "target": "RhoA_ROCK_RhoA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_rationale_dual_role", "target": "RhoA_ROCK_RhoA", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_spm_blood_nerve_barrier_repair", "target": "RhoA_ROCK_RhoA", "relation": "suppresses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_ep3_prostaglandin_receptor", "target": "RhoA_ROCK_RhoA", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_ROCK", "target": "RhoA_ROCK_p38_MAPK", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_fasudil", "target": "RhoA_ROCK_ROCK", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_Y27632", "target": "RhoA_ROCK_ROCK", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_ROCK", "target": "RhoA_ROCK_MARCKS", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "RhoA_ROCK_p38_MAPK", "target": "shared_microglia", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_BDNF", "target": "BDNF_TrkB_TrkB", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_BDNF", "target": "BDNF_TrkB_proBDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_BDNF", "target": "shared_P2X4_receptor", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_rationale_dual_roles", "target": "BDNF_TrkB_BDNF", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "BDNF_TrkB_BDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGFA", "target": "BDNF_TrkB_BDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "shared_microglia", "target": "BDNF_TrkB_BDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_kcc2_stabilizer_stab_1", "target": "BDNF_TrkB_BDNF", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "BDNF_TrkB_BDNF", "relation": "suppresses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_e2_pge2", "target": "BDNF_TrkB_BDNF", "relation": "induces", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_TrkB", "target": "BDNF_TrkB_KCC2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_TrkB", "target": "BDNF_TrkB_TrkB_T1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_ANA_12", "target": "BDNF_TrkB_TrkB", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_wnk_spak_kinase_pathway", "target": "BDNF_TrkB_TrkB", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "BDNF_TrkB_KCC2", "target": "PV_interneurons_PV_interneurons", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BDNF_TrkB_CLP257", "target": "BDNF_TrkB_KCC2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "target": "BDNF_TrkB_KCC2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_arn23746_next_gen_kcc2_activator", "target": "BDNF_TrkB_KCC2", "relation": "targets", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_hdac4_mediated_kcc2_repression", "target": "BDNF_TrkB_KCC2", "relation": "represses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_TNF_alpha", "target": "TNF_TNFR1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_TNF_alpha", "target": "TNF_TNFR2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_infliximab", "target": "TNF_TNF_alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_TNF_alpha", "target": "hif1a_HIF1alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_rationale_paradox", "target": "TNF_TNF_alpha", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGFA", "target": "TNF_TNF_alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "target": "TNF_TNF_alpha", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_spm_microglial_m1\u2192m2_switch", "target": "TNF_TNF_alpha", "relation": "suppresses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "TNF_TNF_alpha", "relation": "induces", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_cox_2_in_spinal_endothelial_cells", "target": "TNF_TNF_alpha", "relation": "induced_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "TNF_XPro1595", "target": "TNF_TNFR1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "IGF1_2_IGF1", "target": "IGF1_2_IGF1R", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "IGF1_2_rationale_IGF1_dual_nature", "target": "IGF1_2_IGF1", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "IGF1_2_IGF2", "target": "IGF1_2_NTRK1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "IGF1_2_follistatin", "target": "IGF1_2_IGF1R", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_blood_brain_barrier", "target": "BBB_blood_spinal_cord_barrier", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "BBB_blood_brain_barrier", "target": "BBB_blood_nerve_barrier", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_blood_brain_barrier", "target": "BBB_neurovascular_unit", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_blood_brain_barrier", "target": "BBB_tight_junction_proteins", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_CypA_MMP9_pathway", "target": "BBB_blood_brain_barrier", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_resolvin_D1", "target": "BBB_blood_brain_barrier", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "BBB_rationale_balancing_act", "target": "BBB_blood_brain_barrier", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGFA", "target": "BBB_blood_brain_barrier", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_angiopoietin_2", "target": "BBB_blood_brain_barrier", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_spm_blood_nerve_barrier_repair", "target": "BBB_blood_brain_barrier", "relation": "repairs", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostacyclin_pgi2", "target": "BBB_blood_brain_barrier", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "BBB_tight_junction_proteins", "relation": "upregulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_tlr4_toll_like_receptor_4", "target": "BBB_tight_junction_proteins", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "SPM_resolution_mediators_spm_blood_nerve_barrier_repair", "target": "BBB_CypA_MMP9_pathway", "relation": "opposes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "hif1a_PHD_enzymes", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "hif1a_VHL", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "hif1a_NF_kB", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "vegf_VEGFA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_HIF1alpha", "target": "AngPt_angiopoietin_2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_2_deoxy_D_glucose", "target": "hif1a_HIF1alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_YC1", "target": "hif1a_HIF1alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "hif1a_rationale_caution", "target": "hif1a_HIF1alpha", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_h3k18la_histone_lactylation", "target": "hif1a_HIF1alpha", "relation": "downstream_of", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_pkm2_pyruvate_kinase_m2", "target": "hif1a_HIF1alpha", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_h3k18la_histone_lactylation_at_pain_genes", "target": "hif1a_HIF1alpha", "relation": "downstream_of", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "hif1a_HIF1alpha", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "prostaglandins_cox_2_in_spinal_endothelial_cells", "target": "hif1a_HIF1alpha", "relation": "induced_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGFA", "target": "vegf_VEGFR2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGFA", "target": "vegf_neuropilin_1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_bevacizumab", "target": "vegf_VEGFA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_VEGF_Trap", "target": "vegf_VEGFA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_rationale_dual_role", "target": "vegf_VEGFA", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_angiopoietin_2", "target": "vegf_VEGFA", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "vegf_semaphorin_3A", "target": "vegf_neuropilin_1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_angiopoietin_1", "target": "AngPt_Tie2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_COMP_Ang1", "target": "AngPt_angiopoietin_1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_angiopoietin_2", "target": "AngPt_Tie2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "AngPt_fumagillin", "target": "AngPt_angiopoietin_2", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "rbfox1_Rbfox1", "target": "rbfox1_NrCAM", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "rbfox1_Rbfox1", "target": "rbfox1_SCN9A_Nav1_7", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "rbfox1_circRbfox1", "target": "rbfox1_Rbfox1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "rbfox1_AAV5_Rbfox1", "target": "rbfox1_Rbfox1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "rbfox1_rationale_caution", "target": "rbfox1_Rbfox1", "relation": "rationale_for", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "target": "rbfox1_Rbfox1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_ctcf_mediated_scn9a_scn10a_chromatin_looping", "target": "rbfox1_Rbfox1", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PV_interneurons_PV_interneurons", "target": "PV_interneurons_CP_AMPARs", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PV_interneurons_CLP257", "target": "PV_interneurons_PV_interneurons", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PV_interneurons_PV_interneurons", "target": "shared_mechanical_allodynia", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PV_interneurons_PV_interneurons", "target": "shared_central_sensitization", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "shared_microglia", "target": "PV_interneurons_PV_interneurons", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_aav9_kcc2_gene_therapy", "target": "PV_interneurons_PV_interneurons", "relation": "targets", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "PV_interneurons_IEM_1460", "target": "PV_interneurons_CP_AMPARs", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "shared_microglia", "target": "shared_neuroinflammation", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "target": "shared_microglia", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_p2x4_p2x7_heteromerization", "target": "shared_microglia", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_microglial_sexual_dimorphism_in_pain", "target": "shared_microglia", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_brd4_bet_bromodomain_pain_pathway", "target": "shared_microglia", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "shared_microglia", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_microglia_derived_pgd2_\u2192_dp2_pain_signaling", "target": "shared_microglia", "relation": "derived_from", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "shared_astrocytes", "target": "shared_neuroinflammation", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "shared_mechanical_allodynia", "target": "shared_central_sensitization", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_Bcl_xL", "target": "autophagy-apoptosis_inhibition_Bax_Bak", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_Bcl_xL", "target": "autophagy-apoptosis_inhibition_Beclin_1", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_Bcl_xL", "target": "autophagy-apoptosis_inhibition_mPTP", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_dual_lock_aav", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "implements", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_goldilocks_rationale", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_LAMP2A", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "semantically_similar_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_myr_Akt", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "semantically_similar_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_Kozak_sequence", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "GABA_apoptosis_BCL2_family", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "target": "autophagy-apoptosis_inhibition_Bcl_xL", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_S5E2_enhancer", "target": "autophagy-apoptosis_inhibition_min_hSyn", "relation": "requires", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_dual_lock_aav", "target": "autophagy-apoptosis_inhibition_S5E2_enhancer", "relation": "implements", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_Calpain", "target": "autophagy-apoptosis_inhibition_Beclin_1", "relation": "causes", "confidence": "INFERRED", "weight": 1.0}, {"source": "GABA_apoptosis_mTORC1", "target": "autophagy-apoptosis_inhibition_Beclin_1", "relation": "inhibits", "confidence": "INFERRED", "weight": 1.0}, {"source": "GABA_apoptosis_mitochondrial_dysfunction", "target": "autophagy-apoptosis_inhibition_mPTP", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_calcium_overload", "target": "autophagy-apoptosis_inhibition_mPTP", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_mPTP", "target": "GABA_apoptosis_caspase_cascade", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_urolithin_a_mitophagy_enhancer", "target": "autophagy-apoptosis_inhibition_mPTP", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_Gibson_Assembly", "target": "autophagy-apoptosis_inhibition_dual_lock_aav", "relation": "implements", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_dual_lock_aav", "target": "autophagy-apoptosis_inhibition_Vormstein_Schneider_2020", "relation": "cites", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_goldilocks_rationale", "target": "autophagy-apoptosis_inhibition_dual_lock_aav", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_dual_lock_aav", "target": "autophagy-apoptosis_inhibition_mDlx_enhancer", "relation": "implements", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "autophagy-apoptosis_inhibition_myr_Akt", "target": "GABA_apoptosis_mTORC1", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_BCL2_family", "target": "autophagy-apoptosis_inhibition_Bax_Bak", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_structural_plasticity", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_structural_plasticity", "target": "assaying_molecularly_structural_plasticity_neurogenesis", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_structural_plasticity", "target": "assaying_molecularly_structural_plasticity_dendritic_spines", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_NMDAR", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_AMPAR", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_CaMKII", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_BDNF", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_Arc", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_PSD95", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "assaying_molecularly_structural_plasticity_synaptic_plasticity", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_CaMKII", "target": "assaying_molecularly_structural_plasticity_NMDAR", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_PSD95", "target": "assaying_molecularly_structural_plasticity_NMDAR", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_CaMKII", "target": "assaying_molecularly_structural_plasticity_AMPAR", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_CP_AMPARs", "target": "assaying_molecularly_structural_plasticity_AMPAR", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_BDNF", "target": "assaying_molecularly_structural_plasticity_TrkB", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_BDNF", "target": "assaying_molecularly_structural_plasticity_neurogenesis", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_BDNF", "target": "assaying_molecularly_structural_plasticity_dendritic_spines", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_BDNF", "target": "assaying_molecularly_structural_plasticity_Arc", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_TrkB_signaling_pain", "target": "assaying_molecularly_structural_plasticity_BDNF", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "assaying_molecularly_structural_plasticity_BDNF", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_TrkB_signaling_pain", "target": "assaying_molecularly_structural_plasticity_TrkB", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "assaying_molecularly_structural_plasticity_TrkB", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "assaying_molecularly_structural_plasticity_DCX", "target": "assaying_molecularly_structural_plasticity_neurogenesis", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_TrkB_signaling_pain", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_TrkB_T1", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_central_sensitization", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_KCC2_dysregulation", "relation": "inhibits", "confidence": "INFERRED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_CIPN", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_ANA_12", "target": "ana_12_NLRP3_inflammasome", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "ana_12_ANA_12", "relation": "references", "confidence": "INFERRED", "weight": 1.0}, {"source": "ana_12_TrkB_signaling_pain", "target": "ana_12_MAPK_pathway", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_TrkB_signaling_pain", "target": "ana_12_KCC2_dysregulation", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_TrkB_signaling_pain", "target": "GABA_apoptosis_calcium_overload", "relation": "causes", "confidence": "INFERRED", "weight": 1.0}, {"source": "KCC2_enhancers_new_clp290_kcc2_activator_prodrug", "target": "ana_12_KCC2_dysregulation", "relation": "targets", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_hdac4_mediated_kcc2_repression", "target": "ana_12_KCC2_dysregulation", "relation": "represses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "ana_12_CIPN", "target": "ana_12_neuropathic_pain", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "ana_12_neuropathic_pain", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_TNF_alpha", "target": "ana_12_NLRP3_inflammasome", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_technical_pillars", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_closed_loop_intervention", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_cross_pathway_map", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_experimental_workflow", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_design_principles", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "Skill_neuroscientific_insights_seeker_god_nodes", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "GABA_apoptosis_HIF1alpha", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "GABA_apoptosis_TNF_alpha", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "GABA_apoptosis_RhoA_ROCK", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_skill", "target": "GABA_apoptosis_PNN_loss", "relation": "references", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_closed_loop_intervention", "target": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "relation": "implements", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_design_principles", "target": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "target": "Skill_neuroscientific_insights_seeker_cross_pathway_map", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "Skill_neuroscientific_insights_seeker_integrative_appraisals", "target": "GABA_apoptosis_calcium_overload", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "GABA_apoptosis_calcium_overload", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_CP_AMPARs", "target": "GABA_apoptosis_calcium_overload", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_calcium_overload", "target": "GABA_apoptosis_Calpain", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_calcium_overload", "target": "GABA_apoptosis_mTORC1", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_PNN_loss", "target": "GABA_apoptosis_calcium_overload", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_bum_9082_brain_penetrant_nkcc1_inhibitor", "target": "GABA_apoptosis_calcium_overload", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "GABA_apoptosis_calcium_overload", "relation": "contributes_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_ROS_oxidative_stress", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_mitochondrial_dysfunction", "target": "GABA_apoptosis_caspase_cascade", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_TNF_alpha", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_HIF1alpha", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_RhoA_ROCK", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_PINK1_Parkin_mitophagy", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_urolithin_a_mitophagy_enhancer", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "targets", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_nad_precursors_nr_nmn", "target": "GABA_apoptosis_mitochondrial_dysfunction", "relation": "targets", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_Rapamycin", "target": "GABA_apoptosis_mTORC1", "relation": "inhibits", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_caution_autophagy_rationale", "target": "GABA_apoptosis_mTORC1", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "GABA_apoptosis_Rapamycin", "target": "GABA_apoptosis_PINK1_Parkin_mitophagy", "relation": "activates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_caspase_cascade", "target": "GABA_apoptosis_BCL2_family", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_ER_stress_UPR", "target": "GABA_apoptosis_caspase_cascade", "relation": "causes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_therapeutic_strategies", "target": "GABA_apoptosis_BCL2_family", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_therapeutic_strategies", "target": "GABA_apoptosis_Rapamycin", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "GABA_apoptosis_caution_autophagy_rationale", "target": "GABA_apoptosis_therapeutic_strategies", "relation": "rationale_for", "confidence": "INFERRED", "weight": 1.0}, {"source": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "target": "KCC2_enhancers_new_arn23746_next_gen_kcc2_activator", "relation": "enables", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "target": "KCC2_enhancers_new_clp290_kcc2_activator_prodrug", "relation": "enables", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_wnk_spak_kinase_pathway", "target": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_bum_9082_brain_penetrant_nkcc1_inhibitor", "target": "KCC2_enhancers_new_kcc2_cryo_em_structure_2024", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_clp290_kcc2_activator_prodrug", "target": "KCC2_enhancers_new_arn23746_next_gen_kcc2_activator", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "KCC2_enhancers_new_arn23746_next_gen_kcc2_activator", "target": "KCC2_enhancers_new_aav9_kcc2_gene_therapy", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "target": "microglial_biology_pain_update_al002a_trem2_agonistic_antibody", "relation": "activated_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "target": "microglial_biology_pain_update_apoe_trem2_signaling_axis", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_trem2_triggering_receptor_on_myeloid_cells_2", "target": "microglial_biology_pain_update_dam_like_microglia_in_chronic_pain", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_p2x4_p2x7_heteromerization", "target": "microglial_biology_pain_update_nc_2600_p2x4_antagonist", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_pkm2_pyruvate_kinase_m2", "target": "microglial_biology_pain_update_tepp_46_pkm2_activator", "relation": "activated_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_pkm2_pyruvate_kinase_m2", "target": "microglial_biology_pain_update_h3k18la_histone_lactylation", "relation": "drives", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_urolithin_a_mitophagy_enhancer", "target": "microglial_biology_pain_update_dam_like_microglia_in_chronic_pain", "relation": "reverses", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_nad_precursors_nr_nmn", "target": "microglial_biology_pain_update_urolithin_a_mitophagy_enhancer", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "microglial_biology_pain_update_dam_like_microglia_in_chronic_pain", "target": "microglial_biology_pain_update_microglial_sexual_dimorphism_in_pain", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_h3k18la_histone_lactylation_at_pain_genes", "target": "epigenetic_mechanisms_pain_p300_cbp_histone_lactyltransferase", "relation": "catalyzed_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "target": "epigenetic_mechanisms_pain_stm2457_mettl3_inhibitor", "relation": "inhibited_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "target": "epigenetic_mechanisms_pain_fto_m6a_eraser_in_pain", "relation": "opposed_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_ctcf_mediated_scn9a_scn10a_chromatin_looping", "target": "epigenetic_mechanisms_pain_mettl3_m6a_igf2bp2_writer_reader_axis", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_brd4_bet_bromodomain_pain_pathway", "target": "epigenetic_mechanisms_pain_ap_1_pioneer_factor_chromatin_opening", "relation": "conceptually_related_to", "confidence": "INFERRED", "weight": 1.0}, {"source": "epigenetic_mechanisms_pain_ezh2_prc2_h3k27me3_silencing", "target": "epigenetic_mechanisms_pain_ap_1_pioneer_factor_chromatin_opening", "relation": "opposes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "SPM_resolution_mediators_alx_fpr2_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "SPM_resolution_mediators_spm_blood_nerve_barrier_repair", "relation": "mediates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_d1_rvd1", "target": "SPM_resolution_mediators_spm_microglial_m1\u2192m2_switch", "relation": "drives", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_resolvin_e1_rve1", "target": "SPM_resolution_mediators_chemr23_cmklr1_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_maresin_1_mar1", "target": "SPM_resolution_mediators_spm_microglial_m1\u2192m2_switch", "relation": "promotes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_lipoxin_a4_lxa4", "target": "SPM_resolution_mediators_alx_fpr2_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "SPM_resolution_mediators_benzo_lipoxin_a4_blxa4", "target": "SPM_resolution_mediators_lipoxin_a4_lxa4", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "S100A8-A9_tlr4_toll_like_receptor_4", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "S100A8-A9_rage_receptor_for_advanced_glycation_end_products", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_fra_1_\u2192_s100a8_transcriptional_axis", "target": "S100A8-A9_s100a8_a9_calprotectin_damp", "relation": "regulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_s100a8_a9_calprotectin_damp", "target": "S100A8-A9_kir4.1_potassium_channel", "relation": "downregulates", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_tlr4_toll_like_receptor_4", "target": "S100A8-A9_tak_242_tlr4_inhibitor", "relation": "inhibited_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "S100A8-A9_rage_receptor_for_advanced_glycation_end_products", "target": "S100A8-A9_azeliragon_rage_inhibitor", "relation": "inhibited_by", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_cox_1_in_neuropathic_pain", "target": "prostaglandins_prostaglandin_d2_pgd2", "relation": "synthesizes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_cox_2_in_spinal_endothelial_cells", "target": "prostaglandins_prostaglandin_e2_pge2", "relation": "synthesizes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_cox_2_in_spinal_endothelial_cells", "target": "prostaglandins_prostacyclin_pgi2", "relation": "synthesizes", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_e2_pge2", "target": "prostaglandins_ep1_prostaglandin_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_e2_pge2", "target": "prostaglandins_ep3_prostaglandin_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_e2_pge2", "target": "prostaglandins_ep4_prostaglandin_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_d2_pgd2", "target": "prostaglandins_dp2_crth2_prostaglandin_receptor", "relation": "binds", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_prostaglandin_d2_pgd2", "target": "prostaglandins_microglia_derived_pgd2_\u2192_dp2_pain_signaling", "relation": "participates_in", "confidence": "EXTRACTED", "weight": 1.0}, {"source": "prostaglandins_ep1_prostaglandin_receptor", "target": "prostaglandins_ono_8711_ep1_antagonist", "relation": "inhibited_by", "confidence": "EXTRACTED", "weight": 1.0}], "hyperedges": [{"id": "mmp9_signaling_hub", "label": "MMP-9 Signaling Hub", "nodes": ["PNN_ECM_MMP9", "PNN_ECM_perineuronal_nets", "BDNF_TrkB_BDNF", "BDNF_TrkB_proBDNF", "BBB_tight_junction_proteins", "BBB_CypA_MMP9_pathway", "TNF_TNF_alpha", "hif1a_HIF1alpha", "PV_interneurons_PV_interneurons"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "PNN_ECM.md"}, {"id": "ngr1_signaling_complex", "label": "NgR1 Receptor Signaling Complex", "nodes": ["NogoA_NgR1_NgR1", "NogoA_NgR1_LINGO1", "NogoA_NgR1_p75NTR", "NogoA_NgR1_NogoA", "NogoA_NgR1_MAG", "NogoA_NgR1_OMgp", "RhoA_ROCK_RhoA", "RhoA_ROCK_ROCK", "NogoA_NgR1_TRPV1", "NogoA_NgR1_LIMK_cofilin"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "NogoA-NgR1.md"}, {"id": "hif1alpha_transcriptional_program", "label": "HIF1\u03b1 Transcriptional Program", "nodes": ["hif1a_HIF1alpha", "vegf_VEGFA", "AngPt_angiopoietin_2", "PNN_ECM_MMP9", "PNN_ECM_MMP2", "BDNF_TrkB_BDNF", "BBB_blood_brain_barrier", "PV_interneurons_PV_interneurons", "shared_microglia"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "hif1a.md"}, {"id": "disinhibition_cascade", "label": "Disinihilation Cascade in Neuropathic Pain", "nodes": ["PNN_ECM_perineuronal_nets", "PV_interneurons_PV_interneurons", "BDNF_TrkB_BDNF", "BDNF_TrkB_TrkB", "BDNF_TrkB_KCC2", "SST_somatostatin_interneurons", "shared_mechanical_allodynia", "shared_central_sensitization"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "PV+_interneurons.md"}, {"id": "disinhibition_cascade", "label": "Disinhibition Cascade: PV Loss \u2192 Unrestrained SST Interneurons \u2192 Lamina I Hyperactivity \u2192 Allodynia", "nodes": ["GABA_apoptosis_calcium_overload", "GABA_apoptosis_mitochondrial_dysfunction", "GABA_apoptosis_caspase_cascade", "GABA_apoptosis_PNN_loss", "ana_12_central_sensitization"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "Skill_neuroscientific_insights_seeker.md"}, {"id": "hif1a_transcriptional_program", "label": "HIF1\u03b1 Transcriptional Program: HIF1\u03b1 Stabilization \u2192 VEGFA, ANGPT2, MMP-9, BDNF, Glycolytic Enzymes \u2192 Microglial M1 and BSCB Leak", "nodes": ["GABA_apoptosis_HIF1alpha", "GABA_apoptosis_mitochondrial_dysfunction", "GABA_apoptosis_ROS_oxidative_stress", "GABA_apoptosis_TNF_alpha"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "Skill_neuroscientific_insights_seeker.md"}, {"id": "mmmp9_signaling_hub", "label": "MMP-9 Signaling Hub: proBDNF\u2192mBDNF Conversion + PNN Cleavage + Tight-Junction Degradation \u2192 KCC2 Loss, PV Failure, BBB Leak", "nodes": ["GABA_apoptosis_PNN_loss", "ana_12_KCC2_dysregulation", "ana_12_central_sensitization", "GABA_apoptosis_Calpain"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "Skill_neuroscientific_insights_seeker.md"}, {"id": "bcl_xl_dual_inhibition_mechanism", "label": "Bcl-xL Dual Inhibition Mechanism: Mitochondrial Membrane Reinforcement (Apoptosis Block) + Beclin-1 Sequestration (Autophagy Block)", "nodes": ["autophagy-apoptosis_inhibition_Bcl_xL", "autophagy-apoptosis_inhibition_mPTP", "autophagy-apoptosis_inhibition_Beclin_1", "autophagy-apoptosis_inhibition_Bax_Bak"], "relation": "implement", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "autophagy-apoptosis_inhibition.md"}, {"id": "bdnf_trkb_signaling_axis", "label": "BDNF/TrkB Signaling Axis: BDNF\u2192TrkB\u2192MAPK \u2192 Central Sensitization + KCC2 Downregulation \u2192 Impaired GABAergic Tone", "nodes": ["assaying_molecularly_structural_plasticity_BDNF", "assaying_molecularly_structural_plasticity_TrkB", "ana_12_MAPK_pathway", "ana_12_KCC2_dysregulation", "ana_12_central_sensitization"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "ana-12.md"}, {"id": "calcium_autophagy_apoptosis_axis", "label": "Ca\u00b2\u207a Overload \u2192 Calpain/mTORC1 Dysregulation \u2192 Autophagy Failure + ER Stress \u2192 Caspase Cascade \u2192 GABAergic Neuron Death", "nodes": ["GABA_apoptosis_calcium_overload", "GABA_apoptosis_Calpain", "GABA_apoptosis_mTORC1", "GABA_apoptosis_ER_stress_UPR", "GABA_apoptosis_caspase_cascade", "GABA_apoptosis_mitochondrial_dysfunction"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "GABA_apoptosis.md"}, {"id": "ngr1_receptor_signaling_complex", "label": "NgR1 Receptor Signaling Complex: Myelin Debris + LPA \u2192 NgR1/RhoA-ROCK \u2192 TRPV1 Stabilization, Nav1.7/1.8 Trafficking \u2192 Ectopic Firing", "nodes": ["GABA_apoptosis_RhoA_ROCK", "GABA_apoptosis_calcium_overload", "GABA_apoptosis_mitochondrial_dysfunction"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "Skill_neuroscientific_insights_seeker.md"}, {"id": "kcc2_activator_pipeline", "label": "KCC2 Activator Pipeline: Structure \u2192 ARN23746 \u2192 Gene Therapy", "nodes": ["KCC2_enhancers_new_KCC2_CryoEM_Structure_2024", "KCC2_enhancers_new_ARN23746_NextGen_KCC2_Activator", "KCC2_enhancers_new_CLP290_KCC2_Activator_Prodrug", "KCC2_enhancers_new_AAV9KCC2_Gene_Therapy", "KCC2_enhancers_new_KCC2_Stabilizer_STAB1"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "KCC2_enhancers_new.md"}, {"id": "chloride_homeostasis_dual", "label": "Chloride Homeostasis: KCC2 Activation + NKCC1 Inhibition", "nodes": ["KCC2_enhancers_new_ARN23746_NextGen_KCC2_Activator", "KCC2_enhancers_new_BUM9082_BrainPenetrant_NKCC1_Inhibitor", "KCC2_enhancers_new_WNKSPAK_Kinase_Pathway", "BDNF_TrkB_KCC2"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "KCC2_enhancers_new.md"}, {"id": "trem2_apoe_axis", "label": "TREM2-APOE Microglial Homeostasis Axis", "nodes": ["microglial_biology_pain_update_TREM2_Triggering_Receptor_on_Myeloid_Cells_2", "microglial_biology_pain_update_APOETREM2_Signaling_Axis", "microglial_biology_pain_update_AL002a_TREM2_Agonistic_Antibody", "microglial_biology_pain_update_DAMlike_Microglia_in_Chronic_Pain"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "microglial_biology_pain_update.md"}, {"id": "purinergic_heteromer", "label": "Purinergic Signaling: P2X4-P2X7 Heteromer \u2192 BDNF \u2192 Pain", "nodes": ["microglial_biology_pain_update_P2X4P2X7_Heteromerization", "microglial_biology_pain_update_NC2600_P2X4_Antagonist", "BDNF_TrkB_BDNF", "shared_microglia"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "microglial_biology_pain_update.md"}, {"id": "glycolysis_lactylation", "label": "Glycolysis \u2192 Lactate \u2192 H3K18la \u2192 Pain Gene Expression", "nodes": ["microglial_biology_pain_update_PKM2_Pyruvate_Kinase_M2", "microglial_biology_pain_update_TEP46_PKM2_Activator", "microglial_biology_pain_update_H3K18la_Histone_Lactylation", "hif1a_HIF1alpha"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "microglial_biology_pain_update.md"}, {"id": "epigenetic_pain_maintenance", "label": "Epigenetic Pain Maintenance: H3K18la + m6A + Chromatin Remodeling", "nodes": ["epigenetic_mechanisms_pain_H3K18la_Histone_Lactylation_at_Pain_Genes", "epigenetic_mechanisms_pain_METTL3m6AIGF2BP2_WriterReader_Axis", "epigenetic_mechanisms_pain_CTCFMediated_Scn9aScn10a_Chromatin_Looping", "epigenetic_mechanisms_pain_AP1_Pioneer_Factor_Chromatin_Opening", "hif1a_HIF1alpha"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "epigenetic_mechanisms_pain.md"}, {"id": "kcc2_epigenetic_silencing", "label": "KCC2 Epigenetic Silencing: HDAC4 + EZH2/PRC2", "nodes": ["epigenetic_mechanisms_pain_HDAC4Mediated_KCC2_Repression", "epigenetic_mechanisms_pain_EZH2PRC2_H3K27me3_Silencing", "BDNF_TrkB_KCC2"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "epigenetic_mechanisms_pain.md"}, {"id": "spm_resolution_triad", "label": "SPM Resolution Triad: RvD1 + LXA4 + MaR1 \u2192 Barrier Repair + M2 Switch + TRPV1 Inhibition", "nodes": ["SPM_resolution_mediators_Resolvin_D1_RvD1", "SPM_resolution_mediators_Lipoxin_A4_LXA4", "SPM_resolution_mediators_Maresin_1_MaR1", "SPM_resolution_mediators_SPM_BloodNerve_Barrier_Repair", "SPM_resolution_mediators_SPM_Microglial_M12_Switch"], "relation": "implement", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "SPM_resolution_mediators.md"}, {"id": "spm_barrier_repair", "label": "RvD1 Barrier Repair: BSCB Re-sealing via Tight Junction Restoration", "nodes": ["SPM_resolution_mediators_Resolvin_D1_RvD1", "SPM_resolution_mediators_SPM_BloodNerve_Barrier_Repair", "BBB_tight_junction_proteins", "BBB_blood_brain_barrier"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "SPM_resolution_mediators.md"}, {"id": "s100a8_damp_axis", "label": "S100A8/A9 DAMP Axis: TLR4/RAGE \u2192 NF-\u03baB \u2192 Cytokines \u2192 Pain", "nodes": ["S100A8A9_S100A8A9_Calprotectin_DAMP", "S100A8A9_TLR4_TollLike_Receptor_4", "S100A8A9_RAGE_Receptor_for_Advanced_Glycation_Endproducts", "TNF_TNF_alpha", "shared_microglia"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "S100A8-A9.md"}, {"id": "prostaglandin_pain_network", "label": "Prostaglandin Pain Network: COX-1/2 \u2192 PGE2/PGD2/PGI2 \u2192 EP/DP/IP Receptors", "nodes": ["prostaglandins_COX1_in_Neuropathic_Pain", "prostaglandins_COX2_in_Spinal_Endothelial_Cells", "prostaglandins_Prostaglandin_E2_PGE2", "prostaglandins_Prostaglandin_D2_PGD2", "prostaglandins_Prostacyclin_PGI2", "prostaglandins_EP1_Prostaglandin_Receptor", "prostaglandins_EP3_Prostaglandin_Receptor", "prostaglandins_DP2CRTH2_Prostaglandin_Receptor"], "relation": "participate_in", "confidence": "EXTRACTED", "confidence_score": 0.9, "source_file": "prostaglandins.md"}, {"id": "microglia_pgd2_signaling", "label": "Microglia \u2192 PGD2 \u2192 DP2 \u2192 Neuron Pain Signaling", "nodes": ["prostaglandins_MicrogliaDerived_PGD2_DP2_Pain_Signaling", "prostaglandins_Prostaglandin_D2_PGD2", "prostaglandins_DP2CRTH2_Prostaglandin_Receptor", "shared_microglia"], "relation": "form", "confidence": "EXTRACTED", "confidence_score": 0.95, "source_file": "prostaglandins.md"}], "communities": {"5": {"name": "Synaptic Plasticity & Pain Circuits", "count": 15, "color": "#EDC948"}, "14": {"name": "SB-3CT MMP Inhibitor", "count": 1, "color": "#B6992D"}, "1": {"name": "Apoptosis/Autophagy & Cell Death", "count": 26, "color": "#F28E2B"}, "15": {"name": "TIMP-1 MMP Inhibitor", "count": 1, "color": "#499894"}, "16": {"name": "miR-488-3p ROCK1 miRNA", "count": 1, "color": "#E15759"}, "17": {"name": "PX-478 HIF1\u03b1 Inhibitor", "count": 1, "color": "#F28E2B"}, "18": {"name": "Community 18", "count": 1, "color": "#555"}, "2": {"name": "BDNF/MMP/TNF Inflammatory Axis", "count": 20, "color": "#4E79A7"}, "9": {"name": "IGF-1 Signaling", "count": 13, "color": "#BAB0AC"}, "19": {"name": "Community 19", "count": 1, "color": "#555"}, "8": {"name": "Rbfox1 Splicing Regulation", "count": 13, "color": "#9C755F"}, "12": {"name": "ADAMTS Proteases", "count": 4, "color": "#D37295"}, "13": {"name": "Tenascin-R", "count": 2, "color": "#8CD17D"}, "3": {"name": "BDNF-TrkB & ECM Plasticity", "count": 20, "color": "#76B7B2"}, "11": {"name": "ECM Core", "count": 8, "color": "#86BCB6"}, "10": {"name": "IGF-2 Signaling", "count": 12, "color": "#AF7AA1"}, "20": {"name": "Community 20", "count": 1, "color": "#555"}, "4": {"name": "Angiopoietin-Tie2 & BBB", "count": 17, "color": "#59A14F"}, "0": {"name": "Nogo-A/NgR1 Inhibition", "count": 32, "color": "#E15759"}, "7": {"name": "AAV Gene Therapy Vectors", "count": 14, "color": "#FF9DA7"}, "6": {"name": "In Vivo Circuit Dissection", "count": 15, "color": "#B07AA1"}, "21": {"name": "Community 21", "count": 1, "color": "#555"}, "22": {"name": "Community 22", "count": 1, "color": "#555"}, "23": {"name": "Community 23", "count": 1, "color": "#555"}}, "stats": {"total_nodes": 221, "total_links": 283, "total_hyperedges": 23, "total_communities": 24, "god_nodes": 11, "edge_confidence": {"EXTRACTED": 246, "INFERRED": 37}, "edge_relations": {"conceptually_related_to": 146, "rationale_for": 16, "suppresses": 4, "inhibits": 12, "activates": 7, "induces": 2, "targets": 5, "represses": 2, "regulates": 11, "induced_by": 2, "repairs": 1, "upregulates": 1, "opposes": 2, "downstream_of": 2, "participates_in": 8, "derived_from": 1, "binds": 11, "implements": 5, "semantically_similar_to": 2, "requires": 1, "causes": 14, "cites": 1, "references": 7, "contributes_to": 1, "enables": 2, "activated_by": 2, "drives": 2, "reverses": 1, "catalyzed_by": 1, "inhibited_by": 4, "opposed_by": 1, "mediates": 1, "promotes": 1, "downregulates": 1, "synthesizes": 3}}};
+
+// Community config
+const COMMUNITY_COLORS = [
+  "#E15759", "#F28E2B", "#4E79A7", "#76B7B2", "#59A14F",
+  "#EDC948", "#B07AA1", "#FF9DA7", "#9C755F", "#BAB0AC",
+  "#AF7AA1", "#86BCB6", "#D37295", "#8CD17D", "#B6992D",
+  "#499894", "#E15759", "#F28E2B"
+];
+
+const COMMUNITY_NAMES = {
+  0: "Nogo-A/NgR1 Inhibition",
+  1: "Apoptosis/Autophagy & Cell Death",
+  2: "BDNF/MMP/TNF Inflammatory Axis",
+  3: "BDNF-TrkB & ECM Plasticity",
+  4: "Angiopoietin-Tie2 & BBB",
+  5: "Synaptic Plasticity & Pain Circuits",
+  6: "In Vivo Circuit Dissection",
+  7: "AAV Gene Therapy Vectors",
+  8: "Rbfox1 Splicing Regulation",
+  9: "IGF-1 Signaling",
+  10: "IGF-2 Signaling",
+  11: "ECM Core",
+  12: "ADAMTS Proteases",
+  13: "Tenascin-R",
+  14: "SB-3CT MMP Inhibitor",
+  15: "TIMP-1 MMP Inhibitor",
+  16: "miR-488-3p ROCK1 miRNA",
+  17: "PX-478 HIF1α Inhibitor"
+};
+
+const GOD_LABELS = new Set([
+  "Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation for Neuropathic Pain",
+  "Hypoxia-Inducible Factor 1 Alpha (HIF1α)",
+  "Vascular Endothelial Growth Factor A (VEGFA)",
+  "Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)",
+  "Brain-Derived Neurotrophic Factor (BDNF)",
+  "Blood-Brain Barrier (BBB)",
+  "Parvalbumin (PV) Interneurons",
+  "Synaptic Plasticity (LTP/LTD)",
+  "Neuronal Calcium (Ca²⁺) Overload",
+  "Mitochondrial Dysfunction in GABAergic Neurons"
+]);
+
+// ===== D3 SETUP =====
+const container = document.getElementById('graph-container');
+const svg = d3.select('#graph-svg');
+const width = () => container.clientWidth;
+const height = () => container.clientHeight;
+
+// Parse data
+let nodes = GRAPH_DATA.nodes;
+let links = GRAPH_DATA.links;
+let hyperedges = GRAPH_DATA.hyperedges || [];
+let communities = GRAPH_DATA.communities || {};
+
+// Ensure community colors
+nodes.forEach(n => {
+  if (n.community >= 0 && n.community < COMMUNITY_COLORS.length) {
+    n.color = COMMUNITY_COLORS[n.community];
+  } else {
+    n.color = '#555';
+  }
+  n.isGod = GOD_LABELS.has(n.label);
+  n.size = n.isGod ? 18 : (n.community < 7 ? 12 : 7);
+});
+
+// Build node lookup
+const nodeMap = {};
+nodes.forEach(n => { nodeMap[n.id] = n; });
+
+// Fix link references
+links = links.map(l => ({
+  source: typeof l.source === 'string' ? l.source : l.source.id || l.source,
+  target: typeof l.target === 'string' ? l.target : l.target.id || l.target,
+  relation: l.relation || '',
+  confidence: l.confidence || '',
+  weight: l.weight || 1.0
+}));
+
+// ===== FORCE SIMULATION =====
+const simulation = d3.forceSimulation(nodes)
+  .force('link', d3.forceLink(links).id(d => d.id).distance(d => 100 / (d.weight || 1)).strength(0.3))
+  .force('charge', d3.forceManyBody().strength(d => d.isGod ? -600 : (d.community < 7 ? -300 : -150)))
+  .force('center', d3.forceCenter(width() / 2, height() / 2))
+  .force('collision', d3.forceCollide().radius(d => d.size + 4))
+  .force('community', communityForce());
+
+function communityForce() {
+  const centers = {};
+  const cx = width() / 2, cy = height() / 2;
+  for (let i = 0; i < 10; i++) {
+    const angle = (i / 10) * 2 * Math.PI - Math.PI / 2;
+    const r = Math.min(width(), height()) * 0.3;
+    centers[i] = { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+  }
+  let alpha;
+  const force = () => {
+    for (const n of nodes) {
+      const c = centers[n.community] || { x: cx, y: cy };
+      const k = alpha * 0.05;
+      n.vx += (c.x - n.x) * k;
+      n.vy += (c.y - n.y) * k;
+    }
+  };
+  force.initialize = (ns) => { alpha = 0.5; };
+  return force;
+}
+
+// ===== RENDERING =====
+const g = svg.append('g');
+
+// Zoom
+const zoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', (event) => {
+  g.attr('transform', event.transform);
+});
+svg.call(zoom);
+
+// Draw hyperedge regions (shaded cascade backgrounds)
+const hyperedgeRegions = g.append('g').attr('class', 'hyperedges');
+hyperedges.forEach((he, i) => {
+  if (he.nodes && he.nodes.length >= 3) {
+    hyperedgeRegions.append('path')
+      .attr('class', 'he-region')
+      .attr('data-he-id', he.id)
+      .attr('fill', 'rgba(118,183,178,0.06)')
+      .attr('stroke', 'rgba(118,183,178,0.2)')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', '4,4')
+      .style('pointer-events', 'none');
+  }
+});
+
+function updateHyperedgeRegions() {
+  hyperedgeRegions.selectAll('.he-region').each(function(d, i) {
+    const he = hyperedges[i];
+    if (!he.nodes || he.nodes.length < 3) return;
+    const pts = he.nodes.map(id => nodeMap[id]).filter(Boolean).map(n => [n.x, n.y]);
+    if (pts.length < 3) return;
+    const hull = d3.polygonHull(pts);
+    if (!hull) return;
+    const padded = hull.map(([x, y]) => {
+      const cx = d3.mean(hull, d => d[0]);
+      const cy = d3.mean(hull, d => d[1]);
+      const dx = x - cx, dy = y - cy;
+      const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+      return [x + (dx/dist) * 30, y + (dy/dist) * 30];
+    });
+    d3.select(this).attr('d', 'M' + padded.map(p => p.join(',')).join('L') + 'Z');
+  });
+}
+
+// Draw links
+const link = g.append('g').attr('class', 'links').selectAll('line')
+  .data(links).join('line')
+  .attr('stroke', d => {
+    if (d.confidence === 'INFERRED') return 'rgba(180,180,200,0.12)';
+    return 'rgba(180,180,200,0.18)';
+  })
+  .attr('stroke-width', d => d.confidence === 'INFERRED' ? 0.8 : 1.2)
+  .attr('stroke-dasharray', d => d.confidence === 'INFERRED' ? '3,3' : null);
+
+// Draw nodes
+const node = g.append('g').attr('class', 'nodes').selectAll('g')
+  .data(nodes).join('g')
+  .attr('class', d => 'node-group' + (d.isGod ? ' god-node' : ''))
+  .call(d3.drag()
+    .on('start', (event, d) => { if (!event.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+    .on('end', (event, d) => { if (!event.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+// Node circles
+node.append('circle')
+  .attr('r', d => d.size)
+  .attr('fill', d => d.color)
+  .attr('stroke', d => d.isGod ? '#ffd700' : 'rgba(255,255,255,0.15)')
+  .attr('stroke-width', d => d.isGod ? 2.5 : 0.8)
+  .style('cursor', 'pointer')
+  .on('mouseover', showTooltip)
+  .on('mouseout', hideTooltip)
+  .on('click', focusNode);
+
+// God node glow
+node.filter(d => d.isGod).append('circle')
+  .attr('r', d => d.size + 5)
+  .attr('fill', 'none')
+  .attr('stroke', '#ffd700')
+  .attr('stroke-width', 1)
+  .attr('opacity', 0.3)
+  .style('pointer-events', 'none');
+
+// Labels
+node.append('text')
+  .text(d => d.label.length > 35 ? d.label.substring(0, 33) + '…' : d.label)
+  .attr('class', d => 'node-label' + (d.isGod ? ' god' : ''))
+  .attr('text-anchor', 'middle')
+  .attr('dy', d => d.size + 12)
+  .style('display', d => d.isGod || d.community < 7 ? 'block' : 'none');
+
+// Simulation tick
+simulation.on('tick', () => {
+  link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+  node.attr('transform', d => `translate(${d.x},${d.y})`);
+  if (simulation.alpha() < 0.1) updateHyperedgeRegions();
+});
+
+// ===== TOOLTIP =====
+const tooltip = d3.select('#tooltip');
+function showTooltip(event, d) {
+  const heForNode = hyperedges.filter(he => he.nodes && he.nodes.includes(d.id));
+  let html = `<h4>${d.isGod ? '★ ' : ''}${d.label}</h4>`;
+  html += `<div class="field"><b>Community:</b> ${COMMUNITY_NAMES[d.community] || 'N/A'}</div>`;
+  html += `<div class="field"><b>Source:</b> ${d.source || 'N/A'}</div>`;
+  if (d.isGod) html += `<div class="field"><b>Role:</b> GOD NODE — high centrality hub</div>`;
+  if (heForNode.length > 0) {
+    html += `<div class="hyperedges-section"><b>Cascades (${heForNode.length}):</b></div>`;
+    heForNode.forEach(he => {
+      html += `<div class="cascade-item">▸ ${he.label}</div>`;
+    });
+  }
+  // Connected nodes
+  const neighbors = links.filter(l => l.source.id === d.id || l.target.id === d.id || l.source === d.id || l.target === d.id);
+  if (neighbors.length > 0) {
+    html += `<div class="field" style="margin-top:4px"><b>Connections:</b> ${neighbors.length} edges</div>`;
+  }
+  tooltip.style('display', 'block').html(html)
+    .style('left', (event.pageX + 15) + 'px')
+    .style('top', (event.pageY - 10) + 'px');
+}
+function hideTooltip() { tooltip.style('display', 'none'); }
+
+function focusNode(event, d) {
+  event.stopPropagation();
+  // Highlight connected
+  const connectedIds = new Set([d.id]);
+  links.forEach(l => {
+    const sid = typeof l.source === 'string' ? l.source : l.source.id;
+    const tid = typeof l.target === 'string' ? l.target : l.target.id;
+    if (sid === d.id) connectedIds.add(tid);
+    if (tid === d.id) connectedIds.add(sid);
+  });
+  node.selectAll('circle').attr('opacity', n => connectedIds.has(n.id) ? 1 : 0.1);
+  link.attr('opacity', l => {
+    const sid = typeof l.source === 'string' ? l.source : l.source.id;
+    const tid = typeof l.target === 'string' ? l.target : l.target.id;
+    return (sid === d.id || tid === d.id) ? 0.6 : 0.03;
+  });
+}
+
+svg.on('click', () => {
+  node.selectAll('circle').attr('opacity', 1);
+  link.attr('opacity', d => d.confidence === 'INFERRED' ? 0.4 : 0.6);
+});
+
+// ===== SEARCH =====
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = nodes.filter(n => n.label.toLowerCase().includes(q)).slice(0, 10);
+  if (matches.length === 0) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  searchResults.innerHTML = matches.map(n =>
+    `<div class="search-item" data-id="${n.id}" style="border-left:3px solid ${n.color}">
+      ${n.isGod ? '★ ' : ''}${n.label}
+    </div>`
+  ).join('');
+  searchResults.querySelectorAll('.search-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const n = nodeMap[el.dataset.id];
+      if (!n) return;
+      // Zoom to node
+      const transform = d3.zoomIdentity.translate(width()/2 - n.x*2, height()/2 - n.y*2).scale(2);
+      svg.transition().duration(600).call(zoom.transform, transform);
+      focusNode({stopPropagation: () => {}}, n);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    });
+  });
+});
+
+// ===== PANEL TABS =====
+document.querySelectorAll('#panel-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#panel-tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+// ===== COMMUNITY LIST =====
+function buildCommunityList(filter = null) {
+  const list = document.getElementById('community-list');
+  const entries = Object.entries(COMMUNITY_NAMES).map(([cid, name]) => ({
+    cid: parseInt(cid),
+    name,
+    count: nodes.filter(n => n.community === parseInt(cid)).length,
+    color: COMMUNITY_COLORS[parseInt(cid)] || '#555'
+  })).filter(e => filter === null || e.count >= filter);
+  entries.sort((a, b) => b.count - a.count);
+
+  list.innerHTML = entries.map(e => `
+    <div class="comm-item" data-cid="${e.cid}" style="opacity:${e.count < 3 ? 0.4 : 1}">
+      <span class="comm-dot" style="background:${e.color}"></span>
+      <span class="comm-label">${e.name}</span>
+      <span class="comm-count">${e.count}</span>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.comm-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const cid = parseInt(el.dataset.cid);
+      const commNodes = nodes.filter(n => n.community === cid);
+      const connectedIds = new Set(commNodes.map(n => n.id));
+      node.selectAll('circle').attr('opacity', n => connectedIds.has(n.id) ? 1 : 0.08);
+      link.attr('opacity', l => {
+        const sid = typeof l.source === 'string' ? l.source : l.source.id;
+        const tid = typeof l.target === 'string' ? l.target : l.target.id;
+        return (connectedIds.has(sid) || connectedIds.has(tid)) ? 0.5 : 0.02;
+      });
+    });
+  });
+}
+
+// ===== CASCADE PANEL =====
+function buildCascadePanel() {
+  const panel = document.getElementById('cascade-panel');
+  if (!hyperedges || hyperedges.length === 0) {
+    panel.innerHTML = '<p style="padding:12px;color:#666">No hyperedges defined.</p>';
+    return;
+  }
+  panel.innerHTML = hyperedges.map(he => {
+    const nodeLabels = (he.nodes || []).map(id => {
+      const n = nodeMap[id];
+      return n ? `<span class="cascade-badge" style="border-color:${n.color}" data-id="${id}">${n.label.substring(0,30)}</span>` : '';
+    }).join('');
+    return `
+      <div class="cascade-block" style="border-left-color:${COMMUNITY_COLORS[3] || '#76B7B2'}">
+        <h4>${he.label}</h4>
+        <div style="font-size:10px;color:#666;margin-bottom:4px">
+          ${he.confidence || ''} (${he.confidence_score || ''}) · ${he.relation || ''} · ${he.source_file || ''}
+        </div>
+        <div class="cascade-nodes">${nodeLabels}</div>
+      </div>
+    `;
+  }).join('');
+
+  panel.querySelectorAll('.cascade-badge').forEach(el => {
+    el.addEventListener('click', () => {
+      const n = nodeMap[el.dataset.id];
+      if (!n) return;
+      const transform = d3.zoomIdentity.translate(width()/2 - n.x*2, height()/2 - n.y*2).scale(2);
+      svg.transition().duration(600).call(zoom.transform, transform);
+      focusNode({stopPropagation: () => {}}, n);
+    });
+  });
+}
+
+// ===== PATHWAY MAP =====
+function buildPathwayMap() {
+  const map = document.getElementById('network-map');
+  map.innerHTML = `
+    <h4 style="padding:12px;color:#aaa;font-size:12px">Cross-Pathway Network Map</h4>
+    <table>
+      <tr><th>Upstream Driver</th><th>Convergent Hub</th><th>Effector Cascade</th><th>Endpoint</th></tr>
+      <tr>
+        <td>Nerve-injury ROS / TNF-α / NF-κB</td>
+        <td>HIF1α stabilization</td>
+        <td>↑ VEGFA, ANGPT2, MMP-9, MMP-2, BDNF, iNOS, glycolytic enzymes</td>
+        <td>M1 microglia, BSCB leak</td>
+      </tr>
+      <tr>
+        <td>MMP-9 Hub</td>
+        <td>proBDNF→mBDNF + PNN cleavage + TJ degradation</td>
+        <td>↓ KCC2, PV failure, BBB leak</td>
+        <td>Mechanical allodynia, central sensitization</td>
+      </tr>
+      <tr>
+        <td>Myelin debris + LPA</td>
+        <td>NgR1 / RhoA-ROCK</td>
+        <td>LIMK/cofilin → TRPV1, Nav1.7/1.8 trafficking</td>
+        <td>Heat hyperalgesia, ectopic firing</td>
+      </tr>
+      <tr>
+        <td>Rbfox1 loss</td>
+        <td>NrCAM exon-10 retention, ↑ SCN9A</td>
+        <td>DRG hyperexcitability</td>
+        <td>Mechanical + thermal hypersensitivity</td>
+      </tr>
+      <tr>
+        <td>Disinhibition cascade</td>
+        <td>PV loss → unrestrained SST</td>
+        <td>Lamina I projection firing</td>
+        <td>Allodynia, spontaneous pain</td>
+      </tr>
+    </table>
+    <h4 style="padding:12px;color:#aaa;font-size:12px;margin-top:16px">Key Therapeutic Strategies</h4>
+    <table>
+      <tr><th>Pillar</th><th>Target</th><th>Lead Compound</th><th>Status</th></tr>
+      <tr><td>Ionic</td><td>KCC2</td><td>CLP257 derivatives</td><td>Preclinical</td></tr>
+      <tr><td>Glial/Cytoskeletal</td><td>ROCK</td><td>Fasudil (approved)</td><td>Phase II (ALS)</td></tr>
+      <tr><td>Circuit</td><td>SST+ interneurons</td><td>hM4Di / SSTR2a antag</td><td>Preclinical</td></tr>
+      <tr><td>Immune</td><td>TNFR1</td><td>XPro1595</td><td>Phase I</td></tr>
+      <tr><td>Epigenetic</td><td>HIF1α</td><td>PX-478 / 2-DG</td><td>Oncology trials</td></tr>
+      <tr><td>Structural</td><td>PNN / MMP-9</td><td>SB-3CT / TIMP-1</td><td>Preclinical</td></tr>
+      <tr><td>Myelin</td><td>NgR1</td><td>NgR1-Fc / NG101</td><td>Phase II (SCI)</td></tr>
+      <tr><td>Splicing</td><td>Rbfox1</td><td>AAV5-Rbfox1 / ASO</td><td>Preclinical</td></tr>
+    </table>
+  `;
+}
+
+// ===== ABOUT PANEL =====
+function buildAboutPanel() {
+  const godList = document.getElementById('god-node-list');
+  godList.innerHTML = Array.from(GOD_LABELS).map(l => `<li>${l}</li>`).join('');
+}
+
+// ===== GLOBAL FUNCTIONS =====
+function showAllCommunities() {
+  node.selectAll('circle').attr('opacity', 1);
+  link.attr('opacity', d => d.confidence === 'INFERRED' ? 0.4 : 0.6);
+}
+function showMajorCommunities() {
+  const majorCids = new Set([0,1,2,3,4,5,6]);
+  node.selectAll('circle').attr('opacity', n => majorCids.has(n.community) ? 1 : 0.08);
+  link.attr('opacity', l => {
+    const sid = typeof l.source === 'string' ? l.source : l.source.id;
+    const tid = typeof l.target === 'string' ? l.target : l.target.id;
+    const sn = nodeMap[sid], tn = nodeMap[tid];
+    return (sn && majorCids.has(sn.community)) || (tn && majorCids.has(tn.community)) ? 0.5 : 0.02;
+  });
+}
+function showGodNodes() {
+  node.selectAll('circle').attr('opacity', n => n.isGod ? 1 : 0.06);
+  link.attr('opacity', l => {
+    const sid = typeof l.source === 'string' ? l.source : l.source.id;
+    const tid = typeof l.target === 'string' ? l.target : l.target.id;
+    const sn = nodeMap[sid], tn = nodeMap[tid];
+    return (sn && sn.isGod) || (tn && tn.isGod) ? 0.5 : 0.02;
+  });
+}
+function resetGraph() {
+  showAllCommunities();
+  svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity);
+}
+
+// ===== INIT =====
+buildCommunityList();
+buildCascadePanel();
+buildPathwayMap();
+buildAboutPanel();
+
+// Resize handler
+window.addEventListener('resize', () => {
+  simulation.force('center', d3.forceCenter(width() / 2, height() / 2));
+  simulation.alpha(0.3).restart();
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'f' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    document.getElementById('search').focus();
+  }
+  if (e.key === 'Escape') resetGraph();
+});
+</script>
+</body>
+</html>

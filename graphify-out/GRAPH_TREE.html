@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CP Knowledge Base — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CP Knowledge Base — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"CP Knowledge Base","total_count":790,"children":[{"name":"ana-12.md","total_count":9,"children":[{"name":"ANA-12 (Selective TrkB Antagonist)","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chemotherapy-Induced Peripheral Neuropathy (CIPN)","total_count":1,"children":[]},{"name":"KCC2 Downregulation (Impaired GABAergic Inhibition)","total_count":1,"children":[]},{"name":"MAPK Pathway (TrkB Downstream Effector)","total_count":1,"children":[]},{"name":"Neuropathic Pain","total_count":1,"children":[]},{"name":"NLRP3 Inflammasome","total_count":1,"children":[]},{"name":"TrkB Signaling in Neuropathic Pain","total_count":1,"children":[]},{"name":"TrkB.T1 (Truncated TrkB Isoform)","total_count":1,"children":[]}]},{"name":"AngPt.md","total_count":5,"children":[{"name":"Angiopoietin-1 (Ang-1)","total_count":1,"children":[]},{"name":"Angiopoietin-2 (Ang-2)","total_count":1,"children":[]},{"name":"COMP-Ang-1 (Stabilized Ang-1)","total_count":1,"children":[]},{"name":"Fumagillin (Ang-2 Inhibitor)","total_count":1,"children":[]},{"name":"Tie2 Receptor","total_count":1,"children":[]}]},{"name":"assaying_molecularly_structural_plasticity.md","total_count":12,"children":[{"name":"Adult Neurogenesis","total_count":1,"children":[]},{"name":"Arc (Activity-Regulated Cytoskeleton-Associated Protein)","total_count":1,"children":[]},{"name":"Brain-Derived Neurotrophic Factor (BDNF)","total_count":1,"children":[]},{"name":"Ca2+/Calmodulin-Dependent Protein Kinase II (CaMKII)","total_count":1,"children":[]},{"name":"Dendritic Spine Dynamics","total_count":1,"children":[]},{"name":"Doublecortin (DCX) — Neurogenesis Marker","total_count":1,"children":[]},{"name":"N-Methyl-D-Aspartate Receptor (NMDAR)","total_count":1,"children":[]},{"name":"PSD-95 (Postsynaptic Density Scaffold Protein)","total_count":1,"children":[]},{"name":"Structural Plasticity in the Brain","total_count":1,"children":[]},{"name":"Synaptic Plasticity (LTP/LTD)","total_count":1,"children":[]},{"name":"Tropomyosin Receptor Kinase B (TrkB)","total_count":1,"children":[]},{"name":"α-Amino-3-Hydroxy-5-Methyl-4-Isoxazolepropionic Acid Receptor (AMPAR)","total_count":1,"children":[]}]},{"name":"autophagy-apoptosis_inhibition.md","total_count":14,"children":[{"name":"Bax/Bak (Pro-Apoptotic Pore-Forming Proteins)","total_count":1,"children":[]},{"name":"Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)","total_count":1,"children":[]},{"name":"Beclin-1 (Autophagosome Nucleation Protein)","total_count":1,"children":[]},{"name":"Dual-Lock AAV Strategy for Apoptosis/Autophagy Inhibition","total_count":1,"children":[]},{"name":"Gibson Assembly Cloning Strategy","total_count":1,"children":[]},{"name":"Kozak Sequence (Ribosome Binding Site)","total_count":1,"children":[]},{"name":"LAMP2A (Chaperone-Mediated Autophagy Receptor)","total_count":1,"children":[]},{"name":"mDlx Enhancer (Broad GABAergic Neuron Targeting)","total_count":1,"children":[]},{"name":"Minimal Human Synapsin (min-hSyn) Promoter","total_count":1,"children":[]},{"name":"Mitochondrial Permeability Transition Pore (mPTP)","total_count":1,"children":[]},{"name":"myr-Akt (Constitutively Active PKB / Alternative Payload)","total_count":1,"children":[]},{"name":"Rationale: Long-Term Autophagy Blockade Risk (Goldilocks Problem)","total_count":1,"children":[]},{"name":"S5E2 Enhancer (PV+ Neuron-Specific Regulatory Element)","total_count":1,"children":[]},{"name":"Vormstein-Schneider et al. (2020)","total_count":1,"children":[]}]},{"name":"BBB.md","total_count":8,"children":[{"name":"Blood-Brain Barrier (BBB)","total_count":1,"children":[]},{"name":"Blood-Nerve Barrier (BNB)","total_count":1,"children":[]},{"name":"Blood-Spinal Cord Barrier (BSCB)","total_count":1,"children":[]},{"name":"CypA-MMP-9 Pathway","total_count":1,"children":[]},{"name":"Neurovascular Unit (NVU)","total_count":1,"children":[]},{"name":"Rationale: Balancing barrier repair with drug delivery is critical","total_count":1,"children":[]},{"name":"Resolvin D1 (Pro-Resolving Mediator)","total_count":1,"children":[]},{"name":"Tight Junction Proteins (Occludin/Claudin-5/ZO-1)","total_count":1,"children":[]}]},{"name":"BDNF-TrkB.md","total_count":9,"children":[{"name":"ANA-12 (TrkB Kinase Inhibitor)","total_count":1,"children":[]},{"name":"Brain-Derived Neurotrophic Factor (BDNF)","total_count":1,"children":[]},{"name":"CLP257 (KCC2 Enhancer)","total_count":1,"children":[]},{"name":"KCC2 (Potassium-Chloride Cotransporter)","total_count":1,"children":[]},{"name":"P2X4 Purinergic Receptor","total_count":1,"children":[]},{"name":"proBDNF","total_count":1,"children":[]},{"name":"Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles","total_count":1,"children":[]},{"name":"TrkB Receptor (TrkB.FL)","total_count":1,"children":[]},{"name":"TrkB.T1 (Truncated Isoform)","total_count":1,"children":[]}]},{"name":"Bradykinin.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Bradykinin","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"Caspase-3.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Caspase-3","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"cav3.2.md","total_count":12,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Cav3.2 T-type Calcium Channel","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"CB2.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Cannabinoid Receptor 2","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]}]},{"name":"CCL2-CCR2.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"CCL2-CCR2 Axis","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Monocyte","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"CCL21-CXCR3.md","total_count":12,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"CCL21-CXCR3 Axis","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"cgrp.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"CGRP","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Peripheral Sensitization","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"Connexin43.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Connexin43","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Fibroblast","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"CSF1-CSF1R.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"CSF1-CSF1R Axis","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"CX3CL1-CX3CR1.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"CX3CL1-CX3CR1 Axis","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Monocyte","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"CXCL12-CXCR4.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"CXCL12-CXCR4 Axis","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"Endothelin.md","total_count":12,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Endothelin","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"epigenetic_mechanisms_pain.md","total_count":8,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Epigenetic Mechanisms in Pain","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]}]},{"name":"ERK-MAPK.md","total_count":12,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"ERK/MAPK Pathway","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"GABA_apoptosis.md","total_count":17,"children":[{"name":"BCL-2 Family Proteins (BAX, BAK, BIM, BCL-2, BCL-xL)","total_count":1,"children":[]},{"name":"Calcium-Permeable AMPA Receptors (CP-AMPARs)","total_count":1,"children":[]},{"name":"Calpain (Ca²⁺-Dependent Cysteine Protease)","total_count":1,"children":[]},{"name":"Caspase Apoptotic Cascade (Caspase-3, -9, -12)","total_count":1,"children":[]},{"name":"ER Stress and Unfolded Protein Response (UPR)","total_count":1,"children":[]},{"name":"HIF1α (Hypoxia-Inducible Factor 1 Alpha)","total_count":1,"children":[]},{"name":"Mitochondrial Dysfunction in GABAergic Neurons","total_count":1,"children":[]},{"name":"mTORC1 (Mammalian Target of Rapamycin Complex 1)","total_count":1,"children":[]},{"name":"Neuronal Calcium (Ca²⁺) Overload","total_count":1,"children":[]},{"name":"Perineuronal Net (PNN) Loss and GABAergic Hyperactivity","total_count":1,"children":[]},{"name":"PINK1/Parkin Mitophagy Pathway","total_count":1,"children":[]},{"name":"Rapamycin (mTOR Inhibitor / Autophagy Enhancer)","total_count":1,"children":[]},{"name":"Rationale: Double-Edged Sword of Autophagy Modulation","total_count":1,"children":[]},{"name":"Reactive Oxygen Species (ROS) and Oxidative Stress","total_count":1,"children":[]},{"name":"RhoA/ROCK Signalling Pathway","total_count":1,"children":[]},{"name":"Therapeutic Strategies Targeting GABAergic Neuron Survival","total_count":1,"children":[]},{"name":"TNF-α (Pro-Inflammatory Cytokine)","total_count":1,"children":[]}]},{"name":"GLT-1.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Glutamate Transporter 1 (GLT-1/EAAT2)","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"GM-CSF.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"GM-CSF","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Monocyte","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neutrophil","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"HDAC.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Histone Deacetylases","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"hif1a.md","total_count":8,"children":[{"name":"2-Deoxy-D-Glucose (2-DG)","total_count":1,"children":[]},{"name":"Hypoxia-Inducible Factor 1 Alpha (HIF1α)","total_count":1,"children":[]},{"name":"NF-κB","total_count":1,"children":[]},{"name":"Prolyl Hydroxylase Domain (PHD) Enzymes","total_count":1,"children":[]},{"name":"PX-478 (HIF1α Inhibitor)","total_count":1,"children":[]},{"name":"Rationale: HIF1α has isoform specificity and systemic risks","total_count":1,"children":[]},{"name":"Von Hippel-Lindau (VHL) Protein","total_count":1,"children":[]},{"name":"YC-1 (HIF1α Inhibitor)","total_count":1,"children":[]}]},{"name":"HO-1_CO.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Heme Oxygenase-1 / Carbon Monoxide","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"IGF1-2.md","total_count":6,"children":[{"name":"Follistatin (FST)","total_count":1,"children":[]},{"name":"IGF1 Receptor (IGF1R)","total_count":1,"children":[]},{"name":"Insulin-like Growth Factor 1 (IGF1)","total_count":1,"children":[]},{"name":"Insulin-like Growth Factor 2 (IGF2)","total_count":1,"children":[]},{"name":"NTRK1 Receptor","total_count":1,"children":[]},{"name":"Rationale: IGF1 has dual neuroprotective and pain-promoting roles","total_count":1,"children":[]}]},{"name":"IL-6.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interleukin-6","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"iNOS.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Inducible Nitric Oxide Synthase","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"JAK-STAT.md","total_count":10,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"JAK-STAT Pathway","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"KCC2.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"KCC2 Chloride Cotransporter","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"KCC2_enhancers_new.md","total_count":5,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"KCC2 Enhancers","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]}]},{"name":"microglial_biology_pain_update.md","total_count":8,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Microglial Biology in Pain","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]}]},{"name":"nav1.7-1.8.md","total_count":8,"children":[{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Nav1.7/Nav1.8 Sodium Channels","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Peripheral Sensitization","total_count":1,"children":[]}]},{"name":"NLRP3.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"NLRP3 Inflammasome","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"NogoA-NgR1.md","total_count":11,"children":[{"name":"846-861PE (NgR1 Antagonist Peptide)","total_count":1,"children":[]},{"name":"LIMK/Cofilin Pathway","total_count":1,"children":[]},{"name":"LINGO-1","total_count":1,"children":[]},{"name":"Myelin-Associated Glycoprotein (MAG)","total_count":1,"children":[]},{"name":"NG101 (Anti-Nogo-A Antibody)","total_count":1,"children":[]},{"name":"Nogo-66 Receptor 1 (NgR1)","total_count":1,"children":[]},{"name":"Nogo-A","total_count":1,"children":[]},{"name":"Oligodendrocyte Myelin Glycoprotein (OMgp)","total_count":1,"children":[]},{"name":"p75 Neurotrophin Receptor (p75NTR)","total_count":1,"children":[]},{"name":"Rationale: Nogo-A/NgR1 have physiological circuit-stabilizing roles","total_count":1,"children":[]},{"name":"TRPV1 Channel","total_count":1,"children":[]}]},{"name":"Notch.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Notch Signaling","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"P2X4.md","total_count":12,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"P2X4 Receptor","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"P2X7.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"P2X7 Receptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"PI3K-Akt-mTOR.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"PI3K/Akt/mTOR Pathway","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"PKC.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Protein Kinase C","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"PNN_ECM.md","total_count":17,"children":[{"name":"ADAMTS Proteases","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chondroitin Sulfate Proteoglycans (CSPGs)","total_count":1,"children":[]},{"name":"Chondroitinase ABC","total_count":1,"children":[]},{"name":"Extracellular Matrix (ECM)","total_count":1,"children":[]},{"name":"Hyaluronan (HA)","total_count":1,"children":[]},{"name":"Link Protein HAPLN1/Crtl1","total_count":1,"children":[]},{"name":"Matrix Metalloproteinase-2 (MMP-2)","total_count":1,"children":[]},{"name":"Matrix Metalloproteinase-9 (MMP-9)","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Perineuronal Nets (PNNs)","total_count":1,"children":[]},{"name":"Rationale: PNNs are critical for normal brain function","total_count":1,"children":[]},{"name":"SB-3CT (MMP Inhibitor)","total_count":1,"children":[]},{"name":"Tenascin-R","total_count":1,"children":[]},{"name":"TIMP-1 (Endogenous MMP Inhibitor)","total_count":1,"children":[]}]},{"name":"PPARy.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"PPAR-gamma","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"proposal_acute_to_chronic_prevention.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Proposal: Acute to Chronic Pain Prevention","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"proposal_chronic_pain_treatment.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Proposal: Chronic Pain Treatment","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"prostaglandins.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Prostaglandins","total_count":1,"children":[]}]},{"name":"PV+_interneurons.md","total_count":4,"children":[{"name":"Calcium-Permeable AMPA Receptors (CP-AMPARs)","total_count":1,"children":[]},{"name":"CLP257 (KCC2 Enhancer)","total_count":1,"children":[]},{"name":"IEM-1460 (CP-AMPAR Antagonist)","total_count":1,"children":[]},{"name":"Parvalbumin (PV) Interneurons","total_count":1,"children":[]}]},{"name":"RAGE.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"RAGE Receptor","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"rbfox1.md","total_count":6,"children":[{"name":"AAV5-Rbfox1 Gene Therapy","total_count":1,"children":[]},{"name":"circRbfox1 (Circular RNA)","total_count":1,"children":[]},{"name":"Nav1.7 (SCN9A) Voltage-Gated Sodium Channel","total_count":1,"children":[]},{"name":"NrCAM (Neuronal Cell Adhesion Molecule)","total_count":1,"children":[]},{"name":"Rationale: Rbfox1 has pleiotropic effects across the nervous system","total_count":1,"children":[]},{"name":"Rbfox1 (A2BP1)","total_count":1,"children":[]}]},{"name":"RhoA-ROCK.md","total_count":12,"children":[{"name":"Astrocytes","total_count":1,"children":[]},{"name":"C3 Exoenzyme (RhoA Inhibitor)","total_count":1,"children":[]},{"name":"EphA1 Receptor","total_count":1,"children":[]},{"name":"Fasudil (ROCK Inhibitor)","total_count":1,"children":[]},{"name":"MARCKS Protein","total_count":1,"children":[]},{"name":"miR-488-3p (ROCK1-Targeting miRNA)","total_count":1,"children":[]},{"name":"p38 MAPK","total_count":1,"children":[]},{"name":"Rationale: RhoA/ROCK has context-dependent roles in regeneration vs pain","total_count":1,"children":[]},{"name":"RhoA GTPase","total_count":1,"children":[]},{"name":"ROCK (ROCK1/ROCK2)","total_count":1,"children":[]},{"name":"Simvastatin (RhoA Inhibitor)","total_count":1,"children":[]},{"name":"Y-27632 (ROCK Inhibitor)","total_count":1,"children":[]}]},{"name":"S100A8-A9.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neutrophil","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"S100A8/A9 (Calprotectin)","total_count":1,"children":[]}]},{"name":"S1P.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Sphingosine-1-Phosphate","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"Skill_neuroscientific_insights_seeker.md","total_count":8,"children":[{"name":"13 Integrative Preclinical Therapeutic Appraisals","total_count":1,"children":[]},{"name":"6-Step In Vivo Experimental Workflow","total_count":1,"children":[]},{"name":"Closed-Loop Neuromodulation Intervention","total_count":1,"children":[]},{"name":"Cross-Cutting Design Principles","total_count":1,"children":[]},{"name":"Cross-Pathway Network Map","total_count":1,"children":[]},{"name":"Four Technical Pillars (Recording, Behavior, Intervention, Decoding)","total_count":1,"children":[]},{"name":"Graphify-Derived God Nodes","total_count":1,"children":[]},{"name":"Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation for Neuropathic Pain","total_count":1,"children":[]}]},{"name":"SPM_resolution_mediators.md","total_count":9,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Specialized Pro-resolving Mediators","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"SST.md","total_count":3,"children":[{"name":"Prdm12 Transcription Factor","total_count":1,"children":[]},{"name":"Somatostatin (SST) Interneurons","total_count":1,"children":[]},{"name":"SSTR2a Receptor","total_count":1,"children":[]}]},{"name":"strategic_clinical_biomarker_plan.md","total_count":8,"children":[{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Strategic Clinical Biomarker Plan","total_count":1,"children":[]}]},{"name":"strategic_rd_roadmap.md","total_count":9,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Strategic R&D Roadmap","total_count":1,"children":[]}]},{"name":"Substance_P-NK1.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Peripheral Sensitization","total_count":1,"children":[]},{"name":"Substance P / NK1 Receptor","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]}]},{"name":"TGF-beta.md","total_count":14,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Pv+","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"Transforming Growth Factor-beta","total_count":1,"children":[]}]},{"name":"TLR2.md","total_count":19,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Monocyte","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"Toll-like Receptor 2","total_count":1,"children":[]}]},{"name":"TLR4.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"Toll-like Receptor 4","total_count":1,"children":[]}]},{"name":"TLR9.md","total_count":15,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Ectopic Firing","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neutrophil","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Satellite Glial","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"Toll-like Receptor 9","total_count":1,"children":[]}]},{"name":"TNF.md","total_count":6,"children":[{"name":"Infliximab (Anti-TNF Antibody)","total_count":1,"children":[]},{"name":"Rationale: Anti-TNF can paradoxically trigger neuropathies","total_count":1,"children":[]},{"name":"TNFR1 Receptor","total_count":1,"children":[]},{"name":"TNFR2 Receptor","total_count":1,"children":[]},{"name":"Tumor Necrosis Factor Alpha (TNF-α)","total_count":1,"children":[]},{"name":"XPro1595 (solTNF/TNFR1 Blocker)","total_count":1,"children":[]}]},{"name":"TRPV1.md","total_count":13,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Macrophage","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Nociceptor","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Spontaneous Pain","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"TRPV1 Channel","total_count":1,"children":[]}]},{"name":"TSPO.md","total_count":16,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Astrocyte","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Endothelial","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Interneuron","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Neuron","total_count":1,"children":[]},{"name":"Schwann Cell","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"TSPO (Translocator Protein)","total_count":1,"children":[]}]},{"name":"vegf.md","total_count":7,"children":[{"name":"Bevacizumab (Anti-VEGF Antibody)","total_count":1,"children":[]},{"name":"Neuropilin-1 (NRP-1)","total_count":1,"children":[]},{"name":"Rationale: VEGFA is crucial for repair but drives pain when excessive","total_count":1,"children":[]},{"name":"Semaphorin-3A","total_count":1,"children":[]},{"name":"Vascular Endothelial Growth Factor A (VEGFA)","total_count":1,"children":[]},{"name":"VEGF-Trap (Aflibercept)","total_count":1,"children":[]},{"name":"VEGFR2 (Flk-1/KDR)","total_count":1,"children":[]}]},{"name":"wnt.md","total_count":11,"children":[{"name":"Allodynia","total_count":1,"children":[]},{"name":"Central Sensitization","total_count":1,"children":[]},{"name":"Chronic Pain","total_count":1,"children":[]},{"name":"Drg","total_count":1,"children":[]},{"name":"Gabaergic","total_count":1,"children":[]},{"name":"Hyperalgesia","total_count":1,"children":[]},{"name":"Mechanical Allodynia","total_count":1,"children":[]},{"name":"Microglia","total_count":1,"children":[]},{"name":"Neuroinflammation","total_count":1,"children":[]},{"name":"Thermal Hyperalgesia","total_count":1,"children":[]},{"name":"Wnt Signaling","total_count":1,"children":[]}]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+# Involvement of Inducible Nitric Oxide Synthase (iNOS) in Neuropathic Pain
+
+Inducible nitric oxide synthase (iNOS, encoded by the *NOS2* gene) is one of three isoforms of nitric oxide synthase that, unlike its constitutively expressed counterparts (nNOS and eNOS), is transcriptionally regulated and produces sustained, high‑output levels of nitric oxide (NO) in response to inflammatory stimuli. In the context of neuropathic pain, iNOS is markedly upregulated in multiple cellular compartments of the nociceptive pathway—including spinal astrocytes, microglia, dorsal root ganglion (DRG) neurons, Schwann cells, and infiltrating macrophages—where its sustained production of NO drives pain hypersensitivity through two parallel and interconnected signalling axes: the **NO–cGMP–PKG pathway**, which enhances neuronal excitability and central sensitisation; and the **NO–peroxynitrite pathway**, which causes nitrosative stress, mitochondrial dysfunction, protein nitration, and lipid peroxidation. Pharmacological inhibition of iNOS with highly selective inhibitors such as **1400W** or genetic deletion of the *Nos2* gene consistently attenuates mechanical allodynia, thermal hyperalgesia, and neuroinflammatory markers in multiple preclinical models of neuropathic pain, including spinal cord injury, peripheral nerve injury, and diabetic neuropathy. While nNOS is considered the primary NOS isoform involved in spinal microglial activation and the initiation of tactile allodynia, iNOS plays a critical role in the maintenance and amplification of chronic pain states, particularly through its actions in astrocytes and at the peripheral nerve. The clinical development of iNOS inhibitors, including topically delivered formulations (KD7040) and selective small molecules (GW274150, AR‑C102222, SD‑6010), has further validated iNOS as a therapeutic target, although challenges related to the dual role of NO in tissue repair and host defence, the redundancy among NOS isoforms, and the need for central nervous system‑penetrant formulations continue to inform ongoing drug discovery efforts.
+
+## 🧬 The NOS Family: Isoforms, Structure, and Normal Function
+
+- **Three NOS isoforms**: Mammalian cells express three distinct nitric oxide synthase enzymes, each encoded by a separate gene:
+    - **Neuronal NOS (nNOS, NOS‑I)** : Encoded by *NOS1*. Constitutively expressed in neurons, skeletal muscle, and epithelial cells. Produces low, pulsatile NO in response to Ca²⁺‑calmodulin binding. nNOS is the predominant isoform in the CNS and is heavily implicated in synaptic plasticity and nociceptive transmission.
+    - **Inducible NOS (iNOS, NOS‑II)** : Encoded by *NOS2*. Transcriptionally regulated; its expression is induced *de novo* by pro‑inflammatory cytokines (TNF‑α, IL‑1β, IFN‑γ), lipopolysaccharide (LPS), and cellular stress. iNOS produces high, sustained NO output that is largely independent of Ca²⁺ because calmodulin is tightly bound at resting intracellular Ca²⁺ levels.
+    - **Endothelial NOS (eNOS, NOS‑III)** : Encoded by *NOS3*. Constitutively expressed in endothelial cells, where it regulates vascular tone and blood flow. Also present in some neurons.
+- **Enzymatic reaction**: All NOS isoforms catalyse the NADPH‑dependent conversion of L‑arginine and molecular oxygen to L‑citrulline and nitric oxide (NO•), using tetrahydrobiopterin (BH₄), flavin adenine dinucleotide (FAD), flavin mononucleotide (FMN), and heme as co‑factors.
+- **Cellular sources of iNOS in neuropathic pain**: iNOS is not normally expressed at significant levels in the resting nervous system. After peripheral nerve injury or spinal cord injury, iNOS is induced in:
+    - **Spinal astrocytes**: A major source in the spinal dorsal horn, where iNOS colocalises with GFAP. Astrocytic iNOS is a key driver of pain maintenance in spinal cord injury‑induced neuropathic pain.
+    - **Spinal microglia**: Microglia upregulate iNOS in response to nerve injury, although nNOS is generally the dominant NOS isoform in microglia.
+    - **DRG neurons and satellite glial cells**: iNOS is upregulated in DRG neurons and satellite cells after nerve injury and viral infection.
+    - **Schwann cells and macrophages**: In the injured peripheral nerve, iNOS is expressed in Schwann cells and infiltrating macrophages, where it contributes to Wallerian degeneration, axonal injury, and local inflammation.
+    - **Supraspinal regions**: iNOS expression increases in the hippocampus and other brain regions in chronic pain, contributing to pain‑related cognitive impairment.
+- **Physiological functions of NO**: At low, controlled concentrations, NO acts as a physiological signalling molecule: it activates soluble guanylyl cyclase (sGC) to produce cGMP, relaxes vascular smooth muscle, modulates neurotransmission, and participates in synaptic plasticity and immune defence. At high, sustained concentrations—the hallmark of iNOS activity—NO becomes neurotoxic, generating reactive nitrogen species (RNS) that damage proteins, lipids, and DNA.
+
+## 🔬 Mechanisms of iNOS in Neuropathic Pain
+
+After peripheral nerve injury or spinal cord injury, iNOS is persistently upregulated and contributes to pain through two major downstream signalling pathways, as well as through direct and indirect modulation of ion channels, neurotransmitter systems, and inflammatory cascades.
+
+### 1. The NO–cGMP–PKG Pathway: Central Sensitisation and Neuronal Hyperexcitability
+
+NO produced by iNOS (and nNOS) diffuses across cell membranes and activates **soluble guanylyl cyclase (sGC)** in adjacent neurons and glial cells. sGC generates cyclic guanosine monophosphate (cGMP), which in turn activates **cGMP‑dependent protein kinase G (PKG)** . This cascade has multiple pronociceptive consequences:
+
+- **Enhancement of NMDA receptor function**: PKG phosphorylates NMDA receptor subunits (particularly GluN2B), increasing their calcium conductance and promoting NMDA receptor‑dependent long‑term potentiation (LTP) at spinal nociceptive synapses—a cellular substrate of central sensitisation.
+- **Increased BDNF expression and KCC2 downregulation**: The NO–cGMP–PKG pathway stimulates BDNF synthesis and release from microglia and astrocytes. BDNF, acting on neuronal TrkB receptors, downregulates the potassium‑chloride cotransporter KCC2, collapsing the chloride gradient and converting GABA/glycine‑mediated inhibition into excitation or reduced inhibition (disinhibition). This is the canonical mechanism of mechanical allodynia.
+- **Enhanced neurotransmitter release**: PKG phosphorylates presynaptic proteins involved in vesicle docking and fusion, increasing the release of glutamate, substance P, and CGRP from nociceptor central terminals, amplifying nociceptive transmission.
+- **Activation of CREB and c‑Fos**: PKG and the ERK/MAPK pathway converge on the transcription factor CREB, inducing the expression of c‑Fos, COX‑2, and other pronociceptive genes that consolidate and sustain central sensitisation.
+- **Spinal microglial activation**: NO donors, such as sodium nitroprusside, markedly increase the mRNA expression of Mac‑1, IL‑6, TLR4, and **P2X4 receptor** in microglial cells, thereby amplifying the pronociceptive microglial phenotype and the ATP–P2X4–BDNF disinhibition cascade.
+
+### 2. The NO–Peroxynitrite Pathway: Nitrosative Stress and Mitochondrial Dysfunction
+
+The second major pathogenic mechanism of iNOS‑derived NO is its diffusion‑limited reaction with **superoxide anion (O₂•⁻)** , generated by NADPH oxidases (NOX1/2/4) and dysfunctional mitochondria, to form **peroxynitrite (ONOO⁻)** . Peroxynitrite is a highly reactive and destructive oxidant that inflicts widespread cellular damage:
+
+- **Protein tyrosine nitration**: Peroxynitrite nitrates tyrosine residues on proteins, forming 3‑nitrotyrosine. This modifies the function of critical enzymes (e.g., mitochondrial electron transport chain complexes, Mn‑superoxide dismutase) and structural proteins (e.g., neurofilaments, α‑tubulin), impairing mitochondrial respiration, axonal transport, and neuronal integrity. Nitrotyrosine accumulation is a validated biomarker of nitrosative stress and is robustly detected in peripheral nerves and DRG in diabetic neuropathy and traumatic nerve injury.
+- **DNA damage and PARP‑1 activation**: Peroxynitrite causes DNA strand breaks, which activate the nuclear enzyme poly(ADP‑ribose) polymerase‑1 (PARP‑1). PARP‑1 consumes NAD⁺ to generate poly(ADP‑ribose) polymers, depleting cellular NAD⁺ and ATP, leading to energy failure and a form of programmed necrosis termed parthanatos.
+- **Lipid peroxidation and ferroptosis**: Peroxynitrite initiates lipid peroxidation chain reactions in cellular membranes, contributing to ferroptosis, an iron‑dependent, non‑apoptotic form of cell death that releases additional DAMPs, further fuelling neuroinflammation.
+- **Mitochondrial dysfunction and ROS amplification**: Peroxynitrite inactivates mitochondrial electron transport chain complexes (I, II, III, and IV) and Mn‑SOD (the mitochondrial antioxidant enzyme). This results in mitochondrial membrane depolarisation, opening of the mitochondrial permeability transition pore (mPTP), further leakage of superoxide, and a vicious cycle of ROS‑induced ROS release that amplifies NLRP3 inflammasome activation and IL‑1β maturation.
+- **S‑nitrosylation**: NO can S‑nitrosylate cysteine residues on numerous proteins, altering their function. For example, S‑nitrosylation of Sirt1 inhibits its deacetylase activity, leading to sustained NF‑κB activation and inflammatory cytokine expression. S‑nitrosylation of ion channels (e.g., TRPV1, TRPA1, Nav1.7, Nav1.8) can enhance their activity, directly increasing nociceptor excitability.
+
+### 3. iNOS in Astrocytes: A Key Mechanism for Pain Maintenance
+
+A landmark 2025 study established that **astrocytic iNOS** is a critical and previously underappreciated mediator of chronic neuropathic pain, particularly after spinal cord injury (SCI).
+
+- Following moderate thoracic spinal cord contusion in rats, iNOS protein expression increased two‑fold in the L4–L5 spinal segments. This iNOS colocalised predominantly with the astrocytic marker GFAP in the superficial laminae of the dorsal horn, indicating that astrocytes are the primary source of injury‑induced iNOS.
+- Intrathecal administration of **1400W**, a highly selective iNOS inhibitor, effectively and dose‑dependently alleviated mechanical hypersensitivity (below‑level allodynia) without producing the motor deficits that were observed with the non‑selective NOS inhibitor L‑NAME or the nNOS inhibitor NPLA.
+- The eNOS inhibitor L‑NIO had no analgesic effect, underscoring the specificity of iNOS in this pain state.
+- 1400W treatment reduced the hyper‑reactivity of both iNOS and GFAP, confirming that astrocytic iNOS activity sustains the reactive astroglial phenotype that maintains pain.
+- These findings highlight iNOS as a potential therapeutic target for SCI‑induced neuropathic pain with reduced risk of motor and cardiovascular side effects compared to non‑selective or nNOS‑selective inhibitors.
+
+### 4. Peripheral iNOS and Local Inflammatory Pain
+
+- **Chronic constriction injury (CCI)** of the sciatic nerve induces local iNOS expression in both **macrophages and Schwann cells** within and distal to the injury site. This local iNOS–NO system contributes to the inflammatory reaction, Wallerian degeneration, and the development of neuropathic pain behaviour.
+- In the L5 spinal nerve axotomy (SNA) model, systemic administration of 1400W limited the development of mechanical and heat hypersensitivity when given in the early post‑injury period. 1400W altered the plasma cytokine profile, increasing anti‑nociceptive mediators (IL‑10) while modulating pro‑inflammatory cytokines (IL‑1α, IL‑1β), suggesting that iNOS inhibition promotes a shift towards an anti‑inflammatory, pro‑resolving cytokine balance.
+- In diabetic neuropathy, iNOS plays a key role in **peroxynitrite injury to peripheral nerve**, and functional and structural changes of diabetic neuropathy. Nitrosative stress in axons and Schwann cells, rather than in DRG neurons, is the primary driver of peripheral nerve dysfunction and degeneration. Diabetic *Nos2*‑/‑ mice are protected from nerve conduction velocity deficits, thermal and mechanical hypoalgesia, tactile allodynia, and the loss of intraepidermal nerve fibres.
+
+### 5. iNOS and the Delicate Balance Between Degeneration and Regeneration
+
+iNOS has a dual role in the injured peripheral nerve, contributing to both tissue damage and subsequent repair.
+
+- Mice lacking iNOS exhibit **delayed Wallerian degeneration** after nerve crush and transection, with abnormal persistence of myelinated fibre profiles distal to the injury zone. This is followed by delayed axonal regeneration, with fewer regenerating myelinated fibres, smaller‑calibre regenerating fibres, and slower reinnervation of muscle endplates.
+- In the CCI model of neuropathic pain, *Nos2*‑/‑ mice show a **delayed onset** but ultimately a similar magnitude of pain behaviour compared to wild‑type mice. This suggests that iNOS‑derived NO is required for the timely initiation of the degenerative and regenerative processes that ultimately lead to pain, but that compensatory mechanisms (e.g., nNOS, COX‑2) can sustain pain in the chronic phase in the absence of iNOS.
+- The delayed mechanical pain threshold normalisation in *iNOS*‑/‑ mice (after day 17 post‑surgery versus day 10 in wild‑type) indicates that iNOS accelerates the development of neuropathic pain, likely by promoting the inflammatory and degenerative events that sensitise nociceptors.
+
+### 6. The p38MAPK/NF‑κB/iNOS Signalling Axis
+
+iNOS expression in glial cells and neurons is driven by the p38 mitogen‑activated protein kinase (p38 MAPK) and nuclear factor‑κB (NF‑κB) pathway.
+
+- Nerve injury and pro‑inflammatory cytokines activate p38 MAPK, which phosphorylates and activates transcription factors (including NF‑κB and AP‑1) that bind to the *NOS2* promoter.
+- NF‑κB is a master transcriptional activator of *NOS2*. Its nuclear translocation and binding to κB elements in the *NOS2* promoter are essential for iNOS induction in microglia, astrocytes, and macrophages.
+- The natural analgesic compound **tetrahydropalmatine (THP)** was shown to ameliorate neuropathic pain in the SNI model by suppressing the p38MAPK/NF‑κB/iNOS signalling pathway, reducing iNOS expression and NO production in DRG and sciatic nerve, and lowering serum IL‑1β levels.
+- Other natural compounds, including resveratrol, curcumin, sulforaphane, and cannabidiol, inhibit the NF‑κB–iNOS axis, contributing to their analgesic and anti‑inflammatory effects.
+
+### 7. Supraspinal iNOS and Pain Comorbidities
+
+- iNOS expression is increased in the **hippocampus** of chronic neuropathic pain rats, where it contributes to the NO/cGMP/PKG pathway. Electroacupuncture at ST36 and GB34 was shown to alleviate neuropathic pain partly by inhibiting hippocampal iNOS and PKG expression, suggesting that central iNOS contributes to the cognitive and affective dimensions of chronic pain.
+- iNOS‑derived NO in the brain can impair hippocampal long‑term potentiation and neurogenesis, linking it to the cognitive deficits frequently observed in chronic pain patients.
+
+## 🔬 Preclinical Evidence of Modulation
+
+### 1. Pharmacological iNOS Inhibitors
+
+- **1400W (N‑(3‑(aminomethyl)benzyl)acetamidine)** : The most extensively used highly selective iNOS inhibitor (>5000‑fold selectivity for iNOS over eNOS, ~200‑fold over nNOS).
+    - **Spinal cord injury**: Intrathecal 1400W effectively alleviated below‑level mechanical hypersensitivity in a rat model of spinal contusion without motor side effects, unlike the non‑selective NOS inhibitor L‑NAME.
+    - **L5 spinal nerve axotomy (SNA)** : Systemic 1400W (20 mg/kg, i.p., every 8 hours for 3 days starting at 18 hours post‑SNA) limited the development of mechanical and heat hypersensitivity and altered the balance of pro‑ and anti‑inflammatory cytokines in plasma. **However, 1400W became ineffective if administered 7 days post‑SNA, once chronic pain was fully established**, indicating a critical early therapeutic window.
+- **Aminoguanidine**: A less selective iNOS inhibitor, administered locally via osmotic pumps, reduced mechanical allodynia and thermal hyperalgesia in the partial sciatic nerve resection model, with the effect dependent on the timing of administration.
+- **AR‑C102222**: A selective iNOS inhibitor that demonstrated antinociceptive activity in rodent models of inflammatory, neuropathic, and post‑operative pain.
+- **SD‑6010**: A selective iNOS inhibitor that showed efficacy in non‑clinical inflammatory, neuropathic, and osteoarthritis pain models.
+- **GW274150**: An orally active, selective iNOS inhibitor (IC₅₀ = 0.2 μM) that exhibits analgesic effects in rat models of inflammatory and neuropathic pain and has been investigated for its potential in mitigating renal ischaemia‑reperfusion injury.
+
+### 2. Genetic Models
+
+- **iNOS global knockout mice (*Nos2*‑/‑)** :
+    - In the **formalin test** of acute inflammatory pain, *iNOS*‑/‑ mice exhibit attenuated second‑phase pain behaviours compared to wild‑type mice.
+    - In the **CCI model** of neuropathic pain, *iNOS*‑/‑ mice show a **delayed onset** of mechanical allodynia (significant differences from sham after day 17, versus day 10 in wild‑type), but eventually develop similar levels of pain. Mechanical pain thresholds are not normalised by day 45 in *iNOS*‑/‑ mice, unlike wild‑type mice.
+    - In **nerve crush and transection models**, *iNOS*‑/‑ mice exhibit delayed Wallerian degeneration and impaired axonal regeneration, highlighting the dual role of iNOS in tissue injury and repair.
+    - In **streptozotocin‑induced diabetic neuropathy**, *iNos*‑/‑ mice are protected from nitrosative stress in peripheral nerve (absent nitrotyrosine and poly(ADP‑ribose) accumulation), preserve normal nerve conduction velocities, and exhibit less severe small‑fibre sensory neuropathy.
+- **Triple NOS knockout mice (n/i/eNOS‑/‑)** : Mice lacking all three NOS isoforms show reduced nerve injury‑induced tactile allodynia and spinal microglial activation. This phenotype is attributable primarily to the absence of nNOS, as *iNOS*‑/‑ mice alone show reduced formalin‑induced pain but no reduction in neuropathic pain behavioural or cellular responses in this particular assay. This suggests that nNOS, rather than iNOS, is the primary NOS isoform responsible for spinal microglial activation and early tactile allodynia after peripheral nerve injury, whereas iNOS may play a more prominent role in pain maintenance and amplification, particularly in the context of sustained astrocytic activation.
+
+### 3. Natural Compounds and Non‑Pharmacological Interventions
+
+- **Tetrahydropalmatine (THP)** : A natural alkaloid that suppresses the p38MAPK/NF‑κB/iNOS signalling pathway, reducing iNOS expression, NO production, and pro‑inflammatory cytokine levels, and alleviating mechanical hyperalgesia and cold allodynia in the SNI model.
+- **Hyperbaric oxygen (HBO) therapy**: Early HBO treatment at 2.5 ATA improved mechanical and thermal hypersensitivity in CCI rats and significantly decreased the upregulated mRNA and protein levels of iNOS and nNOS in the spinal dorsal horn, with no effect on eNOS.
+- **Electroacupuncture**: Alleviates neuropathic pain in part by inhibiting the hippocampal NO/cGMP/PKG pathway and reducing iNOS and PKG expression, as well as suppressing spinal astrocytic iNOS.
+- **Resveratrol, curcumin, and sulforaphane**: Activate Nrf2 and inhibit NF‑κB, thereby suppressing iNOS induction in glial cells and neurons and contributing to their analgesic effects.
+
+## 🩺 Clinical Implications and Therapeutic Opportunities
+
+- **iNOS as a therapeutic target distinct from nNOS and eNOS**: The selective inhibition of iNOS offers a potential advantage over non‑selective NOS inhibitors: iNOS is not constitutively expressed in the CNS or vasculature, so its blockade spares the physiological functions of nNOS (synaptic plasticity, learning, memory) and eNOS (vasodilation, blood pressure regulation). This suggests a wider therapeutic window and fewer cardiovascular and cognitive side effects.
+- **KD7040 (topical iNOS inhibitor)** : Kalypsys, Inc. developed KD7040, a topically delivered iNOS inhibitor for the treatment of neuropathic pain, specifically post‑herpetic neuralgia (PHN). A Phase I single‑dose escalation study was completed in 2007, and a multiple‑dose escalation study was initiated. A Phase IIa clinical trial was planned to evaluate KD7040 versus placebo over 14 days in patients with moderate‑to‑severe PHN pain. The topical formulation is designed to achieve high local drug concentrations at the site of pain while minimising systemic exposure and the potential for off‑target effects. No results from the Phase IIa trial have been publicly reported, and the current development status is unclear.
+- **Other clinical‑stage iNOS inhibitors**: GW274150 (oral, selective) and SD‑6010 have been investigated in inflammatory and neuropathic pain conditions, but large‑scale Phase III data specifically for neuropathic pain are lacking.
+- **Repurposing and combination strategies**:
+    - **iNOS inhibition + nNOS inhibition**: Given the distinct roles of nNOS (initiation, microglial activation) and iNOS (maintenance, astrocytic amplification, peripheral nitrosative stress), combined or sequentially timed inhibition of nNOS and iNOS could provide more complete analgesia.
+    - **iNOS inhibition + antioxidants or peroxynitrite decomposition catalysts**: Combining an iNOS inhibitor with a peroxynitrite scavenger (e.g., FeTMPyP, a peroxynitrite decomposition catalyst) could neutralise the ROS/RNS‑driven component of pain while blocking the ongoing source of NO.
+    - **iNOS inhibition + IL‑6 or TNF‑α inhibitors**: iNOS induction is driven by these cytokines; co‑targeting could break the positive‑feedback loop that sustains iNOS expression.
+    - **iNOS inhibition + KCC2 enhancers**: The NO–cGMP–PKG pathway contributes to BDNF‑mediated KCC2 downregulation; combining iNOS blockade with a KCC2‑activating drug could synergistically restore GABAergic inhibition.
+- **Biomarker potential**: Nitrotyrosine, a footprint of peroxynitrite, and nitrite/nitrate (stable NO metabolites) in cerebrospinal fluid, plasma, or skin biopsies could serve as biomarkers of iNOS activity and nitrosative stress, enabling patient stratification and monitoring of target engagement.
+
+## ⚠️ A Note of Caution and Complexity
+
+- **Dual role of NO and iNOS in tissue repair**: iNOS‑derived NO is essential for the timely execution of Wallerian degeneration, the clearance of myelin debris, and the initiation of axonal regeneration after nerve injury. Complete, prolonged iNOS inhibition could delay regeneration and functional recovery, particularly if initiated too early or maintained for too long. The therapeutic window for iNOS blockade must balance the suppression of pain‑driving inflammation with the preservation of reparative processes.
+- **Critical therapeutic time window**: The efficacy of iNOS inhibition is highly time‑dependent. 1400W is effective in preventing the development of pain hypersensitivity when administered early after nerve injury (within hours to a few days), but **becomes ineffective once chronic pain is fully established** (e.g., 7 days post‑SNA in rats). This suggests that iNOS is primarily involved in the initiation and early amplification phases of neuropathic pain, while other mechanisms (e.g., sustained glial activation, epigenetic reprogramming, maladaptive plasticity) maintain chronic pain in a manner that becomes iNOS‑independent over time. This temporal restriction has significant implications for clinical trial design and patient selection.
+- **Redundancy among NOS isoforms**: nNOS and iNOS have overlapping functions, and compensatory upregulation of one isoform can occur when the other is chronically inhibited or genetically deleted. For example, in *iNOS*‑/‑ mice, nNOS may partially compensate for the loss of iNOS, sustaining some level of NO‑dependent pain signalling. Triple NOS inhibition would circumvent this redundancy but would abolish all physiological NO functions, which is therapeutically unacceptable.
+- **Physiological roles of iNOS in host defence**: iNOS is a critical component of the innate immune response to bacterial, fungal, and parasitic pathogens. Macrophage iNOS produces the high‑output NO that is directly microbicidal. Systemic, chronic iNOS inhibition could increase the risk of opportunistic infections, particularly in immunocompromised or elderly patients. Topical or intrathecal delivery of iNOS inhibitors may mitigate this risk.
+- **Central nervous system penetration**: The degree to which systemically administered iNOS inhibitors cross the blood‑brain barrier and achieve therapeutic concentrations in the spinal cord is variable among compounds and is not always well‑characterised. The analgesic effects observed in some preclinical studies may be mediated, in part, by the inhibition of peripheral iNOS (in the injured nerve, DRG) rather than central iNOS. Intrathecal delivery can circumvent this issue and ensure central target engagement.
+- **Sex differences**: Most preclinical studies on iNOS in neuropathic pain have been conducted in male rodents. Given the known sex differences in neuroinflammation, microglial and astrocytic responses, and NOS isoform expression, it is likely that the role of iNOS and the efficacy of iNOS inhibitors may differ between males and females. This is a significant gap in the literature that requires investigation.
+- **Interactions with the wider pain network**: iNOS is tightly integrated into the broader neuroimmune and pronociceptive network:
+    - **BDNF–TrkB–KCC2**: The NO–cGMP–PKG pathway stimulates BDNF release from glia, leading to KCC2 downregulation and disinhibition.
+    - **TNF‑α, IL‑1β, IL‑6**: These cytokines induce *NOS2* transcription via NF‑κB, and iNOS‑derived NO can further stimulate their production via S‑nitrosylation of inhibitory phosphatases, creating a feed‑forward loop.
+    - **NLRP3 inflammasome**: Peroxynitrite‑mediated mitochondrial damage and mtDNA oxidation provide the second signal for NLRP3 inflammasome activation, linking iNOS to IL‑1β‑driven neuroinflammation.
+    - **P2X4 and P2X7 receptors**: NO donors upregulate P2X4 receptor expression in microglia, sensitising them to ATP and amplifying the ATP–P2X4–BDNF disinhibition cascade.
+    - **NMDA receptor**: The NO–cGMP–PKG pathway enhances NMDA receptor function, and NMDA receptor‑mediated Ca²⁺ influx activates nNOS, creating a positive‑feedback loop that can involve iNOS in the chronic phase.
+    - **COX‑2 and prostaglandins**: iNOS and COX‑2 are often co‑induced by the same inflammatory stimuli, and their products (NO and PGE₂) can synergistically sensitise nociceptors.
+    - **ERK/MAPK and NF‑κB**: The p38MAPK/NF‑κB pathway is the primary transcriptional driver of iNOS, and iNOS‑derived NO can further activate ERK via S‑nitrosylation of upstream regulators, linking iNOS to the broader MAPK signalling network.
+    - **KCC2**: Beyond the BDNF‑dependent pathway, peroxynitrite can directly oxidise and inactivate KCC2, providing a direct, BDNF‑independent mechanism for iNOS‑mediated disinhibition.
