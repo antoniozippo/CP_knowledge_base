@@ -6,7 +6,7 @@ tier: MID
 community: 7
 baseline_state: 0.5
 normal_role: Microglia is a cell_type located in other. Baseline activity level 0.50.
-  It receives 2 regulatory influences and exerts 2.
+  It receives 3 regulatory influences and exerts 2.
 pathological_rules:
 - rule_id: RULE-shared_microglia-01
   description: Microglia releases Brain-Derived Neurotrophic Factor (BDNF)
@@ -27,6 +27,12 @@ inbound_edges:
   neutral_ok: false
 - source_id: PNN_ECM_MMP9
   relation: activates_via_p38
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: RhoA_ROCK_ROCK
+  relation: activates_via_p38_mapk
   sign: 1
   weight: 0.5
   validation_status: null

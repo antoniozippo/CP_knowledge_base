@@ -10,6 +10,7 @@ from simulator.engine.orchestrator import Orchestrator, load_cards, load_scenari
 from simulator.schemas import (
     AgentCard,
     AgentTier,
+    Budget,
     DrugArm,
     Epoch,
     InfluenceEdge,
@@ -107,7 +108,7 @@ def naive_scenario(horizon=40):
     return ScenarioConfig(name="fixture_naive", horizon_days=horizon, injury_model="naive")
 
 
-def sni_scenario(horizon=40, drug_arms=None):
+def sni_scenario(horizon=40, drug_arms=None, budget=None):
     return ScenarioConfig(
         name="sni_like",
         horizon_days=horizon,
@@ -115,6 +116,7 @@ def sni_scenario(horizon=40, drug_arms=None):
         injury_tick=0,
         drug_arms=drug_arms or [],
         initial_perturbations=[Perturbation(agent_id="tnf_hub", value=0.9)],
+        budget=budget if budget is not None else Budget(),
         notes="fixture SNI proxy: boost TNF hub at t0",
     )
 
@@ -329,3 +331,91 @@ def test_g_real_card_set_smoke_run_bounds():
     readout = final.world_after.readouts
     assert 0.0 <= readout.pain_score <= 1.0
     assert 0.0 <= readout.barrier_integrity <= 1.0
+
+
+def _audit_by_tick(logs):
+    by_tick = {}
+    for log in logs:
+        for entry in log.audit:
+            by_tick.setdefault(entry.tick, []).append(entry)
+    return by_tick
+
+
+class TestBudgetControls:
+    def test_cap_two_makes_exactly_two_llm_calls_then_rules(self):
+        llm = ScriptedLLM()
+        orch = Orchestrator(fixture_cards(), sni_scenario(32, budget=Budget(max_llm_calls=2)), llm_client=llm)
+        logs = orch.run()
+        # eligible LLM attempts: hub card x ticks {0, 4, 15, 29} = 4 total
+        assert len(llm.prompts) == 2
+        assert orch.llm_calls_made == 2
+        assert orch.llm_calls_deferred == 2
+        audit = _audit_by_tick(logs)
+        for tick in (0, 4):
+            hub = [e for e in audit[tick] if e.agent_id == "tnf_hub"]
+            assert len(hub) == 1 and hub[0].emitter == "llm"
+            assert all(e.emitter == "rules" for e in audit[tick] if e.agent_id != "tnf_hub")
+        for tick in (15, 29):
+            assert all(e.emitter == "rules" for e in audit[tick])
+
+    def test_default_budget_leaves_all_eligible_calls_uncapped(self):
+        llm = ScriptedLLM()
+        orch = Orchestrator(fixture_cards(), sni_scenario(32), llm_client=llm)
+        orch.run()
+        assert len(llm.prompts) == 4
+        assert orch.llm_calls_made == 4
+        assert orch.llm_calls_deferred == 0
+
+    def test_budget_counts_recorded_in_manifest_json(self, tmp_path):
+        llm = ScriptedLLM()
+        orch = Orchestrator(fixture_cards(), sni_scenario(32, budget=Budget(max_llm_calls=2)), llm_client=llm)
+        logs = orch.run()
+        out_dir = tmp_path / "out"
+        orch.save_run(logs, out_dir)
+        data = json.loads((out_dir / "manifest.json").read_text())
+        assert data["manifest"]["llm_calls_made"] == 2
+        assert data["manifest"]["llm_calls_deferred"] == 2
+
+    def test_naive_scenario_with_tight_budget_completes_rules_only(self):
+        llm = ScriptedLLM()
+        naive = ScenarioConfig(name="fixture_naive", horizon_days=40, injury_model="naive",
+                               budget=Budget(max_llm_calls=0))
+        orch = Orchestrator(fixture_cards(), naive, llm_client=llm)
+        logs = orch.run()
+        assert len(logs) == 40
+        assert llm.prompts == []
+        assert orch.llm_calls_made == 0
+        # boundary ticks {4,15,29} would have been eligible; all deferred, no crash
+        assert orch.llm_calls_deferred == 3
+
+    def test_cache_hits_do_not_consume_budget(self):
+        cache = DeltaCache()
+        warm = ScriptedLLM()
+        Orchestrator(fixture_cards(), sni_scenario(32), llm_client=warm, cache=cache).run()
+        capped = ScriptedLLM()
+        orch = Orchestrator(
+            fixture_cards(),
+            sni_scenario(32, budget=Budget(max_llm_calls=0)),
+            llm_client=capped,
+            cache=cache,
+        )
+        logs = orch.run()
+        assert capped.prompts == []
+        assert orch.llm_calls_made == 0
+        assert orch.llm_calls_deferred == 0
+        audit = _audit_by_tick(logs)
+        for tick in (0, 4, 15, 29):
+            hub = [e for e in audit[tick] if e.agent_id == "tnf_hub"]
+            assert len(hub) == 1 and hub[0].emitter == "llm" and hub[0].cache_hit is True
+
+    def test_zero_wall_minute_budget_defers_everything(self):
+        llm = ScriptedLLM()
+        orch = Orchestrator(
+            fixture_cards(),
+            sni_scenario(32, budget=Budget(max_wall_minutes=0.0)),
+            llm_client=llm,
+        )
+        logs = orch.run()
+        assert llm.prompts == []
+        assert orch.llm_calls_made == 0
+        assert orch.llm_calls_deferred == 4

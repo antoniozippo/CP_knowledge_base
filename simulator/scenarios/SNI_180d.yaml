@@ -1,0 +1,30 @@
+name: sni_180d
+horizon_days: 180
+injury_model: SNI
+injury_tick: 0
+initial_perturbations:
+  - agent_id: shared_microglia
+    value: 0.92
+  - agent_id: TNF_TNF_alpha
+    value: 0.92
+  - agent_id: GABA_apoptosis_ROS_oxidative_stress
+    value: 0.92
+  - agent_id: tlr4_tlr4
+    value: 0.92
+  - agent_id: PNN_ECM_MMP9
+    value: 0.92
+  - agent_id: assaying_molecularly_structural_plasticity_BDNF
+    value: 0.92
+  - agent_id: hif1a_HIF1alpha
+    value: 0.92
+sustained_drives:
+  - agent_id: shared_microglia
+    value: 0.9
+    start_tick: 0
+  - agent_id: TNF_TNF_alpha
+    value: 0.9
+    start_tick: 0
+notes: >-
+  Long-horizon SNI arm: identical seeds and tonic sustained_drives to
+  sni_28d extended to 180 days. Used for chronic-phase persistence facts
+  (pain remains elevated far beyond the transition epoch).

@@ -1,0 +1,7 @@
+name: naive_180d
+horizon_days: 180
+injury_model: naive
+notes: >-
+  Naive control arm for long-horizon stability facts: no injury tick, no
+  perturbations, no drug arms, no sustained drives. All agents stay at card
+  baselines for the full 180-tick run; pain_score must remain negligible.

@@ -277,3 +277,19 @@
     opening
   source_file: analysis/literature/theme_02_MMP9_PNN_ECM.md
   confidence: INFERRED_CLOSURE
+- category: A2
+  source_label: RhoA_ROCK_ROCK
+  target_label: shared_microglia
+  relation: activates_via_p38_mapk
+  sign: 1
+  quote: RhoA/ROCK mediates p38 MAPK activation and morphological changes downstream of P2Y12/13 receptors in spinal microglia in neuropathic pain.
+  source_file: analysis/literature/theme_05_NgR1_RhoA_myelin_inhibitors.md
+  confidence: INFERRED_CLOSURE
+- category: A2
+  source_label: RhoA_ROCK_ROCK
+  target_label: TNF_TNF_alpha
+  relation: promotes_release_via_p38_m1_switch
+  sign: 1
+  quote: 'This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators.'
+  source_file: RhoA-ROCK.md
+  confidence: INFERRED_CLOSURE

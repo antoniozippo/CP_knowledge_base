@@ -15,6 +15,13 @@ enter the deterministic rules path; LLM prompts and the delta cache are
 unaffected, and audit entries keep emitter='rules'. All StateDeltas for a
 tick are computed against the same pre-tick snapshot and applied
 atomically.
+
+Run budgets (scenario.budget): a gate client wraps the LLM client and
+counts actual complete() invocations (cache hits never reach it, so they
+are free). Once max_llm_calls or max_wall_minutes is exhausted the gate
+raises and the engine's existing LLM-failure path degrades that attempt to
+the rule fallback — the run never crashes. Final counters are recorded in
+manifest.json as llm_calls_made / llm_calls_deferred.
 """
 
 import argparse
@@ -23,6 +30,7 @@ import hashlib
 import json
 import logging
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -63,6 +71,43 @@ def _card_content_sha(card: AgentCard) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+class _BudgetExhausted(Exception):
+    """Raised by the budget gate; handled as a normal LLM-path failure."""
+
+
+class _BudgetGateClient:
+    """Wraps an LLM client and enforces scenario.budget.
+
+    Cache hits never call complete(), so they bypass the gate entirely.
+    When a limit is exceeded the gate raises _BudgetExhausted, which
+    evaluate_llm_delta treats like any client failure: the attempt degrades
+    to rules. A single warning is logged at first exhaustion per run.
+    """
+
+    def __init__(self, inner, orchestrator: "Orchestrator"):
+        self._inner = inner
+        self._orch = orchestrator
+
+    def complete(self, prompt: str) -> str:
+        orch = self._orch
+        budget = orch.scenario.budget
+        if (
+            budget.max_llm_calls is not None
+            and orch._llm_calls_made >= budget.max_llm_calls
+        ):
+            orch._note_budget_exhausted("max_llm_calls")
+            raise _BudgetExhausted("max_llm_calls reached")
+        if (
+            budget.max_wall_minutes is not None
+            and (time.monotonic() - orch._run_started_monotonic)
+            >= budget.max_wall_minutes * 60.0
+        ):
+            orch._note_budget_exhausted("max_wall_minutes")
+            raise _BudgetExhausted("max_wall_minutes elapsed")
+        orch._llm_calls_made += 1
+        return self._inner.complete(prompt)
+
+
 class Orchestrator:
     def __init__(
         self,
@@ -77,6 +122,12 @@ class Orchestrator:
         self.llm_client = llm_client
         self.seed = seed
         self.cache = cache if cache is not None else DeltaCache()
+        self._llm_calls_made = 0
+        self._llm_calls_deferred = 0
+        self._budget_warned = False
+        self._run_started_monotonic = time.monotonic()
+        if llm_client is not None:
+            self.llm_client = _BudgetGateClient(llm_client, self)
         self._validate_edge_endpoints()
         for drive in scenario.sustained_drives:
             if drive.agent_id not in {c.id for c in self.cards_by_id.values()}:
@@ -103,6 +154,24 @@ class Orchestrator:
             engine_version=ENGINE_VERSION,
             card_set_hash=self._card_set_hash(),
         )
+
+    @property
+    def llm_calls_made(self) -> int:
+        return self._llm_calls_made
+
+    @property
+    def llm_calls_deferred(self) -> int:
+        return self._llm_calls_deferred
+
+    def _note_budget_exhausted(self, which: str) -> None:
+        self._llm_calls_deferred += 1
+        if not self._budget_warned:
+            self._budget_warned = True
+            logger.warning(
+                "run budget exhausted (%s); falling back to rule engine for "
+                "all subsequent LLM attempts",
+                which,
+            )
 
     def _validate_edge_endpoints(self) -> None:
         missing = sorted(
@@ -279,8 +348,14 @@ class Orchestrator:
     def save_run(self, logs: list[TickLog], out_dir: str | Path | None = None) -> Path:
         out_path = Path(out_dir) if out_dir is not None else Path(".")
         out_path.mkdir(parents=True, exist_ok=True)
+        manifest = self.manifest.model_copy(
+            update={
+                "llm_calls_made": self._llm_calls_made,
+                "llm_calls_deferred": self._llm_calls_deferred,
+            }
+        )
         manifest_payload = {
-            "manifest": self.manifest.model_dump(mode="json"),
+            "manifest": manifest.model_dump(mode="json"),
             "scenario_echo": self.scenario.model_dump(mode="json"),
         }
         (out_path / "manifest.json").write_text(

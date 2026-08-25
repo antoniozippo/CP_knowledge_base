@@ -1,0 +1,41 @@
+name: sni_28d_xpro1595
+horizon_days: 28
+injury_model: SNI
+injury_tick: 0
+initial_perturbations:
+  - agent_id: shared_microglia
+    value: 0.92
+  - agent_id: TNF_TNF_alpha
+    value: 0.92
+  - agent_id: GABA_apoptosis_ROS_oxidative_stress
+    value: 0.92
+  - agent_id: tlr4_tlr4
+    value: 0.92
+  - agent_id: PNN_ECM_MMP9
+    value: 0.92
+  - agent_id: assaying_molecularly_structural_plasticity_BDNF
+    value: 0.92
+  - agent_id: hif1a_HIF1alpha
+    value: 0.92
+drug_arms:
+  - name: xpro1595
+    target_agent_ids:
+      - TNF_TNF_alpha
+    start_tick: 2
+    effect_sign: -1
+    magnitude: 0.5
+sustained_drives:
+  - agent_id: shared_microglia
+    value: 0.9
+    start_tick: 0
+  - agent_id: TNF_TNF_alpha
+    value: 0.9
+    start_tick: 0
+notes: >-
+  SNI pilot plus XPro1595 arm. XPro1595 is a soluble-TNF/TNFR1-selective
+  inhibitor validated in vivo for peripheral nerve injury pain (theme_03
+  F3.1); the target is the TNF-alpha card TNF_TNF_alpha, inhibited
+  (effect_sign -1, magnitude 0.5) from tick 2. Seeds and sustained_drives
+  match sni_28d so the only inter-arm difference is the drug. Expected:
+  inflammation_index falls versus the SNI arm while TNF-driven drive
+  pressure continues to act in parallel (drug pressure is additive).

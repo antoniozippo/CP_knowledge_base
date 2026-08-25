@@ -6,7 +6,7 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: Tumor Necrosis Factor Alpha (TNF-α) is a molecule located in systemic.
-  Baseline activity level 0.50. It receives 3 regulatory influences and exerts 9.
+  Baseline activity level 0.50. It receives 4 regulatory influences and exerts 9.
 pathological_rules:
 - rule_id: RULE-TNF_TNF_alpha-01
   description: 'Tumor Necrosis Factor Alpha (TNF-α) rationale for Rationale: Anti-TNF
@@ -78,6 +78,12 @@ inbound_edges:
   neutral_ok: false
 - source_id: vegf_VEGFA
   relation: mutually_upregulates
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: RhoA_ROCK_ROCK
+  relation: promotes_release_via_p38_m1_switch
   sign: 1
   weight: 0.5
   validation_status: null

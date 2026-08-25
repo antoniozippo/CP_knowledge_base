@@ -185,6 +185,19 @@ class DrugArm(_StrictModel):
         return self
 
 
+class Budget(_StrictModel):
+    """Per-run cost controls on the LLM path.
+
+    max_llm_calls caps actual client invocations (cache hits are free);
+    max_wall_minutes caps wall-clock time from orchestrator construction.
+    When a limit is exceeded the engine degrades to the rule fallback
+    instead of crashing; see Orchestrator.
+    """
+
+    max_llm_calls: int | None = Field(default=None, ge=0)
+    max_wall_minutes: float | None = Field(default=None, ge=0.0)
+
+
 class ScenarioConfig(_StrictModel):
     name: str = Field(pattern=SCENARIO_NAME_PATTERN)
     horizon_days: int = Field(default=180, ge=1, le=180)
@@ -193,6 +206,7 @@ class ScenarioConfig(_StrictModel):
     drug_arms: list[DrugArm] = Field(default_factory=list)
     sustained_drives: list[SustainedDrive] = Field(default_factory=list)
     initial_perturbations: list[Perturbation] = Field(default_factory=list)
+    budget: Budget = Field(default_factory=Budget)
     notes: str | None = None
 
     @model_validator(mode="after")
@@ -256,6 +270,8 @@ class RunManifest(_StrictModel):
     seed: int
     engine_version: str = Field(default="0.1.0", pattern=SEMVER_PATTERN)
     card_set_hash: str
+    llm_calls_made: int | None = Field(default=None, ge=0)
+    llm_calls_deferred: int | None = Field(default=None, ge=0)
 
 
 def epoch_for(tick: int) -> Epoch:

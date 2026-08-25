@@ -6,6 +6,7 @@ from pydantic import ValidationError
 from simulator.schemas import (
     AgentCard,
     AgentTier,
+    Budget,
     DrugArm,
     DynamicsRule,
     Epoch,
@@ -458,6 +459,36 @@ class TestRunManifest:
             )
 
 
+class TestBudget:
+    def test_defaults_allow_unlimited_runs(self):
+        budget = Budget()
+        assert budget.max_llm_calls is None
+        assert budget.max_wall_minutes is None
+
+    def test_scenario_config_budget_defaults_to_empty(self):
+        scenario = ScenarioConfig(name="budget_default", injury_model="naive")
+        assert scenario.budget == Budget()
+
+    def test_explicit_budget_accepted_on_scenario(self):
+        scenario = ScenarioConfig(
+            name="budget_capped",
+            injury_model="naive",
+            budget=Budget(max_llm_calls=5, max_wall_minutes=2.5),
+        )
+        assert scenario.budget.max_llm_calls == 5
+        assert scenario.budget.max_wall_minutes == 2.5
+
+    def test_negative_limits_rejected(self):
+        with pytest.raises(ValidationError):
+            Budget(max_llm_calls=-1)
+        with pytest.raises(ValidationError):
+            Budget(max_wall_minutes=-0.1)
+
+    def test_extra_fields_rejected(self):
+        with pytest.raises(ValidationError):
+            Budget(max_tokens=99)
+
+
 class TestJsonRoundTrip:
     def test_agent_card_roundtrip(self):
         assert_roundtrip(make_card())
@@ -467,3 +498,6 @@ class TestJsonRoundTrip:
 
     def test_tick_log_roundtrip(self):
         assert_roundtrip(make_ticklog())
+
+    def test_budget_roundtrip(self):
+        assert_roundtrip(Budget(max_llm_calls=3, max_wall_minutes=1.5))

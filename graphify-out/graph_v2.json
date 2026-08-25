@@ -18050,6 +18050,32 @@
       "origin": "dynamic_closure",
       "quote": "rapid upregulation in injured DRG neurons, IL-1β cleavage, microglial activation via p38, BSCB/BBB opening",
       "source_ref": "analysis/literature/theme_02_MMP9_PNN_ECM.md"
+    },
+    {
+      "relation": "activates_via_p38_mapk",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_05_NgR1_RhoA_myelin_inhibitors.md",
+      "source_location": null,
+      "weight": null,
+      "source": "RhoA_ROCK_ROCK",
+      "target": "shared_microglia",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "RhoA/ROCK mediates p38 MAPK activation and morphological changes downstream of P2Y12/13 receptors in spinal microglia in neuropathic pain.",
+      "source_ref": "analysis/literature/theme_05_NgR1_RhoA_myelin_inhibitors.md"
+    },
+    {
+      "relation": "promotes_release_via_p38_m1_switch",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "RhoA-ROCK.md",
+      "source_location": null,
+      "weight": null,
+      "source": "RhoA_ROCK_ROCK",
+      "target": "TNF_TNF_alpha",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators.",
+      "source_ref": "RhoA-ROCK.md"
     }
   ],
   "hyperedges": [],

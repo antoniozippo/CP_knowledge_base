@@ -1,0 +1,202 @@
+# Literature-grounded fact assertions for the chronic-pain simulator.
+#
+# Each entry maps a PUBLISHED dynamics expectation (provenance in
+# source_ref: theme sweep finding, edge-claim id EC-####, or dossier file)
+# onto a machine-checkable simulation assertion. Kinds:
+#   stability_bound   - aggregate readout/state bound over a window
+#   ordering_pair     - first-crossing time ordering of two events (+/- tolerance)
+#   readout_threshold - population readout level vs absolute value or vs another arm
+#   drug_effect       - treatment arm lowered vs control by min_reduction
+#   determinism       - byte-identical rerun / cache-sanity zero-LLM-calls
+#
+# Thresholds are calibrated on the current card set (rules-only runs,
+# seed 0); they assert direction and rough magnitude of published effects,
+# not exact values. All facts must PASS for the harness to exit 0.
+
+facts:
+  # ------------------------------------------------------------------
+  # stability_bound
+  # ------------------------------------------------------------------
+  - id: F-01
+    claim: >-
+      Naive animals show negligible pain signaling that stays flat over a
+      180-day horizon (no spontaneous transition to chronic pain).
+    source_ref: "theme_01#F1.14"
+    kind: stability_bound
+    params: {scenario: naive_180d, readout: pain_score, window: [1, 180], agg: max, comparator: "<", value: 0.15}
+
+  - id: F-02
+    claim: >-
+      Every agent state remains within the unit interval [0,1] at every
+      tick of the SNI run (model well-posedness).
+    source_ref: "EC-0001"
+    kind: stability_bound
+    params: {scenario: sni_28d, states_bounded: true}
+
+  - id: F-03
+    claim: >-
+      When tonic injury drives stop, TNF-alpha activity falls significantly
+      below the driver-maintained SNI arm (pathology is driver-maintained
+      and reversible, not self-locking).
+    source_ref: "theme_03#F3.3"
+    kind: stability_bound
+    params: {scenario: sni_28d_drive_decay, vs_scenario: sni_28d, agent_id: TNF_TNF_alpha, window: [20, 27], agg: mean, min_gap: 0.1}
+
+  - id: F-04
+    claim: >-
+      After sustained-drive decay the pain readout sits below the
+      driver-maintained arm (tonic drivers sustain the pain phenotype).
+    source_ref: "KCC2.md"
+    kind: stability_bound
+    params: {scenario: sni_28d_drive_decay, vs_scenario: sni_28d, readout: pain_score, window: [20, 27], agg: mean, min_gap: 0.03}
+
+  # ------------------------------------------------------------------
+  # ordering_pair (first crossings; ties allowed within +/-1 tick)
+  # ------------------------------------------------------------------
+  - id: F-05
+    claim: >-
+      Microglial activation rises no later than TNF-alpha after SNI
+      (glial activation is proximal to cytokine elevation).
+    source_ref: "theme_03#F3.4"
+    kind: ordering_pair
+    params:
+      scenario: sni_28d
+      earlier: {agent: shared_microglia, direction: up}
+      later: {agent: TNF_TNF_alpha, direction: up}
+      tolerance: 1
+
+  - id: F-06
+    claim: >-
+      TNF-alpha rises no later than MMP-9 after SNI (cytokines precede or
+      accompany ECM protease induction).
+    source_ref: "EC-0074"
+    kind: ordering_pair
+    params:
+      scenario: sni_28d
+      earlier: {agent: TNF_TNF_alpha, direction: up}
+      later: {agent: PNN_ECM_MMP9, direction: up}
+      tolerance: 1
+
+  - id: F-07
+    claim: >-
+      BDNF rises before the KCC2 decline (microglia-BDNF-TrkB axis drives
+      chloride dysregulation).
+    source_ref: "theme_01#F1.10"
+    kind: ordering_pair
+    params:
+      scenario: sni_28d
+      earlier: {agent: assaying_molecularly_structural_plasticity_BDNF, direction: up}
+      later: {agent: BDNF_TrkB_KCC2, direction: down}
+      tolerance: 1
+
+  - id: F-08
+    claim: >-
+      KCC2 decline precedes the pain-score rise (spinal disinhibition is
+      upstream of behavioral pain).
+    source_ref: "theme_01#F1.3"
+    kind: ordering_pair
+    params:
+      scenario: sni_28d
+      earlier: {agent: BDNF_TrkB_KCC2, direction: down}
+      later: {readout: pain_score, direction: up, baseline_from: {scenario: naive_28d}}
+      tolerance: 1
+
+  # ------------------------------------------------------------------
+  # readout_threshold
+  # ------------------------------------------------------------------
+  - id: F-09
+    claim: >-
+      Mean pain score over days 14-28 is elevated in SNI versus naive by
+      more than the pre-registered separation margin.
+    source_ref: "theme_02#F2.3"
+    kind: readout_threshold
+    params: {scenario: sni_28d, vs_scenario: naive_28d, readout: pain_score, window: [14, 28], min_gap: 0.05}
+
+  - id: F-10
+    claim: >-
+      Barrier integrity is lower in SNI than naive from day 10 onward
+      (BSCB/BBB disruption follows nerve injury).
+    source_ref: "theme_04#F4.2"
+    kind: readout_threshold
+    params: {scenario: naive_28d, vs_scenario: sni_28d, readout: barrier_integrity, window: [10, 28], min_gap: 0.03}
+
+  - id: F-11
+    claim: >-
+      Inflammation index is higher in SNI than naive during days 7-21
+      (neuroinflammatory response to peripheral nerve injury).
+    source_ref: "theme_03#F3.1"
+    kind: readout_threshold
+    params: {scenario: sni_28d, vs_scenario: naive_28d, readout: inflammation_index, window: [7, 21], min_gap: 0.05}
+
+  - id: F-12
+    claim: >-
+      Pain remains elevated in the chronic phase: SNI at days 150-179 is
+      still separated from naive (persistence beyond the transition epoch).
+    source_ref: "theme_06#F6.1"
+    kind: readout_threshold
+    params: {scenario: sni_180d, vs_scenario: naive_180d, readout: pain_score, window: [150, 179], min_gap: 0.05}
+
+  # ------------------------------------------------------------------
+  # drug_effect
+  # ------------------------------------------------------------------
+  - id: F-13
+    claim: >-
+      CLP257 (KCC2 enhancer) lowers mean pain score over days 14-28 versus
+      SNI by at least the pilot margin.
+    source_ref: "theme_01#F1.2"
+    kind: drug_effect
+    params: {treatment: sni_28d_clp257, control: sni_28d, readout: pain_score, window: [14, 28], min_reduction: 0.03}
+
+  - id: F-14
+    claim: >-
+      Fasudil (ROCK inhibitor) engages its target: mean ROCK activity over
+      days 14-28 is reduced versus SNI by at least 0.2.
+    source_ref: "RhoA-ROCK.md"
+    kind: drug_effect
+    params: {treatment: sni_28d_fasudil, control: sni_28d, agent_id: RhoA_ROCK_ROCK, window: [14, 28], min_reduction: 0.2}
+
+  - id: F-15
+    claim: >-
+      Fasudil dampens the microglial p38/M1 cascade arm: mean microglial
+      activation over days 14-28 is lower than SNI.
+    source_ref: "theme_05#F5.4"
+    kind: drug_effect
+    params: {treatment: sni_28d_fasudil, control: sni_28d, agent_id: shared_microglia, window: [14, 28], min_reduction: 0.05}
+
+  - id: F-16
+    claim: >-
+      XPro1595 (solTNF/TNFR1-selective inhibitor) lowers the inflammation
+      index versus SNI.
+    source_ref: "theme_03#F3.1"
+    kind: drug_effect
+    params: {treatment: sni_28d_xpro1595, control: sni_28d, readout: inflammation_index, window: [7, 21], min_reduction: 0.03}
+
+  # ------------------------------------------------------------------
+  # determinism / caching sanity
+  # ------------------------------------------------------------------
+  - id: F-17
+    claim: >-
+      Re-running sni_28d with identical inputs produces byte-identical
+      tick logs (rules-only runs are fully deterministic).
+    source_ref: "theme_01#F1.14"
+    kind: determinism
+    params: {check: byte_identical_rerun, scenario: sni_28d}
+
+  - id: F-18
+    claim: >-
+      A second run sharing the delta cache makes zero LLM client calls
+      (caching sanity with a fake client).
+    source_ref: "EC-0100"
+    kind: determinism
+    params: {check: cached_second_run_zero_llm, scenario: sni_28d}
+
+notes: >-
+  Fasudil residual gap: published fasudil analgesia (pain-score lowering)
+  cannot currently be expressed end-to-end because the pain readout includes
+  karilin7_PainRelatedAnxiety, whose only driver is a double-weighted
+  Kalirin-7 edge; ROCK suppression releases that inhibition and offsets the
+  pronociceptive cascade. The closure edges RhoA_ROCK_ROCK ->
+  shared_microglia/TNF_TNF_alpha (INFERRED_CLOSURE, theme_05 F5.4 /
+  RhoA-ROCK.md) make target engagement and microglial dampening expressible;
+  F-14/F-15 assert that expressible subset until the readout-composition
+  artifact is resolved.
