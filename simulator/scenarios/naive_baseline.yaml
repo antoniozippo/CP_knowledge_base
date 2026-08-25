@@ -1,0 +1,10 @@
+name: naive_baseline
+horizon_days: 180
+injury_model: naive
+drug_arms: []
+initial_perturbations: []
+notes: >
+  No-injury reference run over the full 254-agent card set built by
+  simulator/build_cards.py. All agents start at their card baselines; no
+  drug arms, no injury seeding. Serves as the paired control for injury
+  scenarios and the baseline-stability guardrail reference.

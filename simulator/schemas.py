@@ -129,6 +129,11 @@ class WorldState(_StrictModel):
         return v
 
 
+class Perturbation(_StrictModel):
+    agent_id: str
+    value: float = Field(ge=0.0, le=1.0)
+
+
 class DrugArm(_StrictModel):
     name: str
     target_agent_ids: list[str]
@@ -160,6 +165,7 @@ class ScenarioConfig(_StrictModel):
     injury_model: Literal["naive", "SNI", "CCI", "SNL", "CIPN", "other"]
     injury_tick: int | None = Field(default=None, ge=0)
     drug_arms: list[DrugArm] = Field(default_factory=list)
+    initial_perturbations: list[Perturbation] = Field(default_factory=list)
     notes: str | None = None
 
     @model_validator(mode="after")
