@@ -194,6 +194,11 @@ class TestInfluenceEdge:
         with pytest.raises(ValidationError):
             make_edge(sign=sign)
 
+    @pytest.mark.parametrize("weight", [-0.1, 1.5])
+    def test_weight_bounded(self, weight):
+        with pytest.raises(ValidationError):
+            make_edge(weight=weight)
+
     def test_weight_defaults_to_one(self):
         edge = InfluenceEdge(source_id="a", relation="increases", sign=-1)
         assert edge.weight == 1.0
@@ -207,6 +212,20 @@ class TestInfluencePacket:
     def test_sender_state_bounded(self):
         with pytest.raises(ValidationError):
             InfluencePacket(source_id="x", sign=1, weight=1.0, sender_state=1.5, tick=0)
+
+    @pytest.mark.parametrize("sign", [-2, 2])
+    def test_sign_out_of_domain_rejected(self, sign):
+        with pytest.raises(ValidationError):
+            InfluencePacket(source_id="x", sign=sign, weight=1.0, sender_state=0.5, tick=0)
+
+    @pytest.mark.parametrize("weight", [-0.1, 1.5])
+    def test_weight_bounded(self, weight):
+        with pytest.raises(ValidationError):
+            InfluencePacket(source_id="x", sign=-1, weight=weight, sender_state=0.5, tick=0)
+
+    def test_negative_tick_rejected(self):
+        with pytest.raises(ValidationError):
+            InfluencePacket(source_id="x", sign=1, weight=1.0, sender_state=0.5, tick=-1)
 
 
 class TestStateDelta:
@@ -338,6 +357,22 @@ class TestDrugArm:
         with pytest.raises(ValidationError):
             make_arm(magnitude=1.5)
 
+    def test_negative_end_tick_rejected(self):
+        with pytest.raises(ValidationError):
+            make_arm(end_tick=-1)
+
+    @pytest.mark.parametrize("start,end", [(10, 5), (7, 7)])
+    def test_inverted_or_flat_window_rejected(self, start, end):
+        with pytest.raises(ValidationError):
+            make_arm(start_tick=start, end_tick=end)
+
+    def test_open_ended_window_accepted(self):
+        assert make_arm(end_tick=None).end_tick is None
+
+    def test_inverted_window_nested_in_scenario_rejected(self):
+        with pytest.raises(ValidationError):
+            make_scenario(drug_arms=[make_arm(start_tick=10, end_tick=5)])
+
 
 class TestScenarioConfig:
     def test_snake_case_name_enforced(self):
@@ -394,6 +429,12 @@ class TestTickLog:
         log = make_ticklog()
         assert len(log.audit) == 2
         assert log.world_after.tick == log.tick
+
+
+class TestTickAuditEntry:
+    def test_negative_tick_rejected(self):
+        with pytest.raises(ValidationError):
+            TickAuditEntry(tick=-1, agent_id="a", emitter="rules", cache_hit=False)
 
 
 class TestRunManifest:

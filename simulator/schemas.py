@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from enum import Enum
 from typing import Literal
 
@@ -50,7 +51,7 @@ class InfluenceEdge(_StrictModel):
     source_id: str
     relation: str
     sign: int = Field(ge=-1, le=1)
-    weight: float = 1.0
+    weight: float = Field(default=1.0, ge=0.0, le=1.0)
     validation_status: str | None = None
     neutral_ok: bool = False
 
@@ -92,10 +93,10 @@ class AgentCard(_StrictModel):
 
 class InfluencePacket(_StrictModel):
     source_id: str
-    sign: int
-    weight: float
+    sign: int = Field(ge=-1, le=1)
+    weight: float = Field(ge=0.0, le=1.0)
     sender_state: float = Field(ge=0.0, le=1.0)
-    tick: int
+    tick: int = Field(ge=0)
 
 
 class StateDelta(_StrictModel):
@@ -132,7 +133,7 @@ class DrugArm(_StrictModel):
     name: str
     target_agent_ids: list[str]
     start_tick: int = Field(ge=0)
-    end_tick: int | None = None
+    end_tick: int | None = Field(default=None, ge=0)
     effect_sign: int
     magnitude: float = Field(ge=0.0, le=1.0)
 
@@ -142,6 +143,15 @@ class DrugArm(_StrictModel):
         if v not in (-1, 1):
             raise ValueError("effect_sign must be -1 or 1")
         return v
+
+    @model_validator(mode="after")
+    def _window_ordering(self) -> "DrugArm":
+        if self.end_tick is not None and self.end_tick <= self.start_tick:
+            raise ValueError(
+                f"drug arm '{self.name}' has inverted window: "
+                f"end_tick {self.end_tick} <= start_tick {self.start_tick}"
+            )
+        return self
 
 
 class ScenarioConfig(_StrictModel):
@@ -176,7 +186,7 @@ class ScenarioConfig(_StrictModel):
 
 
 class TickAuditEntry(_StrictModel):
-    tick: int
+    tick: int = Field(ge=0)
     agent_id: str
     emitter: Literal["llm", "rules"]
     prompt_sha256: str | None = None
@@ -194,8 +204,8 @@ class TickLog(_StrictModel):
 
     @model_validator(mode="after")
     def _unique_delta_agents(self) -> "TickLog":
-        agent_ids = [delta.agent_id for delta in self.deltas_applied]
-        duplicates = sorted({a for a in agent_ids if agent_ids.count(a) > 1})
+        counts = Counter(delta.agent_id for delta in self.deltas_applied)
+        duplicates = sorted(agent_id for agent_id, n in counts.items() if n > 1)
         if duplicates:
             raise ValueError(f"duplicate agent_id in deltas_applied: {', '.join(duplicates)}")
         return self

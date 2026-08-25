@@ -14,6 +14,7 @@ from simulator.schemas import (
     TickLog,
     WorldState,
     epoch_for,
+    validate_state_values,
     validate_states,
 )
 
@@ -33,5 +34,6 @@ __all__ = [
     "TickLog",
     "WorldState",
     "epoch_for",
+    "validate_state_values",
     "validate_states",
 ]
