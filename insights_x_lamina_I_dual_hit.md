@@ -4,7 +4,7 @@
 
 ## Summary
 
-The strongest new mechanistic fact of the validation round is a **cell-type retargeting**: after nerve injury, microglia degrade perineuronal nets that selectively enwrap **lamina I spinoparachial projection neurons** — not PV interneurons — and this GAG stripping alone promotes pain [Tansley et al., Science 377:80–86, 2022]. Combined with the human-anchored disinhibition cascade, this yields a **dual-hit model**: allodynia requires coincident (1) microglial PNN removal from projection neurons and (2) KCC2-dependent weakening of inhibitory control onto those same cells. Either hit alone is compensated.
+The strongest new mechanistic fact of the validation round is a **cell-type retargeting**: after nerve injury, microglia degrade perineuronal nets that selectively enwrap **lamina I spinoparabrachial projection neurons** — not PV interneurons — and this GAG stripping alone promotes pain [Tansley et al., Science 377:80–86, 2022]. Combined with the human-anchored disinhibition cascade, this yields a **dual-hit model**: allodynia requires coincident (1) microglial PNN removal from projection neurons and (2) KCC2-dependent weakening of inhibitory control onto those same cells. Either hit alone is compensated.
 
 ## The Two Hits
 

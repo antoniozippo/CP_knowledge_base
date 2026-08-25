@@ -134,6 +134,9 @@ LC-0036 (NSC23766 ACC ↔ RhoA/ROCK — ACC Kal7 narrative unsupported and NSC23
 **Generic redox/family pairings lacking a discriminable pain hypothesis:**
 LC-0040, LC-0041 (RvD1↔LXA4/MaR1 same-family), LC-0051 (CO↔peroxynitrite), LC-0055 folded into S7 rather than standing alone.
 
+**Already-encoded pathway-internal links:**
+LC-0022 (NMDAR↔IGF1 — both nodes already connected via PI3K-Akt-mTOR dossier edges), LC-0044 (IL-6/JAK2↔MMP-9 hub — encoded by EC-0164/TNF→MMP-9 chain).
+
 **Triad candidates (TC-####):** 38 of 40 discarded as within-dossier transitive derivations of already-encoded chains (GABA_apoptosis cascade internals TC-0010–TC-0024, TC-0028–TC-0040), drug-sign artifacts (TC-0020 simvastatin, TC-0022 myr-Akt), or relations already confirmed (TC-0001 Tie2→barrier = EC-0015). TC-0002 and TC-0031 retained above.
 
 ---
