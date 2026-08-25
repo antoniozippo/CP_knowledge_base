@@ -8679,7 +8679,8 @@
       "weight": 1.0,
       "source": "PNN_ECM_perineuronal_nets",
       "target": "PNN_ECM_rationale_PNN_normal_function",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -9350,7 +9351,8 @@
       "weight": 1.0,
       "source": "ana_12_ANA_12",
       "target": "ana_12_TrkB_signaling_pain",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "inhibits",
@@ -9361,7 +9363,8 @@
       "weight": 1.0,
       "source": "ana_12_ANA_12",
       "target": "ana_12_TrkB_T1",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "inhibits",
@@ -9372,7 +9375,8 @@
       "weight": 1.0,
       "source": "ana_12_ANA_12",
       "target": "shared_central_sensitization",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "inhibits",
@@ -9383,7 +9387,8 @@
       "weight": 1.0,
       "source": "ana_12_ANA_12",
       "target": "ana_12_KCC2_dysregulation",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -9405,7 +9410,8 @@
       "weight": 1.0,
       "source": "ana_12_ANA_12",
       "target": "ana_12_NLRP3_inflammasome",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "references",
@@ -9438,7 +9444,8 @@
       "weight": 1.0,
       "source": "ana_12_TrkB_signaling_pain",
       "target": "ana_12_MAPK_pathway",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "causes",
@@ -9449,7 +9456,8 @@
       "weight": 1.0,
       "source": "ana_12_TrkB_signaling_pain",
       "target": "ana_12_KCC2_dysregulation",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "causes",
@@ -9460,7 +9468,8 @@
       "weight": 1.0,
       "source": "ana_12_TrkB_signaling_pain",
       "target": "GABA_apoptosis_calcium_overload",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "conceptually_related_to",
@@ -9548,7 +9557,8 @@
       "weight": 1.0,
       "source": "NogoA_NgR1_NogoA",
       "target": "NogoA_NgR1_rationale_physiological_roles",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -9746,7 +9756,8 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_RhoA",
       "target": "RhoA_ROCK_rationale_dual_role",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "antagonizes_pathway",
@@ -9757,7 +9768,8 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_RhoA",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "functionally_antagonistic",
@@ -9768,7 +9780,8 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_RhoA",
       "target": "karilin7_Rac1",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "conceptually_related_to",
@@ -9823,7 +9836,8 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_ROCK",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "conceptually_related_to",
@@ -9867,7 +9881,8 @@
       "weight": 1.0,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "BDNF_TrkB_rationale_dual_roles",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -9900,7 +9915,8 @@
       "weight": 1.0,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "karilin7_Kalirin7",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "conceptually_related_to",
@@ -9999,7 +10015,8 @@
       "weight": 1.0,
       "source": "TNF_TNF_alpha",
       "target": "TNF_rationale_paradox",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10043,7 +10060,8 @@
       "weight": 1.0,
       "source": "TNF_TNF_alpha",
       "target": "karilin7_DendriticSpineLoss",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10175,7 +10193,8 @@
       "weight": 1.0,
       "source": "BBB_blood_brain_barrier",
       "target": "BBB_rationale_balancing_act",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10285,7 +10304,8 @@
       "weight": 1.0,
       "source": "hif1a_HIF1alpha",
       "target": "hif1a_rationale_caution",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10340,7 +10360,8 @@
       "weight": 1.0,
       "source": "vegf_VEGFA",
       "target": "vegf_rationale_dual_role",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10373,7 +10394,8 @@
       "rationale": null,
       "source": "vegf_bevacizumab",
       "target": "vegf_VEGFA",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "proposes_combination_with_comp_ang1",
@@ -10648,7 +10670,8 @@
       "weight": 1.0,
       "source": "rbfox1_Rbfox1",
       "target": "rbfox1_rationale_caution",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -10736,7 +10759,8 @@
       "weight": 1.0,
       "source": "GABA_apoptosis_calcium_overload",
       "target": "GABA_apoptosis_PNN_loss",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "causes",
@@ -10769,7 +10793,8 @@
       "weight": 1.0,
       "source": "GABA_apoptosis_mitochondrial_dysfunction",
       "target": "GABA_apoptosis_TNF_alpha",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "causes",
@@ -10780,7 +10805,8 @@
       "weight": 1.0,
       "source": "GABA_apoptosis_mitochondrial_dysfunction",
       "target": "GABA_apoptosis_HIF1alpha",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "causes",
@@ -10791,7 +10817,8 @@
       "weight": 1.0,
       "source": "GABA_apoptosis_mitochondrial_dysfunction",
       "target": "GABA_apoptosis_RhoA_ROCK",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "inhibits",
@@ -14509,7 +14536,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "pv_interneuron_kcc2_dependence",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "stimulates_release_of",
@@ -14520,7 +14548,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "hif1a_microglial_glycolysis",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "stimulates_microglial_release_of",
@@ -14531,7 +14560,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "vegf_VEGFR2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "drives_transcription_of",
@@ -14542,7 +14572,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "jakstat_il6_gp130",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "promotes_via_trkb",
@@ -14553,7 +14584,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "assaying_synaptic_plasticity",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "enhances_excitability_of",
@@ -14564,7 +14596,8 @@
       "rationale": "SST.md states microglial-derived TNF-α and BDNF can enhance SST neuron excitability; BDNF also suppresses PV gate via KCC2 downregulation, indirectly releasing SST brake.",
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "SST_somatostatin_interneurons",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "conceptually_related_to",
@@ -14586,7 +14619,8 @@
       "rationale": null,
       "source": "shared_nfkb",
       "target": "tnf_tnfr1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "suppresses",
@@ -14597,7 +14631,8 @@
       "rationale": null,
       "source": "shared_nfkb",
       "target": "ana12_mechanism",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "drives_upstream_activation_of",
@@ -14608,7 +14643,8 @@
       "rationale": "JAK-STAT.md states TLR4/MyD88/NF-κB induces IL-6 which activates JAK/STAT3; NF-kB is an upstream driver of the IL-6 autocrine loop.",
       "source": "shared_nfkb",
       "target": "jakstat_il6_gp130",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "destabilized_by",
@@ -14641,7 +14677,8 @@
       "weight": 1.0,
       "source": "shared_roa_rock",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "antagonizes_via_Rac1",
@@ -14652,7 +14689,8 @@
       "weight": 1.0,
       "source": "shared_roa_rock",
       "target": "karilin7_Rac1",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "is_cleaved_by",
@@ -14674,7 +14712,8 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "PV_interneurons_PV_interneurons",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "upregulates",
@@ -14685,7 +14724,8 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "RhoA_ROCK_ROCK",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "induces",
@@ -14696,7 +14736,8 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "GABA_apoptosis_HIF1alpha",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "degrades",
@@ -14707,7 +14748,8 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "BBB_tight_junction_proteins",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "drives_transcription_of",
@@ -14718,7 +14760,8 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "jakstat_il6_gp130",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "upregulates_via_rhoa_rock",
@@ -14729,7 +14772,8 @@
       "rationale": "NogoA-NgR1.md states Nogo-A/NgR1 signals through RhoA/ROCK which regulates MMP-9, linking myelin inhibitors to PNN degradation and PV interneuron dysfunction.",
       "source": "pnn_ecm_mmp9",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "conceptually_related_to",
@@ -15598,7 +15642,8 @@
       "weight": 1.0,
       "source": "proposal_acp_quadruple_prophylaxis",
       "target": "proposal_acp_chronification_cascade",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -15708,7 +15753,8 @@
       "weight": 1.0,
       "source": "proposal_cpt_quadruple_treatment",
       "target": "proposal_cpt_spinal_disinhibition",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "conceptually_related_to",
@@ -15851,7 +15897,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "bdnftrkb_trkb_fl",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "converted_to_by_mmp9",
@@ -15873,7 +15920,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "bdnftrkb_trkb_fc",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "induces_release_of",
@@ -15884,7 +15932,8 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "GABA_apoptosis_TNF_alpha",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "mediates_microglial_release_of",
@@ -15895,7 +15944,8 @@
       "rationale": "RhoA-ROCK.md states RhoA/ROCK→p38 MAPK drives microglial M1 phenotype and BDNF release; BDNF-TrkB.md confirms microglial BDNF as pronociceptive source.",
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "RhoA_ROCK_ROCK",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "is_induced_by_indirectly",
@@ -15939,7 +15989,8 @@
       "rationale": null,
       "source": "bdnftrkb_trkb_fl",
       "target": "BDNF_TrkB_KCC2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "potentiates",
@@ -15950,7 +16001,8 @@
       "rationale": null,
       "source": "bdnftrkb_trkb_fl",
       "target": "assaying_nmdar",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "antagonizes",
@@ -15961,7 +16013,8 @@
       "rationale": null,
       "source": "bdnftrkb_trkb_fl",
       "target": "ana_12_ANA_12",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "cross_talks_with_at_igf1r",
@@ -15983,7 +16036,8 @@
       "rationale": null,
       "source": "ana_12_TrkB_T1",
       "target": "ana_12_ANA_12",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "shares_p75ntr_with",
@@ -16027,7 +16081,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "RhoA_ROCK_RhoA",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "promotes_via_nfkb",
@@ -16038,7 +16093,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "hif1a_normoxic_stabilization",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "downregulates",
@@ -16049,7 +16105,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "BBB_tight_junction_proteins",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "activates_via_stat3_src",
@@ -16060,7 +16117,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "il6_jak_stat3",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "mutually_upregulates",
@@ -16071,7 +16129,8 @@
       "rationale": "vegf.md explicitly states VEGFA and TNF-α mutually upregulate each other, amplifying neuroinflammation.",
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "vegf_VEGFA",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "destabilized_by",
@@ -16093,7 +16152,8 @@
       "rationale": null,
       "source": "tnf_tnfr1",
       "target": "TNF_XPro1595",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "preserves",
@@ -16104,7 +16164,8 @@
       "rationale": null,
       "source": "ana12_kcc2_preservation",
       "target": "BDNF_TrkB_KCC2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "drives",
@@ -16137,7 +16198,8 @@
       "rationale": null,
       "source": "gaba_apoptosis_ca_overload",
       "target": "gaba_apoptosis_calpain",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "drives_via_ros",
@@ -16159,7 +16221,8 @@
       "rationale": null,
       "source": "gaba_apoptosis_cpampar",
       "target": "PV_interneurons_PV_interneurons",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "indirectly_protects_against",
@@ -16192,7 +16255,8 @@
       "rationale": null,
       "source": "gaba_apoptosis_calpain",
       "target": "BDNF_TrkB_KCC2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "performs",
@@ -16214,7 +16278,8 @@
       "rationale": null,
       "source": "PV_interneurons_PV_interneurons",
       "target": "pv_interneuron_dreads_optogenetics",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "hyperactivates_when_pv_fails",
@@ -16225,7 +16290,8 @@
       "rationale": "SST.md explicitly describes disinhibition due to PV interneuron loss as the core gate-open mechanism allowing SST neurons to drive allodynia.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "SST_somatostatin_interneurons",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "impairs_via_kcc2_bdnf",
@@ -16236,7 +16302,8 @@
       "rationale": "JAK-STAT.md states STAT3 drives BDNF expression and downregulates KCC2, both of which directly impair PV interneuron inhibitory function.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "il6_jak_stat3",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "indirectly_impairs_via_rhoa_mmp9_pnn",
@@ -16247,7 +16314,8 @@
       "rationale": "NogoA-NgR1.md links NgR1→RhoA→MMP-9→PNN degradation→PV interneuron dysfunction cascade.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "nogoa_ngr1_ngr1",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "depends_on",
@@ -16291,7 +16359,8 @@
       "rationale": null,
       "source": "SST_somatostatin_interneurons",
       "target": "sst_interneuron_excitatory_role",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "autoregulates",
@@ -16313,7 +16382,8 @@
       "rationale": null,
       "source": "SST_somatostatin_interneurons",
       "target": "SST_Prdm12",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "indirectly_modulates_via_nav17",
@@ -16335,7 +16405,8 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "RhoA_ROCK_ROCK",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "activates_via_lpar1",
@@ -16346,7 +16417,8 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "rhoa_rock_lpa_demyelination",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "blocks_membrane_anchoring",
@@ -16357,7 +16429,8 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "RhoA_ROCK_simvastatin",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "activates",
@@ -16368,7 +16441,8 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "inhibits",
@@ -16379,7 +16453,8 @@
       "rationale": null,
       "source": "RhoA_ROCK_ROCK",
       "target": "RhoA_ROCK_fasudil",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "is_activated_by",
@@ -16401,7 +16476,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "hif1a_transcriptional_targets",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "transcribes",
@@ -16412,7 +16488,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "vegf_VEGFA",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "destabilizes",
@@ -16423,7 +16500,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "hif1a_YC1",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "inhibits_translation_of",
@@ -16434,7 +16512,8 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "hif1a_PX478",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "targets",
@@ -16456,7 +16535,8 @@
       "rationale": "hif1a.md explicitly states HIF1α induces ANGPT2; AngPt.md details Ang-2 role in BSCB disruption and pain.",
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "AngPt_angiopoietin_2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "is_upregulated_by_hypoxia_via",
@@ -16478,7 +16558,8 @@
       "rationale": "hif1a.md explicitly pairs VEGFA and ANGPT2 as co-targets of HIF1α transcriptional program; microglial HIF1α-glycolysis drives the full vascular-pain axis.",
       "source": "hif1a_microglial_glycolysis",
       "target": "AngPt_angiopoietin_2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "maintained_by",
@@ -16500,7 +16581,8 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "bbb_rvd1_barrier_reseal",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "disrupts",
@@ -16511,7 +16593,8 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "AngPt_angiopoietin_2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "stabilizes",
@@ -16522,7 +16605,8 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "AngPt_angiopoietin_1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "is_disrupted_by",
@@ -16544,7 +16628,8 @@
       "rationale": null,
       "source": "BBB_tight_junction_proteins",
       "target": "BBB_CypA_MMP9_pathway",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "downregulates",
@@ -16555,7 +16640,8 @@
       "rationale": null,
       "source": "BBB_tight_junction_proteins",
       "target": "vegf_VEGFR2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "complementary_barrier_stabilizer_to",
@@ -16566,7 +16652,8 @@
       "rationale": "Both Ang-1 and RvD1/LXA4 act as vascular stabilizers and barrier resealers via complementary mechanisms. Strategic combination could provide synergistic barrier repair.",
       "source": "bbb_rvd1_barrier_reseal",
       "target": "AngPt_angiopoietin_1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "activates",
@@ -16577,7 +16664,8 @@
       "rationale": null,
       "source": "AngPt_angiopoietin_1",
       "target": "angpt_tie2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "mimics",
@@ -16599,7 +16687,8 @@
       "rationale": null,
       "source": "AngPt_angiopoietin_2",
       "target": "angpt_tie2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "synergistically_amplifies",
@@ -16610,7 +16699,8 @@
       "rationale": null,
       "source": "AngPt_angiopoietin_2",
       "target": "vegf_VEGFA",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "binds",
@@ -16632,7 +16722,8 @@
       "rationale": null,
       "source": "vegf_VEGFA",
       "target": "vegf_neuroma",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "enhances_signaling_of",
@@ -16643,7 +16734,8 @@
       "rationale": null,
       "source": "vegf_VEGFR2",
       "target": "vegf_nrp1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "downregulates_via_bdnf_trkb",
@@ -16654,7 +16746,8 @@
       "rationale": "vegf.md states VEGFA enhances NMDAR transmission and reduces inhibitory tone through BDNF-TrkB-KCC2 signaling in spinal cord.",
       "source": "vegf_VEGFR2",
       "target": "BDNF_TrkB_KCC2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "drives_via_ntrk1",
@@ -16676,7 +16769,8 @@
       "rationale": null,
       "source": "igf_igf2",
       "target": "igf_igf2bp2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "mechanistically_parallels",
@@ -16698,7 +16792,8 @@
       "rationale": null,
       "source": "rbfox1_rbfox1",
       "target": "rbfox1_nrcam_exon10",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "regulates",
@@ -16720,7 +16815,8 @@
       "rationale": null,
       "source": "rbfox1_rbfox1",
       "target": "rbfox1_AAV5_Rbfox1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "potentially_interacts_via_cell_adhesion",
@@ -16731,7 +16827,8 @@
       "rationale": "NrCAM (Rbfox1 target) is a neuronal cell adhesion molecule; NgR1 (cell surface) interacts with LINGO-1 (also a cell adhesion molecule). Structural/functional interaction is possible but not documented.",
       "source": "rbfox1_nrcam_exon10",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "proposes",
@@ -16775,7 +16872,8 @@
       "rationale": null,
       "source": "NogoA_NgR1_NogoA",
       "target": "NogoA_NgR1_NG101",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "MIXED"
     },
     {
       "relation": "co_receptor_of",
@@ -16808,7 +16906,8 @@
       "rationale": null,
       "source": "il6_jak_stat3",
       "target": "jakstat_socs3",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "inhibits",
@@ -16819,7 +16918,8 @@
       "rationale": null,
       "source": "il6_jak_stat3",
       "target": "jakstat_ruxolitinib",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "inhibits",
@@ -16830,7 +16930,8 @@
       "rationale": null,
       "source": "il6_jak_stat3",
       "target": "jakstat_baricitinib",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "downregulates_via_stat3",
@@ -16841,7 +16942,8 @@
       "rationale": null,
       "source": "jakstat_il6_gp130",
       "target": "BDNF_TrkB_KCC2",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "activates_via_ca2_influx",
@@ -16852,7 +16954,8 @@
       "rationale": null,
       "source": "assaying_nmdar",
       "target": "assaying_camkii",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "same_protein",
@@ -16918,7 +17021,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Rac1",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "activates_GEF",
@@ -16929,7 +17033,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_RhoG",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "contains",
@@ -17028,7 +17133,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Rac1_PAK_LIMK_Cofilin_Pathway",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "regulated_by_phosphorylation",
@@ -17061,7 +17167,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Calcineurin",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "downregulates_via_calcineurin",
@@ -17072,7 +17179,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_NMDAR",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "delivers_and_restores",
@@ -17083,7 +17191,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_AAV_Kalirin7",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "knocks_down",
@@ -17094,7 +17203,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_shRNA_Kalirin7",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "genetic_deletion",
@@ -17105,7 +17215,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Kalirin7_KO",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "upregulates",
@@ -17116,7 +17227,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_EnvironmentalEnrichment",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "normalizes_signaling",
@@ -17127,7 +17239,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_DBS_ACC",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "loss_causes",
@@ -17138,7 +17251,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_PainRelatedAnxiety",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "loss_causes",
@@ -17149,7 +17263,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_DendriticSpineLoss",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "induces_downregulation",
@@ -17160,7 +17275,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_SNI",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "induces_downregulation",
@@ -17171,7 +17287,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_CCI",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "expression_differs_by_sex",
@@ -17215,7 +17332,8 @@
       "weight": 1.0,
       "source": "karilin7_KALRN",
       "target": "karilin7_CEBPbeta",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "represses_transcription",
@@ -17226,7 +17344,8 @@
       "weight": 1.0,
       "source": "karilin7_KALRN",
       "target": "hdac_hdac4",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "targets_mRNA",
@@ -17259,7 +17378,8 @@
       "weight": 1.0,
       "source": "karilin7_Rac1",
       "target": "karilin7_PAK",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "inhibits",
@@ -17270,7 +17390,8 @@
       "weight": 1.0,
       "source": "karilin7_Rac1",
       "target": "karilin7_NSC23766",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "activates_Ca_dependent",
@@ -17281,7 +17402,8 @@
       "weight": 1.0,
       "source": "karilin7_NMDAR",
       "target": "karilin7_Calcineurin",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "antagonizes",
@@ -17292,7 +17414,8 @@
       "weight": 1.0,
       "source": "karilin7_NMDAR",
       "target": "karilin7_Ketamine",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "antagonizes",
@@ -17303,7 +17426,8 @@
       "weight": 1.0,
       "source": "karilin7_NMDAR",
       "target": "karilin7_AP5",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "phosphorylates",
@@ -17325,7 +17449,8 @@
       "weight": 1.0,
       "source": "karilin7_LIMK",
       "target": "karilin7_Cofilin",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "depolymerizes",
@@ -17336,7 +17461,8 @@
       "weight": 1.0,
       "source": "karilin7_Cofilin",
       "target": "karilin7_Actin",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "activated_by",
@@ -17358,7 +17484,8 @@
       "weight": 1.0,
       "source": "karilin7_Calcineurin",
       "target": "karilin7_FK506",
-      "sign": -1
+      "sign": -1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "references",
@@ -17380,7 +17507,8 @@
       "weight": 1.0,
       "source": "DRGX_DRGX",
       "target": "DRGX_pronociceptive_channels",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "rationale_for",
@@ -17391,7 +17519,8 @@
       "weight": 1.0,
       "source": "DRGX_DRGX",
       "target": "DRGX_BDNF_TrkB_KCC2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "rationale_for",
@@ -17402,7 +17531,8 @@
       "weight": 1.0,
       "source": "DRGX_DRGX",
       "target": "shared_central_sensitization",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "rationale_for",
@@ -17413,7 +17543,8 @@
       "weight": 1.0,
       "source": "DRGX_DRGX",
       "target": "DRGX_ASO_therapy",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "conceptually_related_to",
@@ -17435,7 +17566,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin-7_Rac1_pathway",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "references",
@@ -17457,7 +17589,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_DendriticSpineLoss",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "CONFIRMED"
     },
     {
       "relation": "rationale_for",
@@ -17468,7 +17601,8 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_PainRelatedAnxiety",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "EXTENDED"
     },
     {
       "relation": "references",
@@ -17490,7 +17624,8 @@
       "weight": 1.0,
       "source": "ZFHX2_ZFHX2",
       "target": "DRGX_pronociceptive_channels",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "rationale_for",
@@ -17501,7 +17636,8 @@
       "weight": 1.0,
       "source": "ZFHX2_ZFHX2",
       "target": "DRGX_BDNF_TrkB_KCC2",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "REFUTED"
     },
     {
       "relation": "rationale_for",
@@ -17512,7 +17648,8 @@
       "weight": 1.0,
       "source": "ZFHX2_ZFHX2",
       "target": "shared_central_sensitization",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "references",
@@ -17534,7 +17671,8 @@
       "weight": 1.0,
       "source": "ZFHX2_ZFHX2",
       "target": "ZFHX2_ASO_therapy",
-      "sign": 1
+      "sign": 1,
+      "validation_status": "NO_EVIDENCE_FOUND"
     }
   ],
   "hyperedges": [],
