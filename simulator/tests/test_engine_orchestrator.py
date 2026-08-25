@@ -419,3 +419,36 @@ class TestBudgetControls:
         assert llm.prompts == []
         assert orch.llm_calls_made == 0
         assert orch.llm_calls_deferred == 4
+
+
+def _window_mean(logs, agent_id, lo=14, hi=28):
+    values = [log.world_after.states[agent_id] for log in logs if lo <= log.world_after.tick <= hi]
+    return sum(values) / len(values)
+
+
+def test_fasudil_target_propagation_via_p38_edge():
+    """Topology/propagation check, NOT a literature-grounded fact.
+
+    Fasudil's -0.5 pressure on RhoA_ROCK_ROCK reaches pain/inflammation
+    circuitry only through the INFERRED_CLOSURE edges ROCK -> shared_microglia
+    (activates_via_p38_mapk) and ROCK -> TNF_TNF_alpha added to the graph in
+    this follow-up. This test pins that propagation exists and is signed as
+    wired (target engagement + downstream dampening); it must not be read as
+    independent empirical validation — see facts.yaml notes.
+    """
+    cards = load_cards(CARDS_DIR)
+    scenarios_dir = CARDS_DIR.parent / "scenarios"
+    control_logs = Orchestrator(
+        cards=cards, scenario=load_scenario(scenarios_dir / "SNI_28d.yaml"), seed=0
+    ).run()
+    treatment_logs = Orchestrator(
+        cards=cards, scenario=load_scenario(scenarios_dir / "SNI_28d_FASUDIL.yaml"), seed=0
+    ).run()
+    rock_reduction = _window_mean(control_logs, "RhoA_ROCK_ROCK") - _window_mean(treatment_logs, "RhoA_ROCK_ROCK")
+    microglia_reduction = (
+        _window_mean(control_logs, "shared_microglia") - _window_mean(treatment_logs, "shared_microglia")
+    )
+    # target engagement (drug pressure acts directly on ROCK)...
+    assert rock_reduction >= 0.2
+    # ...and propagation through the p38 closure edge into microglia.
+    assert microglia_reduction >= 0.05

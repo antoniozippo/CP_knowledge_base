@@ -330,3 +330,44 @@ def test_update_quotes_counts_only_real_changes():
     _, summary_same = ace.apply_closure_edges(g, [p], update_quotes=True)
     assert summary_same.updated == 0
     assert summary_same.skipped_duplicates == 1
+
+
+def test_every_curated_closure_quote_is_verbatim_byte_substring():
+    """Corpus guard: every proposal quote in closure_edges.yaml must be an
+    exact byte substring of its source_file, and the applied graph link must
+    match the proposal byte-for-byte (no silently stripped markers)."""
+    proposals = yaml.safe_load(
+        (REPO_ROOT / "analysis" / "claims" / "closure_edges.yaml").read_text()
+    )
+    assert proposals, "closure_edges.yaml unexpectedly empty"
+    for idx, prop in enumerate(proposals):
+        source = REPO_ROOT / prop["source_file"]
+        assert source.exists(), f"proposal #{idx}: missing source_file {prop['source_file']}"
+        quote_bytes = str(prop["quote"]).encode("utf-8")
+        assert quote_bytes in source.read_bytes(), (
+            f"proposal #{idx} ({prop['source_label']} -> {prop['target_label']}): "
+            "quote is not a verbatim byte substring of {prop['source_file']}"
+        )
+    graph = json.loads((REPO_ROOT / "graphify-out" / "graph_v2.json").read_text())
+    links_by_pair = {}
+    for link in graph["links"]:
+        if link.get("origin") == "dynamic_closure":
+            links_by_pair[(link["source"], link["target"])] = link
+    resolved_pairs = {
+        (ace.resolve_label_to_id(p["source_label"], ace.build_document_indexes(graph["nodes"])),
+         ace.resolve_label_to_id(p["target_label"], ace.build_document_indexes(graph["nodes"])))
+        for p in proposals
+    }
+    missing = sorted(pair for pair in resolved_pairs if None in pair or pair not in links_by_pair)
+    assert not missing, f"proposals not applied to graph: {missing}"
+    for pair, link in links_by_pair.items():
+        match = [
+            p for p in proposals
+            if (ace.resolve_label_to_id(p["source_label"], ace.build_document_indexes(graph["nodes"])),
+                ace.resolve_label_to_id(p["target_label"], ace.build_document_indexes(graph["nodes"])))
+            == pair
+        ]
+        if match:
+            assert link["quote"].encode("utf-8") == str(match[0]["quote"]).encode("utf-8"), (
+                f"graph link {pair} quote drifted from proposal"
+            )

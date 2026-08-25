@@ -18074,7 +18074,7 @@
       "target": "TNF_TNF_alpha",
       "sign": 1,
       "origin": "dynamic_closure",
-      "quote": "This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators.",
+      "quote": "This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators",
       "source_ref": "RhoA-ROCK.md"
     }
   ],

@@ -16,9 +16,8 @@
 | F-12 | Pain remains elevated in the chronic phase: SNI at days 150-179 is still separated from naive (persistence beyond the transition epoch). | theme_06#F6.1 | mean pain_score sni_180d - naive_180d over [150,179] >= 0.0500 | gap=0.2463 (0.2963 vs 0.0500) | PASS |
 | F-13 | CLP257 (KCC2 enhancer) lowers mean pain score over days 14-28 versus SNI by at least the pilot margin. | theme_01#F1.2 | mean readout pain_score reduction >= 0.0300 over [14,28] | sni_28d-sni_28d_clp257=0.0543 (0.2958 -> 0.2415) | PASS |
 | F-14 | Fasudil (ROCK inhibitor) engages its target: mean ROCK activity over days 14-28 is reduced versus SNI by at least 0.2. | RhoA-ROCK.md | mean state[RhoA_ROCK_ROCK] reduction >= 0.2000 over [14,28] | sni_28d-sni_28d_fasudil=0.3786 (0.8009 -> 0.4223) | PASS |
-| F-15 | Fasudil dampens the microglial p38/M1 cascade arm: mean microglial activation over days 14-28 is lower than SNI. | theme_05#F5.4 | mean state[shared_microglia] reduction >= 0.0500 over [14,28] | sni_28d-sni_28d_fasudil=0.0999 (0.9550 -> 0.8551) | PASS |
 | F-16 | XPro1595 (solTNF/TNFR1-selective inhibitor) lowers the inflammation index versus SNI. | theme_03#F3.1 | mean readout inflammation_index reduction >= 0.0300 over [7,21] | sni_28d-sni_28d_xpro1595=0.0316 (0.6369 -> 0.6053) | PASS |
 | F-17 | Re-running sni_28d with identical inputs produces byte-identical tick logs (rules-only runs are fully deterministic). | theme_01#F1.14 | tick_log bytes identical across reruns of sni_28d | identical | PASS |
 | F-18 | A second run sharing the delta cache makes zero LLM client calls (caching sanity with a fake client). | EC-0100 | cached second run makes 0 LLM calls | warm=24, second=0 | PASS |
 
-Overall: PASS (18/18 facts)
+Overall: PASS (17/17 facts)

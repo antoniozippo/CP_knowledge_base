@@ -11,6 +11,7 @@ from simulator.validation.check_facts import (
     KINDS,
     evaluate_fact,
     load_facts,
+    main,
     render_markdown,
     resolve_source_ref,
     run_checks,
@@ -526,3 +527,49 @@ class TestRunChecksIntegration:
         results, _ = checked
         kinds = {r.kind for r in results}
         assert kinds == set(KINDS)
+
+
+def _single_fact_yaml(path: Path, value: float) -> Path:
+    fact = {
+        "id": "F-90",
+        "claim": "naive pain stays below threshold (synthetic exit-code probe)",
+        "source_ref": "EC-0001",
+        "kind": "stability_bound",
+        "params": {
+            "scenario": "naive_28d",
+            "readout": "pain_score",
+            "comparator": "<",
+            "value": value,
+        },
+    }
+    path.write_text(yaml.safe_dump({"facts": [fact]}))
+    return path
+
+
+class TestMainExitCode:
+    def _run_main(self, tmp_path, value):
+        facts = _single_fact_yaml(tmp_path / "facts.yaml", value)
+        report = tmp_path / "facts_report.md"
+        code = main(
+            [
+                "--cards", str(CARDS_DIR),
+                "--scenarios-dir", str(SCENARIOS_DIR),
+                "--facts", str(facts),
+                "--report", str(report),
+            ]
+        )
+        return code, report
+
+    def test_failing_fact_exits_nonzero_and_reports_fail(self, tmp_path):
+        # naive_28d pain max is 0.05, so a 0.01 threshold must FAIL
+        code, report = self._run_main(tmp_path, 0.01)
+        assert code == 1
+        text = report.read_text()
+        assert "| FAIL |" in text
+
+    def test_passing_fact_exits_zero(self, tmp_path):
+        code, report = self._run_main(tmp_path, 0.5)
+        assert code == 0
+        text = report.read_text()
+        assert "| PASS |" in text
+        assert "| FAIL |" not in text

@@ -155,14 +155,6 @@ facts:
     kind: drug_effect
     params: {treatment: sni_28d_fasudil, control: sni_28d, agent_id: RhoA_ROCK_ROCK, window: [14, 28], min_reduction: 0.2}
 
-  - id: F-15
-    claim: >-
-      Fasudil dampens the microglial p38/M1 cascade arm: mean microglial
-      activation over days 14-28 is lower than SNI.
-    source_ref: "theme_05#F5.4"
-    kind: drug_effect
-    params: {treatment: sni_28d_fasudil, control: sni_28d, agent_id: shared_microglia, window: [14, 28], min_reduction: 0.05}
-
   - id: F-16
     claim: >-
       XPro1595 (solTNF/TNFR1-selective inhibitor) lowers the inflammation
@@ -197,6 +189,10 @@ notes: >-
   Kalirin-7 edge; ROCK suppression releases that inhibition and offsets the
   pronociceptive cascade. The closure edges RhoA_ROCK_ROCK ->
   shared_microglia/TNF_TNF_alpha (INFERRED_CLOSURE, theme_05 F5.4 /
-  RhoA-ROCK.md) make target engagement and microglial dampening expressible;
-  F-14/F-15 assert that expressible subset until the readout-composition
-  artifact is resolved.
+  RhoA-ROCK.md) are topology, not independent literature facts, so any
+  downstream-propagation assertion against them is circular as a
+  literature-grounded check. F-14 asserts the non-circular subset (target
+  engagement); the propagation check lives outside this harness as
+  simulator/tests/test_engine_orchestrator.py::
+  test_fasudil_target_propagation_via_p38_edge and is labeled
+  topology-dependent there.
