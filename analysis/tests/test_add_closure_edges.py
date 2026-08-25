@@ -42,8 +42,7 @@ def make_rationale_node(node_id, label):
     return node
 
 
-@pytest.fixture
-def graph():
+def base_graph():
     nodes = [
         make_node("kcc2_card", "KCC2 (Potassium-Chloride Cotransporter)", entity_type="channel"),
         make_node("allo_card", "Mechanical Allodynia", entity_type="symptom"),
@@ -67,6 +66,11 @@ def graph():
         }
     ]
     return {"directed": False, "multigraph": False, "graph": {}, "nodes": nodes, "links": links}
+
+
+@pytest.fixture
+def graph():
+    return base_graph()
 
 
 def proposal(source="KCC2 (Potassium-Chloride Cotransporter)", target="Mechanical Allodynia",
@@ -214,3 +218,115 @@ def test_cli_writes_graph_with_appended_links(graph, tmp_path):
     ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path)])
     written = json.loads(graph_path.read_text())
     assert any(l.get("origin") == "dynamic_closure" for l in written["links"])
+
+
+# ---------------------------------------------------------------------------
+# --update-quotes mode
+# ---------------------------------------------------------------------------
+
+def seeded_closure_graph():
+    """Graph already containing one dynamic-closure link with stale metadata."""
+    g = copy.deepcopy(base_graph())
+    g["links"].append(
+        {
+            "relation": "causes",
+            "confidence": "INFERRED_CLOSURE",
+            "source_file": "KCC2.md",
+            "source_location": None,
+            "weight": None,
+            "source": "kcc2_card",
+            "target": "allo_card",
+            "sign": -1,
+            "origin": "dynamic_closure",
+            "quote": "OLD correlation-flavored sentence.",
+            "source_ref": "KCC2.md",
+        }
+    )
+    return g
+
+
+def test_update_quotes_rewrites_quote_and_source_ref_on_closure_links():
+    g = seeded_closure_graph()
+    p = proposal()
+    p["quote"] = "NEW causal sentence with direct mechanism."
+    p["source_file"] = "Mechanisms.md"
+    new_graph, summary = ace.apply_closure_edges(
+        g, [p], update_quotes=True
+    )
+    link = next(l for l in new_graph["links"] if l.get("origin") == "dynamic_closure")
+    assert link["quote"] == "NEW causal sentence with direct mechanism."
+    assert link["source_ref"] == "Mechanisms.md"
+    assert summary.added == 0
+    assert summary.updated == 1
+
+
+def test_default_mode_leaves_existing_quote_metadata_untouched():
+    g = seeded_closure_graph()
+    p = proposal()
+    p["quote"] = "NEW causal sentence."
+    _, summary = ace.apply_closure_edges(g, [p])
+    link = next(l for l in g["links"] if l.get("origin") == "dynamic_closure")
+    assert link["quote"].startswith("OLD")
+    assert summary.updated == 0
+
+
+def test_update_quotes_never_touches_non_closure_links():
+    g = seeded_closure_graph()
+    # same pair, but extracted (non-closure) provenance — must stay intact
+    g["links"].append(
+        {
+            "relation": "activates",
+            "confidence": "EXTRACTED",
+            "source_file": "elsewhere.md",
+            "weight": 1.0,
+            "source": "microglia_card",
+            "target": "bdnf_card",
+            "sign": 1,
+        }
+    )
+    p = proposal(source="Microglia", target="Brain-Derived Neurotrophic Factor (BDNF)",
+                 relation="activates", sign=1)
+    p["quote"] = "REWROTE."
+    p["source_file"] = "other.md"
+    new_graph, _ = ace.apply_closure_edges(g, [p], update_quotes=True)
+    extracted = next(l for l in new_graph["links"] if l.get("relation") == "activates")
+    assert extracted.get("origin") is None
+    assert "quote" not in extracted
+
+
+def test_source_ref_note_appended_to_link_source_ref():
+    g = copy.deepcopy(base_graph())
+    p = proposal()
+    p["source_ref_note"] = "macrophage≈CNS-resident-macrophage/microglia mapping per dossier context"
+    new_graph, summary = ace.apply_closure_edges(g, [p])
+    link = new_graph["links"][-1]
+    expected = "KCC2.md | macrophage≈CNS-resident-macrophage/microglia mapping per dossier context"
+    assert link["source_ref"] == expected
+    assert summary.added == 1
+
+
+def test_cli_update_quotes_flag_rewrites_file(tmp_path, capsys):
+    graph_path = tmp_path / "graph.json"
+    proposals_path = tmp_path / "closure.yaml"
+    graph_path.write_text(json.dumps(seeded_closure_graph()))
+    p = proposal()
+    p["quote"] = "NEW causal sentence with direct mechanism."
+    proposals_path.write_text(yaml.safe_dump([p]))
+    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path),
+              "--update-quotes"])
+    written = json.loads(graph_path.read_text())
+    link = next(l for l in written["links"] if l.get("origin") == "dynamic_closure")
+    assert link["quote"].startswith("NEW")
+    assert "updated=1" in capsys.readouterr().out
+
+
+def test_update_quotes_counts_only_real_changes():
+    g = seeded_closure_graph()
+    # align seeded metadata with the proposal: rewrite becomes a no-op
+    closure = next(l for l in g["links"] if l.get("origin") == "dynamic_closure")
+    p = proposal()
+    closure["quote"] = p["quote"]
+    closure["source_ref"] = p["source_file"]
+    _, summary_same = ace.apply_closure_edges(g, [p], update_quotes=True)
+    assert summary_same.updated == 0
+    assert summary_same.skipped_duplicates == 1

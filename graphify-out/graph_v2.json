@@ -17762,7 +17762,7 @@
       "target": "shared_mechanical_allodynia",
       "sign": 1,
       "origin": "dynamic_closure",
-      "quote": "This structural loss correlates directly with reduced PV interneuron firing rates and the emergence of mechanical allodynia.",
+      "quote": "**Enzymatic PNN Removal Triggers Pain**: Injection of **chondroitinase ABC** (an enzyme that degrades CSPGs) into the spinal dorsal horn of naïve animals is sufficient to induce mechanical allodynia and thermal hyperalgesia.",
       "source_ref": "PNN_ECM.md"
     },
     {
@@ -17827,7 +17827,7 @@
       "target": "PV_interneurons_PV_interneurons",
       "sign": -1,
       "origin": "dynamic_closure",
-      "quote": "This structural loss correlates directly with reduced PV interneuron firing rates and the emergence of mechanical allodynia.",
+      "quote": "This degrades the polyanionic shield, impairing ion buffering and directly reducing the fast‑spiking capacity of PV interneurons.",
       "source_ref": "PNN_ECM.md"
     },
     {
@@ -17866,7 +17866,7 @@
       "target": "hif1a_HIF1alpha",
       "sign": 1,
       "origin": "dynamic_closure",
-      "quote": "In the context of neuropathic pain, HIF1α is stabilized and activated not only by hypoxia but also by injury‑induced inflammatory signals, even under normal oxygen tension (normoxic stabilization).",
+      "quote": "It is itself stabilized by **TNF‑α** and **ROS**, creating a positive‑feedback loop.",
       "source_ref": "hif1a.md"
     },
     {
@@ -17958,7 +17958,7 @@
       "sign": 1,
       "origin": "dynamic_closure",
       "quote": "**Inflammatory Activation**: Ang-2 promotes the inflammatory activation of macrophages and other immune cells[reference:6].",
-      "source_ref": "AngPt.md"
+      "source_ref": "AngPt.md | macrophage≈CNS-resident-macrophage/microglia mapping per dossier context"
     },
     {
       "relation": "drives_cytokine_release_from_macrophages",

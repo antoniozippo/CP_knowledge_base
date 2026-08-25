@@ -41,12 +41,14 @@ REQUIRED_FIELDS = ("source_label", "target_label", "relation", "sign", "quote", 
 class ClosureSummary:
     proposed: int = 0
     added: int = 0
+    updated: int = 0
     skipped_duplicates: int = 0
     unresolved: list = field(default_factory=list)
 
     def render(self) -> str:
         return (
             f"closure edges: proposed={self.proposed} added={self.added} "
+            f"updated={self.updated} "
             f"skipped_duplicates={self.skipped_duplicates} unresolved={len(self.unresolved)}"
         )
 
@@ -136,9 +138,14 @@ def _validate_proposal(proposal, position):
         raise ValueError(f"proposal #{position} quote exceeds 400 chars")
 
 
-def apply_closure_edges(graph, proposals):
+def apply_closure_edges(graph, proposals, update_quotes=False):
     """Pure core: return (new_graph, ClosureSummary); raises ValueError when
-    any endpoint fails to resolve (graph left untouched in that case)."""
+    any endpoint fails to resolve (graph left untouched in that case).
+
+    With update_quotes=True, proposals whose (source, target) pair already
+    exists as an origin=="dynamic_closure" link get their quote and
+    source_ref metadata rewritten in place instead of being skipped.
+    Topology (endpoints, relation, sign, confidence) is never modified."""
     new_graph = copy.deepcopy(graph)
     summary = ClosureSummary(proposed=len(proposals))
 
@@ -166,13 +173,38 @@ def apply_closure_edges(graph, proposals):
         )
         raise ValueError(f"unresolved endpoints ({len(unresolved)}): {detail}")
 
+    links_by_pair = {}
+    for link in new_graph["links"]:
+        links_by_pair.setdefault((link["source"], link["target"]), []).append(link)
     existing_signed_pairs = {
-        (link["source"], link["target"])
-        for link in new_graph["links"]
-        if link.get("sign", 0) != 0
+        pair for pair, links in links_by_pair.items()
+        if any(l.get("sign", 0) != 0 for l in links)
     }
+
+    def _source_ref(resolved):
+        note = resolved.get("source_ref_note")
+        ref = resolved["source_file"]
+        return f"{ref} | {note}" if note else ref
+
     for resolved in checked:
         pair = (resolved["source"], resolved["target"])
+        if update_quotes:
+            closure_links = [
+                l for l in links_by_pair.get(pair, [])
+                if l.get("origin") == "dynamic_closure"
+            ]
+            if closure_links:
+                new_ref = _source_ref(resolved)
+                if (
+                    closure_links[0]["quote"] == resolved["quote"]
+                    and closure_links[0]["source_ref"] == new_ref
+                ):
+                    summary.skipped_duplicates += 1
+                else:
+                    closure_links[0]["quote"] = resolved["quote"]
+                    closure_links[0]["source_ref"] = new_ref
+                    summary.updated += 1
+                continue
         if pair in existing_signed_pairs:
             summary.skipped_duplicates += 1
             continue
@@ -188,10 +220,11 @@ def apply_closure_edges(graph, proposals):
                 "sign": int(resolved["sign"]),
                 "origin": "dynamic_closure",
                 "quote": resolved["quote"],
-                "source_ref": resolved["source_file"],
+                "source_ref": _source_ref(resolved),
             }
         )
         existing_signed_pairs.add(pair)
+        links_by_pair.setdefault(pair, []).append(new_graph["links"][-1])
         summary.added += 1
     return new_graph, summary
 
@@ -200,14 +233,19 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--graph", type=Path, default=DEFAULT_GRAPH)
     parser.add_argument("--proposals", type=Path, default=DEFAULT_PROPOSALS)
+    parser.add_argument(
+        "--update-quotes", action="store_true",
+        help="rewrite quote/source_ref on existing origin=='dynamic_closure' "
+             "links whose pair matches a proposal; never changes topology",
+    )
     args = parser.parse_args(argv)
 
     graph = json.loads(args.graph.read_text())
     proposals = yaml.safe_load(args.proposals.read_text()) or []
-    new_graph, summary = apply_closure_edges(graph, proposals)
+    new_graph, summary = apply_closure_edges(graph, proposals, update_quotes=args.update_quotes)
     if summary.unresolved:
         raise SystemExit(summary.render())
-    if summary.added:
+    if summary.added or summary.updated:
         args.graph.write_text(json.dumps(new_graph, indent=2, ensure_ascii=False) + "\n")
     print(summary.render())
     return 0

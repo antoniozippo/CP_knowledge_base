@@ -70,8 +70,9 @@
   target_label: shared_mechanical_allodynia
   relation: emergence_of
   sign: 1
-  quote: This structural loss correlates directly with reduced PV interneuron firing rates and the emergence
-    of mechanical allodynia.
+  quote: '**Enzymatic PNN Removal Triggers Pain**: Injection of **chondroitinase ABC** (an enzyme that
+    degrades CSPGs) into the spinal dorsal horn of naïve animals is sufficient to induce mechanical allodynia
+    and thermal hyperalgesia.'
   source_file: PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -113,8 +114,8 @@
   target_label: PV_interneurons_PV_interneurons
   relation: impairs_fast_spiking_of
   sign: -1
-  quote: This structural loss correlates directly with reduced PV interneuron firing rates and the emergence
-    of mechanical allodynia.
+  quote: This degrades the polyanionic shield, impairing ion buffering and directly reducing the fast‑spiking
+    capacity of PV interneurons.
   source_file: PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -141,8 +142,7 @@
   target_label: hif1a_HIF1alpha
   relation: stabilizes_via_nfkb_phd_inhibition
   sign: 1
-  quote: In the context of neuropathic pain, HIF1α is stabilized and activated not only by hypoxia but
-    also by injury‑induced inflammatory signals, even under normal oxygen tension (normoxic stabilization).
+  quote: It is itself stabilized by **TNF‑α** and **ROS**, creating a positive‑feedback loop.
   source_file: hif1a.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -212,6 +212,7 @@
     immune cells[reference:6].'
   source_file: AngPt.md
   confidence: INFERRED_CLOSURE
+  source_ref_note: macrophage≈CNS-resident-macrophage/microglia mapping per dossier context
 - category: A3
   source_label: AngPt_angiopoietin_2
   target_label: TNF_TNF_alpha

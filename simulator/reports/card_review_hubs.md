@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-08-25T17:20:46Z
+generated: 2026-08-25T17:45:41Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 

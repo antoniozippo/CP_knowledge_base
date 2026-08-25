@@ -79,7 +79,7 @@ EDGES = [
      "analysis/literature/theme_02_MMP9_PNN_ECM.md",
      "LITERAL:MMP-9 rapid/transient DRG-neuron upregulation gates early-phase allodynia (TIMP-1, siRNA, KO, inhibitor-I all effective early; exogenous i.t. MMP-9 sufficient)"),
     ("A1", PNN_LOSS, ALLO, "emergence_of", 1, "PNN_ECM.md",
-     "the emergence of mechanical allodynia"),
+     "sufficient to induce mechanical allodynia"),
     # --- A2: cascade completion ---
     ("A2", MGL, BDNF, "releases", 1, "KCC2.md",
      "Activated microglia release BDNF"),
@@ -90,13 +90,13 @@ EDGES = [
     ("A2", MMP9, PNN_LOSS, "degrades_pnn_lattice", 1, "PNN_ECM.md",
      "dismantling the PNN lattice"),
     ("A2", PNN_LOSS, PV, "impairs_fast_spiking_of", -1, "PNN_ECM.md",
-     "reduced PV interneuron firing rates"),
+     "directly reducing the fast"),
     ("A2", KCC2_ID, PV, "supports_inhibitory_output_of", 1, "PV+_interneurons.md",
      "depends on a low intracellular chloride concentration maintained by KCC2"),
     ("A2", ROS, HIF, "stabilizes", 1, "hif1a.md",
      "inhibit PHDs or directly stabilize HIF1"),
     ("A2", TNF, HIF, "stabilizes_via_nfkb_phd_inhibition", 1, "hif1a.md",
-     "normoxic stabilization"),
+     "LITERAL:It is itself stabilized by **TNF‑α** and **ROS**, creating a positive‑feedback loop."),
     ("A2", HIF, VEGF, "transcribes", 1, "hif1a.md",
      "principal transcriptional driver of VEGFA"),
     ("A2", HIF, ANG2, "transcribes", 1, "hif1a.md",
@@ -131,12 +131,19 @@ EDGES = [
 
 proposals = []
 seen_pairs = set()
+
+# Optional mapping caveats appended to a link's source_ref at apply time.
+SOURCE_REF_NOTES = {
+    ("AngPt_angiopoietin_2", "shared_microglia"):
+        "macrophage≈CNS-resident-macrophage/microglia mapping per dossier context",
+}
+
 for cat, src, dst, rel, sign, fname, marker in EDGES:
     quote = q(fname, marker)
     pair = (src, dst)
     assert pair not in seen_pairs, f"intra-file duplicate pair {pair}"
     seen_pairs.add(pair)
-    proposals.append({
+    entry = {
         "category": cat,
         "source_label": src,
         "target_label": dst,
@@ -145,7 +152,11 @@ for cat, src, dst, rel, sign, fname, marker in EDGES:
         "quote": quote,
         "source_file": fname,
         "confidence": "INFERRED_CLOSURE",
-    })
+    }
+    note = SOURCE_REF_NOTES.get(pair)
+    if note:
+        entry["source_ref_note"] = note
+    proposals.append(entry)
 
 # verify endpoints resolve against document nodes of the real graph
 import json
