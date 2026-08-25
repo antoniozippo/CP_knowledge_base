@@ -1,0 +1,27 @@
+name: sni_28d
+horizon_days: 28
+injury_model: SNI
+injury_tick: 0
+initial_perturbations:
+  - agent_id: shared_microglia
+    value: 0.92
+  - agent_id: TNF_TNF_alpha
+    value: 0.92
+  - agent_id: GABA_apoptosis_ROS_oxidative_stress
+    value: 0.92
+  - agent_id: tlr4_tlr4
+    value: 0.92
+  - agent_id: PNN_ECM_MMP9
+    value: 0.92
+  - agent_id: assaying_molecularly_structural_plasticity_BDNF
+    value: 0.92
+  - agent_id: hif1a_HIF1alpha
+    value: 0.92
+notes: >-
+  SNI pilot scenario. Seeds are proximal injury drivers resolved against the
+  real card set: microglial activation, TNF-alpha, ROS/oxidative stress,
+  MMP-9, BDNF, HIF1-alpha. No DAMP card exists in the set; its canonical
+  receptor TLR4 (tlr4_tlr4) is seeded as the DAMP-signaling proxy. Seed
+  magnitude 0.92: orphan nodes contract toward baseline by a factor of
+  ~0.637 per tick, so only seeds >= ~0.87 satisfy first_crossing with
+  delta=0.15 and sustain=2 for two consecutive logged ticks.

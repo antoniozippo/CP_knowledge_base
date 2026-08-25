@@ -1,0 +1,6 @@
+name: naive_28d
+horizon_days: 28
+injury_model: naive
+notes: >-
+  Naive control arm for the SNI pilot: no injury tick, no perturbations,
+  no drug arms. All agents start at their card baselines.
