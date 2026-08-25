@@ -19,3 +19,4 @@ graphify-out/graph_processed.json
 # OneDrive sync metadata
 *.tmp
 ~$*
+__pycache__/
