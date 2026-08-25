@@ -1,0 +1,33 @@
+id: AngPt_angiopoietin_1
+label: Angiopoietin-1 (Ang-1)
+entity_type: concept
+compartment: other
+tier: MID
+community: 4
+baseline_state: 0.5
+normal_role: Angiopoietin-1 (Ang-1) is a concept located in other. Baseline activity
+  level 0.50. It receives 2 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-AngPt_angiopoietin_1-01
+  description: Angiopoietin-1 (Ang-1) activates Tie2 Receptor Tyrosine Kinase
+  claim_refs:
+  - EC-0006
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: bbb_bbb
+  relation: stabilizes
+  sign: 1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+- source_id: bbb_rvd1_barrier_reseal
+  relation: complementary_barrier_stabilizer_to
+  sign: 1
+  weight: 0.5
+  validation_status: EXTENDED
+  neutral_ok: false
+outbound_ids:
+- angpt_tie2
+rule_gap_reason: null
+source_note: AngPt.md

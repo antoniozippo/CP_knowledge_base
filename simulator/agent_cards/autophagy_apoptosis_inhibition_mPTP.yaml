@@ -1,0 +1,37 @@
+id: autophagy-apoptosis_inhibition_mPTP
+label: Mitochondrial Permeability Transition Pore (mPTP)
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Mitochondrial Permeability Transition Pore (mPTP) is a concept located
+  in other. Baseline activity level 0.50. It receives 1 regulatory influences and
+  exerts 2.
+pathological_rules:
+- rule_id: RULE-autophagy_apoptosis_inhibition_mPTP-01
+  description: Mitochondrial Permeability Transition Pore (mPTP) causes Neuronal Calcium
+    (Ca²⁺) Overload
+  claim_refs:
+  - EC-0082
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-autophagy_apoptosis_inhibition_mPTP-02
+  description: Mitochondrial Permeability Transition Pore (mPTP) causes Caspase Apoptotic
+    Cascade (Caspase-3, -9, -12)
+  claim_refs:
+  - EC-0081
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: autophagy-apoptosis_inhibition_Bcl_xL
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- GABA_apoptosis_calcium_overload
+- GABA_apoptosis_caspase_cascade
+rule_gap_reason: null
+source_note: autophagy-apoptosis_inhibition.md

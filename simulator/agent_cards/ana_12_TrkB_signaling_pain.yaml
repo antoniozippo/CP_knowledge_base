@@ -1,0 +1,44 @@
+id: ana_12_TrkB_signaling_pain
+label: TrkB Signaling in Neuropathic Pain
+entity_type: receptor
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: TrkB Signaling in Neuropathic Pain is a receptor located in other. Baseline
+  activity level 0.50. It receives 1 regulatory influences and exerts 3.
+pathological_rules:
+- rule_id: RULE-ana_12_TrkB_signaling_pain-01
+  description: TrkB Signaling in Neuropathic Pain activates MAPK Pathway (TrkB Downstream
+    Effector)
+  claim_refs:
+  - EC-0121
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-ana_12_TrkB_signaling_pain-02
+  description: '[MIXED:Pathogenic in chronic dorsal-horn pain states; transiently
+    beneficial early post-lesion in motor circuits; BDNF-TrkB effects context-dependent
+    (immature/Shc-only upregulate KCC2)] TrkB Signalin'
+  claim_refs:
+  - EC-0122
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-ana_12_TrkB_signaling_pain-03
+  description: TrkB Signaling in Neuropathic Pain causes Neuronal Calcium (Ca²⁺) Overload
+  claim_refs:
+  - EC-0166
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: ana_12_ANA_12
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+outbound_ids:
+- ana_12_MAPK_pathway
+- ana_12_KCC2_dysregulation
+- GABA_apoptosis_calcium_overload
+rule_gap_reason: null
+source_note: ana-12.md

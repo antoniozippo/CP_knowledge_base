@@ -1,0 +1,14 @@
+id: IGF1_2_IGF2
+label: Insulin-like Growth Factor 2 (IGF2)
+entity_type: concept
+compartment: other
+tier: PERIPHERAL
+community: 30
+baseline_state: 0.5
+normal_role: Insulin-like Growth Factor 2 (IGF2) is a concept located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: IGF1-2.md

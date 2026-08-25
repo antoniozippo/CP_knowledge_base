@@ -1,0 +1,30 @@
+id: autophagy-apoptosis_inhibition_Beclin_1
+label: Beclin-1 (Autophagosome Nucleation Protein)
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Beclin-1 (Autophagosome Nucleation Protein) is a concept located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-autophagy_apoptosis_inhibition_Beclin_1-01
+  description: Beclin-1 (Autophagosome Nucleation Protein) causes Calpain (Ca²⁺-Dependent
+    Cysteine Protease)
+  claim_refs:
+  - EC-0143
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-autophagy_apoptosis_inhibition_Beclin_1-02
+  description: Beclin-1 (Autophagosome Nucleation Protein) inhibits mTORC1 (Mammalian
+    Target of Rapamycin Complex 1)
+  claim_refs:
+  - EC-0144
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- GABA_apoptosis_Calpain
+- GABA_apoptosis_mTORC1
+rule_gap_reason: null
+source_note: autophagy-apoptosis_inhibition.md

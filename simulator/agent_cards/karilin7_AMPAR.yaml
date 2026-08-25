@@ -1,0 +1,15 @@
+id: karilin7_AMPAR
+label: AMPA Receptor (Kalirin-7 Regulated Trafficking)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.5
+normal_role: AMPA Receptor (Kalirin-7 Regulated Trafficking) is a receptor located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: karilin-7.md

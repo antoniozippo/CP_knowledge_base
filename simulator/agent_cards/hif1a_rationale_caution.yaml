@@ -1,0 +1,21 @@
+id: hif1a_rationale_caution
+label: 'Rationale: HIF1α has isoform specificity and systemic risks'
+entity_type: concept
+compartment: systemic
+tier: PERIPHERAL
+community: 4
+baseline_state: 0.5
+normal_role: 'Rationale: HIF1α has isoform specificity and systemic risks is a concept
+  located in systemic. Baseline activity level 0.50. It receives 1 regulatory influences
+  and exerts 0.'
+pathological_rules: []
+inbound_edges:
+- source_id: hif1a_HIF1alpha
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: EXTENDED
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: hif1a.md

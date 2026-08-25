@@ -1,0 +1,32 @@
+id: shared_central_sensitization
+label: Central Sensitization
+entity_type: process
+compartment: other
+tier: MID
+community: 8
+baseline_state: 0.5
+normal_role: Central Sensitization is a process located in other. Baseline activity
+  level 0.50. It receives 3 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: ana_12_ANA_12
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+- source_id: DRGX_DRGX
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: REFUTED
+  neutral_ok: false
+- source_id: ZFHX2_ZFHX2
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: PNN_ECM.md

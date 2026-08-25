@@ -1,0 +1,15 @@
+id: strategic_biomarker_nitege
+label: NITEGE Fragments (PNN dismantling biomarker)
+entity_type: structure
+compartment: other
+tier: PERIPHERAL
+community: 19
+baseline_state: 0.5
+normal_role: NITEGE Fragments (PNN dismantling biomarker) is a structure located in
+  other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts
+  0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: strategic_clinical_biomarker_plan.md

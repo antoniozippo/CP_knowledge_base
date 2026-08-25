@@ -1,0 +1,109 @@
+id: assaying_molecularly_structural_plasticity_BDNF
+label: Brain-Derived Neurotrophic Factor (BDNF)
+entity_type: molecule
+compartment: other
+tier: HUB
+community: 1
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules:
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-01
+  description: 'Brain-Derived Neurotrophic Factor (BDNF) rationale for Rationale:
+    BDNF has both pro-nociceptive and anti-nociceptive roles'
+  claim_refs:
+  - EC-0021
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-02
+  description: Brain-Derived Neurotrophic Factor (BDNF) upregulates translation Kalirin-7
+    (GEF for Rac1/RhoG)
+  claim_refs:
+  - EC-0147
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-03
+  description: Brain-Derived Neurotrophic Factor (BDNF) disrupts via trkb kcc2 PV
+    Inhibition KCC2-Dependency
+  claim_refs:
+  - EC-0017
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-04
+  description: Brain-Derived Neurotrophic Factor (BDNF) stimulates release of HIF1α-Driven
+    Microglial Glycolytic Shift (M1)
+  claim_refs:
+  - EC-0024
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-05
+  description: Brain-Derived Neurotrophic Factor (BDNF) stimulates microglial release
+    of VEGFR2 (Flk-1/KDR)
+  claim_refs:
+  - EC-0023
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-06
+  description: Brain-Derived Neurotrophic Factor (BDNF) drives transcription of IL-6/gp130/JAK2
+    Axis
+  claim_refs:
+  - EC-0018
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-07
+  description: Brain-Derived Neurotrophic Factor (BDNF) promotes via trkb Synaptic
+    Plasticity Protein Biomarkers
+  claim_refs:
+  - EC-0020
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-08
+  description: Brain-Derived Neurotrophic Factor (BDNF) enhances excitability of Somatostatin
+    (SST) Interneurons
+  claim_refs:
+  - EC-0145
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-09
+  description: Brain-Derived Neurotrophic Factor (BDNF) activates TrkB.FL (Full-Length
+    TrkB Receptor)
+  claim_refs:
+  - EC-0016
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-10
+  description: Brain-Derived Neurotrophic Factor (BDNF) sequesters TrkB-Fc (BDNF Sequestering
+    Chimera)
+  claim_refs:
+  - EC-0022
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-11
+  description: Brain-Derived Neurotrophic Factor (BDNF) induces release of TNF-α (Pro-Inflammatory
+    Cytokine)
+  claim_refs:
+  - EC-0019
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-12
+  description: Brain-Derived Neurotrophic Factor (BDNF) mediates microglial release
+    of ROCK (ROCK1/ROCK2)
+  claim_refs:
+  - EC-0146
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- BDNF_TrkB_rationale_dual_roles
+- karilin7_Kalirin7
+- pv_interneuron_kcc2_dependence
+- hif1a_microglial_glycolysis
+- vegf_VEGFR2
+- jakstat_il6_gp130
+- assaying_synaptic_plasticity
+- SST_somatostatin_interneurons
+- bdnftrkb_trkb_fl
+- bdnftrkb_trkb_fc
+- GABA_apoptosis_TNF_alpha
+- RhoA_ROCK_ROCK
+rule_gap_reason: null
+source_note: assaying_molecularly_structural_plasticity.md

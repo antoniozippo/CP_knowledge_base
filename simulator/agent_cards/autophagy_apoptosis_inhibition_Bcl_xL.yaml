@@ -1,0 +1,47 @@
+id: autophagy-apoptosis_inhibition_Bcl_xL
+label: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)
+entity_type: drug
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.0
+normal_role: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) is a drug located
+  in other. Baseline activity level 0.00. It receives 0 regulatory influences and
+  exerts 4.
+pathological_rules:
+- rule_id: RULE-autophagy_apoptosis_inhibition_Bcl_xL-01
+  description: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) inhibits Bax/Bak
+    (Pro-Apoptotic Pore-Forming Proteins)
+  claim_refs:
+  - EC-0009
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-autophagy_apoptosis_inhibition_Bcl_xL-02
+  description: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) inhibits Mitochondrial
+    Permeability Transition Pore (mPTP)
+  claim_refs:
+  - EC-0010
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-autophagy_apoptosis_inhibition_Bcl_xL-03
+  description: 'Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) rationale for
+    Rationale: Long-Term Autophagy Blockade Risk (Goldilocks Problem)'
+  claim_refs:
+  - EC-0142
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-autophagy_apoptosis_inhibition_Bcl_xL-04
+  description: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) rationale for
+    Kozak Sequence (Ribosome Binding Site)
+  claim_refs:
+  - EC-0141
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- autophagy-apoptosis_inhibition_Bax_Bak
+- autophagy-apoptosis_inhibition_mPTP
+- autophagy-apoptosis_inhibition_goldilocks_rationale
+- autophagy-apoptosis_inhibition_Kozak_sequence
+rule_gap_reason: null
+source_note: autophagy-apoptosis_inhibition.md

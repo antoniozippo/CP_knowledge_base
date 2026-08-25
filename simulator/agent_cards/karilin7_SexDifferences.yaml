@@ -1,0 +1,15 @@
+id: karilin7_SexDifferences
+label: Sex Differences (Female ACC Kalirin-7 Trajectory)
+entity_type: molecule
+compartment: ACC
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.5
+normal_role: Sex Differences (Female ACC Kalirin-7 Trajectory) is a molecule located
+  in ACC. Baseline activity level 0.50. It receives 0 regulatory influences and exerts
+  0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: karilin-7.md

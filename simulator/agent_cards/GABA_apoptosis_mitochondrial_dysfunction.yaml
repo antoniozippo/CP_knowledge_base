@@ -1,0 +1,69 @@
+id: GABA_apoptosis_mitochondrial_dysfunction
+label: Mitochondrial Dysfunction in GABAergic Neurons
+entity_type: cell_type
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Mitochondrial Dysfunction in GABAergic Neurons is a cell_type located
+  in other. Baseline activity level 0.50. It receives 1 regulatory influences and
+  exerts 6.
+pathological_rules:
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-01
+  description: Mitochondrial Dysfunction in GABAergic Neurons causes Reactive Oxygen
+    Species (ROS) and Oxidative Stress
+  claim_refs:
+  - EC-0077
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-02
+  description: Mitochondrial Dysfunction in GABAergic Neurons causes Caspase Apoptotic
+    Cascade (Caspase-3, -9, -12)
+  claim_refs:
+  - EC-0075
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-03
+  description: Mitochondrial Dysfunction in GABAergic Neurons causes TNF-α (Pro-Inflammatory
+    Cytokine)
+  claim_refs:
+  - EC-0079
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-04
+  description: Mitochondrial Dysfunction in GABAergic Neurons causes HIF1α (Hypoxia-Inducible
+    Factor 1 Alpha)
+  claim_refs:
+  - EC-0076
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-05
+  description: Mitochondrial Dysfunction in GABAergic Neurons causes RhoA/ROCK Signalling
+    Pathway
+  claim_refs:
+  - EC-0078
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_mitochondrial_dysfunction-06
+  description: Mitochondrial Dysfunction in GABAergic Neurons inhibits PINK1/Parkin
+    Mitophagy Pathway
+  claim_refs:
+  - EC-0080
+  direction: down
+  magnitude_hint: null
+inbound_edges:
+- source_id: GABA_apoptosis_calcium_overload
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- GABA_apoptosis_ROS_oxidative_stress
+- GABA_apoptosis_caspase_cascade
+- GABA_apoptosis_TNF_alpha
+- GABA_apoptosis_HIF1alpha
+- GABA_apoptosis_RhoA_ROCK
+- GABA_apoptosis_PINK1_Parkin_mitophagy
+rule_gap_reason: null
+source_note: GABA_apoptosis.md

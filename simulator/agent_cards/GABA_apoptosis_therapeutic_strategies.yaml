@@ -1,0 +1,23 @@
+id: GABA_apoptosis_therapeutic_strategies
+label: Therapeutic Strategies Targeting GABAergic Neuron Survival
+entity_type: cell_type
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Therapeutic Strategies Targeting GABAergic Neuron Survival is a cell_type
+  located in other. Baseline activity level 0.50. It receives 0 regulatory influences
+  and exerts 1.
+pathological_rules:
+- rule_id: RULE-GABA_apoptosis_therapeutic_strategies-01
+  description: 'Therapeutic Strategies Targeting GABAergic Neuron Survival rationale
+    for Rationale: Double-Edged Sword of Autophagy Modulation'
+  claim_refs:
+  - EC-0165
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- GABA_apoptosis_caution_autophagy_rationale
+rule_gap_reason: null
+source_note: GABA_apoptosis.md

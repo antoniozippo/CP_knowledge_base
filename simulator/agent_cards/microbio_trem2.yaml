@@ -1,0 +1,15 @@
+id: microbio_trem2
+label: TREM2 in Neuropathic Pain (Microglial Phenotype Regulator)
+entity_type: cell_type
+compartment: other
+tier: MID
+community: 3
+baseline_state: 0.5
+normal_role: TREM2 in Neuropathic Pain (Microglial Phenotype Regulator) is a cell_type
+  located in other. Baseline activity level 0.50. It receives 0 regulatory influences
+  and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: microglial_biology_pain_update.md

@@ -1,0 +1,14 @@
+id: PNN_ECM_MMP2
+label: Matrix Metalloproteinase-2 (MMP-2)
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 4
+baseline_state: 0.5
+normal_role: Matrix Metalloproteinase-2 (MMP-2) is a molecule located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: PNN_ECM.md

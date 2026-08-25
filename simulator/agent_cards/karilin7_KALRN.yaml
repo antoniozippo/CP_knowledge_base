@@ -1,0 +1,30 @@
+id: karilin7_KALRN
+label: KALRN Gene (Chromosome 3q21.2)
+entity_type: concept
+compartment: other
+tier: MID
+community: 5
+baseline_state: 0.5
+normal_role: KALRN Gene (Chromosome 3q21.2) is a concept located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-karilin7_KALRN-01
+  description: KALRN Gene (Chromosome 3q21.2) drives transcription C/EBPbeta (Kalrn
+    Transcription Factor)
+  claim_refs:
+  - EC-0050
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_KALRN-02
+  description: KALRN Gene (Chromosome 3q21.2) represses transcription HDAC4 (Class
+    IIa, represses KCC2/GAD65)
+  claim_refs:
+  - EC-0051
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- karilin7_CEBPbeta
+- hdac_hdac4
+rule_gap_reason: null
+source_note: karilin-7.md

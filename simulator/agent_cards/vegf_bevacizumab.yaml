@@ -1,0 +1,22 @@
+id: vegf_bevacizumab
+label: Bevacizumab (Anti-VEGF Antibody)
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 14
+baseline_state: 0.5
+normal_role: Bevacizumab (Anti-VEGF Antibody) is a molecule located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-vegf_bevacizumab-01
+  description: Bevacizumab (Anti-VEGF Antibody) sequesters Vascular Endothelial Growth
+    Factor A (VEGFA)
+  claim_refs:
+  - EC-0011
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- vegf_VEGFA
+rule_gap_reason: null
+source_note: vegf.md

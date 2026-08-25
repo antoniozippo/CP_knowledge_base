@@ -1,0 +1,24 @@
+id: proposal_acp_quadruple_prophylaxis
+label: Time-Staggered Quadruple Prophylactic Protocol (Pain Chronification Prevention)
+entity_type: concept
+compartment: other
+tier: MID
+community: 2
+baseline_state: 0.5
+normal_role: Time-Staggered Quadruple Prophylactic Protocol (Pain Chronification Prevention)
+  is a concept located in other. Baseline activity level 0.50. It receives 0 regulatory
+  influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-proposal_acp_quadruple_prophylaxis-01
+  description: Time-Staggered Quadruple Prophylactic Protocol (Pain Chronification
+    Prevention) rationale for Molecular Cascade of Acute-to-Chronic Pain Transition
+    (4 Phases)
+  claim_refs:
+  - EC-0120
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- proposal_acp_chronification_cascade
+rule_gap_reason: null
+source_note: proposals/proposal_acute_to_chronic_prevention.md

@@ -1,0 +1,15 @@
+id: strategic_biomarker_rbfox1
+label: Rbfox1-NrCAM-SCN9A Axis (DRG hyperexcitability)
+entity_type: symptom
+compartment: DRG
+tier: PERIPHERAL
+community: 6
+baseline_state: 0.05
+normal_role: Rbfox1-NrCAM-SCN9A Axis (DRG hyperexcitability) is a symptom located
+  in DRG. Baseline activity level 0.05. It receives 0 regulatory influences and exerts
+  0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: strategic_clinical_biomarker_plan.md

@@ -1,0 +1,70 @@
+id: GABA_apoptosis_HIF1alpha
+label: HIF1α (Hypoxia-Inducible Factor 1 Alpha)
+entity_type: concept
+compartment: other
+tier: HUB
+community: 1
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules:
+- rule_id: RULE-GABA_apoptosis_HIF1alpha-01
+  description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) drives transcription of HIF1α
+    Transcriptional Battery (Pain Genes)
+  claim_refs:
+  - EC-0039
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_HIF1alpha-02
+  description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) transcribes Vascular Endothelial
+    Growth Factor A (VEGFA)
+  claim_refs:
+  - EC-0041
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_HIF1alpha-03
+  description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) destabilizes YC-1 (HIF1α Inhibitor)
+  claim_refs:
+  - EC-0038
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_HIF1alpha-04
+  description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) inhibits translation of PX-478
+    (HIF1α Inhibitor)
+  claim_refs:
+  - EC-0040
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_HIF1alpha-05
+  description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) transcribes Angiopoietin-2
+    (Ang-2)
+  claim_refs:
+  - EC-0149
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: GABA_apoptosis_mitochondrial_dysfunction
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: pnn_ecm_mmp9
+  relation: induces
+  sign: 1
+  weight: 0.9
+  validation_status: EXTENDED
+  neutral_ok: false
+- source_id: gaba_apoptosis_ca_overload
+  relation: drives_via_ros
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- hif1a_transcriptional_targets
+- vegf_VEGFA
+- hif1a_YC1
+- hif1a_PX478
+- AngPt_angiopoietin_2
+rule_gap_reason: null
+source_note: GABA_apoptosis.md

@@ -1,0 +1,42 @@
+id: SST_somatostatin_interneurons
+label: Somatostatin (SST) Interneurons
+entity_type: cell_type
+compartment: other
+tier: MID
+community: 8
+baseline_state: 0.5
+normal_role: Somatostatin (SST) Interneurons is a cell_type located in other. Baseline
+  activity level 0.50. It receives 2 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-SST_somatostatin_interneurons-01
+  description: Somatostatin (SST) Interneurons drives SST Interneurons as Excitatory
+    Pain Drivers
+  claim_refs:
+  - EC-0111
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-SST_somatostatin_interneurons-02
+  description: Somatostatin (SST) Interneurons specifies development of Prdm12 Transcription
+    Factor
+  claim_refs:
+  - EC-0112
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: enhances_excitability_of
+  sign: 1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: PV_interneurons_PV_interneurons
+  relation: hyperactivates_when_pv_fails
+  sign: 1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids:
+- sst_interneuron_excitatory_role
+- SST_Prdm12
+rule_gap_reason: null
+source_note: SST.md

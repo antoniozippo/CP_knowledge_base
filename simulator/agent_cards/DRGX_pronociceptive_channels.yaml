@@ -1,0 +1,26 @@
+id: DRGX_pronociceptive_channels
+label: Pronociceptive ion channels
+entity_type: channel
+compartment: other
+tier: PERIPHERAL
+community: 15
+baseline_state: 0.5
+normal_role: Pronociceptive ion channels is a channel located in other. Baseline activity
+  level 0.50. It receives 2 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: DRGX_DRGX
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: REFUTED
+  neutral_ok: false
+- source_id: ZFHX2_ZFHX2
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: REFUTED
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: DRGX.md

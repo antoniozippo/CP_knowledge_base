@@ -1,0 +1,156 @@
+id: karilin7_Kalirin7
+label: Kalirin-7 (GEF for Rac1/RhoG)
+entity_type: molecule
+compartment: other
+tier: HUB
+community: 5
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules:
+- rule_id: RULE-karilin7_Kalirin7-01
+  description: Kalirin-7 (GEF for Rac1/RhoG) activates GEF Rac1 GTPase
+  claim_refs:
+  - EC-0052
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-02
+  description: Kalirin-7 (GEF for Rac1/RhoG) activates GEF RhoG GTPase
+  claim_refs:
+  - EC-0053
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-03
+  description: Kalirin-7 (GEF for Rac1/RhoG) initiates Rac1-PAK-LIMK-Cofilin Actin
+    Remodelling Pathway
+  claim_refs:
+  - EC-0060
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-04
+  description: Kalirin-7 (GEF for Rac1/RhoG) dephosphorylates and degrades Calcineurin
+    (Ca2+-Dependent Kalirin-7 Phosphatase)
+  claim_refs:
+  - EC-0055
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-05
+  description: Kalirin-7 (GEF for Rac1/RhoG) downregulates via calcineurin NMDAR (ACC
+    Kalirin-7 Downregulation Driver)
+  claim_refs:
+  - EC-0056
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-06
+  description: Kalirin-7 (GEF for Rac1/RhoG) delivers and restores AAV-Kalirin-7 (Gene
+    Therapy, ACC-Targeted)
+  claim_refs:
+  - EC-0054
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-07
+  description: Kalirin-7 (GEF for Rac1/RhoG) knocks down shRNA Kalirin-7 Knockdown
+    (ACC)
+  claim_refs:
+  - EC-0061
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-08
+  description: Kalirin-7 (GEF for Rac1/RhoG) genetic deletion Kalirin-7 Global Knockout
+    Mouse
+  claim_refs:
+  - EC-0057
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-09
+  description: Kalirin-7 (GEF for Rac1/RhoG) upregulates Environmental Enrichment
+    (Boosts ACC Kalirin-7)
+  claim_refs:
+  - EC-0068
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-10
+  description: Kalirin-7 (GEF for Rac1/RhoG) normalizes signaling Deep Brain Stimulation
+    of ACC
+  claim_refs:
+  - EC-0064
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-11
+  description: Kalirin-7 (GEF for Rac1/RhoG) loss causes Pain-Related Anxiety (ACC
+    Kalirin-7 Dependent)
+  claim_refs:
+  - EC-0063
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-12
+  description: Kalirin-7 (GEF for Rac1/RhoG) loss causes Dendritic Spine Loss (ACC
+    Layer II/III Pyramidal)
+  claim_refs:
+  - EC-0062
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-15
+  description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
+  claim_refs:
+  - EC-0067
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-16
+  description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Dendritic Spine Loss (ACC
+    Layer II/III Pyramidal)
+  claim_refs:
+  - EC-0065
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-17
+  description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC
+    Kalirin-7 Dependent)
+  claim_refs:
+  - EC-0066
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: RhoA_ROCK_RhoA
+  relation: antagonizes_pathway
+  sign: -1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: RhoA_ROCK_ROCK
+  relation: antagonizes_pathway
+  sign: -1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: upregulates_translation
+  sign: 1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: shared_roa_rock
+  relation: antagonizes_pathway
+  sign: -1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids:
+- karilin7_Rac1
+- karilin7_RhoG
+- karilin7_Rac1_PAK_LIMK_Cofilin_Pathway
+- karilin7_Calcineurin
+- karilin7_NMDAR
+- karilin7_AAV_Kalirin7
+- karilin7_shRNA_Kalirin7
+- karilin7_Kalirin7_KO
+- karilin7_EnvironmentalEnrichment
+- karilin7_DBS_ACC
+- karilin7_PainRelatedAnxiety
+- karilin7_DendriticSpineLoss
+- karilin7_SNI
+- karilin7_CCI
+- karilin-7_Rac1_pathway
+- karilin7_DendriticSpineLoss
+- karilin7_PainRelatedAnxiety
+rule_gap_reason: null
+source_note: karilin-7.md

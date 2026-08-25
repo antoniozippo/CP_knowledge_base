@@ -1,0 +1,21 @@
+id: BBB_rationale_balancing_act
+label: 'Rationale: Balancing barrier repair with drug delivery is critical'
+entity_type: concept
+compartment: barrier
+tier: PERIPHERAL
+community: 4
+baseline_state: 0.5
+normal_role: 'Rationale: Balancing barrier repair with drug delivery is critical is
+  a concept located in barrier. Baseline activity level 0.50. It receives 1 regulatory
+  influences and exerts 0.'
+pathological_rules: []
+inbound_edges:
+- source_id: BBB_blood_brain_barrier
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: BBB.md

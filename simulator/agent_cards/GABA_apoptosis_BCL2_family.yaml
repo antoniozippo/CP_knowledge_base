@@ -1,0 +1,15 @@
+id: GABA_apoptosis_BCL2_family
+label: BCL-2 Family Proteins (BAX, BAK, BIM, BCL-2, BCL-xL)
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: BCL-2 Family Proteins (BAX, BAK, BIM, BCL-2, BCL-xL) is a concept located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: GABA_apoptosis.md
