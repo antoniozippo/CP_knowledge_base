@@ -14,8 +14,8 @@
 | UNREVIEWED | 69 | 26.3% |
 
 - **Priority coverage** (substantively reviewed = CONFIRMED/EXTENDED/REFUTED/MIXED):
-  - **P0:** 88/138 reviewed (**63.8%**); 28 P0 claims untouched by any sweep finding, 21 P0 claims outside all ten themes.
-  - **P1:** 9/31 reviewed (**29.0%**); 12 untouched, 9 out-of-theme.
+  - **P0:** 88/138 reviewed (**63.8%**); 28 P0 claims untouched by any sweep finding, 22 P0 claims outside all ten themes.
+  - **P1:** 9/31 reviewed (**29.0%**); 13 untouched, 9 out-of-theme.
   - All QC cards are P3; reviewed or explicitly flagged unverified.
 - **Headline confirmations:** BDNF–TrkB→KCC2 cascade now human-tissue anchored (Davis 2025 human dorsal horn; Dedek 2019 *Brain*); MMP-9 hub reconfirmed end-to-end incl. phase structure (Kawasaki 2008 intact through 2025 reviews); Rbfox1–NrCAM splicing axis confirmed verbatim incl. the 72-h ASO figure; BRADiNP quotes verified word-for-word against Stemper et al., *Pain* 2025; P2X7 reaches a clinical-track antagonist (AK1780); lactylation–IGF2BP2 axis multiply replicated.
 - **Headline refutations:** DRGX polarity fully inverted (EC-0031…0034, adjudicated vs Ito et al., *Mol Pain* 2020); ZFHX2 regulome mismatch (EC-0131, EC-0133 — regulome is SST/PTGIR/GFRA3/GAL, not Nav/TRPV1/CGRP/BDNF; Zfhx2-null mice heat-HYPERsensitive); Kalirin-7 injury-downregulation claims (EC-0058/EC-0059) inverted at spinal level where Kal7 gain-of-function is pronociceptive.
@@ -62,7 +62,7 @@ Related MIXED items requiring action (support + contradiction): **EC-0070** (re-
 | EC-0097 | Add firing-pattern-restoration readout (Qiu 2024 PNAS); RARα node is preprint-stage |
 | EC-0099 | Disinhibition paradigm gains opioid-resistance dimension; KCC2 pipeline matured (AXN-027 FIH Q4 2024; OV350 H1 2025) |
 | EC-0108 | LPA cascade gains satellite-glial/Schwann-cell peripheral arm; UD-039/UD-059Na, PIPE-791, oxypeucedanin new handles |
-| EC-0100 / EC-0110 | ROCK inhibition pro-regenerative instances widen context-dependence framing |
+| EC-0110 | ROCK inhibition pro-regenerative instances widen context-dependence framing |
 | EC-0117 | XPro1595 efficacy sex-dependent (males>females, estrogen-blunted); late SCI dosing failed; MINDFuL Ph2 = AD not pain; predicate phrasing inverted |
 | EC-0120 | Mark synthetic/proposal-level; DMF-prevention and Denk-2013 schedule dependence give indirect conceptual support only |
 | EC-0127 | Anti-TNF double hazard expanded: demyelination + impaired acute-to-chronic resolution (TNFR2 pro-resolving arm) |
@@ -119,4 +119,4 @@ Grouped by pathway area:
 - **Verdict rules applied:** CONFIRMED = ≥1 SUPPORTS, no contradiction; EXTENDED = SUPPORTS + scope/timing/mechanism refinement (qualifier recorded); REFUTED = ≥1 CONTRADICTS and no adequate support; MIXED = both present; NO_EVIDENCE_FOUND = claim's thematic area swept but no finding touched it (or targeted search explicitly found nothing); UNREVIEWED = topic outside all ten themes. Conflicts weighed primary research > reviews > preprints.
 - **Adjudication searches used:** 4 of 6 allotted. (1) DRGX direction → confirmed polarity inversion via Ito et al., *Mol Pain* 2020;16:33 (PMC7099666). (2) Kalirin-7 ACC narrative → no ACC-Kal7-pain study exists; TIAM1 identified as evidenced ACC Rac1-GEF (Ru et al., *J Clin Invest* 2022;132:e158545). (3) MMP-9→PNN→PV → Tansley et al., *Science* 2022;377:80 confirms lamina-I PNNs enwrap spinoparabrachial projection neurons (not PV), both sexes; Mascio et al., *Pain* 2025 confirms forebrain sign inversion. (4) Fulmetibant BRADiNP → Stemper et al., *Pain* 2025 (PMID 40334047; NCT05219812): treatment difference 0.07 (95% CI −0.170–0.314), negative; QC quotes verbatim.
 - **Limitations:** sweeps rest on abstract/snippet-level evidence with some paywalled sources; several key items are preprints (RARα bioRxiv 2022, Nex-TNFR2 bioRxiv 2025, claudin-12 bioRxiv 2019, Davis 2025 bioRxiv/journal-in-press, N02C0702 2026) — flagged in qualifiers; search-engine recency skew means mid-2026 coverage is incomplete; negative findings are query-relative ("no retrievable source" ≠ proof of nonexistence) so ACC-Kal7 and ZFHX2 deletions should be preceded by one targeted PubMed check; KCC2-enhancer named compounds (ARN23746, STAB-1, BUM-9082) and FX11/AZD3965 figures remain unsourced and were graded NO_EVIDENCE_FOUND rather than accepted.
-- **No dossiers, claims.json, or graph files were modified; nothing committed.**
+- **Provenance:** verdicts applied to dossiers (24 files) and graph edges (138 links annotated with `validation_status`) in commits `f681780`–`b37eda6`; original confidence/sign/relation fields preserved untouched.
