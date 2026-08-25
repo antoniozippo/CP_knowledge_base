@@ -63,6 +63,7 @@ def fixture_graph():
         make_link("rat_foo", "docC_baz", "inhibits", confidence="INFERRED"),
         make_link("rat_foo", "docA_foo", "references"),
         make_link("docD_drug", "docC_baz", "promotes"),
+        make_link("docD_drug", "docE_sym", "references"),
     ]
     return {
         "directed": True,
@@ -176,7 +177,7 @@ class TestBuildGraph:
 
     def test_edges_redirected_no_self_loops(self, fixture_graph):
         out, summary = bg.build_graph(fixture_graph)
-        assert len(out["links"]) == 3
+        assert len(out["links"]) == 4
         assert summary["links_dropped_self_loop"] == 1
         endpoints = {(l["source"], l["target"]) for l in out["links"]}
         assert ("docA_foo", "docC_baz") in endpoints
@@ -209,6 +210,7 @@ class TestBuildGraph:
         assert signs["activates"] == 1
         assert signs["inhibits"] == -1
         assert signs["promotes"] == 1
+        assert signs["references"] == 0
         inhibited = next(l for l in out["links"] if l["relation"] == "inhibits")
         assert inhibited["confidence"] == "INFERRED"
         assert inhibited["weight"] == 1.0
