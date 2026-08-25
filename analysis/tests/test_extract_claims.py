@@ -386,6 +386,18 @@ class TestTextMunging:
     def test_ip_abbreviation_merged(self):
         assert len(ec.split_sentences("AMG487 was given i.p. (3 mg/kg) daily in the CCI model.")) == 1
 
+    def test_pain_phenotype_timepoints_pass_context_gate(self, tmp_path):
+        (tmp_path / "Pheno.md").write_text(
+            "Antagonist reduces established mechanical allodynia observed 7\u201328 days after "
+            "partial sciatic nerve ligation in mice.\n\n"
+            "Participants reported they sleep 8 hours per night without any notable complaints.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert len(claims) == 1
+        assert claims[0]["value_tokens"] == ["28 days"]
+        assert claims[0]["quote"].startswith("Antagonist reduces")
+
     def test_decode_error_reports_filename(self, tmp_path, capsys):
         (tmp_path / "Broken.md").write_bytes(b"\xff\xfe not utf8 with 10 mg/kg")
         (tmp_path / "Good.md").write_text("Dose 5 mg/kg in pain model.\n", encoding="utf-8")

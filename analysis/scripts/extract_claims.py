@@ -62,7 +62,7 @@ ALWAYS_QUANT_PATTERNS = (
     BINDING_AFFINITY_RE,
 )
 
-TIMEPOINT_CONTEXT_RE = re.compile(r"injur|pain|model|treat", re.IGNORECASE)
+TIMEPOINT_CONTEXT_RE = re.compile(r"injur|pain|model|treat|ligat|allodyn|hyperalgesi", re.IGNORECASE)
 
 README_PREFIX = "readme"
 

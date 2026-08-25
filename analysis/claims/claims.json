@@ -2575,6 +2575,24 @@
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
+    "object": "Reduces established mechanical allodynia observed 7–28 days after partial sciatic nerve ligation in wild‑type mice.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "Bradykinin.md",
+    "quote": "Reduces established mechanical allodynia observed 7–28 days after partial sciatic nerve ligation in wild‑type mice.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "28 days"
+    ]
+  },
+  {
+    "id": "QC-0004",
+    "kind": "quantitative",
+    "subject": "Bradykinin",
+    "predicate": "quantitative_statement",
     "object": "Design: After blinded washout of prior DNP treatment, patients were randomised 1:1 to start with either fulmetibant (450 mg once daily) or placebo in the first 4‑week treatment period, and vice versa in the second period.",
     "sign": 0,
     "confidence": "EXTRACTED",
@@ -2589,7 +2607,7 @@
     ]
   },
   {
-    "id": "QC-0004",
+    "id": "QC-0005",
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
@@ -2607,7 +2625,7 @@
     ]
   },
   {
-    "id": "QC-0005",
+    "id": "QC-0006",
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
@@ -2625,7 +2643,7 @@
     ]
   },
   {
-    "id": "QC-0006",
+    "id": "QC-0007",
     "kind": "quantitative",
     "subject": "CB2",
     "predicate": "quantitative_statement",
@@ -2643,7 +2661,7 @@
     ]
   },
   {
-    "id": "QC-0007",
+    "id": "QC-0008",
     "kind": "quantitative",
     "subject": "CB2",
     "predicate": "quantitative_statement",
@@ -2662,7 +2680,7 @@
     ]
   },
   {
-    "id": "QC-0008",
+    "id": "QC-0009",
     "kind": "quantitative",
     "subject": "CCL21-CXCR3",
     "predicate": "quantitative_statement",
@@ -2681,7 +2699,25 @@
     ]
   },
   {
-    "id": "QC-0009",
+    "id": "QC-0010",
+    "kind": "quantitative",
+    "subject": "CCL21-CXCR3",
+    "predicate": "quantitative_statement",
+    "object": "Intrathecal injection of a CCL21‑neutralising monoclonal antibody 1 hour before CCI or SNL surgery significantly delays and attenuates the development of mechanical allodynia and thermal hyperalgesia.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "CCL21-CXCR3.md",
+    "quote": "Intrathecal injection of a CCL21‑neutralising monoclonal antibody 1 hour before CCI or SNL surgery significantly delays and attenuates the development of mechanical allodynia and thermal hyperalgesia.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "1 hour"
+    ]
+  },
+  {
+    "id": "QC-0011",
     "kind": "quantitative",
     "subject": "CCL21-CXCR3",
     "predicate": "quantitative_statement",
@@ -2699,7 +2735,7 @@
     ]
   },
   {
-    "id": "QC-0010",
+    "id": "QC-0012",
     "kind": "quantitative",
     "subject": "CSF1-CSF1R",
     "predicate": "quantitative_statement",
@@ -2717,7 +2753,7 @@
     ]
   },
   {
-    "id": "QC-0011",
+    "id": "QC-0013",
     "kind": "quantitative",
     "subject": "CSF1-CSF1R",
     "predicate": "quantitative_statement",
@@ -2735,7 +2771,7 @@
     ]
   },
   {
-    "id": "QC-0012",
+    "id": "QC-0014",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2753,7 +2789,25 @@
     ]
   },
   {
-    "id": "QC-0013",
+    "id": "QC-0015",
+    "kind": "quantitative",
+    "subject": "CXCL12-CXCR4",
+    "predicate": "quantitative_statement",
+    "object": "Spinal nerve ligation (SNL) : Intrathecal AMD3100 (20 μg/rat, once daily for 3 days) alleviates mechanical allodynia.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "CXCL12-CXCR4.md",
+    "quote": "Spinal nerve ligation (SNL) : Intrathecal AMD3100 (20 μg/rat, once daily for 3 days) alleviates mechanical allodynia.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "3 days"
+    ]
+  },
+  {
+    "id": "QC-0016",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2772,7 +2826,25 @@
     ]
   },
   {
-    "id": "QC-0014",
+    "id": "QC-0017",
+    "kind": "quantitative",
+    "subject": "CXCL12-CXCR4",
+    "predicate": "quantitative_statement",
+    "object": "Partial sciatic nerve ligation (pSNL) and CPIP: Intrathecal AMD3100 (administered daily from 1 hour before surgery to post‑operative day 3) attenuates the development of mechanical allodynia and downregulates spinal TNF‑α, IL‑1β, and IL‑6 mRNA.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "CXCL12-CXCR4.md",
+    "quote": "Partial sciatic nerve ligation (pSNL) and CPIP: Intrathecal AMD3100 (administered daily from 1 hour before surgery to post‑operative day 3) attenuates the development of mechanical allodynia and downregulates spinal TNF‑α, IL‑1β, and IL‑6 mRNA.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "1 hour"
+    ]
+  },
+  {
+    "id": "QC-0018",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2790,7 +2862,7 @@
     ]
   },
   {
-    "id": "QC-0015",
+    "id": "QC-0019",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2808,7 +2880,7 @@
     ]
   },
   {
-    "id": "QC-0016",
+    "id": "QC-0020",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2826,7 +2898,7 @@
     ]
   },
   {
-    "id": "QC-0017",
+    "id": "QC-0021",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2844,7 +2916,7 @@
     ]
   },
   {
-    "id": "QC-0018",
+    "id": "QC-0022",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2862,7 +2934,7 @@
     ]
   },
   {
-    "id": "QC-0019",
+    "id": "QC-0023",
     "kind": "quantitative",
     "subject": "Endothelin",
     "predicate": "quantitative_statement",
@@ -2882,7 +2954,7 @@
     ]
   },
   {
-    "id": "QC-0020",
+    "id": "QC-0024",
     "kind": "quantitative",
     "subject": "Endothelin",
     "predicate": "quantitative_statement",
@@ -2900,7 +2972,7 @@
     ]
   },
   {
-    "id": "QC-0021",
+    "id": "QC-0025",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2919,7 +2991,7 @@
     ]
   },
   {
-    "id": "QC-0022",
+    "id": "QC-0026",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2937,7 +3009,7 @@
     ]
   },
   {
-    "id": "QC-0023",
+    "id": "QC-0027",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2955,7 +3027,7 @@
     ]
   },
   {
-    "id": "QC-0024",
+    "id": "QC-0028",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2973,7 +3045,7 @@
     ]
   },
   {
-    "id": "QC-0025",
+    "id": "QC-0029",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2991,7 +3063,7 @@
     ]
   },
   {
-    "id": "QC-0026",
+    "id": "QC-0030",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -3009,7 +3081,7 @@
     ]
   },
   {
-    "id": "QC-0027",
+    "id": "QC-0031",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -3027,7 +3099,7 @@
     ]
   },
   {
-    "id": "QC-0028",
+    "id": "QC-0032",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3045,7 +3117,7 @@
     ]
   },
   {
-    "id": "QC-0029",
+    "id": "QC-0033",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3064,7 +3136,7 @@
     ]
   },
   {
-    "id": "QC-0030",
+    "id": "QC-0034",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3083,7 +3155,7 @@
     ]
   },
   {
-    "id": "QC-0031",
+    "id": "QC-0035",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3102,7 +3174,7 @@
     ]
   },
   {
-    "id": "QC-0032",
+    "id": "QC-0036",
     "kind": "quantitative",
     "subject": "HO-1_CO",
     "predicate": "quantitative_statement",
@@ -3120,7 +3192,25 @@
     ]
   },
   {
-    "id": "QC-0033",
+    "id": "QC-0037",
+    "kind": "quantitative",
+    "subject": "IGF1-2",
+    "predicate": "quantitative_statement",
+    "object": "siRNA-Mediated Knockdown: Directly silencing IGF2 with intrathecal small-interfering RNA (siRNA) significantly inhibited mechanical and cold allodynia, with the analgesic effect lasting for 10 days.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "IGF1-2.md",
+    "quote": "siRNA-Mediated Knockdown: Directly silencing IGF2 with intrathecal small-interfering RNA (siRNA) significantly inhibited mechanical and cold allodynia, with the analgesic effect lasting for 10 days.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "10 days"
+    ]
+  },
+  {
+    "id": "QC-0038",
     "kind": "quantitative",
     "subject": "KCC2",
     "predicate": "quantitative_statement",
@@ -3138,7 +3228,7 @@
     ]
   },
   {
-    "id": "QC-0034",
+    "id": "QC-0039",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3157,7 +3247,7 @@
     ]
   },
   {
-    "id": "QC-0035",
+    "id": "QC-0040",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3179,7 +3269,7 @@
     ]
   },
   {
-    "id": "QC-0036",
+    "id": "QC-0041",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3193,11 +3283,12 @@
     "priority_flag": null,
     "theme_hint": null,
     "value_tokens": [
-      "1 mg/kg"
+      "1 mg/kg",
+      "12h"
     ]
   },
   {
-    "id": "QC-0037",
+    "id": "QC-0042",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3217,7 +3308,7 @@
     ]
   },
   {
-    "id": "QC-0038",
+    "id": "QC-0043",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3235,7 +3326,7 @@
     ]
   },
   {
-    "id": "QC-0039",
+    "id": "QC-0044",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3253,7 +3344,7 @@
     ]
   },
   {
-    "id": "QC-0040",
+    "id": "QC-0045",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3272,7 +3363,7 @@
     ]
   },
   {
-    "id": "QC-0041",
+    "id": "QC-0046",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3290,7 +3381,7 @@
     ]
   },
   {
-    "id": "QC-0042",
+    "id": "QC-0047",
     "kind": "quantitative",
     "subject": "P2X7",
     "predicate": "quantitative_statement",
@@ -3309,7 +3400,7 @@
     ]
   },
   {
-    "id": "QC-0043",
+    "id": "QC-0048",
     "kind": "quantitative",
     "subject": "PPARy",
     "predicate": "quantitative_statement",
@@ -3327,7 +3418,7 @@
     ]
   },
   {
-    "id": "QC-0044",
+    "id": "QC-0049",
     "kind": "quantitative",
     "subject": "PPARy",
     "predicate": "quantitative_statement",
@@ -3345,7 +3436,43 @@
     ]
   },
   {
-    "id": "QC-0045",
+    "id": "QC-0050",
+    "kind": "quantitative",
+    "subject": "RhoA-ROCK",
+    "predicate": "quantitative_statement",
+    "object": "Ripasudil: Intraperitoneal administration reduces SCI‑induced mechanical allodynia, with effects lasting up to 28 days[reference:20].",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "RhoA-ROCK.md",
+    "quote": "Ripasudil: Intraperitoneal administration reduces SCI‑induced mechanical allodynia, with effects lasting up to 28 days[reference:20].",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "28 days"
+    ]
+  },
+  {
+    "id": "QC-0051",
+    "kind": "quantitative",
+    "subject": "RhoA-ROCK",
+    "predicate": "quantitative_statement",
+    "object": "siRNA Knockdown: Lumbar intrathecal injection of siRNA targeting RhoA significantly reduces tactile hypersensitivity for 6‑8 weeks after contusive SCI, whereas the C3 fusion protein BA‑210 fails to prevent allodynia at similar time points, likely due to the transient nature of the peptide inhibitor versus the sustained silencing effect of siRNA[reference:29].",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "RhoA-ROCK.md",
+    "quote": "siRNA Knockdown: Lumbar intrathecal injection of siRNA targeting RhoA significantly reduces tactile hypersensitivity for 6‑8 weeks after contusive SCI, whereas the C3 fusion protein BA‑210 fails to prevent allodynia at similar time points, likely due to the transient nature of the peptide inhibitor versus the sustained silencing effect of siRNA[reference:29].",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "8 weeks"
+    ]
+  },
+  {
+    "id": "QC-0052",
     "kind": "quantitative",
     "subject": "S1P",
     "predicate": "quantitative_statement",
@@ -3363,7 +3490,7 @@
     ]
   },
   {
-    "id": "QC-0046",
+    "id": "QC-0053",
     "kind": "quantitative",
     "subject": "SPM_resolution_mediators",
     "predicate": "quantitative_statement",
@@ -3381,7 +3508,7 @@
     ]
   },
   {
-    "id": "QC-0047",
+    "id": "QC-0054",
     "kind": "quantitative",
     "subject": "SPM_resolution_mediators",
     "predicate": "quantitative_statement",
@@ -3399,7 +3526,7 @@
     ]
   },
   {
-    "id": "QC-0048",
+    "id": "QC-0055",
     "kind": "quantitative",
     "subject": "Skill_neuroscientific_insights_seeker",
     "predicate": "quantitative_statement",
@@ -3417,7 +3544,7 @@
     ]
   },
   {
-    "id": "QC-0049",
+    "id": "QC-0056",
     "kind": "quantitative",
     "subject": "TLR2",
     "predicate": "quantitative_statement",
@@ -3436,7 +3563,7 @@
     ]
   },
   {
-    "id": "QC-0050",
+    "id": "QC-0057",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3454,7 +3581,7 @@
     ]
   },
   {
-    "id": "QC-0051",
+    "id": "QC-0058",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3472,7 +3599,7 @@
     ]
   },
   {
-    "id": "QC-0052",
+    "id": "QC-0059",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3490,7 +3617,7 @@
     ]
   },
   {
-    "id": "QC-0053",
+    "id": "QC-0060",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3508,7 +3635,7 @@
     ]
   },
   {
-    "id": "QC-0054",
+    "id": "QC-0061",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3526,7 +3653,7 @@
     ]
   },
   {
-    "id": "QC-0055",
+    "id": "QC-0062",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
@@ -3544,7 +3671,7 @@
     ]
   },
   {
-    "id": "QC-0056",
+    "id": "QC-0063",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
@@ -3562,7 +3689,7 @@
     ]
   },
   {
-    "id": "QC-0057",
+    "id": "QC-0064",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
@@ -3580,7 +3707,7 @@
     ]
   },
   {
-    "id": "QC-0058",
+    "id": "QC-0065",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
@@ -3599,7 +3726,7 @@
     ]
   },
   {
-    "id": "QC-0059",
+    "id": "QC-0066",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3618,7 +3745,7 @@
     ]
   },
   {
-    "id": "QC-0060",
+    "id": "QC-0067",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3636,7 +3763,7 @@
     ]
   },
   {
-    "id": "QC-0061",
+    "id": "QC-0068",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3654,7 +3781,7 @@
     ]
   },
   {
-    "id": "QC-0062",
+    "id": "QC-0069",
     "kind": "quantitative",
     "subject": "autophagy-apoptosis_inhibition",
     "predicate": "quantitative_statement",
@@ -3672,7 +3799,7 @@
     ]
   },
   {
-    "id": "QC-0063",
+    "id": "QC-0070",
     "kind": "quantitative",
     "subject": "cav3.2",
     "predicate": "quantitative_statement",
@@ -3690,7 +3817,7 @@
     ]
   },
   {
-    "id": "QC-0064",
+    "id": "QC-0071",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3708,7 +3835,7 @@
     ]
   },
   {
-    "id": "QC-0065",
+    "id": "QC-0072",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3726,7 +3853,7 @@
     ]
   },
   {
-    "id": "QC-0066",
+    "id": "QC-0073",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3744,7 +3871,7 @@
     ]
   },
   {
-    "id": "QC-0067",
+    "id": "QC-0074",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3762,7 +3889,7 @@
     ]
   },
   {
-    "id": "QC-0068",
+    "id": "QC-0075",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3781,7 +3908,7 @@
     ]
   },
   {
-    "id": "QC-0069",
+    "id": "QC-0076",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3799,7 +3926,7 @@
     ]
   },
   {
-    "id": "QC-0070",
+    "id": "QC-0077",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3817,7 +3944,7 @@
     ]
   },
   {
-    "id": "QC-0071",
+    "id": "QC-0078",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3835,7 +3962,7 @@
     ]
   },
   {
-    "id": "QC-0072",
+    "id": "QC-0079",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3853,7 +3980,7 @@
     ]
   },
   {
-    "id": "QC-0073",
+    "id": "QC-0080",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3871,7 +3998,7 @@
     ]
   },
   {
-    "id": "QC-0074",
+    "id": "QC-0081",
     "kind": "quantitative",
     "subject": "karilin-7",
     "predicate": "quantitative_statement",
@@ -3890,7 +4017,7 @@
     ]
   },
   {
-    "id": "QC-0075",
+    "id": "QC-0082",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3908,7 +4035,26 @@
     ]
   },
   {
-    "id": "QC-0076",
+    "id": "QC-0083",
+    "kind": "quantitative",
+    "subject": "microglial_biology_pain_update",
+    "predicate": "quantitative_statement",
+    "object": "Intrathecal AL002a (10 µg) at day 7 post-SNI reversed established allodynia within 48 hours, with effects lasting >14 days.",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "microglial_biology_pain_update.md",
+    "quote": "Intrathecal AL002a (10 µg) at day 7 post-SNI reversed established allodynia within 48 hours, with effects lasting >14 days.",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "48 hours",
+      "14 days"
+    ]
+  },
+  {
+    "id": "QC-0084",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3927,7 +4073,7 @@
     ]
   },
   {
-    "id": "QC-0077",
+    "id": "QC-0085",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3945,7 +4091,7 @@
     ]
   },
   {
-    "id": "QC-0078",
+    "id": "QC-0086",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3963,7 +4109,7 @@
     ]
   },
   {
-    "id": "QC-0079",
+    "id": "QC-0087",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3981,7 +4127,7 @@
     ]
   },
   {
-    "id": "QC-0080",
+    "id": "QC-0088",
     "kind": "quantitative",
     "subject": "nav1.7-1.8",
     "predicate": "quantitative_statement",
@@ -3999,7 +4145,7 @@
     ]
   },
   {
-    "id": "QC-0081",
+    "id": "QC-0089",
     "kind": "quantitative",
     "subject": "prostaglandins",
     "predicate": "quantitative_statement",
@@ -4017,7 +4163,7 @@
     ]
   },
   {
-    "id": "QC-0082",
+    "id": "QC-0090",
     "kind": "quantitative",
     "subject": "prostaglandins",
     "predicate": "quantitative_statement",
@@ -4035,7 +4181,25 @@
     ]
   },
   {
-    "id": "QC-0083",
+    "id": "QC-0091",
+    "kind": "quantitative",
+    "subject": "rbfox1",
+    "predicate": "quantitative_statement",
+    "object": "Targeting the downstream splicing event: Intrathecal injection of an antisense oligonucleotide (ASO) that selectively blocks the long Nrcam isoform partially reverses SNL‑induced allodynia and hyperalgesia within 72 hours[reference:8].",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "rbfox1.md",
+    "quote": "Targeting the downstream splicing event: Intrathecal injection of an antisense oligonucleotide (ASO) that selectively blocks the long Nrcam isoform partially reverses SNL‑induced allodynia and hyperalgesia within 72 hours[reference:8].",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "72 hours"
+    ]
+  },
+  {
+    "id": "QC-0092",
     "kind": "quantitative",
     "subject": "strategic_rd_roadmap",
     "predicate": "quantitative_statement",
@@ -4053,7 +4217,7 @@
     ]
   },
   {
-    "id": "QC-0084",
+    "id": "QC-0093",
     "kind": "quantitative",
     "subject": "wnt",
     "predicate": "quantitative_statement",
