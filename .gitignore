@@ -8,6 +8,14 @@ graphify-out/.graphify_*
 graphify-out/cost.json
 graphify-out/manifest.json
 
+# graphify working copies / backups (regeneratable)
+graphify-out/graph_backup*.json
+graphify-out/graph_merged.json
+graphify-out/graph_processed.json
+
+# agent session logs
+.claude/logs/
+
 # OneDrive sync metadata
 *.tmp
 ~$*
