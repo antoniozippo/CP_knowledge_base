@@ -57,7 +57,8 @@ def build_prompt(
         for rule in card.pathological_rules
     ]
     inbound_lines = [
-        f"- from {p.source_id}: sign={p.sign:+d} weight={p.weight:.2f} sender_state={p.sender_state:.4f}"
+        f"- from {p.source_id}: sign={p.sign:+d} weight={p.weight:.2f} "
+        f"sender_state={p.sender_state:.4f} (baseline {p.sender_baseline:.4f})"
         for p in packets
     ]
     return (
@@ -118,7 +119,8 @@ class DeltaCache:
     @staticmethod
     def signature(packets: list[InfluencePacket]) -> str:
         tuples = sorted(
-            (p.source_id, p.sign, p.weight, p.sender_state, p.tick) for p in packets
+            (p.source_id, p.sign, p.weight, p.sender_state, p.sender_baseline, p.tick)
+            for p in packets
         )
         canonical = json.dumps(tuples, sort_keys=True)
         return hashlib.sha256(canonical.encode("utf-8")).hexdigest()

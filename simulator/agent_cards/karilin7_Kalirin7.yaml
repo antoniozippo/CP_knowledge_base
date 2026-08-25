@@ -128,12 +128,6 @@ inbound_edges:
   weight: 0.5
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
-- source_id: shared_roa_rock
-  relation: antagonizes_pathway
-  sign: -1
-  weight: 0.5
-  validation_status: NO_EVIDENCE_FOUND
-  neutral_ok: false
 outbound_ids:
 - karilin7_Rac1
 - karilin7_RhoG

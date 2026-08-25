@@ -48,7 +48,7 @@ inbound_edges:
   weight: 0.9
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
-- source_id: pnn_ecm_mmp9
+- source_id: PNN_ECM_MMP9
   relation: induces
   sign: 1
   weight: 0.9
@@ -61,7 +61,6 @@ inbound_edges:
   validation_status: null
   neutral_ok: false
 outbound_ids:
-- hif1a_transcriptional_targets
 - vegf_VEGFA
 - hif1a_YC1
 - hif1a_PX478

@@ -126,15 +126,16 @@ class Orchestrator:
     def _build_packets(self, agent_id: str, tick: int) -> list[InfluencePacket]:
         packets = []
         for edge in self.cards_by_id[agent_id].inbound_edges:
-            sender_state = self.world.states.get(edge.source_id)
-            if sender_state is None:
+            sender = self.cards_by_id.get(edge.source_id)
+            if sender is None:
                 continue
             packets.append(
                 InfluencePacket(
                     source_id=edge.source_id,
                     sign=edge.sign,
                     weight=edge.weight,
-                    sender_state=sender_state,
+                    sender_state=self.world.states[edge.source_id],
+                    sender_baseline=sender.baseline_state,
                     tick=tick,
                 )
             )

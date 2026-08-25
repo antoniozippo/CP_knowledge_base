@@ -21,7 +21,7 @@ pathological_rules:
   direction: down
   magnitude_hint: null
 inbound_edges:
-- source_id: pnn_ecm_mmp9
+- source_id: PNN_ECM_MMP9
   relation: upregulates
   sign: 1
   weight: 0.9

@@ -9,7 +9,7 @@ normal_role: XPro1595 (solTNF/TNFR1 Blocker) is a drug located in systemic. Base
   activity level 0.00. It receives 1 regulatory influences and exerts 0.
 pathological_rules: []
 inbound_edges:
-- source_id: tnf_tnfr1
+- source_id: TNF_TNFR1
   relation: selectively_blocks
   sign: -1
   weight: 0.9

@@ -95,14 +95,9 @@ inbound_edges: []
 outbound_ids:
 - BDNF_TrkB_rationale_dual_roles
 - karilin7_Kalirin7
-- pv_interneuron_kcc2_dependence
-- hif1a_microglial_glycolysis
 - vegf_VEGFR2
-- jakstat_il6_gp130
 - assaying_synaptic_plasticity
 - SST_somatostatin_interneurons
-- bdnftrkb_trkb_fl
-- bdnftrkb_trkb_fc
 - GABA_apoptosis_TNF_alpha
 - RhoA_ROCK_ROCK
 rule_gap_reason: null

@@ -331,14 +331,48 @@ def select_document_nodes(graph_nodes, tier_filter=None):
     return selected
 
 
-def build_influence_edge(link):
+def build_endpoint_indexes(nodes_by_id):
+    """Card-universe indexes over document-type nodes for endpoint resolution."""
+    doc_ids = set()
+    docs_by_lower = {}
+    docs_by_norm = defaultdict(list)
+    for node_id, node in nodes_by_id.items():
+        if node.get("file_type") != "document":
+            continue
+        doc_ids.add(node_id)
+        docs_by_lower.setdefault(node_id.lower(), node_id)
+        docs_by_norm[node.get("norm_label")].append(node_id)
+    return nodes_by_id, doc_ids, docs_by_lower, docs_by_norm
+
+
+def resolve_endpoint_id(endpoint, nodes_by_id, doc_ids, docs_by_lower, docs_by_norm):
+    """Resolve a raw graph endpoint id to a card-producing id.
+
+    Order: exact match, then case-insensitive id match, then the endpoint's
+    own node norm_label matched against document norm_labels (deterministic
+    lowest id on ties). Returns None when no document counterpart exists.
+    """
+    if endpoint in doc_ids:
+        return endpoint
+    case_hit = docs_by_lower.get(endpoint.lower())
+    if case_hit is not None:
+        return case_hit
+    node = nodes_by_id.get(endpoint)
+    if node is not None:
+        norm_hits = sorted(docs_by_norm.get(node.get("norm_label"), []))
+        if norm_hits:
+            return norm_hits[0]
+    return None
+
+
+def build_influence_edge(link, source_id=None):
     sign = int(link.get("sign") or 0)
     status = link.get("validation_status")
     neutral_ok = False
     if sign == 0:
         neutral_ok = True
     return InfluenceEdge(
-        source_id=link["source"],
+        source_id=source_id if source_id is not None else link["source"],
         relation=link["relation"],
         sign=sign,
         weight=weight_for(link.get("confidence")),
@@ -348,11 +382,18 @@ def build_influence_edge(link):
 
 
 def build_card(node, nodes_by_id, inbound_links, outbound_links, prepared_claims,
-               verdict_map, hub_enrich=False, vault_dir=None):
+               verdict_map, endpoint_ctx=None, hub_enrich=False, vault_dir=None):
     label = node["label"]
     entity_type = node["entity_type"]
     compartment = node["compartment"]
     baseline_state = baseline_for(entity_type)
+
+    ctx = endpoint_ctx or (None,) * 4
+
+    def resolve(endpoint):
+        if ctx[0] is None:
+            return endpoint
+        return resolve_endpoint_id(endpoint, *ctx)
 
     # neutral links are excluded unless flagged REFUTED/MIXED by the review
     kept_inbound = [
@@ -360,8 +401,21 @@ def build_card(node, nodes_by_id, inbound_links, outbound_links, prepared_claims
         if link.get("sign", 0) != 0
         or link.get("validation_status") in NEUTRAL_KEEP_STATUSES
     ]
-    inbound_edges = [build_influence_edge(link) for link in kept_inbound]
-    outbound_ids = [link["target"] for link in outbound_links]
+    inbound_edges = []
+    unresolved_drops = 0
+    for link in kept_inbound:
+        source = resolve(link["source"])
+        if source is None:
+            unresolved_drops += 1
+            continue
+        inbound_edges.append(build_influence_edge(link, source_id=source))
+    outbound_ids = []
+    for link in outbound_links:
+        target = resolve(link["target"])
+        if target is None:
+            unresolved_drops += 1
+            continue
+        outbound_ids.append(target)
     rules, stats_delta = build_rules(
         node, label, outbound_links, nodes_by_id, prepared_claims, verdict_map
     )
@@ -407,7 +461,10 @@ def build_card(node, nodes_by_id, inbound_links, outbound_links, prepared_claims
             )[:NORMAL_ROLE_MAX_CHARS]
             card = AgentCard(**payload)
 
-    return card, stats_delta
+    return card, {
+        **stats_delta,
+        "unresolved_endpoint_drops": unresolved_drops,
+    }
 
 
 def build_cards(graph, claims, verdicts, *, hub_enrich=False, vault_dir=None,
@@ -430,12 +487,14 @@ def build_cards(graph, claims, verdicts, *, hub_enrich=False, vault_dir=None,
     index = build_label_index(nodes)
     prepared_claims = prepare_edge_claims(claims, index)
     verdict_map = build_verdict_map(verdicts)
+    endpoint_ctx = build_endpoint_indexes(nodes_by_id)
 
     cards = []
     stats = {
         "dropped_refuted_rules": 0,
         "mixed_annotated": 0,
         "dropped_rule_details": [],
+        "unresolved_endpoint_drops": 0,
     }
     for node in select_document_nodes(nodes, tier_filter=tier_filter):
         card, delta = build_card(
@@ -445,12 +504,14 @@ def build_cards(graph, claims, verdicts, *, hub_enrich=False, vault_dir=None,
             [l for l in outbound_by_source.get(node["id"], []) if l.get("sign", 0) != 0],
             prepared_claims,
             verdict_map,
+            endpoint_ctx=endpoint_ctx,
             hub_enrich=hub_enrich,
             vault_dir=vault_dir,
         )
         cards.append(card)
         stats["dropped_refuted_rules"] += delta["dropped_refuted_rules"]
         stats["mixed_annotated"] += delta["mixed_annotated"]
+        stats["unresolved_endpoint_drops"] += delta["unresolved_endpoint_drops"]
         stats["dropped_rule_details"].extend(delta["dropped_rule_details"])
     return cards, stats
 
@@ -523,6 +584,7 @@ def build_manifest(entries, graph_sha256, stats, cards):
         "card_set_hash": card_set_hash,
         "dropped_refuted_rules": stats["dropped_refuted_rules"],
         "mixed_annotated": stats["mixed_annotated"],
+        "unresolved_endpoint_drops": stats.get("unresolved_endpoint_drops", 0),
     }
 
 

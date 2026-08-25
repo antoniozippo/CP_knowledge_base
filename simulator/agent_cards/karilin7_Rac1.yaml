@@ -6,7 +6,7 @@ tier: MID
 community: 7
 baseline_state: 0.5
 normal_role: Rac1 GTPase is a concept located in other. Baseline activity level 0.50.
-  It receives 3 regulatory influences and exerts 2.
+  It receives 2 regulatory influences and exerts 2.
 pathological_rules:
 - rule_id: RULE-karilin7_Rac1-01
   description: Rac1 GTPase activates PAK (Rac1 Effector Kinase)
@@ -23,12 +23,6 @@ pathological_rules:
 inbound_edges:
 - source_id: RhoA_ROCK_RhoA
   relation: functionally_antagonistic
-  sign: -1
-  weight: 0.5
-  validation_status: NO_EVIDENCE_FOUND
-  neutral_ok: false
-- source_id: shared_roa_rock
-  relation: antagonizes_via_Rac1
   sign: -1
   weight: 0.5
   validation_status: NO_EVIDENCE_FOUND

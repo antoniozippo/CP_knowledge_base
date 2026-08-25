@@ -8,19 +8,7 @@ baseline_state: 0.5
 normal_role: <LLM_ENRICH>
 pathological_rules: []
 inbound_edges:
-- source_id: bdnftrkb_trkb_fl
-  relation: downregulates
-  sign: -1
-  weight: 0.9
-  validation_status: MIXED
-  neutral_ok: false
-- source_id: ana12_kcc2_preservation
-  relation: preserves
-  sign: 1
-  weight: 0.9
-  validation_status: CONFIRMED
-  neutral_ok: false
-- source_id: gaba_apoptosis_calpain
+- source_id: GABA_apoptosis_Calpain
   relation: cleaves
   sign: -1
   weight: 0.9
@@ -31,12 +19,6 @@ inbound_edges:
   sign: -1
   weight: 0.5
   validation_status: MIXED
-  neutral_ok: false
-- source_id: jakstat_il6_gp130
-  relation: downregulates_via_stat3
-  sign: -1
-  weight: 0.9
-  validation_status: EXTENDED
   neutral_ok: false
 outbound_ids: []
 rule_gap_reason: all candidate rules refuted or none found

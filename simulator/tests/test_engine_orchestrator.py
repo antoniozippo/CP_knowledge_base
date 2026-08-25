@@ -194,9 +194,13 @@ def test_naive_with_seeds_rejected():
 
 
 def test_a_naive_guardrail_states_bounded_and_pain_below_threshold():
-    logs = Orchestrator(fixture_cards(), naive_scenario(40)).run()
+    cards = fixture_cards()
+    orch = Orchestrator(cards, naive_scenario(40))
+    logs = orch.run()
     assert len(logs) == 40
+    baselines = {c.id: c.baseline_state for c in cards}
     for log in logs:
+        assert log.world_after.states == baselines
         for state in log.world_after.states.values():
             assert 0.0 <= state <= 1.0
         assert log.world_after.readouts.pain_score < 0.2

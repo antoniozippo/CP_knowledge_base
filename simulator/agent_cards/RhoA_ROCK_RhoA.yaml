@@ -6,7 +6,7 @@ tier: MID
 community: 7
 baseline_state: 0.5
 normal_role: RhoA GTPase is a molecule located in other. Baseline activity level 0.50.
-  It receives 1 regulatory influences and exerts 7.
+  It receives 1 regulatory influences and exerts 6.
 pathological_rules:
 - rule_id: RULE-RhoA_ROCK_RhoA-01
   description: 'RhoA GTPase rationale for Rationale: RhoA/ROCK has context-dependent
@@ -65,8 +65,7 @@ outbound_ids:
 - karilin7_Kalirin7
 - karilin7_Rac1
 - RhoA_ROCK_ROCK
-- rhoa_rock_lpa_demyelination
 - RhoA_ROCK_simvastatin
-- nogoa_ngr1_ngr1
+- NogoA_NgR1_NgR1
 rule_gap_reason: null
 source_note: RhoA-ROCK.md

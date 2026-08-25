@@ -7,7 +7,7 @@ community: 2
 baseline_state: 0.5
 normal_role: Quadruple-Pronged Therapeutic Strategy for Established Neuropathic Pain
   is a concept located in other. Baseline activity level 0.50. It receives 0 regulatory
-  influences and exerts 1.
+  influences and exerts 0.
 pathological_rules:
 - rule_id: RULE-proposal_cpt_quadruple_treatment-01
   description: Quadruple-Pronged Therapeutic Strategy for Established Neuropathic
@@ -18,7 +18,6 @@ pathological_rules:
   direction: up
   magnitude_hint: null
 inbound_edges: []
-outbound_ids:
-- proposal_cpt_spinal_disinhibition
+outbound_ids: []
 rule_gap_reason: null
 source_note: proposals/proposal_chronic_pain_treatment.md

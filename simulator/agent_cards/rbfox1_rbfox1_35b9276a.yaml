@@ -7,7 +7,7 @@ community: 14
 baseline_state: 0.5
 normal_role: Rbfox1 (A2BP1) RNA-Binding Splicing Regulator is a molecule located in
   other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts
-  2.
+  1.
 pathological_rules:
 - rule_id: RULE-rbfox1_rbfox1-01
   description: Rbfox1 (A2BP1) RNA-Binding Splicing Regulator prevents when expressed
@@ -25,7 +25,6 @@ pathological_rules:
   magnitude_hint: null
 inbound_edges: []
 outbound_ids:
-- rbfox1_nrcam_exon10
 - rbfox1_AAV5_Rbfox1
 rule_gap_reason: null
 source_note: rbfox1.md

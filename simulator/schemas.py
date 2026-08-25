@@ -96,6 +96,7 @@ class InfluencePacket(_StrictModel):
     sign: int = Field(ge=-1, le=1)
     weight: float = Field(ge=0.0, le=1.0)
     sender_state: float = Field(ge=0.0, le=1.0)
+    sender_baseline: float = Field(default=0.5, ge=0.0, le=1.0)
     tick: int = Field(ge=0)
 
 
