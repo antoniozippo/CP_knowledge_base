@@ -69,10 +69,12 @@ README_PREFIX = "readme"
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
 MARKDOWN_PREFIX_RE = re.compile(r"^\s*(?:[#>]+|[-*+]|\d+[.)])\s+")
 MARKDOWN_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+MARKDOWN_BLOCK_START_RE = re.compile(r"^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>\s)")
 
 ABBREVIATION_ENDINGS = {
     "al", "eg", "ie", "vs", "cf", "fig", "eq", "eqs", "approx",
     "dr", "no", "nos", "pp", "ed", "eds", "ca", "ref", "seq", "st",
+    "ip", "sc", "po", "iv",
 }
 
 
@@ -126,6 +128,9 @@ def iter_paragraphs(text):
             continue
         if in_fence:
             continue
+        if block and MARKDOWN_BLOCK_START_RE.match(raw):
+            yield " ".join(block)
+            block = []
         cleaned = clean_line(raw)
         if not cleaned:
             if block:

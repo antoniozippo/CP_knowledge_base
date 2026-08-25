@@ -2575,24 +2575,6 @@
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
-    "object": "Systemic treatment: Reduces established mechanical allodynia observed 7–28 days after partial sciatic nerve ligation in wild‑type mice.",
-    "sign": 0,
-    "confidence": "EXTRACTED",
-    "source_note": "Bradykinin.md",
-    "quote": "Systemic treatment: Reduces established mechanical allodynia observed 7–28 days after partial sciatic nerve ligation in wild‑type mice.",
-    "citation_status": "UNVERIFIED",
-    "priority": "P3",
-    "priority_flag": null,
-    "theme_hint": null,
-    "value_tokens": [
-      "28 days"
-    ]
-  },
-  {
-    "id": "QC-0004",
-    "kind": "quantitative",
-    "subject": "Bradykinin",
-    "predicate": "quantitative_statement",
     "object": "Design: After blinded washout of prior DNP treatment, patients were randomised 1:1 to start with either fulmetibant (450 mg once daily) or placebo in the first 4‑week treatment period, and vice versa in the second period.",
     "sign": 0,
     "confidence": "EXTRACTED",
@@ -2607,7 +2589,7 @@
     ]
   },
   {
-    "id": "QC-0005",
+    "id": "QC-0004",
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
@@ -2625,7 +2607,7 @@
     ]
   },
   {
-    "id": "QC-0006",
+    "id": "QC-0005",
     "kind": "quantitative",
     "subject": "Bradykinin",
     "predicate": "quantitative_statement",
@@ -2643,7 +2625,7 @@
     ]
   },
   {
-    "id": "QC-0007",
+    "id": "QC-0006",
     "kind": "quantitative",
     "subject": "CB2",
     "predicate": "quantitative_statement",
@@ -2661,51 +2643,34 @@
     ]
   },
   {
-    "id": "QC-0008",
+    "id": "QC-0007",
     "kind": "quantitative",
     "subject": "CB2",
     "predicate": "quantitative_statement",
-    "object": "In wild‑type mice, LY2828360 (3 mg/kg/day i.p.",
+    "object": "In wild‑type mice, LY2828360 (3 mg/kg/day i.p. × 12 days) suppressed paclitaxel‑induced neuropathic pain without producing tolerance.",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "CB2.md",
-    "quote": "In wild‑type mice, LY2828360 (3 mg/kg/day i.p.",
+    "quote": "In wild‑type mice, LY2828360 (3 mg/kg/day i.p. × 12 days) suppressed paclitaxel‑induced neuropathic pain without producing tolerance.",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
     "theme_hint": null,
     "value_tokens": [
-      "3 mg/kg"
-    ]
-  },
-  {
-    "id": "QC-0009",
-    "kind": "quantitative",
-    "subject": "CB2",
-    "predicate": "quantitative_statement",
-    "object": "× 12 days) suppressed paclitaxel‑induced neuropathic pain without producing tolerance.",
-    "sign": 0,
-    "confidence": "EXTRACTED",
-    "source_note": "CB2.md",
-    "quote": "× 12 days) suppressed paclitaxel‑induced neuropathic pain without producing tolerance.",
-    "citation_status": "UNVERIFIED",
-    "priority": "P3",
-    "priority_flag": null,
-    "theme_hint": null,
-    "value_tokens": [
+      "3 mg/kg",
       "12 days"
     ]
   },
   {
-    "id": "QC-0010",
+    "id": "QC-0008",
     "kind": "quantitative",
     "subject": "CCL21-CXCR3",
     "predicate": "quantitative_statement",
-    "object": "In the CCI model in mice, systemic or intrathecal administration of AMG487 (3 mg/kg, i.p., daily for 7 days) significantly: Reverses mechanical allodynia and thermal hyperalgesia in a dose‑dependent manner.",
+    "object": "In the CCI model in mice, systemic or intrathecal administration of AMG487 (3 mg/kg, i.p., daily for 7 days) significantly:",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "CCL21-CXCR3.md",
-    "quote": "In the CCI model in mice, systemic or intrathecal administration of AMG487 (3 mg/kg, i.p., daily for 7 days) significantly: Reverses mechanical allodynia and thermal hyperalgesia in a dose‑dependent manner.",
+    "quote": "In the CCI model in mice, systemic or intrathecal administration of AMG487 (3 mg/kg, i.p., daily for 7 days) significantly:",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -2716,7 +2681,7 @@
     ]
   },
   {
-    "id": "QC-0011",
+    "id": "QC-0009",
     "kind": "quantitative",
     "subject": "CCL21-CXCR3",
     "predicate": "quantitative_statement",
@@ -2734,7 +2699,7 @@
     ]
   },
   {
-    "id": "QC-0012",
+    "id": "QC-0010",
     "kind": "quantitative",
     "subject": "CSF1-CSF1R",
     "predicate": "quantitative_statement",
@@ -2752,7 +2717,7 @@
     ]
   },
   {
-    "id": "QC-0013",
+    "id": "QC-0011",
     "kind": "quantitative",
     "subject": "CSF1-CSF1R",
     "predicate": "quantitative_statement",
@@ -2770,7 +2735,7 @@
     ]
   },
   {
-    "id": "QC-0014",
+    "id": "QC-0012",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2788,7 +2753,7 @@
     ]
   },
   {
-    "id": "QC-0015",
+    "id": "QC-0013",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2807,7 +2772,7 @@
     ]
   },
   {
-    "id": "QC-0016",
+    "id": "QC-0014",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2825,7 +2790,7 @@
     ]
   },
   {
-    "id": "QC-0017",
+    "id": "QC-0015",
     "kind": "quantitative",
     "subject": "CXCL12-CXCR4",
     "predicate": "quantitative_statement",
@@ -2843,7 +2808,7 @@
     ]
   },
   {
-    "id": "QC-0018",
+    "id": "QC-0016",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2861,7 +2826,7 @@
     ]
   },
   {
-    "id": "QC-0019",
+    "id": "QC-0017",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2879,7 +2844,7 @@
     ]
   },
   {
-    "id": "QC-0020",
+    "id": "QC-0018",
     "kind": "quantitative",
     "subject": "Connexin43",
     "predicate": "quantitative_statement",
@@ -2897,7 +2862,7 @@
     ]
   },
   {
-    "id": "QC-0021",
+    "id": "QC-0019",
     "kind": "quantitative",
     "subject": "Endothelin",
     "predicate": "quantitative_statement",
@@ -2917,7 +2882,7 @@
     ]
   },
   {
-    "id": "QC-0022",
+    "id": "QC-0020",
     "kind": "quantitative",
     "subject": "Endothelin",
     "predicate": "quantitative_statement",
@@ -2935,7 +2900,7 @@
     ]
   },
   {
-    "id": "QC-0023",
+    "id": "QC-0021",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2954,7 +2919,7 @@
     ]
   },
   {
-    "id": "QC-0024",
+    "id": "QC-0022",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2972,7 +2937,7 @@
     ]
   },
   {
-    "id": "QC-0025",
+    "id": "QC-0023",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -2990,7 +2955,7 @@
     ]
   },
   {
-    "id": "QC-0026",
+    "id": "QC-0024",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -3008,15 +2973,15 @@
     ]
   },
   {
-    "id": "QC-0027",
+    "id": "QC-0025",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
-    "object": "Systemic (intraperitoneal) or intrathecal ceftriaxone administration: Significantly increases spinal GLT‑1 protein expression and glutamate uptake activity within 3–7 days of treatment.",
+    "object": "Significantly increases spinal GLT‑1 protein expression and glutamate uptake activity within 3–7 days of treatment.",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "GLT-1.md",
-    "quote": "Systemic (intraperitoneal) or intrathecal ceftriaxone administration: Significantly increases spinal GLT‑1 protein expression and glutamate uptake activity within 3–7 days of treatment.",
+    "quote": "Significantly increases spinal GLT‑1 protein expression and glutamate uptake activity within 3–7 days of treatment.",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3026,7 +2991,7 @@
     ]
   },
   {
-    "id": "QC-0028",
+    "id": "QC-0026",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -3044,7 +3009,7 @@
     ]
   },
   {
-    "id": "QC-0029",
+    "id": "QC-0027",
     "kind": "quantitative",
     "subject": "GLT-1",
     "predicate": "quantitative_statement",
@@ -3062,7 +3027,7 @@
     ]
   },
   {
-    "id": "QC-0030",
+    "id": "QC-0028",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3080,7 +3045,7 @@
     ]
   },
   {
-    "id": "QC-0031",
+    "id": "QC-0029",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3099,7 +3064,7 @@
     ]
   },
   {
-    "id": "QC-0032",
+    "id": "QC-0030",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3118,7 +3083,7 @@
     ]
   },
   {
-    "id": "QC-0033",
+    "id": "QC-0031",
     "kind": "quantitative",
     "subject": "GM-CSF",
     "predicate": "quantitative_statement",
@@ -3137,7 +3102,7 @@
     ]
   },
   {
-    "id": "QC-0034",
+    "id": "QC-0032",
     "kind": "quantitative",
     "subject": "HO-1_CO",
     "predicate": "quantitative_statement",
@@ -3155,7 +3120,7 @@
     ]
   },
   {
-    "id": "QC-0035",
+    "id": "QC-0033",
     "kind": "quantitative",
     "subject": "KCC2",
     "predicate": "quantitative_statement",
@@ -3173,7 +3138,7 @@
     ]
   },
   {
-    "id": "QC-0036",
+    "id": "QC-0034",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3192,7 +3157,7 @@
     ]
   },
   {
-    "id": "QC-0037",
+    "id": "QC-0035",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3214,7 +3179,7 @@
     ]
   },
   {
-    "id": "QC-0038",
+    "id": "QC-0036",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3232,7 +3197,7 @@
     ]
   },
   {
-    "id": "QC-0039",
+    "id": "QC-0037",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3252,7 +3217,7 @@
     ]
   },
   {
-    "id": "QC-0040",
+    "id": "QC-0038",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3270,7 +3235,7 @@
     ]
   },
   {
-    "id": "QC-0041",
+    "id": "QC-0039",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3288,7 +3253,7 @@
     ]
   },
   {
-    "id": "QC-0042",
+    "id": "QC-0040",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3307,7 +3272,7 @@
     ]
   },
   {
-    "id": "QC-0043",
+    "id": "QC-0041",
     "kind": "quantitative",
     "subject": "KCC2_enhancers_new",
     "predicate": "quantitative_statement",
@@ -3325,15 +3290,15 @@
     ]
   },
   {
-    "id": "QC-0044",
+    "id": "QC-0042",
     "kind": "quantitative",
     "subject": "P2X7",
     "predicate": "quantitative_statement",
-    "object": "Activation and unique properties: Low ATP affinity: P2X7 requires high micromolar to millimolar concentrations of ATP for activation (EC₅₀ ≈ 300 μM to >1 mM), which are only reached under pathological conditions of cellular damage, stress, or intense neuronal activity.",
+    "object": "Low ATP affinity: P2X7 requires high micromolar to millimolar concentrations of ATP for activation (EC₅₀ ≈ 300 μM to >1 mM), which are only reached under pathological conditions of cellular damage, stress, or intense neuronal activity.",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "P2X7.md",
-    "quote": "Activation and unique properties: Low ATP affinity: P2X7 requires high micromolar to millimolar concentrations of ATP for activation (EC₅₀ ≈ 300 μM to >1 mM), which are only reached under pathological conditions of cellular damage, stress, or intense neuronal activity.",
+    "quote": "Low ATP affinity: P2X7 requires high micromolar to millimolar concentrations of ATP for activation (EC₅₀ ≈ 300 μM to >1 mM), which are only reached under pathological conditions of cellular damage, stress, or intense neuronal activity.",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3344,7 +3309,7 @@
     ]
   },
   {
-    "id": "QC-0045",
+    "id": "QC-0043",
     "kind": "quantitative",
     "subject": "PPARy",
     "predicate": "quantitative_statement",
@@ -3362,7 +3327,7 @@
     ]
   },
   {
-    "id": "QC-0046",
+    "id": "QC-0044",
     "kind": "quantitative",
     "subject": "PPARy",
     "predicate": "quantitative_statement",
@@ -3380,7 +3345,7 @@
     ]
   },
   {
-    "id": "QC-0047",
+    "id": "QC-0045",
     "kind": "quantitative",
     "subject": "S1P",
     "predicate": "quantitative_statement",
@@ -3398,7 +3363,7 @@
     ]
   },
   {
-    "id": "QC-0048",
+    "id": "QC-0046",
     "kind": "quantitative",
     "subject": "SPM_resolution_mediators",
     "predicate": "quantitative_statement",
@@ -3416,7 +3381,7 @@
     ]
   },
   {
-    "id": "QC-0049",
+    "id": "QC-0047",
     "kind": "quantitative",
     "subject": "SPM_resolution_mediators",
     "predicate": "quantitative_statement",
@@ -3434,7 +3399,7 @@
     ]
   },
   {
-    "id": "QC-0050",
+    "id": "QC-0048",
     "kind": "quantitative",
     "subject": "Skill_neuroscientific_insights_seeker",
     "predicate": "quantitative_statement",
@@ -3452,7 +3417,7 @@
     ]
   },
   {
-    "id": "QC-0051",
+    "id": "QC-0049",
     "kind": "quantitative",
     "subject": "TLR2",
     "predicate": "quantitative_statement",
@@ -3471,15 +3436,15 @@
     ]
   },
   {
-    "id": "QC-0052",
+    "id": "QC-0050",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
-    "object": "Calcium entry through TRPV1 is critical both for the acute excitation of nociceptors and for the calcium‑dependent desensitisation that limits sustained channel activity.[reference:7][reference:8] Endogenous activators: Noxious heat (threshold ≈ 43 °C) Extracellular protons (pH < 6) Endovanilloids (anandamide, N‑arachidonoyl‑dopamine, 12‑ and 15‑HPETE) Depolarisation‑induced activation Tissue dist",
+    "object": "Tissue distribution: TRPV1 is expressed in approximately 60–70% of small‑ and medium‑diameter DRG neurons (C‑fibre and Aδ‑fibre nociceptors).",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TRPV1.md",
-    "quote": "Calcium entry through TRPV1 is critical both for the acute excitation of nociceptors and for the calcium‑dependent desensitisation that limits sustained channel activity.[reference:7][reference:8] Endogenous activators: Noxious heat (threshold ≈ 43 °C) Extracellular protons (pH < 6) Endovanilloids (anandamide, N‑arachidonoyl‑dopamine, 12‑ and 15‑HPETE) Depolarisation‑induced activation Tissue distribution: TRPV1 is expressed in approximately 60–70% of small‑ and medium‑diameter DRG neurons (C‑fibre and Aδ‑fibre nociceptors).",
+    "quote": "Tissue distribution: TRPV1 is expressed in approximately 60–70% of small‑ and medium‑diameter DRG neurons (C‑fibre and Aδ‑fibre nociceptors).",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3489,15 +3454,15 @@
     ]
   },
   {
-    "id": "QC-0053",
+    "id": "QC-0051",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
-    "object": "This is the basis for the clinical use of capsaicin 8% patches.[reference:38][reference:39] Capsaicin‑induced desensitisation involves: calcium‑dependent calmodulin binding to the TRPV1 C‑terminus; activation of the phosphatase calcineurin, which dephosphorylates TRPV1; depletion of neuropeptides (substance P, CGRP); and, at high concentrations, reversible nerve terminal degeneration (defunctional",
+    "object": "This is the basis for the clinical use of capsaicin 8% patches.[reference:38][reference:39]",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TRPV1.md",
-    "quote": "This is the basis for the clinical use of capsaicin 8% patches.[reference:38][reference:39] Capsaicin‑induced desensitisation involves: calcium‑dependent calmodulin binding to the TRPV1 C‑terminus; activation of the phosphatase calcineurin, which dephosphorylates TRPV1; depletion of neuropeptides (substance P, CGRP); and, at high concentrations, reversible nerve terminal degeneration (defunctionalisation).[reference:40] Presynaptic capsaicin desensitisation in the spinal dorsal horn downregulates both synchronous glutamate release and postsynaptic responses, transiently increasing the pain threshold.[reference:41]",
+    "quote": "This is the basis for the clinical use of capsaicin 8% patches.[reference:38][reference:39]",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3507,26 +3472,25 @@
     ]
   },
   {
-    "id": "QC-0054",
+    "id": "QC-0052",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
-    "object": "Capsaicin 8% patch (Qutenza) : FDA‑approved for neuropathic pain associated with postherpetic neuralgia (PHN) and diabetic peripheral neuropathy (DPN) of the feet.[reference:49] A single 30‑ to 60‑minute application produces analgesia lasting up to 12 weeks.",
+    "object": "Capsaicin 8% patch (Qutenza) :",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TRPV1.md",
-    "quote": "Capsaicin 8% patch (Qutenza) : FDA‑approved for neuropathic pain associated with postherpetic neuralgia (PHN) and diabetic peripheral neuropathy (DPN) of the feet.[reference:49] A single 30‑ to 60‑minute application produces analgesia lasting up to 12 weeks.",
+    "quote": "Capsaicin 8% patch (Qutenza) :",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
     "theme_hint": null,
     "value_tokens": [
-      "8%",
-      "12 weeks"
+      "8%"
     ]
   },
   {
-    "id": "QC-0055",
+    "id": "QC-0053",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
@@ -3544,15 +3508,15 @@
     ]
   },
   {
-    "id": "QC-0056",
+    "id": "QC-0054",
     "kind": "quantitative",
     "subject": "TRPV1",
     "predicate": "quantitative_statement",
-    "object": "ACD440 (topical TRPV1 antagonist) : A first‑in‑class, topical TRPV1 antagonist (gel formulation) in Phase II clinical development for chronic peripheral neuropathic pain.[reference:51][reference:52] Phase IIa data demonstrated that ACD440 reduces temperature‑evoked pain by approximately 50%, a clinically relevant reduction.",
+    "object": "Phase IIa data demonstrated that ACD440 reduces temperature‑evoked pain by approximately 50%, a clinically relevant reduction.",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TRPV1.md",
-    "quote": "ACD440 (topical TRPV1 antagonist) : A first‑in‑class, topical TRPV1 antagonist (gel formulation) in Phase II clinical development for chronic peripheral neuropathic pain.[reference:51][reference:52] Phase IIa data demonstrated that ACD440 reduces temperature‑evoked pain by approximately 50%, a clinically relevant reduction.",
+    "quote": "Phase IIa data demonstrated that ACD440 reduces temperature‑evoked pain by approximately 50%, a clinically relevant reduction.",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3562,15 +3526,15 @@
     ]
   },
   {
-    "id": "QC-0057",
+    "id": "QC-0055",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
-    "object": "Zopiclone, already clinically used as a hypnotic, was shown to alleviate neuropathic pain in the SNI model by upregulating TSPO and preventing pyroptosis via the AMPK‑PGC‑1α pathway.[reference:29] Etifoxine (Stresam) : Etifoxine (50 mg/kg, twice daily) post‑sciatic nerve crush significantly alleviated mechanical and thermal hypersensitivity and improved motor dysfunction in rats.[reference:30] Eti",
+    "object": "Etifoxine (50 mg/kg, twice daily) post‑sciatic nerve crush significantly alleviated mechanical and thermal hypersensitivity and improved motor dysfunction in rats.[reference:30]",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TSPO.md",
-    "quote": "Zopiclone, already clinically used as a hypnotic, was shown to alleviate neuropathic pain in the SNI model by upregulating TSPO and preventing pyroptosis via the AMPK‑PGC‑1α pathway.[reference:29] Etifoxine (Stresam) : Etifoxine (50 mg/kg, twice daily) post‑sciatic nerve crush significantly alleviated mechanical and thermal hypersensitivity and improved motor dysfunction in rats.[reference:30] Etifoxine treatment reduced microglial presence and pro‑inflammatory cytokine transcription (TNF‑α, IL‑6, IL‑1β) in the DRG and spinal cord.[reference:31] Etifoxine prevented the decline in mitochondrial respiration (non‑phosphorylation, ATP‑linked, and maximal respiration) after mPTP induction by Ca²⁺, indicating protection of mitochondrial function under stress.[reference:32] In a monoarthritis model, curative and preventive treatment with etifoxine (50 mg/kg) efficiently reduced neuropathic pain symptoms, accompanied by reduced microglial activation, lower pro‑inflammatory mediator levels, amplified GABAergic inhibition, and prevention of PGE₂‑induced glycinergic disinhibition.[reference:33] Genetic Approaches: TSPO overexpression lentivirus (LV‑TSPO) : Intraspinal injection of LV‑TSPO to overexpress TSPO in the spinal dorsal horn relieved the development of chronic neuropathic pain in the SNL model, while TSPO‑inhibited lentivirus (LV‑shTSPO) did not.[reference:34] Mendelian randomization: Analysis of GWAS data indicated that genetically predicted increased TSPO expression is linked to pain relief, providing human genetic evidence for TSPO's protective role.[reference:35] Diabetic Peripheral Neuropathy: In DPN rats, TSPO agonist Ro5‑4864 alleviated mechanical allodynia, increased myelin sheath thickness, improved Schwann cell function and regeneration, restored autophagic flux, and activated the Nrf2‑dependent antioxidant system.",
+    "quote": "Etifoxine (50 mg/kg, twice daily) post‑sciatic nerve crush significantly alleviated mechanical and thermal hypersensitivity and improved motor dysfunction in rats.[reference:30]",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3580,7 +3544,25 @@
     ]
   },
   {
-    "id": "QC-0058",
+    "id": "QC-0056",
+    "kind": "quantitative",
+    "subject": "TSPO",
+    "predicate": "quantitative_statement",
+    "object": "In a monoarthritis model, curative and preventive treatment with etifoxine (50 mg/kg) efficiently reduced neuropathic pain symptoms, accompanied by reduced microglial activation, lower pro‑inflammatory mediator levels, amplified GABAergic inhibition, and prevention of PGE₂‑induced glycinergic disinhibition.[reference:33]",
+    "sign": 0,
+    "confidence": "EXTRACTED",
+    "source_note": "TSPO.md",
+    "quote": "In a monoarthritis model, curative and preventive treatment with etifoxine (50 mg/kg) efficiently reduced neuropathic pain symptoms, accompanied by reduced microglial activation, lower pro‑inflammatory mediator levels, amplified GABAergic inhibition, and prevention of PGE₂‑induced glycinergic disinhibition.[reference:33]",
+    "citation_status": "UNVERIFIED",
+    "priority": "P3",
+    "priority_flag": null,
+    "theme_hint": null,
+    "value_tokens": [
+      "50 mg/kg"
+    ]
+  },
+  {
+    "id": "QC-0057",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
@@ -3598,15 +3580,15 @@
     ]
   },
   {
-    "id": "QC-0059",
+    "id": "QC-0058",
     "kind": "quantitative",
     "subject": "TSPO",
     "predicate": "quantitative_statement",
-    "object": "This heterogeneity implies that TSPO‑targeting drugs may have region‑ and cell‑type‑specific effects, which could be therapeutically exploited or could complicate dosing.[reference:51][reference:52] Sex Differences: TSPO upregulation shows different temporal dynamics between males and females after nerve injury, with broader upregulation at 4 weeks in males and at 10 weeks in females.",
+    "object": "Sex Differences: TSPO upregulation shows different temporal dynamics between males and females after nerve injury, with broader upregulation at 4 weeks in males and at 10 weeks in females.",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "TSPO.md",
-    "quote": "This heterogeneity implies that TSPO‑targeting drugs may have region‑ and cell‑type‑specific effects, which could be therapeutically exploited or could complicate dosing.[reference:51][reference:52] Sex Differences: TSPO upregulation shows different temporal dynamics between males and females after nerve injury, with broader upregulation at 4 weeks in males and at 10 weeks in females.",
+    "quote": "Sex Differences: TSPO upregulation shows different temporal dynamics between males and females after nerve injury, with broader upregulation at 4 weeks in males and at 10 weeks in females.",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3617,7 +3599,7 @@
     ]
   },
   {
-    "id": "QC-0060",
+    "id": "QC-0059",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3636,7 +3618,7 @@
     ]
   },
   {
-    "id": "QC-0061",
+    "id": "QC-0060",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3654,7 +3636,7 @@
     ]
   },
   {
-    "id": "QC-0062",
+    "id": "QC-0061",
     "kind": "quantitative",
     "subject": "ana-12",
     "predicate": "quantitative_statement",
@@ -3672,7 +3654,7 @@
     ]
   },
   {
-    "id": "QC-0063",
+    "id": "QC-0062",
     "kind": "quantitative",
     "subject": "autophagy-apoptosis_inhibition",
     "predicate": "quantitative_statement",
@@ -3690,7 +3672,7 @@
     ]
   },
   {
-    "id": "QC-0064",
+    "id": "QC-0063",
     "kind": "quantitative",
     "subject": "cav3.2",
     "predicate": "quantitative_statement",
@@ -3708,7 +3690,7 @@
     ]
   },
   {
-    "id": "QC-0065",
+    "id": "QC-0064",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3726,15 +3708,15 @@
     ]
   },
   {
-    "id": "QC-0066",
+    "id": "QC-0065",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
-    "object": "Therapeutic implications: LDHA inhibition: Reducing lactate production with the LDHA inhibitor FX11 (intrathecal, 10 µg) eliminates H3K18la at pain gene promoters and reverses established mechanical allodynia in SNI mice within 72 hours (2024).",
+    "object": "LDHA inhibition: Reducing lactate production with the LDHA inhibitor FX11 (intrathecal, 10 µg) eliminates H3K18la at pain gene promoters and reverses established mechanical allodynia in SNI mice within 72 hours (2024).",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "epigenetic_mechanisms_pain.md",
-    "quote": "Therapeutic implications: LDHA inhibition: Reducing lactate production with the LDHA inhibitor FX11 (intrathecal, 10 µg) eliminates H3K18la at pain gene promoters and reverses established mechanical allodynia in SNI mice within 72 hours (2024).",
+    "quote": "LDHA inhibition: Reducing lactate production with the LDHA inhibitor FX11 (intrathecal, 10 µg) eliminates H3K18la at pain gene promoters and reverses established mechanical allodynia in SNI mice within 72 hours (2024).",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -3744,7 +3726,7 @@
     ]
   },
   {
-    "id": "QC-0067",
+    "id": "QC-0066",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3762,7 +3744,7 @@
     ]
   },
   {
-    "id": "QC-0068",
+    "id": "QC-0067",
     "kind": "quantitative",
     "subject": "epigenetic_mechanisms_pain",
     "predicate": "quantitative_statement",
@@ -3780,7 +3762,7 @@
     ]
   },
   {
-    "id": "QC-0069",
+    "id": "QC-0068",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3799,7 +3781,7 @@
     ]
   },
   {
-    "id": "QC-0070",
+    "id": "QC-0069",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3817,7 +3799,7 @@
     ]
   },
   {
-    "id": "QC-0071",
+    "id": "QC-0070",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3835,7 +3817,7 @@
     ]
   },
   {
-    "id": "QC-0072",
+    "id": "QC-0071",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3853,7 +3835,7 @@
     ]
   },
   {
-    "id": "QC-0073",
+    "id": "QC-0072",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3871,7 +3853,7 @@
     ]
   },
   {
-    "id": "QC-0074",
+    "id": "QC-0073",
     "kind": "quantitative",
     "subject": "iNOS",
     "predicate": "quantitative_statement",
@@ -3889,7 +3871,7 @@
     ]
   },
   {
-    "id": "QC-0075",
+    "id": "QC-0074",
     "kind": "quantitative",
     "subject": "karilin-7",
     "predicate": "quantitative_statement",
@@ -3908,7 +3890,7 @@
     ]
   },
   {
-    "id": "QC-0076",
+    "id": "QC-0075",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3926,7 +3908,7 @@
     ]
   },
   {
-    "id": "QC-0077",
+    "id": "QC-0076",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3945,7 +3927,7 @@
     ]
   },
   {
-    "id": "QC-0078",
+    "id": "QC-0077",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3963,7 +3945,7 @@
     ]
   },
   {
-    "id": "QC-0079",
+    "id": "QC-0078",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3981,7 +3963,7 @@
     ]
   },
   {
-    "id": "QC-0080",
+    "id": "QC-0079",
     "kind": "quantitative",
     "subject": "microglial_biology_pain_update",
     "predicate": "quantitative_statement",
@@ -3999,7 +3981,7 @@
     ]
   },
   {
-    "id": "QC-0081",
+    "id": "QC-0080",
     "kind": "quantitative",
     "subject": "nav1.7-1.8",
     "predicate": "quantitative_statement",
@@ -4017,7 +3999,7 @@
     ]
   },
   {
-    "id": "QC-0082",
+    "id": "QC-0081",
     "kind": "quantitative",
     "subject": "prostaglandins",
     "predicate": "quantitative_statement",
@@ -4035,15 +4017,15 @@
     ]
   },
   {
-    "id": "QC-0083",
+    "id": "QC-0082",
     "kind": "quantitative",
     "subject": "prostaglandins",
     "predicate": "quantitative_statement",
-    "object": "COX Inhibitors: Non‑selective COX inhibitors (NSAIDs) : Local injection of ketorolac into the injury site or plantar surface reverses tactile allodynia for >5 days in the partial sciatic nerve ligation (PSNL) model and suppresses injury‑induced CREB phosphorylation in the spinal dorsal horn[reference:44].",
+    "object": "Non‑selective COX inhibitors (NSAIDs) : Local injection of ketorolac into the injury site or plantar surface reverses tactile allodynia for >5 days in the partial sciatic nerve ligation (PSNL) model and suppresses injury‑induced CREB phosphorylation in the spinal dorsal horn[reference:44].",
     "sign": 0,
     "confidence": "EXTRACTED",
     "source_note": "prostaglandins.md",
-    "quote": "COX Inhibitors: Non‑selective COX inhibitors (NSAIDs) : Local injection of ketorolac into the injury site or plantar surface reverses tactile allodynia for >5 days in the partial sciatic nerve ligation (PSNL) model and suppresses injury‑induced CREB phosphorylation in the spinal dorsal horn[reference:44].",
+    "quote": "Non‑selective COX inhibitors (NSAIDs) : Local injection of ketorolac into the injury site or plantar surface reverses tactile allodynia for >5 days in the partial sciatic nerve ligation (PSNL) model and suppresses injury‑induced CREB phosphorylation in the spinal dorsal horn[reference:44].",
     "citation_status": "UNVERIFIED",
     "priority": "P3",
     "priority_flag": null,
@@ -4053,7 +4035,7 @@
     ]
   },
   {
-    "id": "QC-0084",
+    "id": "QC-0083",
     "kind": "quantitative",
     "subject": "strategic_rd_roadmap",
     "predicate": "quantitative_statement",
@@ -4071,7 +4053,7 @@
     ]
   },
   {
-    "id": "QC-0085",
+    "id": "QC-0084",
     "kind": "quantitative",
     "subject": "wnt",
     "predicate": "quantitative_statement",

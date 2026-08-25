@@ -3,20 +3,20 @@
     "P0": 138,
     "P1": 31,
     "P2": 0,
-    "P3": 85
+    "P3": 84
   },
   "counts_by_kind": {
     "edge": 169,
-    "quantitative": 85
+    "quantitative": 84
   },
   "counts_by_confidence": {
-    "EXTRACTED": 223,
+    "EXTRACTED": 222,
     "INFERRED": 30,
     "AMBIGUOUS": 1
   },
   "kalirin_inferred_count": 4,
   "nrcam_ngr1_flag_count": 1,
-  "quantitative_statement_count": 85,
-  "generated_at": "2026-08-25T10:48:47+00:00",
+  "quantitative_statement_count": 84,
+  "generated_at": "2026-08-25T11:04:17+00:00",
   "input_sha256": "9fed39caa63803c82f1db1aecceb3d7449ba6144d11fa984b2e94664da32cf8a"
 }

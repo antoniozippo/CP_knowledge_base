@@ -348,6 +348,44 @@ class TestTextMunging:
         assert claims[0]["quote"].endswith("allodynia in this injury model.")
         assert "7 days" in claims[0]["value_tokens"]
 
+    def test_adjacent_bullets_without_blank_lines_stay_separate(self, tmp_path):
+        (tmp_path / "Bullets.md").write_text(
+            "*   **Etifoxine (Stresam)** :\n"
+            "    *   Etifoxine (50 mg/kg, twice daily) post-nerve crush significantly alleviated hypersensitivity.\n"
+            "    *   A second etifoxline arm used 25 mg/kg dosing in the monoarthritis model.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        quotes = [c["quote"] for c in claims]
+        assert len(quotes) == 2
+        assert quotes[0].startswith("Etifoxine (50 mg/kg")
+        assert quotes[1].startswith("A second etifoxline arm")
+        tokens = [token for c in claims for token in c["value_tokens"]]
+        assert "50 mg/kg" in tokens and "25 mg/kg" in tokens
+
+    def test_heading_and_blockquote_are_boundaries(self, tmp_path):
+        (tmp_path / "Mixed.md").write_text(
+            "### Dosing Summary\n"
+            "- Loading dose was 10 mg/kg in the treated cohort.\n"
+            "> Quote: maintenance used 5 mg/kg in the pain model.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert [c["value_tokens"] for c in claims] == [["10 mg/kg"], ["5 mg/kg"]]
+        assert claims[0]["quote"].startswith("Dosing Summary") is False
+
+    def test_dose_like_hyphen_line_is_not_a_bullet_boundary(self, tmp_path):
+        (tmp_path / "Dose.md").write_text(
+            "Escalation schedule\n-5 mM bolus was followed by 2 mg/kg maintenance infusions.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert len(claims) == 1
+        assert claims[0]["quote"].startswith("Escalation schedule")
+
+    def test_ip_abbreviation_merged(self):
+        assert len(ec.split_sentences("AMG487 was given i.p. (3 mg/kg) daily in the CCI model.")) == 1
+
     def test_decode_error_reports_filename(self, tmp_path, capsys):
         (tmp_path / "Broken.md").write_bytes(b"\xff\xfe not utf8 with 10 mg/kg")
         (tmp_path / "Good.md").write_text("Dose 5 mg/kg in pain model.\n", encoding="utf-8")
