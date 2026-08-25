@@ -59,3 +59,12 @@ Both pharmacological inhibition and genetic deletion of HIF1α have been shown t
     - It promotes glycolytic **microglial activation**, which releases TNF‑α and BDNF, feeding into the TNF and BDNF‑TrkB pathways.
     - It is itself stabilized by **TNF‑α** and **ROS**, creating a positive‑feedback loop.
     - Thus, a comprehensive therapeutic strategy may need to address this entire network, rather than a single node.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0042 | ✅ EXTENDED | theme_04#F4.3, theme_04#F4.9 · PMC3218033 (YC-1 stroke harm); PMID 36017378 (protective mitophagy); PMID 38291291 (ferroptosis suppression) | Isoform/systemic-risk rationale strengthened by concrete counter-examples and bipolar HIF1α physiology — pan-inhibition harmful in ischemic/regenerative contexts; phase- and cell-type qualifiers required |
+| EC-0073 | ✅ EXTENDED | theme_04#F4.4 · Eur J Pharmacol 2023 (HIF-1alpha/MMP-9 sensitization) | MMP-9↔HIF1α linkage supported at axis level (co-driving central sensitization) rather than strict unidirectional induction — soften causal direction to bidirectional/co-driver axis |

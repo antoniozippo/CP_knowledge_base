@@ -51,3 +51,13 @@ The clinical translation of anti‑VEGFA strategies for neuropathic pain is comp
     - VEGFA‑driven BBB breakdown facilitates the entry of circulating pronociceptive factors (e.g., fibrinogen, immune cells), directly feeding into the barrier dysfunction mechanisms.
 - **Sex Differences**: In some preclinical studies, female rodents show a different time course and magnitude of VEGFA upregulation after nerve injury, with a potentially greater contribution from immune cell‑derived VEGFA. This remains understudied but may influence the response to anti‑VEGF therapy.
 - **Off‑Target Effects**: VEGFA receptors are expressed on many cell types, including endothelial cells throughout the body and neurons in brain regions involved in cognition and mood. Chronic blockade may therefore affect cognitive function and emotional regulation, necessitating careful risk‑benefit analysis.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0168 | 🔶 MIXED | theme_04#F4.7 · Brain Sci 2025 pii S1878747925000108/S1878747925000121; JECCR 2021 (anti-VEGFR1) | Contested VEGFR2 valence: 2025 organotypic-cord data show VEGFR2 signaling neuroprotective with pronociception segregating to VEGFR1 — treat as contested, consider VEGFR1 reassignment; context differs (chemotherapy vs nerve-injury models) |
+| EC-0129 | ✅ EXTENDED | theme_04#F4.7 · J Neurochem 2013; Mol Pain 2022 (sFlt-1); PMID 42582843 (neuroma phenotypic shift, VEGF-untested) | Excess VEGFA driving aberrant angiogenesis and prolonged pain confirmed; direct painful-neuroma causality not retrieved — soften to neuroma-associated neovascularization unless causal VEGF-neuroma study attached |
+| EC-0130 | ✅ EXTENDED | theme_04#F4.7 · Beazley-Long et al. 2013, Am J Pathol; Hulse 2017, Channels; Brain Sci 2025 pair | Repair-vs-pain duality refined into isoform and receptor axes — replace blunt duality framing with SRPK1 isoform splicing (VEGF-Axxxa/xxxb) and VEGFR1-pronociceptive vs VEGFR2-context-protective edges |

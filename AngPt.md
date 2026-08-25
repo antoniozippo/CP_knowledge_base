@@ -48,3 +48,12 @@ Pharmacological and genetic manipulation of the Ang/Tie2 pathway in animal model
 *   **Ang-1 vs. Ang-2 Balance**: The therapeutic window for angiopoietin modulation likely depends on restoring the Ang-1/Ang-2 balance rather than simply inhibiting one or the other.
 *   **Interaction with VEGF**: The Ang/Tie2 system is intricately linked with VEGF signaling. Ang-2 can prime vessels to be more responsive to VEGF, and the combination of Ang-2 upregulation and VEGF signaling can synergistically drive inflammation and permeability. Thus, an effective strategy may require co‑targeting of both pathways.
 *   **Systemic Effects**: Since Tie2 is critical for systemic vascular homeostasis, systemic modulation could lead to off-target effects (e.g., hypertension, proteinuria, or impaired wound healing). Localized delivery or specific targeting of pathological pathways is highly desirable.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0013 | ✅ EXTENDED | theme_04#F4.5 · Beggs et al. 2010, Mol Pain 6:74; Montague-Cardoso & Malcangio 2021, Pain Rep | BSCB disruption well supported preclinically but model-heterogeneous; leaks peak 24–48 h and often resolve ~d7–14; SNI infiltration weak by lineage tracing; predicate encoding inverted (Ang-2 disrupts barrier) — fix encoding |
+| EC-0159 | ✅ EXTENDED | theme_08#F8.1, theme_08#F8.3, theme_04#F4.6 · Ji 2023, Annu Rev Pharmacol Toxicol; Ferreira 2025, Eur J Pharmacol (AT-LXA4) | Family-level SPM pro-resolution support strong but the specific SPM-complementary-to-Ang-1 barrier combination remains INFERRED — no direct SPM-vs-Ang-1 comparison retrieved |

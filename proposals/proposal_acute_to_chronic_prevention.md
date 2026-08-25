@@ -563,3 +563,11 @@ The splice-switching ASO approach validated in Aim 1 could open an entirely new 
 ---
 
 *This proposal represents a comprehensive strategy for preventing the transition from acute to chronic neuropathic pain through rationally time-staggered intervention at the four earliest molecular nodes of the chronification cascade. By demonstrating that transient, prophylactic targeting of Rbfox1, HIF1α, MMP-9, and VEGFA — each within its defined temporal window — can durably prevent pain development without the toxicities of sustained target modulation, we aim to establish a new paradigm in pain medicine: preventing chronic pain before it begins.*
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0120 | ✅ EXTENDED | theme_08#F8.7, theme_09#F9.7 · Le et al. 2025, Brain Behav Immun 128:725 (DMF pretreatment); Denk et al. 2013, Pain 154:1668 | Staged-prophylaxis concept gains indirect/conceptual support (DMF prevention of chronification; schedule-dependent HDACi effects) but the staggered quadruple protocol itself is untested — mark evidence_level=synthetic/proposal-level |

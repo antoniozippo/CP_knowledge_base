@@ -14,6 +14,8 @@ Neuropathic pain is a multidimensional experience comprising sensory, emotional,
 
 ### 1. Injury‑Induced Downregulation of Kalirin‑7 in the ACC
 
+> ⚠️ **2026 validation:** direction inverted — injury models associate with Kalirin‑7 recruitment/upregulation driving pronociceptive sensitization; ACC-specific downregulation has no retrievable source; see Validation section.
+
 - **Decreased protein and mRNA**: In rodent models of neuropathic pain, including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced. This downregulation is detectable as early as 3 days post‑injury and persists for at least 4 weeks, paralleling the time course of pain‑related anxiety development. The reduction is specific to the ACC; expression in the somatosensory cortex or spinal cord is not altered in the same manner. This suggests that the ACC Kalirin‑7 loss is a region‑specific response to sustained nociceptive input, not a global stress reaction.
 - **Upstream mechanisms**: The molecular triggers for Kalirin‑7 downregulation include:
     - **Excessive activation of NMDA receptors (NMDARs)** in the ACC by ascending nociceptive drive. Chronic NMDAR overactivation leads to **Ca²⁺‑dependent activation of the phosphatase calcineurin**, which dephosphorylates and destabilises Kalirin‑7, targeting it for proteasomal degradation. Additionally, the transcription factor **C/EBPβ** (CCAAT/enhancer‑binding protein beta) is downregulated in the ACC after nerve injury, and since C/EBPβ drives *Kalrn* transcription, its loss contributes to reduced Kalirin‑7 synthesis.
@@ -93,3 +95,16 @@ While the ACC is the most studied site, Kalirin‑7 is expressed in the spinal d
     - **RhoA/ROCK**: Kalirin‑7 activates Rac1, which functionally antagonises the RhoA/ROCK pathway. The loss of Kalirin‑7 may therefore shift the balance towards RhoA‑mediated growth cone collapse and synapse retraction, further exacerbating synaptic deterioration.
     - **Wnt and Notch**: These developmental pathways intersect with Kalirin‑7 to regulate spine morphogenesis; their dysregulation in chronic pain could compound Kalirin‑7‑mediated synaptic pathology.
     - **KCC2 and GABAergic inhibition**: While Kalirin‑7 operates primarily at excitatory synapses, the loss of inhibitory tone in the ACC (via KCC2 downregulation) can further disinhibit pyramidal neurons, paradoxically increasing excitatory drive and accelerating Kalirin‑7 breakdown. Restoring GABAergic inhibition could be a complementary strategy to preserve Kalirin‑7.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0058 | ⚠️ REFUTED | theme_10#F10.1 · Nat Commun 2015 (ncomms7820); SGK1-kalirin-PSD95/NR2B follow-ups (PubMed set) | CCI associates with Kalirin‑7 recruitment/upregulation driving pronociceptive sensitization; ACC-specific downregulation has no retrievable source — invert or demote to explicit hypothesis |
+| EC-0059 | ⚠️ REFUTED | theme_10#F10.1 · Nat Commun 2015; SIRT1-CDK5-Kal7 and T2D follow-ups (PubMed set) | Same sign inversion for SNI-type injuries: Kal7 gain-of-function is pronociceptive — downregulation claim unsupported |
+| EC-0063 | ✅ EXTENDED | theme_10#F10.6, theme_10#F10.2 · Koga et al. 2015, Neuron 85:377; Nat Neurosci 2024;27:272 (ACC-VTA loop) | Pain-related anxiety real and robustly ACC-linked but molecular attribution shifts from Kal7 to AC1/GluN2B/HCN pre-LTP circuits and P2X4R-BDNF (NB001, ZD7288, oxytocin handles) |
+| EC-0066 | ✅ EXTENDED | theme_10#F10.6 · Koga et al. 2015, Neuron; Neurosci Biobehav Rev 2026 (ACC integrative hub) | Anxiety-comorbidity framing supported at phenomenon level with corrected molecular attribution (AC1/GluN2B/HCN/PKMζ; BLA/LHb/VTA circuits) |
+| EC-0068 | ✅ EXTENDED | theme_10#F10.7 · Mol Brain 2025 (voluntary running, knee OA); APC/C-Cdh1 Mol Pain 2015 | Exercise/environmental enrichment restores ACC synapses via unspecified mechanisms (NOT Kal7) — relabel mediator |
+| EC-0167 | ✅ EXTENDED | theme_10#F10.10 · ACC neuroplasticity review doi:10.1002/brb3.71408 (PMC13080107) | Network-level cytokine→ACC plasticity supported; direct TNFα→spine-morphology endpoint unverified — low-medium confidence, time-stamp dynamics |

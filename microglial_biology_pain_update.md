@@ -72,3 +72,14 @@ A paradigm-shifting body of work (2015-2024, notably from the Mogil and Salter l
 ---
 
 *This document supplements the existing hif1a.md, TNF.md, and autophagy-apoptosis_inhibition.md files. Cross-references the HIF1α Transcriptional Program and Disinhibition Cascade hyperedges.*
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0082 | ✅ EXTENDED | theme_03#F3.10, theme_02#F2.5 · Tuina study 2026 (TREM2/LAMP1); Neurosci Biobehav Rev 2026 senescence review | TREM2 downregulation extended by TREM2/LAMP1 phagocytosis-targeting therapeutics and senescence dimension — checkpoint angle makes TREM2 actionable; CX3CR1 dependence contested |
+| QC-0083 | ✅ EXTENDED | theme_03#F3.10, theme_02#F2.5 · TREM2/LAMP1 2026; Aging Cell 2025 ABT-737 | AL002a reversal claim extended into microglial-phagocytosis and aging frameworks — registry-level verification of AL002a pain data advised |
+| QC-0086 | ✅ EXTENDED | theme_03#F3.10 · Aging Cell 2025; Neurosci Biobehav Rev 2026 | Urolithin A mitophagy claim extended by senescence/mitophagy targeting wave in microglia — promote urolithin A to graph node |
+| QC-0087 | ✅ EXTENDED | theme_03#F3.10 · Neurosci Biobehav Rev 2026 | Nicotinamide riboside CIPN claim extended within mitochondrial-restoration/senescence frame — source-level verification advised |

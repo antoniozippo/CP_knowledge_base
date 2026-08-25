@@ -74,3 +74,11 @@ N6-methyladenosine (m6A) is the most abundant internal mRNA modification, regula
 ---
 
 *This document supplements the existing hif1a.md, rbfox1.md, and Skill_neuroscientific_insights_seeker.md files. It connects the Lactylation Brake (Appraisal 11) and Splice-Switching Triad (Appraisal 3) therapeutic strategies to their molecular epigenetic foundations.*
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0071 | ✅ EXTENDED | theme_09#F9.1, theme_09#F9.3, theme_04#F4.2 · Wang Q-H et al. 2025, J Neurosci (DOI 10.1523/jneurosci.0365-25.2025); Nat Commun 2025 DOCK4 | H3K18la persistence confirmed and extended with first concrete targets (IGF2BP2-CCT2) — mark is model- and locus-specific: robust in CCI DRG, unchanged in SNL where H4K8la rose |

@@ -76,3 +76,13 @@ Manipulation of the RhoA/ROCK pathway has been extensively validated in animal m
     *   It is activated downstream of **TNF‑α** and contributes to **VEGFA**‑induced vascular permeability.
     *   It drives the degradation of perineuronal nets through the activation of matrix metalloproteinases (MMPs), linking it to **PV interneuron** dysfunction.
     *   Chronic inhibition may thus affect multiple integrated pathways, necessitating a network‑level therapeutic approach.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0108 | ✅ EXTENDED | theme_05#F5.6 · J Transl Med 2025 (Cx43-SGC crosstalk); STTT 2025 LPA review; IASP 2024 UD-039 posters | LPA–LPAR1–RhoA demyelination cascade extended by satellite-glial/Schwann-cell peripheral arm absent from KB dossier — new handles UD-039/UD-059Na, PIPE-791, oxypeucedanin |
+| EC-0110 | ✅ EXTENDED | theme_05#F5.5 · J Orthop Transl 2024; Ramer et al. 2004, J Neurosci; Xu et al. 2020, Mol Pain | Context-dependent regeneration-vs-pain roles reinforced: ROCK inhibition aids regeneration/remyelination centrally and peripherally while relieving pain — add pro-regenerative instances to caution framing |
+| EC-0146 | ✅ EXTENDED | theme_05#F5.4 · Tatsumi et al. 2015, Glia 63:216 | Microglial BDNF/ROCK interplay supported via RhoA/ROCK-p38 microglial cascade, but card predicate wording ('release of ROCK') is garbled — recast as BDNF-linked microglial RhoA/ROCK activation (kinases are not released) |

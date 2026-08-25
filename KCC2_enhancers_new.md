@@ -59,3 +59,13 @@ The cryo-EM structures of human KCC2 in multiple conformational states (publishe
 ---
 
 *This document supplements the existing BDNF-TrkB.md, ana-12.md, and GABA_apoptosis.md files in the CP_knowledge_base. Cross-referenced with the Disinhibition Cascade hyperedge and the KCC2 Downregulation god-node.*
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0039 | ✅ EXTENDED | theme_01#F1.1, theme_01#F1.2 · Pressey et al. 2024, Front Mol Neurosci 17:1503070 | Field pipeline advanced to named candidates (AXN-027 FIH Q4 2024; OV350 H1 2025); CLP290 figures themselves not independently resurfaced — attach primary CLP290 source; no CLP257 clinical trial exists |
+| QC-0040 | ✅ EXTENDED | theme_01#F1.2, theme_01#F1.1 · PNAS 2026 (prochlorperazine/CLP-257 clustering); PMC7371006 (MOA critique) | ARN23746 potency/selectivity figures carry a CLP257 mechanism-of-action caveat (indirect/clustering debate) and are not independently surfaced — verify against primary before promotion |
+| QC-0042 | ✅ EXTENDED | theme_01#F1.2 · PMC7371006; PNAS 2026 | Lead-compound claim carries same MOA caveat; specific EC50/B:P figures not independently surfaced — verify primary source for the unnamed lead |

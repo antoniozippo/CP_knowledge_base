@@ -17,3 +17,12 @@ Based on these findings, TNF modulation has been explored as a therapeutic strat
 
 ### ⚠️ A Note of Caution and Complexity
 While TNF inhibition can relieve pain, it is crucial to note the **paradoxical effect** where anti-TNF therapies may sometimes trigger neuropathies in rare cases. The relationship between TNF and pain is complex, and the effects of its modulation can vary, highlighting the need for a personalized approach.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0117 | ✅ EXTENDED | theme_03#F3.1, theme_03#F3.2, theme_03#F3.3 · Cells 2025;14:1749; Jaeger et al. 2026, npj Dementia (MINDFuL); O'Reilly 2021, J Neurotrauma | XPro1595 selective solTNF/TNFR1 blockade validated in vivo with human Phase 2 safety precedent — efficacy sex-dependent (males respond, females blunted via estrogen); late SCI dosing failed; MINDFuL Ph2 = AD not pain; card predicate phrasing inverted |
+| EC-0127 | ✅ EXTENDED | theme_03#F3.3 · Reumatologia 2021 (Kucharz); J Pain Res 2025 (postoperative resolution); PNAS 2019 TNFR2/Treg | Anti-TNF paradox expanded to two hazards: demyelinating neuropathy + impaired acute-to-chronic pain resolution (TNFR2 pro-resolving arm) — NEW_MECHANISM candidate: neuronal TNFR2→POMC/beta-endorphin + CB1 pro-resolution axis (bioRxiv 2025.11.24.690195) |

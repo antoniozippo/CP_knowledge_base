@@ -260,3 +260,11 @@ The ongoing opioid epidemic — responsible for over 80,000 deaths annually in t
 ---
 
 *Proposal prepared for NIH R01 or ERC Advanced Grant submission. The total length is approximately 50,000 characters excluding references.*
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0099 | ✅ EXTENDED | theme_01#F1.1, theme_01#F1.6, theme_01#F1.9 · PNAS 118(3) 2021; Koga 2017, Sci Rep; Pressey et al. 2024, Front Mol Neurosci | Spinal disinhibition paradigm gains opioid-resistant touch-pain dimension and matured KCC2 clinical pipeline (AXN-027 first-in-human Q4 2024; OV350 IV H1 2025) — strengthens quadruple-pronged rationale with opioid-sparing argument |

@@ -170,3 +170,11 @@ However, **no selective CB2 agonist has yet successfully completed Phase III cli
 *   **Redundancy with CB1**: CB1 receptors are also expressed on nociceptors and in the CNS and contribute to cannabinoid‑mediated analgesia. In some pain models, the analgesic effects of "CB2‑selective" agonists may be partially mediated by CB1, particularly at higher doses[reference:81]. Peripherally restricted CB1/CB2 dual agonists are also being explored to harness the synergistic potential of both receptors while avoiding central CB1‑mediated side effects[reference:82].
 *   **Sex differences**: Preclinical studies of CB2 agonists in pain models have not always rigorously evaluated sex as a biological variable. Given the known sex differences in immune responses and pain processing, this is an important consideration for future research.
 *   **Interactions with other pain pathways**: The CB2 receptor system is deeply integrated with the broader neuroimmune pain network. CB2 activation suppresses the production of **TNF‑α, IL‑1β, and BDNF**, interrupting the positive‑feedback loops that drive neuroinflammation and central sensitization. CB2 also functionally interacts with the **endogenous opioid system**, the **TLR4/NF‑κB pathway**, and the **ERK/MAPK cascade**, placing it at the intersection of multiple pronociceptive and analgesic mechanisms. A comprehensive understanding of these interactions is essential for optimizing CB2‑targeted therapies.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0008 | ✅ EXTENDED | theme_08#F8.8 · Lin et al. 2018 (PMID 29192123); Guenther et al. 2024/2025, Biomed Pharmacother/Neuropharmacology | LY2828360 paclitaxel experiment reproduced exactly and extended (sensory-neuron locus; spontaneous-pain CPP; opioid-sparing) — CB2 bench-bedside gap: inconsistent human trials; CNTX-6016 still Phase I |

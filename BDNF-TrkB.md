@@ -49,3 +49,11 @@ The BDNF–TrkB system exemplifies the **yin-and-yang of neurotrophin signaling*
 *   **Time-Dependent Effects**: In the early phase after injury, BDNF may contribute to protective neuroplasticity and repair, while sustained overexpression drives chronic pain. The therapeutic window for intervention must be carefully considered.
 *   **Sex Differences**: There is increasing evidence that BDNF-driven pain mechanisms operate differently in males and females. In some rodent models, spinal BDNF–TrkB signaling is a dominant pain mediator in males, whereas females rely on alternative adaptive immune or neuroimmune mechanisms. This has profound implications for the development of universal versus sex-specific therapies.
 *   **Interaction with Other Modulators**: BDNF–TrkB signaling does not act in isolation. It interacts intimately with other systems you've asked about: TNF-α potently induces BDNF release from glia, and BDNF can modulate the integrity of the blood-brain barrier by altering tight junction protein expression. A comprehensive treatment strategy for neuropathic pain will likely need to consider these interconnected networks simultaneously.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0124 | 🔶 MIXED | theme_01#F1.3, theme_01#F1.10, theme_01#F1.14 · Rivera et al. 2002/2004; Cheung 2023, Sci Rep | TrkB.FL→KCC2 downregulation supported (rodent + human) with the same early-adaptive/temporal contradiction — time-window and circuit qualifiers required (motor vs dorsal-horn) |

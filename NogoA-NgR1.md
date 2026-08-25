@@ -64,3 +64,12 @@ Pharmacological, genetic, and antibody-based interventions targeting the Nogo-A/
     *   **HIF1α and VEGFA**: Hypoxia and vascular damage can upregulate Nogo-A expression, and the Nogo-A/NgR1 pathway can in turn influence vascular remodeling and BBB integrity through RhoA-mediated effects on endothelial tight junctions.
     *   **Perineuronal Nets and ECM**: Nogo-A signaling through RhoA can regulate MMP-9 expression, linking myelin inhibitors to perineuronal net degradation and PV interneuron dysfunction.
     *   **TNF-α and Neuroinflammation**: Pro-inflammatory cytokines can upregulate NgR1 and its co-receptors on neurons and glia, sensitizing the system to myelin inhibitors and creating a feedforward loop of neuroinflammation and disinhibition.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0094 | 🔶 MIXED | theme_05#F5.1 · Kucher/Curci NISCI consortium, Lancet Neurol 2025 (PMID 39706632; NCT03935321) | NG101 does neutralize Nogo-A (mechanism intact) but NISCI Phase 2b missed its primary endpoint — soften dossier to 'well tolerated; subgroup/post-hoc signals only' (spasticity roughly halved vs placebo); card predicate inverted |
+| EC-0106 | 🔶 MIXED | theme_05#F5.8, theme_05#F5.7 · Chivatakarn et al. 2007, J Neurosci; Zheng et al. 2005; Sekine et al. 2018, Sci Signal (ORL1) | Functional NgR1–RhoA coupling real but card direction inverted (ligand-NgR1 activates RhoA) and NgR1 dispensable for chronic substrate-bound inhibition (PirB/NgR2 redundancy) — scope convergence claim to acute signaling |

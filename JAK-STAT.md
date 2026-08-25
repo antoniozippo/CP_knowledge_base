@@ -89,3 +89,13 @@ Pharmacological inhibition of JAK or STAT3, as well as genetic deletion, consist
     *   It promotes **VEGF** and **MMP‑9** expression, linking to vascular remodelling and barrier disruption.
     *   STAT3 upregulates the **NLRP3** inflammasome components, creating a feed‑forward loop with innate immunity.
     *   Thus, JAK/STAT3 inhibition could be a high‑leverage intervention that simultaneously addresses multiple parallel pain‑driving pathways.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0045 | ✅ EXTENDED | theme_01#F1.10, theme_01#F1.12, theme_09#F9.10 · Lee et al. 2023, Exp Neurol 370:114576; Pieraut et al. 2011, J Neurosci 31:13516 | IL-6/JAK2/STAT3 axis validated as pronociceptive hub but terminal STAT3→KCC2 step unproven (NKCC1 phosphorylation documented instead) — axis tied to glial activation and NKCC1 |
+| EC-0047 | ✅ EXTENDED | theme_09#F9.8, theme_09#F9.4, theme_09#F9.9 · Makabe et al. 2024, Arthritis Res Ther 26:121; IJMS 2024;25:11943 | Baricitinib suppression of JAK/STAT3-dependent pain extended to CSF-1 glial arm + neuronal cell-autonomous site — BBB penetration uncertain (CNS action mainly where barrier weak); card predicate inverted (drug inhibits pathway) |
+| EC-0048 | ✅ EXTENDED | theme_09#F9.4, theme_09#F9.9, theme_09#F9.10 · Eur J Pharmacol 2024 (BV2 NF-kB/MAPK); Tsuda et al. 2011, Brain | Ruxolitinib-class JAK inhibition analgesic in glial and neuronal preparations — brain exposure limited; predicate inverted (ruxolitinib inhibits pathway) |

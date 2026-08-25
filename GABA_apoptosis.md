@@ -96,3 +96,11 @@ Directly targeting autophagy, apoptosis, or mitochondrial Ca²⁺ handling in th
     - **HIF1α** drives a metabolic shift toward glycolysis, potentially depriving GABAergic neurons of efficient mitochondrial ATP production and worsening their vulnerability.
     - **Perineuronal net (PNN) loss** exacerbates hyperactivity, pushing more Ca²⁺ into the neuron and accelerating mitochondrial failure.
     Thus, interventions that dampen upstream drivers (e.g., anti‑TNF agents, KCC2 enhancers, ROCK inhibitors) may indirectly protect GABAergic mitochondrial health and reduce the need for direct pro‑survival autophagy/apoptosis modulation.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0093 | ✅ EXTENDED | theme_02#F2.9 · Tuina/chABC study doi:10.3389/fnmol.2026.1860375 | PNN loss and Ca²⁺ overload causally linked but demonstrated direction is PNN-degradation→Ca²⁺-overload; reciprocal direction untested — annotate arrow direction |

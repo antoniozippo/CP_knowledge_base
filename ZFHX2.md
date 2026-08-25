@@ -16,6 +16,8 @@ ZFHX2 (zinc finger homeobox 2, also known as ZFH‑2) is a large, multifunctiona
 
 ## 🔬 Mechanisms of ZFHX2 in Neuropathic Pain
 
+> ⚠️ **2026 validation:** regulome contradicted — published ChIP-seq shows SST↑/PTGIR↓/GFRA3↓/GAL↓ (no Nav/TRPV1/CGRP/BDNF battery) and Zfhx2-null mice are heat-hypersensitive; see Validation section.
+
 Following peripheral nerve injury, ZFHX2 activity is engaged to drive and sustain a broad pronociceptive transcriptional programme that underlies neuropathic pain.
 
 ### 1. Direct Regulation of Pronociceptive Ion Channels and Neuropeptides
@@ -112,3 +114,12 @@ ZFHX2 binds directly to the promoter/enhancer regions of multiple key pain genes
     - It is activated downstream of **NGF–TrkA**, **TNF‑α**, and **ERK/MAPK** signalling, linking neurotrophic and inflammatory inputs to transcriptional reprogramming.
     - Its downstream cytokine and chemokine effects connect it to **TLR4**, **NLRP3**, and **JAK/STAT** neuroinflammatory networks.
     - In the spinal cord, ZFHX2 contributes to the transcriptional maintenance of **central sensitisation**, cooperating with CREB, NF‑κB, and other injury‑inducible transcription factors.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0131 | ⚠️ REFUTED | theme_06#F6.8 · Habib et al. 2018, Brain 141:365 (Marsili syndrome) | ZFHX2 ChIP-seq regulome excludes BDNF; Zfhx2-null mice are heat-HYPERsensitive — BDNF–TrkB–KCC2 rationale contradicted. Human R1913K genetics premise stands; rebuild mechanism cards on SST/PTGIR/GFRA3/GAL regulome |
+| EC-0133 | ⚠️ REFUTED | theme_06#F6.8 · Habib et al. 2018, Brain 141:365 | Claimed Nav1.7/Nav1.8/TRPV1/TRPA1/CGRP transactivation contradicted by published regulome (neuropeptide-signalling gene set instead); Zfhx2-null heat hypersensitivity guards against naive LOF-analgesia modelling |

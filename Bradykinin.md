@@ -170,3 +170,11 @@ Targeting the generation of bradykinin upstream of the receptors represents an a
     *   **CCL2/CCR2 and CX3CL1/CX3CR1**: Bradykinin can promote the expression of chemokines, linking the KKS to the recruitment and activation of microglia and macrophages.
     *   **Endothelin**: Both bradykinin and endothelin are potent algogenic peptides that activate Gαq/11‑coupled receptors and sensitise TRP channels through overlapping intracellular pathways, suggesting potential synergy.
     *   **Opioid system**: As described, kinin receptors support peripheral opioid analgesia; blockade may impair endogenous and exogenous opioid efficacy.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0002 | ✅ EXTENDED | theme_07#F7.9 · Front Med 2025 (stage-dependent diabetic B1R); Stemper et al. 2025, Pain | Protective kinin–opioid interaction conceptually reinforced by stage-dependent protective B1R biology, but the exact 30–35% double-KO figure was not independently reproduced — B1R sign flips with disease stage (early protective / late pronociceptive) |

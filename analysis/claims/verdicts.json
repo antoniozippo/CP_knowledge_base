@@ -1,0 +1,2891 @@
+[
+  {
+    "claim_id": "EC-0001",
+    "verdict": "CONFIRMED",
+    "rationale": "ANA-12 blocks TrkB-driven pronociceptive plasticity consistent with rACC/spinal TrkB-blockade literature.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Cazorla et al. 2011 line (via ana-12.md); Li TT et al. 2022, Brain Res Bull"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0002",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "No retrieved source corroborates an ANA-12->NLRP3 inhibitory edge; NLRP3 itself is a validated but model-dependent pronociceptive node.",
+    "evidence_refs": [
+      "theme_03#F3.4",
+      "theme_03#F3.5"
+    ],
+    "citations": [
+      "Curto-Reyes et al. 2015 (tabulated, Front Physiol); Zhang et al. 2026, Sci Rep"
+    ],
+    "qualifier": "NLRP3 necessity model-dependent (null in SNI; positive in CCI/DNP/cancer/EAE)"
+  },
+  {
+    "claim_id": "EC-0003",
+    "verdict": "CONFIRMED",
+    "rationale": "ANA-12 inhibition of neuropathic TrkB signaling matches published ANA-12/cyclotraxin-B pharmacology and usage.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull; Br J Anaesth 2025 (P2X4R-BDNF-TrkB)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0004",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "General ANA-12 TrkB pharmacology validated but the truncated-isoform (TrkB.T1) interaction specifically was not resurfaced.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Cazorla et al. 2011 line (via ana-12.md)"
+    ],
+    "qualifier": "TrkB.T1-selective binding unaddressed"
+  },
+  {
+    "claim_id": "EC-0005",
+    "verdict": "CONFIRMED",
+    "rationale": "TrkB-blockade preservation of KCC2 is anchored in rodent and human dorsal-horn tissue showing BDNF-TrKB drives membrane KCC2 loss.",
+    "evidence_refs": [
+      "theme_01#F1.3",
+      "theme_01#F1.4"
+    ],
+    "citations": [
+      "Davis et al. 2025, bioRxiv/PMID 40667986; Dedek et al. 2019, Brain 142:1535"
+    ],
+    "qualifier": "STEP61-pFyn-pGluN2B coupling is male-specific across rodent and human tissue"
+  },
+  {
+    "claim_id": "EC-0006",
+    "verdict": "CONFIRMED",
+    "rationale": "Ang-1 activation of Tie2 promoting endothelial quiescence/junction tightening is standard confirmed vascular biology in SCI/pain models.",
+    "evidence_refs": [
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Thurston-era biology; Nieswandt/Koh 2013 Trends Mol Med; Brain 2010;133:1026"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0007",
+    "verdict": "CONFIRMED",
+    "rationale": "Ang-2 antagonism of Tie2 with TNF-alpha sensitization reconfirmed (Nat Med 2006 lineage) in SCI barrier work.",
+    "evidence_refs": [
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Rennel/Zhang-era Nat Med 2006;12:235; Acta Neuropathol Commun 2018 (sivelestat)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0008",
+    "verdict": "CONFIRMED",
+    "rationale": "Ang-2 synergy with VEGFA in vascular destabilization reconfirmed within the Ang/Tie2 SCI-pain literature.",
+    "evidence_refs": [
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Nat Med 2006;12:235; J Neurotrauma 2010;27:2067"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0009",
+    "verdict": "UNREVIEWED",
+    "rationale": "Autophagy/apoptosis inhibitor dossier (Bcl-xL-Bax/Bak) lies outside all ten sweep themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0010",
+    "verdict": "UNREVIEWED",
+    "rationale": "Bcl-xL-mPTP edge belongs to the unswept apoptosis/autophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0011",
+    "verdict": "CONFIRMED",
+    "rationale": "VEGFA sequestration (bevacizumab/sFlt-1 class) relieves nerve-injury pain; strategy refined toward isoform/receptor selectivity.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "Mol Pain 2022 (sFlt-1 trap); J Exp Clin Cancer Res 2021 (anti-VEGFR1 D16F7)"
+    ],
+    "qualifier": "Blunt sequestration superseded by isoform (VEGF-Axxxa/xxxb) and receptor-selective approaches"
+  },
+  {
+    "claim_id": "EC-0012",
+    "verdict": "CONFIRMED",
+    "rationale": "Repair-versus-delivery barrier rationale supported at BBB/BSCB and mirrored at the blood-nerve barrier (perineurium).",
+    "evidence_refs": [
+      "theme_04#F4.5",
+      "theme_04#F4.8"
+    ],
+    "citations": [
+      "Montague-Cardoso & Malcangio 2021, Pain Rep; PNAS 2012 (perineurial opening)"
+    ],
+    "qualifier": "New compartment added: perineurial/BNB (claudin-1/-5, occludin)"
+  },
+  {
+    "claim_id": "EC-0013",
+    "verdict": "EXTENDED",
+    "rationale": "BSCB disruption in neuropathic pain is well supported preclinically but model-heterogeneous and often transient.",
+    "evidence_refs": [
+      "theme_04#F4.5"
+    ],
+    "citations": [
+      "Beggs et al. 2010, Mol Pain 6:74; Montague-Cardoso & Malcangio 2021, Pain Rep"
+    ],
+    "qualifier": "Leaks peak 24-48h and often resolve by day 7-14; SNI infiltration weak by lineage tracing; predicate direction appears inverted (Ang-2 disrupts barrier) - fix encoding"
+  },
+  {
+    "claim_id": "EC-0014",
+    "verdict": "EXTENDED",
+    "rationale": "SPM (RvD1/LXA4) pro-resolution role is mainstream and multiply replicated; direct barrier-resealing data remain thin.",
+    "evidence_refs": [
+      "theme_08#F8.1",
+      "theme_08#F8.2",
+      "theme_08#F8.3",
+      "theme_08#F8.4",
+      "theme_04#F4.5"
+    ],
+    "citations": [
+      "Wang YH et al. 2022, Neuroscience 494:12; Eur J Med Res 2025;30:189; Ji 2023 Annu Rev Pharmacol Toxicol"
+    ],
+    "qualifier": "Barrier-resealing framing is a specific instance of the general resolution program; no approved resolvin drug; precursor supplementation weak/null"
+  },
+  {
+    "claim_id": "EC-0015",
+    "verdict": "CONFIRMED",
+    "rationale": "Ang-1 stabilization of barrier integrity reconfirmed by IV Ang-1 rescue of BSCB permeability after SCI.",
+    "evidence_refs": [
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Brain 2010;133:1026; J Neurotrauma 2010;27:2067"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0016",
+    "verdict": "CONFIRMED",
+    "rationale": "BDNF activation of full-length TrkB is directly shown in rACC aversion circuits and canonical receptor biology.",
+    "evidence_refs": [
+      "theme_10#F10.4"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull; Mol Brain 2021 (NB001-blockable enhancement)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0017",
+    "verdict": "EXTENDED",
+    "rationale": "Microglial/BDNF-TrkB disruption of KCC2-dependent inhibition is strongly supported and extended by a peripheral (DRG-KCC2) arm.",
+    "evidence_refs": [
+      "theme_01#F1.4",
+      "theme_01#F1.10",
+      "theme_01#F1.5",
+      "theme_01#F1.14",
+      "theme_03#F3.13"
+    ],
+    "citations": [
+      "Coull et al. 2005, Nature 438:1017; Mol Pain 19 (2023); Xian et al. 2025, Cell Biosci 15:12"
+    ],
+    "qualifier": "Pathogenic in chronic dorsal-horn pain states (human-tissue anchored); early post-lesion downregulation can be adaptive in motor circuits; microglial P2X4-BDNF questioned and IRF5/P2X4 male-specific"
+  },
+  {
+    "claim_id": "EC-0018",
+    "verdict": "CONFIRMED",
+    "rationale": "BDNF feeding the IL-6/gp130/JAK2 hub matches current consensus network framing of pronociceptive transcription.",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Tsuda et al. 2011, Brain 134:1127; Aging Dis 2024;15:186 (review)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0019",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "The BDNF-induces-TNF release edge did not surface in any sweep; adjacent microglial BDNF/P2X4 pathway is itself contested.",
+    "evidence_refs": [
+      "theme_03#F3.13"
+    ],
+    "citations": [
+      "Malcangio 2018 viewpoint PMC6148335"
+    ],
+    "qualifier": "P2X4-BDNF microglial controversy; IRF5/P2X4 dependence is male-specific"
+  },
+  {
+    "claim_id": "EC-0020",
+    "verdict": "CONFIRMED",
+    "rationale": "BDNF-TrkB promotion of synaptic-plasticity protein programs (NR2B/pERK/pCREB) directly shown in rACC and spinal preparations.",
+    "evidence_refs": [
+      "theme_10#F10.8",
+      "theme_10#F10.4"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull; Katano et al. 2011, Neuropharmacology"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0021",
+    "verdict": "CONFIRMED",
+    "rationale": "Dual pro-/anti-nociceptive BDNF roles vindicated: pronociceptive via TrkB-NR2B-ERK in ACC, context-dependent ligand/receptor effects elsewhere.",
+    "evidence_refs": [
+      "theme_10#F10.4"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull; psilocybin-review counter-note (cortical BDNF facilitatory)"
+    ],
+    "qualifier": "Valence depends on ligand form (pro- vs mature-BDNF), region, and receptor complex"
+  },
+  {
+    "claim_id": "EC-0022",
+    "verdict": "CONFIRMED",
+    "rationale": "TrkB-Fc/cyclotraxin-B sequestration of BDNF reduces pain affect; tool biology supported despite inverted predicate wording.",
+    "evidence_refs": [
+      "theme_10#F10.4"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull (cyclotraxin-B)"
+    ],
+    "qualifier": "Predicate inverted in card (should read TrkB-Fc sequesters BDNF)"
+  },
+  {
+    "claim_id": "EC-0023",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Card predicate is malformed (release of a receptor); underlying BDNF-glial VEGF/VEGFR coupling is plausible-supported but the stated edge is unusable.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "Theme 4 Contradictions #5 (data-quality flag)"
+    ],
+    "qualifier": "Fix direction/source rather than delete; likely intended BDNF-glial VEGFR2 upregulation"
+  },
+  {
+    "claim_id": "EC-0024",
+    "verdict": "CONFIRMED",
+    "rationale": "BDNF-linked HIF1alpha-driven glycolytic shift in myeloid cells validated and extended beyond microglia to DRG macrophages and neurons.",
+    "evidence_refs": [
+      "theme_04#F4.1"
+    ],
+    "citations": [
+      "Wang S et al. 2023, Glia (HK2, PMID 37909251); PRMT6-HIF1alpha Pain Res Forum 2024/25"
+    ],
+    "qualifier": "Upstream regulators PRMT6/Lyn-IRF5/HK2/FGF4 newly identified above the HIF1alpha node"
+  },
+  {
+    "claim_id": "EC-0025",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "PV dysfunction is strongly supported but the specific CP-AMPAR-mediated excitotoxic-death mechanism was not probed; theme internally inconsistent (F1.6 lists claim, Limitations say untouched).",
+    "evidence_refs": [
+      "theme_01#F1.6"
+    ],
+    "citations": [
+      "Qiu et al. 2024, PNAS; Rankin et al. 2024, Cell Rep"
+    ],
+    "qualifier": "Internal inconsistency flagged: F1.6 SUPPORTS mapping vs theme_01 Limitations 'left untouched'"
+  },
+  {
+    "claim_id": "EC-0026",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "FK506-calcineurin enzymology is canonical but card direction inverted and the ACC-Kal7 degradation loop it serves has no retrievable primary source.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Part of unsupported ACC Kalirin-7 narrative; recommend demotion to hypothesis"
+  },
+  {
+    "claim_id": "EC-0027",
+    "verdict": "CONFIRMED",
+    "rationale": "Calpain cleavage of KCC2 impairing chloride homeostasis is directly documented in neuropathic pain and after SCI.",
+    "evidence_refs": [
+      "theme_01#F1.11"
+    ],
+    "citations": [
+      "Zhou et al. 2012, J Biol Chem (via Lee-Hotta 2019, Neurochem Int); Aix-Marseille thesis 2018"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0028",
+    "verdict": "UNREVIEWED",
+    "rationale": "ER-stress/UPR arm of the caspase cascade sits in the unswept GABA_apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0029",
+    "verdict": "UNREVIEWED",
+    "rationale": "Closed-loop neuromodulation/Neuropixels meta-claim from skill notes outside all ten themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0030",
+    "verdict": "CONFIRMED",
+    "rationale": "Cofilin-mediated actin depolymerization is core, well-replicated cytoskeletal biology used across NgR1/TRPV1 and Kal7 pathways.",
+    "evidence_refs": [
+      "theme_05#F5.3",
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Li Y et al. 2014, Sci Signal 7:ra61; Penzes et al. 2008, Trends Neurosci"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0031",
+    "verdict": "REFUTED",
+    "rationale": "Adjudicated: DRGX is anti-nociceptive post-development (down after SNL; knockdown induces pain); no DRGX-to-BDNF-TrkB-KCC2 link exists - KB polarity inverted.",
+    "evidence_refs": [
+      "theme_06#F6.7",
+      "theme_01#F1.5"
+    ],
+    "citations": [
+      "Ito T et al. 2020, Mol Pain 16:33 (PMC7099666; adjudicated via websearch)",
+      "Chen et al. 2001, Neuron (Drg11 development)"
+    ],
+    "qualifier": "Replace with inverted edges: DRGX loss-of-function derepresses MMP-9 -> pain; nociceptor-localized KCC2 suppresses BDNF release (peripheral arm)"
+  },
+  {
+    "claim_id": "EC-0032",
+    "verdict": "REFUTED",
+    "rationale": "DRGX overexpression suppresses maintenance-phase central sensitization - the claimed pronociceptive rationale is opposite to evidence.",
+    "evidence_refs": [
+      "theme_06#F6.7"
+    ],
+    "citations": [
+      "Ito T et al. 2020, Mol Pain 16:33 (adjudicated)"
+    ],
+    "qualifier": "Invert sign: DRGX restoration alleviates; downregulation maintains sensitization"
+  },
+  {
+    "claim_id": "EC-0033",
+    "verdict": "REFUTED",
+    "rationale": "A DRGX antisense/knockdown therapy would be predicted to worsen pain; the therapeutic direction is inverted.",
+    "evidence_refs": [
+      "theme_06#F6.7"
+    ],
+    "citations": [
+      "Ito T et al. 2020, Mol Pain 16:33 (adjudicated)"
+    ],
+    "qualifier": "Testable direction is DRGX restoration (AAV overexpression), not knockdown"
+  },
+  {
+    "claim_id": "EC-0034",
+    "verdict": "REFUTED",
+    "rationale": "No SCN9A/SCN10A/TRPV1 transactivation battery exists; only MMP-9 restraint demonstrated (EP2 not rescued by DRGX).",
+    "evidence_refs": [
+      "theme_06#F6.7"
+    ],
+    "citations": [
+      "Ito T et al. 2020, Mol Pain 16:33 (adjudicated)"
+    ],
+    "qualifier": "Corrected regulome: MMP-9 (rescued), EP2/PTGER2 (not rescued)"
+  },
+  {
+    "claim_id": "EC-0035",
+    "verdict": "CONFIRMED",
+    "rationale": "Calpain activation downstream of calcium overload and its cleavage of KCC2 are experimentally supported; upstream cascade framing comes from an unswept dossier.",
+    "evidence_refs": [
+      "theme_01#F1.11"
+    ],
+    "citations": [
+      "Zhou et al. 2012, J Biol Chem; Lee-Hotta et al. 2019, Neurochem Int"
+    ],
+    "qualifier": "Calpain-to-KCC2 arm directly evidenced; 'GABAergic Ca2+ Overload Cascade' node itself unvalidated"
+  },
+  {
+    "claim_id": "EC-0036",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cascade-to-mPTP edge resides in the unswept GABA_apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0037",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cascade-to-CP-AMPAR edge resides in the unswept GABA_apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0038",
+    "verdict": "CONFIRMED",
+    "rationale": "YC-1 destabilizes/inhibits HIF1 transcriptional activity (card inverted) and carries a concrete safety red flag.",
+    "evidence_refs": [
+      "theme_04#F4.3"
+    ],
+    "citations": [
+      "Selleck compilation (HeLa HRE IC50 ~1.2 uM); PMC3218033 (stroke worsening)"
+    ],
+    "qualifier": "YC-1 increases mortality/infarct in rat stroke; no approved HIF1alpha inhibitor as of 2023"
+  },
+  {
+    "claim_id": "EC-0039",
+    "verdict": "CONFIRMED",
+    "rationale": "HIF1alpha transcriptional battery validated across microglia, macrophages and neurons with multiple upstream inducers identified.",
+    "evidence_refs": [
+      "theme_04#F4.1"
+    ],
+    "citations": [
+      "Wang S et al. 2023, Glia; Wu/Chen 2026, J Headache Pain; PRMT6 entry Pain Res Forum"
+    ],
+    "qualifier": "Cell-type scope broader than microglia; protective contexts exist (see EC-0042 qualifier)"
+  },
+  {
+    "claim_id": "EC-0040",
+    "verdict": "CONFIRMED",
+    "rationale": "PX-478 suppresses HIF1alpha at multiple levels including translation - mechanistic support solid, translational program absent.",
+    "evidence_refs": [
+      "theme_04#F4.3"
+    ],
+    "citations": [
+      "Koh et al. 2008, Mol Cancer Ther 7:90; NCI Drug Dictionary"
+    ],
+    "qualifier": "Oncology Phase I only (neutropenia DLT); no neurological/pain indication; card predicate inverted"
+  },
+  {
+    "claim_id": "EC-0041",
+    "verdict": "CONFIRMED",
+    "rationale": "HIF1alpha transactivation of VEGFA reconfirmed from founding hypoxia-VEGF observation through myeloid-pain work.",
+    "evidence_refs": [
+      "theme_04#F4.4"
+    ],
+    "citations": [
+      "Shweiki et al. 1992, Nature; Cramer et al. 2003, Cell"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0042",
+    "verdict": "EXTENDED",
+    "rationale": "Isoform/systemic-risk rationale strengthened by concrete counter-examples and bipolar HIF1alpha physiology.",
+    "evidence_refs": [
+      "theme_04#F4.3",
+      "theme_04#F4.9"
+    ],
+    "citations": [
+      "PMC3218033 (YC-1 stroke harm); PMID 36017378 (protective mitophagy); PMID 38291291 (ferroptosis suppression)"
+    ],
+    "qualifier": "Pan-inhibition harmful in ischemic/regenerative contexts; phase- and cell-type qualifiers required"
+  },
+  {
+    "claim_id": "EC-0043",
+    "verdict": "UNREVIEWED",
+    "rationale": "IGF2-NTRK1-ER-stress cascade (IGF1-2 dossier) untouched by all ten sweeps.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0044",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "IGF2BP2 is validated as a lactylation-driven m6A reader, but the claimed IGF2-to-IGF2BP2-mRNA-stabilization edge was never examined; possible entity conflation.",
+    "evidence_refs": [
+      "theme_09#F9.1"
+    ],
+    "citations": [
+      "Wang Q-H et al. 2025, J Neurosci (H3K18la->Igf2bp2)"
+    ],
+    "qualifier": "Possible IGF2 (ligand) vs IGF2BP2 (reader) conflation in KB - audit source_note"
+  },
+  {
+    "claim_id": "EC-0045",
+    "verdict": "EXTENDED",
+    "rationale": "IL-6/JAK2/STAT3 axis is a validated pronociceptive hub, but the terminal STAT3-to-KCC2 step is unproven (NKCC1 phosphorylation documented instead).",
+    "evidence_refs": [
+      "theme_01#F1.10",
+      "theme_01#F1.12",
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Lee et al. 2023, Exp Neurol 370:114576; Pieraut et al. 2011, J Neurosci 31:13516"
+    ],
+    "qualifier": "Flag gap: direct STAT3->KCC2 transcriptional evidence absent; axis tied to glial activation and NKCC1"
+  },
+  {
+    "claim_id": "EC-0046",
+    "verdict": "UNREVIEWED",
+    "rationale": "IGF1 dual-role rationale (IGF1-2 dossier) untouched by sweeps.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0047",
+    "verdict": "EXTENDED",
+    "rationale": "Baricitinib suppression of JAK/STAT3-dependent pain supported and extended by CSF-1/glial and neuronal cell-autonomous arms.",
+    "evidence_refs": [
+      "theme_09#F9.8",
+      "theme_09#F9.4",
+      "theme_09#F9.9"
+    ],
+    "citations": [
+      "Makabe et al. 2024, Arthritis Res Ther 26:121; IJMS 2024;25:11943"
+    ],
+    "qualifier": "BBB penetration uncertain (CNS action mainly where barrier weak); card predicate inverted (drug inhibits pathway)"
+  },
+  {
+    "claim_id": "EC-0048",
+    "verdict": "EXTENDED",
+    "rationale": "Ruxolitinib-class JAK inhibition analgesic in glial and neuronal preparations; CNS-delivery caveat applies.",
+    "evidence_refs": [
+      "theme_09#F9.4",
+      "theme_09#F9.9",
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Eur J Pharmacol 2024 (BV2 NF-kB/MAPK); Tsuda et al. 2011, Brain"
+    ],
+    "qualifier": "Predicate inverted (ruxolitinib inhibits pathway); baricitinib/ruxolitinib brain exposure limited"
+  },
+  {
+    "claim_id": "EC-0049",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "SOCS3 negative-feedback brake is consensus biology but the termination edge was not directly classified this round (only partial SOCS3-JAK/STAT3 hit in search log).",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "SOCS3-JAK/STAT3 blockade record PMC6632340 (partial)"
+    ],
+    "qualifier": "Predicate inverted (SOCS3 terminates JAK/STAT3)"
+  },
+  {
+    "claim_id": "EC-0050",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "KALRN-to-C/EBPbeta transcription edge is part of the unsupported ACC Kalirin-7 narrative; direction suspect (C/EBPbeta canonically upstream of Kalrn).",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Recommend demotion to hypothesis pending primary source"
+  },
+  {
+    "claim_id": "EC-0051",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Downstream HDAC4-represses-GAD65 effector arm is confirmed (panobinostat restores GAD65/GABA), but the KALRN-to-HDAC4-repression upstream link is unsourced.",
+    "evidence_refs": [
+      "theme_09#F9.5",
+      "theme_09#F9.12"
+    ],
+    "citations": [
+      "Pain Reports 2024 (panobinostat/GAD65); Front Pharmacol 2025 HDAC-microglia review"
+    ],
+    "qualifier": "miR-206-3p restrains HDAC4 post-transcriptionally; HDAC4 has dual roles in myeloid cells - avoid linear pronociceptive framing"
+  },
+  {
+    "claim_id": "EC-0052",
+    "verdict": "CONFIRMED",
+    "rationale": "Kalirin-7 GEF activation of Rac1 is canonical, replication-backed biology (spinal nociceptive sensitization flagship).",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015 (ncomms7820); Penzes et al. 2008, Trends Neurosci"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0053",
+    "verdict": "CONFIRMED",
+    "rationale": "Kalirin-7 GEF activity toward RhoG is textbook general biology within the supported Kal7 cluster.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Penzes et al. 2008, Trends Neurosci"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0054",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "AAV-Kalirin-7 ACC gene therapy has no retrievable primary source; adjudication found TIAM1 (not Kal7) as the evidenced ACC Rac1-GEF and spinal Kal7 is pronociceptive (sign-inversion risk).",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Ru Q et al. 2022, J Clin Invest 132:e158545 (TIAM1-ACC); Nat Commun 2015 (spinal Kal7)"
+    ],
+    "qualifier": "Demote to hypothesis; therapy logic may invert if generalized beyond hypothesized ACC compartment"
+  },
+  {
+    "claim_id": "EC-0055",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Calcineurin-dephosphorylation/degradation-of-Kal7 loop belongs to the unverifiable ACC narrative; card direction inverted.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Fix direction and demote pending primary source"
+  },
+  {
+    "claim_id": "EC-0056",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Kal7-via-calcineurin NMDAR-downregulation edge sits inside the unsupported ACC story; not explicitly classified by sweep.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "ACC-contextualized; treat as hypothesis"
+  },
+  {
+    "claim_id": "EC-0057",
+    "verdict": "CONFIRMED",
+    "rationale": "Global Kalirin knockout mouse existence and spine phenotypes rest on supported general neurobiology (KO/KD reduce spines), though not pain-model specific.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Penzes-lineage KO/KD literature (RNAi reduces spine density)"
+    ],
+    "qualifier": "Developmental/neurobiology anchor; no chronic-pain KO phenotype retrieved"
+  },
+  {
+    "claim_id": "EC-0058",
+    "verdict": "REFUTED",
+    "rationale": "Adjudicated: spinal injury models show Kalirin-7 recruitment/upregulation with pronociceptive function - the claimed CCI-induced downregulation has no retrievable support anywhere and inverse sign in the only available data.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015 (ncomms7820); SGK1-kalirin-PSD95/NR2B follow-ups (PubMed set)"
+    ],
+    "qualifier": "ACC-compartment downregulation unverifiable; invert or demote to explicit hypothesis"
+  },
+  {
+    "claim_id": "EC-0059",
+    "verdict": "REFUTED",
+    "rationale": "Same sign inversion as CCI: SNI-type injuries associate with Kal7 gain-of-function pronociceptively; downregulation claim unsupported.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015; SIRT1-CDK5-Kal7 and T2D follow-ups (PubMed set)"
+    ],
+    "qualifier": "Invert or scope explicitly as unverified hypothesis"
+  },
+  {
+    "claim_id": "EC-0060",
+    "verdict": "CONFIRMED",
+    "rationale": "Rac1-PAK-LIMK-cofilin actin-remodeling initiation by Kal7 is the canonical, well-replicated module.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015 (ncomms7820); Li Y et al. 2014, Sci Signal"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0061",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "ACC shRNA-Kalirin-7 knockdown experiments could not be matched to any retrievable study.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Demote to hypothesis"
+  },
+  {
+    "claim_id": "EC-0062",
+    "verdict": "CONFIRMED",
+    "rationale": "Kalirin-7 loss reducing dendritic spines is supported as general cortical biology; the ACC-pain-specific instantiation lacks primary support and timing is biphasic.",
+    "evidence_refs": [
+      "theme_10#F10.1",
+      "theme_10#F10.7"
+    ],
+    "citations": [
+      "Penzes-lineage KD spine data; Ru Q et al. 2022, J Clin Invest (SNI increases ACC spines at 7 wk)"
+    ],
+    "qualifier": "Early LTP-gain vs late remodeling coexist; static 'injury->spine loss' needs time stamps"
+  },
+  {
+    "claim_id": "EC-0063",
+    "verdict": "EXTENDED",
+    "rationale": "Pain-related anxiety phenomenon is robustly ACC-linked but molecular attribution shifts to AC1/GluN2B/HCN pre-LTP circuits and P2X4R-BDNF rather than Kalirin-7.",
+    "evidence_refs": [
+      "theme_10#F10.6",
+      "theme_10#F10.2"
+    ],
+    "citations": [
+      "Koga et al. 2015, Neuron 85:377; Nat Neurosci 2024;27:272 (ACC-VTA loop)"
+    ],
+    "qualifier": "Attribution correction: replace Kal7-dependence with circuit/molecular handles (NB001, ZD7288, oxytocin)"
+  },
+  {
+    "claim_id": "EC-0064",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "DBS-of-ACC normalizing Kalirin-7 signaling has no retrievable source.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Demote to hypothesis"
+  },
+  {
+    "claim_id": "EC-0065",
+    "verdict": "CONFIRMED",
+    "rationale": "Same general-biology support as spine-loss claim; ACC-pain attribution unverified.",
+    "evidence_refs": [
+      "theme_10#F10.7",
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Penzes-lineage KD data; ACC review PMC13080107"
+    ],
+    "qualifier": "Time-window qualifier needed; molecular mediator in ACC-pain unestablished"
+  },
+  {
+    "claim_id": "EC-0066",
+    "verdict": "EXTENDED",
+    "rationale": "Anxiety-comorbidity framing supported at phenomenon level with corrected molecular attribution away from Kal7.",
+    "evidence_refs": [
+      "theme_10#F10.6"
+    ],
+    "citations": [
+      "Koga et al. 2015, Neuron; Neurosci Biobehav Rev 2026 (ACC integrative hub)"
+    ],
+    "qualifier": "Use AC1/GluN2B/HCN/PKMzeta and BLA/LHb/VTA circuit attributions"
+  },
+  {
+    "claim_id": "EC-0067",
+    "verdict": "CONFIRMED",
+    "rationale": "Rac1-PAK-LIMK-cofilin pathway rationale is the supported canonical module.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015; Li Y et al. 2014, Sci Signal"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0068",
+    "verdict": "EXTENDED",
+    "rationale": "Exercise/environmental enrichment restoring ACC synaptic structure is supported, but Kalirin-7 as the mediating boost is unverified - relabel mechanism.",
+    "evidence_refs": [
+      "theme_10#F10.7"
+    ],
+    "citations": [
+      "Mol Brain 2025 (voluntary running, knee OA); APC/C-Cdh1 Mol Pain 2015"
+    ],
+    "qualifier": "Corrected mechanism label: running/exercise restores ACC synapses via unspecified (NOT Kal7) mechanisms"
+  },
+  {
+    "claim_id": "EC-0069",
+    "verdict": "CONFIRMED",
+    "rationale": "LIMK phosphorylation/inhibition of cofilin confirmed within the sensory-neuron actin/TRPV1 lineage.",
+    "evidence_refs": [
+      "theme_05#F5.3"
+    ],
+    "citations": [
+      "Li Y et al. 2014, Sci Signal 7:ra61"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0070",
+    "verdict": "MIXED",
+    "rationale": "Adjudicated: spinal PNN degradation promotes pain but targets lamina-I spinoparabrachial projection neurons (microglial GAG stripping +/- MMP-9), not PV interneurons, and forebrain PNN effects run opposite - claim needs cell-type and region re-scoping.",
+    "evidence_refs": [
+      "theme_02#F2.3",
+      "theme_02#F2.1",
+      "theme_01#F1.13",
+      "theme_02#F2.4",
+      "theme_02#F2.10"
+    ],
+    "citations": [
+      "Tansley et al. 2022, Science 377:80 (adjudicated); Mascio et al. 2025, Pain (thalamocortical PNNs)"
+    ],
+    "qualifier": "Re-scope: cell type = projection neurons; encode region-conditioned signs (spinal protective PNNs / cortical pronociceptive PNNs) and phase windows (MMP-9 early, MMP-2 late)"
+  },
+  {
+    "claim_id": "EC-0071",
+    "verdict": "CONFIRMED",
+    "rationale": "MMP-9 degradation of tight-junction proteins and barrier opening reconfirmed across 2023-2025 reviews and BSCB studies.",
+    "evidence_refs": [
+      "theme_02#F2.1",
+      "theme_04#F4.5",
+      "theme_04#F4.8"
+    ],
+    "citations": [
+      "Front Mol Neurosci 2025 MMP-9 review; Montague-Cardoso & Malcangio 2021"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0072",
+    "verdict": "CONFIRMED",
+    "rationale": "MMP-9 feeding the IL-6/JAK inflammatory transcriptional hub fits consensus network framing; ELF1 identified as new upstream initiator.",
+    "evidence_refs": [
+      "theme_09#F9.10",
+      "theme_02#F2.2"
+    ],
+    "citations": [
+      "ELF1 study PMC9633582; Aging Dis 2024 JAK2/STAT3 review"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0073",
+    "verdict": "EXTENDED",
+    "rationale": "MMP-9-HIF1alpha linkage supported at axis level (co-driving central sensitization) rather than strict unidirectional induction.",
+    "evidence_refs": [
+      "theme_04#F4.4"
+    ],
+    "citations": [
+      "Eur J Pharmacol 2023 (HIF-1alpha/MMP-9 sensitization)"
+    ],
+    "qualifier": "Soften causal direction to bidirectional/co-driver axis"
+  },
+  {
+    "claim_id": "EC-0074",
+    "verdict": "CONFIRMED",
+    "rationale": "MMP-9-to-ROCK upregulation supported within microglial RhoA/ROCK-p38 cascade and MMP-9 hub broadening.",
+    "evidence_refs": [
+      "theme_02#F2.1",
+      "theme_05#F5.4"
+    ],
+    "citations": [
+      "Tatsumi et al. 2015, Glia 63:216; Front Mol Neurosci 2025 review"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0075",
+    "verdict": "UNREVIEWED",
+    "rationale": "Mitochondrial-dysfunction-to-caspase edge in unswept GABA_apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0076",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "HIF1alpha area heavily swept but the mitochondrial-dysfunction-to-HIF1alpha edge itself was never referenced; mtROS adjacency only.",
+    "evidence_refs": [
+      "theme_04#F4.4"
+    ],
+    "citations": [
+      "Palazon et al. 2014, Immunity (ROS/NF-kB normoxic stabilization context)"
+    ],
+    "qualifier": "Adjacent ROS-arm support only"
+  },
+  {
+    "claim_id": "EC-0077",
+    "verdict": "UNREVIEWED",
+    "rationale": "ROS-output edge of unswept mitochondrial dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0078",
+    "verdict": "CONFIRMED",
+    "rationale": "Mitochondrial dysfunction engaging RhoA/ROCK supported and extended by new upstream activators (USP53/FKBP51).",
+    "evidence_refs": [
+      "theme_05#F5.10"
+    ],
+    "citations": [
+      "Acta Neurobiol Exp 2022;82 (USP53-FKBP51-RhoA/ROCK)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0079",
+    "verdict": "CONFIRMED",
+    "rationale": "Mitochondrial-to-TNF linkage indirectly supported via mtROS/mtDNA as canonical NLRP3 inflammasome activators.",
+    "evidence_refs": [
+      "theme_03#F3.4"
+    ],
+    "citations": [
+      "Grace et al. 2016, PNAS (morphine/NLRP3); Gombault 2013, Front Immunol"
+    ],
+    "qualifier": "Indirect (canonical DAMP logic), not edge-specific"
+  },
+  {
+    "claim_id": "EC-0080",
+    "verdict": "UNREVIEWED",
+    "rationale": "Mitophagy-inhibition edge in unswept autophagy/apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0081",
+    "verdict": "UNREVIEWED",
+    "rationale": "mPTP-to-caspase edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0082",
+    "verdict": "UNREVIEWED",
+    "rationale": "mPTP-to-calcium edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0083",
+    "verdict": "CONFIRMED",
+    "rationale": "NF-kB-driven pronociceptive TNFR1 program supported by solTNF/TNFR1-selective genetics and pharmacology.",
+    "evidence_refs": [
+      "theme_03#F3.1",
+      "theme_03#F3.3"
+    ],
+    "citations": [
+      "Cells 2025;14:1749 (TNFR1 KO phenocopy); PNAS 2019 (TNFR2 dichotomy)"
+    ],
+    "qualifier": "TNFR2 is the pro-resolving arm - keep receptor specificity explicit"
+  },
+  {
+    "claim_id": "EC-0084",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Biologically implausible edge (NF-kB suppressing small-molecule binding) untouched by any finding; likely extraction artifact.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [],
+    "qualifier": "Audit extraction; delete or rewrite"
+  },
+  {
+    "claim_id": "EC-0085",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Ca-dependent calcineurin activation is canonical enzymology but the ACC Kal7-degradation context it serves is unsupported.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Keep enzymology, drop ACC-Kal7 packaging unless sourced"
+  },
+  {
+    "claim_id": "EC-0086",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "AP-5 antagonism of NMDAR is trivial pharmacology; the preserve-Kal7-in-ACC interpretation is unsourced; card predicate inverted.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Fix direction; decouple from Kal7 narrative"
+  },
+  {
+    "claim_id": "EC-0087",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Ketamine-NMDAR antagonism established; preserve-Kal7 framing unsourced; related ketamine-TrkB interplay plausible-unverified.",
+    "evidence_refs": [
+      "theme_10#F10.1",
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "QC-0068 source (diabetic ketamine study) not located"
+    ],
+    "qualifier": "Decouple from Kal7 narrative"
+  },
+  {
+    "claim_id": "EC-0088",
+    "verdict": "CONFIRMED",
+    "rationale": "NMDAR Ca2+-influx activation of CaMKII as plasticity kinase confirmed in spinal and ACC pain preparations.",
+    "evidence_refs": [
+      "theme_10#F10.8"
+    ],
+    "citations": [
+      "Katano et al. 2011; Neurosci Bull 2021 (pCaMKII-NR2B in ACC)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0089",
+    "verdict": "UNREVIEWED",
+    "rationale": "Calcium-to-calpain activation in unswept cascade dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0090",
+    "verdict": "UNREVIEWED",
+    "rationale": "Calcium-to-mTORC1 edge unswept.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0091",
+    "verdict": "UNREVIEWED",
+    "rationale": "Calcium-to-CP-AMPAR edge unswept.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0092",
+    "verdict": "UNREVIEWED",
+    "rationale": "Calcium-to-mitochondrial-dysfunction edge unswept.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0093",
+    "verdict": "EXTENDED",
+    "rationale": "PNN loss and calcium overload are causally linked, with the demonstrated direction being PNN-degradation -> Ca2+-overload.",
+    "evidence_refs": [
+      "theme_02#F2.9"
+    ],
+    "citations": [
+      "Tuina/chABC study doi:10.3389/fnmol.2026.1860375"
+    ],
+    "qualifier": "Reciprocal direction (Ca2+ overload causes PNN loss) untested; annotate arrow direction"
+  },
+  {
+    "claim_id": "EC-0094",
+    "verdict": "MIXED",
+    "rationale": "NG101 does neutralize Nogo-A (mechanism intact) but the NISCI phase 2b trial missed its primary endpoint - efficacy optimism contradicted; card predicate inverted.",
+    "evidence_refs": [
+      "theme_05#F5.1"
+    ],
+    "citations": [
+      "Kucher/Curci NISCI consortium, Lancet Neurol 2025 (PMID 39706632; NCT03935321)"
+    ],
+    "qualifier": "Invert subject/object; soften dossier to 'well tolerated; subgroup/post-hoc signals only'; spasticity roughly halved vs placebo"
+  },
+  {
+    "claim_id": "EC-0095",
+    "verdict": "CONFIRMED",
+    "rationale": "Physiological circuit-stabilizing roles of Nogo-A/NgR1 supported, with the important qualification that NgR1 mediates acute collapse but not chronic substrate-bound inhibition.",
+    "evidence_refs": [
+      "theme_05#F5.8",
+      "theme_05#F5.1"
+    ],
+    "citations": [
+      "Chivatakarn et al. 2007, J Neurosci 27:7117; Zheng et al. 2005"
+    ],
+    "qualifier": "Redundancy: PirB, NgR2/gangliosides compensate; ORL1 gates NgR1 maturation (new handle)"
+  },
+  {
+    "claim_id": "EC-0096",
+    "verdict": "UNREVIEWED",
+    "rationale": "PINK1/Parkin-rapamycin edge in unswept mitophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0097",
+    "verdict": "EXTENDED",
+    "rationale": "Chemogenetic/optogenetic PV rescue supported and extended to firing-pattern restoration as therapeutic readout; RARalpha node is preprint-stage.",
+    "evidence_refs": [
+      "theme_01#F1.6",
+      "theme_01#F1.7"
+    ],
+    "citations": [
+      "Qiu et al. 2024, PNAS; Rankin et al. 2024, Cell Rep; Cao/Scherrer/Chen bioRxiv 2022 (preprint)"
+    ],
+    "qualifier": "RARalpha homeostatic-plasticity mechanism unreviewed (bioRxiv)"
+  },
+  {
+    "claim_id": "EC-0098",
+    "verdict": "CONFIRMED",
+    "rationale": "PNN necessity for normal function demonstrated in vivo at spinal level via Crtl1/link-protein knockout hyperalgesia phenotype.",
+    "evidence_refs": [
+      "theme_02#F2.6"
+    ],
+    "citations": [
+      "Sanchez-Ventura et al. 2024, Int J Mol Sci 25:4267"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0099",
+    "verdict": "EXTENDED",
+    "rationale": "Spinal disinhibition paradigm rationale extended by opioid-resistant touch-pain dimension and matured KCC2 clinical pipeline.",
+    "evidence_refs": [
+      "theme_01#F1.1",
+      "theme_01#F1.6",
+      "theme_01#F1.9"
+    ],
+    "citations": [
+      "PNAS 118(3) 2021; Koga 2017, Sci Rep; Pressey et al. 2024, Front Mol Neurosci"
+    ],
+    "qualifier": "Adds opioid-sparing argument; AXN-027 first-in-human (Q4 2024), OV350 IV (H1 2025)"
+  },
+  {
+    "claim_id": "EC-0100",
+    "verdict": "CONFIRMED",
+    "rationale": "Fasudil inhibition of ROCK reconfirmed with widened preclinical base (transection repair, Minamata model, intrathecal ripasudil).",
+    "evidence_refs": [
+      "theme_05#F5.5"
+    ],
+    "citations": [
+      "Kishima et al. 2021, Spine; J Orthop Translat 2024"
+    ],
+    "qualifier": "Predicate inverted (fasudil inhibits ROCK); biphasic dose/context effects noted"
+  },
+  {
+    "claim_id": "EC-0101",
+    "verdict": "CONFIRMED",
+    "rationale": "Rac1 activation of PAK is canonical effector biology in the supported module.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Nat Commun 2015; Penzes et al. 2008"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0102",
+    "verdict": "CONFIRMED",
+    "rationale": "NSC23766 Rac1 inhibition valid as pharmacology but off-target profile (muscarinic antagonist, NMDAR-CREB suppression) confounds behavioral interpretation; predicate inverted.",
+    "evidence_refs": [
+      "theme_10#F10.9"
+    ],
+    "citations": [
+      "JPET 2013 (PMID 23887096); J Neurosci 2014;34:14006"
+    ],
+    "qualifier": "No ACC-pain microinjection use found; interpret any future ACC results cautiously"
+  },
+  {
+    "claim_id": "EC-0103",
+    "verdict": "CONFIRMED",
+    "rationale": "Rbfox1 pleiotropy confirmed - regulates hundreds of transcripts; global targeting deemed unlikely therapeutic.",
+    "evidence_refs": [
+      "theme_06#F6.6"
+    ],
+    "citations": [
+      "Neurotherapeutics editorial commentary 2024; He et al. 2023, Neurotherapeutics"
+    ],
+    "qualifier": "Splice-targeting (downstream ASO) preferred over global Rbfox1 modulation"
+  },
+  {
+    "claim_id": "EC-0104",
+    "verdict": "CONFIRMED",
+    "rationale": "Rbfox1 expression preventing NrCAM exon-10 retention confirmed end-to-end (CLIP binding at (U)GCAUG downstream of exon 10).",
+    "evidence_refs": [
+      "theme_06#F6.6"
+    ],
+    "citations": [
+      "He et al. 2023, Neurotherapeutics 20:e00309; Liang et al. 2020, J Pain 21:625"
+    ],
+    "qualifier": "Canonical binding-direction (exon exclusion) debated in commentary; behavioral rescue incomplete"
+  },
+  {
+    "claim_id": "EC-0105",
+    "verdict": "CONFIRMED",
+    "rationale": "AAV5-Rbfox1 restoration mitigating hypersensitivity directly replicated.",
+    "evidence_refs": [
+      "theme_06#F6.6"
+    ],
+    "citations": [
+      "He et al. 2023, Neurotherapeutics 20:e00309"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0106",
+    "verdict": "MIXED",
+    "rationale": "Functional NgR1-RhoA coupling real but card direction inverted (ligand-NgR1 activates RhoA), and NgR1 is dispensable for chronic substrate-bound inhibition.",
+    "evidence_refs": [
+      "theme_05#F5.8",
+      "theme_05#F5.7"
+    ],
+    "citations": [
+      "Chivatakarn et al. 2007, J Neurosci; Zheng et al. 2005; Sekine et al. 2018, Sci Signal (ORL1)"
+    ],
+    "qualifier": "Invert direction; qualify NgR1-centric convergence to acute signaling; PirB/NgR2 redundancy"
+  },
+  {
+    "claim_id": "EC-0107",
+    "verdict": "CONFIRMED",
+    "rationale": "RhoA activation of ROCK reconfirmed as current standard model in spinal microglia (P2Y12/13-p38 cascade).",
+    "evidence_refs": [
+      "theme_05#F5.4"
+    ],
+    "citations": [
+      "Tatsumi et al. 2015, Glia 63:216; Zhang et al. (P2Y12-GTP-RhoA)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0108",
+    "verdict": "EXTENDED",
+    "rationale": "LPA-LPAR1-RhoA demyelination cascade supported and extended to satellite-glial/Schwann-cell peripheral arm with new antagonists.",
+    "evidence_refs": [
+      "theme_05#F5.6"
+    ],
+    "citations": [
+      "J Transl Med 2025 (Cx43-SGC crosstalk); STTT 2025 LPA review; IASP 2024 UD-039 posters"
+    ],
+    "qualifier": "Peripheral arm absent from KB dossier; PIPE-791, oxypeucedanin novel handles"
+  },
+  {
+    "claim_id": "EC-0109",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Simvastatin blocking RhoA membrane anchoring is standard mevalonate pharmacology but was not resurfaced by this sweep.",
+    "evidence_refs": [
+      "theme_05#F5.5"
+    ],
+    "citations": [],
+    "qualifier": "Predicate inverted (statin blocks RhoA prenylation/anchoring)"
+  },
+  {
+    "claim_id": "EC-0110",
+    "verdict": "EXTENDED",
+    "rationale": "Context-dependent regeneration-vs-pain roles reinforced: ROCK inhibition aids regeneration/remyelination centrally and peripherally while relieving pain.",
+    "evidence_refs": [
+      "theme_05#F5.5"
+    ],
+    "citations": [
+      "J Orthop Transl 2024; Ramer et al. 2004, J Neurosci; Xu et al. 2020, Mol Pain"
+    ],
+    "qualifier": "Add pro-regenerative instances to caution framing"
+  },
+  {
+    "claim_id": "EC-0111",
+    "verdict": "CONFIRMED",
+    "rationale": "SST interneuron ablation abolishing mechanical pain and SST transcriptome handles reconfirmed.",
+    "evidence_refs": [
+      "theme_01#F1.8"
+    ],
+    "citations": [
+      "Duan et al. 2014, Cell 159:1417; Chamessian et al. 2018, Sci Rep; Cav3.2-in-SOM+ Front Cell Neurosci 2022"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0112",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "SST circuitry solid, but Prdm12 developmental-specification edge was not resurfaced and direction reads backwards (Prdm12 specifies SST fate).",
+    "evidence_refs": [
+      "theme_01#F1.8"
+    ],
+    "citations": [],
+    "qualifier": "Fix direction; attach developmental source before promotion"
+  },
+  {
+    "claim_id": "EC-0113",
+    "verdict": "CONFIRMED",
+    "rationale": "TNF-alpha activation of RhoA supported and extended by USP53/FKBP51 deubiquitinase arm.",
+    "evidence_refs": [
+      "theme_05#F5.10"
+    ],
+    "citations": [
+      "Acta Neurobiol Exp 2022;82; Tatsumi 2015 context"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0114",
+    "verdict": "CONFIRMED",
+    "rationale": "TNF-alpha engagement of JAK/STAT3 (Src-dependent) matches consensus network framing.",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Tsuda et al. 2011, Brain; Aging Dis 2024 review"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0115",
+    "verdict": "CONFIRMED",
+    "rationale": "TNF-alpha downregulation of tight-junction proteins supported in BSCB/BBB disruption literature.",
+    "evidence_refs": [
+      "theme_04#F4.5",
+      "theme_04#F4.8"
+    ],
+    "citations": [
+      "Montague-Cardoso & Malcangio 2021; claudin-12 bioRxiv 2019 (BNB mirror)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0116",
+    "verdict": "CONFIRMED",
+    "rationale": "Normoxic HIF1alpha stabilization by ROS/TNF/NF-kB systematized in landmark inflammation-immunity integration.",
+    "evidence_refs": [
+      "theme_04#F4.4"
+    ],
+    "citations": [
+      "Palazon et al. 2014, Immunity 41:518"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0117",
+    "verdict": "EXTENDED",
+    "rationale": "XPro1595 selective solTNF/TNFR1 blockade validated in vivo and extended by human Phase 2 safety precedent plus sex- and window-limitations.",
+    "evidence_refs": [
+      "theme_03#F3.1",
+      "theme_03#F3.2",
+      "theme_03#F3.3"
+    ],
+    "citations": [
+      "Cells 2025;14:1749; Jaeger et al. 2026, npj Dementia (MINDFuL); O'Reilly 2021, J Neurotrauma"
+    ],
+    "qualifier": "Sex-dependent efficacy (males respond, females blunted via estrogen); late SCI dosing failed; AD indication not pain; card predicate phrasing inverted"
+  },
+  {
+    "claim_id": "EC-0118",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Encoding inverted - CypA-MMP-9 degrades tight junctions, not vice versa; underlying proteolysis supported so fix direction rather than delete.",
+    "evidence_refs": [
+      "theme_04#F4.8"
+    ],
+    "citations": [
+      "Theme 4 Contradictions #5 (data-quality flag)"
+    ],
+    "qualifier": "Directionality fix required"
+  },
+  {
+    "claim_id": "EC-0119",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Encoding inverted - VEGFR2 is downregulated by disease signals, not by tight junctions; underlying coupling untested; fix direction/source.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "Theme 4 Contradictions #5"
+    ],
+    "qualifier": "Data-quality flag"
+  },
+  {
+    "claim_id": "EC-0120",
+    "verdict": "EXTENDED",
+    "rationale": "Staged-prophylaxis concept gains indirect/conceptual support (DMF prevention of chronification; schedule-dependent HDACi effects) but the staggered quadruple protocol itself is untested.",
+    "evidence_refs": [
+      "theme_08#F8.7",
+      "theme_09#F9.7"
+    ],
+    "citations": [
+      "Le et al. 2025, Brain Behav Immun 128:725 (DMF pretreatment); Denk et al. 2013, Pain 154:1668"
+    ],
+    "qualifier": "Proposal-level synthesis: mark evidence_level=synthetic; component edges individually graded elsewhere"
+  },
+  {
+    "claim_id": "EC-0121",
+    "verdict": "CONFIRMED",
+    "rationale": "TrkB-to-MAPK arm directly shown in rACC aversion (NR2B/pERK/pCREB reversed by TrkB block).",
+    "evidence_refs": [
+      "theme_10#F10.4"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0122",
+    "verdict": "MIXED",
+    "rationale": "TrkB-driven KCC2 downregulation is strongly supported including human tissue, but early post-lesion downregulation can be adaptive - temporal qualifier mandatory.",
+    "evidence_refs": [
+      "theme_01#F1.3",
+      "theme_01#F1.4",
+      "theme_01#F1.10",
+      "theme_01#F1.14"
+    ],
+    "citations": [
+      "Davis 2025 (human SDH); Dedek 2019, Brain; Cheung et al. 2023, Sci Rep 13:7871"
+    ],
+    "qualifier": "Pathogenic in chronic dorsal-horn pain states; transiently beneficial early post-lesion in motor circuits; BDNF-TrkB effects context-dependent (immature/Shc-only upregulate KCC2)"
+  },
+  {
+    "claim_id": "EC-0123",
+    "verdict": "CONFIRMED",
+    "rationale": "ANA-12 antagonism of TrkB.FL is validated tool pharmacology; card predicate inverted.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Cazorla et al. 2011 line"
+    ],
+    "qualifier": "Fix direction"
+  },
+  {
+    "claim_id": "EC-0124",
+    "verdict": "MIXED",
+    "rationale": "Full-length TrkB signaling downregulating KCC2 supported (rodent + human) with the same early-adaptive/temporal contradiction.",
+    "evidence_refs": [
+      "theme_01#F1.3",
+      "theme_01#F1.10",
+      "theme_01#F1.14"
+    ],
+    "citations": [
+      "Rivera et al. 2002/2004; Cheung 2023, Sci Rep"
+    ],
+    "qualifier": "Time-window and circuit qualifiers required (motor vs dorsal-horn)"
+  },
+  {
+    "claim_id": "EC-0125",
+    "verdict": "CONFIRMED",
+    "rationale": "TrkB potentiation of NMDAR/GluN2B trafficking shown in rACC aversion and PSD-95-GluN2B literature.",
+    "evidence_refs": [
+      "theme_10#F10.4",
+      "theme_10#F10.3"
+    ],
+    "citations": [
+      "Li TT et al. 2022, Brain Res Bull; Sci Rep 2022 PSD-95/NR2B ACC"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0126",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "TrkB.T1-specific interaction with ANA-12 not separately resurfaced though ANA-12 tool validity holds broadly.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [],
+    "qualifier": "Isoform-specific binding unaddressed"
+  },
+  {
+    "claim_id": "EC-0127",
+    "verdict": "EXTENDED",
+    "rationale": "Anti-TNF paradox expanded to two distinct hazards: demyelinating neuropathy and impaired acute-to-chronic pain resolution (TNFR2 pro-resolving arm).",
+    "evidence_refs": [
+      "theme_03#F3.3"
+    ],
+    "citations": [
+      "Reumatologia 2021 (Kucharz); J Pain Res 2025 (postoperative resolution); PNAS 2019 TNFR2/Treg"
+    ],
+    "qualifier": "NEW_MECHANISM candidate: neuronal TNFR2->POMC/beta-endorphin + CB1 pro-resolution axis (bioRxiv 2025.11.24.690195)"
+  },
+  {
+    "claim_id": "EC-0128",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "VEGFR2-NRP1 coreceptor enhancement is standard angiogenesis biology but unassessed in pain context this sweep.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [],
+    "qualifier": "Attach angiogenesis-domain source or mark out-of-scope"
+  },
+  {
+    "claim_id": "EC-0129",
+    "verdict": "EXTENDED",
+    "rationale": "Excess VEGFA driving aberrant angiogenesis and prolonged pain confirmed; direct painful-neuroma causality not retrieved.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "J Neurochem 2013; Mol Pain 2022 (sFlt-1); PMID 42582843 (neuroma phenotypic shift, VEGF-untested)"
+    ],
+    "qualifier": "Soften to neuroma-associated neovascularization unless a causal VEGF-neuroma study is attached"
+  },
+  {
+    "claim_id": "EC-0130",
+    "verdict": "EXTENDED",
+    "rationale": "Repair-vs-pain duality refined into isoform and receptor axes (VEGF-Axxxa/xxxb; VEGFR1 pronociceptive vs VEGFR2 context-protective).",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "Beazley-Long et al. 2013, Am J Pathol; Hulse 2017, Channels; Brain Sci 2025 pair"
+    ],
+    "qualifier": "Replace blunt duality framing with SRPK1-splicing and receptor-resolved edges"
+  },
+  {
+    "claim_id": "EC-0131",
+    "verdict": "REFUTED",
+    "rationale": "ZFHX2 regulome excludes BDNF and Zfhx2-null mice are heat-HYPERsensitive - the BDNF-TrkB-KCC2 rationale is contradicted.",
+    "evidence_refs": [
+      "theme_06#F6.8"
+    ],
+    "citations": [
+      "Habib et al. 2018, Brain 141:365 (Marsili syndrome)"
+    ],
+    "qualifier": "Human genetics premise real (R1913K hypoalgesia) but mechanism cards must be rebuilt on SST/PTGIR/GFRA3/GAL regulome"
+  },
+  {
+    "claim_id": "EC-0132",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "No injury-model (SNI/CCI/SNL) ZFHX2 study exists; central-sensitization role unevidenced.",
+    "evidence_refs": [
+      "theme_06#F6.8"
+    ],
+    "citations": [],
+    "qualifier": "Strong-but-not-exhaustive negative evidence; targeted PubMed check advised before deletion"
+  },
+  {
+    "claim_id": "EC-0133",
+    "verdict": "REFUTED",
+    "rationale": "Claimed Nav1.7/Nav1.8/TRPV1/TRPA1/CGRP transactivation contradicted: ChIP-seq regulome is neuropeptide-signalling genes (SST up; PTGIR, GFRA3, GAL down).",
+    "evidence_refs": [
+      "theme_06#F6.8"
+    ],
+    "citations": [
+      "Habib et al. 2018, Brain 141:365"
+    ],
+    "qualifier": "Replace battery with corrected gene set; note Zfhx2-null heat hypersensitivity guards against naive LOF-analgesia modeling"
+  },
+  {
+    "claim_id": "EC-0134",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "No preclinical ZFHX2-ASO/siRNA study surfaced in any database searched.",
+    "evidence_refs": [
+      "theme_06#F6.8"
+    ],
+    "citations": [],
+    "qualifier": "Concept-only; keep unsourced"
+  },
+  {
+    "claim_id": "EC-0135",
+    "verdict": "UNREVIEWED",
+    "rationale": "mPTP-rapamycin protection edge in unswept mitophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0136",
+    "verdict": "UNREVIEWED",
+    "rationale": "mPTP-Ru360/MCU edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0137",
+    "verdict": "UNREVIEWED",
+    "rationale": "mTORC1-rapamycin edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0138",
+    "verdict": "UNREVIEWED",
+    "rationale": "myr-Akt payload edge in unswept autophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0139",
+    "verdict": "UNREVIEWED",
+    "rationale": "Skill/meta-appraisal design claim outside all ten themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0140",
+    "verdict": "CONFIRMED",
+    "rationale": "ANA-12 preserving KCC2 via TrkB blockade consistent with validated BDNF-TrkB-to-KCC2 cascade and ANA-12 tool data.",
+    "evidence_refs": [
+      "theme_10#F10.5",
+      "theme_01#F1.4"
+    ],
+    "citations": [
+      "Dedek et al. 2019, Brain; Mol Pain 2023 dynamic-allodynia study"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0141",
+    "verdict": "UNREVIEWED",
+    "rationale": "Bcl-xL-Kozak vector-design edge in unswept autophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0142",
+    "verdict": "UNREVIEWED",
+    "rationale": "Long-term autophagy-blockade risk rationale in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0143",
+    "verdict": "UNREVIEWED",
+    "rationale": "Beclin-1-calpain edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0144",
+    "verdict": "UNREVIEWED",
+    "rationale": "Beclin-1-mTORC1 edge in unswept dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0145",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "BDNF enhancing SST interneuron excitability not resurfaced although SST area swept.",
+    "evidence_refs": [
+      "theme_01#F1.8"
+    ],
+    "citations": [],
+    "qualifier": "Attach source or drop"
+  },
+  {
+    "claim_id": "EC-0146",
+    "verdict": "EXTENDED",
+    "rationale": "Microglial BDNF/ROCK interplay supported via RhoA/ROCK-p38 microglial cascade, but card predicate wording ('release of ROCK') is garbled.",
+    "evidence_refs": [
+      "theme_05#F5.4"
+    ],
+    "citations": [
+      "Tatsumi et al. 2015, Glia 63:216"
+    ],
+    "qualifier": "Recast edge as BDNF-linked microglial RhoA/ROCK activation (kinases are not released)"
+  },
+  {
+    "claim_id": "EC-0147",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Explicitly flagged NO_SUPPORT_FOUND: no retrieved source connects BDNF to Kalrn translation in any region.",
+    "evidence_refs": [
+      "theme_10#F10.4",
+      "theme_10#F10.1"
+    ],
+    "citations": [],
+    "qualifier": "Drop or mark speculative"
+  },
+  {
+    "claim_id": "EC-0148",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cascade-via-ROS HIF1alpha edge in unswept cascade dossier (HIF area swept, edge untouched).",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0149",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "No pain-context study links HIF1alpha transcriptionally to ANGPT2; general-hypoxia plausibility only - mark speculative.",
+    "evidence_refs": [
+      "theme_04#F4.10"
+    ],
+    "citations": [],
+    "qualifier": "Keep sign, set evidence_level=speculative until primary source attached"
+  },
+  {
+    "claim_id": "EC-0150",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Glycolytic-shift-to-Ang-2 chain unsupported in pain literature; retrieved Ang-2 regulation is neutrophil-elastase-linked instead.",
+    "evidence_refs": [
+      "theme_04#F4.10",
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Acta Neuropathol Commun 2018 (sivelestat/Ang-1 alternative route)"
+    ],
+    "qualifier": "Consider replacing with elastase->Ang-1-degradation edge"
+  },
+  {
+    "claim_id": "EC-0151",
+    "verdict": "CONFIRMED",
+    "rationale": "MMP-9-to-NgR1 upregulation via RhoA/ROCK listed among reconfirmed core claims; ORL1 maturation adds upstream handle.",
+    "evidence_refs": [
+      "theme_02#F2.1",
+      "theme_05#F5.7"
+    ],
+    "citations": [
+      "Front Mol Neurosci 2025 review; Sekine et al. 2018, Sci Signal"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0152",
+    "verdict": "CONFIRMED",
+    "rationale": "NF-kB upstream activation of IL-6/gp130/JAK2 hub matches consensus framing.",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Tsuda 2011, Brain; Aging Dis 2024 review"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0153",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Rbfox1-NrCAM splice axis confirmed end-to-end, but the NrCAM-NgR1 interaction edge remains ambiguous/untested (EGFR-link hypothesis also unproven).",
+    "evidence_refs": [
+      "theme_06#F6.6"
+    ],
+    "citations": [
+      "Neurotherapeutics commentary 2024"
+    ],
+    "qualifier": "Keep AMBIGUOUS status; do not promote without binding data"
+  },
+  {
+    "claim_id": "EC-0154",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "PV-failure-to-SST-hyperactivation compensation edge not resurfaced (BLA bidirectional PV/SST appeared in search log only).",
+    "evidence_refs": [
+      "theme_01#F1.8"
+    ],
+    "citations": [],
+    "qualifier": "Spinal vs BLA context unclear - specify region before sourcing"
+  },
+  {
+    "claim_id": "EC-0155",
+    "verdict": "CONFIRMED",
+    "rationale": "Listed among IL-6/JAK-STAT network edges matching current consensus framing; semantics unusual but sweep-assigned SUPPORTS.",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [
+      "Tsuda et al. 2011, Brain"
+    ],
+    "qualifier": "Reword predicate for clarity (PV-KCC2/BDNF state modulates JAK/STAT tone)"
+  },
+  {
+    "claim_id": "EC-0156",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Indirect PV-via-RhoA/MMP9/PNN impairment of NgR1 untested as a chain and inherits the EC-0070 cell-type problem.",
+    "evidence_refs": [
+      "theme_01#F1.13",
+      "theme_02#F2.3"
+    ],
+    "citations": [
+      "Tansley et al. 2022, Science"
+    ],
+    "qualifier": "Do not promote until EC-0070 re-scoped"
+  },
+  {
+    "claim_id": "EC-0157",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "ACC-contextualized ROCK-antagonizes-Kal7 inference flagged unsupported; generic RhoA/Rac1 antagonism is textbook but pain-context source absent.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Demote with kalirin_inferred flag retained"
+  },
+  {
+    "claim_id": "EC-0158",
+    "verdict": "UNREVIEWED",
+    "rationale": "Goldilocks/dual-lock AAV rationale in unswept autophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0159",
+    "verdict": "EXTENDED",
+    "rationale": "Family-level SPM pro-resolution support strong, but the specific SPM-complementary-to-Ang-1 barrier combination is untested head-to-head.",
+    "evidence_refs": [
+      "theme_08#F8.1",
+      "theme_08#F8.3",
+      "theme_04#F4.6"
+    ],
+    "citations": [
+      "Ji 2023, Annu Rev Pharmacol Toxicol; Ferreira 2025, Eur J Pharmacol (AT-LXA4)"
+    ],
+    "qualifier": "Remains INFERRED: no direct SPM-vs-Ang-1 comparison retrieved"
+  },
+  {
+    "claim_id": "EC-0160",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "RhoA-antagonizes-Kal7 inference flagged unsupported in ACC framing.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "kalirin_inferred; demote"
+  },
+  {
+    "claim_id": "EC-0161",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Generic RhoA-Rac1 functional antagonism is standard biology but no pain-context primary source surfaced for the edge as framed.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Penzes-lineage general biology"
+    ],
+    "qualifier": "Attach textbook/review source or leave low confidence"
+  },
+  {
+    "claim_id": "EC-0162",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Axis-level antagonism of Kal7 flagged unsupported (ACC-contextualized inferred).",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Demote"
+  },
+  {
+    "claim_id": "EC-0163",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Via-Rac1 antagonism variant likewise unsupported in pain context.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [],
+    "qualifier": "kalirin_inferred; demote"
+  },
+  {
+    "claim_id": "EC-0164",
+    "verdict": "CONFIRMED",
+    "rationale": "TNF-VEGFA mutual upregulation reconfirmed in inflammation-angiogenesis landmark literature.",
+    "evidence_refs": [
+      "theme_04#F4.4"
+    ],
+    "citations": [
+      "Palazon et al. 2014, Immunity; Nat Med 2006 Ang-2/TNF era"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0165",
+    "verdict": "UNREVIEWED",
+    "rationale": "Therapeutic-strategy rationale in unswept autophagy/apoptosis dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "EC-0166",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Ana-12 dossier swept but TrkB-causes-calcium-overload edge itself untouched.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [],
+    "qualifier": "Chain inference only; source or demote"
+  },
+  {
+    "claim_id": "EC-0167",
+    "verdict": "EXTENDED",
+    "rationale": "Cytokine-to-ACC-plasticity contribution supported at network level; direct TNFalpha-to-spine-elimination endpoint unverified.",
+    "evidence_refs": [
+      "theme_10#F10.10"
+    ],
+    "citations": [
+      "ACC neuroplasticity review doi:10.1002/brb3.71408 (PMC13080107)"
+    ],
+    "qualifier": "Low-medium confidence on morphology endpoint; time-stamp dynamics"
+  },
+  {
+    "claim_id": "EC-0168",
+    "verdict": "MIXED",
+    "rationale": "Contested VEGFR2 valence: 2025 organotypic-cord data show VEGFR2 signaling neuroprotective with pronociception segregating to VEGFR1, contradicting the inferred pronociceptive VEGFR2-to-BDNF-TrkB-to-KCC2 chain.",
+    "evidence_refs": [
+      "theme_04#F4.7"
+    ],
+    "citations": [
+      "Brain Sci 2025 pii S1878747925000108/S1878747925000121; JECCR 2021 (anti-VEGFR1)"
+    ],
+    "qualifier": "Context-dependent (chemotherapy neurotoxicity vs nerve-injury models); treat as contested, consider VEGFR1 reassignment"
+  },
+  {
+    "claim_id": "EC-0169",
+    "verdict": "UNREVIEWED",
+    "rationale": "mTORC1 double-edged-sword rationale in unswept autophagy dossier.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0001",
+    "verdict": "CONFIRMED",
+    "rationale": "B1-selective des-Arg9-Leu8-bradykinin reducing established mechanical allodynia days-to-weeks post-lesion supported by kinin-antagonist CIPN work.",
+    "evidence_refs": [
+      "theme_07#F7.5"
+    ],
+    "citations": [
+      "Becker et al. 2023, Pharmaceutics 15:852"
+    ],
+    "qualifier": "Mechanical allodynia responsive; cold allodynia kinin-resistant in cisplatin model - scope boundary"
+  },
+  {
+    "claim_id": "QC-0002",
+    "verdict": "EXTENDED",
+    "rationale": "Protective kinin-opioid interaction conceptually reinforced by stage-dependent protective B1R biology, but the exact 30-35% double-KO figure was not independently reproduced.",
+    "evidence_refs": [
+      "theme_07#F7.9"
+    ],
+    "citations": [
+      "Front Med 2025 (stage-dependent diabetic B1R); Stemper et al. 2025, Pain"
+    ],
+    "qualifier": "B1R sign flips with disease stage (early protective / late pronociceptive) - add temporal qualifier"
+  },
+  {
+    "claim_id": "QC-0003",
+    "verdict": "CONFIRMED",
+    "rationale": "Established-allodynia reversal by kinin blockade supported (DALBK/icatibant ~52%/57% in cisplatin CIPN).",
+    "evidence_refs": [
+      "theme_07#F7.5"
+    ],
+    "citations": [
+      "Becker et al. 2023, Pharmaceutics 15:852"
+    ],
+    "qualifier": "Cold allodynia resistant boundary condition"
+  },
+  {
+    "claim_id": "QC-0004",
+    "verdict": "CONFIRMED",
+    "rationale": "BRADiNP crossover design statement verified verbatim against the published Phase 2a report (fulmetibant 450 mg once daily, 2x4-week periods).",
+    "evidence_refs": [
+      "theme_07#F7.7"
+    ],
+    "citations": [
+      "Stemper et al. 2025, Pain (doi:10.1097/j.pain.0000000000003642; NCT05219812; adjudicated)"
+    ],
+    "qualifier": "Trial negative: treatment difference 0.07 (-0.170 to 0.314) - contextualize as failed translation"
+  },
+  {
+    "claim_id": "QC-0005",
+    "verdict": "CONFIRMED",
+    "rationale": "Primary-endpoint statement verified verbatim against published BRADiNP report.",
+    "evidence_refs": [
+      "theme_07#F7.7"
+    ],
+    "citations": [
+      "Stemper et al. 2025, Pain (adjudicated)"
+    ],
+    "qualifier": "Negative primary result"
+  },
+  {
+    "claim_id": "QC-0006",
+    "verdict": "CONFIRMED",
+    "rationale": "AE-rate statement verified verbatim (mostly mild/moderate, 51.3% of treated participants; 41.8% drug vs 32.9% placebo).",
+    "evidence_refs": [
+      "theme_07#F7.7"
+    ],
+    "citations": [
+      "Stemper et al. 2025, Pain (adjudicated); Icatibant Outcome Survey safety bedrock"
+    ],
+    "qualifier": "Promote citation_status to VERIFIED"
+  },
+  {
+    "claim_id": "QC-0007",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "~50% cognitive-impairment prevalence statistic not targeted by any executed query.",
+    "evidence_refs": [
+      "theme_08#F8.8"
+    ],
+    "citations": [],
+    "qualifier": "Left unverified; assign dedicated epidemiology check"
+  },
+  {
+    "claim_id": "QC-0008",
+    "verdict": "EXTENDED",
+    "rationale": "LY2828360 paclitaxel experiment reproduced exactly and extended (sensory-neuron locus; spontaneous-pain CPP; opioid-sparing).",
+    "evidence_refs": [
+      "theme_08#F8.8"
+    ],
+    "citations": [
+      "Lin et al. 2018 (PMID 29192123); Guenther et al. 2024/2025, Biomed Pharmacother/Neuropharmacology"
+    ],
+    "qualifier": "CB2 bench-bedside gap: inconsistent human trials; CNTX-6016 still Phase I"
+  },
+  {
+    "claim_id": "QC-0009",
+    "verdict": "UNREVIEWED",
+    "rationale": "AMG487 CCL21-CXCR3 dosing claim outside all ten themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0010",
+    "verdict": "UNREVIEWED",
+    "rationale": "CCL21-neutralising antibody claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0011",
+    "verdict": "UNREVIEWED",
+    "rationale": "48-hour CCL21 reversal claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0012",
+    "verdict": "EXTENDED",
+    "rationale": "PLX5622 IC50/tool status supported; systemic myeloid effects and pexidartinib hepatotoxicity constraints added.",
+    "evidence_refs": [
+      "theme_03#F3.7"
+    ],
+    "citations": [
+      "Nat Commun 2019 (PLX5622 pharmacology); Cell Reports 2025 (sex-dimorphic depletion)"
+    ],
+    "qualifier": "Male>female depletion efficacy under identical regimens"
+  },
+  {
+    "claim_id": "QC-0013",
+    "verdict": "EXTENDED",
+    "rationale": "65 mg/kg pSNL PLX5622 experiment supported by CSF1R-depletion reversal literature with sex-dimorphic caveat.",
+    "evidence_refs": [
+      "theme_03#F3.7"
+    ],
+    "citations": [
+      "Lee et al. 2018, Mol Pain 14; Henry et al. 2020, J Neurosci"
+    ],
+    "qualifier": "Sex-dimorphic microglial response (female mitochondrial-survival compensation)"
+  },
+  {
+    "claim_id": "QC-0014",
+    "verdict": "UNREVIEWED",
+    "rationale": "CXCR4-GlyR alpha3 colocalization claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0015",
+    "verdict": "UNREVIEWED",
+    "rationale": "AMD3100 SNL claim outside themes (nearest: Xie 2016 AMD3100 noted unresolved in theme 5 limitations).",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0016",
+    "verdict": "UNREVIEWED",
+    "rationale": "Systemic AMD3100 opioid-secretion claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0017",
+    "verdict": "UNREVIEWED",
+    "rationale": "pSNL/CPIP AMD3100 cytokine claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0018",
+    "verdict": "UNREVIEWED",
+    "rationale": "SNI AMD3100 claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0019",
+    "verdict": "UNREVIEWED",
+    "rationale": "Bone-cancer AMD3100 claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0020",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cx43 hemichannel Ca2+-regulation claim outside themes (only incidental Cx43-SGC lexical appearance in theme 5).",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0021",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cx43 injury-induced expression kinetics outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0022",
+    "verdict": "UNREVIEWED",
+    "rationale": "Cx43 heterozygous-KO gene-dosage claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0023",
+    "verdict": "UNREVIEWED",
+    "rationale": "ABT-627 endothelin diabetic-rat claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0024",
+    "verdict": "UNREVIEWED",
+    "rationale": "Bosentan SCI claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0025",
+    "verdict": "UNREVIEWED",
+    "rationale": "GLT-1 glutamate-gradient physiology outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0026",
+    "verdict": "UNREVIEWED",
+    "rationale": "GLT-1 80-90% uptake share outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0027",
+    "verdict": "UNREVIEWED",
+    "rationale": "Slc1a2 mRNA reduction kinetics outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0028",
+    "verdict": "UNREVIEWED",
+    "rationale": "Microdialysis glutamate elevation outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0029",
+    "verdict": "UNREVIEWED",
+    "rationale": "GLT-1 upregulation timecourse outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0030",
+    "verdict": "UNREVIEWED",
+    "rationale": "GLT-1 heterozygous-KO severity claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0031",
+    "verdict": "UNREVIEWED",
+    "rationale": "Ceftriaxone PHN pilot outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0032",
+    "verdict": "UNREVIEWED",
+    "rationale": "GM-CSFR nociceptor-expression controversy explicitly carried forward unverified by theme 6 limitations.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": "Assigned to immune-theme dossier; not re-searched"
+  },
+  {
+    "claim_id": "QC-0033",
+    "verdict": "UNREVIEWED",
+    "rationale": "Human DRG GM-CSFR map outside swept findings.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0034",
+    "verdict": "UNREVIEWED",
+    "rationale": "DRG meninges leukocyte accumulation kinetics outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0035",
+    "verdict": "UNREVIEWED",
+    "rationale": "Vertebral-BM myeloid migration percentages outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0036",
+    "verdict": "CONFIRMED",
+    "rationale": "COHb >10-15% toxicity ceiling consistent with entire CORM-field premise of controlled local CO delivery.",
+    "evidence_refs": [
+      "theme_08#F8.5"
+    ],
+    "citations": [
+      "Motterlini & Otterbein 2010, Nat Rev Drug Discov; Ling et al. 2017, J Med Chem"
+    ],
+    "qualifier": "HO isoform dichotomy (HO-1 anti-, HO-2 pronociceptive) must accompany any HO-activity statement"
+  },
+  {
+    "claim_id": "QC-0037",
+    "verdict": "UNREVIEWED",
+    "rationale": "Intrathecal IGF2-siRNA 10-day claim (IGF1-2 dossier) untouched by sweeps.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0038",
+    "verdict": "CONFIRMED",
+    "rationale": "[Cl-]i 4-7 mM physiological setting supported by chloride-homeostasis canon and newly human-anchored via HRDD biomarker extension.",
+    "evidence_refs": [
+      "theme_01#F1.3",
+      "theme_01#F1.15"
+    ],
+    "citations": [
+      "Marshall et al. 2023, Brain Commun; Pressey et al. 2024, Front Mol Neurosci"
+    ],
+    "qualifier": "HRDD matures as human pharmacodynamic readout of spinal KCC2; CSF-KCC2 still Rett-only"
+  },
+  {
+    "claim_id": "QC-0039",
+    "verdict": "EXTENDED",
+    "rationale": "CLP290 claim embedded in a field whose pipeline has advanced to named candidates (AXN-027 FIH; OV350); CLP290 figures themselves not independently resurfaced.",
+    "evidence_refs": [
+      "theme_01#F1.1",
+      "theme_01#F1.2"
+    ],
+    "citations": [
+      "Pressey et al. 2024, Front Mol Neurosci 17:1503070"
+    ],
+    "qualifier": "Attach primary CLP290 source; note no CLP257 clinical trial exists"
+  },
+  {
+    "claim_id": "QC-0040",
+    "verdict": "EXTENDED",
+    "rationale": "Potency/selectivity statements carry a mechanism-of-action caveat: CLP257 MOA debated (indirect; membrane-clustering mechanism supported 2026).",
+    "evidence_refs": [
+      "theme_01#F1.2",
+      "theme_01#F1.1"
+    ],
+    "citations": [
+      "PNAS 2026 (prochlorperazine/CLP-257 clustering); PMC7371006 (MOA critique)"
+    ],
+    "qualifier": "ARN23746 numbers not independently surfaced - verify against primary before promotion"
+  },
+  {
+    "claim_id": "QC-0041",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "ARN23746 SNI efficacy figures not surfaced by sweep (flagged unverified quantitative card).",
+    "evidence_refs": [
+      "theme_01#F1.1"
+    ],
+    "citations": [],
+    "qualifier": "Verify ARN23746 primary source"
+  },
+  {
+    "claim_id": "QC-0042",
+    "verdict": "EXTENDED",
+    "rationale": "Lead-compound claim carries same MOA caveat; specific EC50/B:P figures not independently surfaced.",
+    "evidence_refs": [
+      "theme_01#F1.2"
+    ],
+    "citations": [
+      "PMC7371006; PNAS 2026"
+    ],
+    "qualifier": "Verify primary source for the unnamed lead"
+  },
+  {
+    "claim_id": "QC-0043",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "STAB-1 prophylactic CIPN figure not surfaced (flagged unverified).",
+    "evidence_refs": [
+      "theme_01#F1.1"
+    ],
+    "citations": [],
+    "qualifier": "Verify STAB-1 primary source"
+  },
+  {
+    "claim_id": "QC-0044",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "BUM-9082 brain-selectivity figure not surfaced (flagged unverified).",
+    "evidence_refs": [
+      "theme_01#F1.1"
+    ],
+    "citations": [],
+    "qualifier": "Verify BUM-9082 primary source"
+  },
+  {
+    "claim_id": "QC-0045",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "CLP290+bumetanide dual ED50-synergy figure not surfaced (flagged unverified).",
+    "evidence_refs": [
+      "theme_01#F1.1"
+    ],
+    "citations": [],
+    "qualifier": "Verify synergy source"
+  },
+  {
+    "claim_id": "QC-0046",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "200 mg/kg tolerability figure not surfaced (flagged unverified).",
+    "evidence_refs": [
+      "theme_01#F1.1"
+    ],
+    "citations": [],
+    "qualifier": "Verify tolerability source"
+  },
+  {
+    "claim_id": "QC-0047",
+    "verdict": "CONFIRMED",
+    "rationale": "P2X7 high-micromolar ATP affinity threshold reconfirmed ahead of clinical-track antagonist AK1780.",
+    "evidence_refs": [
+      "theme_03#F3.8"
+    ],
+    "citations": [
+      "J Pain 2025 (AK1780/LY3857210); Chessell et al. 2005, Pain 114:386"
+    ],
+    "qualifier": "AK1780 positioned for neuropathic-pain PoC trials"
+  },
+  {
+    "claim_id": "QC-0048",
+    "verdict": "EXTENDED",
+    "rationale": "PPARgamma agonist analgesia supported and mechanistically deepened (sTREM2 biomarker, M1/M2, mitochondrial axis) with TZD-safety caveats.",
+    "evidence_refs": [
+      "theme_08#F8.6"
+    ],
+    "citations": [
+      "Acta Neuropathol Commun 2025; Trends Pharmacol Sci 2024"
+    ],
+    "qualifier": "Rosiglitazone CV signal; fluid retention/weight gain limit chronic use"
+  },
+  {
+    "claim_id": "QC-0049",
+    "verdict": "CONFIRMED",
+    "rationale": "Intrathecal 15d-PGJ2 anti-allodynic claim supported at class level within PPARgamma agonist literature.",
+    "evidence_refs": [
+      "theme_08#F8.6"
+    ],
+    "citations": [
+      "Pioglitazone NP literature (PMC4329091; Acta Neuropathol Commun 2025)"
+    ],
+    "qualifier": "No 15d-PGJ2-specific study resurfaced this sweep - class-level only"
+  },
+  {
+    "claim_id": "QC-0050",
+    "verdict": "CONFIRMED",
+    "rationale": "Ripasudil intrathecal SCI allodynia effect (to day 28) directly reconfirmed.",
+    "evidence_refs": [
+      "theme_05#F5.5"
+    ],
+    "citations": [
+      "Kishima et al. 2021, Spine (doi:10.1016/j.spinee.2020.08.011)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0051",
+    "verdict": "CONFIRMED",
+    "rationale": "RhoA-siRNA durability advantage over BA-210 consistent with ROCK-inhibitor preclinical base.",
+    "evidence_refs": [
+      "theme_05#F5.5"
+    ],
+    "citations": [
+      "Spine 2021 ripasudil; J Orthop Transl 2024 fasudil"
+    ],
+    "qualifier": "siRNA-vs-peptide durability contrast retained"
+  },
+  {
+    "claim_id": "QC-0052",
+    "verdict": "CONFIRMED",
+    "rationale": "Fingolimod lymphopenia to ~20-30% baseline via lymph-node trapping confirmed as class hallmark.",
+    "evidence_refs": [
+      "theme_08#F8.9"
+    ],
+    "citations": [
+      "Doolen et al. 2018, Pain 159:224; S1PR pharmacology reviews"
+    ],
+    "qualifier": "First-dose bradycardia additional class caveat"
+  },
+  {
+    "claim_id": "QC-0053",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Most-potent-SPM ED50 comparison not reproduced in sweep results though SPM area thoroughly covered.",
+    "evidence_refs": [
+      "theme_08#F8.1"
+    ],
+    "citations": [],
+    "qualifier": "Locate primary head-to-head ED50 source"
+  },
+  {
+    "claim_id": "QC-0054",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Omega-3-to-SPM conversion efficiency estimate not independently surfaced (adjacent null RA supplementation RCT noted).",
+    "evidence_refs": [
+      "theme_08#F8.4"
+    ],
+    "citations": [
+      "Sci Rep 2017 17-HDHA association"
+    ],
+    "qualifier": "Conversion-efficiency figure needs sourcing"
+  },
+  {
+    "claim_id": "QC-0055",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "2-14 day Nogo-A therapeutic-window restriction not directly tested; NISCI results partially support windowing caution.",
+    "evidence_refs": [
+      "theme_05#F5.1"
+    ],
+    "citations": [
+      "Lancet Neurol 2025 NISCI"
+    ],
+    "qualifier": "Window rationale remains proposal-level"
+  },
+  {
+    "claim_id": "QC-0056",
+    "verdict": "CONFIRMED",
+    "rationale": "TLR2 mRNA/protein time course (rise 1-3 d, peak 7-14 d) supported by TLR-axis pain literature.",
+    "evidence_refs": [
+      "theme_03#F3.6"
+    ],
+    "citations": [
+      "ACT001 study Front Immunol 2022; TLR4 review PMC7890571"
+    ],
+    "qualifier": "Peripheral TLR4 stimulation can transiently release opioids - antagonism caveat"
+  },
+  {
+    "claim_id": "QC-0057",
+    "verdict": "CONFIRMED",
+    "rationale": "TRPV1 60-70% small/medium DRG neuron share consistent with literature family; not matched to a single primary table this sweep.",
+    "evidence_refs": [
+      "theme_06#F6.3",
+      "theme_06#F6.4"
+    ],
+    "citations": [
+      "TRPV1-biased allosterism Neuron 2024 (area anchor)"
+    ],
+    "qualifier": "Confidence-note retained per theme 6 limitations"
+  },
+  {
+    "claim_id": "QC-0058",
+    "verdict": "CONFIRMED",
+    "rationale": "Capsaicin 8% patch clinical basis uncontested in retrieved 2022-2026 TRPV1 literature.",
+    "evidence_refs": [
+      "theme_06#F6.4"
+    ],
+    "citations": [
+      "Qutenza trial background via theme_07-style corroboration; Scand J Pain 2025 (ACD440 context)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0059",
+    "verdict": "CONFIRMED",
+    "rationale": "Qutenza statement consistent with retrieved trial-literature background; unchanged.",
+    "evidence_refs": [
+      "theme_06#F6.4"
+    ],
+    "citations": [
+      "Scand J Pain 2025 (PMID 40711349) context"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0060",
+    "verdict": "CONFIRMED",
+    "rationale": "~30% pain-score reduction vs low-dose control consistent with trial background; unchanged.",
+    "evidence_refs": [
+      "theme_06#F6.4"
+    ],
+    "citations": [
+      "Qutenza trial background"
+    ],
+    "qualifier": "Note substring false-positive flag in theme 3 (harmless)"
+  },
+  {
+    "claim_id": "QC-0061",
+    "verdict": "CONFIRMED",
+    "rationale": "ACD440 ~50% temperature-evoked pain reduction figure matches published Phase 2a; restrictive qualifiers apply.",
+    "evidence_refs": [
+      "theme_06#F6.4"
+    ],
+    "citations": [
+      "Scand J Pain 2025 (PMID 40711349; NCT05416931)"
+    ],
+    "qualifier": "n=14 crossover; benefit shown in prespecified period-1 analysis only; thermal-evoked pain only; primary endpoint missed due to period effect"
+  },
+  {
+    "claim_id": "QC-0062",
+    "verdict": "UNREVIEWED",
+    "rationale": "Etifoxine nerve-crush claim (TSPO dossier) outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0063",
+    "verdict": "UNREVIEWED",
+    "rationale": "Etifoxine monoarthritis claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0064",
+    "verdict": "UNREVIEWED",
+    "rationale": "TSPO low-affinity binder frequency outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0065",
+    "verdict": "UNREVIEWED",
+    "rationale": "TSPO sex-difference kinetics outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0066",
+    "verdict": "CONFIRMED",
+    "rationale": "ANA-12 IC50 ~45.6 nM high-affinity non-competitive TrkB binding revalidated.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Cazorla et al. 2011 lineage"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0067",
+    "verdict": "CONFIRMED",
+    "rationale": "Systemic 0.5 mg/kg i.p. brain-wide partial TrkB inhibition within ~4 h matches published ANA-12 pharmacokinetics.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [
+      "Cazorla-lineage; 2022/2025 rACC usage studies"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0068",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Diabetic ketamine-ANA-12 reversal study directionally plausible but not independently located.",
+    "evidence_refs": [
+      "theme_10#F10.5"
+    ],
+    "citations": [],
+    "qualifier": "Keep medium-low confidence until primary source found"
+  },
+  {
+    "claim_id": "QC-0069",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "S5E2 PV-enhancer >90% specificity figure not assessed by any query.",
+    "evidence_refs": [
+      "theme_01#F1.6"
+    ],
+    "citations": [],
+    "qualifier": "PV area swept; enhancer-specificity figure unsourced"
+  },
+  {
+    "claim_id": "QC-0070",
+    "verdict": "CONFIRMED",
+    "rationale": "Intrathecal Cav3.2 ASO sustained analgesia supported by in vivo silencing literature (Messinger 2009) with duration consistent with ASO pharmacodynamics.",
+    "evidence_refs": [
+      "theme_06#F6.5"
+    ],
+    "citations": [
+      "Messinger et al. 2009, Pain 145:184"
+    ],
+    "qualifier": "ABT-639 Phase II failure tempers blocker translation (possible low human DRG T-type density)"
+  },
+  {
+    "claim_id": "QC-0071",
+    "verdict": "EXTENDED",
+    "rationale": "H3K18la persistence core premise confirmed and extended with first concrete targets (IGF2BP2-CCT2), but mark is model- and locus-specific.",
+    "evidence_refs": [
+      "theme_09#F9.1",
+      "theme_09#F9.3",
+      "theme_04#F4.2"
+    ],
+    "citations": [
+      "Wang Q-H et al. 2025, J Neurosci (DOI 10.1523/jneurosci.0365-25.2025); Nat Commun 2025 DOCK4"
+    ],
+    "qualifier": "H3K18la robust in CCI DRG but unchanged in SNL where H4K8la rose - annotate model/locus"
+  },
+  {
+    "claim_id": "QC-0072",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Lactylation-blockade analgesia principle multiply replicated (2-DG, oxamate, LDN-193189) but FX11-specific 10 ug/72 h parameters were not reproduced verbatim - citation verification required.",
+    "evidence_refs": [
+      "theme_04#F4.2",
+      "theme_09#F9.1"
+    ],
+    "citations": [
+      "J Neurosci 2026 PMID 41260921 (2-DG/Igf2bp2); Neurobiol Dis 2026 (oxamate)"
+    ],
+    "qualifier": "Keep UNVERIFIED pending FX11 source check"
+  },
+  {
+    "claim_id": "QC-0073",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "AZD3965 oral 50 mg/kg lactylation claim not encountered this sweep.",
+    "evidence_refs": [
+      "theme_09#F9.10"
+    ],
+    "citations": [],
+    "qualifier": "Unverified, not falsified - locate source"
+  },
+  {
+    "claim_id": "QC-0074",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "Truncated claim text ('50 mg/kg)...') lacks compound identity and was not encountered; unverified.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": "Fix truncated card text first"
+  },
+  {
+    "claim_id": "QC-0075",
+    "verdict": "UNREVIEWED",
+    "rationale": "1400W selectivity claim (iNOS dossier) outside all ten themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0076",
+    "verdict": "UNREVIEWED",
+    "rationale": "1400W SNA early-window efficacy claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0077",
+    "verdict": "UNREVIEWED",
+    "rationale": "1400W 7-day window-loss claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0078",
+    "verdict": "UNREVIEWED",
+    "rationale": "GW274150 profile claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0079",
+    "verdict": "UNREVIEWED",
+    "rationale": "KD7040 Phase IIa plan claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0080",
+    "verdict": "UNREVIEWED",
+    "rationale": "1400W schedule-dependence summary outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0081",
+    "verdict": "NO_EVIDENCE_FOUND",
+    "rationale": "3-day onset/4-week persistence of ACC Kalirin-7 downregulation belongs to the unsupported ACC narrative.",
+    "evidence_refs": [
+      "theme_10#F10.1"
+    ],
+    "citations": [
+      "Theme 10 Contradictions #1"
+    ],
+    "qualifier": "Drop or demote with the ACC-Kal7 cluster"
+  },
+  {
+    "claim_id": "QC-0082",
+    "verdict": "EXTENDED",
+    "rationale": "TREM2 downregulation claim extended by TREM2/LAMP1 phagocytosis-targeting therapeutics and senescence dimension.",
+    "evidence_refs": [
+      "theme_03#F3.10",
+      "theme_02#F2.5"
+    ],
+    "citations": [
+      "Tuina study 2026 (TREM2/LAMP1); Neurosci Biobehav Rev 2026 senescence review"
+    ],
+    "qualifier": "Phagocytosis-checkpoint angle makes TREM2 actionable; CX3CR1 dependence contested"
+  },
+  {
+    "claim_id": "QC-0083",
+    "verdict": "EXTENDED",
+    "rationale": "AL002a reversal claim extended into microglial-phagocytosis and aging frameworks.",
+    "evidence_refs": [
+      "theme_03#F3.10",
+      "theme_02#F2.5"
+    ],
+    "citations": [
+      "TREM2/LAMP1 2026; Aging Cell 2025 ABT-737"
+    ],
+    "qualifier": "Registry-level verification of AL002a pain data advised"
+  },
+  {
+    "claim_id": "QC-0084",
+    "verdict": "CONFIRMED",
+    "rationale": "P2X7 >100 uM threshold driving NLRP3/IL-1beta/pyroptosis supported and clinically proximal (AK1780).",
+    "evidence_refs": [
+      "theme_03#F3.8"
+    ],
+    "citations": [
+      "J Pain 2025 AK1780; Chessell 2005"
+    ],
+    "qualifier": "Gasdermin-D pyroptosis added downstream"
+  },
+  {
+    "claim_id": "QC-0085",
+    "verdict": "CONFIRMED",
+    "rationale": "2-DG glycolysis-blockade analgesia independently replicated across lactylation and HK2/myeloid programs.",
+    "evidence_refs": [
+      "theme_04#F4.1",
+      "theme_04#F4.2"
+    ],
+    "citations": [
+      "Wang 2023, Glia; J Neurosci 2026 (2-DG attenuates hypersensitivity)"
+    ],
+    "qualifier": "Tool specificity caveats apply"
+  },
+  {
+    "claim_id": "QC-0086",
+    "verdict": "EXTENDED",
+    "rationale": "Urolithin A mitophagy claim extended by senescence/mitophagy targeting wave in microglia.",
+    "evidence_refs": [
+      "theme_03#F3.10"
+    ],
+    "citations": [
+      "Aging Cell 2025; Neurosci Biobehav Rev 2026"
+    ],
+    "qualifier": "Promote urolithin A to graph node per theme 3 suggestion"
+  },
+  {
+    "claim_id": "QC-0087",
+    "verdict": "EXTENDED",
+    "rationale": "Nicotinamide riboside CIPN claim extended within mitochondrial-restoration/senescence frame.",
+    "evidence_refs": [
+      "theme_03#F3.10"
+    ],
+    "citations": [
+      "Neurosci Biobehav Rev 2026"
+    ],
+    "qualifier": "Source-level verification advised"
+  },
+  {
+    "claim_id": "QC-0088",
+    "verdict": "CONFIRMED",
+    "rationale": "Target-occupancy/translation difficulty confirmed: partial responder rates 30-70% despite >99% occupancy.",
+    "evidence_refs": [
+      "theme_06#F6.1",
+      "theme_06#F6.2"
+    ],
+    "citations": [
+      "Bertoch et al. 2025, Anesthesiology 142:1085; Stewart et al. 2025, PNAS"
+    ],
+    "qualifier": "Nav1.7 retains AP-initiation role under suzetrigine - multi-channel cotargeting implication"
+  },
+  {
+    "claim_id": "QC-0089",
+    "verdict": "CONFIRMED",
+    "rationale": "EP1-on-infiltrating-macrophages finding untouched by EP2-refutation and EP1 relevance reconfirmed via ONO-8711 lineage.",
+    "evidence_refs": [
+      "theme_07#F7.12",
+      "theme_07#F7.18"
+    ],
+    "citations": [
+      "ONO-8711 CCI classic (PMID 11574375); Nat Commun 2025 EP2/Schwann cell"
+    ],
+    "qualifier": "EP-subtype attribution field contested (EP2/Schwann-cell vs legacy EP4) - keep EP1 scoping explicit"
+  },
+  {
+    "claim_id": "QC-0090",
+    "verdict": "CONFIRMED",
+    "rationale": "Local ketorolac reversing PSNL allodynia >5 days uncontested; CREB-phosphorylation suppression mechanism-consistent.",
+    "evidence_refs": [
+      "theme_07#F7.18",
+      "theme_09#F9.13"
+    ],
+    "citations": [
+      "Kawasaki et al. 2008, J Neurosci 28:5189 (PICs->pCREB)"
+    ],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0091",
+    "verdict": "CONFIRMED",
+    "rationale": "NrCAM exon-10 ASO partial reversal within 72 h matches primary literature almost verbatim.",
+    "evidence_refs": [
+      "theme_06#F6.6"
+    ],
+    "citations": [
+      "Liang et al. 2020, J Pain 21:625; He et al. 2023, Neurotherapeutics"
+    ],
+    "qualifier": "Behavioral rescue incomplete even with normalized splice ratios"
+  },
+  {
+    "claim_id": "QC-0092",
+    "verdict": "UNREVIEWED",
+    "rationale": "Strategic-roadmap delivery claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  },
+  {
+    "claim_id": "QC-0093",
+    "verdict": "UNREVIEWED",
+    "rationale": "Wnt time-course claim outside themes.",
+    "evidence_refs": [],
+    "citations": [],
+    "qualifier": null
+  }
+]

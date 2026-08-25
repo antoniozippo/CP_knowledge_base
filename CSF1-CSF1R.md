@@ -104,3 +104,12 @@ A large and consistent body of evidence from pharmacological, genetic, and viral
     - **NLRP3 inflammasome**: CSF1R‑mediated ERK and NF‑κB activation promotes NLRP3 inflammasome assembly and IL‑1β maturation in the DRG.
     - **RhoA/ROCK**: CSF1R can activate RhoA in microglia, contributing to cytoskeletal changes that facilitate migration and phagocytosis.
     - **HIF1α/VEGFA**: Hypoxia‑driven HIF1α may upregulate CSF1 expression, linking metabolic stress to CSF1/CSF1R‑mediated neuroinflammation.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0012 | ✅ EXTENDED | theme_03#F3.7 · Nat Commun 2019 (PLX5622 pharmacology); Cell Reports 2025 (sex-dimorphic depletion) | PLX5622 IC50/tool status supported; systemic myeloid effects and pexidartinib hepatotoxicity constraints added — male>female depletion efficacy under identical regimens |
+| QC-0013 | ✅ EXTENDED | theme_03#F3.7 · Lee et al. 2018, Mol Pain 14; Henry et al. 2020, J Neurosci | 65 mg/kg pSNL PLX5622 experiment supported by CSF1R-depletion reversal literature with sex-dimorphic caveat (female mitochondrial-survival compensation) |

@@ -131,3 +131,11 @@ There is emerging crosstalk between PPARγ and the synthesis of neurosteroids. P
     - **Wnt/β‑catenin**: PPARγ promotes β‑catenin degradation via a proteasome‑dependent mechanism, potentially countering the pathological activation of Wnt signalling that contributes to NMDA receptor potentiation and pain.
     - **Nrf2/HO‑1**: PPARγ is a major upstream activator of Nrf2, and many of its antioxidant and mitochondrial protective effects are mediated through this pathway. This links PPARγ to the resolution of oxidative stress and ferroptosis.
     - **CB2 receptor**: PPARγ and CB2 are functionally coupled; some of the anti‑inflammatory effects of CB2 agonists may be mediated through the secondary activation of PPARγ, and PPARγ agonists can potentiate CB2‑mediated analgesia.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| QC-0048 | ✅ EXTENDED | theme_08#F8.6 · Acta Neuropathol Commun 2025; Trends Pharmacol Sci 2024 | PPARγ agonist analgesia supported and mechanistically deepened (sTREM2 biomarker, M1/M2, mitochondrial axis) — TZD safety caveats: rosiglitazone CV signal; fluid retention/weight gain limit chronic use |

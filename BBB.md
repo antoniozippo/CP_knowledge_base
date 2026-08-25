@@ -41,3 +41,11 @@ Despite significant progress, translating these findings into clinical practice 
 *   **Balancing Act**: A major therapeutic challenge is balancing the need to restore the BBB's protective function with the need to deliver analgesic drugs into the CNS. Strategies that seal the barrier could theoretically restrict drug entry, so the timing of such treatments in relation to other pharmacotherapies is a critical unknown.
 *   **Lack of Direct Evidence**: Currently, much of the mechanistic evidence comes from preclinical models and post-mortem studies. Directly confirming region-specific BBB compromise in living patients with chronic pain remains a major technical hurdle, though the development of advanced imaging techniques offers a promising route for clinical translation[reference:22].
 *   **Peripheral vs. Central Barriers**: While the BBB has been the main focus, the **blood-nerve barrier (BNB)** and **blood-spinal cord barrier (BSCB)** are also critically involved. For example, BNB disruption in trigeminal neuralgia has been directly linked to mechanical allodynia[reference:23]. A holistic approach targeting all neural barriers may be necessary.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0014 | ✅ EXTENDED | theme_08#F8.1–F8.4, theme_04#F4.5 · Wang YH et al. 2022, Neuroscience 494:12; Eur J Med Res 2025;30:189; Ji 2023 Annu Rev Pharmacol Toxicol | SPM (RvD1/LXA4) pro-resolution role multiply replicated; barrier-resealing framing is an instance of the general resolution program — no approved resolvin drug; precursor supplementation weak/null |

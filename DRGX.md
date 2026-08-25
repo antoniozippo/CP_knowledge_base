@@ -16,6 +16,8 @@ DRGX (dorsal root ganglia homeobox) is a paired‑like homeodomain transcription
 
 ## 🔬 Mechanisms of DRGX in Neuropathic Pain
 
+> ⚠️ **2026 validation:** polarity inverted — DRGX is DOWNregulated after SNL and knockdown induces pain; see Validation section.
+
 Following peripheral nerve injury (traumatic, metabolic, or toxic), DRGX activity is maintained or further enhanced, ensuring the continued expression of the genes that drive nociceptor hyperexcitability and central sensitisation. DRGX therefore serves as a **central node that couples nerve injury to a broad pronociceptive transcriptional response**.
 
 ### 1. Direct Regulation of Pronociceptive Ion Channels
@@ -86,6 +88,8 @@ DRGX binds directly to the promoter/enhancer regions of multiple key pain‑rela
 
 ## 🩺 Clinical Implications and Therapeutic Opportunities
 
+> ⚠️ **2026 validation:** therapeutic direction inverted — DRGX knockdown would be predicted to worsen pain; restoration is the supported strategy; see Validation section.
+
 - **Master regulator targeting**: DRGX controls the expression of multiple pronociceptive ion channels (Nav1.7, Nav1.8, TRPV1, TRPA1) and neuropeptides (CGRP, substance P) simultaneously. This positions DRGX inhibition as a potentially **higher‑leverage strategy** than targeting any single downstream channel, as it could overcome the functional redundancy that has limited the clinical efficacy of selective Nav or TRP channel blockers.
 - **ASO‑based therapy**: Antisense oligonucleotides are the most clinically advanced approach for transiently knocking down DRGX. Intrathecal delivery can achieve high DRG and spinal cord exposure with minimal systemic side effects. Several ASOs targeting other neuronal transcription factors are already in clinical trials for neurodegenerative diseases, providing a regulatory pathway for DRGX‑targeted ASOs in chronic pain.
 - **Gene therapy with viral vectors**: AAV‑mediated delivery of shRNA or dominant‑negative DRGX constructs could provide long‑lasting, one‑time treatment for chronic neuropathic pain, particularly for conditions with a clear nociceptor‑driven aetiology (e.g., painful diabetic neuropathy, CIPN, post‑herpetic neuralgia).
@@ -106,3 +110,14 @@ DRGX binds directly to the promoter/enhancer regions of multiple key pain‑rela
     - It is activated downstream of **NGF–TrkA**, **TNF‑α**, and **ERK/MAPK** signalling, linking neurotrophic and inflammatory inputs to transcriptional reprogramming.
     - Its downstream cytokine and chemokine effects connect it to **TLR4**, **NLRP3**, and **JAK/STAT** neuroinflammatory networks.
     - In the spinal cord, DRGX contributes to the transcriptional maintenance of **central sensitisation**, cooperating with CREB, NF‑κB, and other injury‑inducible transcription factors.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0031 | ⚠️ REFUTED | theme_06#F6.7, theme_01#F1.5 · Ito T et al. 2020, Mol Pain 16:33 (PMC7099666; adjudicated via websearch); Chen et al. 2001, Neuron (Drg11 development) | DRGX is downregulated in small/medium DRG neurons after SNL; shRNA knockdown induces mechanical/thermal pain; overexpression suppresses maintenance-phase pain by restraining MMP-9. No DRGX→BDNF–TrkB–KCC2 link exists — polarity inverted vs original text |
+| EC-0032 | ⚠️ REFUTED | theme_06#F6.7 · Ito T et al. 2020, Mol Pain 16:33 (adjudicated) | Sensitization rationale runs opposite: DRGX restoration alleviates; loss maintains sensitization — flip sign; retitle as protective TF post-development |
+| EC-0033 | ⚠️ REFUTED | theme_06#F6.7 · Ito T et al. 2020, Mol Pain 16:33 (adjudicated) | A DRGX-knockdown ASO would be predicted to worsen pain — testable direction is restoration (AAV overexpression), not knockdown |
+| EC-0034 | ⚠️ REFUTED | theme_06#F6.7 · Ito T et al. 2020, Mol Pain 16:33 (adjudicated) | No SCN9A/SCN10A/TRPV1 transactivation battery exists; only MMP-9 restraint demonstrated — corrected regulome: Mmp9 (rescued), Ptger2/EP2 (not rescued) |

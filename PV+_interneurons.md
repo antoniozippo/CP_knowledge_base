@@ -52,3 +52,13 @@ Preserving or restoring PV interneuron function is an emerging therapeutic goal.
 *   **Plasticity and Compensation**: Not all PV interneurons are lost in neuropathic pain; the surviving population may undergo functional changes, and some inhibitory circuits may compensate. Over-activating inhibition globally could cause motor or sensory deficits.
 *   **Sex Differences**: Emerging evidence suggests that PV interneuron dysfunction may be more pronounced in male rodents, while females might rely on alternative mechanisms for allodynia. This again highlights the need for sex-specific therapeutic strategies.
 *   **Systemic Targeting**: PV interneurons are widespread in the brain. Any systemic intervention aimed at enhancing their function (e.g., KCC2 enhancers) could influence cognition, mood, and memory. Localized spinal delivery or specific targeting of disease-induced pathways remains a major challenge.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0070 | 🔶 MIXED | theme_02#F2.3, theme_02#F2.1, theme_01#F1.13, theme_02#F2.4, theme_02#F2.10 · Tansley et al. 2022, Science 377:80 (adjudicated); Mascio et al. 2025, Pain (thalamocortical PNNs) | Spinal PNN degradation promotes pain via projection-neuron GAG stripping (±MMP-9), not PV interneurons; forebrain sign inversion (PNN build-up pronociceptive; chABC analgesic) — re-scope cell type to lamina-I spinoparabrachial projection neurons; encode region-conditioned signs and phase windows (MMP-9 early, MMP-2 late) |
+| EC-0017 | ✅ EXTENDED | theme_01#F1.4, theme_01#F1.10, theme_01#F1.5, theme_01#F1.14, theme_03#F3.13 · Coull et al. 2005, Nature 438:1017; Mol Pain 19 (2023); Xian et al. 2025, Cell Biosci 15:12 | BDNF–TrkB disruption of KCC2-dependent inhibition strongly supported and human-tissue anchored; peripheral DRG-KCC2 arm added — pathogenic in chronic dorsal horn but early post-lesion downregulation can be adaptive in motor circuits; microglial P2X4-BDNF questioned, IRF5/P2X4 male-specific |
+| EC-0097 | ✅ EXTENDED | theme_01#F1.6, theme_01#F1.7 · Qiu et al. 2024, PNAS; Rankin et al. 2024, Cell Rep; Cao/Scherrer/Chen bioRxiv 2022 (preprint) | Chemogenetic/optogenetic PV rescue extended to firing-pattern restoration as therapeutic readout — RARα homeostatic-plasticity node remains preprint-stage/unreviewed |

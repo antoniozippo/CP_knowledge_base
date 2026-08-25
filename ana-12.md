@@ -49,3 +49,11 @@ ANA-12 has demonstrated efficacy in a broad range of preclinical pain models.
 *   **Limited Durability**: In some cancer pain models, ANA-12 has been observed to provide only transient pain relief, with the effect diminishing over time[reference:31]. This may indicate the development of compensatory mechanisms or that ongoing BDNF/TrkB signaling is only one component of sustained pain.
 *   **Context-Dependent Roles of TrkB Isoforms**: The discovery that ANA-12 also blocks TrkB.T1 signaling adds a layer of complexity. Since TrkB.T1 can have both pro-nociceptive and neuroprotective roles, the net effect of blocking both full-length TrkB and TrkB.T1 may vary depending on the pain etiology and stage[reference:32].
 *   **Interactions with Other Systems**: ANA-12's effects are deeply intertwined with the other pathways previously discussed in this series. It blocks TNF-α and IL-1β production, interferes with NMDA receptor potentiation, and indirectly preserves KCC2 function, highlighting its role as a master switch for neuroinflammation and central sensitization.
+
+## Validation (2026)
+
+> Literature round 2026-08 · full report: analysis/validation_report.md
+
+| Claim | Verdict | Evidence | Note |
+|-------|---------|----------|------|
+| EC-0122 | 🔶 MIXED | theme_01#F1.3, theme_01#F1.4, theme_01#F1.10, theme_01#F1.14 · Davis 2025 (human SDH); Dedek 2019, Brain; Cheung et al. 2023, Sci Rep 13:7871 | TrkB-driven KCC2 downregulation strongly supported including human tissue, but early post-lesion downregulation can be adaptive in motor circuits — time-window/circuit qualifiers mandatory; BDNF-TrkB effects context-dependent (immature/Shc-only upregulate KCC2) |
