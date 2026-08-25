@@ -1,0 +1,22 @@
+{
+  "counts_by_priority": {
+    "P0": 138,
+    "P1": 31,
+    "P2": 0,
+    "P3": 80
+  },
+  "counts_by_kind": {
+    "edge": 169,
+    "quantitative": 80
+  },
+  "counts_by_confidence": {
+    "EXTRACTED": 218,
+    "INFERRED": 30,
+    "AMBIGUOUS": 1
+  },
+  "kalirin_inferred_count": 4,
+  "nrcam_ngr1_flag_count": 1,
+  "quantitative_statement_count": 80,
+  "generated_at": "2026-08-25T10:29:19+00:00",
+  "input_sha256": "9fed39caa63803c82f1db1aecceb3d7449ba6144d11fa984b2e94664da32cf8a"
+}
