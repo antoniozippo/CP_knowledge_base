@@ -123,6 +123,10 @@ def graph_copy(graph):
     return json.loads(json.dumps(graph))
 
 
+def _empty_graph():
+    return {"nodes": [], "links": [], "hyperedges": []}
+
+
 @pytest.fixture
 def claims(fixture_graph, tmp_path):
     return ec.extract_all(graph_copy(fixture_graph), make_vault(tmp_path))
@@ -273,14 +277,14 @@ class TestSchemaAndOrder:
         vault.mkdir()
         lines = [
             f"Dose batch {i} mg/kg was administered in the neuropathic pain model."
-            for i in range(ec.QUANT_CAP + 5)
+            for i in range(ec.QUANT_WARN_THRESHOLD + 5)
         ]
         (vault / "Bulk.md").write_text("\n\n".join(lines), encoding="utf-8")
-        claims = ec.extract_all({"nodes": [], "links": [], "hyperedges": []}, vault)
+        claims = ec.extract_all(_empty_graph(), vault)
         quant = by_kind(claims, "quantitative")
-        assert len(quant) == ec.QUANT_CAP + 5
+        assert len(quant) == ec.QUANT_WARN_THRESHOLD + 5
         index = ec.summarize(claims)
-        assert index["warnings"] and str(ec.QUANT_CAP) in index["warnings"][0]
+        assert index["warnings"] and str(ec.QUANT_WARN_THRESHOLD) in index["warnings"][0]
 
     def test_ids_stable_across_runs(self, fixture_graph, tmp_path):
         first = ec.extract_all(graph_copy(fixture_graph), make_vault(tmp_path))
@@ -291,6 +295,65 @@ class TestSchemaAndOrder:
         snapshot = json.dumps(fixture_graph)
         ec.extract_all(fixture_graph, make_vault(tmp_path))
         assert json.dumps(fixture_graph) == snapshot
+
+
+class TestTextMunging:
+    def test_frontmatter_block_skipped(self, tmp_path):
+        (tmp_path / "FM.md").write_text(
+            "---\ntitle: X\nignore 10 mg/kg metadata\n---\n\nReal dose 5 mg/kg in pain model.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert [c["quote"] for c in claims] == ["Real dose 5 mg/kg in pain model."]
+
+    def test_unclosed_frontmatter_yields_no_claims(self, tmp_path):
+        (tmp_path / "Bad.md").write_text(
+            "---\ntitle: X\nstray 10 mg/kg line never closed\n", encoding="utf-8"
+        )
+        assert ec.extract_all(_empty_graph(), tmp_path) == []
+
+    def test_code_fence_content_skipped(self, tmp_path):
+        (tmp_path / "Code.md").write_text(
+            "```\nfenced 20 mg/kg pseudo-dose in model\n```\n\nProse dose 5 mg/kg in pain model.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert [c["value_tokens"] for c in claims] == [["5 mg/kg"]]
+
+    def test_split_sentences_merges_across_abbreviations(self):
+        assert len(ec.split_sentences("Allodynia fell as reported by Coull et al. (2003) in rodents.")) == 1
+        assert len(ec.split_sentences("Some doses e.g. 50% shifts appeared. Next one stands alone.")) == 2
+
+    @pytest.mark.parametrize("hyphen", ["\u2010", "\u2011", "\u2012", "\u2013", "\u2014"])
+    def test_unicode_hyphen_fold_and_timepoint_match(self, tmp_path, hyphen):
+        (tmp_path / "Uni.md").write_text(
+            f"Expression rose 2.5{hyphen}fold in injured DRG neurons.\n\n"
+            f"Animals were perfused 24{hyphen}h after treatment onset.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert len(claims) == 2
+        tokens = [token for claim in claims for token in claim["value_tokens"]]
+        assert any(token.startswith("2.5") and token.endswith("fold") for token in tokens), tokens
+        assert any(token.startswith("24") and token.endswith("h") for token in tokens), tokens
+
+    def test_hardwrapped_paragraph_yields_full_sentence_quote(self, tmp_path):
+        (tmp_path / "Wrap.md").write_text(
+            "Rats received gabapentin daily for 7 days) significantly\n"
+            "reduced mechanical allodynia in this injury model.\n",
+            encoding="utf-8",
+        )
+        claims = ec.extract_all(_empty_graph(), tmp_path)
+        assert len(claims) == 1
+        assert claims[0]["quote"].endswith("allodynia in this injury model.")
+        assert "7 days" in claims[0]["value_tokens"]
+
+    def test_decode_error_reports_filename(self, tmp_path, capsys):
+        (tmp_path / "Broken.md").write_bytes(b"\xff\xfe not utf8 with 10 mg/kg")
+        (tmp_path / "Good.md").write_text("Dose 5 mg/kg in pain model.\n", encoding="utf-8")
+        with pytest.raises(UnicodeDecodeError):
+            ec.extract_all(_empty_graph(), tmp_path)
+        assert "Broken.md" in capsys.readouterr().err
 
 
 class TestCli:

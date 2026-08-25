@@ -11,8 +11,11 @@ NrCAM/NgR1 relation pair.
 Source B (quantitative statement claims): sentences mined from top-level
 dossier Markdown notes that contain a concentration/dose, percentage, fold
 change, IC50/EC50/ED50/Ki value, or a timepoint co-occurring with injury/pain/
-model/treatment context. Identical sentences are deduplicated per file; nothing
-is silently truncated above the 1500-statement cap (a warning is recorded).
+model/treatment context. Consecutive non-blank lines are joined into paragraph
+blocks first so hard-wrapped sentences are quoted whole; typographic hyphens
+(U+2010-U+2014) act as separators in fold/timepoint patterns without altering
+the verbatim quote text. Identical sentences are deduplicated per file; nothing
+is silently truncated above the warning threshold (a warning is recorded).
 
 Inputs are never modified. Extraction is deterministic pure-Python: claim ids
 are sequential over a deterministic sort, so identical inputs yield byte-equal
@@ -32,7 +35,7 @@ DEFAULT_GRAPH_PATH = Path("graphify-out/graph_v2.json")
 DEFAULT_VAULT_DIR = Path(".")
 DEFAULT_OUTPUT_DIR = Path("analysis/claims")
 
-QUANT_CAP = 1500
+QUANT_WARN_THRESHOLD = 1500
 OBJECT_MAX_CHARS = 400
 
 PRIORITY_RANK = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
@@ -48,9 +51,9 @@ CONCENTRATION_RE = re.compile(
     r"\d+(?:\.\d+)?\s?(?:mg/kg|ng/mL|µg/mL|μg/mL|ug/mL|mg/mL|µM|μM|uM|mM|nM)\b"
 )
 PERCENT_RE = re.compile(r"\d+(?:\.\d+)?\s?%")
-FOLD_CHANGE_RE = re.compile(r"\d+(?:\.\d+)?[\s-]fold")
+FOLD_CHANGE_RE = re.compile(r"\d+(?:\.\d+)?[\s\u2010-\u2014-]fold")
 BINDING_AFFINITY_RE = re.compile(r"\b(?:IC50|EC50|ED50|Ki)\b[^.;]{0,40}?\d+(?:\.\d+)?")
-TIMEPOINT_RE = re.compile(r"\b\d+(?:\.\d+)?[\s-]?(?:hours?|hrs?|days?|weeks?|h|d|w)\b")
+TIMEPOINT_RE = re.compile(r"\b\d+(?:\.\d+)?[\s\u2010-\u2014-]?(?:hours?|hrs?|days?|weeks?|h|d|w)\b")
 
 ALWAYS_QUANT_PATTERNS = (
     CONCENTRATION_RE,
@@ -93,7 +96,7 @@ def clean_line(raw):
 def ends_with_abbreviation(fragment):
     tail = fragment.rstrip(")\"'”’]").rstrip(".")
     words = tail.split()
-    return bool(words) and words[-1].lower() in ABBREVIATION_ENDINGS
+    return bool(words) and words[-1].lower().replace(".", "") in ABBREVIATION_ENDINGS
 
 
 def split_sentences(line):
@@ -108,21 +111,35 @@ def split_sentences(line):
     return merged
 
 
-def iter_sentences(text):
+def iter_paragraphs(text):
     lines = text.splitlines()
     if lines and lines[0].strip() == "---":
         lines = _skip_frontmatter(lines)
     in_fence = False
+    block = []
     for raw in lines:
         if raw.strip().startswith("```"):
             in_fence = not in_fence
+            if block:
+                yield " ".join(block)
+                block = []
             continue
         if in_fence:
             continue
         cleaned = clean_line(raw)
         if not cleaned:
+            if block:
+                yield " ".join(block)
+                block = []
             continue
-        yield from split_sentences(cleaned)
+        block.append(cleaned)
+    if block:
+        yield " ".join(block)
+
+
+def iter_sentences(text):
+    for paragraph in iter_paragraphs(text):
+        yield from split_sentences(paragraph)
 
 
 def _skip_frontmatter(lines):
@@ -164,11 +181,19 @@ def make_quant_claim(subject, source_note, sentence, tokens):
     }
 
 
+def read_dossier(path):
+    try:
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        print(f"error: {path.name}: {exc}", file=sys.stderr)
+        raise
+
+
 def extract_quant_claims(vault_dir):
     claims = []
     for path in iter_dossier_files(vault_dir):
         seen = set()
-        for sentence in iter_sentences(path.read_text(encoding="utf-8")):
+        for sentence in iter_sentences(read_dossier(path)):
             tokens = match_value_tokens(sentence)
             if not tokens:
                 continue
@@ -260,10 +285,10 @@ def summarize(claims):
         ),
     }
     quant_total = index["quantitative_statement_count"]
-    if quant_total > QUANT_CAP:
+    if quant_total > QUANT_WARN_THRESHOLD:
         index["warnings"] = [
-            f"quantitative statements ({quant_total}) exceed cap ({QUANT_CAP}); "
-            "all kept, none truncated"
+            f"quantitative statements ({quant_total}) exceed warning threshold "
+            f"({QUANT_WARN_THRESHOLD}); all kept, none truncated"
         ]
     return index
 
