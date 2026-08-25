@@ -1,0 +1,2052 @@
+{
+  "source_graph": "graphify-out/graph_v2.json",
+  "built_from_commit": "976d9c0bdc4e029d8322082f70c29af9c8f97b8b",
+  "cooccurrence_candidates": [
+    {
+      "id": "LC-0001",
+      "node_a": "AngPt_Tie2",
+      "node_b": "angpt_tie2",
+      "label_a": "Tie2 Receptor",
+      "label_b": "Tie2 Receptor Tyrosine Kinase",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 1.055629,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Angiopoietin-1 (Ang-1)",
+        "Angiopoietin-2 (Ang-2)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0002",
+      "node_a": "hif1a_PX478",
+      "node_b": "hif1a_YC1",
+      "label_a": "PX-478 (HIF1α Inhibitor)",
+      "label_b": "YC-1 (HIF1α Inhibitor)",
+      "community_a": 37,
+      "community_b": 4,
+      "entity_type_a": "drug",
+      "entity_type_b": "drug",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.082021,
+      "jaccard": 0.666667,
+      "shared_neighbors": [
+        "Transient HIF1α Inhibition (Acute-to-Chronic Prevention, Node 2)",
+        "HIF1α (Hypoxia-Inducible Factor 1 Alpha)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0003",
+      "node_a": "BDNF_TrkB_TrkB",
+      "node_b": "bdnftrkb_trkb_fl",
+      "label_a": "TrkB Receptor (TrkB.FL)",
+      "label_b": "TrkB.FL (Full-Length TrkB Receptor)",
+      "community_a": 8,
+      "community_b": 21,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.94589,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "ANA-12 (Selective TrkB Antagonist)",
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0004",
+      "node_a": "PNN_ECM_SB3CT",
+      "node_b": "proposal_cpt_pnn_mmp9_bdnf_kcc2",
+      "label_a": "SB-3CT (MMP Inhibitor)",
+      "label_b": "PNN Degradation → MMP-9 → BDNF → KCC2 Loss Cascade",
+      "community_a": 34,
+      "community_b": 2,
+      "entity_type_a": "drug",
+      "entity_type_b": "pathway",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.910239,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "MMP-9 Inhibition / PNN Preservation (Acute-to-Chronic Prevention, Node 3)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0005",
+      "node_a": "DRGX_BDNF_TrkB_KCC2",
+      "node_b": "shared_central_sensitization",
+      "label_a": "BDNF–TrkB–KCC2 cascade",
+      "label_b": "Central Sensitization",
+      "community_a": 15,
+      "community_b": 8,
+      "entity_type_a": "receptor",
+      "entity_type_b": "process",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.072009,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "DRGX",
+        "ZFHX2"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0006",
+      "node_a": "AngPt_Tie2",
+      "node_b": "bbb_bbb",
+      "label_a": "Tie2 Receptor",
+      "label_b": "Blood-Brain/Spinal Cord Barrier (BBB/BSCB)",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "receptor",
+      "entity_type_b": "structure",
+      "compartment_a": "other",
+      "compartment_b": "dorsal_horn",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.055629,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "Angiopoietin-1 (Ang-1)",
+        "Angiopoietin-2 (Ang-2)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0007",
+      "node_a": "DRGX_nociceptor_gene_programme",
+      "node_b": "shared_central_sensitization",
+      "label_a": "Nociceptor gene programme",
+      "label_b": "Central Sensitization",
+      "community_a": 15,
+      "community_b": 8,
+      "entity_type_a": "cell_type",
+      "entity_type_b": "process",
+      "compartment_a": "peripheral",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.072009,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "DRGX",
+        "ZFHX2"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0008",
+      "node_a": "DRGX_pronociceptive_channels",
+      "node_b": "shared_central_sensitization",
+      "label_a": "Pronociceptive ion channels",
+      "label_b": "Central Sensitization",
+      "community_a": 15,
+      "community_b": 8,
+      "entity_type_a": "channel",
+      "entity_type_b": "process",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.072009,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "DRGX",
+        "ZFHX2"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0009",
+      "node_a": "TNF_TNFR1",
+      "node_b": "proposal_cpt_tnfr1_blockade",
+      "label_a": "TNFR1 Receptor",
+      "label_b": "TNFR1-Selective TNF Blockade (Chronic Pain Treatment Pillar 4, XPro1595)",
+      "community_a": 4,
+      "community_b": 2,
+      "entity_type_a": "receptor",
+      "entity_type_b": "drug",
+      "compartment_a": "other",
+      "compartment_b": "systemic",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.910239,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "XPro1595 (solTNF/TNFR1 Blocker)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0010",
+      "node_a": "AngPt_COMP_Ang1",
+      "node_b": "angpt_tie2",
+      "label_a": "COMP-Ang-1 (Stabilized Ang-1)",
+      "label_b": "Tie2 Receptor Tyrosine Kinase",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "concept",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.621335,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "Angiopoietin-1 (Ang-1)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0011",
+      "node_a": "AngPt_COMP_Ang1",
+      "node_b": "bbb_rvd1_barrier_reseal",
+      "label_a": "COMP-Ang-1 (Stabilized Ang-1)",
+      "label_b": "Resolvin D1 / Lipoxin A4 (Barrier Resealing)",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "barrier",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.621335,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "Angiopoietin-1 (Ang-1)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0012",
+      "node_a": "NogoA_NgR1_NgR1",
+      "node_b": "nogoa_ngr1_ngr1",
+      "label_a": "Nogo-66 Receptor 1 (NgR1)",
+      "label_b": "NgR1 (Nogo-66 Receptor 1)",
+      "community_a": 7,
+      "community_b": 19,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.80817,
+      "jaccard": 0.3,
+      "shared_neighbors": [
+        "LINGO-1",
+        "Nogo-A",
+        "RhoA GTPase"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0013",
+      "node_a": "cxcl12_cxcr4_cxcr4",
+      "node_b": "tlr2_tlr2",
+      "label_a": "CXCR4 Receptor",
+      "label_b": "TLR2 (Toll-Like Receptor 2)",
+      "community_a": 9,
+      "community_b": 10,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.444386,
+      "jaccard": 0.285714,
+      "shared_neighbors": [
+        "CX3CR1 Receptor",
+        "NF-kB Transcription Factor (master neuroinflammation driver)",
+        "TLR4 (Toll-like Receptor 4)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0014",
+      "node_a": "BBB_blood_brain_barrier",
+      "node_b": "bbb_bbb",
+      "label_a": "Blood-Brain Barrier (BBB)",
+      "label_b": "Blood-Brain/Spinal Cord Barrier (BBB/BSCB)",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "structure",
+      "entity_type_b": "structure",
+      "compartment_a": "barrier",
+      "compartment_b": "dorsal_horn",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.371328,
+      "jaccard": 0.272727,
+      "shared_neighbors": [
+        "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+        "Angiopoietin-2 (Ang-2)",
+        "Vascular Endothelial Growth Factor A (VEGFA)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0015",
+      "node_a": "PV_interneurons_IEM_1460",
+      "node_b": "assaying_molecularly_structural_plasticity_AMPAR",
+      "label_a": "IEM-1460 (CP-AMPAR Antagonist)",
+      "label_b": "α-Amino-3-Hydroxy-5-Methyl-4-Isoxazolepropionic Acid Receptor (AMPAR)",
+      "community_a": 8,
+      "community_b": 1,
+      "entity_type_a": "channel",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Calcium-Permeable AMPA Receptors (CP-AMPARs)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0016",
+      "node_a": "AngPt_Tie2",
+      "node_b": "bbb_rvd1_barrier_reseal",
+      "label_a": "Tie2 Receptor",
+      "label_b": "Resolvin D1 / Lipoxin A4 (Barrier Resealing)",
+      "community_a": 4,
+      "community_b": 16,
+      "entity_type_a": "receptor",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "barrier",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.621335,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Angiopoietin-1 (Ang-1)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0017",
+      "node_a": "jakstat_il6_gp130",
+      "node_b": "tlr9_tlr9",
+      "label_a": "IL-6/gp130/JAK2 Axis",
+      "label_b": "TLR9 (Toll-Like Receptor 9)",
+      "community_a": 20,
+      "community_b": 10,
+      "entity_type_a": "pathway",
+      "entity_type_b": "receptor",
+      "compartment_a": "systemic",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.94589,
+      "jaccard": 0.272727,
+      "shared_neighbors": [
+        "NF-kB Transcription Factor (master neuroinflammation driver)",
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0018",
+      "node_a": "bradykinin_b1r",
+      "node_b": "cgrp_cipn_sensitisation",
+      "label_a": "B1 Receptor (B1R)",
+      "label_b": "CGRP Pathway Sensitisation in CIPN (RAMP1 Upregulation)",
+      "community_a": 2,
+      "community_b": 3,
+      "entity_type_a": "receptor",
+      "entity_type_b": "pathway",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 1.442695,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "CIPN via Bradykinin KKS"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0019",
+      "node_a": "connexin43_hemichannel",
+      "node_b": "tlr2_tlr2",
+      "label_a": "Cx43 Hemichannels (pathological opening)",
+      "label_b": "TLR2 (Toll-Like Receptor 2)",
+      "community_a": 13,
+      "community_b": 10,
+      "entity_type_a": "concept",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.233821,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "RAGE (Receptor for Advanced Glycation End-products / AGER)",
+        "NLRP3 Inflammasome",
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0020",
+      "node_a": "TNF_TNFR1",
+      "node_b": "tnf_tnfr1",
+      "label_a": "TNFR1 Receptor",
+      "label_b": "TNFR1 (TNF Receptor 1, pronociceptive)",
+      "community_a": 4,
+      "community_b": 18,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "systemic",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.910239,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "XPro1595 (solTNF/TNFR1 Blocker)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0021",
+      "node_a": "SST_Prdm12",
+      "node_b": "sst_interneuron_excitatory_role",
+      "label_a": "Prdm12 Transcription Factor",
+      "label_b": "SST Interneurons as Excitatory Pain Drivers",
+      "community_a": 8,
+      "community_b": 14,
+      "entity_type_a": "process",
+      "entity_type_b": "cell_type",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.513898,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Somatostatin (SST) Interneurons"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0022",
+      "node_a": "assaying_nmdar",
+      "node_b": "igf_igf1",
+      "label_a": "NMDAR (GluN2B/GluN2A) as Plasticity Marker",
+      "label_b": "IGF1 (Insulin-like Growth Factor 1, Dual Role)",
+      "community_a": 5,
+      "community_b": 21,
+      "entity_type_a": "channel",
+      "entity_type_b": "molecule",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.621335,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "TrkB.FL (Full-Length TrkB Receptor)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0023",
+      "node_a": "bbb_bbb",
+      "node_b": "vegf_VEGFR2",
+      "label_a": "Blood-Brain/Spinal Cord Barrier (BBB/BSCB)",
+      "label_b": "VEGFR2 (Flk-1/KDR)",
+      "community_a": 16,
+      "community_b": 4,
+      "entity_type_a": "structure",
+      "entity_type_b": "concept",
+      "compartment_a": "dorsal_horn",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.937034,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+        "Vascular Endothelial Growth Factor A (VEGFA)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0024",
+      "node_a": "kcc2_bdnf_trkb_kcc2",
+      "node_b": "strategic_biomarker_mmp9_hub",
+      "label_a": "BDNF-TrkB-KCC2 disinhibition cascade",
+      "label_b": "MMP-9 Hub (clinical biomarker nexus)",
+      "community_a": 0,
+      "community_b": 19,
+      "entity_type_a": "receptor",
+      "entity_type_b": "molecule",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.586961,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "MMP-9 (Matrix Metalloproteinase-9)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0025",
+      "node_a": "SST_SSTR2a",
+      "node_b": "sst_interneuron_excitatory_role",
+      "label_a": "SSTR2a Receptor",
+      "label_b": "SST Interneurons as Excitatory Pain Drivers",
+      "community_a": 8,
+      "community_b": 14,
+      "entity_type_a": "receptor",
+      "entity_type_b": "cell_type",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.513898,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Somatostatin (SST) Interneurons"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0026",
+      "node_a": "GABA_apoptosis_mitochondrial_dysfunction",
+      "node_b": "hif1a_normoxic_stabilization",
+      "label_a": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "label_b": "HIF1α Normoxic Stabilization by ROS/TNF/NF-kB",
+      "community_a": 1,
+      "community_b": 18,
+      "entity_type_a": "cell_type",
+      "entity_type_b": "molecule",
+      "compartment_a": "other",
+      "compartment_b": "systemic",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.763103,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "TNF-α (Pro-Inflammatory Cytokine)",
+        "HIF1α (Hypoxia-Inducible Factor 1 Alpha)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0027",
+      "node_a": "bdnftrkb_probdnf_p75",
+      "node_b": "jakstat_il6_gp130",
+      "label_a": "proBDNF / p75NTR Signaling",
+      "label_b": "IL-6/gp130/JAK2 Axis",
+      "community_a": 19,
+      "community_b": 20,
+      "entity_type_a": "receptor",
+      "entity_type_b": "pathway",
+      "compartment_a": "other",
+      "compartment_b": "systemic",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.603881,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "MMP-9 (Matrix Metalloproteinase-9)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0028",
+      "node_a": "rbfox1_nrcam_exon10",
+      "node_b": "rbfox1_scn9a_stability",
+      "label_a": "NrCAM Exon 10 Retention (Rbfox1 Loss Effect)",
+      "label_b": "Rbfox1-SCN9A mRNA Stability (Nav1.7 Regulation)",
+      "community_a": 14,
+      "community_b": 29,
+      "entity_type_a": "concept",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Rbfox1 (A2BP1) RNA-Binding Splicing Regulator"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0029",
+      "node_a": "BDNF_TrkB_TrkB",
+      "node_b": "pv_interneuron_kcc2_dependence",
+      "label_a": "TrkB Receptor (TrkB.FL)",
+      "label_b": "PV Inhibition KCC2-Dependency",
+      "community_a": 8,
+      "community_b": 20,
+      "entity_type_a": "receptor",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.5,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0030",
+      "node_a": "jakstat_il6_gp130",
+      "node_b": "tlr2_tlr2",
+      "label_a": "IL-6/gp130/JAK2 Axis",
+      "label_b": "TLR2 (Toll-Like Receptor 2)",
+      "community_a": 20,
+      "community_b": 10,
+      "entity_type_a": "pathway",
+      "entity_type_b": "receptor",
+      "compartment_a": "systemic",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.94589,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "NF-kB Transcription Factor (master neuroinflammation driver)",
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0031",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_b": "vegf_VEGFR2",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_b": "VEGFR2 (Flk-1/KDR)",
+      "community_a": 1,
+      "community_b": 4,
+      "entity_type_a": "molecule",
+      "entity_type_b": "concept",
+      "compartment_a": "systemic",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.201291,
+      "jaccard": 0.214286,
+      "shared_neighbors": [
+        "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+        "Vascular Endothelial Growth Factor A (VEGFA)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0032",
+      "node_a": "inos_cgmp_pkg",
+      "node_b": "pv_interneuron_kcc2_dependence",
+      "label_a": "NO-cGMP-PKG Pathway (central sensitisation)",
+      "label_b": "PV Inhibition KCC2-Dependency",
+      "community_a": 12,
+      "community_b": 20,
+      "entity_type_a": "pathway",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.666667,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0033",
+      "node_a": "BDNF_TrkB_TrkB",
+      "node_b": "ana_12_TrkB_signaling_pain",
+      "label_a": "TrkB Receptor (TrkB.FL)",
+      "label_b": "TrkB Signaling in Neuropathic Pain",
+      "community_a": 8,
+      "community_b": 1,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.698552,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "ANA-12 (Selective TrkB Antagonist)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0034",
+      "node_a": "inos_1400w",
+      "node_b": "inos_no",
+      "label_a": "1400W (selective iNOS inhibitor)",
+      "label_b": "Nitric Oxide (NO, iNOS-derived)",
+      "community_a": 11,
+      "community_b": 12,
+      "entity_type_a": "drug",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.910239,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "iNOS (Inducible Nitric Oxide Synthase / NOS2)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0035",
+      "node_a": "NogoA_NgR1_NG101",
+      "node_b": "nogoa_ngr1_trpv1_stabilization",
+      "label_a": "NG101 (Anti-Nogo-A Antibody)",
+      "label_b": "Nogo-A/NgR1 TRPV1 Membrane Stabilization",
+      "community_a": 7,
+      "community_b": 19,
+      "entity_type_a": "concept",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.480898,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Nogo-A"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0036",
+      "node_a": "karilin7_NSC23766",
+      "node_b": "shared_roa_rock",
+      "label_a": "NSC23766 (Rac1 Inhibitor, ACC Microinjection)",
+      "label_b": "RhoA/ROCK Signalling Axis",
+      "community_a": 7,
+      "community_b": 17,
+      "entity_type_a": "drug",
+      "entity_type_b": "pathway",
+      "compartment_a": "ACC",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.621335,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Rac1 GTPase"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0037",
+      "node_a": "NogoA_NgR1_TRPV1",
+      "node_b": "nogoa_ngr1_trpv1_stabilization",
+      "label_a": "TRPV1 Channel",
+      "label_b": "Nogo-A/NgR1 TRPV1 Membrane Stabilization",
+      "community_a": 7,
+      "community_b": 19,
+      "entity_type_a": "channel",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.480898,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Nogo-A"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0038",
+      "node_a": "NogoA_NgR1_rationale_physiological_roles",
+      "node_b": "nogoa_ngr1_trpv1_stabilization",
+      "label_a": "Rationale: Nogo-A/NgR1 have physiological circuit-stabilizing roles",
+      "label_b": "Nogo-A/NgR1 TRPV1 Membrane Stabilization",
+      "community_a": 7,
+      "community_b": 19,
+      "entity_type_a": "concept",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.480898,
+      "jaccard": 1.0,
+      "shared_neighbors": [
+        "Nogo-A"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0039",
+      "node_a": "cxcl12_cxcr4_cxcr4",
+      "node_b": "tlr9_tlr9",
+      "label_a": "CXCR4 Receptor",
+      "label_b": "TLR9 (Toll-Like Receptor 9)",
+      "community_a": 9,
+      "community_b": 10,
+      "entity_type_a": "receptor",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 1.010091,
+      "jaccard": 0.214286,
+      "shared_neighbors": [
+        "NF-kB Transcription Factor (master neuroinflammation driver)",
+        "TLR4 (Toll-like Receptor 4)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0040",
+      "node_a": "BBB_resolvin_D1",
+      "node_b": "spm_lxa4",
+      "label_a": "Resolvin D1 (Pro-Resolving Mediator)",
+      "label_b": "Lipoxin A4 (LXA4)",
+      "community_a": 4,
+      "community_b": 0,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.513898,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Specialized Pro-resolving Mediators (SPMs)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0041",
+      "node_a": "BBB_resolvin_D1",
+      "node_b": "spm_mar1",
+      "label_a": "Resolvin D1 (Pro-Resolving Mediator)",
+      "label_b": "Maresin 1 (MaR1)",
+      "community_a": 4,
+      "community_b": 0,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.513898,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Specialized Pro-resolving Mediators (SPMs)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0042",
+      "node_a": "s100a8_a9_complex",
+      "node_b": "tlr9_tlr9",
+      "label_a": "S100A8/A9 Complex (Calprotectin / DAMP)",
+      "label_b": "TLR9 (Toll-Like Receptor 9)",
+      "community_a": 23,
+      "community_b": 10,
+      "entity_type_a": "concept",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.961985,
+      "jaccard": 0.214286,
+      "shared_neighbors": [
+        "RAGE (Receptor for Advanced Glycation End-products / AGER)",
+        "TLR4 (Toll-like Receptor 4)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0043",
+      "node_a": "jakstat_il6_gp130",
+      "node_b": "kcc2_bdnf_trkb_kcc2",
+      "label_a": "IL-6/gp130/JAK2 Axis",
+      "label_b": "BDNF-TrkB-KCC2 disinhibition cascade",
+      "community_a": 20,
+      "community_b": 0,
+      "entity_type_a": "pathway",
+      "entity_type_b": "receptor",
+      "compartment_a": "systemic",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.586961,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "MMP-9 (Matrix Metalloproteinase-9)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0044",
+      "node_a": "jakstat_il6_gp130",
+      "node_b": "strategic_biomarker_mmp9_hub",
+      "label_a": "IL-6/gp130/JAK2 Axis",
+      "label_b": "MMP-9 Hub (clinical biomarker nexus)",
+      "community_a": 20,
+      "community_b": 19,
+      "entity_type_a": "pathway",
+      "entity_type_b": "molecule",
+      "compartment_a": "systemic",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.586961,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "MMP-9 (Matrix Metalloproteinase-9)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0045",
+      "node_a": "BDNF_TrkB_TrkB",
+      "node_b": "inos_cgmp_pkg",
+      "label_a": "TrkB Receptor (TrkB.FL)",
+      "label_b": "NO-cGMP-PKG Pathway (central sensitisation)",
+      "community_a": 8,
+      "community_b": 12,
+      "entity_type_a": "receptor",
+      "entity_type_b": "pathway",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0046",
+      "node_a": "proposal_cpt_tnfr1_blockade",
+      "node_b": "tnf_tnfr1",
+      "label_a": "TNFR1-Selective TNF Blockade (Chronic Pain Treatment Pillar 4, XPro1595)",
+      "label_b": "TNFR1 (TNF Receptor 1, pronociceptive)",
+      "community_a": 2,
+      "community_b": 18,
+      "entity_type_a": "drug",
+      "entity_type_b": "receptor",
+      "compartment_a": "systemic",
+      "compartment_b": "systemic",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.910239,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "XPro1595 (solTNF/TNFR1 Blocker)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0047",
+      "node_a": "bdnftrkb_trkb_fl",
+      "node_b": "pv_interneuron_kcc2_dependence",
+      "label_a": "TrkB.FL (Full-Length TrkB Receptor)",
+      "label_b": "PV Inhibition KCC2-Dependency",
+      "community_a": 21,
+      "community_b": 20,
+      "entity_type_a": "receptor",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0048",
+      "node_a": "hif1a_PX478",
+      "node_b": "microbio_glycolytic_shift",
+      "label_a": "PX-478 (HIF1α Inhibitor)",
+      "label_b": "Microglial Glycolytic Shift (Warburg Effect) in Pain",
+      "community_a": 37,
+      "community_b": 2,
+      "entity_type_a": "drug",
+      "entity_type_b": "cell_type",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "Transient HIF1α Inhibition (Acute-to-Chronic Prevention, Node 2)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0049",
+      "node_a": "bdnftrkb_probdnf_p75",
+      "node_b": "epigenetic_h3k18la",
+      "label_a": "proBDNF / p75NTR Signaling",
+      "label_b": "Histone Lactylation H3K18la (metabolic-epigenetic interface)",
+      "community_a": 19,
+      "community_b": 6,
+      "entity_type_a": "receptor",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.603881,
+      "jaccard": 0.285714,
+      "shared_neighbors": [
+        "MMP-9 (Matrix Metalloproteinase-9)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0050",
+      "node_a": "igf_igf2bp2",
+      "node_b": "rbfox1_rbfox1",
+      "label_a": "IGF2BP2 (m6A Reader Stabilizing Pain Transcripts)",
+      "label_b": "Rbfox1 (A2BP1) RNA-Binding Splicing Regulator",
+      "community_a": 29,
+      "community_b": 14,
+      "entity_type_a": "concept",
+      "entity_type_b": "molecule",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 1.442695,
+      "jaccard": 0.2,
+      "shared_neighbors": [
+        "Rbfox1-SCN9A mRNA Stability (Nav1.7 Regulation)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0051",
+      "node_a": "ho1_co_co",
+      "node_b": "inos_peroxynitrite",
+      "label_a": "Carbon Monoxide (CO signalling)",
+      "label_b": "Peroxynitrite (ONOO-)",
+      "community_a": 11,
+      "community_b": 12,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.600294,
+      "jaccard": 0.285714,
+      "shared_neighbors": [
+        "NLRP3 Inflammasome",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0052",
+      "node_a": "ho1_co_corm",
+      "node_b": "ho1_co_ho1",
+      "label_a": "CO-Releasing Molecules (CORMs)",
+      "label_b": "Heme Oxygenase-1 (HO-1/HMOX1)",
+      "community_a": 11,
+      "community_b": 17,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.558111,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Carbon Monoxide (CO signalling)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0053",
+      "node_a": "pv_interneuron_kcc2_dependence",
+      "node_b": "substance_p_nk1_nk1r",
+      "label_a": "PV Inhibition KCC2-Dependency",
+      "label_b": "NK1 Receptor (TACR1)",
+      "community_a": 20,
+      "community_b": 12,
+      "entity_type_a": "concept",
+      "entity_type_b": "receptor",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0054",
+      "node_a": "pv_interneuron_kcc2_dependence",
+      "node_b": "vegf_VEGFR2",
+      "label_a": "PV Inhibition KCC2-Dependency",
+      "label_b": "VEGFR2 (Flk-1/KDR)",
+      "community_a": 20,
+      "community_b": 4,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "peripheral",
+      "tier_b": "mid",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.4,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0055",
+      "node_a": "connexin43_cx43",
+      "node_b": "s100a8_a9_complex",
+      "label_a": "Connexin 43 (Cx43/GJA1)",
+      "label_b": "S100A8/A9 Complex (Calprotectin / DAMP)",
+      "community_a": 13,
+      "community_b": 23,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.762753,
+      "jaccard": 0.222222,
+      "shared_neighbors": [
+        "Cx43 Hemichannels (pathological opening)",
+        "TLR4 (Toll-like Receptor 4)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0056",
+      "node_a": "bdnftrkb_trkb_fl",
+      "node_b": "inos_cgmp_pkg",
+      "label_a": "TrkB.FL (Full-Length TrkB Receptor)",
+      "label_b": "NO-cGMP-PKG Pathway (central sensitisation)",
+      "community_a": 21,
+      "community_b": 12,
+      "entity_type_a": "receptor",
+      "entity_type_b": "pathway",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "mid",
+      "adamic_adar": 0.511595,
+      "jaccard": 0.333333,
+      "shared_neighbors": [
+        "Brain-Derived Neurotrophic Factor (BDNF)",
+        "KCC2 (Potassium-Chloride Cotransporter)"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0057",
+      "node_a": "rbfox1_AAV5_Rbfox1",
+      "node_b": "rbfox1_nrcam_exon10",
+      "label_a": "AAV5-Rbfox1 Gene Therapy",
+      "label_b": "NrCAM Exon 10 Retention (Rbfox1 Loss Effect)",
+      "community_a": 22,
+      "community_b": 14,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "Rbfox1 (A2BP1) RNA-Binding Splicing Regulator"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0058",
+      "node_a": "rbfox1_AAV5_Rbfox1",
+      "node_b": "rbfox1_scn9a_stability",
+      "label_a": "AAV5-Rbfox1 Gene Therapy",
+      "label_b": "Rbfox1-SCN9A mRNA Stability (Nav1.7 Regulation)",
+      "community_a": 22,
+      "community_b": 29,
+      "entity_type_a": "concept",
+      "entity_type_b": "channel",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "Rbfox1 (A2BP1) RNA-Binding Splicing Regulator"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0059",
+      "node_a": "rbfox1_AAV5_Rbfox1",
+      "node_b": "vegf_bevacizumab",
+      "label_a": "AAV5-Rbfox1 Gene Therapy",
+      "label_b": "Bevacizumab (Anti-VEGF Antibody)",
+      "community_a": 22,
+      "community_b": 14,
+      "entity_type_a": "concept",
+      "entity_type_b": "molecule",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "mid",
+      "tier_b": "peripheral",
+      "adamic_adar": 0.721348,
+      "jaccard": 0.25,
+      "shared_neighbors": [
+        "Cross-Pathway Integrative Therapeutic Appraisals"
+      ],
+      "evidence_basis": "structure"
+    },
+    {
+      "id": "LC-0060",
+      "node_a": "GABA_apoptosis_HIF1alpha",
+      "node_b": "hif1a_HIF1alpha",
+      "label_a": "HIF1α (Hypoxia-Inducible Factor 1 Alpha)",
+      "label_b": "Hypoxia-Inducible Factor 1 Alpha (HIF1α)",
+      "community_a": 1,
+      "community_b": 4,
+      "entity_type_a": "concept",
+      "entity_type_b": "concept",
+      "compartment_a": "other",
+      "compartment_b": "other",
+      "tier_a": "hub",
+      "tier_b": "mid",
+      "adamic_adar": 1.987714,
+      "jaccard": 0.173913,
+      "shared_neighbors": [
+        "YC-1 (HIF1α Inhibitor)",
+        "Angiopoietin-2 (Ang-2)",
+        "Vascular Endothelial Growth Factor A (VEGFA)",
+        "Brain-Derived Neurotrophic Factor (BDNF)"
+      ],
+      "evidence_basis": "structure"
+    }
+  ],
+  "triad_candidates": [
+    {
+      "id": "TC-0001",
+      "node_a": "angpt_tie2",
+      "node_c": "bbb_bbb",
+      "label_a": "Tie2 Receptor Tyrosine Kinase",
+      "label_c": "Blood-Brain/Spinal Cord Barrier (BBB/BSCB)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "AngPt_angiopoietin_1",
+          "s1": 1,
+          "s2": 1
+        },
+        {
+          "via": "AngPt_angiopoietin_2",
+          "s1": -1,
+          "s2": -1
+        }
+      ],
+      "n_support": 2,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0002",
+      "node_a": "GABA_apoptosis_mitochondrial_dysfunction",
+      "node_c": "vegf_VEGFA",
+      "label_a": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "label_c": "Vascular Endothelial Growth Factor A (VEGFA)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_HIF1alpha",
+          "s1": 1,
+          "s2": 1
+        },
+        {
+          "via": "GABA_apoptosis_TNF_alpha",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 2,
+      "min_confidence": 0.85,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0003",
+      "node_a": "AngPt_angiopoietin_2",
+      "node_c": "vegf_neuroma",
+      "label_a": "Angiopoietin-2 (Ang-2)",
+      "label_c": "Neuroma Formation via Excessive VEGFA",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "vegf_VEGFA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0004",
+      "node_a": "AngPt_angiopoietin_2",
+      "node_c": "vegf_rationale_dual_role",
+      "label_a": "Angiopoietin-2 (Ang-2)",
+      "label_c": "Rationale: VEGFA is crucial for repair but drives pain when excessive",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "vegf_VEGFA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0005",
+      "node_a": "BBB_CypA_MMP9_pathway",
+      "node_c": "GABA_apoptosis_TNF_alpha",
+      "label_a": "CypA-MMP-9 Pathway",
+      "label_c": "TNF-α (Pro-Inflammatory Cytokine)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "BBB_tight_junction_proteins",
+          "s1": -1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0006",
+      "node_a": "BBB_CypA_MMP9_pathway",
+      "node_c": "pnn_ecm_mmp9",
+      "label_a": "CypA-MMP-9 Pathway",
+      "label_c": "MMP-9 (Matrix Metalloproteinase-9)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "BBB_tight_junction_proteins",
+          "s1": -1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0007",
+      "node_a": "BBB_tight_junction_proteins",
+      "node_c": "GABA_apoptosis_mitochondrial_dysfunction",
+      "label_a": "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+      "label_c": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_TNF_alpha",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0008",
+      "node_a": "BBB_tight_junction_proteins",
+      "node_c": "assaying_molecularly_structural_plasticity_BDNF",
+      "label_a": "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+      "label_c": "Brain-Derived Neurotrophic Factor (BDNF)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_TNF_alpha",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0009",
+      "node_a": "BBB_tight_junction_proteins",
+      "node_c": "vegf_nrp1",
+      "label_a": "Tight Junction Proteins (Occludin/Claudin-5/ZO-1)",
+      "label_c": "Neuropilin-1 (NRP-1) Co-Receptor",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "vegf_VEGFR2",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0010",
+      "node_a": "BDNF_TrkB_KCC2",
+      "node_c": "gaba_apoptosis_ca_overload",
+      "label_a": "KCC2 (Potassium-Chloride Cotransporter)",
+      "label_c": "GABAergic Ca2+ Overload Cascade",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "gaba_apoptosis_calpain",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0011",
+      "node_a": "GABA_apoptosis_Calpain",
+      "node_c": "autophagy-apoptosis_inhibition_mPTP",
+      "label_a": "Calpain (Ca²⁺-Dependent Cysteine Protease)",
+      "label_c": "Mitochondrial Permeability Transition Pore (mPTP)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_calcium_overload",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0012",
+      "node_a": "GABA_apoptosis_ER_stress_UPR",
+      "node_c": "GABA_apoptosis_mitochondrial_dysfunction",
+      "label_a": "ER Stress and Unfolded Protein Response (UPR)",
+      "label_c": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_caspase_cascade",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0013",
+      "node_a": "GABA_apoptosis_ER_stress_UPR",
+      "node_c": "autophagy-apoptosis_inhibition_mPTP",
+      "label_a": "ER Stress and Unfolded Protein Response (UPR)",
+      "label_c": "Mitochondrial Permeability Transition Pore (mPTP)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_caspase_cascade",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0014",
+      "node_a": "GABA_apoptosis_HIF1alpha",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "HIF1α (Hypoxia-Inducible Factor 1 Alpha)",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0015",
+      "node_a": "GABA_apoptosis_HIF1alpha",
+      "node_c": "vegf_neuroma",
+      "label_a": "HIF1α (Hypoxia-Inducible Factor 1 Alpha)",
+      "label_c": "Neuroma Formation via Excessive VEGFA",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "vegf_VEGFA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0016",
+      "node_a": "GABA_apoptosis_HIF1alpha",
+      "node_c": "vegf_rationale_dual_role",
+      "label_a": "HIF1α (Hypoxia-Inducible Factor 1 Alpha)",
+      "label_c": "Rationale: VEGFA is crucial for repair but drives pain when excessive",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "vegf_VEGFA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0017",
+      "node_a": "GABA_apoptosis_PINK1_Parkin_mitophagy",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "PINK1/Parkin Mitophagy Pathway",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0018",
+      "node_a": "GABA_apoptosis_PNN_loss",
+      "node_c": "autophagy-apoptosis_inhibition_mPTP",
+      "label_a": "Perineuronal Net (PNN) Loss and GABAergic Hyperactivity",
+      "label_c": "Mitochondrial Permeability Transition Pore (mPTP)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_calcium_overload",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0019",
+      "node_a": "GABA_apoptosis_ROS_oxidative_stress",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "Reactive Oxygen Species (ROS) and Oxidative Stress",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0020",
+      "node_a": "GABA_apoptosis_Rapamycin",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "Rapamycin (mTOR Inhibitor / Autophagy Enhancer)",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mTORC1",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0021",
+      "node_a": "GABA_apoptosis_Rapamycin",
+      "node_c": "GABA_apoptosis_mitochondrial_dysfunction",
+      "label_a": "Rapamycin (mTOR Inhibitor / Autophagy Enhancer)",
+      "label_c": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_PINK1_Parkin_mitophagy",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0022",
+      "node_a": "GABA_apoptosis_Rapamycin",
+      "node_c": "autophagy-apoptosis_inhibition_myr_Akt",
+      "label_a": "Rapamycin (mTOR Inhibitor / Autophagy Enhancer)",
+      "label_c": "myr-Akt (Constitutively Active PKB / Alternative Payload)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mTORC1",
+          "s1": -1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0023",
+      "node_a": "GABA_apoptosis_RhoA_ROCK",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "RhoA/ROCK Signalling Pathway",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0024",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "GABA_apoptosis_calcium_overload",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "Neuronal Calcium (Ca²⁺) Overload",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0025",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "RhoA_ROCK_ROCK",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "ROCK (ROCK1/ROCK2)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "RhoA_ROCK_RhoA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0026",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "RhoA_ROCK_rationale_dual_role",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "Rationale: RhoA/ROCK has context-dependent roles in regeneration vs pain",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "RhoA_ROCK_RhoA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0027",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "RhoA_ROCK_simvastatin",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "Simvastatin (RhoA Inhibitor)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "RhoA_ROCK_RhoA",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0028",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "jakstat_baricitinib",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "Baricitinib (JAK1/2 Inhibitor, RA-Approved)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "il6_jak_stat3",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0029",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "jakstat_ruxolitinib",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "Ruxolitinib (JAK1/2 Inhibitor, FDA-Approved)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "il6_jak_stat3",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0030",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "jakstat_socs3",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "SOCS3 (Negative Regulator of JAK/STAT3)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "il6_jak_stat3",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0031",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "nogoa_ngr1_ngr1",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "NgR1 (Nogo-66 Receptor 1)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "RhoA_ROCK_RhoA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0032",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "rhoa_rock_lpa_demyelination",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "LPA-RhoA-Demyelination Cascade",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "RhoA_ROCK_RhoA",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0033",
+      "node_a": "GABA_apoptosis_TNF_alpha",
+      "node_c": "vegf_VEGFR2",
+      "label_a": "TNF-α (Pro-Inflammatory Cytokine)",
+      "label_c": "VEGFR2 (Flk-1/KDR)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "BBB_tight_junction_proteins",
+          "s1": -1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0034",
+      "node_a": "GABA_apoptosis_calcium_overload",
+      "node_c": "GABA_apoptosis_caspase_cascade",
+      "label_a": "Neuronal Calcium (Ca²⁺) Overload",
+      "label_c": "Caspase Apoptotic Cascade (Caspase-3, -9, -12)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_mitochondrial_dysfunction",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0035",
+      "node_a": "GABA_apoptosis_calcium_overload",
+      "node_c": "autophagy-apoptosis_inhibition_Bcl_xL",
+      "label_a": "Neuronal Calcium (Ca²⁺) Overload",
+      "label_c": "Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "autophagy-apoptosis_inhibition_mPTP",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0036",
+      "node_a": "GABA_apoptosis_caspase_cascade",
+      "node_c": "autophagy-apoptosis_inhibition_Bcl_xL",
+      "label_a": "Caspase Apoptotic Cascade (Caspase-3, -9, -12)",
+      "label_c": "Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "autophagy-apoptosis_inhibition_mPTP",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0037",
+      "node_a": "GABA_apoptosis_mTORC1",
+      "node_c": "autophagy-apoptosis_inhibition_mPTP",
+      "label_a": "mTORC1 (Mammalian Target of Rapamycin Complex 1)",
+      "label_c": "Mitochondrial Permeability Transition Pore (mPTP)",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_calcium_overload",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0038",
+      "node_a": "GABA_apoptosis_mitochondrial_dysfunction",
+      "node_c": "RhoA_ROCK_RhoA",
+      "label_a": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "label_c": "RhoA GTPase",
+      "inferred_sign": 1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_TNF_alpha",
+          "s1": 1,
+          "s2": 1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0039",
+      "node_a": "GABA_apoptosis_mitochondrial_dysfunction",
+      "node_c": "hif1a_PX478",
+      "label_a": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "label_c": "PX-478 (HIF1α Inhibitor)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_HIF1alpha",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    },
+    {
+      "id": "TC-0040",
+      "node_a": "GABA_apoptosis_mitochondrial_dysfunction",
+      "node_c": "hif1a_YC1",
+      "label_a": "Mitochondrial Dysfunction in GABAergic Neurons",
+      "label_c": "YC-1 (HIF1α Inhibitor)",
+      "inferred_sign": -1,
+      "support_paths": [
+        {
+          "via": "GABA_apoptosis_HIF1alpha",
+          "s1": 1,
+          "s2": -1
+        }
+      ],
+      "n_support": 1,
+      "min_confidence": 1.0,
+      "evidence_basis": "triad"
+    }
+  ],
+  "summary": {
+    "n_nodes": 520,
+    "n_links": 812,
+    "n_cooccurrence_candidates": 60,
+    "n_triad_candidates": 40
+  }
+}
