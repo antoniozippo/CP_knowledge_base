@@ -9768,7 +9768,7 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_RhoA",
       "target": "karilin7_Rac1",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "conceptually_related_to",
@@ -9900,7 +9900,7 @@
       "weight": 1.0,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "karilin7_Kalirin7",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "conceptually_related_to",
@@ -10032,7 +10032,7 @@
       "weight": 1.0,
       "source": "TNF_TNF_alpha",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": 0
     },
     {
       "relation": "contributes_to",
@@ -10043,7 +10043,7 @@
       "weight": 1.0,
       "source": "TNF_TNF_alpha",
       "target": "karilin7_DendriticSpineLoss",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "conceptually_related_to",
@@ -10373,7 +10373,7 @@
       "rationale": null,
       "source": "vegf_bevacizumab",
       "target": "vegf_VEGFA",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "proposes_combination_with_comp_ang1",
@@ -13651,7 +13651,7 @@
       "weight": 1.0,
       "source": "nlrp3_il1b",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": 0
     },
     {
       "relation": "conceptually_related_to",
@@ -14493,17 +14493,6 @@
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "insights_x_KCC2.md",
-      "source_location": "line 24",
-      "weight": 1.0,
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "BDNF_TrkB_TrkB",
-      "sign": 0
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CX3CL1-CX3CR1.md",
       "source_location": "line 68",
       "weight": 1.0,
@@ -14520,7 +14509,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "pv_interneuron_kcc2_dependence",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "stimulates_release_of",
@@ -14531,7 +14520,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "hif1a_microglial_glycolysis",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "stimulates_microglial_release_of",
@@ -14542,7 +14531,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "vegf_VEGFR2",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "drives_transcription_of",
@@ -14564,7 +14553,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "assaying_synaptic_plasticity",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "enhances_excitability_of",
@@ -14575,7 +14564,7 @@
       "rationale": "SST.md states microglial-derived TNF-α and BDNF can enhance SST neuron excitability; BDNF also suppresses PV gate via KCC2 downregulation, indirectly releasing SST brake.",
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "SST_somatostatin_interneurons",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "conceptually_related_to",
@@ -14619,7 +14608,7 @@
       "rationale": "JAK-STAT.md states TLR4/MyD88/NF-κB induces IL-6 which activates JAK/STAT3; NF-kB is an upstream driver of the IL-6 autocrine loop.",
       "source": "shared_nfkb",
       "target": "jakstat_il6_gp130",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "destabilized_by",
@@ -14630,7 +14619,7 @@
       "weight": 1.0,
       "source": "shared_tnfa",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": 0
     },
     {
       "relation": "conceptually_related_to",
@@ -14663,7 +14652,7 @@
       "weight": 1.0,
       "source": "shared_roa_rock",
       "target": "karilin7_Rac1",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "is_cleaved_by",
@@ -14685,7 +14674,7 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "PV_interneurons_PV_interneurons",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "upregulates",
@@ -14718,7 +14707,7 @@
       "rationale": null,
       "source": "pnn_ecm_mmp9",
       "target": "BBB_tight_junction_proteins",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "drives_transcription_of",
@@ -14740,7 +14729,7 @@
       "rationale": "NogoA-NgR1.md states Nogo-A/NgR1 signals through RhoA/ROCK which regulates MMP-9, linking myelin inhibitors to PNN degradation and PV interneuron dysfunction.",
       "source": "pnn_ecm_mmp9",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "conceptually_related_to",
@@ -15884,7 +15873,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "bdnftrkb_trkb_fc",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "induces_release_of",
@@ -15895,7 +15884,7 @@
       "rationale": null,
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "GABA_apoptosis_TNF_alpha",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "mediates_microglial_release_of",
@@ -15906,7 +15895,7 @@
       "rationale": "RhoA-ROCK.md states RhoA/ROCK→p38 MAPK drives microglial M1 phenotype and BDNF release; BDNF-TrkB.md confirms microglial BDNF as pronociceptive source.",
       "source": "assaying_molecularly_structural_plasticity_BDNF",
       "target": "RhoA_ROCK_ROCK",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "is_induced_by_indirectly",
@@ -15961,7 +15950,7 @@
       "rationale": null,
       "source": "bdnftrkb_trkb_fl",
       "target": "assaying_nmdar",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "antagonizes",
@@ -16049,7 +16038,7 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "hif1a_normoxic_stabilization",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "downregulates",
@@ -16071,7 +16060,7 @@
       "rationale": null,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "il6_jak_stat3",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "mutually_upregulates",
@@ -16082,7 +16071,7 @@
       "rationale": "vegf.md explicitly states VEGFA and TNF-α mutually upregulate each other, amplifying neuroinflammation.",
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "vegf_VEGFA",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "destabilized_by",
@@ -16093,7 +16082,7 @@
       "weight": 1.0,
       "source": "GABA_apoptosis_TNF_alpha",
       "target": "karilin7_Kalirin7",
-      "sign": -1
+      "sign": 0
     },
     {
       "relation": "selectively_blocks",
@@ -16104,7 +16093,7 @@
       "rationale": null,
       "source": "tnf_tnfr1",
       "target": "TNF_XPro1595",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "preserves",
@@ -16115,7 +16104,7 @@
       "rationale": null,
       "source": "ana12_kcc2_preservation",
       "target": "BDNF_TrkB_KCC2",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "drives",
@@ -16159,7 +16148,7 @@
       "rationale": "hif1a.md states ROS inhibit PHD enzymes enabling normoxic HIF1α stabilization; GABA_apoptosis.md identifies ROS burst from mPTP opening as key calcium overload consequence.",
       "source": "gaba_apoptosis_ca_overload",
       "target": "GABA_apoptosis_HIF1alpha",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "causes_excitotoxic_death_in",
@@ -16170,7 +16159,7 @@
       "rationale": null,
       "source": "gaba_apoptosis_cpampar",
       "target": "PV_interneurons_PV_interneurons",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "indirectly_protects_against",
@@ -16181,7 +16170,7 @@
       "rationale": null,
       "source": "gaba_apoptosis_mptp",
       "target": "gaba_apoptosis_rapamycin",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "prevents",
@@ -16192,7 +16181,7 @@
       "rationale": null,
       "source": "gaba_apoptosis_mptp",
       "target": "gaba_apoptosis_ru360",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "cleaves",
@@ -16203,7 +16192,7 @@
       "rationale": null,
       "source": "gaba_apoptosis_calpain",
       "target": "BDNF_TrkB_KCC2",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "performs",
@@ -16225,7 +16214,7 @@
       "rationale": null,
       "source": "PV_interneurons_PV_interneurons",
       "target": "pv_interneuron_dreads_optogenetics",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "hyperactivates_when_pv_fails",
@@ -16236,7 +16225,7 @@
       "rationale": "SST.md explicitly describes disinhibition due to PV interneuron loss as the core gate-open mechanism allowing SST neurons to drive allodynia.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "SST_somatostatin_interneurons",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "impairs_via_kcc2_bdnf",
@@ -16247,7 +16236,7 @@
       "rationale": "JAK-STAT.md states STAT3 drives BDNF expression and downregulates KCC2, both of which directly impair PV interneuron inhibitory function.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "il6_jak_stat3",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "indirectly_impairs_via_rhoa_mmp9_pnn",
@@ -16258,7 +16247,7 @@
       "rationale": "NogoA-NgR1.md links NgR1→RhoA→MMP-9→PNN degradation→PV interneuron dysfunction cascade.",
       "source": "PV_interneurons_PV_interneurons",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "depends_on",
@@ -16324,7 +16313,7 @@
       "rationale": null,
       "source": "SST_somatostatin_interneurons",
       "target": "SST_Prdm12",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "indirectly_modulates_via_nav17",
@@ -16357,7 +16346,7 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "rhoa_rock_lpa_demyelination",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "blocks_membrane_anchoring",
@@ -16368,7 +16357,7 @@
       "rationale": null,
       "source": "RhoA_ROCK_RhoA",
       "target": "RhoA_ROCK_simvastatin",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "activates",
@@ -16382,28 +16371,6 @@
       "sign": 1
     },
     {
-      "relation": "antagonizes_pathway",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "karilin-7.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "karilin7_Kalirin7",
-      "sign": -1
-    },
-    {
-      "relation": "functionally_antagonistic",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "karilin-7.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "karilin7_Rac1",
-      "sign": 0
-    },
-    {
       "relation": "inhibits",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -16412,17 +16379,6 @@
       "rationale": null,
       "source": "RhoA_ROCK_ROCK",
       "target": "RhoA_ROCK_fasudil",
-      "sign": -1
-    },
-    {
-      "relation": "antagonizes_pathway",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "karilin-7.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "RhoA_ROCK_ROCK",
-      "target": "karilin7_Kalirin7",
       "sign": -1
     },
     {
@@ -16456,7 +16412,7 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "vegf_VEGFA",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "destabilizes",
@@ -16467,7 +16423,7 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "hif1a_YC1",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "inhibits_translation_of",
@@ -16478,18 +16434,7 @@
       "rationale": null,
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "hif1a_PX478",
-      "sign": 0
-    },
-    {
-      "relation": "transcribes",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "vegf.md",
-      "source_location": null,
-      "rationale": null,
-      "source": "GABA_apoptosis_HIF1alpha",
-      "target": "vegf_VEGFA",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "targets",
@@ -16511,7 +16456,7 @@
       "rationale": "hif1a.md explicitly states HIF1α induces ANGPT2; AngPt.md details Ang-2 role in BSCB disruption and pain.",
       "source": "GABA_apoptosis_HIF1alpha",
       "target": "AngPt_angiopoietin_2",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "is_upregulated_by_hypoxia_via",
@@ -16533,7 +16478,7 @@
       "rationale": "hif1a.md explicitly pairs VEGFA and ANGPT2 as co-targets of HIF1α transcriptional program; microglial HIF1α-glycolysis drives the full vascular-pain axis.",
       "source": "hif1a_microglial_glycolysis",
       "target": "AngPt_angiopoietin_2",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "maintained_by",
@@ -16555,7 +16500,7 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "bbb_rvd1_barrier_reseal",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "disrupts",
@@ -16566,7 +16511,7 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "AngPt_angiopoietin_2",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "stabilizes",
@@ -16577,7 +16522,7 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "AngPt_angiopoietin_1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "is_disrupted_by",
@@ -16599,7 +16544,7 @@
       "rationale": null,
       "source": "BBB_tight_junction_proteins",
       "target": "BBB_CypA_MMP9_pathway",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "downregulates",
@@ -16621,7 +16566,7 @@
       "rationale": "Both Ang-1 and RvD1/LXA4 act as vascular stabilizers and barrier resealers via complementary mechanisms. Strategic combination could provide synergistic barrier repair.",
       "source": "bbb_rvd1_barrier_reseal",
       "target": "AngPt_angiopoietin_1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "activates",
@@ -16654,7 +16599,7 @@
       "rationale": null,
       "source": "AngPt_angiopoietin_2",
       "target": "angpt_tie2",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "synergistically_amplifies",
@@ -16665,7 +16610,7 @@
       "rationale": null,
       "source": "AngPt_angiopoietin_2",
       "target": "vegf_VEGFA",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "binds",
@@ -16698,7 +16643,7 @@
       "rationale": null,
       "source": "vegf_VEGFR2",
       "target": "vegf_nrp1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "downregulates_via_bdnf_trkb",
@@ -16709,7 +16654,7 @@
       "rationale": "vegf.md states VEGFA enhances NMDAR transmission and reduces inhibitory tone through BDNF-TrkB-KCC2 signaling in spinal cord.",
       "source": "vegf_VEGFR2",
       "target": "BDNF_TrkB_KCC2",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "drives_via_ntrk1",
@@ -16720,7 +16665,7 @@
       "rationale": null,
       "source": "igf_igf2",
       "target": "igf_ntrk1_igf2_er_stress",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "stabilizes_mrna_of",
@@ -16731,7 +16676,7 @@
       "rationale": null,
       "source": "igf_igf2",
       "target": "igf_igf2bp2",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "mechanistically_parallels",
@@ -16753,7 +16698,7 @@
       "rationale": null,
       "source": "rbfox1_rbfox1",
       "target": "rbfox1_nrcam_exon10",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "regulates",
@@ -16775,7 +16720,7 @@
       "rationale": null,
       "source": "rbfox1_rbfox1",
       "target": "rbfox1_AAV5_Rbfox1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "potentially_interacts_via_cell_adhesion",
@@ -16786,7 +16731,7 @@
       "rationale": "NrCAM (Rbfox1 target) is a neuronal cell adhesion molecule; NgR1 (cell surface) interacts with LINGO-1 (also a cell adhesion molecule). Structural/functional interaction is possible but not documented.",
       "source": "rbfox1_nrcam_exon10",
       "target": "nogoa_ngr1_ngr1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "proposes",
@@ -16830,7 +16775,7 @@
       "rationale": null,
       "source": "NogoA_NgR1_NogoA",
       "target": "NogoA_NgR1_NG101",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "co_receptor_of",
@@ -16863,7 +16808,7 @@
       "rationale": null,
       "source": "il6_jak_stat3",
       "target": "jakstat_socs3",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "inhibits",
@@ -16896,7 +16841,7 @@
       "rationale": null,
       "source": "jakstat_il6_gp130",
       "target": "BDNF_TrkB_KCC2",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "activates_via_ca2_influx",
@@ -16907,7 +16852,7 @@
       "rationale": null,
       "source": "assaying_nmdar",
       "target": "assaying_camkii",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "same_protein",
@@ -16951,18 +16896,7 @@
       "rationale": null,
       "source": "skill_closed_loop",
       "target": "skill_neuropixels",
-      "sign": 0
-    },
-    {
-      "relation": "interacts_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "karilin-7.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "BDNF_TrkB_KCC2",
-      "target": "karilin7_Kalirin7",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "encoded_by",
@@ -16984,7 +16918,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Rac1",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "activates_GEF",
@@ -16995,7 +16929,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_RhoG",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "contains",
@@ -17094,7 +17028,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Rac1_PAK_LIMK_Cofilin_Pathway",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "regulated_by_phosphorylation",
@@ -17127,7 +17061,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Calcineurin",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "downregulates_via_calcineurin",
@@ -17138,7 +17072,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_NMDAR",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "delivers_and_restores",
@@ -17149,7 +17083,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_AAV_Kalirin7",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "knocks_down",
@@ -17160,7 +17094,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_shRNA_Kalirin7",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "genetic_deletion",
@@ -17171,7 +17105,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_Kalirin7_KO",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "upregulates",
@@ -17193,7 +17127,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_DBS_ACC",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "loss_causes",
@@ -17204,7 +17138,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_PainRelatedAnxiety",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "loss_causes",
@@ -17215,7 +17149,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_DendriticSpineLoss",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "induces_downregulation",
@@ -17226,7 +17160,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_SNI",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "induces_downregulation",
@@ -17237,7 +17171,7 @@
       "weight": 1.0,
       "source": "karilin7_Kalirin7",
       "target": "karilin7_CCI",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "expression_differs_by_sex",
@@ -17281,7 +17215,7 @@
       "weight": 1.0,
       "source": "karilin7_KALRN",
       "target": "karilin7_CEBPbeta",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "represses_transcription",
@@ -17292,7 +17226,7 @@
       "weight": 1.0,
       "source": "karilin7_KALRN",
       "target": "hdac_hdac4",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "targets_mRNA",
@@ -17347,7 +17281,7 @@
       "weight": 1.0,
       "source": "karilin7_NMDAR",
       "target": "karilin7_Calcineurin",
-      "sign": 0
+      "sign": 1
     },
     {
       "relation": "antagonizes",
@@ -17391,7 +17325,7 @@
       "weight": 1.0,
       "source": "karilin7_LIMK",
       "target": "karilin7_Cofilin",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "depolymerizes",
@@ -17402,7 +17336,7 @@
       "weight": 1.0,
       "source": "karilin7_Cofilin",
       "target": "karilin7_Actin",
-      "sign": 0
+      "sign": -1
     },
     {
       "relation": "activated_by",

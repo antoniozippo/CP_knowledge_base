@@ -3,6 +3,7 @@
 import json
 import subprocess
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 import pytest
@@ -64,6 +65,7 @@ def fixture_graph():
         make_link("rat_foo", "docA_foo", "references"),
         make_link("docD_drug", "docC_baz", "promotes"),
         make_link("docD_drug", "docE_sym", "references"),
+        make_link("rat_foo", "docC_baz", "activates"),
     ]
     return {
         "directed": True,
@@ -145,12 +147,75 @@ class TestClassifiers:
 
 
 class TestTier:
+    def test_named_constants_match_plan_targets(self):
+        assert bg.HUB_TIER_THRESHOLD == 15
+        assert bg.MID_TIER_THRESHOLD == 3
+
     @pytest.mark.parametrize(
         "degree,expected",
         [(15, "hub"), (20, "hub"), (14, "mid"), (3, "mid"), (2, "peripheral"), (0, "peripheral")],
     )
     def test_thresholds(self, degree, expected):
         assert bg.assign_tier(degree) == expected
+
+    def test_cli_threshold_overrides_shift_boundaries(self):
+        nodes = [make_node(f"n{i}", f"Node {i}") for i in range(12)]
+        links = [make_link(f"n{i}", "n0", "activates") for i in range(1, 12)]
+        graph = {
+            "directed": True,
+            "multigraph": True,
+            "graph": {},
+            "nodes": nodes,
+            "links": links,
+            "hyperedges": [],
+        }
+        default_out, _ = bg.build_graph(graph)
+        overridden_out, _ = bg.build_graph(graph, hub_threshold=10, mid_threshold=2)
+        default_n0 = next(n for n in default_out["nodes"] if n["id"] == "n0")
+        overridden_n0 = next(n for n in overridden_out["nodes"] if n["id"] == "n0")
+        assert default_n0["tier"] == "mid"
+        assert overridden_n0["tier"] == "hub"
+
+
+class TestSignInference:
+    @staticmethod
+    def _signed_pair(relation):
+        nodes = [make_node("a", "Alpha kinase"), make_node("b", "Beta peptide")]
+        graph = {
+            "directed": True,
+            "multigraph": True,
+            "graph": {},
+            "nodes": nodes,
+            "links": [make_link("a", "b", relation)],
+            "hyperedges": [],
+        }
+        out, summary = bg.build_graph(graph)
+        return out["links"][0]["sign"], summary
+
+    @pytest.mark.parametrize(
+        "relation",
+        ["upregulates_translation", "loss_causes", "activates_GEF", "enhances_excitability_of"],
+    )
+    def test_positive_stems(self, relation):
+        sign, _summary = self._signed_pair(relation)
+        assert sign == 1
+
+    @pytest.mark.parametrize(
+        "relation",
+        ["selectively_blocks", "knocks_down", "induces_downregulation", "disrupts"],
+    )
+    def test_negative_stems(self, relation):
+        sign, _summary = self._signed_pair(relation)
+        assert sign == -1
+
+    def test_unmatched_relation_is_neutral(self):
+        sign, _summary = self._signed_pair("mechanistically_parallels")
+        assert sign == 0
+
+    def test_passive_form_zeroed_and_flagged_not_inverted(self):
+        sign, summary = self._signed_pair("destabilized_by")
+        assert sign == 0
+        assert summary["flagged_passive_relations"] == {"destabilized_by"}
 
 
 class TestBuildGraph:
@@ -179,8 +244,10 @@ class TestBuildGraph:
         out, summary = bg.build_graph(fixture_graph)
         assert len(out["links"]) == 4
         assert summary["links_dropped_self_loop"] == 1
-        endpoints = {(l["source"], l["target"]) for l in out["links"]}
-        assert ("docA_foo", "docC_baz") in endpoints
+        assert summary["links_dropped_duplicate"] == 1
+        triples = [(l["source"], l["target"], l["relation"]) for l in out["links"]]
+        assert len(triples) == len(set(triples))
+        assert ("docA_foo", "docC_baz") in {(l["source"], l["target"]) for l in out["links"]}
         for link in out["links"]:
             assert link["source"] != link["target"]
 
@@ -285,3 +352,12 @@ class TestRealGraphSmoke:
         kcc2_nodes = [n for n in out["nodes"] if bg.normalize_label(n["label"]) == "kcc2"]
         assert len(kcc2_nodes) == 1
         assert "merged_from" in kcc2_nodes[0]
+
+    def test_non_allowlist_relations_have_nonzero_sign(self):
+        raw = json.loads(REAL_INPUT.read_text())
+        out, _summary = bg.build_graph(raw)
+        zeroed = defaultdict(int)
+        for link in out["links"]:
+            if link["relation"] not in bg.AMBIGUOUS_SIGN_RELATIONS and link["sign"] == 0:
+                zeroed[link["relation"]] += 1
+        assert not zeroed, f"causal-shaped relations left unsigned: {dict(zeroed)}"

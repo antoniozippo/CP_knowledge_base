@@ -5,6 +5,13 @@ Pipeline: entity deduplication (normalized-label equality with gene-synonym
 folding) -> node enrichment (entity_type, compartment, tier) -> edge
 normalization (sign derived from relation). Input is never modified; results
 are written to graphify-out/graph_v2.json.
+
+Sign convention: `sign` is read along the stored source->target direction of
+each edge. +1 means the source increases/promotes the target, -1 means it
+decreases/inhibits it, 0 means neutral/reference or undetermined. Passive-voice
+relations ("*_by" patterns) invert that reading ("A destabilized_by B" means B
+acts -1 on A); rather than silently flipping endpoints we map them to sign 0
+and report them to stdout for later claim-card review.
 """
 
 import argparse
@@ -44,14 +51,95 @@ RELATION_SIGN = {
     "upregulates": 1,
     "promotes": 1,
     "rationale_for": 1,
+    "specifies_development_of": 1,
     "inhibits": -1,
     "downregulates": -1,
     "antagonizes": -1,
     "antagonizes_pathway": -1,
     "blocks": -1,
     "suppresses": -1,
-    "destabilized_by": -1,
+    "genetic_deletion": -1,
 }
+
+POSITIVE_RELATION_STEMS = (
+    "activ", "caus", "driv", "induc", "upregul", "promot", "increas",
+    "enhanc", "potenti", "stabiliz", "elevat", "sensitiz",
+    "stimulat", "mediat", "transcrib", "preserv", "rescu", "restor",
+    "enabl", "initiat", "normaliz", "amplifi", "contribut",
+)
+
+NEGATIVE_RELATION_STEMS = (
+    "inhibit", "downregul", "suppress", "block", "disrupt", "repress",
+    "decreas", "destabiliz", "knock", "antagon", "impair", "prevent",
+    "attenuat", "negat",
+    "damag", "cleav", "sequest", "neutraliz", "terminat", "degrad",
+    "depolymeriz", "protect",
+)
+
+PASSIVE_RELATION_PATTERN = re.compile(r"(^|_)by(_|$)")
+
+AMBIGUOUS_SIGN_RELATIONS = {
+    # neutral/reference (spec baseline)
+    "references",
+    "conceptually_related_to",
+    "semantically_similar_to",
+    "same_protein",
+    "interacts_with",
+    "binds",
+    "participates_in",
+    "expressed_in",
+    "regulates",
+    "implements",
+    "related",
+    # symmetric interactions / similarities
+    "interacts_with_pathway",
+    "binds_to",
+    "cross_talks_with_at_igf1r",
+    "cooperates_with_for_ltp",
+    "shares_p75ntr_with",
+    "co_receptor_of",
+    "same_pathway",
+    "mechanistically_parallels",
+    "mimics",
+    "complementary_pathway_in_ACC",
+    "autoregulates",
+    "expression_differs_by_sex",
+    # meta / proposal / annotation / dependency
+    "cites",
+    "proposes",
+    "proposes_combination_with_comp_ang1",
+    "performs",
+    "gates_using",
+    "depends_on",
+    "requires",
+    "contains",
+    "targets",
+    "targets_mRNA",
+    "regulates_trafficking",
+    "indirectly_modulates_via_nav17",
+    "targeted_downstream",
+    "provides_resolution_via",
+    "phosphorylates",
+    # passive voice: direction-inverting, pending claim-card review
+    "destabilized_by",
+    "stabilized_by",
+    "maintained_by",
+    "activated_by",
+    "regulated_by_phosphorylation",
+    "targeted_by",
+    "encoded_by",
+    "is_mediated_by",
+    "is_promoted_by",
+    "is_activated_by",
+    "is_induced_by_indirectly",
+    "is_disrupted_by",
+    "is_cleaved_by",
+    "converted_to_by_mmp9",
+    "is_upregulated_by_hypoxia_via",
+}
+
+HUB_TIER_THRESHOLD = 15
+MID_TIER_THRESHOLD = 3
 
 GENE_SYNONYMS = {
     "slc12a5": "kcc2",
@@ -96,10 +184,10 @@ def classify_compartment(label):
     return _first_match(label.lower(), COMPARTMENT_RULES) or "other"
 
 
-def assign_tier(degree):
-    if degree >= 15:
+def assign_tier(degree, hub_threshold=HUB_TIER_THRESHOLD, mid_threshold=MID_TIER_THRESHOLD):
+    if degree >= hub_threshold:
         return "hub"
-    if degree >= 3:
+    if degree >= mid_threshold:
         return "mid"
     return "peripheral"
 
@@ -137,17 +225,24 @@ def merge_nodes(nodes, canonical):
 def redirect_links(links, canonical):
     redirected = []
     dropped_self_loops = []
+    dropped_duplicates = 0
+    seen_triples = set()
     for link in links:
         source = canonical.get(link["source"], link["source"])
         target = canonical.get(link["target"], link["target"])
         if source == target:
             dropped_self_loops.append(link)
             continue
+        triple = (source, target, link["relation"])
+        if triple in seen_triples:
+            dropped_duplicates += 1
+            continue
+        seen_triples.add(triple)
         new_link = dict(link)
         new_link["source"] = source
         new_link["target"] = target
         redirected.append(new_link)
-    return redirected, dropped_self_loops
+    return redirected, dropped_self_loops, dropped_duplicates
 
 
 def compute_degrees(nodes, links):
@@ -161,13 +256,32 @@ def compute_degrees(nodes, links):
     return {n["id"]: len(neighbors[n["id"]]) for n in nodes}
 
 
+def relation_sign(relation):
+    if relation in RELATION_SIGN:
+        return RELATION_SIGN[relation]
+    if PASSIVE_RELATION_PATTERN.search(relation):
+        return None
+    negative = any(stem in relation for stem in NEGATIVE_RELATION_STEMS)
+    positive = any(stem in relation for stem in POSITIVE_RELATION_STEMS)
+    if negative:
+        return -1
+    if positive:
+        return 1
+    return 0
+
+
 def sign_edges(links):
     signed = []
+    flagged_passives = set()
     for link in links:
         out = dict(link)
-        out["sign"] = RELATION_SIGN.get(link["relation"], 0)
+        sign = relation_sign(link["relation"])
+        if sign is None:
+            sign = 0
+            flagged_passives.add(link["relation"])
+        out["sign"] = sign
         signed.append(out)
-    return signed
+    return signed, flagged_passives
 
 
 def find_near_misses(nodes, threshold=0.6, limit=10):
@@ -191,27 +305,27 @@ def find_near_misses(nodes, threshold=0.6, limit=10):
     return near_misses
 
 
-def build_graph(graph_in):
+def build_graph(graph_in, hub_threshold=HUB_TIER_THRESHOLD, mid_threshold=MID_TIER_THRESHOLD):
     nodes_before = len(graph_in["nodes"])
     links_before = len(graph_in["links"])
 
     canonical = build_canonical_map(graph_in["nodes"])
     survivors = merge_nodes(graph_in["nodes"], canonical)
-    redirected, dropped = redirect_links(graph_in["links"], canonical)
+    redirected, dropped_loops, dropped_dups = redirect_links(graph_in["links"], canonical)
 
-    enriched = sign_edges(redirected)
-    degrees = compute_degrees(survivors, enriched)
+    signed, flagged_passives = sign_edges(redirected)
+    degrees = compute_degrees(survivors, signed)
     final_nodes = []
     for node in survivors:
         out = dict(node)
         out["entity_type"] = classify_entity_type(node["label"])
         out["compartment"] = classify_compartment(node["label"])
-        out["tier"] = assign_tier(degrees[node["id"]])
+        out["tier"] = assign_tier(degrees[node["id"]], hub_threshold, mid_threshold)
         final_nodes.append(out)
 
     graph_out = dict(graph_in)
     graph_out["nodes"] = final_nodes
-    graph_out["links"] = enriched
+    graph_out["links"] = signed
     graph_out.setdefault("hyperedges", [])
 
     summary = {
@@ -219,8 +333,11 @@ def build_graph(graph_in):
         "nodes_after": len(final_nodes),
         "merged_nodes": nodes_before - len(final_nodes),
         "links_before": links_before,
-        "links_dropped_self_loop": len(dropped),
-        "links_after": len(enriched),
+        "links_dropped_self_loop": len(dropped_loops),
+        "links_dropped_duplicate": dropped_dups,
+        "links_after": len(signed),
+        "flagged_passive_relations": flagged_passives,
+        "signs": Counter(l["sign"] for l in signed),
         "entity_types": Counter(n["entity_type"] for n in final_nodes),
         "compartments": Counter(n["compartment"] for n in final_nodes),
         "tiers": Counter(n["tier"] for n in final_nodes),
@@ -233,10 +350,17 @@ def print_summary(summary):
     print(f"Nodes: {summary['nodes_before']} -> {summary['nodes_after']} "
           f"(merged: {summary['merged_nodes']})")
     print(f"Links: {summary['links_before']} -> {summary['links_after']} "
-          f"(self-loops dropped: {summary['links_dropped_self_loop']})")
+          f"(self-loops dropped: {summary['links_dropped_self_loop']}, "
+          f"duplicate parallels dropped: {summary['links_dropped_duplicate']})")
+    print("Signs:", dict(sorted(summary["signs"].items())))
     print("Entity types:", dict(sorted(summary["entity_types"].items())))
     print("Compartments:", dict(sorted(summary["compartments"].items())))
     print("Tiers:", dict(sorted(summary["tiers"].items())))
+    if summary["flagged_passive_relations"]:
+        print("WARNING passive-voice relations mapped to sign 0 "
+              "(direction-inverting; queued for claim-card review):")
+        for rel in sorted(summary["flagged_passive_relations"]):
+            print(f"  {rel}")
     if summary["near_misses"]:
         print("Near-miss pairs NOT merged (token overlap but distinct normalized labels):")
         for score, a, b in summary["near_misses"]:
@@ -249,12 +373,18 @@ def main(argv=None):
                         help="Input graph JSON path")
     parser.add_argument("--output", default="graphify-out/graph_v2.json",
                         help="Output graph v2 JSON path")
+    parser.add_argument("--hub-threshold", type=int, default=HUB_TIER_THRESHOLD,
+                        help=f"Min degree for tier=hub (default {HUB_TIER_THRESHOLD}; "
+                             "simulator plan targets ~30 hub agents)")
+    parser.add_argument("--mid-threshold", type=int, default=MID_TIER_THRESHOLD,
+                        help=f"Min degree for tier=mid (default {MID_TIER_THRESHOLD}; "
+                             "simulator plan targets ~265 mid / ~300 peripheral agents)")
     args = parser.parse_args(argv)
 
     with open(args.input) as f:
         graph_in = json.load(f)
 
-    graph_out, summary = build_graph(graph_in)
+    graph_out, summary = build_graph(graph_in, args.hub_threshold, args.mid_threshold)
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
