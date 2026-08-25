@@ -135,6 +135,31 @@ class Perturbation(_StrictModel):
     value: float = Field(ge=0.0, le=1.0)
 
 
+class SustainedDrive(_StrictModel):
+    """Tonic scenario-level excitation for one agent.
+
+    While start_tick <= tick < end_tick (end_tick None = through the whole
+    horizon) the engine adds (value - baseline_agent) * DRIVE_GAIN as a
+    constant positive deviation contribution to the agent's inbound
+    excitation, modeling tonic drivers such as ectopic firing or sustained
+    glial activation.
+    """
+
+    agent_id: str
+    value: float = Field(ge=0.0, le=1.0)
+    start_tick: int = Field(ge=0)
+    end_tick: int | None = Field(default=None, ge=0)
+
+    @model_validator(mode="after")
+    def _window_ordering(self) -> "SustainedDrive":
+        if self.end_tick is not None and self.end_tick <= self.start_tick:
+            raise ValueError(
+                f"sustained drive on '{self.agent_id}' has inverted window: "
+                f"end_tick {self.end_tick} <= start_tick {self.start_tick}"
+            )
+        return self
+
+
 class DrugArm(_StrictModel):
     name: str
     target_agent_ids: list[str]
@@ -166,6 +191,7 @@ class ScenarioConfig(_StrictModel):
     injury_model: Literal["naive", "SNI", "CCI", "SNL", "CIPN", "other"]
     injury_tick: int | None = Field(default=None, ge=0)
     drug_arms: list[DrugArm] = Field(default_factory=list)
+    sustained_drives: list[SustainedDrive] = Field(default_factory=list)
     initial_perturbations: list[Perturbation] = Field(default_factory=list)
     notes: str | None = None
 
@@ -188,6 +214,12 @@ class ScenarioConfig(_StrictModel):
                 raise ValueError(
                     f"drug arm '{arm.name}' ends at tick {arm.end_tick}, "
                     f"beyond horizon {self.horizon_days}"
+                )
+        for drive in self.sustained_drives:
+            if drive.start_tick >= self.horizon_days:
+                raise ValueError(
+                    f"sustained drive on '{drive.agent_id}' starts at tick "
+                    f"{drive.start_tick}, beyond horizon {self.horizon_days}"
                 )
         return self
 

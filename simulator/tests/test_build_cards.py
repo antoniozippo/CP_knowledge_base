@@ -559,3 +559,19 @@ def test_tests_never_invoke_real_opencode(monkeypatch):
 
     monkeypatch.setattr(bc.subprocess, "run", forbidden)
     monkeypatch.setattr(bc.subprocess, "Popen", forbidden, raising=False)
+
+
+def test_inferred_closure_confidence_maps_to_half_weight():
+    """Dynamic-closure edges (confidence INFERRED_CLOSURE) get weight 0.5."""
+    assert bc.CONFIDENCE_WEIGHTS["INFERRED_CLOSURE"] == 0.5
+    assert bc.weight_for("INFERRED_CLOSURE") == 0.5
+    link = {
+        "source": "s",
+        "relation": "causes",
+        "sign": 1,
+        "confidence": "INFERRED_CLOSURE",
+        "validation_status": None,
+        "weight": None,
+    }
+    edge = bc.build_influence_edge(link)
+    assert edge.weight == 0.5

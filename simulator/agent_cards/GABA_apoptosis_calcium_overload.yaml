@@ -6,7 +6,7 @@ tier: MID
 community: 1
 baseline_state: 0.5
 normal_role: Neuronal Calcium (Ca²⁺) Overload is a concept located in other. Baseline
-  activity level 0.50. It receives 2 regulatory influences and exerts 5.
+  activity level 0.50. It receives 3 regulatory influences and exerts 5.
 pathological_rules:
 - rule_id: RULE-GABA_apoptosis_calcium_overload-01
   description: Neuronal Calcium (Ca²⁺) Overload causes Mitochondrial Dysfunction in
@@ -55,6 +55,12 @@ inbound_edges:
   sign: 1
   weight: 0.5
   validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: stimulates_mitochondrial_ca_overload
+  sign: 1
+  weight: 0.5
+  validation_status: null
   neutral_ok: false
 outbound_ids:
 - GABA_apoptosis_mitochondrial_dysfunction

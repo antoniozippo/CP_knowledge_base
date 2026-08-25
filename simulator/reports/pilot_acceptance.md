@@ -12,8 +12,8 @@ baseline +/- 0.15 held for 2 consecutive ticks
 
 | arm | scenario | injury | seeds | drug arm |
 |---|---|---|---|---|
-| SNI | sni_28d | SNI @ tick 0 | all seven drivers seeded at 0.92: microglia, TNF-a, ROS, TLR4 (DAMP proxy), MMP-9, BDNF, HIF1a | none |
-| CLP257 | sni_28d_clp257 | SNI @ tick 0 | identical to SNI | clp257 -> BDNF_TrkB_KCC2, +0.6 from tick 3 |
+| SNI | sni_28d | SNI @ tick 0 | all seven drivers seeded at 0.92: microglia, TNF-a, ROS, TLR4 (DAMP proxy), MMP-9, BDNF, HIF1a; tonic sustained_drives hold microglia and TNF-a at 0.9 from tick 0 | none |
+| CLP257 | sni_28d_clp257 | SNI @ tick 0 | identical to SNI (same seeds + same sustained_drives) | clp257 -> BDNF_TrkB_KCC2, +0.6 from tick 3 |
 | naive | naive_28d | none | none | none |
 
 ## Event table (SNI arm)
@@ -24,11 +24,11 @@ baseline +/- 0.15 held for 2 consecutive ticks
 | tnf_alpha | TNF_TNF_alpha | 0.50 | up | 1 |
 | bdnf | assaying_molecularly_structural_plasticity_BDNF | 0.50 | up | 1 |
 | mmp9 | PNN_ECM_MMP9 | 0.50 | up | 1 |
-| kcc2_drop | BDNF_TrkB_KCC2 | 0.50 | down | never |
-| pnn_loss | GABA_apoptosis_PNN_loss | 0.50 | up | never |
-| pv_dysfunction | PV_interneurons_PV_interneurons | 0.50 | down | never |
-| sst_interneurons | SST_somatostatin_interneurons | 0.50 | up | never |
-| pain_readout | <readout:pain_score> | 0.05 | up | never |
+| kcc2_drop | BDNF_TrkB_KCC2 | 0.50 | down | 2 |
+| pnn_loss | GABA_apoptosis_PNN_loss | 0.50 | up | 4 |
+| pv_dysfunction | PV_interneurons_PV_interneurons | 0.50 | down | 2 |
+| sst_interneurons | SST_somatostatin_interneurons | 0.50 | up | 2 |
+| pain_readout | <readout:pain_score> | 0.05 | up | 3 |
 
 ## Ordering check (tie tolerance +/-1 tick)
 
@@ -36,25 +36,25 @@ baseline +/- 0.15 held for 2 consecutive ticks
 |---|---|---|---|
 | microglia <= tnf/bdnf | 1 | 1 | PASS |
 | tnf/bdnf <= mmp9 | 1 | 1 | PASS |
-| mmp9 <= kcc2-drop/pnn | 1 | never | FAIL |
-| kcc2-drop/pnn <= pv-dysfunction | never | never | FAIL |
-| pv-dysfunction <= pain-rise | never | never | FAIL |
+| mmp9 <= kcc2-drop/pnn | 1 | 2 | PASS |
+| kcc2-drop/pnn <= pv-dysfunction | 2 | 2 | PASS |
+| pv-dysfunction <= pain-rise | 2 | 3 | PASS |
 
 ## Drug effect and separation numbers
 
-- mean pain_score ticks 14-28: SNI 0.0416, CLP257 0.0416, naive 0.0500
-- mean KCC2 state ticks >= 14: SNI 0.4934, CLP257 0.9012
+- mean pain_score ticks 14-28: SNI 0.2936, CLP257 0.2377, naive 0.0500
+- mean KCC2 state ticks >= 14: SNI 0.1217, CLP257 0.5380
 
 ## Criteria verdicts
 
 | criterion | verdict | detail |
 |---|---|---|
-| drug_effect_pain_lower | **FAIL** | mean pain_score ticks 14-28: SNI=0.0416 CLP257=0.0416 SNI-CLP257=+0.0000 (required >=0.03) |
-| drug_effect_kcc2_higher | **PASS** | mean BDNF_TrkB_KCC2 state ticks >= 14: SNI=0.4934 CLP257=0.9012 margin=+0.4078 |
-| naive_separation | **FAIL** | mean pain_score ticks 14-28: SNI=0.0416 naive=0.0500 SNI-naive=-0.0084 (required >=0.05) |
-| event_ordering | **FAIL** | microglia <= tnf/bdnf:ok; tnf/bdnf <= mmp9:ok; mmp9 <= kcc2-drop/pnn:FAIL; kcc2-drop/pnn <= pv-dysfunction:FAIL; pv-dysfunction <= pain-rise:FAIL |
+| drug_effect_pain_lower | **PASS** | mean pain_score ticks 14-28: SNI=0.2936 CLP257=0.2377 SNI-CLP257=+0.0558 (required >=0.03) |
+| drug_effect_kcc2_higher | **PASS** | mean BDNF_TrkB_KCC2 state ticks >= 14: SNI=0.1217 CLP257=0.5380 margin=+0.4162 |
+| naive_separation | **PASS** | mean pain_score ticks 14-28: SNI=0.2936 naive=0.0500 SNI-naive=+0.2436 (required >=0.05) |
+| event_ordering | **PASS** | microglia <= tnf/bdnf:ok; tnf/bdnf <= mmp9:ok; mmp9 <= kcc2-drop/pnn:ok; kcc2-drop/pnn <= pv-dysfunction:ok; pv-dysfunction <= pain-rise:ok |
 
-Overall: **FAIL**
+Overall: PASS
 
 ## Caveats
 
@@ -80,20 +80,21 @@ before the run):
   end_tick >= horizon_days; omission reproduces the intended [3, 28)
   window exactly under the active-tick rule start <= t < end.
 
-Structural topology facts discovered by this pilot (relevant to any FAIL
-verdict above; thresholds were NOT weakened):
+Structural topology after the Task 2.4b dynamic-closure revision (29
+evidence-backed edges appended to graph_v2.json with confidence
+INFERRED_CLOSURE / weight 0.5; quotes curated from repo dossiers and theme
+findings in analysis/claims/closure_edges.yaml):
 
-- The influence graph is acyclic outside one unrelated 2-cycle
-  (ana_12_ANA_12 <-> ana_12_TrkB_T1), so no seed produces a sustained
-  elevation: every deviation decays back to baseline within ~10 ticks.
-  Windowed means over ticks 14-28 therefore measure near-baseline noise.
-- The three symptom-type cards that form pain_score are karilin7_PainRelatedAnxiety
-  (reaches pain only via karilin7_Kalirin7), plus shared_mechanical_allodynia and
-  strategic_biomarker_rbfox1, both of which have zero inbound edges and stay
-  frozen at 0.05.
-- BDNF_TrkB_KCC2 has zero outbound receivers: clp257 pressure raises KCC2's
-  own state but cannot propagate to any other agent, so the pain difference
-  between the SNI and CLP257 arms is exactly 0 regardless of seeds or
-  magnitude. Restoring drug sensitivity requires adding downstream edges
-  from KCC2 (or from a KCC2-downstream inhibitory interneuron card) into
-  the pain pathway in the next card-set revision.
+- The disinhibition cascade is now dynamically expressible: microglia ->
+  BDNF -> KCC2 (down), TNF -> KCC2, MMP-9 -> PNN loss -> PV (down),
+  KCC2 -> PV (supportive), and symptom causation edges into mechanical
+  allodynia and central sensitization close the chain from seeds to
+  pain_score.
+- Reinforcing loops sustain pathology without further seeding: microglia
+  -> TNF -> HIF1a -> Ang-2 -> microglia, TNF <-> VEGFA mutual induction,
+  TNF -> MMP-9 -> microglia, plus tonic scenario sustained_drives on
+  microglia and TNF-alpha modeling ongoing ectopic firing / glial
+  activation through the whole horizon.
+- clp257 now propagates: KCC2 has outbound edges (allodynia down, central
+  sensitization down, PV support up), so raising KCC2 lowers the SNI vs
+  CLP257 pain separation instead of being trapped at zero.

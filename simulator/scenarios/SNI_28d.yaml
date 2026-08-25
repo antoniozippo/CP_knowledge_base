@@ -17,6 +17,13 @@ initial_perturbations:
     value: 0.92
   - agent_id: hif1a_HIF1alpha
     value: 0.92
+sustained_drives:
+  - agent_id: shared_microglia
+    value: 0.9
+    start_tick: 0
+  - agent_id: TNF_TNF_alpha
+    value: 0.9
+    start_tick: 0
 notes: >-
   SNI pilot scenario. Seeds are proximal injury drivers resolved against the
   real card set: microglial activation, TNF-alpha, ROS/oxidative stress,
@@ -25,3 +32,7 @@ notes: >-
   magnitude 0.92: orphan nodes contract toward baseline by a factor of
   ~0.637 per tick, so only seeds >= ~0.87 satisfy first_crossing with
   delta=0.15 and sustain=2 for two consecutive logged ticks.
+  Sustained drives model tonic injury drivers after SNI: ongoing ectopic
+  afferent firing and persistent glial activation keep microglia and TNF-a
+  elevated through the whole horizon (value 0.9 from tick 0, no end tick =
+  active while start <= tick < horizon).

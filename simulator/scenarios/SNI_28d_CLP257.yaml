@@ -24,11 +24,20 @@ drug_arms:
     start_tick: 3
     effect_sign: 1
     magnitude: 0.6
+sustained_drives:
+  - agent_id: shared_microglia
+    value: 0.9
+    start_tick: 0
+  - agent_id: TNF_TNF_alpha
+    value: 0.9
+    start_tick: 0
 notes: >-
   SNI pilot plus CLP257 (KCC2 enhancer) arm. Target is the canonical merged
   KCC2 molecule card BDNF_TrkB_KCC2. Seed magnitudes match sni_28d (0.92,
   see that scenario's notes for the sustain=2 visibility rationale).
-  end_tick is intentionally omitted:
+  Sustained drives are identical to sni_28d (microglia and TNF-a tonic at
+  0.9 from tick 0) so the only inter-arm difference is the drug.
+  end_tick is intentionally omitted on the drug arm:
   ScenarioConfig forbids end_tick >= horizon_days, and omitting it yields
   exactly the intended active window [3, 28) because the horizon caps the
   run at tick 27.

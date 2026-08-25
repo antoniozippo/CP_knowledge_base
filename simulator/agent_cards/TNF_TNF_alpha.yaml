@@ -6,7 +6,7 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: Tumor Necrosis Factor Alpha (TNF-α) is a molecule located in systemic.
-  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 2.
+  Baseline activity level 0.50. It receives 3 regulatory influences and exerts 9.
 pathological_rules:
 - rule_id: RULE-TNF_TNF_alpha-01
   description: 'Tumor Necrosis Factor Alpha (TNF-α) rationale for Rationale: Anti-TNF
@@ -22,9 +22,75 @@ pathological_rules:
   - EC-0167
   direction: up
   magnitude_hint: null
-inbound_edges: []
+- rule_id: RULE-TNF_TNF_alpha-03
+  description: Tumor Necrosis Factor Alpha (TNF-α) promotes Mechanical Allodynia
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-04
+  description: Tumor Necrosis Factor Alpha (TNF-α) downregulates via tnfr1 nfkb pkc
+    KCC2 (Potassium-Chloride Cotransporter)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-05
+  description: Tumor Necrosis Factor Alpha (TNF-α) stabilizes via nfkb phd inhibition
+    Hypoxia-Inducible Factor 1 Alpha (HIF1α)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-06
+  description: Tumor Necrosis Factor Alpha (TNF-α) stimulates mitochondrial ca overload
+    Neuronal Calcium (Ca²⁺) Overload
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-07
+  description: Tumor Necrosis Factor Alpha (TNF-α) enhances excitability of Somatostatin
+    (SST) Interneurons
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-08
+  description: Tumor Necrosis Factor Alpha (TNF-α) mutually upregulates Vascular Endothelial
+    Growth Factor A (VEGFA)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-TNF_TNF_alpha-09
+  description: Tumor Necrosis Factor Alpha (TNF-α) induces expression of Matrix Metalloproteinase-9
+    (MMP-9)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: shared_microglia
+  relation: releases
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: AngPt_angiopoietin_2
+  relation: drives_cytokine_release_from_macrophages
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: vegf_VEGFA
+  relation: mutually_upregulates
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
 outbound_ids:
 - TNF_rationale_paradox
 - karilin7_DendriticSpineLoss
+- shared_mechanical_allodynia
+- BDNF_TrkB_KCC2
+- hif1a_HIF1alpha
+- GABA_apoptosis_calcium_overload
+- SST_somatostatin_interneurons
+- vegf_VEGFA
+- PNN_ECM_MMP9
 rule_gap_reason: null
 source_note: TNF.md

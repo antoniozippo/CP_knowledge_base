@@ -6,7 +6,13 @@ Emitter choice per agent per tick:
   - Everything else uses the deterministic rule fallback every tick.
 
 Drug arms act as additive pressure on their targets' rule computation
-(targets' own states are never written directly). All StateDeltas for a
+(targets' own states are never written directly). Sustained drives act the
+same way: while start_tick <= tick < end_tick (None = whole horizon) each
+drive contributes (value - baseline_agent) * DRIVE_GAIN to that agent's
+inbound excitation before tanh — a constant tonic deviation modeling
+drivers like ectopic firing or sustained glial activation. Drives only
+enter the deterministic rules path; LLM prompts and the delta cache are
+unaffected, and audit entries keep emitter='rules'. All StateDeltas for a
 tick are computed against the same pre-tick snapshot and applied
 atomically.
 """
@@ -23,7 +29,7 @@ from pathlib import Path
 import yaml
 
 from simulator.engine.llm_agent import DeltaCache, OpenCodeClient, evaluate_llm_delta
-from simulator.engine.rule_fallback import compute_influence, rule_next_state
+from simulator.engine.rule_fallback import DRIVE_GAIN, compute_influence, rule_next_state
 from simulator.readouts import compute_readouts
 from simulator.schemas import (
     AgentCard,
@@ -72,6 +78,9 @@ class Orchestrator:
         self.seed = seed
         self.cache = cache if cache is not None else DeltaCache()
         self._validate_edge_endpoints()
+        for drive in scenario.sustained_drives:
+            if drive.agent_id not in {c.id for c in self.cards_by_id.values()}:
+                raise ValueError(f"sustained drive targets unknown agent '{drive.agent_id}'")
         if scenario.injury_model != "naive" and not scenario.initial_perturbations:
             raise NotImplementedError(
                 f"scenario '{scenario.name}' ({scenario.injury_model}) declares no "
@@ -152,10 +161,29 @@ class Orchestrator:
                 pressures[target] = pressures.get(target, 0.0) + pressure
         return pressures
 
-    def _rule_delta(self, agent_id: str, tick: int, packets, drug_pressure: float):
+    def _drive_pressures(self, tick: int) -> dict[str, float]:
+        """Tonic sustained-drive contribution per agent at this tick.
+
+        Each active drive adds (value - baseline_agent) * DRIVE_GAIN, a
+        constant positive deviation, to the agent's inbound excitation.
+        """
+        pressures: dict[str, float] = {}
+        for drive in self.scenario.sustained_drives:
+            active = drive.start_tick <= tick and (
+                drive.end_tick is None or tick < drive.end_tick
+            )
+            if not active:
+                continue
+            card = self.cards_by_id[drive.agent_id]
+            contribution = (drive.value - card.baseline_state) * DRIVE_GAIN
+            pressures[drive.agent_id] = pressures.get(drive.agent_id, 0.0) + contribution
+        return pressures
+
+    def _rule_delta(self, agent_id: str, tick: int, packets, drug_pressure: float,
+                    drive_pressure: float = 0.0):
         card = self.cards_by_id[agent_id]
         current = self.world.states[agent_id]
-        new_state = rule_next_state(card, current, packets, drug_pressure)
+        new_state = rule_next_state(card, current, packets, drug_pressure, drive_pressure)
         refs = (
             [r.rule_id for r in card.pathological_rules]
             or [p.source_id for p in packets]
@@ -163,6 +191,7 @@ class Orchestrator:
         )
         rationale = (
             f"rules: I={compute_influence(packets):+.4f} drug={drug_pressure:+.4f} "
+            f"drive={drive_pressure:+.4f} "
             f"epoch={Epoch.from_tick(tick).value}"
         )
         return StateDelta(
@@ -177,6 +206,7 @@ class Orchestrator:
     def step(self) -> TickLog:
         tick = self.world.tick
         pressures = self._drug_pressures(tick)
+        drives = self._drive_pressures(tick)
         llm_ticks = self._llm_eligible_ticks()
         deltas = []
         audit = []
@@ -184,6 +214,7 @@ class Orchestrator:
             card = self.cards_by_id[agent_id]
             packets = self._build_packets(agent_id, tick)
             drug_pressure = pressures.get(agent_id, 0.0)
+            drive_pressure = drives.get(agent_id, 0.0)
             use_llm = (
                 self.llm_client is not None
                 and card.tier.value == "HUB"
@@ -215,7 +246,7 @@ class Orchestrator:
                 if attempt.delta is not None:
                     deltas.append(attempt.delta)
                     continue
-            deltas.append(self._rule_delta(agent_id, tick, packets, drug_pressure))
+            deltas.append(self._rule_delta(agent_id, tick, packets, drug_pressure, drive_pressure))
             if not use_llm:
                 audit.append(TickAuditEntry(tick=tick, agent_id=agent_id, emitter="rules", cache_hit=False))
         new_states = dict(self.world.states)

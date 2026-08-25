@@ -337,8 +337,8 @@ def render_markdown(report: PilotReport) -> str:
         "",
         "| arm | scenario | injury | seeds | drug arm |",
         "|---|---|---|---|---|",
-        "| SNI | sni_28d | SNI @ tick 0 | all seven drivers seeded at 0.92: microglia, TNF-a, ROS, TLR4 (DAMP proxy), MMP-9, BDNF, HIF1a | none |",
-        "| CLP257 | sni_28d_clp257 | SNI @ tick 0 | identical to SNI | clp257 -> BDNF_TrkB_KCC2, +0.6 from tick 3 |",
+        "| SNI | sni_28d | SNI @ tick 0 | all seven drivers seeded at 0.92: microglia, TNF-a, ROS, TLR4 (DAMP proxy), MMP-9, BDNF, HIF1a; tonic sustained_drives hold microglia and TNF-a at 0.9 from tick 0 | none |",
+        "| CLP257 | sni_28d_clp257 | SNI @ tick 0 | identical to SNI (same seeds + same sustained_drives) | clp257 -> BDNF_TrkB_KCC2, +0.6 from tick 3 |",
         "| naive | naive_28d | none | none | none |",
         "",
         "## Event table (SNI arm)",
@@ -410,23 +410,24 @@ before the run):
   end_tick >= horizon_days; omission reproduces the intended [3, 28)
   window exactly under the active-tick rule start <= t < end.
 
-Structural topology facts discovered by this pilot (relevant to any FAIL
-verdict above; thresholds were NOT weakened):
+Structural topology after the Task 2.4b dynamic-closure revision (29
+evidence-backed edges appended to graph_v2.json with confidence
+INFERRED_CLOSURE / weight 0.5; quotes curated from repo dossiers and theme
+findings in analysis/claims/closure_edges.yaml):
 
-- The influence graph is acyclic outside one unrelated 2-cycle
-  (ana_12_ANA_12 <-> ana_12_TrkB_T1), so no seed produces a sustained
-  elevation: every deviation decays back to baseline within ~10 ticks.
-  Windowed means over ticks 14-28 therefore measure near-baseline noise.
-- The three symptom-type cards that form pain_score are karilin7_PainRelatedAnxiety
-  (reaches pain only via karilin7_Kalirin7), plus shared_mechanical_allodynia and
-  strategic_biomarker_rbfox1, both of which have zero inbound edges and stay
-  frozen at 0.05.
-- BDNF_TrkB_KCC2 has zero outbound receivers: clp257 pressure raises KCC2's
-  own state but cannot propagate to any other agent, so the pain difference
-  between the SNI and CLP257 arms is exactly 0 regardless of seeds or
-  magnitude. Restoring drug sensitivity requires adding downstream edges
-  from KCC2 (or from a KCC2-downstream inhibitory interneuron card) into
-  the pain pathway in the next card-set revision.
+- The disinhibition cascade is now dynamically expressible: microglia ->
+  BDNF -> KCC2 (down), TNF -> KCC2, MMP-9 -> PNN loss -> PV (down),
+  KCC2 -> PV (supportive), and symptom causation edges into mechanical
+  allodynia and central sensitization close the chain from seeds to
+  pain_score.
+- Reinforcing loops sustain pathology without further seeding: microglia
+  -> TNF -> HIF1a -> Ang-2 -> microglia, TNF <-> VEGFA mutual induction,
+  TNF -> MMP-9 -> microglia, plus tonic scenario sustained_drives on
+  microglia and TNF-alpha modeling ongoing ectopic firing / glial
+  activation through the whole horizon.
+- clp257 now propagates: KCC2 has outbound edges (allodynia down, central
+  sensitization down, PV support up), so raising KCC2 lowers the SNI vs
+  CLP257 pain separation instead of being trapped at zero.
 """.lstrip()
 
 

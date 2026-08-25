@@ -39,7 +39,12 @@ DEFAULT_VERDICTS = Path("analysis/claims/verdicts.json")
 DEFAULT_OUTPUT_DIR = Path("simulator/agent_cards")
 DEFAULT_REPORT = Path("simulator/reports/card_review_hubs.md")
 
-CONFIDENCE_WEIGHTS = {"EXTRACTED": 0.9, "INFERRED": 0.5, "AMBIGUOUS": 0.25}
+CONFIDENCE_WEIGHTS = {
+    "EXTRACTED": 0.9,
+    "INFERRED": 0.5,
+    "INFERRED_CLOSURE": 0.5,
+    "AMBIGUOUS": 0.25,
+}
 ENTITY_BASELINE = {"drug": 0.0, "symptom": 0.05}
 DEFAULT_BASELINE = 0.5
 TIER_BY_NAME = {

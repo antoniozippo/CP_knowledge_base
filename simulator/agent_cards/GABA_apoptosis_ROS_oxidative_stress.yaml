@@ -7,8 +7,14 @@ community: 1
 baseline_state: 0.5
 normal_role: Reactive Oxygen Species (ROS) and Oxidative Stress is a concept located
   in other. Baseline activity level 0.50. It receives 1 regulatory influences and
-  exerts 0.
-pathological_rules: []
+  exerts 1.
+pathological_rules:
+- rule_id: RULE-GABA_apoptosis_ROS_oxidative_stress-01
+  description: Reactive Oxygen Species (ROS) and Oxidative Stress stabilizes Hypoxia-Inducible
+    Factor 1 Alpha (HIF1α)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges:
 - source_id: GABA_apoptosis_mitochondrial_dysfunction
   relation: causes
@@ -16,6 +22,7 @@ inbound_edges:
   weight: 0.9
   validation_status: null
   neutral_ok: false
-outbound_ids: []
+outbound_ids:
+- hif1a_HIF1alpha
 rule_gap_reason: null
 source_note: GABA_apoptosis.md

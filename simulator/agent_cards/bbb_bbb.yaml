@@ -6,7 +6,7 @@ tier: MID
 community: 16
 baseline_state: 0.5
 normal_role: Blood-Brain/Spinal Cord Barrier (BBB/BSCB) is a structure located in
-  dorsal_horn. Baseline activity level 0.50. It receives 0 regulatory influences and
+  dorsal_horn. Baseline activity level 0.50. It receives 2 regulatory influences and
   exerts 2.
 pathological_rules:
 - rule_id: RULE-bbb_bbb-01
@@ -30,7 +30,19 @@ pathological_rules:
   - EC-0015
   direction: up
   magnitude_hint: null
-inbound_edges: []
+inbound_edges:
+- source_id: vegf_VEGFA
+  relation: disrupts
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: AngPt_angiopoietin_2
+  relation: disrupts
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
 outbound_ids:
 - AngPt_angiopoietin_2
 - AngPt_angiopoietin_1

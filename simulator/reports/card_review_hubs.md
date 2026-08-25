@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-08-25T15:48:02Z
+generated: 2026-08-25T17:20:46Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -8,9 +8,13 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 
 - tier: HUB | entity_type: channel | compartment: other | community: 8
 - proposed_normal_role: <LLM_ENRICH>
-- rule_gap_reason: all candidate rules refuted or none found
-- pathological rules (0):
-  - (none surviving verdict filtering)
+- pathological rules (3):
+  - `RULE-BDNF_TrkB_KCC2-01` [down] KCC2 (Potassium-Chloride Cotransporter) causes Mechanical Allodynia
+    - claim_refs: (none)
+  - `RULE-BDNF_TrkB_KCC2-02` [down] KCC2 (Potassium-Chloride Cotransporter) causes Central Sensitization
+    - claim_refs: (none)
+  - `RULE-BDNF_TrkB_KCC2-03` [up] KCC2 (Potassium-Chloride Cotransporter) supports inhibitory output of Parvalbumin (PV) Interneurons
+    - claim_refs: (none)
 
 ## GABA_apoptosis_HIF1alpha (HIF1α (Hypoxia-Inducible Factor 1 Alpha))
 
@@ -58,7 +62,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 1
 - proposed_normal_role: <LLM_ENRICH>
-- pathological rules (12):
+- pathological rules (13):
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-01` [up] Brain-Derived Neurotrophic Factor (BDNF) rationale for Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles
     - claim_refs: EC-0021 (CONFIRMED)
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-02` [up] Brain-Derived Neurotrophic Factor (BDNF) upregulates translation Kalirin-7 (GEF for Rac1/RhoG)
@@ -83,6 +87,8 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
     - claim_refs: EC-0019 (NO_EVIDENCE_FOUND)
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-12` [up] Brain-Derived Neurotrophic Factor (BDNF) mediates microglial release of ROCK (ROCK1/ROCK2)
     - claim_refs: EC-0146 (EXTENDED)
+  - `RULE-assaying_molecularly_structural_plasticity_BDNF-13` [down] Brain-Derived Neurotrophic Factor (BDNF) downregulates KCC2 (Potassium-Chloride Cotransporter)
+    - claim_refs: (none)
 
 ## karilin7_Kalirin7 (Kalirin-7 (GEF for Rac1/RhoG))
 

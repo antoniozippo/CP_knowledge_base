@@ -1,0 +1,217 @@
+#!/usr/bin/env python3
+"""Apply evidence-backed dynamic-closure edges to graphify-out/graph_v2.json.
+
+Task 2.4b Part B. Reads curated proposals from analysis/claims/
+closure_edges.yaml, resolves every endpoint label to an existing
+document-type node id (exact id, case-insensitive id, norm_label — the same
+resolution ladder as simulator/build_cards.py), skips any (source, target)
+pair that already exists as a link, and appends the remaining links with
+full provenance:
+
+    {relation, sign, confidence: "INFERRED_CLOSURE", weight: null,
+     origin: "dynamic_closure", quote, source_ref}
+
+validation_status and confidence_score keys are intentionally omitted:
+graph tooling treats the presence of validation_status as a review verdict
+and of confidence_score as a numeric model score, neither of which applies
+to curated closure edges. weight stays null on the link; the card builder
+maps confidence to a numeric weight via its CONFIDENCE_WEIGHTS map
+(INFERRED_CLOSURE -> 0.5).
+The tool is idempotent: a second run adds nothing because every applied
+pair is then skipped as a duplicate.
+"""
+
+import argparse
+import copy
+import json
+import sys
+from collections import defaultdict
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import yaml
+
+DEFAULT_GRAPH = Path("graphify-out/graph_v2.json")
+DEFAULT_PROPOSALS = Path("analysis/claims/closure_edges.yaml")
+
+REQUIRED_FIELDS = ("source_label", "target_label", "relation", "sign", "quote", "source_file")
+
+
+@dataclass
+class ClosureSummary:
+    proposed: int = 0
+    added: int = 0
+    skipped_duplicates: int = 0
+    unresolved: list = field(default_factory=list)
+
+    def render(self) -> str:
+        return (
+            f"closure edges: proposed={self.proposed} added={self.added} "
+            f"skipped_duplicates={self.skipped_duplicates} unresolved={len(self.unresolved)}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# endpoint resolution (mirrors simulator/build_cards.py)
+# ---------------------------------------------------------------------------
+
+def _norm_tokens(label):
+    import re
+
+    text = re.sub(r"\([^)]*\)", " ", str(label).lower())
+    text = re.sub(r"[^\w\s]+", " ", text)
+    return [tok for tok in text.split() if tok]
+
+
+def build_document_indexes(nodes):
+    """Index document-type nodes for label -> id resolution."""
+    by_id = {}
+    by_lower = {}
+    by_norm = defaultdict(list)
+    norm_token_index = defaultdict(set)
+    for node in nodes:
+        if node.get("file_type") != "document":
+            continue
+        node_id = node["id"]
+        by_id[node_id] = node
+        by_lower.setdefault(node_id.lower(), node_id)
+        by_norm[node.get("norm_label")].append(node_id)
+        key = " ".join(_norm_tokens(node.get("label") or node.get("norm_label") or ""))
+        if key:
+            norm_token_index[key].add(node_id)
+    return by_id, by_lower, by_norm, norm_token_index
+
+
+def resolve_label_to_id(label, indexes):
+    """Resolve one label to a document node id or None.
+
+    Order: exact id, case-insensitive id, exact norm_label, token-prefix
+    match over labels (deterministic lowest id on ties).
+    """
+    by_id, by_lower, by_norm, norm_token_index = indexes
+    if label in by_id:
+        return label
+    case_hit = by_lower.get(str(label).lower())
+    if case_hit is not None:
+        return case_hit
+    hits = sorted(by_norm.get(label, [])) or sorted(
+        {nid for key, ids in by_norm.items() if key and key.lower() == str(label).lower() for nid in ids}
+    )
+    if hits:
+        return hits[0]
+    tokens = _norm_tokens(label)
+    if not tokens:
+        return None
+    n = len(tokens)
+    resolved = set()
+    for key, ids in norm_token_index.items():
+        key_tokens = key.split()
+        if len(key_tokens) >= n and key_tokens[:n] == tokens:
+            resolved |= ids
+    return min(sorted(resolved)) if resolved else None
+
+
+def resolve_proposal_endpoints(proposal, nodes):
+    """Attach resolved source/target ids to one proposal dict (raises on failure)."""
+    indexes = build_document_indexes(nodes)
+    source_id = resolve_label_to_id(proposal["source_label"], indexes)
+    target_id = resolve_label_to_id(proposal["target_label"], indexes)
+    proposal = dict(proposal)
+    proposal["source"] = source_id
+    proposal["target"] = target_id
+    return proposal
+
+
+# ---------------------------------------------------------------------------
+# application
+# ---------------------------------------------------------------------------
+
+def _validate_proposal(proposal, position):
+    missing = [f for f in REQUIRED_FIELDS if not proposal.get(f)]
+    if missing:
+        raise ValueError(f"proposal #{position} missing fields: {', '.join(missing)}")
+    if int(proposal["sign"]) not in (-1, 1):
+        raise ValueError(f"proposal #{position} sign must be -1 or 1")
+    if len(str(proposal["quote"])) > 400:
+        raise ValueError(f"proposal #{position} quote exceeds 400 chars")
+
+
+def apply_closure_edges(graph, proposals):
+    """Pure core: return (new_graph, ClosureSummary); raises ValueError when
+    any endpoint fails to resolve (graph left untouched in that case)."""
+    new_graph = copy.deepcopy(graph)
+    summary = ClosureSummary(proposed=len(proposals))
+
+    checked = []
+    unresolved = []
+    for i, proposal in enumerate(proposals):
+        _validate_proposal(proposal, i)
+        resolved = resolve_proposal_endpoints(proposal, new_graph["nodes"])
+        if resolved["source"] is None or resolved["target"] is None:
+            bad = [
+                label
+                for label, rid in (
+                    (resolved["source_label"], resolved["source"]),
+                    (resolved["target_label"], resolved["target"]),
+                )
+                if rid is None
+            ]
+            unresolved.append({"index": i, "labels": bad})
+            continue
+        checked.append(resolved)
+
+    if unresolved:
+        detail = "; ".join(
+            f"#{u['index']}: {', '.join(u['labels'])}" for u in unresolved
+        )
+        raise ValueError(f"unresolved endpoints ({len(unresolved)}): {detail}")
+
+    existing_signed_pairs = {
+        (link["source"], link["target"])
+        for link in new_graph["links"]
+        if link.get("sign", 0) != 0
+    }
+    for resolved in checked:
+        pair = (resolved["source"], resolved["target"])
+        if pair in existing_signed_pairs:
+            summary.skipped_duplicates += 1
+            continue
+        new_graph["links"].append(
+            {
+                "relation": resolved["relation"],
+                "confidence": resolved.get("confidence", "INFERRED_CLOSURE"),
+                "source_file": resolved["source_file"],
+                "source_location": None,
+                "weight": None,
+                "source": resolved["source"],
+                "target": resolved["target"],
+                "sign": int(resolved["sign"]),
+                "origin": "dynamic_closure",
+                "quote": resolved["quote"],
+                "source_ref": resolved["source_file"],
+            }
+        )
+        existing_signed_pairs.add(pair)
+        summary.added += 1
+    return new_graph, summary
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--graph", type=Path, default=DEFAULT_GRAPH)
+    parser.add_argument("--proposals", type=Path, default=DEFAULT_PROPOSALS)
+    args = parser.parse_args(argv)
+
+    graph = json.loads(args.graph.read_text())
+    proposals = yaml.safe_load(args.proposals.read_text()) or []
+    new_graph, summary = apply_closure_edges(graph, proposals)
+    if summary.unresolved:
+        raise SystemExit(summary.render())
+    if summary.added:
+        args.graph.write_text(json.dumps(new_graph, indent=2, ensure_ascii=False) + "\n")
+    print(summary.render())
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
