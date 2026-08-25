@@ -236,6 +236,13 @@ class Orchestrator:
         return log
 
     def run(self) -> list[TickLog]:
+        """Simulate horizon_days ticks.
+
+        Reproducibility caveat: rules-only runs are fully deterministic and
+        byte-reproducible; runs with an active LLM path embed measured
+        latency_ms in TickAuditEntry, so their tick logs are not
+        byte-identical across reruns.
+        """
         return [self.step() for _ in range(self.scenario.horizon_days)]
 
     def save_run(self, logs: list[TickLog], out_dir: str | Path | None = None) -> Path:

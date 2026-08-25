@@ -149,6 +149,8 @@ def test_llm_next_state_none_on_garbage_or_invalid_ranges():
         '{"new_state": 1.5, "rationale": "x", "refs": ["r"]}',
         '{"new_state": 0.5, "rationale": "x", "refs": []}',
         '{"new_state": "high", "rationale": "x", "refs": ["r"]}',
+        '{"rationale": "x", "refs": ["r"]}',
+        '{"new_state": 0.5, "rationale": "x"}',
     ]:
         assert llm_next_state(make_card(), [], 0.5, Epoch.INITIATION, 0, FakeClient(bad)) is None
 

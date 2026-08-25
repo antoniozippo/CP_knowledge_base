@@ -199,7 +199,7 @@ def evaluate_llm_delta(
     try:
         delta_dict = parse_delta(raw)
         delta = _validated_delta(card, tick, delta_dict)
-    except ValueError as exc:
+    except (KeyError, TypeError, ValueError) as exc:
         logger.warning("llm_next_state parse/validation failure for %s: %s", card.id, exc)
         return LLMAttemptResult(delta=None, latency_ms=latency)
     if cache is not None:
