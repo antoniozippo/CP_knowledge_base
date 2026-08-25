@@ -80,7 +80,7 @@ before the run):
   end_tick >= horizon_days; omission reproduces the intended [3, 28)
   window exactly under the active-tick rule start <= t < end.
 
-Structural topology after the Task 2.4b dynamic-closure revision (29
+Structural topology after the Task 2.4b dynamic-closure revision (31
 evidence-backed edges appended to graph_v2.json with confidence
 INFERRED_CLOSURE / weight 0.5; quotes curated from repo dossiers and theme
 findings in analysis/claims/closure_edges.yaml):

@@ -1,0 +1,45 @@
+# Chronic-Pain Agent Simulator
+
+One agent per knowledge-graph entity. Agents perceive signed influence packets from upstream nodes and emit schema-validated state deltas; a deterministic orchestrator applies them over discrete daily ticks.
+
+## Architecture
+
+```
+graph_v2.json ──build_cards.py──> agent_cards/*.yaml (254 cards)
+                                        │
+scenarios/*.yaml ──────┐                v
+                       └────> engine/orchestrator.py  <── engine/rule_fallback.py (every agent)
+                                  │        ^              engine/llm_agent.py (hub tier, gated)
+                                  v        │
+                             readouts.py + DeltaCache
+                                  v
+                        reports/runs/<run>/ (manifest.json, tick_log.jsonl, states.csv)
+                                  v
+                        reports/generate_report.py → markdown + PNG
+```
+
+- **Agents**: one per document-type node of the knowledge graph (254). Rationale/image graph nodes are provenance annotations, not biological entities, and get no agent.
+- **Dynamics** (`engine/rule_fallback.py`): deviation-propagation — `E = Σ w·sign·(sender_state − sender_baseline)`; `target = clamp01(baseline + 0.8·tanh(E + drug_pressure))`; relaxation α=0.35; baseline pull β=0.02. Rest state is preserved exactly.
+- **Tiers**: hub (8) / mid (90) / peripheral (156) by graph degree. LLM reasoning is available for hub agents at epoch boundaries {injury_tick, 4, 15, 29} via `opencode run` (JSON-schema constrained, cached by card+packet signature, budget-capped); all other agents always use compiled rules.
+- **Time**: 1 tick = 1 day; horizon ≤180 days. Epochs: INITIATION 0–3, SUBACUTE 4–14, TRANSITION 15–28, ESTABLISHED_CHRONIC ≥29.
+- **Readouts** (`readouts.py`): pain_score (symptom nodes), inflammation_index, barrier_integrity (1 − mean barrier-node states).
+
+## Quickstart
+
+```bash
+python3 -m simulator.build_cards                                   # regenerate cards (offline)
+python3 -m simulator.engine.orchestrator \
+    --scenario simulator/scenarios/sni_28d.yaml \
+    --out simulator/reports/runs/demo                              # run SNI 28 days
+python3 -m simulator.reports.generate_report \
+    --run simulator/reports/runs/demo --out simulator/reports/report_demo.md --plots-dir simulator/reports/plots
+python3 -m simulator.validation.pilot_acceptance                   # acceptance gates (PASS 4/4)
+python3 -m simulator.validation.check_facts                        # literature facts (17 checks)
+```
+
+## Scientific caveats
+
+1. **Determinism**: rules-only runs are byte-reproducible (verified in CI tests). Runs using the LLM path embed wall-clock latency in audit logs and are not byte-reproducible.
+2. **Closure edges**: 31 `origin="dynamic_closure"` links were added to make chronicification dynamics expressible (the original causal subgraph was acyclic and orphaned from symptom nodes). Every edge carries a verbatim dossier quote in `analysis/claims/closure_edges.yaml`; they are INFERRED topology, not independent literature facts.
+3. **LLM grounding**: agent personas derive from dossier text + validated claim cards; every LLM delta must cite rule/claim IDs. The facts harness (`validation/facts.yaml`) encodes 17 literature-grounded expectations with provenance refs.
+4. **Scope**: scenarios currently cover naive/SNI arms (+ fasudil/xpro1595/drive-decay variants). CCI/CIPN scenario files are deferred.
