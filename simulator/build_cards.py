@@ -290,7 +290,7 @@ def enrich_hub_card(card, dossier_text):
         os.environ.get("OPENCODE_BIN", "opencode"),
         "run",
         "--format",
-        "text",
+        "default",
         prompt,
     ]
     try:

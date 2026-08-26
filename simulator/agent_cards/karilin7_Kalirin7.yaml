@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 5
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: Kalirin-7 (GEF for Rac1/RhoG) is a molecule located in other. Baseline
+  activity level 0.50. It receives 3 regulatory influences and exerts 18.
 pathological_rules:
 - rule_id: RULE-karilin7_Kalirin7-01
   description: Kalirin-7 (GEF for Rac1/RhoG) activates GEF Rac1 GTPase

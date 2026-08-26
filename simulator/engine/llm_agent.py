@@ -27,7 +27,7 @@ class OpenCodeClient:
 
     def complete(self, prompt: str) -> str:
         result = subprocess.run(
-            [self.bin_path, "run", "--format", "text", prompt],
+            [self.bin_path, "run", "--format", "default", prompt],
             capture_output=True,
             text=True,
             timeout=CLIENT_TIMEOUT_S,

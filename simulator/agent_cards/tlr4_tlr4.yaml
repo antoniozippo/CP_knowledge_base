@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 0
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: TLR4 (Toll-like Receptor 4) is a receptor located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
 pathological_rules: []
 inbound_edges: []
 outbound_ids: []

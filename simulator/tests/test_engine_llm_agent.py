@@ -69,7 +69,7 @@ def test_client_invokes_opencode_run_subprocess(monkeypatch):
     client = OpenCodeClient()
     out = client.complete("MYPROMPT")
     assert out == "out"
-    assert seen["cmd"] == ["/fake/opencode", "run", "--format", "text", "MYPROMPT"]
+    assert seen["cmd"] == ["/fake/opencode", "run", "--format", "default", "MYPROMPT"]
     assert seen["timeout"] == 120
 
 

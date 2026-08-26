@@ -1,13 +1,13 @@
 # Hub agent card review digest
 
-generated: 2026-08-26T11:01:35Z
+generated: 2026-08-26T11:31:57Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
 ## BDNF_TrkB_KCC2 (KCC2 (Potassium-Chloride Cotransporter))
 
 - tier: HUB | entity_type: channel | compartment: other | community: 8
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: KCC2 (Potassium-Chloride Cotransporter) is a channel located in other. Baseline activity level 0.50. It receives 5 regulatory influences and exerts 3.
 - pathological rules (3):
   - `RULE-BDNF_TrkB_KCC2-01` [down] KCC2 (Potassium-Chloride Cotransporter) causes Mechanical Allodynia
     - claim_refs: (none)
@@ -19,7 +19,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## GABA_apoptosis_HIF1alpha (HIF1α (Hypoxia-Inducible Factor 1 Alpha))
 
 - tier: HUB | entity_type: concept | compartment: other | community: 1
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: HIF1α (Hypoxia-Inducible Factor 1 Alpha) is a concept located in other. Baseline activity level 0.50. It receives 3 regulatory influences and exerts 4.
 - pathological rules (5):
   - `RULE-GABA_apoptosis_HIF1alpha-01` [up] HIF1α (Hypoxia-Inducible Factor 1 Alpha) drives transcription of HIF1α Transcriptional Battery (Pain Genes)
     - claim_refs: EC-0039 (CONFIRMED)
@@ -35,7 +35,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## GABA_apoptosis_mTORC1 (mTORC1 (Mammalian Target of Rapamycin Complex 1))
 
 - tier: HUB | entity_type: drug | compartment: other | community: 1
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: mTORC1 (Mammalian Target of Rapamycin Complex 1) is a drug located in other. Baseline activity level 0.00. It receives 3 regulatory influences and exerts 2.
 - pathological rules (2):
   - `RULE-GABA_apoptosis_mTORC1-01` [down] mTORC1 (Mammalian Target of Rapamycin Complex 1) inhibits Rapamycin (mTOR Inhibitor / Autophagy Enhancer)
     - claim_refs: EC-0137 (UNREVIEWED)
@@ -45,7 +45,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## Skill_neuroscientific_insights_seeker_skill (Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation for Neuropathic Pain)
 
 - tier: HUB | entity_type: concept | compartment: other | community: 1
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation for Neuropathic Pain is a concept located in other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
 - rule_gap_reason: all candidate rules refuted or none found
 - pathological rules (0):
   - (none surviving verdict filtering)
@@ -53,7 +53,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## ana_12_NLRP3_inflammasome (NLRP3 Inflammasome)
 
 - tier: HUB | entity_type: concept | compartment: other | community: 1
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: NLRP3 Inflammasome is a concept located in other. Baseline activity level 0.50. It receives 1 regulatory influences and exerts 0.
 - rule_gap_reason: all candidate rules refuted or none found
 - pathological rules (0):
   - (none surviving verdict filtering)
@@ -61,7 +61,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## assaying_molecularly_structural_plasticity_BDNF (Brain-Derived Neurotrophic Factor (BDNF))
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 1
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: Brain-Derived Neurotrophic Factor (BDNF) is a molecule located in other. Baseline activity level 0.50. It receives 3 regulatory influences and exerts 11.
 - pathological rules (14):
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-01` [up] Brain-Derived Neurotrophic Factor (BDNF) rationale for Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles
     - claim_refs: EC-0021 (CONFIRMED)
@@ -95,7 +95,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## karilin7_Kalirin7 (Kalirin-7 (GEF for Rac1/RhoG))
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 5
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: Kalirin-7 (GEF for Rac1/RhoG) is a molecule located in other. Baseline activity level 0.50. It receives 3 regulatory influences and exerts 18.
 - pathological rules (16):
   - `RULE-karilin7_Kalirin7-01` [up] Kalirin-7 (GEF for Rac1/RhoG) activates GEF Rac1 GTPase
     - claim_refs: EC-0052 (CONFIRMED)
@@ -136,7 +136,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## rage_rage (RAGE (Receptor for Advanced Glycation End-products / AGER))
 
 - tier: HUB | entity_type: receptor | compartment: other | community: 10
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: RAGE (Receptor for Advanced Glycation End-products / AGER) is a receptor located in other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
 - rule_gap_reason: all candidate rules refuted or none found
 - pathological rules (0):
   - (none surviving verdict filtering)
@@ -144,7 +144,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 ## tlr4_tlr4 (TLR4 (Toll-like Receptor 4))
 
 - tier: HUB | entity_type: receptor | compartment: other | community: 0
-- proposed_normal_role: <LLM_ENRICH>
+- proposed_normal_role: TLR4 (Toll-like Receptor 4) is a receptor located in other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
 - rule_gap_reason: all candidate rules refuted or none found
 - pathological rules (0):
   - (none surviving verdict filtering)

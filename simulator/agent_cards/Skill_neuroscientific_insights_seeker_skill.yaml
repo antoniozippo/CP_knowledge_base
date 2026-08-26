@@ -6,7 +6,9 @@ compartment: other
 tier: HUB
 community: 1
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: 'Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation
+  for Neuropathic Pain is a concept located in other. Baseline activity level 0.50.
+  It receives 0 regulatory influences and exerts 0.'
 pathological_rules: []
 inbound_edges: []
 outbound_ids: []

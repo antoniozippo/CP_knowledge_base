@@ -5,7 +5,9 @@ compartment: other
 tier: HUB
 community: 1
 baseline_state: 0.0
-normal_role: <LLM_ENRICH>
+normal_role: mTORC1 (Mammalian Target of Rapamycin Complex 1) is a drug located in
+  other. Baseline activity level 0.00. It receives 3 regulatory influences and exerts
+  2.
 pathological_rules:
 - rule_id: RULE-GABA_apoptosis_mTORC1-01
   description: mTORC1 (Mammalian Target of Rapamycin Complex 1) inhibits Rapamycin

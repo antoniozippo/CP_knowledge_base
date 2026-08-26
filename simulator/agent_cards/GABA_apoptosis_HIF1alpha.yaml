@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 1
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: HIF1α (Hypoxia-Inducible Factor 1 Alpha) is a concept located in other.
+  Baseline activity level 0.50. It receives 3 regulatory influences and exerts 4.
 pathological_rules:
 - rule_id: RULE-GABA_apoptosis_HIF1alpha-01
   description: HIF1α (Hypoxia-Inducible Factor 1 Alpha) drives transcription of HIF1α

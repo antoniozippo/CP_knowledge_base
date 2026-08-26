@@ -367,7 +367,7 @@ def test_enrich_hub_card_subprocess_contract(monkeypatch):
     result = bc.enrich_hub_card(card, "dossier excerpt")
     assert result == ""
     assert recorded["cmd"][0] == "fake-opencode-bin"
-    assert recorded["cmd"][1:4] == ["run", "--format", "text"]
+    assert recorded["cmd"][1:4] == ["run", "--format", "default"]
     assert "Hub One" in recorded["cmd"][4]
     assert recorded["timeout"] == bc.ENRICH_TIMEOUT_S == 120
 

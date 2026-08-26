@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 1
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: NLRP3 Inflammasome is a concept located in other. Baseline activity level
+  0.50. It receives 1 regulatory influences and exerts 0.
 pathological_rules: []
 inbound_edges:
 - source_id: ana_12_ANA_12

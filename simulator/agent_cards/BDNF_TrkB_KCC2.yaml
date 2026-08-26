@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 8
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: KCC2 (Potassium-Chloride Cotransporter) is a channel located in other.
+  Baseline activity level 0.50. It receives 5 regulatory influences and exerts 3.
 pathological_rules:
 - rule_id: RULE-BDNF_TrkB_KCC2-01
   description: KCC2 (Potassium-Chloride Cotransporter) causes Mechanical Allodynia

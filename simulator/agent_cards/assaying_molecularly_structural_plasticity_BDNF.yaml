@@ -5,7 +5,8 @@ compartment: other
 tier: HUB
 community: 1
 baseline_state: 0.5
-normal_role: <LLM_ENRICH>
+normal_role: Brain-Derived Neurotrophic Factor (BDNF) is a molecule located in other.
+  Baseline activity level 0.50. It receives 3 regulatory influences and exerts 11.
 pathological_rules:
 - rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-01
   description: 'Brain-Derived Neurotrophic Factor (BDNF) rationale for Rationale:
