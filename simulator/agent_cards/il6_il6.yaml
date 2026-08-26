@@ -6,9 +6,15 @@ tier: MID
 community: 0
 baseline_state: 0.5
 normal_role: IL-6 (Interleukin-6) is a molecule located in systemic. Baseline activity
-  level 0.50. It receives 0 regulatory influences and exerts 0.
-pathological_rules: []
+  level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-il6_il6-01
+  description: IL-6 (Interleukin-6) activates via jak phosphorylation NKCC1 (SLC12A2)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges: []
-outbound_ids: []
+outbound_ids:
+- KCC2_enhancers_new_NKCC1
 rule_gap_reason: null
 source_note: IL-6.md

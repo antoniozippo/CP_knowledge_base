@@ -1,15 +1,15 @@
-generated_at_utc: '2026-08-26T09:58:33Z'
-input_graph_sha256: a267b034760ce3415a14e59ca11d6ad6c27e30972214db0a9274aadccb1e9426
+generated_at_utc: '2026-08-26T10:10:33Z'
+input_graph_sha256: 80d0ff89b7ac6f8610293f292d6185361b5e9d8f6fc5a756531727c3b00c47ab
 counts_by_tier:
   HUB: 8
   MID: 90
-  PERIPHERAL: 156
+  PERIPHERAL: 157
 counts_by_entity_type:
   cell_type: 14
   channel: 16
   concept: 102
   drug: 22
-  molecule: 45
+  molecule: 46
   pathway: 13
   process: 8
   receptor: 22
@@ -151,6 +151,9 @@ cards:
 - id: IGF1_2_rationale_IGF1_dual_nature
   file: IGF1_2_rationale_IGF1_dual_nature.yaml
   sha256: 731cd90f84717a2a90a08e64464f67f1e3dd395413e755a87e6f972e5e600728
+- id: KCC2_enhancers_new_NKCC1
+  file: KCC2_enhancers_new_NKCC1.yaml
+  sha256: 0a1fd87a5c4454029c5e7d25649d7d602cab82e9f80c0d9074715a6229a3ac99
 - id: NogoA_NgR1_846_861PE
   file: NogoA_NgR1_846_861PE.yaml
   sha256: 302d0d0ea240fc280fa8dd86fa240ce9cade3a9ba2931d8325633f5012e7c4ae
@@ -507,7 +510,7 @@ cards:
   sha256: 187613c345365e26c98f3945176a9a211f8351142eb512528ede5d9fa914e589
 - id: il6_il6
   file: il6_il6.yaml
-  sha256: 5ae6aedb881610bbc39eea5d4d3a15c0b406446bf42126530a3906bd03ff1eab
+  sha256: 536815f7add7186c26bf98b83df58d0dab53478e705f62729714cc0d40cd8772
 - id: insights_nlrp3
   file: insights_nlrp3.yaml
   sha256: 1e6e738be13858d8ef78e7bfa55900740db7d2b4f21b7f63450d44c84adb418c
@@ -778,7 +781,7 @@ cards:
 - id: wnt_wnt
   file: wnt_wnt.yaml
   sha256: 91f6343dcbcbfc44f6968581f8a49fd29da3b9da9ea3aa12d19a2d10dafc3c1b
-card_set_hash: dba57d874e17d3c7bac83d1827b16a221f14fe1f20788d0865514bf41e82cf10
+card_set_hash: e0aa17113b056c6e62860a98dfca97ee4e23e6830f7d9fc4e32b696d155f75ea
 dropped_refuted_rules: 8
 mixed_annotated: 4
 unresolved_endpoint_drops: 30

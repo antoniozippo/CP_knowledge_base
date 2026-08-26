@@ -267,3 +267,12 @@
   source_file: analysis/literature/theme_04_HIF1_metabolism_vascular_barriers.md
   source_ref: theme_04#A4.1 | Zhang, Zhao & Kuang 2025, doi:10.1159/000547276 | resolves raw-graph AMBIGUOUS edge BDNF--[regulates]-->BBB Integrity; context = meningitis/LPS + aging-vascular models
   confidence: INFERRED_CLOSURE
+- category: A2
+  source_label: il6_il6
+  target_label: KCC2_enhancers_new_NKCC1
+  relation: activates_via_jak_phosphorylation
+  sign: 1
+  quote: anti-IL-6 antibody or IL-6−/− mice prevented chloride accumulation; phospho-NKCC1 was absent from IL-6−/− dorsal root ganglia after injury; IL-6R blocking antibody, soluble IL-6R and JAK inhibitors (AG490, cucurbitacin, INCB018424) hyperpolarized EGABA back toward inhibitory values.
+  source_file: analysis/literature/theme_01_spinal_disinhibition_KCC2_PV_SST.md
+  source_ref: theme_01#A1.1 | Pieraut et al., J Neurosci 31(38):13516-13526, 2011 | resolves raw-graph AMBIGUOUS edge; post-translational only (no transcript change), regenerative context in IL-6R+ DRG neurons
+  confidence: INFERRED_CLOSURE

@@ -8601,6 +8601,22 @@
       "entity_type": "molecule",
       "compartment": "other",
       "tier": "peripheral"
+    },
+    {
+      "label": "NKCC1 (SLC12A2)",
+      "file_type": "document",
+      "source_file": "KCC2_enhancers_new.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "KCC2_enhancers_new_NKCC1",
+      "community": 1,
+      "norm_label": "nkcc1 (slc12a2)",
+      "entity_type": "molecule",
+      "compartment": "other",
+      "tier": "peripheral"
     }
   ],
   "links": [
@@ -18102,6 +18118,19 @@
       "origin": "dynamic_closure",
       "quote": "upregulates BDNF in LPS-injured hCMEC/D3 cells, increasing TEER and tight-junction proteins (ZO-1, Claudin-5, AQP4) and reducing permeability in rats; causality established because miR-155 mimic or **sh-BDNF knockdown partially reversed** the protective effects on TEER, tight-junction expression, and cytokine levels",
       "source_ref": "analysis/literature/theme_04_HIF1_metabolism_vascular_barriers.md"
+    },
+    {
+      "relation": "activates_via_jak_phosphorylation",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_01_spinal_disinhibition_KCC2_PV_SST.md",
+      "source_location": null,
+      "weight": null,
+      "source": "il6_il6",
+      "target": "KCC2_enhancers_new_NKCC1",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "anti-IL-6 antibody or IL-6−/− mice prevented chloride accumulation; phospho-NKCC1 was absent from IL-6−/− dorsal root ganglia after injury; IL-6R blocking antibody, soluble IL-6R and JAK inhibitors (AG490, cucurbitacin, INCB018424) hyperpolarized EGABA back toward inhibitory values.",
+      "source_ref": "analysis/literature/theme_01_spinal_disinhibition_KCC2_PV_SST.md"
     }
   ],
   "hyperedges": [],
