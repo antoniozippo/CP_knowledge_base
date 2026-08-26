@@ -129,11 +129,16 @@ def resolve_proposal_endpoints(proposal, nodes):
 # ---------------------------------------------------------------------------
 
 def _validate_proposal(proposal, position):
-    missing = [f for f in REQUIRED_FIELDS if not proposal.get(f)]
+    missing = [f for f in REQUIRED_FIELDS if proposal.get(f) is None]
     if missing:
         raise ValueError(f"proposal #{position} missing fields: {', '.join(missing)}")
-    if int(proposal["sign"]) not in (-1, 1):
-        raise ValueError(f"proposal #{position} sign must be -1 or 1")
+    status = proposal.get("validation_status")
+    if int(proposal["sign"]) == 0 and status not in ("REFUTED", "MIXED"):
+        raise ValueError(
+            f"proposal #{position}: sign 0 allowed only with validation_status REFUTED/MIXED (quarantine)"
+        )
+    if int(proposal["sign"]) not in (-1, 0, 1):
+        raise ValueError(f"proposal #{position} sign must be -1, 0 or 1")
     if len(str(proposal["quote"])) > 400:
         raise ValueError(f"proposal #{position} quote exceeds 400 chars")
 
@@ -223,6 +228,8 @@ def apply_closure_edges(graph, proposals, update_quotes=False):
                 "source_ref": _source_ref(resolved),
             }
         )
+        if resolved.get("validation_status"):
+            new_graph["links"][-1]["validation_status"] = resolved["validation_status"]
         existing_signed_pairs.add(pair)
         links_by_pair.setdefault(pair, []).append(new_graph["links"][-1])
         summary.added += 1

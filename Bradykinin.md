@@ -178,3 +178,4 @@ Targeting the generation of bradykinin upstream of the receptors represents an a
 | Claim | Verdict | Evidence | Note |
 |-------|---------|----------|------|
 | QC-0002 | ✅ EXTENDED | theme_07#F7.9 · Front Med 2025 (stage-dependent diabetic B1R); Stemper et al. 2025, Pain | Protective kinin–opioid interaction conceptually reinforced by stage-dependent protective B1R biology, but the exact 30–35% double-KO figure was not independently reproduced — B1R sign flips with disease stage (early protective / late pronociceptive) |
+| Fulmetibant→allodynia drug edge (raw-graph AMBIGUOUS) | ⚠️ REFUTED (clinical) | theme_07#A7.1, F7.7 · Stemper et al. 2025, Pain, doi:10.1097/j.pain.0000000000003642; NCT05219812 | BRADiNP Ph2a negative in painful diabetic neuropathy (Δ0.07 NRS, CI −0.170–0.314); encoded as quarantined sign-0 pair — preclinical B1-blockade analgesia (cisplatin DALBK/icatibant) unaffected; cold allodynia B1/B2-resistant |

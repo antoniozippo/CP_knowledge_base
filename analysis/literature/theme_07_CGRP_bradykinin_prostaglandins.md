@@ -160,6 +160,12 @@ Keyword filter (`cgrp, bradykinin, kallikrein, prostaglandin, cox, pge2, substan
 28. Bouillet L, et al. Completion of the Icatibant Outcome Survey. Clin Exp Allergy (2026). https://doi.org/10.1111/cea.70271
 29. Hill R. NK1 (substance P) receptor antagonists—why are they not analgesic in humans? Trends Pharmacol Sci 21:244-246 (2000). https://pubmed.ncbi.nlm.nih.gov/10871891/
 
+## Post-Round Adjudications (2026-08-26)
+
+### A7.1: fulmetibant → mechanical allodynia resolved (was graph AMBIGUOUS edge `Fulmetibant--[inhibits]-->Mechanical Allodynia`)
+- **Evidence:** BRADiNP Phase 2a (randomized, double-blind, placebo-controlled 2-period crossover, n=158 treated, 75 completers both periods) of fulmetibant 450 mg once daily in painful diabetic neuropathy: primary endpoint change in weekly mean 24-h average pain NRS at week 4 showed treatment difference **0.07 (95% CI −0.170 to 0.314)** — negative; authors' conclusion: "preclinical efficacy seen with this bradykinin 1 receptor antagonist did not translate" [Stemper et al., Pain 2025, doi:10.1097/j.pain.0000000000003642; NCT05219812]. Preclinical B1-blockade analgesia remains model-supported (QC-0001/0003 cisplatin DALBK/icatibant data), and cold allodynia was B1/B2-blockade-resistant in the cisplatin model (F7 Contradictions); stage-dependent B1R sign-flip in diabetes (F7.9) further cautions against static drug→symptom edges.
+- **Relation to KB:** raw-graph edge `Fulmetibant --[inhibits]--> Mechanical Allodynia` (AMBIGUOUS 0.2) → **REFUTED as a clinical drug effect** in the only human test (DNP Ph2a). Encoded as a QUARANTINE pair (sign 0 + validation_status REFUTED) so future graph rebuilds cannot resurrect it as an active simulator rule; preclinical mechanism-level B1 edges unaffected.
+
 ## Sweep Limitations
 - **Snippet-level evidence:** all findings derive from websearch result extracts (abstracts/highlights); full texts, supplementary data and exact dose-response figures were not independently retrieved or verified.
 - **Claims-inventory gap dominates this theme:** `cgrp.md` and `Substance_P-NK1.md` produced zero claims, so CGRP/SP-NK1 axes could be validated only at dossier level; conversely all six bradykinin claims are trial-design/quantitative statements whose source paper (BRADiNP) is now located and quotable.

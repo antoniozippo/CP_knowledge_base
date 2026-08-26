@@ -18131,6 +18131,20 @@
       "origin": "dynamic_closure",
       "quote": "anti-IL-6 antibody or IL-6−/− mice prevented chloride accumulation; phospho-NKCC1 was absent from IL-6−/− dorsal root ganglia after injury; IL-6R blocking antibody, soluble IL-6R and JAK inhibitors (AG490, cucurbitacin, INCB018424) hyperpolarized EGABA back toward inhibitory values.",
       "source_ref": "analysis/literature/theme_01_spinal_disinhibition_KCC2_PV_SST.md"
+    },
+    {
+      "relation": "inhibits_mechanical_allodynia",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md",
+      "source_location": null,
+      "weight": null,
+      "source": "bradykinin_fulmetibant",
+      "target": "shared_mechanical_allodynia",
+      "sign": 0,
+      "origin": "dynamic_closure",
+      "quote": "primary endpoint change in weekly mean 24-h average pain NRS at week 4 showed treatment difference **0.07 (95% CI −0.170 to 0.314)** — negative; authors' conclusion: \"preclinical efficacy seen with this bradykinin 1 receptor antagonist did not translate\"",
+      "source_ref": "analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md",
+      "validation_status": "REFUTED"
     }
   ],
   "hyperedges": [],

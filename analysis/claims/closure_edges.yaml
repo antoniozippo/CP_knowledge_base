@@ -276,3 +276,13 @@
   source_file: analysis/literature/theme_01_spinal_disinhibition_KCC2_PV_SST.md
   source_ref: theme_01#A1.1 | Pieraut et al., J Neurosci 31(38):13516-13526, 2011 | resolves raw-graph AMBIGUOUS edge; post-translational only (no transcript change), regenerative context in IL-6R+ DRG neurons
   confidence: INFERRED_CLOSURE
+- category: A5
+  source_label: Bradykinin_Fulmetibant
+  target_label: shared_mechanical_allodynia
+  relation: inhibits_mechanical_allodynia
+  sign: 0
+  validation_status: REFUTED
+  quote: 'primary endpoint change in weekly mean 24-h average pain NRS at week 4 showed treatment difference **0.07 (95% CI −0.170 to 0.314)** — negative; authors'' conclusion: "preclinical efficacy seen with this bradykinin 1 receptor antagonist did not translate"'
+  source_file: analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md
+  source_ref: 'theme_07#A7.1 | Stemper et al., Pain 2025, doi:10.1097/j.pain.0000000000003642, NCT05219812 | quarantine: BRADiNP Ph2a negative in painful diabetic neuropathy; preclinical B1-blockade edges unaffected'
+  confidence: INFERRED_CLOSURE

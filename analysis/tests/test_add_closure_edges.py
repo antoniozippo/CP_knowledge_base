@@ -371,3 +371,35 @@ def test_every_curated_closure_quote_is_verbatim_byte_substring():
             assert link["quote"].encode("utf-8") == str(match[0]["quote"]).encode("utf-8"), (
                 f"graph link {pair} quote drifted from proposal"
             )
+
+
+def test_quarantine_sign_zero_requires_validation_status():
+    import pytest
+    from add_closure_edges import _validate_proposal
+    base = {"source_label": "A", "target_label": "B", "relation": "inhibits_x",
+            "quote": "q", "source_file": "f.md", "sign": 0}
+    with pytest.raises(ValueError, match="quarantine"):
+        _validate_proposal(base, 0)
+    _validate_proposal({**base, "validation_status": "REFUTED"}, 0)
+    signed = {**base, "sign": -1}
+    _validate_proposal(signed, 0)
+
+
+def test_quarantine_entry_applied_inert_with_status(graph):
+    import json
+    from add_closure_edges import apply_closure_edges
+    proposals = [{
+        "category": "A5",
+        "source_label": "KCC2 (Potassium-Chloride Cotransporter)",
+        "target_label": "Mechanical Allodynia",
+        "relation": "inhibits_mechanical_allodynia",
+        "sign": 0,
+        "validation_status": "REFUTED",
+        "quote": "negative trial result",
+        "source_file": "theme.md",
+        "confidence": "INFERRED_CLOSURE",
+    }]
+    new_graph, summary = apply_closure_edges(json.loads(json.dumps(graph)), proposals)
+    assert summary.added == 1
+    link = [l for l in new_graph["links"] if l.get("origin") == "dynamic_closure"][0]
+    assert link["sign"] == 0 and link["validation_status"] == "REFUTED"
