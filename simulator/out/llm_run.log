@@ -1,0 +1,1 @@
+run complete: ticks=28 final_tick=28 pain=0.4807 inflammation=0.6417 barrier_integrity=0.3164 -> simulator/out/SNI_28d_LLM

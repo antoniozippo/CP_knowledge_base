@@ -1,0 +1,2 @@
+WARNING simulator.engine.llm_agent: llm_next_state client failure for BDNF_TrkB_KCC2 at tick 4: timed out
+run complete: ticks=28 final_tick=28 pain=0.4744 inflammation=0.6398 barrier_integrity=0.3185 -> simulator/out/FASUDIL_LLM

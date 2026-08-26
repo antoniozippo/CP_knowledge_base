@@ -1,0 +1,122 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 0,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [],
+      "horizon_days": 28,
+      "initial_perturbations": [
+        {
+          "agent_id": "shared_microglia",
+          "value": 0.92
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "value": 0.92
+        },
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "value": 0.92
+        },
+        {
+          "agent_id": "tlr4_tlr4",
+          "value": 0.92
+        },
+        {
+          "agent_id": "PNN_ECM_MMP9",
+          "value": 0.92
+        },
+        {
+          "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+          "value": 0.92
+        },
+        {
+          "agent_id": "hif1a_HIF1alpha",
+          "value": 0.92
+        }
+      ],
+      "injury_model": "SNI",
+      "injury_tick": 0,
+      "name": "sni_28d",
+      "notes": "SNI pilot scenario. Seeds are proximal injury drivers resolved against the real card set: microglial activation, TNF-alpha, ROS/oxidative stress, MMP-9, BDNF, HIF1-alpha. No DAMP card exists in the set; its canonical receptor TLR4 (tlr4_tlr4) is seeded as the DAMP-signaling proxy. Seed magnitude 0.92: orphan nodes contract toward baseline by a factor of ~0.637 per tick, so only seeds >= ~0.87 satisfy first_crossing with delta=0.15 and sustain=2 for two consecutive logged ticks. Sustained drives model tonic injury drivers after SNI: ongoing ectopic afferent firing and persistent glial activation keep microglia and TNF-a elevated through the whole horizon (value 0.9 from tick 0, no end tick = active while start <= tick < horizon).",
+      "sustained_drives": [
+        {
+          "agent_id": "shared_microglia",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        }
+      ]
+    },
+    "seed": 0,
+    "started_at_utc": "2026-08-26T19:39:15Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [],
+    "horizon_days": 28,
+    "initial_perturbations": [
+      {
+        "agent_id": "shared_microglia",
+        "value": 0.92
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "value": 0.92
+      },
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "value": 0.92
+      },
+      {
+        "agent_id": "tlr4_tlr4",
+        "value": 0.92
+      },
+      {
+        "agent_id": "PNN_ECM_MMP9",
+        "value": 0.92
+      },
+      {
+        "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+        "value": 0.92
+      },
+      {
+        "agent_id": "hif1a_HIF1alpha",
+        "value": 0.92
+      }
+    ],
+    "injury_model": "SNI",
+    "injury_tick": 0,
+    "name": "sni_28d",
+    "notes": "SNI pilot scenario. Seeds are proximal injury drivers resolved against the real card set: microglial activation, TNF-alpha, ROS/oxidative stress, MMP-9, BDNF, HIF1-alpha. No DAMP card exists in the set; its canonical receptor TLR4 (tlr4_tlr4) is seeded as the DAMP-signaling proxy. Seed magnitude 0.92: orphan nodes contract toward baseline by a factor of ~0.637 per tick, so only seeds >= ~0.87 satisfy first_crossing with delta=0.15 and sustain=2 for two consecutive logged ticks. Sustained drives model tonic injury drivers after SNI: ongoing ectopic afferent firing and persistent glial activation keep microglia and TNF-a elevated through the whole horizon (value 0.9 from tick 0, no end tick = active while start <= tick < horizon).",
+    "sustained_drives": [
+      {
+        "agent_id": "shared_microglia",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      }
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 27,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [
+        {
+          "effect_sign": -1,
+          "end_tick": null,
+          "magnitude": 0.5,
+          "name": "fasudil",
+          "start_tick": 3,
+          "target_agent_ids": [
+            "RhoA_ROCK_ROCK"
+          ]
+        }
+      ],
+      "horizon_days": 28,
+      "initial_perturbations": [
+        {
+          "agent_id": "shared_microglia",
+          "value": 0.92
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "value": 0.92
+        },
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "value": 0.92
+        },
+        {
+          "agent_id": "tlr4_tlr4",
+          "value": 0.92
+        },
+        {
+          "agent_id": "PNN_ECM_MMP9",
+          "value": 0.92
+        },
+        {
+          "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+          "value": 0.92
+        },
+        {
+          "agent_id": "hif1a_HIF1alpha",
+          "value": 0.92
+        }
+      ],
+      "injury_model": "SNI",
+      "injury_tick": 0,
+      "name": "sni_28d_fasudil",
+      "notes": "SNI pilot plus fasudil arm. Fasudil is a clinically approved ROCK inhibitor; the target is the canonical ROCK (ROCK1/ROCK2) molecule card RhoA_ROCK_ROCK, inhibited (effect_sign -1, magnitude 0.5) from tick 3, mirroring the clp257 window convention. Seeds and sustained_drives match sni_28d so the only inter-arm difference is the drug. Published dynamics (dossier RhoA-ROCK.md, theme_05 F5.4): RhoA/ROCK-p38 MAPK microglial cascade is pronociceptive, so inhibiting ROCK should lower pain.",
+      "sustained_drives": [
+        {
+          "agent_id": "shared_microglia",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        }
+      ]
+    },
+    "seed": 42,
+    "started_at_utc": "2026-08-26T21:30:28Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [
+      {
+        "effect_sign": -1,
+        "end_tick": null,
+        "magnitude": 0.5,
+        "name": "fasudil",
+        "start_tick": 3,
+        "target_agent_ids": [
+          "RhoA_ROCK_ROCK"
+        ]
+      }
+    ],
+    "horizon_days": 28,
+    "initial_perturbations": [
+      {
+        "agent_id": "shared_microglia",
+        "value": 0.92
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "value": 0.92
+      },
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "value": 0.92
+      },
+      {
+        "agent_id": "tlr4_tlr4",
+        "value": 0.92
+      },
+      {
+        "agent_id": "PNN_ECM_MMP9",
+        "value": 0.92
+      },
+      {
+        "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+        "value": 0.92
+      },
+      {
+        "agent_id": "hif1a_HIF1alpha",
+        "value": 0.92
+      }
+    ],
+    "injury_model": "SNI",
+    "injury_tick": 0,
+    "name": "sni_28d_fasudil",
+    "notes": "SNI pilot plus fasudil arm. Fasudil is a clinically approved ROCK inhibitor; the target is the canonical ROCK (ROCK1/ROCK2) molecule card RhoA_ROCK_ROCK, inhibited (effect_sign -1, magnitude 0.5) from tick 3, mirroring the clp257 window convention. Seeds and sustained_drives match sni_28d so the only inter-arm difference is the drug. Published dynamics (dossier RhoA-ROCK.md, theme_05 F5.4): RhoA/ROCK-p38 MAPK microglial cascade is pronociceptive, so inhibiting ROCK should lower pain.",
+    "sustained_drives": [
+      {
+        "agent_id": "shared_microglia",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      }
+    ]
+  }
+}
