@@ -4,45 +4,36 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "dual_hit_components",
-        "label": "Dual-Hit Components Acting on Lamina I Projection Neurons",
-        "nodes": [
-          "insights_x_lamina_I_dual_hit_MicroglialGagStripping",
-          "insights_x_lamina_I_dual_hit_Kcc2Disinhibition",
-          "insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons"
+        "id": "HE_miR155_BDNF_barrier_pathway",
+        "label": "miR-155/BDNF barrier-protection pathway (Zhang, Zhao & Kuang 2025, doi:10.1159/000547276)",
+        "members": [
+          "BBB_Hyperoside",
+          "BBB_MicroRNA155",
+          "BDNFTrkB_BDNF",
+          "BBB_TightJunctionIntegrity"
         ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "insights_x_lamina_I_dual_hit.md"
+        "confidence": "EXTRACTED"
       },
       {
-        "id": "quadruple_prophylaxis_nodes",
-        "label": "Four Convergence Nodes of Acute-to-Chronic Prevention",
-        "nodes": [
-          "proposal_acute_to_chronic_prevention_Rbfox1Restoration",
-          "proposal_acute_to_chronic_prevention_TransientHif1aInhibition",
-          "proposal_acute_to_chronic_prevention_Mmp9Inhibition",
-          "proposal_acute_to_chronic_prevention_LocalAntiVegfa"
+        "id": "HE_IL6_JAK2_STAT3_axis",
+        "label": "IL-6/gp130/JAK2/STAT3 pronociceptive axis",
+        "members": [
+          "JAKSTAT_IL6",
+          "JAKSTAT_JAK2",
+          "JAKSTAT_STAT3"
         ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "proposals/proposal_acute_to_chronic_prevention.md"
+        "confidence": "EXTRACTED"
       },
       {
-        "id": "four_treatment_pillars",
-        "label": "Four-Pillar Chronic Pain Treatment Combination",
-        "nodes": [
-          "proposal_chronic_pain_treatment_Kcc2Enhancement",
-          "proposal_chronic_pain_treatment_RockInhibition",
-          "proposal_chronic_pain_treatment_SstInterneuronSilencing",
-          "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade"
+        "id": "HE_ZFHX2_corrected_regulome",
+        "label": "Corrected ZFHX2 neuropeptide regulome (Habib 2018; SST up, PTGIR/GFRA3/GAL down)",
+        "members": [
+          "ZFHX2_ZFHX2",
+          "ZFHX2_SST",
+          "ZFHX2_NeuropeptideRegulome",
+          "ZFHX2_R1913K_Variant"
         ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "proposals/proposal_chronic_pain_treatment.md"
+        "confidence": "EXTRACTED"
       }
     ]
   },
@@ -56,7 +47,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "perineuronal nets (pnns)",
       "id": "PNN_ECM_perineuronal_nets"
     },
@@ -69,7 +60,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
+      "community": 37,
       "norm_label": "extracellular matrix (ecm)",
       "id": "PNN_ECM_extracellular_matrix"
     },
@@ -82,7 +73,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "chondroitin sulfate proteoglycans (cspgs)",
       "id": "PNN_ECM_CSPGs"
     },
@@ -95,7 +86,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "hyaluronan (ha)",
       "id": "PNN_ECM_hyaluronan"
     },
@@ -108,7 +99,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "matrix metalloproteinase-9 (mmp-9)",
       "id": "PNN_ECM_MMP9"
     },
@@ -121,7 +112,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "matrix metalloproteinase-2 (mmp-2)",
       "id": "PNN_ECM_MMP2"
     },
@@ -134,7 +125,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 38,
       "norm_label": "adamts proteases",
       "id": "PNN_ECM_ADAMTS"
     },
@@ -147,7 +138,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "chondroitinase abc",
       "id": "PNN_ECM_chondroitinase_ABC"
     },
@@ -160,7 +151,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 39,
       "norm_label": "tenascin-r",
       "id": "PNN_ECM_tenascin_R"
     },
@@ -173,7 +164,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "link protein hapln1/crtl1",
       "id": "PNN_ECM_HAPLN1"
     },
@@ -186,7 +177,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 40,
       "norm_label": "sb-3ct (mmp inhibitor)",
       "id": "PNN_ECM_SB3CT"
     },
@@ -199,7 +190,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 37,
+      "community": 41,
       "norm_label": "timp-1 (endogenous mmp inhibitor)",
       "id": "PNN_ECM_TIMP1"
     },
@@ -212,7 +203,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "rationale: pnns are critical for normal brain function",
       "id": "PNN_ECM_rationale_PNN_normal_function"
     },
@@ -238,7 +229,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "central sensitization",
       "id": "shared_central_sensitization"
     },
@@ -264,7 +255,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "mechanical allodynia",
       "id": "shared_mechanical_allodynia"
     },
@@ -732,7 +723,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "nogo-a",
       "id": "NogoA_NgR1_NogoA"
     },
@@ -745,7 +736,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "nogo-66 receptor 1 (ngr1)",
       "id": "NogoA_NgR1_NgR1"
     },
@@ -758,7 +749,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "lingo-1",
       "id": "NogoA_NgR1_LINGO1"
     },
@@ -771,7 +762,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "p75 neurotrophin receptor (p75ntr)",
       "id": "NogoA_NgR1_p75NTR"
     },
@@ -784,7 +775,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "myelin-associated glycoprotein (mag)",
       "id": "NogoA_NgR1_MAG"
     },
@@ -797,7 +788,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "oligodendrocyte myelin glycoprotein (omgp)",
       "id": "NogoA_NgR1_OMgp"
     },
@@ -810,7 +801,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "trpv1 channel",
       "id": "NogoA_NgR1_TRPV1"
     },
@@ -823,7 +814,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "limk/cofilin pathway",
       "id": "NogoA_NgR1_LIMK_cofilin"
     },
@@ -836,7 +827,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "ng101 (anti-nogo-a antibody)",
       "id": "NogoA_NgR1_NG101"
     },
@@ -849,7 +840,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "846-861pe (ngr1 antagonist peptide)",
       "id": "NogoA_NgR1_846_861PE"
     },
@@ -862,7 +853,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "rationale: nogo-a/ngr1 have physiological circuit-stabilizing roles",
       "id": "NogoA_NgR1_rationale_physiological_roles"
     },
@@ -875,7 +866,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "somatostatin (sst) interneurons",
       "id": "SST_somatostatin_interneurons"
     },
@@ -888,7 +879,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "sstr2a receptor",
       "id": "SST_SSTR2a"
     },
@@ -901,7 +892,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "prdm12 transcription factor",
       "id": "SST_Prdm12"
     },
@@ -914,7 +905,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "rhoa gtpase",
       "id": "RhoA_ROCK_RhoA"
     },
@@ -927,7 +918,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "rock (rock1/rock2)",
       "id": "RhoA_ROCK_ROCK"
     },
@@ -953,7 +944,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "marcks protein",
       "id": "RhoA_ROCK_MARCKS"
     },
@@ -966,7 +957,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "epha1 receptor",
       "id": "RhoA_ROCK_EphA1"
     },
@@ -979,7 +970,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "fasudil (rock inhibitor)",
       "id": "RhoA_ROCK_fasudil"
     },
@@ -992,7 +983,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "y-27632 (rock inhibitor)",
       "id": "RhoA_ROCK_Y27632"
     },
@@ -1005,7 +996,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "simvastatin (rhoa inhibitor)",
       "id": "RhoA_ROCK_simvastatin"
     },
@@ -1018,7 +1009,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "c3 exoenzyme (rhoa inhibitor)",
       "id": "RhoA_ROCK_C3_exoenzyme"
     },
@@ -1031,7 +1022,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 38,
+      "community": 42,
       "norm_label": "mir-488-3p (rock1-targeting mirna)",
       "id": "RhoA_ROCK_miR_488_3p"
     },
@@ -1044,7 +1035,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "rationale: rhoa/rock has context-dependent roles in regeneration vs pain",
       "id": "RhoA_ROCK_rationale_dual_role"
     },
@@ -1070,7 +1061,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "brain-derived neurotrophic factor (bdnf)",
       "id": "BDNF_TrkB_BDNF"
     },
@@ -1083,7 +1074,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "trkb receptor (trkb.fl)",
       "id": "BDNF_TrkB_TrkB"
     },
@@ -1096,7 +1087,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "kcc2 (potassium-chloride cotransporter)",
       "id": "BDNF_TrkB_KCC2"
     },
@@ -1109,7 +1100,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "probdnf",
       "id": "BDNF_TrkB_proBDNF"
     },
@@ -1122,7 +1113,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "trkb.t1 (truncated isoform)",
       "id": "BDNF_TrkB_TrkB_T1"
     },
@@ -1135,7 +1126,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "ana-12 (trkb kinase inhibitor)",
       "id": "BDNF_TrkB_ANA_12"
     },
@@ -1148,7 +1139,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "clp257 (kcc2 enhancer)",
       "id": "BDNF_TrkB_CLP257"
     },
@@ -1161,7 +1152,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "rationale: bdnf has both pro-nociceptive and anti-nociceptive roles",
       "id": "BDNF_TrkB_rationale_dual_roles"
     },
@@ -1174,7 +1165,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "p2x4 purinergic receptor",
       "id": "shared_P2X4_receptor"
     },
@@ -1265,7 +1256,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "insulin-like growth factor 1 (igf1)",
       "id": "IGF1_2_IGF1"
     },
@@ -1278,7 +1269,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 36,
       "norm_label": "insulin-like growth factor 2 (igf2)",
       "id": "IGF1_2_IGF2"
     },
@@ -1291,7 +1282,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "igf1 receptor (igf1r)",
       "id": "IGF1_2_IGF1R"
     },
@@ -1304,7 +1295,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 36,
       "norm_label": "ntrk1 receptor",
       "id": "IGF1_2_NTRK1"
     },
@@ -1317,7 +1308,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "follistatin (fst)",
       "id": "IGF1_2_follistatin"
     },
@@ -1330,7 +1321,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "rationale: igf1 has dual neuroprotective and pain-promoting roles",
       "id": "IGF1_2_rationale_IGF1_dual_nature"
     },
@@ -1343,7 +1334,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "blood-brain barrier (bbb)",
       "id": "BBB_blood_brain_barrier"
     },
@@ -1356,7 +1347,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "blood-spinal cord barrier (bscb)",
       "id": "BBB_blood_spinal_cord_barrier"
     },
@@ -1369,7 +1360,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "blood-nerve barrier (bnb)",
       "id": "BBB_blood_nerve_barrier"
     },
@@ -1382,7 +1373,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "neurovascular unit (nvu)",
       "id": "BBB_neurovascular_unit"
     },
@@ -1395,7 +1386,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "tight junction proteins (occludin/claudin-5/zo-1)",
       "id": "BBB_tight_junction_proteins"
     },
@@ -1408,7 +1399,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "cypa-mmp-9 pathway",
       "id": "BBB_CypA_MMP9_pathway"
     },
@@ -1421,7 +1412,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "resolvin d1 (pro-resolving mediator)",
       "id": "BBB_resolvin_D1"
     },
@@ -1434,7 +1425,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "rationale: balancing barrier repair with drug delivery is critical",
       "id": "BBB_rationale_balancing_act"
     },
@@ -1525,7 +1516,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
+      "community": 43,
       "norm_label": "px-478 (hif1\u03b1 inhibitor)",
       "id": "hif1a_PX478"
     },
@@ -1551,7 +1542,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "vascular endothelial growth factor a (vegfa)",
       "id": "vegf_VEGFA"
     },
@@ -1564,7 +1555,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "vegfr2 (flk-1/kdr)",
       "id": "vegf_VEGFR2"
     },
@@ -1577,7 +1568,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "neuropilin-1 (nrp-1)",
       "id": "vegf_neuropilin_1"
     },
@@ -1590,7 +1581,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "semaphorin-3a",
       "id": "vegf_semaphorin_3A"
     },
@@ -1603,7 +1594,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 27,
       "norm_label": "bevacizumab (anti-vegf antibody)",
       "id": "vegf_bevacizumab"
     },
@@ -1616,7 +1607,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "vegf-trap (aflibercept)",
       "id": "vegf_VEGF_Trap"
     },
@@ -1629,7 +1620,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "rationale: vegfa is crucial for repair but drives pain when excessive",
       "id": "vegf_rationale_dual_role"
     },
@@ -1655,7 +1646,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "angiopoietin-2 (ang-2)",
       "id": "AngPt_angiopoietin_2"
     },
@@ -1694,7 +1685,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "fumagillin (ang-2 inhibitor)",
       "id": "AngPt_fumagillin"
     },
@@ -1889,7 +1880,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "parvalbumin (pv) interneurons",
       "id": "PV_interneurons_PV_interneurons"
     },
@@ -1902,7 +1893,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "calcium-permeable ampa receptors (cp-ampars)",
       "id": "PV_interneurons_CP_AMPARs"
     },
@@ -1915,7 +1906,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "iem-1460 (cp-ampar antagonist)",
       "id": "PV_interneurons_IEM_1460"
     },
@@ -1928,7 +1919,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 4,
       "norm_label": "clp257 (kcc2 enhancer)",
       "id": "PV_interneurons_CLP257"
     },
@@ -3186,7 +3177,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
+      "community": 44,
       "norm_label": "cx3cr1 antagonists (analgesics)",
       "id": "cx3cl1_cx3cr1_amd3100_analog"
     },
@@ -3199,7 +3190,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "sphingosine-1-phosphate (s1p)",
       "id": "s1p_s1p_molecule"
     },
@@ -3212,7 +3203,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "s1pr1 receptor",
       "id": "s1p_s1pr1"
     },
@@ -3225,7 +3216,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "s1pr2 receptor (pronociceptive)",
       "id": "s1p_s1pr2"
     },
@@ -3238,7 +3229,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "s1pr3 receptor (astrogliosis)",
       "id": "s1p_s1pr3"
     },
@@ -3251,7 +3242,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "sphingosine kinase 1 (sphk1)",
       "id": "s1p_sphk1"
     },
@@ -3264,7 +3255,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "sphingosine kinase 2 (sphk2)",
       "id": "s1p_sphk2"
     },
@@ -3277,7 +3268,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "fingolimod (fty720)",
       "id": "s1p_fingolimod"
     },
@@ -3290,7 +3281,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "connexin 43 (cx43/gja1)",
       "id": "connexin43_cx43"
     },
@@ -3303,7 +3294,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "gap junction channels (cx43)",
       "id": "connexin43_gap_junction"
     },
@@ -3316,7 +3307,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "cx43 hemichannels (pathological opening)",
       "id": "connexin43_hemichannel"
     },
@@ -3329,7 +3320,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "tat-gap19 (cx43 hemichannel blocker)",
       "id": "connexin43_tat_gap19"
     },
@@ -3342,7 +3333,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "astrocytic syncytium (calcium wave propagation)",
       "id": "connexin43_astrocyte_syncytium"
     },
@@ -3355,7 +3346,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 33,
       "norm_label": "heme oxygenase-1 (ho-1/hmox1)",
       "id": "ho1_co_ho1"
     },
@@ -3381,7 +3372,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 33,
       "norm_label": "nrf2 (ho-1 transcriptional regulator)",
       "id": "ho1_co_nrf2"
     },
@@ -3394,7 +3385,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 33,
       "norm_label": "bilirubin (antioxidant ho-1 product)",
       "id": "ho1_co_bilirubin"
     },
@@ -3420,7 +3411,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 33,
       "norm_label": "dimethyl fumarate (nrf2 activator)",
       "id": "ho1_co_dimethyl_fumarate"
     },
@@ -3433,7 +3424,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "s100a8 (calgranulin a / mrp8)",
       "id": "s100a8_a9_s100a8"
     },
@@ -3446,7 +3437,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "s100a9 (calgranulin b)",
       "id": "s100a8_a9_s100a9"
     },
@@ -3459,7 +3450,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "s100a8/a9 complex (calprotectin / damp)",
       "id": "s100a8_a9_complex"
     },
@@ -3472,7 +3463,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "kcc2 (slc12a5 chloride cotransporter)",
       "id": "insights_kcc2_kcc2"
     },
@@ -3485,7 +3476,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "disinhibition cascade (kcc2-mediated)",
       "id": "insights_kcc2_disinhibition_cascade"
     },
@@ -3498,7 +3489,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "kcc2 enhancers (clp257, vu0463271)",
       "id": "insights_kcc2_clp257"
     },
@@ -3511,7 +3502,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "pkc phosphorylation of kcc2 (thr906/thr1007)",
       "id": "insights_kcc2_pkc_phosphorylation"
     },
@@ -3524,7 +3515,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 17,
       "norm_label": "nitege fragments (pnn dismantling biomarker)",
       "id": "strategic_biomarker_nitege"
     },
@@ -3537,7 +3528,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "angiopoietin-2 (ang-2, barrier biomarker)",
       "id": "strategic_biomarker_ang2"
     },
@@ -3550,7 +3541,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 17,
       "norm_label": "mmp-9 hub (clinical biomarker nexus)",
       "id": "strategic_biomarker_mmp9_hub"
     },
@@ -3563,7 +3554,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "rbfox1-nrcam-scn9a axis (drg hyperexcitability)",
       "id": "strategic_biomarker_rbfox1"
     },
@@ -3576,7 +3567,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
+      "community": 25,
       "norm_label": "precision analgesia stratification framework",
       "id": "strategic_biomarker_precision_analgesia"
     },
@@ -3602,7 +3593,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "nitric oxide (no, inos-derived)",
       "id": "inos_no"
     },
@@ -3615,7 +3606,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "peroxynitrite (onoo-)",
       "id": "inos_peroxynitrite"
     },
@@ -3641,7 +3632,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "no-cgmp-pkg pathway (central sensitisation)",
       "id": "inos_cgmp_pkg"
     },
@@ -3654,7 +3645,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "p2x7 receptor (p2rx7)",
       "id": "p2x7_p2x7"
     },
@@ -3667,7 +3658,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "pannexin-1 (panx1, p2x7 large pore partner)",
       "id": "p2x7_pannexin1"
     },
@@ -3680,7 +3671,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 30,
       "norm_label": "pyroptosis (p2x7-gsdmd pathway)",
       "id": "p2x7_pyroptosis"
     },
@@ -3693,7 +3684,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "a438079 (p2x7 antagonist)",
       "id": "p2x7_a438079"
     },
@@ -3706,7 +3697,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "jnj-54175446 (afc-5128, brain-penetrant p2x7 antagonist)",
       "id": "p2x7_jnj54175446"
     },
@@ -3719,7 +3710,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "tlr9 (toll-like receptor 9)",
       "id": "tlr9_tlr9"
     },
@@ -3732,7 +3723,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "mitochondrial dna (mtdna, tlr9 endogenous ligand)",
       "id": "tlr9_mtdna"
     },
@@ -3745,7 +3736,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "odn2088 (tlr9 antagonist oligodeoxynucleotide)",
       "id": "tlr9_odn2088"
     },
@@ -3758,7 +3749,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "cgas-sting pathway (mtdna co-sensor)",
       "id": "tlr9_cgas_sting"
     },
@@ -3771,7 +3762,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "substance p (sp / tac1)",
       "id": "substance_p_nk1_sp"
     },
@@ -3784,7 +3775,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "nk1 receptor (tacr1)",
       "id": "substance_p_nk1_nk1r"
     },
@@ -3797,7 +3788,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "substance p-saporin (sp-sap neurotoxin conjugate)",
       "id": "substance_p_nk1_sp_sap"
     },
@@ -3810,7 +3801,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "aprepitant (nk1 antagonist, clinical failures)",
       "id": "substance_p_nk1_aprepitant"
     },
@@ -3836,7 +3827,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 30,
       "norm_label": "asc adaptor protein (inflammasome)",
       "id": "nlrp3_asc"
     },
@@ -3849,7 +3840,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 30,
       "norm_label": "caspase-1 (nlrp3 executioner)",
       "id": "nlrp3_caspase1"
     },
@@ -3862,7 +3853,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 30,
       "norm_label": "gasdermin d (gsdmd, pyroptosis executioner)",
       "id": "nlrp3_gsdmd"
     },
@@ -3888,7 +3879,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
+      "community": 30,
       "norm_label": "il-1beta (nlrp3 effector cytokine)",
       "id": "nlrp3_il1b"
     },
@@ -3901,7 +3892,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "tlr2 (toll-like receptor 2)",
       "id": "tlr2_tlr2"
     },
@@ -3914,7 +3905,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "hmgb1 (tlr2/rage shared damp ligand)",
       "id": "tlr2_hmgb1"
     },
@@ -3927,7 +3918,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "myd88 adaptor (tlr2/tlr4/tlr9 shared)",
       "id": "tlr2_myd88"
     },
@@ -3940,7 +3931,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "c29 / cu-cpt22 (small-molecule tlr2 inhibitors)",
       "id": "tlr2_c29"
     },
@@ -3953,7 +3944,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 41,
+      "community": 45,
       "norm_label": "hdac1 (class i, nuclear corepressor)",
       "id": "hdac_hdac1"
     },
@@ -3966,7 +3957,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "hdac2 (class i, restrains cacna2d1)",
       "id": "hdac_hdac2"
     },
@@ -3979,7 +3970,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "hdac3 (class i, suppresses gabaergic genes)",
       "id": "hdac_hdac3"
     },
@@ -3992,7 +3983,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "hdac4 (class iia, represses kcc2/gad65)",
       "id": "hdac_hdac4"
     },
@@ -4031,7 +4022,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "vorinostat/saha (pan-hdac inhibitor)",
       "id": "hdac_vorinostat"
     },
@@ -4044,7 +4035,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "rgfp966 (hdac3-selective inhibitor)",
       "id": "hdac_rgfp966"
     },
@@ -4070,7 +4061,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "histone lactylation h3k18la (metabolic-epigenetic interface)",
       "id": "epigenetic_h3k18la"
     },
@@ -4083,7 +4074,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "m6a rna methylation (epitranscriptomic layer)",
       "id": "epigenetic_m6a"
     },
@@ -4096,7 +4087,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "mettl3 (m6a writer, stabilises nav1.7/nav1.8 mrna)",
       "id": "epigenetic_mettl3"
     },
@@ -4122,7 +4113,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 42,
+      "community": 46,
       "norm_label": "ctcf/tad 3d genome (scn9a-scn10a locus remodelling)",
       "id": "epigenetic_ctcf_tads"
     },
@@ -4135,7 +4126,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 43,
+      "community": 47,
       "norm_label": "ezh2/prc2 (h3k27me3 repression at pain gene promoters)",
       "id": "epigenetic_ezh2"
     },
@@ -4148,7 +4139,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "cav3.2 t-type calcium channel (cacna1h)",
       "id": "cav32_cav32"
     },
@@ -4161,7 +4152,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "z944 (selective t-type blocker, phase ii)",
       "id": "cav32_z944"
     },
@@ -4174,7 +4165,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "ethosuximide (t-type channel blocker, repurposing)",
       "id": "cav32_ethosuximide"
     },
@@ -4187,7 +4178,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "o-glcnac glycosylation of cav3.2 (diabetic neuropathy)",
       "id": "cav32_glycosylation"
     },
@@ -4200,7 +4191,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "rage (receptor for advanced glycation end-products / ager)",
       "id": "rage_rage"
     },
@@ -4213,7 +4204,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "advanced glycation end-products (ages)",
       "id": "rage_ages"
     },
@@ -4226,7 +4217,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "soluble rage (srage, decoy receptor)",
       "id": "rage_srage"
     },
@@ -4239,7 +4230,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "fps-zm1 (brain-penetrant rage antagonist)",
       "id": "rage_fps_zm1"
     },
@@ -4252,7 +4243,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "azeliragon (ttp488, oral rage antagonist)",
       "id": "rage_azeliragon"
     },
@@ -4265,7 +4256,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "rage auto-amplificatory nf-kb loop",
       "id": "rage_auto_amplificatory_loop"
     },
@@ -4408,7 +4399,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "trpv1 (transient receptor potential vanilloid 1)",
       "id": "trpv1_trpv1"
     },
@@ -4421,7 +4412,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "capsaicin 8% patch (qutenza, trpv1 desensitisation)",
       "id": "trpv1_capsaicin_patch"
     },
@@ -4434,7 +4425,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "resiniferatoxin (rtx, ultrapotent trpv1 agonist)",
       "id": "trpv1_rtx"
     },
@@ -4447,7 +4438,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "acd440 (topical trpv1 antagonist, phase ii)",
       "id": "trpv1_acd440"
     },
@@ -4460,7 +4451,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "trpv1-mitochondria excitotoxicity loop",
       "id": "trpv1_mitochondria_crosstalk"
     },
@@ -4473,7 +4464,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "endothelin-1 (et-1 / edn1)",
       "id": "endothelin_et1"
     },
@@ -4486,7 +4477,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "endothelin eta receptor (pronociceptive)",
       "id": "endothelin_eta"
     },
@@ -4499,7 +4490,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "endothelin etb receptor (dual: analgesic/pronociceptive)",
       "id": "endothelin_etb"
     },
@@ -4512,7 +4503,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "bosentan (dual eta/etb antagonist, pah-approved)",
       "id": "endothelin_bosentan"
     },
@@ -4525,7 +4516,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "atrasentan / abt-627 (eta-selective antagonist)",
       "id": "endothelin_atrasentan"
     },
@@ -4538,7 +4529,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "pi3k (phosphoinositide 3-kinase)",
       "id": "pi3k_akt_mtor_pi3k"
     },
@@ -4551,7 +4542,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "akt / pkb (pi3k effector kinase)",
       "id": "pi3k_akt_mtor_akt"
     },
@@ -4564,7 +4555,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "mtorc1 (mechanistic target of rapamycin complex 1)",
       "id": "pi3k_akt_mtor_mtorc1"
     },
@@ -4577,7 +4568,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "rapamycin / sirolimus (mtorc1 inhibitor)",
       "id": "pi3k_akt_mtor_rapamycin"
     },
@@ -4590,7 +4581,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "pten (negative regulator of pi3k, lost after nerve injury)",
       "id": "pi3k_akt_mtor_pten"
     },
@@ -4603,7 +4594,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "ampk (mtor rheostat, energy sensor)",
       "id": "pi3k_akt_mtor_ampk"
     },
@@ -4616,7 +4607,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "mtorc1-mediated autophagy suppression (ulk1 inhibition)",
       "id": "pi3k_akt_mtor_autophagy_suppression"
     },
@@ -4629,7 +4620,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 13,
       "norm_label": "bdnf (brain-derived neurotrophic factor)",
       "id": "shared_bdnf"
     },
@@ -4642,7 +4633,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 13,
       "norm_label": "trkb receptor (bdnf receptor)",
       "id": "shared_trkb"
     },
@@ -4681,7 +4672,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
+      "community": 10,
       "norm_label": "p38 mapk (neuroinflammation kinase)",
       "id": "shared_p38_mapk"
     },
@@ -4694,7 +4685,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 44,
+      "community": 48,
       "norm_label": "il-6 (pro-inflammatory cytokine)",
       "id": "shared_il6"
     },
@@ -4720,7 +4711,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "glt-1 / eaat2 (glutamate transporter)",
       "id": "shared_glt1"
     },
@@ -4733,7 +4724,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "extracellular atp (damp / purinergic signal)",
       "id": "shared_atp"
     },
@@ -4746,7 +4737,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "nav1.7 (scn9a voltage-gated sodium channel)",
       "id": "shared_nav17"
     },
@@ -4759,7 +4750,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "nav1.8 (scn10a voltage-gated sodium channel)",
       "id": "shared_nav18"
     },
@@ -4772,7 +4763,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 20,
       "norm_label": "rhoa/rock signalling axis",
       "id": "shared_roa_rock"
     },
@@ -4785,7 +4776,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "cgrp (calcitonin gene-related peptide)",
       "id": "shared_cgrp"
     },
@@ -4798,7 +4789,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "p2x4 receptor (microglial bdnf release)",
       "id": "shared_p2x4"
     },
@@ -4811,7 +4802,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 12,
       "norm_label": "tlr4 (toll-like receptor 4)",
       "id": "shared_tlr4"
     },
@@ -4824,7 +4815,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 17,
       "norm_label": "mmp-9 (matrix metalloproteinase 9)",
       "id": "shared_mmp9"
     },
@@ -4837,7 +4828,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 6,
       "norm_label": "trpa1 channel (co-expressed with trpv1)",
       "id": "shared_trpa1"
     },
@@ -4850,7 +4841,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 45,
+      "community": 49,
       "norm_label": "inos-no axis (shared with ho-1/co antagonism)",
       "id": "shared_inos_no"
     },
@@ -5045,7 +5036,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "ppar\u03b3 (peroxisome proliferator-activated receptor gamma)",
       "id": "ppary_ppary"
     },
@@ -5058,7 +5049,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pioglitazone (ppar\u03b3 agonist)",
       "id": "ppary_pioglitazone"
     },
@@ -5071,7 +5062,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "rosiglitazone (ppar\u03b3 agonist)",
       "id": "ppary_rosiglitazone"
     },
@@ -5084,7 +5075,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cannabidiol (cbd) as ppar\u03b3 agonist",
       "id": "ppary_cannabidiol"
     },
@@ -5097,7 +5088,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "15d-pgj2 (endogenous ppar\u03b3 ligand)",
       "id": "ppary_15d_pgj2"
     },
@@ -5110,7 +5101,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nrf2/ho-1 antioxidant pathway (ppar\u03b3)",
       "id": "ppary_nrf2_ho1"
     },
@@ -5123,7 +5114,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "macrophage/microglial m1-to-m2 switching via ppar\u03b3",
       "id": "ppary_m1_m2_switching"
     },
@@ -5136,7 +5127,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nf-\u03bab transrepression by ppar\u03b3",
       "id": "ppary_nf_kb_transrepression"
     },
@@ -5149,7 +5140,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "ppar\u03b3 as upstream suppressor of nlrp3",
       "id": "ppary_nlrp3_upstream"
     },
@@ -5162,7 +5153,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "ppar\u03b3 protection of kcc2 via bdnf reduction",
       "id": "ppary_kcc2_bdnf_axis"
     },
@@ -5175,7 +5166,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "selective ppar\u03b3 modulators (sppar\u03b3ms)",
       "id": "ppary_spppargms"
     },
@@ -5188,7 +5179,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pgc-1\u03b1 mitochondrial biogenesis (ppar\u03b3)",
       "id": "ppary_pgc1a"
     },
@@ -5201,7 +5192,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "jak/stat3 inhibition by ppar\u03b3",
       "id": "ppary_stat3_inhibition"
     },
@@ -5214,7 +5205,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp (calcitonin gene-related peptide)",
       "id": "cgrp_cgrp"
     },
@@ -5227,7 +5218,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp receptor (clr/ramp1 heterodimer)",
       "id": "cgrp_clr_ramp1_receptor"
     },
@@ -5240,7 +5231,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "ramp1 upregulation in neuropathic pain",
       "id": "cgrp_ramp1_upregulation"
     },
@@ -5253,7 +5244,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "galcanezumab (anti-cgrp mab)",
       "id": "cgrp_galcanezumab"
     },
@@ -5266,7 +5257,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "gepants (cgrp receptor antagonists)",
       "id": "cgrp_gepants"
     },
@@ -5279,7 +5270,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "rimegepant",
       "id": "cgrp_rimegepant"
     },
@@ -5292,7 +5283,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "neurogenic inflammation via cgrp",
       "id": "cgrp_neurogenic_inflammation"
     },
@@ -5305,7 +5296,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp-driven bdnf release and kcc2 disinhibition",
       "id": "cgrp_bdnf_kcc2_disinhibition"
     },
@@ -5318,7 +5309,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp pathway sensitisation in cipn (ramp1 upregulation)",
       "id": "cgrp_cipn_sensitisation"
     },
@@ -5331,7 +5322,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "sex-specific cgrp biology in pain",
       "id": "cgrp_sex_differences"
     },
@@ -5344,7 +5335,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp-trpv1 positive feedback loop",
       "id": "cgrp_trpv1_feedback"
     },
@@ -5357,7 +5348,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgrp and substance p co-release",
       "id": "cgrp_substance_p_corelease"
     },
@@ -5370,7 +5361,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nlrp3 inflammasome as master pain hub",
       "id": "insights_nlrp3"
     },
@@ -5383,7 +5374,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nlrp3 signal 1 priming (damps\u2192tlr4\u2192nf-\u03bab)",
       "id": "insights_nlrp3_signal1_priming"
     },
@@ -5396,7 +5387,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nlrp3 signal 2 activation (k+ efflux, ros, caspase-1)",
       "id": "insights_nlrp3_signal2_activation"
     },
@@ -5409,7 +5400,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nlrp3 downstream amplification (il-1\u03b2\u2192trpv1/nav/kcc2/cgrp)",
       "id": "insights_nlrp3_downstream_amplification"
     },
@@ -5422,7 +5413,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nlrp3 pyroptosis feed-forward loop (damps\u2192microglia\u2192il-1\u03b2)",
       "id": "insights_nlrp3_pyroptosis_feedforward"
     },
@@ -5435,7 +5426,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "mcc950 (nlrp3 inhibitor)",
       "id": "insights_nlrp3_mcc950"
     },
@@ -5448,7 +5439,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "gasdermin d pore formation (nlrp3)",
       "id": "insights_nlrp3_gasdermin_d"
     },
@@ -5461,7 +5452,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "trem2 in neuropathic pain (microglial phenotype regulator)",
       "id": "microbio_trem2"
     },
@@ -5474,7 +5465,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "p2x4-p2x7 receptor heteromerization",
       "id": "microbio_p2x4_p2x7_crosstalk"
     },
@@ -5513,7 +5504,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "microglial mitophagy defects (pink1/parkin) in pain",
       "id": "microbio_mitophagy_defects"
     },
@@ -5526,7 +5517,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "urolithin a (mitophagy enhancer for pain)",
       "id": "microbio_urolithin_a"
     },
@@ -5539,7 +5530,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nad+ augmentation (nr/nmn) for microglial mitochondria in pain",
       "id": "microbio_nad_augmentation"
     },
@@ -5552,7 +5543,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "sex dimorphism in microglial pain signaling",
       "id": "microbio_sex_dimorphism"
     },
@@ -5565,7 +5556,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "apoe-trem2 axis in neuropathic pain",
       "id": "microbio_apoe_trem2"
     },
@@ -5578,7 +5569,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "disease-associated microglia (dam) phenotype in pain",
       "id": "microbio_dam_phenotype"
     },
@@ -5591,7 +5582,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "nc-2600 (p2x4 antagonist, phase ii)",
       "id": "microbio_nc2600"
     },
@@ -6020,7 +6011,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 22,
       "norm_label": "bdnf (brain-derived neurotrophic factor)",
       "id": "bdnftrkb_bdnf"
     },
@@ -6034,7 +6025,7 @@
       "author": null,
       "contributor": null,
       "rationale": "TrkB.FL on lamina I projection neurons mediates pronociceptive BDNF signaling: KCC2 downregulation, GluN2B phosphorylation, LTP at C-fiber synapses. The primary kinase target for neuropathic pain.",
-      "community": 20,
+      "community": 21,
       "norm_label": "trkb.fl (full-length trkb receptor)",
       "id": "bdnftrkb_trkb_fl"
     },
@@ -6048,7 +6039,7 @@
       "author": null,
       "contributor": null,
       "rationale": "TrkB.T1 lacks the kinase domain but has active signaling; it is the predominant TrkB isoform in nociceptors and upregulated after injury. ANA-12 also blocks TrkB.T1, adding complexity to TrkB targeting.",
-      "community": 20,
+      "community": 21,
       "norm_label": "trkb.t1 (truncated isoform)",
       "id": "bdnftrkb_trkb_t1"
     },
@@ -6062,7 +6053,7 @@
       "author": null,
       "contributor": null,
       "rationale": "proBDNF binds p75NTR promoting apoptosis. MMP-9 cleaves proBDNF to mBDNF, shifting the balance toward pronociceptive TrkB.FL signaling. Inhibiting MMP-9 reduces mBDNF and allodynia.",
-      "community": 21,
+      "community": 17,
       "norm_label": "probdnf / p75ntr signaling",
       "id": "bdnftrkb_probdnf_p75"
     },
@@ -6076,7 +6067,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Val66Met reduces activity-dependent BDNF secretion. Complex effects on pain: protective in some conditions, harmful in others depending on etiology and sex. Important human genetic variable for precision analgesia.",
-      "community": 46,
+      "community": 50,
       "norm_label": "bdnf val66met polymorphism",
       "id": "bdnftrkb_val66met"
     },
@@ -6090,7 +6081,7 @@
       "author": null,
       "contributor": null,
       "rationale": "TrkB-Fc scavenges BDNF intrathecally and consistently reduces mechanical allodynia and thermal hyperalgesia in CCI and SNL models. Gold-standard tool for BDNF pathway validation.",
-      "community": 19,
+      "community": 22,
       "norm_label": "trkb-fc (bdnf sequestering chimera)",
       "id": "bdnftrkb_trkb_fc"
     },
@@ -6103,7 +6094,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "norm_label": "tnf-\u03b1 (tumor necrosis factor-alpha)",
       "id": "tnf_tnfa"
     },
@@ -6117,7 +6108,7 @@
       "author": null,
       "contributor": null,
       "rationale": "TNFR1 binds soluble TNF-\u03b1 and initiates NF-\u03baB/MAPK inflammatory signaling that drives neuronal sensitization and microglial activation. XPro1595 selectively blocks solTNF/TNFR1 without impairing tmTNF/TNFR2 neuroprotection.",
-      "community": 18,
+      "community": 19,
       "norm_label": "tnfr1 (tnf receptor 1, pronociceptive)",
       "id": "tnf_tnfr1"
     },
@@ -6131,7 +6122,7 @@
       "author": null,
       "contributor": null,
       "rationale": "TNFR2 activation promotes pain resolution: M1\u2192M2 microglial shift, lipoxin/RvD1 induction, neuroprotection. TNFR2-selective agonism provides long-lasting pain resolution and is the therapeutic complement to TNFR1 blockade.",
-      "community": 18,
+      "community": 19,
       "norm_label": "tnfr2 (tnf receptor 2, neuroprotective)",
       "id": "tnf_tnfr2"
     },
@@ -6145,7 +6136,7 @@
       "author": null,
       "contributor": null,
       "rationale": "XPro1595 is a dominant-negative TNF that selectively neutralizes solTNF/TNFR1 signaling while preserving tmTNF/TNFR2. Reduces peripheral neuropathies and microglial activation without pan-TNF suppression risks.",
-      "community": 18,
+      "community": 19,
       "norm_label": "xpro1595 (tnfr1-selective soltnf blocker)",
       "id": "tnf_xpro1595"
     },
@@ -6158,7 +6149,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 21,
       "norm_label": "ana-12 (selective trkb antagonist)",
       "id": "ana12_ana12"
     },
@@ -6186,7 +6177,7 @@
       "author": null,
       "contributor": null,
       "rationale": "ANA-12 opposes BDNF-driven KCC2 downregulation and NMDA receptor potentiation at GluN2B, restoring inhibitory tone. Validates TrkB-KCC2 axis as sequential therapeutic target.",
-      "community": 20,
+      "community": 21,
       "norm_label": "ana-12 kcc2 preservation via trkb blockade",
       "id": "ana12_kcc2_preservation"
     },
@@ -6199,7 +6190,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 25,
+      "community": 26,
       "norm_label": "gabaergic ca2+ overload cascade",
       "id": "gaba_apoptosis_ca_overload"
     },
@@ -6213,7 +6204,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PV interneurons express high levels of GluA2-lacking Ca2+-permeable AMPARs. Sustained glutamatergic drive causes massive Ca2+ entry, triggering mitochondrial damage and apoptosis. IEM-1460 blocks CP-AMPARs and protects PV neurons.",
-      "community": 25,
+      "community": 26,
       "norm_label": "cp-ampars (glua2-lacking) in pv neurons",
       "id": "gaba_apoptosis_cpampar"
     },
@@ -6227,7 +6218,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Excessive mitochondrial Ca2+ uptake opens mPTP, collapses ATP production, generates ROS burst releasing cytochrome c. Cyclosporin A/NIM811 inhibit cyclophilin D-dependent mPTP opening and reduce allodynia.",
-      "community": 25,
+      "community": 26,
       "norm_label": "mptp opening / mitochondrial failure",
       "id": "gaba_apoptosis_mptp"
     },
@@ -6241,7 +6232,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Sustained Ca2+ activates calpain which cleaves ATG5, Beclin-1 (impairing autophagy), and KCC2 C-terminus. MDL-28170 calpain inhibitor preserves GABAergic neurons and reduces pain behaviors.",
-      "community": 25,
+      "community": 26,
       "norm_label": "calpain-mediated cleavage (ca2+-activated)",
       "id": "gaba_apoptosis_calpain"
     },
@@ -6255,7 +6246,7 @@
       "author": null,
       "contributor": null,
       "rationale": "mTORC1 hyperactivation by Ca2+ influx blocks autophagy initiation. Rapamycin/rapalogs restore autophagic flux, clear damaged mitochondria, protect GABAergic neurons from apoptosis, and reduce mechanical allodynia.",
-      "community": 25,
+      "community": 26,
       "norm_label": "rapamycin / mtor inhibition (autophagy restoration)",
       "id": "gaba_apoptosis_rapamycin"
     },
@@ -6269,7 +6260,7 @@
       "author": null,
       "contributor": null,
       "rationale": "The MCU inhibitor Ru360 blocks mitochondrial Ca2+ uptake, prevents mPTP opening, and protects GABAergic neurons from apoptosis, reducing neuropathic pain.",
-      "community": 25,
+      "community": 26,
       "norm_label": "ru360 / mcu blockade",
       "id": "gaba_apoptosis_ru360"
     },
@@ -6282,7 +6273,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 17,
       "norm_label": "parvalbumin (pv) interneurons",
       "id": "pv_interneuron_pv"
     },
@@ -6296,7 +6287,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PV interneurons (laminae I-III) gate A\u03b2-fiber tactile input by feedforward inhibition, preventing touch from activating nociceptive circuits. Their failure is the cellular basis of mechanical allodynia.",
-      "community": 21,
+      "community": 17,
       "norm_label": "pv feedforward inhibition gate",
       "id": "pv_interneuron_gate"
     },
@@ -6310,7 +6301,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PV interneuron inhibitory output depends on KCC2-maintained low intracellular Cl-. BDNF-TrkB-driven KCC2 downregulation reduces functional inhibition even before PV cell death occurs.",
-      "community": 20,
+      "community": 21,
       "norm_label": "pv inhibition kcc2-dependency",
       "id": "pv_interneuron_kcc2_dependence"
     },
@@ -6324,7 +6315,7 @@
       "author": null,
       "contributor": null,
       "rationale": "DREADD/ChR2 activation of surviving PV interneurons powerfully suppresses mechanical allodynia in nerve-injured animals, proving that boosting residual PV output is sufficient for analgesia.",
-      "community": 26,
+      "community": 27,
       "norm_label": "chemogenetic/optogenetic pv rescue",
       "id": "pv_interneuron_dreads_optogenetics"
     },
@@ -6337,7 +6328,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "norm_label": "somatostatin (sst) interneurons",
       "id": "sst_interneuron_sst"
     },
@@ -6351,7 +6342,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Spinal SST interneurons (lamina II) are glutamatergic. They relay A\u03b2-fiber touch to lamina I nociceptive neurons. After PV interneuron loss they become disinhibited and drive mechanical allodynia. Ablation or chemogenetic silencing reverses allodynia.",
-      "community": 17,
+      "community": 18,
       "norm_label": "sst interneurons as excitatory pain drivers",
       "id": "sst_interneuron_excitatory_role"
     },
@@ -6365,7 +6356,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Prdm12 specifies spinal SST interneuron identity. Prdm12-knockout mice lack SST interneurons and show near-complete absence of mechanical allodynia after nerve injury, confirming causal role.",
-      "community": 17,
+      "community": 18,
       "norm_label": "prdm12 transcription factor (sst development)",
       "id": "sst_interneuron_prdm12"
     },
@@ -6379,7 +6370,7 @@
       "author": null,
       "contributor": null,
       "rationale": "SSTR2a is the predominant SST receptor in spinal cord. Its role is complex: SST released after injury acts on SSTR2a but effects can be paradoxically pronociceptive in disinhibition context. SSTR2a antagonists are being explored as analgesics.",
-      "community": 17,
+      "community": 18,
       "norm_label": "sstr2a receptor (sst autoregulation)",
       "id": "sst_interneuron_sstr2a"
     },
@@ -6392,7 +6383,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 22,
       "norm_label": "rhoa gtpase",
       "id": "rhoa_rock_rhoa"
     },
@@ -6406,7 +6397,7 @@
       "author": null,
       "contributor": null,
       "rationale": "ROCK phosphorylates LIMK\u2192cofilin (actin stabilization), p38 MAPK (microglial M1 activation), and MARCKS (neurotransmitter release amplification). Fasudil (approved for cerebral vasospasm) is the prototype ROCK inhibitor for pain repurposing.",
-      "community": 19,
+      "community": 22,
       "norm_label": "rock (rock1/rock2 kinases)",
       "id": "rhoa_rock_rock"
     },
@@ -6420,7 +6411,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Lysophosphatidic acid (LPA) generated post-injury signals via LPAR1\u2192RhoA/ROCK to demyelinate DRG neurons, causing mechanical allodynia. Blocking this cascade prevents both demyelination and pain.",
-      "community": 19,
+      "community": 22,
       "norm_label": "lpa-rhoa-demyelination cascade",
       "id": "rhoa_rock_lpa_demyelination"
     },
@@ -6434,7 +6425,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Fasudil is approved in Japan for subarachnoid hemorrhage. Attenuates neuropathic pain in CCI/TCI/post-stroke models. Repurposing trials for ALS and Parkinson's provide clinical scaffold for pain trials.",
-      "community": 19,
+      "community": 22,
       "norm_label": "fasudil (rock inhibitor, clinically approved)",
       "id": "rhoa_rock_fasudil"
     },
@@ -6448,7 +6439,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Simvastatin depletes mevalonate/geranylgeranyl isoprenoids, preventing RhoA membrane anchoring. Intrathecal simvastatin blocks allodynia and astrogliosis. Explains partial analgesic effects of statins in diabetic neuropathy.",
-      "community": 19,
+      "community": 22,
       "norm_label": "simvastatin (rhoa prenylation inhibitor)",
       "id": "rhoa_rock_simvastatin"
     },
@@ -6461,7 +6452,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 22,
+      "community": 14,
       "norm_label": "hif1\u03b1 (hypoxia-inducible factor 1-alpha)",
       "id": "hif1a_hif1a"
     },
@@ -6475,7 +6466,7 @@
       "author": null,
       "contributor": null,
       "rationale": "After nerve injury, ROS, succinate, NO, and TNF-\u03b1 inhibit PHD enzymes or activate NF-\u03baB, stabilizing HIF1\u03b1 under normoxia. This drives a transcriptional program covering VEGFA, ANGPT2, MMP-9, iNOS, BDNF, Nav1.7, Nav1.8, TRPV1.",
-      "community": 18,
+      "community": 19,
       "norm_label": "hif1\u03b1 normoxic stabilization by ros/tnf/nf-kb",
       "id": "hif1a_normoxic_stabilization"
     },
@@ -6489,7 +6480,7 @@
       "author": null,
       "contributor": null,
       "rationale": "HIF1\u03b1 drives VEGFA, ANGPT2, MMP-2/9, iNOS, COX-2, LDHA/PDK1 (Warburg shift), BDNF (indirectly), Nav1.7, Nav1.8, TRPV1. A master transcriptional hub amplifying all major pain pathways simultaneously.",
-      "community": 22,
+      "community": 14,
       "norm_label": "hif1\u03b1 transcriptional battery (pain genes)",
       "id": "hif1a_transcriptional_targets"
     },
@@ -6503,7 +6494,7 @@
       "author": null,
       "contributor": null,
       "rationale": "YC-1 promotes HIF1\u03b1 degradation. Systemic/intrathecal YC-1 significantly reduces mechanical allodynia and thermal hyperalgesia in CCI/SNI models, associated with reduced VEGFA, iNOS, and glycolytic enzymes.",
-      "community": 22,
+      "community": 14,
       "norm_label": "yc-1 (hif1\u03b1 destabilizer)",
       "id": "hif1a_yc1"
     },
@@ -6517,7 +6508,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PX-478 inhibits HIF1\u03b1 translation. Intrathecal PX-478 reduces microglial activation, neuroinflammation, and pain behaviors in CCI. Tested in oncology trials (safety data available), repurposing candidate.",
-      "community": 22,
+      "community": 14,
       "norm_label": "px-478 (hif1\u03b1 translation inhibitor)",
       "id": "hif1a_px478"
     },
@@ -6531,7 +6522,7 @@
       "author": null,
       "contributor": null,
       "rationale": "HIF1\u03b1 stabilization in spinal microglia drives Warburg shift (oxidative phosphorylation\u2192glycolysis), M1 pro-inflammatory phenotype, TNF-\u03b1/IL-1\u03b2/BDNF secretion. 2-DG glycolysis inhibitor reduces microglial activation and allodynia.",
-      "community": 13,
+      "community": 14,
       "norm_label": "hif1\u03b1-driven microglial glycolytic shift (m1)",
       "id": "hif1a_microglial_glycolysis"
     },
@@ -6544,7 +6535,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "blood-brain/spinal cord barrier (bbb/bscb)",
       "id": "bbb_bbb"
     },
@@ -6558,7 +6549,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Occludin, claudin-5, and ZO-1 form the physical BBB/BSCB seal. TNF-\u03b1, IL-1\u03b2, MMP-9, and VEGFA significantly downregulate these proteins in neuropathic pain states, increasing CNS permeability to circulating pronociceptive mediators.",
-      "community": 13,
+      "community": 34,
       "norm_label": "tight junction proteins (occludin, claudin-5, zo-1)",
       "id": "bbb_tight_junctions"
     },
@@ -6572,7 +6563,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Cyclophilin A (CypA) activates MMP-9 which degrades basement membrane and tight junctions. CsA (cyclosporine A) inhibiting CypA promotes BSCB repair and alleviates neuropathic pain in animal models.",
-      "community": 13,
+      "community": 34,
       "norm_label": "cypa-mmp-9 pathway (bbb degradation)",
       "id": "bbb_cypa_mmp9_pathway"
     },
@@ -6586,7 +6577,7 @@
       "author": null,
       "contributor": null,
       "rationale": "SPMs (RvD1, LXA4) actively resolve neuroinflammation and reseal the blood-nerve barrier. Represent disease-modifying treatment potential rather than mere symptom management.",
-      "community": 13,
+      "community": 14,
       "norm_label": "resolvin d1 / lipoxin a4 (barrier resealing)",
       "id": "bbb_rvd1_barrier_reseal"
     },
@@ -6600,7 +6591,7 @@
       "author": null,
       "contributor": null,
       "rationale": "P-gp is a major efflux transporter modified by pain states, affecting CNS drug accumulation. Its dysregulation in neuropathic pain can have unpredictable effects on analgesic CNS exposure.",
-      "community": 47,
+      "community": 51,
       "norm_label": "p-glycoprotein efflux pump (drug delivery barrier)",
       "id": "bbb_p_glycoprotein"
     },
@@ -6613,7 +6604,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "angiopoietin-1 (ang-1, vascular stabilizer)",
       "id": "angpt_ang1"
     },
@@ -6627,7 +6618,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Ang-2 is markedly upregulated in spinal dorsal horn and injured nerves after peripheral nerve injury, driving pathological angiogenesis, BSCB disruption, macrophage activation, and TNF-\u03b1/IL-1\u03b2 release. Potential serum/CSF biomarker for pain severity.",
-      "community": 13,
+      "community": 14,
       "norm_label": "angiopoietin-2 (ang-2, vascular destabilizer)",
       "id": "angpt_ang2"
     },
@@ -6641,7 +6632,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Tie2 is expressed on endothelial cells, pericytes, neurons, and immune cells. Ang-1 activates Tie2 (vascular stability); Ang-2 acts as a functional antagonist in inflammation. Constitutively activating Tie2 mutations cause painful venous malformations.",
-      "community": 13,
+      "community": 14,
       "norm_label": "tie2 receptor tyrosine kinase",
       "id": "angpt_tie2"
     },
@@ -6655,7 +6646,7 @@
       "author": null,
       "contributor": null,
       "rationale": "COMP-Ang-1 (cartilage oligomeric matrix protein-Ang-1) reduces pro-inflammatory markers, improves nerve conduction, and promotes microvascular regeneration in diabetic ob/ob mice. Clinical repurposing candidate for vascular neuropathic pain.",
-      "community": 13,
+      "community": 14,
       "norm_label": "comp-ang-1 (stabilized ang-1 therapeutic)",
       "id": "angpt_comp_ang1"
     },
@@ -6668,7 +6659,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 14,
       "norm_label": "vegfa (vascular endothelial growth factor a)",
       "id": "vegf_vegfa"
     },
@@ -6682,7 +6673,7 @@
       "author": null,
       "contributor": null,
       "rationale": "VEGFR2 is expressed on DRG neurons, Schwann cells, macrophages, and spinal glia. Activation sensitizes TRPV1/TRPA1/Nav1.8, promotes microglial BDNF release, and disrupts BSCB via tight-junction downregulation.",
-      "community": 13,
+      "community": 34,
       "norm_label": "vegfr2 (pronociceptive vegfa receptor)",
       "id": "vegf_vegfr2"
     },
@@ -6696,7 +6687,7 @@
       "author": null,
       "contributor": null,
       "rationale": "NRP-1 enhances VEGFR2 signaling on nociceptors. Semaphorin-3A antagonizes VEGFA/NRP-1 to block VEGFR2-dependent pain without abolishing neuroprotective VEGFA roles via VEGFR1.",
-      "community": 13,
+      "community": 34,
       "norm_label": "neuropilin-1 (nrp-1) co-receptor",
       "id": "vegf_nrp1"
     },
@@ -6710,7 +6701,7 @@
       "author": null,
       "contributor": null,
       "rationale": "VEGFA drives disorganized angiogenesis at regenerating nerve tips, promoting painful neuroma formation with chronic inflammatory environment and ectopic firing from axonal sprouts.",
-      "community": 13,
+      "community": 14,
       "norm_label": "neuroma formation via excessive vegfa",
       "id": "vegf_neuroma"
     },
@@ -6723,7 +6714,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 21,
       "norm_label": "igf1 (insulin-like growth factor 1, dual role)",
       "id": "igf_igf1"
     },
@@ -6737,7 +6728,7 @@
       "author": null,
       "contributor": null,
       "rationale": "IGF2 spinal levels increase significantly after SNI. siRNA knockdown of IGF2 provides 10-day pain relief. NTRK1 upregulation drives IGF2-dependent ER stress to sustain chronic post-surgical pain (2025 study). Key new target.",
-      "community": 17,
+      "community": 18,
       "norm_label": "igf2 (insulin-like growth factor 2, pro-nociceptive)",
       "id": "igf_igf2"
     },
@@ -6751,7 +6742,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Unidirectional cascade: NTRK1 upregulation drives IGF2-dependent ER stress in spinal cord to sustain chronic post-surgical pain. Inhibiting IGF2 alleviates both ER stress and pain. Novel target distinct from BDNF/TrkB axis.",
-      "community": 17,
+      "community": 18,
       "norm_label": "ntrk1\u2192igf2\u2192er stress cascade",
       "id": "igf_ntrk1_igf2_er_stress"
     },
@@ -6765,7 +6756,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Histone lactylation in injured DRG drives IGF2BP2 expression, an m6A mRNA reader that stabilizes pro-nociceptive transcripts. Connects IGF signaling network to epigenetic pain mechanisms.",
-      "community": 17,
+      "community": 18,
       "norm_label": "igf2bp2 (m6a reader stabilizing pain transcripts)",
       "id": "igf_igf2bp2"
     },
@@ -6778,7 +6769,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 18,
       "norm_label": "rbfox1 (a2bp1) rna-binding splicing regulator",
       "id": "rbfox1_rbfox1"
     },
@@ -6806,7 +6797,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Rbfox1 regulates SCN9A (Nav1.7) mRNA stability via PABPC1 and m6A methylation. Rbfox1 loss increases Nav1.7 expression, providing a second route for DRG hyperexcitability independent of NrCAM splicing.",
-      "community": 17,
+      "community": 18,
       "norm_label": "rbfox1-scn9a mrna stability (nav1.7 regulation)",
       "id": "rbfox1_scn9a_stability"
     },
@@ -6820,7 +6811,7 @@
       "author": null,
       "contributor": null,
       "rationale": "AAV5-Rbfox1 delivery to DRG before SNL preserves Rbfox1 levels and significantly attenuates mechanical allodynia, thermal hyperalgesia, and spinal central sensitization. Proof-of-concept for splicing-master gene therapy.",
-      "community": 17,
+      "community": 18,
       "norm_label": "aav5-rbfox1 gene therapy (pain prevention)",
       "id": "rbfox1_aav5_restoration"
     },
@@ -6833,7 +6824,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 22,
+      "community": 17,
       "norm_label": "nogo-a (myelin-associated inhibitor)",
       "id": "nogoa_ngr1_nogoa"
     },
@@ -6847,7 +6838,7 @@
       "author": null,
       "contributor": null,
       "rationale": "NgR1 (GPI-anchored) forms tripartite complex with LINGO-1 and p75NTR/TROY, converging signals from Nogo-A, MAG, and OMgp onto RhoA/ROCK activation. Genetic NgR1 knockout shows reduced pain sensitivity and enhanced nerve injury recovery.",
-      "community": 21,
+      "community": 17,
       "norm_label": "ngr1 (nogo-66 receptor 1)",
       "id": "nogoa_ngr1_ngr1"
     },
@@ -6861,7 +6852,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Nogo-A binds NgR1, activating LIMK/cofilin-dependent actin polymerization that stabilizes TRPV1 on plasma membrane, promoting inflammatory heat hyperalgesia. Anti-Nogo-A antibodies reduce TRPV1 membrane content and alleviate heat hyperalgesia.",
-      "community": 22,
+      "community": 17,
       "norm_label": "nogo-a/ngr1 trpv1 membrane stabilization",
       "id": "nogoa_ngr1_trpv1_stabilization"
     },
@@ -6875,7 +6866,7 @@
       "author": null,
       "contributor": null,
       "rationale": "NG101 (Phase II multicenter NISCI trial) improved neurological recovery in acute SCI patients. Pain outcomes (secondary endpoint) are being analyzed. Opens clinical pathway for anti-Nogo-A therapy in neuropathic pain.",
-      "community": 22,
+      "community": 17,
       "norm_label": "ng101 (anti-nogo-a antibody, nisci trial)",
       "id": "nogoa_ngr1_ng101"
     },
@@ -6889,7 +6880,7 @@
       "author": null,
       "contributor": null,
       "rationale": "LINGO-1 is essential for NgR1 complex function and inhibits remyelination. Anti-LINGO-1 antibodies (opicinumab, Phase II MS trials) block myelin-inhibitor signaling and promote remyelination, potential analgesic in demyelinating pain.",
-      "community": 21,
+      "community": 17,
       "norm_label": "lingo-1 (ngr1 co-receptor, remyelination target)",
       "id": "nogoa_ngr1_lingo1"
     },
@@ -6902,7 +6893,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 19,
       "norm_label": "jak/stat3 pathway",
       "id": "jakstat_jak_stat3"
     },
@@ -6916,7 +6907,7 @@
       "author": null,
       "contributor": null,
       "rationale": "IL-6 binding to gp130 activates JAK2\u2192STAT3(Tyr705). Activated STAT3 drives reactive glial transcriptome: IL-1\u03b2, TNF-\u03b1, IL-6 autocrine loop, CCL2, BDNF, COX-2, iNOS, MMP-9, NLRP3 upregulation. Master sustainer of chronic neuroinflammation.",
-      "community": 20,
+      "community": 21,
       "norm_label": "il-6/gp130/jak2 axis",
       "id": "jakstat_il6_gp130"
     },
@@ -6930,7 +6921,7 @@
       "author": null,
       "contributor": null,
       "rationale": "SOCS3 is induced by STAT3 itself to terminate signaling (negative feedback). In chronic pain, SOCS3 is downregulated or insufficient, enabling sustained STAT3 activity. AAV-mediated SOCS3 overexpression reduces neuropathic pain in CCI/SNL models.",
-      "community": 18,
+      "community": 19,
       "norm_label": "socs3 (negative regulator of jak/stat3)",
       "id": "jakstat_socs3"
     },
@@ -6944,7 +6935,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Ruxolitinib is approved for myelofibrosis. Attenuates mechanical allodynia, reduces glial activation, and normalizes STAT3-dependent gene expression in preclinical pain models. Repurposing candidate for neuropathic pain.",
-      "community": 18,
+      "community": 19,
       "norm_label": "ruxolitinib (jak1/2 inhibitor, fda-approved)",
       "id": "jakstat_ruxolitinib"
     },
@@ -6958,7 +6949,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Baricitinib is approved for RA. Clinical trial for chronic low back pain is ongoing. JAK inhibitor repurposing for neuropathic pain is the fastest-to-clinic strategy, leveraging existing safety profiles.",
-      "community": 18,
+      "community": 19,
       "norm_label": "baricitinib (jak1/2 inhibitor, ra-approved)",
       "id": "jakstat_baricitinib"
     },
@@ -6971,7 +6962,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 22,
       "norm_label": "synaptic plasticity protein biomarkers",
       "id": "assaying_synaptic_plasticity"
     },
@@ -6985,7 +6976,7 @@
       "author": null,
       "contributor": null,
       "rationale": "GluN2B:GluN2A ratio at synapses determines LTP/LTD threshold. GluN2B-rich synapses have lower plasticity threshold. BDNF-TrkB signaling potentiates NMDAR via GluN2B phosphorylation, driving pain LTP.",
-      "community": 6,
+      "community": 28,
       "norm_label": "nmdar (glun2b/glun2a) as plasticity marker",
       "id": "assaying_nmdar"
     },
@@ -6999,7 +6990,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PSD-95 clusters and anchors glutamate receptors at excitatory synapses. Its disruption reflects synaptic structural remodeling. Loss of PSD-95 after TBI coincides with dendritic spine loss.",
-      "community": 6,
+      "community": 28,
       "norm_label": "psd-95 (postsynaptic density scaffolding)",
       "id": "assaying_psd95"
     },
@@ -7013,7 +7004,7 @@
       "author": null,
       "contributor": null,
       "rationale": "CaMKII activated by NMDAR Ca2+ influx autophosphorylates and inserts GluA1-AMPARs, driving spine growth and LTP. Essential for pain-related synaptic plasticity consolidation.",
-      "community": 6,
+      "community": 28,
       "norm_label": "camkii (ltp kinase, structural plasticity)",
       "id": "assaying_camkii"
     },
@@ -7026,7 +7017,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 27,
       "norm_label": "in vivo multimodal circuit dissection skill",
       "id": "skill_neuroscientific"
     },
@@ -7040,7 +7031,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Adaptive optogenetic/chemogenetic/electrical stimulation triggered by real-time neural/behavioral thresholds. State-gated therapy avoids motor/cognitive side effects of tonic stimulation. Key innovation for PV interneuron rescue strategy.",
-      "community": 26,
+      "community": 27,
       "norm_label": "closed-loop neuromodulation for pain",
       "id": "skill_closed_loop"
     },
@@ -7054,7 +7045,7 @@
       "author": null,
       "contributor": null,
       "rationale": "High-density electrophysiology across DRG, dorsal horn, thalamus, ACC, PAG enables real-time pain-state decoding. HMM/GLM decoders triggering closed-loop interventions at chronification thresholds.",
-      "community": 26,
+      "community": 27,
       "norm_label": "neuropixels ensemble recording (pain circuits)",
       "id": "skill_neuropixels"
     },
@@ -7068,7 +7059,7 @@
       "author": null,
       "contributor": null,
       "rationale": "13 mechanistic dossiers synthesized with god-node framework to generate 13 multi-pathway therapeutic appraisals (HIF1a window destabilization, TNFR1-biased blockade, Rbfox1 splice triad, NTRK1-IGF2-ER stress, closed-loop PV boost+CLP257+IEM-1460, etc.).",
-      "community": 26,
+      "community": 27,
       "norm_label": "cross-pathway integrative therapeutic appraisals",
       "id": "skill_integrative_appraisals"
     },
@@ -7082,7 +7073,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Shared cross-file node: KCC2 downregulation is the convergence point across BDNF-TrkB, ana-12, GABA_apoptosis, PV+, SST, JAK-STAT, HIF1a files.",
-      "community": 20,
+      "community": 21,
       "norm_label": "kcc2 (shared node)",
       "id": "shared_kcc2"
     },
@@ -7096,7 +7087,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Shared cross-file node: VEGFA is downstream of HIF1a, upstream of BBB disruption, linked to Ang-2 synergism, and drives BDNF/microglial activation in vegf, HIF1a, BBB, AngPt files.",
-      "community": 13,
+      "community": 14,
       "norm_label": "vegfa (shared node)",
       "id": "shared_vegfa"
     },
@@ -7109,7 +7100,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "kalirin-7 (gef for rac1/rhog)",
       "id": "karilin7_Kalirin7"
     },
@@ -7122,7 +7113,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "kalrn gene (chromosome 3q21.2)",
       "id": "karilin7_KALRN"
     },
@@ -7135,7 +7126,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "rac1 gtpase",
       "id": "karilin7_Rac1"
     },
@@ -7148,7 +7139,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "rhog gtpase",
       "id": "karilin7_RhoG"
     },
@@ -7161,7 +7152,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "dh1 domain (rac1/rhog gef catalytic core)",
       "id": "karilin7_DH1_domain"
     },
@@ -7174,7 +7165,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 28,
       "norm_label": "psd-95 (kalirin-7 synaptic scaffold partner)",
       "id": "karilin7_PSD95"
     },
@@ -7187,7 +7178,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 29,
       "norm_label": "nmdar (acc kalirin-7 downregulation driver)",
       "id": "karilin7_NMDAR"
     },
@@ -7200,7 +7191,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 28,
       "norm_label": "camkii (kalirin-7 phosphorylation regulator)",
       "id": "karilin7_CaMKII"
     },
@@ -7213,7 +7204,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "pka (kalirin-7 phosphorylation regulator)",
       "id": "karilin7_PKA"
     },
@@ -7226,7 +7217,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "pak (rac1 effector kinase)",
       "id": "karilin7_PAK"
     },
@@ -7239,7 +7230,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "lim kinase (actin cytoskeleton regulator)",
       "id": "karilin7_LIMK"
     },
@@ -7252,7 +7243,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "cofilin (actin depolymerization factor)",
       "id": "karilin7_Cofilin"
     },
@@ -7265,7 +7256,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "actin cytoskeleton (dendritic spine structure)",
       "id": "karilin7_Actin"
     },
@@ -7278,7 +7269,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "ampa receptor (kalirin-7 regulated trafficking)",
       "id": "karilin7_AMPAR"
     },
@@ -7291,7 +7282,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "anterior cingulate cortex (acc)",
       "id": "karilin7_ACC"
     },
@@ -7304,7 +7295,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "pain-related anxiety (acc kalirin-7 dependent)",
       "id": "karilin7_PainRelatedAnxiety"
     },
@@ -7330,7 +7321,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 29,
       "norm_label": "calcineurin (ca2+-dependent kalirin-7 phosphatase)",
       "id": "karilin7_Calcineurin"
     },
@@ -7343,7 +7334,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "c/ebpbeta (kalrn transcription factor)",
       "id": "karilin7_CEBPbeta"
     },
@@ -7356,7 +7347,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "hdac4 (kalrn epigenetic silencer)",
       "id": "karilin7_HDAC4"
     },
@@ -7369,7 +7360,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 29,
       "norm_label": "ketamine (nmdar antagonist, preserves kalirin-7)",
       "id": "karilin7_Ketamine"
     },
@@ -7382,7 +7373,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 29,
       "norm_label": "ap-5 (competitive nmdar antagonist)",
       "id": "karilin7_AP5"
     },
@@ -7395,7 +7386,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 29,
       "norm_label": "tacrolimus/fk506 (calcineurin inhibitor)",
       "id": "karilin7_FK506"
     },
@@ -7408,7 +7399,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "nsc23766 (rac1 inhibitor, acc microinjection)",
       "id": "karilin7_NSC23766"
     },
@@ -7421,7 +7412,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "aav-kalirin-7 (gene therapy, acc-targeted)",
       "id": "karilin7_AAV_Kalirin7"
     },
@@ -7434,7 +7425,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "shrna kalirin-7 knockdown (acc)",
       "id": "karilin7_shRNA_Kalirin7"
     },
@@ -7447,7 +7438,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "kalirin-7 global knockout mouse",
       "id": "karilin7_Kalirin7_KO"
     },
@@ -7460,7 +7451,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "environmental enrichment (boosts acc kalirin-7)",
       "id": "karilin7_EnvironmentalEnrichment"
     },
@@ -7473,7 +7464,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "deep brain stimulation of acc",
       "id": "karilin7_DBS_ACC"
     },
@@ -7486,7 +7477,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "mir-182 (kalrn-targeting circulating mirna)",
       "id": "karilin7_miR182"
     },
@@ -7499,7 +7490,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 24,
       "norm_label": "mir-204 (kalrn-targeting circulating mirna)",
       "id": "karilin7_miR204"
     },
@@ -7512,7 +7503,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "hippocampus kalirin-7 (cognitive deficits)",
       "id": "karilin7_Hippocampus"
     },
@@ -7525,7 +7516,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "central amygdala (cea) kalirin-7",
       "id": "karilin7_Amygdala_CeA"
     },
@@ -7538,7 +7529,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "spinal dorsal horn kalirin-7",
       "id": "karilin7_SpinalDorsalHorn"
     },
@@ -7551,7 +7542,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "drg kalirin-7 (neurite outgrowth)",
       "id": "karilin7_DRG"
     },
@@ -7564,7 +7555,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "cofilin-modulating peptides (slingshot phosphatase inhibitor)",
       "id": "karilin7_CofilinModulatingPeptides"
     },
@@ -7577,7 +7568,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "slingshot phosphatase (cofilin activator)",
       "id": "karilin7_Slingshot"
     },
@@ -7590,7 +7581,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "limk inhibitors (therapeutic strategy)",
       "id": "karilin7_LIMK_Inhibitors"
     },
@@ -7603,7 +7594,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "rac1-pak-limk-cofilin actin remodelling pathway",
       "id": "karilin7_Rac1_PAK_LIMK_Cofilin_Pathway"
     },
@@ -7616,7 +7607,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "spared nerve injury (sni) model",
       "id": "karilin7_SNI"
     },
@@ -7629,7 +7620,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "chronic constriction injury (cci) model",
       "id": "karilin7_CCI"
     },
@@ -7642,7 +7633,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 9,
       "norm_label": "sex differences (female acc kalirin-7 trajectory)",
       "id": "karilin7_SexDifferences"
     },
@@ -7655,7 +7646,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "drgx",
       "id": "DRGX_DRGX"
     },
@@ -7668,7 +7659,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 48,
+      "community": 52,
       "norm_label": "neuropathic pain",
       "id": "DRGX_neuropathic_pain"
     },
@@ -7681,7 +7672,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "nociceptor gene programme",
       "id": "DRGX_nociceptor_gene_programme"
     },
@@ -7694,7 +7685,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "pronociceptive ion channels",
       "id": "DRGX_pronociceptive_channels"
     },
@@ -7707,7 +7698,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "bdnf\u2013trkb\u2013kcc2 cascade",
       "id": "DRGX_BDNF_TrkB_KCC2"
     },
@@ -7720,7 +7711,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "central sensitisation",
       "id": "DRGX_central_sensitisation"
     },
@@ -7733,7 +7724,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "drgx antisense oligonucleotide therapy",
       "id": "DRGX_ASO_therapy"
     },
@@ -7746,7 +7737,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 31,
       "norm_label": "kalirin-7",
       "id": "karilin-7_Kalirin_7"
     },
@@ -7759,7 +7750,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 31,
       "norm_label": "anterior cingulate cortex",
       "id": "karilin-7_anterior_cingulate_cortex"
     },
@@ -7772,7 +7763,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 31,
       "norm_label": "rac1\u2013pak\u2013limk\u2013cofilin pathway",
       "id": "karilin-7_Rac1_pathway"
     },
@@ -7785,7 +7776,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 31,
       "norm_label": "pain-related anxiety",
       "id": "karilin-7_pain_related_anxiety"
     },
@@ -7798,7 +7789,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
+      "community": 31,
       "norm_label": "dendritic spine loss",
       "id": "karilin-7_dendritic_spine_loss"
     },
@@ -7811,7 +7802,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "zfhx2",
       "id": "ZFHX2_ZFHX2"
     },
@@ -7824,7 +7815,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "nociceptor gene programme",
       "id": "ZFHX2_nociceptor_gene_programme"
     },
@@ -7837,7 +7828,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "pronociceptive ion channels",
       "id": "ZFHX2_pronociceptive_channels"
     },
@@ -7850,7 +7841,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "bdnf\u2013trkb\u2013kcc2 cascade",
       "id": "ZFHX2_BDNF_TrkB_KCC2"
     },
@@ -7863,7 +7854,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "central sensitisation",
       "id": "ZFHX2_central_sensitisation"
     },
@@ -7876,7 +7867,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "congenital insensitivity to pain",
       "id": "ZFHX2_congenital_insensitivity_to_pain"
     },
@@ -7889,7 +7880,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 11,
       "norm_label": "zfhx2 antisense oligonucleotide therapy",
       "id": "ZFHX2_ASO_therapy"
     },
@@ -7902,9 +7893,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "BDNF-TrkB_BDNF",
       "community": 1,
-      "norm_label": "bdnf"
+      "norm_label": "bdnf",
+      "id": "BDNF-TrkB_BDNF"
     },
     {
       "label": "TrkB Receptor (TrkB.FL/TrkB.T1)",
@@ -7915,9 +7906,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "BDNF-TrkB_TrkB",
       "community": 1,
-      "norm_label": "trkb receptor (trkb.fl/trkb.t1)"
+      "norm_label": "trkb receptor (trkb.fl/trkb.t1)",
+      "id": "BDNF-TrkB_TrkB"
     },
     {
       "label": "KCC2 (SLC12A5)",
@@ -7928,9 +7919,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "BDNF-TrkB_KCC2",
       "community": 1,
-      "norm_label": "kcc2 (slc12a5)"
+      "norm_label": "kcc2 (slc12a5)",
+      "id": "BDNF-TrkB_KCC2"
     },
     {
       "label": "Central Sensitization",
@@ -7941,9 +7932,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "BDNF-TrkB_CentralSensitization",
       "community": 1,
-      "norm_label": "central sensitization"
+      "norm_label": "central sensitization",
+      "id": "BDNF-TrkB_CentralSensitization"
     },
     {
       "label": "ANA-12 (TrkB Antagonist)",
@@ -7954,9 +7945,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ana-12_ANA12",
       "community": 1,
-      "norm_label": "ana-12 (trkb antagonist)"
+      "norm_label": "ana-12 (trkb antagonist)",
+      "id": "ana-12_ANA12"
     },
     {
       "label": "Resolvin D1 (RvD1)",
@@ -7967,9 +7958,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "insights_x_RvD1_TrkB_RvD1",
       "community": 1,
-      "norm_label": "resolvin d1 (rvd1)"
+      "norm_label": "resolvin d1 (rvd1)",
+      "id": "insights_x_RvD1_TrkB_RvD1"
     },
     {
       "label": "ALX/FPR2 Receptor",
@@ -7980,9 +7971,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "insights_x_RvD1_TrkB_ALXFPR2",
       "community": 1,
-      "norm_label": "alx/fpr2 receptor"
+      "norm_label": "alx/fpr2 receptor",
+      "id": "insights_x_RvD1_TrkB_ALXFPR2"
     },
     {
       "label": "TNF-alpha",
@@ -7993,9 +7984,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "TNF_TNFalpha",
       "community": 1,
-      "norm_label": "tnf-alpha"
+      "norm_label": "tnf-alpha",
+      "id": "TNF_TNFalpha"
     },
     {
       "label": "CSF1 (M-CSF)",
@@ -8006,9 +7997,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "CSF1-CSF1R_CSF1",
-      "community": 30,
-      "norm_label": "csf1 (m-csf)"
+      "community": 35,
+      "norm_label": "csf1 (m-csf)",
+      "id": "CSF1-CSF1R_CSF1"
     },
     {
       "label": "CSF1R",
@@ -8019,9 +8010,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "CSF1-CSF1R_CSF1R",
-      "community": 30,
-      "norm_label": "csf1r"
+      "community": 35,
+      "norm_label": "csf1r",
+      "id": "CSF1-CSF1R_CSF1R"
     },
     {
       "label": "Interleukin-34",
@@ -8032,9 +8023,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "CSF1-CSF1R_IL34",
-      "community": 30,
-      "norm_label": "interleukin-34"
+      "community": 35,
+      "norm_label": "interleukin-34",
+      "id": "CSF1-CSF1R_IL34"
     },
     {
       "label": "Spinal Microglia (Activated)",
@@ -8045,9 +8036,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "CSF1-CSF1R_SpinalMicroglia",
       "community": 1,
-      "norm_label": "spinal microglia (activated)"
+      "norm_label": "spinal microglia (activated)",
+      "id": "CSF1-CSF1R_SpinalMicroglia"
     },
     {
       "label": "IL-6/JAK2/STAT3 Axis",
@@ -8058,9 +8049,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "JAK-STAT_JAKSTAT3Axis",
       "community": 1,
-      "norm_label": "il-6/jak2/stat3 axis"
+      "norm_label": "il-6/jak2/stat3 axis",
+      "id": "JAK-STAT_JAKSTAT3Axis"
     },
     {
       "label": "Angiopoietin-1",
@@ -8071,9 +8062,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "AngPt_Angiopoietin1",
       "community": 1,
-      "norm_label": "angiopoietin-1"
+      "norm_label": "angiopoietin-1",
+      "id": "AngPt_Angiopoietin1"
     },
     {
       "label": "Angiopoietin-2",
@@ -8084,9 +8075,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "AngPt_Angiopoietin2",
       "community": 1,
-      "norm_label": "angiopoietin-2"
+      "norm_label": "angiopoietin-2",
+      "id": "AngPt_Angiopoietin2"
     },
     {
       "label": "Blood-Brain/Spinal Cord Barrier Integrity",
@@ -8097,9 +8088,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "BBB_BloodBrainBarrier",
       "community": 1,
-      "norm_label": "blood-brain/spinal cord barrier integrity"
+      "norm_label": "blood-brain/spinal cord barrier integrity",
+      "id": "BBB_BloodBrainBarrier"
     },
     {
       "label": "Bradykinin (Kallikrein-Kinin System)",
@@ -8110,9 +8101,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "Bradykinin_Bradykinin",
-      "community": 31,
-      "norm_label": "bradykinin (kallikrein-kinin system)"
+      "community": 1,
+      "norm_label": "bradykinin (kallikrein-kinin system)",
+      "id": "Bradykinin_Bradykinin"
     },
     {
       "label": "Bradykinin B1 Receptor (Inducible)",
@@ -8123,9 +8114,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "Bradykinin_B1Receptor",
       "community": 1,
-      "norm_label": "bradykinin b1 receptor (inducible)"
+      "norm_label": "bradykinin b1 receptor (inducible)",
+      "id": "Bradykinin_B1Receptor"
     },
     {
       "label": "Bradykinin B2 Receptor (Constitutive)",
@@ -8136,9 +8127,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "Bradykinin_B2Receptor",
-      "community": 31,
-      "norm_label": "bradykinin b2 receptor (constitutive)"
+      "community": 1,
+      "norm_label": "bradykinin b2 receptor (constitutive)",
+      "id": "Bradykinin_B2Receptor"
     },
     {
       "label": "TRPV1 Channel",
@@ -8149,9 +8140,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "Bradykinin_TRPV1",
-      "community": 31,
-      "norm_label": "trpv1 channel"
+      "community": 1,
+      "norm_label": "trpv1 channel",
+      "id": "Bradykinin_TRPV1"
     },
     {
       "label": "Fulmetibant (BAY 2395840, B1 Antagonist)",
@@ -8162,9 +8153,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "Bradykinin_Fulmetibant",
       "community": 1,
-      "norm_label": "fulmetibant (bay 2395840, b1 antagonist)"
+      "norm_label": "fulmetibant (bay 2395840, b1 antagonist)",
+      "id": "Bradykinin_Fulmetibant"
     },
     {
       "label": "CB2 Cannabinoid Receptor",
@@ -8175,9 +8166,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "CB2_CB2Receptor",
       "community": 1,
-      "norm_label": "cb2 cannabinoid receptor"
+      "norm_label": "cb2 cannabinoid receptor",
+      "id": "CB2_CB2Receptor"
     },
     {
       "label": "PPAR-gamma",
@@ -8188,9 +8179,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "PPARy_PPARgamma",
       "community": 1,
-      "norm_label": "ppar-gamma"
+      "norm_label": "ppar-gamma",
+      "id": "PPARy_PPARgamma"
     },
     {
       "label": "RhoA/ROCK Pathway",
@@ -8201,9 +8192,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "RhoA-ROCK_RhoAROCK",
       "community": 1,
-      "norm_label": "rhoa/rock pathway"
+      "norm_label": "rhoa/rock pathway",
+      "id": "RhoA-ROCK_RhoAROCK"
     },
     {
       "label": "Nogo-A (RTN4)",
@@ -8214,9 +8205,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "NogoA-NgR1_NogoA",
       "community": 1,
-      "norm_label": "nogo-a (rtn4)"
+      "norm_label": "nogo-a (rtn4)",
+      "id": "NogoA-NgR1_NogoA"
     },
     {
       "label": "NgR1 Receptor Complex (LINGO-1/p75NTR-TROY)",
@@ -8227,9 +8218,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "NogoA-NgR1_NgR1",
       "community": 1,
-      "norm_label": "ngr1 receptor complex (lingo-1/p75ntr-troy)"
+      "norm_label": "ngr1 receptor complex (lingo-1/p75ntr-troy)",
+      "id": "NogoA-NgR1_NgR1"
     },
     {
       "label": "Parvalbumin+ Interneurons (Spinal Dorsal Horn)",
@@ -8240,9 +8231,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "PV+_interneurons_PVInterneurons",
       "community": 1,
-      "norm_label": "parvalbumin+ interneurons (spinal dorsal horn)"
+      "norm_label": "parvalbumin+ interneurons (spinal dorsal horn)",
+      "id": "PV+_interneurons_PVInterneurons"
     },
     {
       "label": "Perineuronal Nets",
@@ -8253,9 +8244,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "PV+_interneurons_PerineuronalNets",
       "community": 1,
-      "norm_label": "perineuronal nets"
+      "norm_label": "perineuronal nets",
+      "id": "PV+_interneurons_PerineuronalNets"
     },
     {
       "label": "Mechanical Allodynia",
@@ -8266,9 +8257,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "PV+_interneurons_MechanicalAllodynia",
       "community": 1,
-      "norm_label": "mechanical allodynia"
+      "norm_label": "mechanical allodynia",
+      "id": "PV+_interneurons_MechanicalAllodynia"
     },
     {
       "label": "Mitochondrial Calcium Overload (MCU/mPTP)",
@@ -8279,9 +8270,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "GABA_apoptosis_MitoCaOverload",
       "community": 1,
-      "norm_label": "mitochondrial calcium overload (mcu/mptp)"
+      "norm_label": "mitochondrial calcium overload (mcu/mptp)",
+      "id": "GABA_apoptosis_MitoCaOverload"
     },
     {
       "label": "Autophagy Failure and Apoptosis Programs",
@@ -8292,9 +8283,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "GABA_apoptosis_AutophagyApoptosis",
       "community": 1,
-      "norm_label": "autophagy failure and apoptosis programs"
+      "norm_label": "autophagy failure and apoptosis programs",
+      "id": "GABA_apoptosis_AutophagyApoptosis"
     },
     {
       "label": "CLP257/CLP290 (First-Gen KCC2 Enhancers)",
@@ -8305,9 +8296,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "KCC2_enhancers_new_CLP290",
       "community": 1,
-      "norm_label": "clp257/clp290 (first-gen kcc2 enhancers)"
+      "norm_label": "clp257/clp290 (first-gen kcc2 enhancers)",
+      "id": "KCC2_enhancers_new_CLP290"
     },
     {
       "label": "ARN23746 (Next-Gen KCC2 Activator)",
@@ -8318,9 +8309,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "KCC2_enhancers_new_ARN23746",
       "community": 1,
-      "norm_label": "arn23746 (next-gen kcc2 activator)"
+      "norm_label": "arn23746 (next-gen kcc2 activator)",
+      "id": "KCC2_enhancers_new_ARN23746"
     },
     {
       "label": "NKCC1 (SLC12A2)",
@@ -8331,9 +8322,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "KCC2_enhancers_new_NKCC1",
       "community": 1,
-      "norm_label": "nkcc1 (slc12a2)"
+      "norm_label": "nkcc1 (slc12a2)",
+      "id": "KCC2_enhancers_new_NKCC1"
     },
     {
       "label": "Histone Lactylation (H3K18la)",
@@ -8344,9 +8335,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "epigenetic_mechanisms_pain_HistoneLactylation",
       "community": 1,
-      "norm_label": "histone lactylation (h3k18la)"
+      "norm_label": "histone lactylation (h3k18la)",
+      "id": "epigenetic_mechanisms_pain_HistoneLactylation"
     },
     {
       "label": "METTL3/m6A RNA Methylation",
@@ -8357,9 +8348,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "epigenetic_mechanisms_pain_METTL3_m6A",
       "community": 1,
-      "norm_label": "mettl3/m6a rna methylation"
+      "norm_label": "mettl3/m6a rna methylation",
+      "id": "epigenetic_mechanisms_pain_METTL3_m6A"
     },
     {
       "label": "HDAC4",
@@ -8370,9 +8361,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "epigenetic_mechanisms_pain_HDAC4",
       "community": 1,
-      "norm_label": "hdac4"
+      "norm_label": "hdac4",
+      "id": "epigenetic_mechanisms_pain_HDAC4"
     },
     {
       "label": "TREM2",
@@ -8383,9 +8374,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "microglial_biology_pain_update_Trem2",
-      "community": 9,
-      "norm_label": "trem2"
+      "community": 8,
+      "norm_label": "trem2",
+      "id": "microglial_biology_pain_update_Trem2"
     },
     {
       "label": "P2X4 Receptor",
@@ -8396,9 +8387,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "microglial_biology_pain_update_P2x4",
-      "community": 9,
-      "norm_label": "p2x4 receptor"
+      "community": 8,
+      "norm_label": "p2x4 receptor",
+      "id": "microglial_biology_pain_update_P2x4"
     },
     {
       "label": "Urolithin A (mitophagy enhancer)",
@@ -8409,9 +8400,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "microglial_biology_pain_update_UrolithinA",
-      "community": 9,
-      "norm_label": "urolithin a (mitophagy enhancer)"
+      "community": 8,
+      "norm_label": "urolithin a (mitophagy enhancer)",
+      "id": "microglial_biology_pain_update_UrolithinA"
     },
     {
       "label": "VEGFA",
@@ -8422,9 +8413,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "vegf_Vegfa",
-      "community": 9,
-      "norm_label": "vegfa"
+      "community": 8,
+      "norm_label": "vegfa",
+      "id": "vegf_Vegfa"
     },
     {
       "label": "VEGFR1 (Flt-1)",
@@ -8435,9 +8426,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "vegf_Vegfr1",
-      "community": 9,
-      "norm_label": "vegfr1 (flt-1)"
+      "community": 8,
+      "norm_label": "vegfr1 (flt-1)",
+      "id": "vegf_Vegfr1"
     },
     {
       "label": "BSCB/BNB Barrier Breakdown",
@@ -8448,9 +8439,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "vegf_BarrierBreakdown",
-      "community": 9,
-      "norm_label": "bscb/bnb barrier breakdown"
+      "community": 8,
+      "norm_label": "bscb/bnb barrier breakdown",
+      "id": "vegf_BarrierBreakdown"
     },
     {
       "label": "Kalirin-7 (Rac1 GEF)",
@@ -8461,9 +8452,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "karilin-7_Kalirin7",
-      "community": 9,
-      "norm_label": "kalirin-7 (rac1 gef)"
+      "community": 8,
+      "norm_label": "kalirin-7 (rac1 gef)",
+      "id": "karilin-7_Kalirin7"
     },
     {
       "label": "ACC Kalirin-7 Downregulation Claim (REFUTED)",
@@ -8474,9 +8465,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "karilin-7_AccDownregulationRefuted",
-      "community": 9,
-      "norm_label": "acc kalirin-7 downregulation claim (refuted)"
+      "community": 8,
+      "norm_label": "acc kalirin-7 downregulation claim (refuted)",
+      "id": "karilin-7_AccDownregulationRefuted"
     },
     {
       "label": "Spinal Pronociceptive Kalirin-7 Role",
@@ -8487,9 +8478,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "karilin-7_SpinalPronociceptiveRole",
-      "community": 9,
-      "norm_label": "spinal pronociceptive kalirin-7 role"
+      "community": 8,
+      "norm_label": "spinal pronociceptive kalirin-7 role",
+      "id": "karilin-7_SpinalPronociceptiveRole"
     },
     {
       "label": "Lamina I Dual-Hit Model (PNN Stripping + KCC2 Failure)",
@@ -8500,9 +8491,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lamina_I_dual_hit_DualHitModel",
-      "community": 9,
-      "norm_label": "lamina i dual-hit model (pnn stripping + kcc2 failure)"
+      "community": 8,
+      "norm_label": "lamina i dual-hit model (pnn stripping + kcc2 failure)",
+      "id": "insights_x_lamina_I_dual_hit_DualHitModel"
     },
     {
       "label": "Lamina I Spinoparabrachial Projection Neurons",
@@ -8513,9 +8504,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons",
-      "community": 9,
-      "norm_label": "lamina i spinoparabrachial projection neurons"
+      "community": 8,
+      "norm_label": "lamina i spinoparabrachial projection neurons",
+      "id": "insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons"
     },
     {
       "label": "Microglial PNN GAG Stripping (Hit 1)",
@@ -8526,9 +8517,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lamina_I_dual_hit_MicroglialGagStripping",
-      "community": 9,
-      "norm_label": "microglial pnn gag stripping (hit 1)"
+      "community": 8,
+      "norm_label": "microglial pnn gag stripping (hit 1)",
+      "id": "insights_x_lamina_I_dual_hit_MicroglialGagStripping"
     },
     {
       "label": "KCC2-Dependent Disinhibition (Hit 2)",
@@ -8539,9 +8530,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lamina_I_dual_hit_Kcc2Disinhibition",
-      "community": 9,
-      "norm_label": "kcc2-dependent disinhibition (hit 2)"
+      "community": 8,
+      "norm_label": "kcc2-dependent disinhibition (hit 2)",
+      "id": "insights_x_lamina_I_dual_hit_Kcc2Disinhibition"
     },
     {
       "label": "Mechanical Allodynia",
@@ -8552,9 +8543,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lamina_I_dual_hit_MechanicalAllodynia",
-      "community": 9,
-      "norm_label": "mechanical allodynia"
+      "community": 8,
+      "norm_label": "mechanical allodynia",
+      "id": "insights_x_lamina_I_dual_hit_MechanicalAllodynia"
     },
     {
       "label": "Histone Lactylation Phase Gate on MMP-9 Switch",
@@ -8565,9 +8556,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lactylation_MMP9_LactylationPhaseGate",
-      "community": 9,
-      "norm_label": "histone lactylation phase gate on mmp-9 switch"
+      "community": 8,
+      "norm_label": "histone lactylation phase gate on mmp-9 switch",
+      "id": "insights_x_lactylation_MMP9_LactylationPhaseGate"
     },
     {
       "label": "MMP-9 (Early-Phase Pronociceptive Gelatinase)",
@@ -8578,9 +8569,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lactylation_MMP9_Mmp9",
-      "community": 9,
-      "norm_label": "mmp-9 (early-phase pronociceptive gelatinase)"
+      "community": 8,
+      "norm_label": "mmp-9 (early-phase pronociceptive gelatinase)",
+      "id": "insights_x_lactylation_MMP9_Mmp9"
     },
     {
       "label": "DRGX (Protective Restraint Factor)",
@@ -8591,9 +8582,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lactylation_MMP9_Drgx",
-      "community": 9,
-      "norm_label": "drgx (protective restraint factor)"
+      "community": 8,
+      "norm_label": "drgx (protective restraint factor)",
+      "id": "insights_x_lactylation_MMP9_Drgx"
     },
     {
       "label": "ELF1 (MMP-9 Transcriptional Activator)",
@@ -8604,9 +8595,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "insights_x_lactylation_MMP9_Elf1",
-      "community": 9,
-      "norm_label": "elf1 (mmp-9 transcriptional activator)"
+      "community": 8,
+      "norm_label": "elf1 (mmp-9 transcriptional activator)",
+      "id": "insights_x_lactylation_MMP9_Elf1"
     },
     {
       "label": "Time-Staggered Quadruple Prophylaxis Strategy",
@@ -8617,9 +8608,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_acute_to_chronic_prevention_TimeStaggeredProphylaxis",
-      "community": 9,
-      "norm_label": "time-staggered quadruple prophylaxis strategy"
+      "community": 8,
+      "norm_label": "time-staggered quadruple prophylaxis strategy",
+      "id": "proposal_acute_to_chronic_prevention_TimeStaggeredProphylaxis"
     },
     {
       "label": "Rbfox1 Restoration (T=0-6h)",
@@ -8630,9 +8621,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_acute_to_chronic_prevention_Rbfox1Restoration",
-      "community": 9,
-      "norm_label": "rbfox1 restoration (t=0-6h)"
+      "community": 8,
+      "norm_label": "rbfox1 restoration (t=0-6h)",
+      "id": "proposal_acute_to_chronic_prevention_Rbfox1Restoration"
     },
     {
       "label": "Transient HIF1alpha Inhibition (T=6-72h)",
@@ -8643,9 +8634,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_acute_to_chronic_prevention_TransientHif1aInhibition",
-      "community": 9,
-      "norm_label": "transient hif1alpha inhibition (t=6-72h)"
+      "community": 8,
+      "norm_label": "transient hif1alpha inhibition (t=6-72h)",
+      "id": "proposal_acute_to_chronic_prevention_TransientHif1aInhibition"
     },
     {
       "label": "Early Transient MMP-9 Inhibition (SB-3CT/TIMP-1)",
@@ -8656,9 +8647,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_acute_to_chronic_prevention_Mmp9Inhibition",
-      "community": 9,
-      "norm_label": "early transient mmp-9 inhibition (sb-3ct/timp-1)"
+      "community": 8,
+      "norm_label": "early transient mmp-9 inhibition (sb-3ct/timp-1)",
+      "id": "proposal_acute_to_chronic_prevention_Mmp9Inhibition"
     },
     {
       "label": "Local Anti-VEGFA (T=24-72h)",
@@ -8669,9 +8660,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_acute_to_chronic_prevention_LocalAntiVegfa",
-      "community": 9,
-      "norm_label": "local anti-vegfa (t=24-72h)"
+      "community": 8,
+      "norm_label": "local anti-vegfa (t=24-72h)",
+      "id": "proposal_acute_to_chronic_prevention_LocalAntiVegfa"
     },
     {
       "label": "Four-Pillar Chronic Pain Treatment Strategy",
@@ -8682,9 +8673,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_chronic_pain_treatment_FourPillarStrategy",
-      "community": 9,
-      "norm_label": "four-pillar chronic pain treatment strategy"
+      "community": 8,
+      "norm_label": "four-pillar chronic pain treatment strategy",
+      "id": "proposal_chronic_pain_treatment_FourPillarStrategy"
     },
     {
       "label": "KCC2 Enhancement Pillar (CLP257/AAV-KCC2)",
@@ -8695,9 +8686,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_chronic_pain_treatment_Kcc2Enhancement",
-      "community": 9,
-      "norm_label": "kcc2 enhancement pillar (clp257/aav-kcc2)"
+      "community": 8,
+      "norm_label": "kcc2 enhancement pillar (clp257/aav-kcc2)",
+      "id": "proposal_chronic_pain_treatment_Kcc2Enhancement"
     },
     {
       "label": "ROCK Inhibition Pillar (Fasudil/AS1892802)",
@@ -8708,9 +8699,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_chronic_pain_treatment_RockInhibition",
-      "community": 9,
-      "norm_label": "rock inhibition pillar (fasudil/as1892802)"
+      "community": 8,
+      "norm_label": "rock inhibition pillar (fasudil/as1892802)",
+      "id": "proposal_chronic_pain_treatment_RockInhibition"
     },
     {
       "label": "SST+ Interneuron Silencing Pillar",
@@ -8721,9 +8712,9 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_chronic_pain_treatment_SstInterneuronSilencing",
-      "community": 9,
-      "norm_label": "sst+ interneuron silencing pillar"
+      "community": 8,
+      "norm_label": "sst+ interneuron silencing pillar",
+      "id": "proposal_chronic_pain_treatment_SstInterneuronSilencing"
     },
     {
       "label": "TNFR1-Selective TNF Blockade Pillar (XPro1595)",
@@ -8734,9 +8725,243 @@
       "captured_at": "2026-08-26",
       "author": null,
       "contributor": null,
-      "id": "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade",
-      "community": 9,
-      "norm_label": "tnfr1-selective tnf blockade pillar (xpro1595)"
+      "community": 8,
+      "norm_label": "tnfr1-selective tnf blockade pillar (xpro1595)",
+      "id": "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade"
+    },
+    {
+      "label": "Tight Junction Integrity (ZO-1/Claudin-5/AQP4, TEER)",
+      "file_type": "document",
+      "source_file": "BBB.md",
+      "source_location": "line 35; Validation table",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BBB_TightJunctionIntegrity",
+      "community": 1,
+      "norm_label": "tight junction integrity (zo-1/claudin-5/aqp4, teer)"
+    },
+    {
+      "label": "Hyperoside (barrier-protective flavonoid)",
+      "file_type": "document",
+      "source_file": "BBB.md",
+      "source_location": "line 35; Validation table row 2",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BBB_Hyperoside",
+      "community": 1,
+      "norm_label": "hyperoside (barrier-protective flavonoid)"
+    },
+    {
+      "label": "miR-155 (BDNF-suppressing microRNA)",
+      "file_type": "document",
+      "source_file": "BBB.md",
+      "source_location": "line 35 (miR-155/BDNF pathway)",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BBB_MicroRNA155",
+      "community": 1,
+      "norm_label": "mir-155 (bdnf-suppressing microrna)"
+    },
+    {
+      "label": "CypA-MMP-9 Barrier-Degrading Pathway",
+      "file_type": "document",
+      "source_file": "BBB.md",
+      "source_location": "lines 13, 33",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BBB_CypA_MMP9_Pathway",
+      "community": 1,
+      "norm_label": "cypa-mmp-9 barrier-degrading pathway"
+    },
+    {
+      "label": "BDNF",
+      "file_type": "document",
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "lines 7-11, 51; Validation EC-0124",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BDNFTrkB_BDNF",
+      "community": 1,
+      "norm_label": "bdnf"
+    },
+    {
+      "label": "TrkB receptor (TrkB.FL)",
+      "file_type": "document",
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "lines 7-11, 25",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BDNFTrkB_TrkB",
+      "community": 1,
+      "norm_label": "trkb receptor (trkb.fl)"
+    },
+    {
+      "label": "KCC2 Downregulation (chloride gradient collapse)",
+      "file_type": "document",
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 9; Validation EC-0124",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "BDNFTrkB_KCC2Downregulation",
+      "community": 1,
+      "norm_label": "kcc2 downregulation (chloride gradient collapse)"
+    },
+    {
+      "label": "Interleukin-6 (IL-6)",
+      "file_type": "document",
+      "source_file": "JAK-STAT.md",
+      "source_location": "lines 3, 24; Validation IL-6->NKCC1 row",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "JAKSTAT_IL6",
+      "community": 1,
+      "norm_label": "interleukin-6 (il-6)"
+    },
+    {
+      "label": "JAK2 kinase",
+      "file_type": "document",
+      "source_file": "JAK-STAT.md",
+      "source_location": "lines 7, 24",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "JAKSTAT_JAK2",
+      "community": 1,
+      "norm_label": "jak2 kinase"
+    },
+    {
+      "label": "STAT3 transcription factor",
+      "file_type": "document",
+      "source_file": "JAK-STAT.md",
+      "source_location": "lines 8, 24-31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "JAKSTAT_STAT3",
+      "community": 1,
+      "norm_label": "stat3 transcription factor"
+    },
+    {
+      "label": "NKCC1 Phosphorylation at Plasma Membrane (Cl- accumulation)",
+      "file_type": "document",
+      "source_file": "JAK-STAT.md",
+      "source_location": "Validation table IL-6->NKCC1 row (Pieraut et al. 2011)",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "JAKSTAT_NKCC1_Phosphorylation",
+      "community": 1,
+      "norm_label": "nkcc1 phosphorylation at plasma membrane (cl- accumulation)"
+    },
+    {
+      "label": "Bradykinin B1 Receptor (inducible)",
+      "file_type": "document",
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 15-19, 52-58",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "Bradykinin_B1R",
+      "community": 1,
+      "norm_label": "bradykinin b1 receptor (inducible)"
+    },
+    {
+      "label": "Bradykinin B2 Receptor (constitutive)",
+      "file_type": "document",
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 10-14, 31-50",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "Bradykinin_B2R",
+      "community": 1,
+      "norm_label": "bradykinin b2 receptor (constitutive)"
+    },
+    {
+      "label": "Pain Hypersensitivity (allodynia/hyperalgesia)",
+      "file_type": "document",
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 57, 100-105, 141-142",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "Bradykinin_PainHypersensitivity",
+      "community": 1,
+      "norm_label": "pain hypersensitivity (allodynia/hyperalgesia)"
+    },
+    {
+      "label": "ZFHX2 p.R1913K (Marsili syndrome variant)",
+      "file_type": "document",
+      "source_file": "ZFHX2.md",
+      "source_location": "line 131; Validation EC-0131 (Habib 2018, Brain 141:365)",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ZFHX2_R1913K_Variant",
+      "community": 11,
+      "norm_label": "zfhx2 p.r1913k (marsili syndrome variant)"
+    },
+    {
+      "label": "Somatostatin (SST)",
+      "file_type": "document",
+      "source_file": "ZFHX2.md",
+      "source_location": "line 137 (regulome table); closure_edges.yaml",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ZFHX2_SST",
+      "community": 11,
+      "norm_label": "somatostatin (sst)"
+    },
+    {
+      "label": "ZFHX2 Downregulated Genes (PTGIR/GFRA3/GAL)",
+      "file_type": "document",
+      "source_file": "ZFHX2.md",
+      "source_location": "lines 133-140 (regulome table)",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ZFHX2_NeuropeptideRegulome",
+      "community": 11,
+      "norm_label": "zfhx2 downregulated genes (ptgir/gfra3/gal)"
+    },
+    {
+      "label": "Noxious Heat Pain Sensitivity",
+      "file_type": "document",
+      "source_file": "ZFHX2.md",
+      "source_location": "lines 131, 142 (heat-hypersensitive null-mouse nuance)",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ZFHX2_NoxiousHeatSensitivity",
+      "community": 11,
+      "norm_label": "noxious heat pain sensitivity"
     }
   ],
   "links": [
@@ -17101,6 +17326,66 @@
       "target": "PV+_interneurons_MechanicalAllodynia"
     },
     {
+      "relation": "regulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ZFHX2.md",
+      "source_location": "line 131 (heterozygous missense, inherited dominant, possible altered/gain-of-function)",
+      "weight": 1.0,
+      "source": "ZFHX2_R1913K_Variant",
+      "target": "ZFHX2_ZFHX2"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ZFHX2.md",
+      "source_location": "line 142 (Zfhx2-null mice are heat-HYPERsensitive: WT ZFHX2 restrains heat pain; modality-specific nuance)",
+      "weight": 1.0,
+      "source": "ZFHX2_ZFHX2",
+      "target": "ZFHX2_NoxiousHeatSensitivity"
+    },
+    {
+      "relation": "upregulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ZFHX2.md",
+      "source_location": "line 137 (corrected closure edge ZFHX2-(+1)->SST, ChIP-seq regulome)",
+      "weight": 1.0,
+      "source": "ZFHX2_ZFHX2",
+      "target": "ZFHX2_SST"
+    },
+    {
+      "relation": "downregulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ZFHX2.md",
+      "source_location": "lines 138-140 (PTGIR down 2.4-fold, GFRA3 down, GAL most strongly downregulated)",
+      "weight": 1.0,
+      "source": "ZFHX2_ZFHX2",
+      "target": "ZFHX2_NeuropeptideRegulome"
+    },
+    {
+      "relation": "regulates",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.1,
+      "source_file": "ZFHX2.md",
+      "source_location": "Validation EC-0131 (REFUTED: published ChIP-seq regulome excludes BDNF; legacy induction claim contradicted)",
+      "weight": 0.1,
+      "source": "ZFHX2_ZFHX2",
+      "target": "BDNFTrkB_BDNF"
+    },
+    {
+      "relation": "regulates",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.1,
+      "source_file": "ZFHX2.md",
+      "source_location": "Validation EC-0133 (REFUTED: Nav/TRPV1/CGRP transactivation contradicted by published regulome)",
+      "weight": 0.1,
+      "source": "ZFHX2_ZFHX2",
+      "target": "Bradykinin_TRPV1"
+    },
+    {
       "relation": "activates",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -17424,6 +17709,46 @@
       "relation": "activates",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 51; Validation EC row (BDNF supports barrier via TEER; causal by sh-BDNF reversal)",
+      "weight": 1.0,
+      "source": "BDNFTrkB_BDNF",
+      "target": "BBB_BloodBrainBarrier"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "line 35 (reduces BBB damage/permeability)",
+      "weight": 1.0,
+      "source": "BBB_Hyperoside",
+      "target": "BBB_BloodBrainBarrier"
+    },
+    {
+      "relation": "causes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "line 13 (opens barrier)",
+      "weight": 1.0,
+      "source": "BBB_CypA_MMP9_Pathway",
+      "target": "BBB_BloodBrainBarrier"
+    },
+    {
+      "relation": "causes",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "JAK-STAT.md",
+      "source_location": "line 89 (VEGF/MMP-9, vascular remodelling and barrier disruption)",
+      "weight": 0.8,
+      "source": "JAKSTAT_STAT3",
+      "target": "BBB_BloodBrainBarrier"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "Bradykinin.md",
       "source_location": null,
       "weight": 1.0,
@@ -17461,6 +17786,16 @@
       "target": "Bradykinin_TRPV1"
     },
     {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Bradykinin.md",
+      "source_location": "line 37 (PKCe phosphorylation Ser800, lowers thermal threshold)",
+      "weight": 1.0,
+      "source": "Bradykinin_B2R",
+      "target": "Bradykinin_TRPV1"
+    },
+    {
       "relation": "inhibits",
       "confidence": "AMBIGUOUS",
       "confidence_score": 0.2,
@@ -17469,6 +17804,26 @@
       "weight": 0.2,
       "source": "Bradykinin_Fulmetibant",
       "target": "PV+_interneurons_MechanicalAllodynia"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 106, 137 (selective orally bioavailable B1 antagonist)",
+      "weight": 1.0,
+      "source": "Bradykinin_Fulmetibant",
+      "target": "Bradykinin_B1R"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.1,
+      "source_file": "Bradykinin.md",
+      "source_location": "Validation rows (BRADiNP Ph2a NEGATIVE in painful diabetic neuropathy, NCT05219812; quarantined sign-0 pair)",
+      "weight": 0.1,
+      "source": "Bradykinin_Fulmetibant",
+      "target": "Bradykinin_PainHypersensitivity"
     },
     {
       "relation": "inhibits",
@@ -17989,50 +18344,221 @@
       "weight": 1.0,
       "source": "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade",
       "target": "proposal_chronic_pain_treatment_FourPillarStrategy"
+    },
+    {
+      "relation": "upregulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 51; BBB.md line 35",
+      "weight": 1.0,
+      "source": "BDNFTrkB_BDNF",
+      "target": "BBB_TightJunctionIntegrity"
+    },
+    {
+      "relation": "downregulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "line 13 (degrades basement membrane and tight junction proteins)",
+      "weight": 1.0,
+      "source": "BBB_CypA_MMP9_Pathway",
+      "target": "BBB_TightJunctionIntegrity"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "line 35",
+      "weight": 1.0,
+      "source": "BBB_Hyperoside",
+      "target": "BBB_MicroRNA155"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "Validation table row 2 (sh-BDNF knockdown reverses protection: causal basis for BDNF barrier role)",
+      "weight": 1.0,
+      "source": "BBB_Hyperoside",
+      "target": "BDNFTrkB_BDNF"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BBB.md",
+      "source_location": "line 35 (miR-155 down, BDNF up)",
+      "weight": 1.0,
+      "source": "BBB_MicroRNA155",
+      "target": "BDNFTrkB_BDNF"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 7",
+      "weight": 1.0,
+      "source": "BDNFTrkB_BDNF",
+      "target": "BDNFTrkB_TrkB"
+    },
+    {
+      "relation": "upregulates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "JAK-STAT.md",
+      "source_location": "lines 27, 87 (STAT3 drives BDNF expression)",
+      "weight": 1.0,
+      "source": "JAKSTAT_STAT3",
+      "target": "BDNFTrkB_BDNF"
+    },
+    {
+      "relation": "causes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 9; Validation EC-0124",
+      "weight": 1.0,
+      "source": "BDNFTrkB_TrkB",
+      "target": "BDNFTrkB_KCC2Downregulation"
+    },
+    {
+      "relation": "causes",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "BDNF-TrkB.md",
+      "source_location": "line 33 (disinhibition-driven allodynia)",
+      "weight": 0.9,
+      "source": "BDNFTrkB_KCC2Downregulation",
+      "target": "Bradykinin_PainHypersensitivity"
+    },
+    {
+      "relation": "causes",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "JAK-STAT.md",
+      "source_location": "Validation EC-0045 (terminal STAT3->KCC2 step unproven; NKCC1 phosphorylation documented instead)",
+      "weight": 0.2,
+      "source": "JAKSTAT_STAT3",
+      "target": "BDNFTrkB_KCC2Downregulation"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "JAK-STAT.md",
+      "source_location": "convergent Cl--dependent disinhibition (NKCC1 gain vs KCC2 loss)",
+      "weight": 0.7,
+      "source": "JAKSTAT_NKCC1_Phosphorylation",
+      "target": "BDNFTrkB_KCC2Downregulation"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "JAK-STAT.md",
+      "source_location": "line 24 (gp130/JAK2-dependent)",
+      "weight": 1.0,
+      "source": "JAKSTAT_IL6",
+      "target": "JAKSTAT_JAK2"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "JAK-STAT.md",
+      "source_location": "Validation IL-6->NKCC1 row (Pieraut 2011, J Neurosci 31:13516; IL-6R/JAK-dependent, post-translational, axotomized IL-6R+ DRG neurons)",
+      "weight": 1.0,
+      "source": "JAKSTAT_IL6",
+      "target": "JAKSTAT_NKCC1_Phosphorylation"
+    },
+    {
+      "relation": "activates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "JAK-STAT.md",
+      "source_location": "lines 12-13, 24",
+      "weight": 1.0,
+      "source": "JAKSTAT_JAK2",
+      "target": "JAKSTAT_STAT3"
+    },
+    {
+      "relation": "causes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Bradykinin.md",
+      "source_location": "line 57 (B1R activation essential to neuropathic pain development, preclinical; stage-dependent per Validation QC-0002)",
+      "weight": 1.0,
+      "source": "Bradykinin_B1R",
+      "target": "Bradykinin_PainHypersensitivity"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 58, 92, 148 (post-injury receptor subtype switch; redundancy motivating dual antagonism)",
+      "weight": 0.8,
+      "source": "Bradykinin_B1R",
+      "target": "Bradykinin_B2R"
+    },
+    {
+      "relation": "causes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Bradykinin.md",
+      "source_location": "lines 36-49 (acute excitation/sensitisation and central sensitisation)",
+      "weight": 1.0,
+      "source": "Bradykinin_B2R",
+      "target": "Bradykinin_PainHypersensitivity"
+    },
+    {
+      "relation": "inhibits",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ZFHX2.md",
+      "source_location": "line 131 (hyposensitivity to noxious heat/capsaicin; elevated heat-pain thresholds, copy-number dependent)",
+      "weight": 1.0,
+      "source": "ZFHX2_R1913K_Variant",
+      "target": "ZFHX2_NoxiousHeatSensitivity"
     }
   ],
   "hyperedges": [
     {
-      "id": "dual_hit_components",
-      "label": "Dual-Hit Components Acting on Lamina I Projection Neurons",
-      "nodes": [
-        "insights_x_lamina_I_dual_hit_MicroglialGagStripping",
-        "insights_x_lamina_I_dual_hit_Kcc2Disinhibition",
-        "insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons"
+      "id": "HE_miR155_BDNF_barrier_pathway",
+      "label": "miR-155/BDNF barrier-protection pathway (Zhang, Zhao & Kuang 2025, doi:10.1159/000547276)",
+      "members": [
+        "BBB_Hyperoside",
+        "BBB_MicroRNA155",
+        "BDNFTrkB_BDNF",
+        "BBB_TightJunctionIntegrity"
       ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "insights_x_lamina_I_dual_hit.md"
+      "confidence": "EXTRACTED"
     },
     {
-      "id": "quadruple_prophylaxis_nodes",
-      "label": "Four Convergence Nodes of Acute-to-Chronic Prevention",
-      "nodes": [
-        "proposal_acute_to_chronic_prevention_Rbfox1Restoration",
-        "proposal_acute_to_chronic_prevention_TransientHif1aInhibition",
-        "proposal_acute_to_chronic_prevention_Mmp9Inhibition",
-        "proposal_acute_to_chronic_prevention_LocalAntiVegfa"
+      "id": "HE_IL6_JAK2_STAT3_axis",
+      "label": "IL-6/gp130/JAK2/STAT3 pronociceptive axis",
+      "members": [
+        "JAKSTAT_IL6",
+        "JAKSTAT_JAK2",
+        "JAKSTAT_STAT3"
       ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "proposals/proposal_acute_to_chronic_prevention.md"
+      "confidence": "EXTRACTED"
     },
     {
-      "id": "four_treatment_pillars",
-      "label": "Four-Pillar Chronic Pain Treatment Combination",
-      "nodes": [
-        "proposal_chronic_pain_treatment_Kcc2Enhancement",
-        "proposal_chronic_pain_treatment_RockInhibition",
-        "proposal_chronic_pain_treatment_SstInterneuronSilencing",
-        "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade"
+      "id": "HE_ZFHX2_corrected_regulome",
+      "label": "Corrected ZFHX2 neuropeptide regulome (Habib 2018; SST up, PTGIR/GFRA3/GAL down)",
+      "members": [
+        "ZFHX2_ZFHX2",
+        "ZFHX2_SST",
+        "ZFHX2_NeuropeptideRegulome",
+        "ZFHX2_R1913K_Variant"
       ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "proposals/proposal_chronic_pain_treatment.md"
+      "confidence": "EXTRACTED"
     }
   ],
-  "built_at_commit": "9e2df89e1bdfdfbeb2529e8763451b0e21bfd0ac"
+  "built_at_commit": "9fcbfdf14d74b31550adbc85d9061e86816a5e70"
 }
