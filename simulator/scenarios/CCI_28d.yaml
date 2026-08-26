@@ -1,0 +1,42 @@
+name: cci_28d
+horizon_days: 28
+injury_model: CCI
+injury_tick: 0
+initial_perturbations:
+  - agent_id: shared_microglia
+    value: 0.92
+  - agent_id: TNF_TNF_alpha
+    value: 0.92
+  - agent_id: GABA_apoptosis_ROS_oxidative_stress
+    value: 0.92
+  - agent_id: tlr4_tlr4
+    value: 0.92
+  - agent_id: PNN_ECM_MMP9
+    value: 0.92
+  - agent_id: assaying_molecularly_structural_plasticity_BDNF
+    value: 0.92
+  - agent_id: hif1a_HIF1alpha
+    value: 0.92
+  - agent_id: bradykinin_bradykinin
+    value: 0.88
+  - agent_id: il6_il6
+    value: 0.85
+sustained_drives:
+  - agent_id: shared_microglia
+    value: 0.9
+    start_tick: 0
+  - agent_id: TNF_TNF_alpha
+    value: 0.9
+    start_tick: 0
+  - agent_id: il6_il6
+    value: 0.8
+    start_tick: 0
+notes: >-
+  Chronic constriction injury (Bennett-Xie model): loose ligatures produce
+  ongoing Wallerian degeneration with a strong peripheral inflammatory
+  exudate. Shares the SNI core cascade (microglia, TNF, ROS, TLR4 as DAMP
+  proxy, MMP-9, BDNF, HIF1-alpha) and adds kinin/interleukin peripheral
+  drivers: bradykinin (inflammatory exudate, B1R induction) and IL-6
+  (autocrine neuronal loop, NKCC1 phosphorylation). Sustained drives model
+  the persistent constriction source: tonic microglial activation, TNF and
+  IL-6 elevation through the whole horizon.

@@ -136,6 +136,24 @@ facts:
     kind: readout_threshold
     params: {scenario: sni_180d, vs_scenario: naive_180d, readout: pain_score, window: [150, 179], min_gap: 0.05}
 
+  - id: F-20
+    claim: >-
+      Chronic constriction injury elevates mean pain score over days 14-28
+      versus naive by more than the separation margin (CCI produces robust
+      mechanical hypersensitivity).
+    source_ref: "theme_02#F2.3"
+    kind: readout_threshold
+    params: {scenario: cci_28d, vs_scenario: naive_28d, readout: pain_score, window: [14, 28], min_gap: 0.05}
+
+  - id: F-21
+    claim: >-
+      Paclitaxel-type CIPN elevates mean pain score over days 14-28 versus
+      naive (axonal mitotoxicity + TLR4 neuroinflammation reproduce chronic
+      hypersensitivity without mechanical nerve lesion).
+    source_ref: "theme_03#F3.1"
+    kind: readout_threshold
+    params: {scenario: cipn_28d, vs_scenario: naive_28d, readout: pain_score, window: [14, 28], min_gap: 0.05}
+
   # ------------------------------------------------------------------
   # drug_effect
   # ------------------------------------------------------------------

@@ -130,7 +130,7 @@ simulator/
 1. **Agent count**: "All 595 nodes" resolved to **254 agents** — one per document-type entity in the deduplicated graph. Rationale nodes (~266) are provenance annotations, not biological entities.
 2. **Dynamic closure**: pilot proved the original signed subgraph acyclic and orphaned from symptom nodes; 31 evidence-backed edges (verbatim dossier quotes) + sustained-drive mechanism were added to make chronicification expressible. Provenance: `analysis/claims/closure_edges.yaml`.
 3. **Peripheral distillation script** superseded by the compiled rule fallback (all non-hub agents are rules-driven by design).
-4. **CCI/CIPN scenarios** deferred beyond this plan iteration.
+4. **CCI/CIPN scenarios** delivered post-plan (`cci_28d`, `cipn_28d`; facts F-20/F-21).
 5. **Zotero import** skipped (no MCP server available); reference lists live inside each theme file.
 
 ---
