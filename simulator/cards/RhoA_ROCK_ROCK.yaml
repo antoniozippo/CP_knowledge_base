@@ -1,0 +1,59 @@
+id: RhoA_ROCK_ROCK
+label: ROCK (ROCK1/ROCK2)
+entity_type: molecule
+compartment: other
+tier: MID
+community: 7
+baseline_state: 0.5
+normal_role: ROCK (ROCK1/ROCK2) is a molecule located in other. Baseline activity
+  level 0.50. It receives 3 regulatory influences and exerts 4.
+pathological_rules:
+- rule_id: RULE-RhoA_ROCK_ROCK-01
+  description: ROCK (ROCK1/ROCK2) inhibits Fasudil (ROCK Inhibitor)
+  claim_refs:
+  - EC-0100
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-RhoA_ROCK_ROCK-02
+  description: ROCK (ROCK1/ROCK2) activates via p38 mapk Microglia
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-RhoA_ROCK_ROCK-03
+  description: ROCK (ROCK1/ROCK2) promotes release via p38 m1 switch Tumor Necrosis
+    Factor Alpha (TNF-α)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-RhoA_ROCK_ROCK-04
+  description: ROCK (ROCK1/ROCK2) promotes pathological spine remodeling Dendritic
+    Spine Loss (ACC Layer II/III Pyramidal)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: PNN_ECM_MMP9
+  relation: upregulates
+  sign: 1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: mediates_microglial_release_of
+  sign: 1
+  weight: 0.5
+  validation_status: EXTENDED
+  neutral_ok: false
+- source_id: RhoA_ROCK_RhoA
+  relation: activates
+  sign: 1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+outbound_ids:
+- RhoA_ROCK_fasudil
+- shared_microglia
+- TNF_TNF_alpha
+- karilin7_DendriticSpineLoss
+rule_gap_reason: null
+source_note: RhoA-ROCK.md

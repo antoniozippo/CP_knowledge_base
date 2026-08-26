@@ -1,0 +1,20 @@
+id: CSF1-CSF1R_IL34
+label: Interleukin-34
+entity_type: concept
+compartment: other
+tier: PERIPHERAL
+community: 30
+baseline_state: 0.5
+normal_role: Interleukin-34 is a concept located in other. Baseline activity level
+  0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-CSF1_CSF1R_IL34-01
+  description: Interleukin-34 activates CSF1R (receptor tyrosine kinase)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- csf1_csf1r
+rule_gap_reason: null
+source_note: CSF1-CSF1R.md

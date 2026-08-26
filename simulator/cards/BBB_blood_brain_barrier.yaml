@@ -1,0 +1,22 @@
+id: BBB_blood_brain_barrier
+label: Blood-Brain Barrier (BBB)
+entity_type: structure
+compartment: barrier
+tier: MID
+community: 4
+baseline_state: 0.5
+normal_role: Blood-Brain Barrier (BBB) is a structure located in barrier. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-BBB_blood_brain_barrier-01
+  description: 'Blood-Brain Barrier (BBB) rationale for Rationale: Balancing barrier
+    repair with drug delivery is critical'
+  claim_refs:
+  - EC-0012
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- BBB_rationale_balancing_act
+rule_gap_reason: null
+source_note: BBB.md

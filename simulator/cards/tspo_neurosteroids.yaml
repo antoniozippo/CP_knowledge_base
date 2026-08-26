@@ -1,0 +1,15 @@
+id: tspo_neurosteroids
+label: Neurosteroids (allopregnanolone, GABA-A potentiators)
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 11
+baseline_state: 0.5
+normal_role: Neurosteroids (allopregnanolone, GABA-A potentiators) is a molecule located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: TSPO.md

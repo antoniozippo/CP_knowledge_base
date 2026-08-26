@@ -1,0 +1,69 @@
+id: hif1a_HIF1alpha
+label: Hypoxia-Inducible Factor 1 Alpha (HIF1α)
+entity_type: concept
+compartment: other
+tier: MID
+community: 4
+baseline_state: 0.5
+normal_role: Hypoxia-Inducible Factor 1 Alpha (HIF1α) is a concept located in other.
+  Baseline activity level 0.50. It receives 2 regulatory influences and exerts 6.
+pathological_rules:
+- rule_id: RULE-hif1a_HIF1alpha-01
+  description: 'Hypoxia-Inducible Factor 1 Alpha (HIF1α) rationale for Rationale:
+    HIF1α has isoform specificity and systemic risks'
+  claim_refs:
+  - EC-0042
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-02
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) transcribes Vascular Endothelial
+    Growth Factor A (VEGFA)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-03
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) transcribes Angiopoietin-2
+    (Ang-2)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-04
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) activates Matrix Metalloproteinase-9
+    (MMP-9)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-05
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) activates Spinal Microglia
+    (Activated)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-06
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) upregulates Histone Lactylation
+    (H3K18la)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: GABA_apoptosis_ROS_oxidative_stress
+  relation: stabilizes
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: stabilizes_via_nfkb_phd_inhibition
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- hif1a_rationale_caution
+- vegf_VEGFA
+- AngPt_angiopoietin_2
+- PNN_ECM_MMP9
+- CSF1-CSF1R_SpinalMicroglia
+- epigenetic_mechanisms_pain_HistoneLactylation
+rule_gap_reason: null
+source_note: hif1a.md

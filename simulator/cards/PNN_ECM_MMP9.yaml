@@ -1,0 +1,45 @@
+id: PNN_ECM_MMP9
+label: Matrix Metalloproteinase-9 (MMP-9)
+entity_type: molecule
+compartment: other
+tier: MID
+community: 4
+baseline_state: 0.5
+normal_role: Matrix Metalloproteinase-9 (MMP-9) is a molecule located in other. Baseline
+  activity level 0.50. It receives 2 regulatory influences and exerts 3.
+pathological_rules:
+- rule_id: RULE-PNN_ECM_MMP9-01
+  description: Matrix Metalloproteinase-9 (MMP-9) gates early phase Mechanical Allodynia
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-PNN_ECM_MMP9-02
+  description: Matrix Metalloproteinase-9 (MMP-9) degrades pnn lattice Perineuronal
+    Net (PNN) Loss and GABAergic Hyperactivity
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-PNN_ECM_MMP9-03
+  description: Matrix Metalloproteinase-9 (MMP-9) activates via p38 Microglia
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: hif1a_HIF1alpha
+  relation: activates
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: induces_expression_of
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- shared_mechanical_allodynia
+- GABA_apoptosis_PNN_loss
+- shared_microglia
+rule_gap_reason: null
+source_note: PNN_ECM.md

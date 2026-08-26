@@ -1,0 +1,14 @@
+id: pi3k_akt_mtor_rapamycin
+label: Rapamycin / Sirolimus (mTORC1 inhibitor)
+entity_type: drug
+compartment: other
+tier: PERIPHERAL
+community: 6
+baseline_state: 0.0
+normal_role: Rapamycin / Sirolimus (mTORC1 inhibitor) is a drug located in other.
+  Baseline activity level 0.00. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: PI3K-Akt-mTOR.md

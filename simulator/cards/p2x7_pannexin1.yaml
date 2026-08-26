@@ -1,0 +1,14 @@
+id: p2x7_pannexin1
+label: Pannexin-1 (Panx1, P2X7 large pore partner)
+entity_type: channel
+compartment: other
+tier: PERIPHERAL
+community: 13
+baseline_state: 0.5
+normal_role: Pannexin-1 (Panx1, P2X7 large pore partner) is a channel located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: P2X7.md

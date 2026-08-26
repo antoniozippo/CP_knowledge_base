@@ -1,0 +1,14 @@
+id: BDNF_TrkB_TrkB
+label: TrkB Receptor (TrkB.FL)
+entity_type: receptor
+compartment: other
+tier: MID
+community: 8
+baseline_state: 0.5
+normal_role: TrkB Receptor (TrkB.FL) is a receptor located in other. Baseline activity
+  level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: BDNF-TrkB.md

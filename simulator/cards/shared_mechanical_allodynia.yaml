@@ -1,0 +1,122 @@
+id: shared_mechanical_allodynia
+label: Mechanical Allodynia
+entity_type: symptom
+compartment: other
+tier: MID
+community: 8
+baseline_state: 0.05
+normal_role: Mechanical Allodynia is a symptom located in other. Baseline activity
+  level 0.05. It receives 18 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: BDNF_TrkB_KCC2
+  relation: causes
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: PV_interneurons_PV_interneurons
+  relation: gates_touch_evoked_pain
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: SST_somatostatin_interneurons
+  relation: drives
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: promotes
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: PNN_ECM_MMP9
+  relation: gates_early_phase
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: GABA_apoptosis_PNN_loss
+  relation: emergence_of
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: bradykinin_fulmetibant
+  relation: inhibits_mechanical_allodynia
+  sign: 0
+  weight: 0.5
+  validation_status: REFUTED
+  neutral_ok: true
+- source_id: Bradykinin_B1Receptor
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: epigenetic_mechanisms_pain_HistoneLactylation
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: epigenetic_mechanisms_pain_METTL3_m6A
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: microglial_biology_pain_update_Trem2
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: vegf_Vegfr1
+  relation: causes
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: karilin-7_SpinalPronociceptiveRole
+  relation: causes
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: insights_x_lamina_I_dual_hit_DualHitModel
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_RockInhibition
+  relation: inhibits
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_SstInterneuronSilencing
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade
+  relation: inhibits
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: bradykinin_fulmetibant
+  relation: inhibits_mechanical_allodynia
+  sign: 0
+  weight: 0.5
+  validation_status: REFUTED
+  neutral_ok: true
+outbound_ids: []
+rule_gap_reason: null
+source_note: PNN_ECM.md

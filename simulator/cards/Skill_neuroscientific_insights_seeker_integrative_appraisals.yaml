@@ -1,0 +1,23 @@
+id: Skill_neuroscientific_insights_seeker_integrative_appraisals
+label: 13 Integrative Preclinical Therapeutic Appraisals
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: 13 Integrative Preclinical Therapeutic Appraisals is a concept located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 1.
+pathological_rules:
+- rule_id: RULE-Skill_neuroscientific_insights_seeker_integrative_appraisals-01
+  description: 13 Integrative Preclinical Therapeutic Appraisals rationale for Cross-Cutting
+    Design Principles
+  claim_refs:
+  - EC-0139
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- Skill_neuroscientific_insights_seeker_design_principles
+rule_gap_reason: null
+source_note: Skill_neuroscientific_insights_seeker.md

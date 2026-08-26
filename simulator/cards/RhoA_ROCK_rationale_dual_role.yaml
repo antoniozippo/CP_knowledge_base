@@ -1,0 +1,21 @@
+id: RhoA_ROCK_rationale_dual_role
+label: 'Rationale: RhoA/ROCK has context-dependent roles in regeneration vs pain'
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 7
+baseline_state: 0.5
+normal_role: 'Rationale: RhoA/ROCK has context-dependent roles in regeneration vs
+  pain is a molecule located in other. Baseline activity level 0.50. It receives 1
+  regulatory influences and exerts 0.'
+pathological_rules: []
+inbound_edges:
+- source_id: RhoA_ROCK_RhoA
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: EXTENDED
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: RhoA-ROCK.md

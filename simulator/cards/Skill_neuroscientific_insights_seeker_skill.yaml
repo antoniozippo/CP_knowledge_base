@@ -1,0 +1,14 @@
+id: Skill_neuroscientific_insights_seeker_skill
+label: 'Skill: In Vivo Multimodal Circuit Dissection & Closed-Loop Neuromodulation
+  for Neuropathic Pain'
+entity_type: concept
+compartment: other
+tier: HUB
+community: 1
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: all candidate rules refuted or none found
+source_note: Skill_neuroscientific_insights_seeker.md

@@ -1,0 +1,14 @@
+id: connexin43_gap_junction
+label: Gap Junction Channels (Cx43)
+entity_type: channel
+compartment: other
+tier: PERIPHERAL
+community: 13
+baseline_state: 0.5
+normal_role: Gap Junction Channels (Cx43) is a channel located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: Connexin43.md

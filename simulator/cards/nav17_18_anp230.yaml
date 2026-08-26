@@ -1,0 +1,14 @@
+id: nav17_18_anp230
+label: ANP-230 (multi-Nav blocker Nav1.7/1.8/1.9)
+entity_type: channel
+compartment: other
+tier: PERIPHERAL
+community: 0
+baseline_state: 0.5
+normal_role: ANP-230 (multi-Nav blocker Nav1.7/1.8/1.9) is a channel located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: nav1.7-1.8.md

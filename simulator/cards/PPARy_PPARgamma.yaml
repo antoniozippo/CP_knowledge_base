@@ -1,0 +1,32 @@
+id: PPARy_PPARgamma
+label: PPAR-gamma
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: PPAR-gamma is a concept located in other. Baseline activity level 0.50.
+  It receives 1 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-PPARy_PPARgamma-01
+  description: PPAR-gamma inhibits Spinal Microglia (Activated)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-PPARy_PPARgamma-02
+  description: PPAR-gamma inhibits IL-6/JAK2/STAT3 Axis
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+inbound_edges:
+- source_id: shared_central_sensitization
+  relation: downregulates
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- CSF1-CSF1R_SpinalMicroglia
+- JAK-STAT_JAKSTAT3Axis
+rule_gap_reason: null
+source_note: PPARy.md

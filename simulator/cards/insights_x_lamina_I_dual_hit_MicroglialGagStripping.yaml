@@ -1,0 +1,27 @@
+id: insights_x_lamina_I_dual_hit_MicroglialGagStripping
+label: Microglial PNN GAG Stripping (Hit 1)
+entity_type: cell_type
+compartment: other
+tier: MID
+community: 9
+baseline_state: 0.5
+normal_role: Microglial PNN GAG Stripping (Hit 1) is a cell_type located in other.
+  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-insights_x_lamina_I_dual_hit_MicroglialGagStripping-01
+  description: Microglial PNN GAG Stripping (Hit 1) causes Lamina I Spinoparabrachial
+    Projection Neurons
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: proposal_acute_to_chronic_prevention_Mmp9Inhibition
+  relation: inhibits
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons
+rule_gap_reason: null
+source_note: insights_x_lamina_I_dual_hit.md

@@ -10312,8 +10312,9 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_RhoA",
       "target": "karilin7_Kalirin7",
-      "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "sign": 0,
+      "validation_status": "REFUTED",
+      "quarantine_reason": "theme_10#A10.1: no evidence RhoA/ROCK degrades Kal7; fasudil paradox contradicts sign -1 encoding"
     },
     {
       "relation": "functionally_antagonistic",
@@ -10380,8 +10381,9 @@
       "weight": 1.0,
       "source": "RhoA_ROCK_ROCK",
       "target": "karilin7_Kalirin7",
-      "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "sign": 0,
+      "validation_status": "REFUTED",
+      "quarantine_reason": "theme_10#A10.1: no evidence RhoA/ROCK degrades Kal7; fasudil paradox contradicts sign -1 encoding"
     },
     {
       "relation": "conceptually_related_to",
@@ -19366,6 +19368,61 @@
       "source": "proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade",
       "target": "proposal_chronic_pain_treatment_FourPillarStrategy",
       "sign": 1
+    },
+    {
+      "relation": "inhibits_mechanical_allodynia",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md",
+      "source_location": null,
+      "weight": null,
+      "source": "bradykinin_fulmetibant",
+      "target": "shared_mechanical_allodynia",
+      "sign": 0,
+      "origin": "dynamic_closure",
+      "quote": "primary endpoint change in weekly mean 24-h average pain NRS at week 4 showed treatment difference **0.07 (95% CI −0.170 to 0.314)** — negative; authors' conclusion: \"preclinical efficacy seen with this bradykinin 1 receptor antagonist did not translate\"",
+      "source_ref": "analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md",
+      "validation_status": "REFUTED"
+    },
+    {
+      "relation": "antagonizes_pathway",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "RhoA_ROCK_RhoA",
+      "target": "karilin7_Kalirin7",
+      "sign": 0,
+      "origin": "dynamic_closure",
+      "quote": "Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "validation_status": "REFUTED"
+    },
+    {
+      "relation": "antagonizes_pathway",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "RhoA_ROCK_ROCK",
+      "target": "karilin7_Kalirin7",
+      "sign": 0,
+      "origin": "dynamic_closure",
+      "quote": "Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "validation_status": "REFUTED"
+    },
+    {
+      "relation": "promotes_pathological_spine_remodeling",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "RhoA_ROCK_ROCK",
+      "target": "karilin7_DendriticSpineLoss",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "Fasudil prevented the pathological spine remodeling induced by TBI — RhoA-ROCK activation drives dendritic spine loss via spine retraction pathways",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
     }
   ],
   "hyperedges": [],

@@ -1,0 +1,15 @@
+id: epigenetic_mettl3
+label: METTL3 (m6A writer, stabilises Nav1.7/Nav1.8 mRNA)
+entity_type: channel
+compartment: other
+tier: PERIPHERAL
+community: 6
+baseline_state: 0.5
+normal_role: METTL3 (m6A writer, stabilises Nav1.7/Nav1.8 mRNA) is a channel located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: epigenetic_mechanisms_pain.md

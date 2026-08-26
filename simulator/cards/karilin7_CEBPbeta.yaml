@@ -1,0 +1,20 @@
+id: karilin7_CEBPbeta
+label: C/EBPbeta (Kalrn Transcription Factor)
+entity_type: process
+compartment: other
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.5
+normal_role: C/EBPbeta (Kalrn Transcription Factor) is a process located in other.
+  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: karilin7_KALRN
+  relation: drives_transcription
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: karilin-7.md

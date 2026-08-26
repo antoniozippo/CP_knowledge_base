@@ -1,0 +1,20 @@
+id: cb2_cb2
+label: CB2 Cannabinoid Receptor
+entity_type: receptor
+compartment: other
+tier: MID
+community: 0
+baseline_state: 0.5
+normal_role: CB2 Cannabinoid Receptor is a receptor located in other. Baseline activity
+  level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-cb2_cb2-01
+  description: CB2 Cannabinoid Receptor inhibits Spinal Microglia (Activated)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- CSF1-CSF1R_SpinalMicroglia
+rule_gap_reason: null
+source_note: CB2.md

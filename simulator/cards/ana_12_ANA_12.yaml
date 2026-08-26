@@ -1,0 +1,65 @@
+id: ana_12_ANA_12
+label: ANA-12 (Selective TrkB Antagonist)
+entity_type: receptor
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: ANA-12 (Selective TrkB Antagonist) is a receptor located in other. Baseline
+  activity level 0.50. It receives 2 regulatory influences and exerts 5.
+pathological_rules:
+- rule_id: RULE-ana_12_ANA_12-01
+  description: ANA-12 (Selective TrkB Antagonist) inhibits TrkB Signaling in Neuropathic
+    Pain
+  claim_refs:
+  - EC-0003
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-ana_12_ANA_12-02
+  description: ANA-12 (Selective TrkB Antagonist) inhibits TrkB.T1 (Truncated TrkB
+    Isoform)
+  claim_refs:
+  - EC-0004
+  - EC-0126
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-ana_12_ANA_12-03
+  description: ANA-12 (Selective TrkB Antagonist) inhibits Central Sensitization
+  claim_refs:
+  - EC-0001
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-ana_12_ANA_12-04
+  description: ANA-12 (Selective TrkB Antagonist) inhibits KCC2 Downregulation (Impaired
+    GABAergic Inhibition)
+  claim_refs:
+  - EC-0140
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-ana_12_ANA_12-05
+  description: ANA-12 (Selective TrkB Antagonist) inhibits NLRP3 Inflammasome
+  claim_refs:
+  - EC-0002
+  direction: down
+  magnitude_hint: null
+inbound_edges:
+- source_id: bdnftrkb_trkb_fl
+  relation: antagonizes
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+- source_id: ana_12_TrkB_T1
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids:
+- ana_12_TrkB_signaling_pain
+- ana_12_TrkB_T1
+- shared_central_sensitization
+- ana_12_KCC2_dysregulation
+- ana_12_NLRP3_inflammasome
+rule_gap_reason: null
+source_note: ana-12.md

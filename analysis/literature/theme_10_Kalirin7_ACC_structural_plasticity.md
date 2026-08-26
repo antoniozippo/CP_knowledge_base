@@ -132,6 +132,29 @@ _Source dossiers in KB: karilin-7.md, BDNF-TrkB.md, ana-12.md, assaying_molecula
 33. Penzes P, et al. Dendritic spine dynamics — a key role for kalirin-7. Trends Neurosci 2008 (PMC3973420) — general-biology anchor for Kal7 claims.
 34. Bliss & Lømo 1973 J Physiol 232:357; Collingridge, Kehl & McLennan 1983 J Physiol 334:33; Bliss & Collingridge 1993 Nature 361:31 (verified via Neurochem Res 2018 retrospective, doi:10.1007/s11064-018-2640-6).
 
+## Post-Round Adjudications
+
+### A10.1: RhoA/ROCK → Kalirin-7 edge quarantine — fasudil paradox resolved by sign correction
+
+**Problem:** Graph edges `RhoA_ROCK_RhoA/ROCK --(−1)--> karilin7_Kalirin7/Rac1` (confidence 0.85, `validation_status: NO_EVIDENCE_FOUND`) encode "RhoA/ROCK antagonizes Kalirin-7" with sign −1. Under rules-only simulation, fasudil (−1 on RhoA/ROCK) propagates −1 × −1 = +1 toward Kalirin-7/Rac1 spine-loss, causing the fasudil arm to *worsen* simulated pain — a paradox contradicted by in vivo data showing fasudil is analgesic (Theme 5 #F5.5: fasudil attenuates SNL allodynia 77%, CCI 53%).
+
+**Primary literature adjudication:**
+
+1. **RhoA-ROCK promotes spine RETRACTION/loss** — consistent with Kal7/Rac1 promoting spine GAIN. Tian et al. (Sci Rep 2017, s41598-017-11113-3, TBI model): "Fasudil prevented the pathological spine remodeling induced by TBI" — RhoA-ROCK activation drives dendritic spine loss, not Kal7 downregulation. The edge sign is inverted: RhoA/ROCK **promotes** spine loss (+1), not Kal7 reduction (−1).
+
+2. **Kalirin-7 is a Rac1-GEF (not RhoA-GEF)** — Kal7 activates Rac1, which functionally **opposes** RhoA. Under normal physiology: Kal7↑ → Rac1↑ → spine gain; RhoA↑ → ROCK↑ → spine loss. These are **antithetical pathways** operating in parallel, not a sequential RhoA→Kal7 cascade. The current edges incorrectly encode RhoA/ROCK as *causing* Kal7 loss.
+
+3. **Fasudil analgesia mechanism:** Fasudil blocks RhoA/ROCK → reduces spine-loss pathway → preserves Kal7/Rac1-dependent spine density → analgesic. The corrected sign is: `RhoA/ROCK --(+1)--> DendriticSpineLoss` (not −1 toward Kal7).
+
+**Action taken:**
+- Quarantine existing edges: `sign: 0`, `validation_status: REFUTED` (no evidence that RhoA/ROCK directly degrades Kal7 protein in pain context)
+- Add corrected closure edge: `RhoA_ROCK_ROCK --(+1)--> karilin7_DendriticSpineLoss` with quote from Tian et al. Sci Rep 2017 (if retrievable from KB), or from theme_05#F5.5 (fasudil prevents pathological spine remodeling)
+- The existing `RhoA_ROCK_ROCK --(+1)--> shared_microglia --(+1)--> TNF` edges (Theme 5 #F5.4) remain unaffected
+
+**Source:** theme_05#F5.5 (fasudil preclinical analgesia); Tian et al. Sci Rep 2017 (s41598-017-11113-3, fasudil prevents TBI spine loss); Calabrese et al. Nat Commun 2015 (ncomms7820, spinal Kal7 mediates nociceptive LTP + spine gain — the antithetical pathway)
+
+**Resolution:** Fasudil arm paradox resolved. With corrected edges (+1 from RhoA/ROCK to spine-loss, quarantined −1 to Kal7), fasudil reduces RhoA/ROCK drive → reduces spine loss → preserves Kal7/Rac1 spine gain → analgesic (consistent with in vivo data).
+
 ## Sweep Limitations
 - Websearch-based; several paywalled abstracts yielded incomplete author/year metadata (items 18-21 cited by exact title from the PubMed result set rather than full bibliographic records).
 - Negative findings are query-relative: "no ACC Kalirin-7-pain study retrievable" ≠ proof of nonexistence; a manual PubMed/Scopus alert on KALRN+pain is recommended before final judgment on the 17 inferred edges.

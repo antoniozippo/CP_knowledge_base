@@ -1,0 +1,32 @@
+id: JAK-STAT_JAKSTAT3Axis
+label: IL-6/JAK2/STAT3 Axis
+entity_type: pathway
+compartment: systemic
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: IL-6/JAK2/STAT3 Axis is a pathway located in systemic. Baseline activity
+  level 0.50. It receives 1 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-JAK_STAT_JAKSTAT3Axis-01
+  description: IL-6/JAK2/STAT3 Axis upregulates Brain-Derived Neurotrophic Factor
+    (BDNF)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-JAK_STAT_JAKSTAT3Axis-02
+  description: IL-6/JAK2/STAT3 Axis upregulates TNF-alpha (pro-inflammatory cytokine)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: PPARy_PPARgamma
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- assaying_molecularly_structural_plasticity_BDNF
+rule_gap_reason: null
+source_note: JAK-STAT.md

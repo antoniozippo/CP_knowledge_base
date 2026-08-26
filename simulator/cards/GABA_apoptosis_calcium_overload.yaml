@@ -1,0 +1,72 @@
+id: GABA_apoptosis_calcium_overload
+label: Neuronal Calcium (Ca²⁺) Overload
+entity_type: concept
+compartment: other
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Neuronal Calcium (Ca²⁺) Overload is a concept located in other. Baseline
+  activity level 0.50. It receives 3 regulatory influences and exerts 5.
+pathological_rules:
+- rule_id: RULE-GABA_apoptosis_calcium_overload-01
+  description: Neuronal Calcium (Ca²⁺) Overload causes Mitochondrial Dysfunction in
+    GABAergic Neurons
+  claim_refs:
+  - EC-0092
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_calcium_overload-02
+  description: Neuronal Calcium (Ca²⁺) Overload causes Calcium-Permeable AMPA Receptors
+    (CP-AMPARs)
+  claim_refs:
+  - EC-0091
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_calcium_overload-03
+  description: Neuronal Calcium (Ca²⁺) Overload activates Calpain (Ca²⁺-Dependent
+    Cysteine Protease)
+  claim_refs:
+  - EC-0089
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_calcium_overload-04
+  description: Neuronal Calcium (Ca²⁺) Overload activates mTORC1 (Mammalian Target
+    of Rapamycin Complex 1)
+  claim_refs:
+  - EC-0090
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_calcium_overload-05
+  description: Neuronal Calcium (Ca²⁺) Overload causes Perineuronal Net (PNN) Loss
+    and GABAergic Hyperactivity
+  claim_refs:
+  - EC-0093
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: autophagy-apoptosis_inhibition_mPTP
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: ana_12_TrkB_signaling_pain
+  relation: causes
+  sign: 1
+  weight: 0.5
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: stimulates_mitochondrial_ca_overload
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- GABA_apoptosis_mitochondrial_dysfunction
+- PV_interneurons_CP_AMPARs
+- GABA_apoptosis_Calpain
+- GABA_apoptosis_mTORC1
+- GABA_apoptosis_PNN_loss
+rule_gap_reason: null
+source_note: GABA_apoptosis.md

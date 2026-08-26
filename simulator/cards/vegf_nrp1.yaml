@@ -1,0 +1,20 @@
+id: vegf_nrp1
+label: Neuropilin-1 (NRP-1) Co-Receptor
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 18
+baseline_state: 0.5
+normal_role: Neuropilin-1 (NRP-1) Co-Receptor is a receptor located in other. Baseline
+  activity level 0.50. It receives 1 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: vegf_VEGFR2
+  relation: enhances_signaling_of
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: vegf.md

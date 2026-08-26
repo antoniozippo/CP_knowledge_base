@@ -1,0 +1,21 @@
+id: IGF1_2_rationale_IGF1_dual_nature
+label: 'Rationale: IGF1 has dual neuroprotective and pain-promoting roles'
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 28
+baseline_state: 0.5
+normal_role: 'Rationale: IGF1 has dual neuroprotective and pain-promoting roles is
+  a molecule located in other. Baseline activity level 0.50. It receives 1 regulatory
+  influences and exerts 0.'
+pathological_rules: []
+inbound_edges:
+- source_id: IGF1_2_IGF1
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: IGF1-2.md

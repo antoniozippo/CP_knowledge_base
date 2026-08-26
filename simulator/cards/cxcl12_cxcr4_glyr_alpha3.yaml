@@ -1,0 +1,15 @@
+id: cxcl12_cxcr4_glyr_alpha3
+label: GlyRalpha3 (glycine receptor, CXCR4-regulated)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 9
+baseline_state: 0.5
+normal_role: GlyRalpha3 (glycine receptor, CXCR4-regulated) is a receptor located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: CXCL12-CXCR4.md

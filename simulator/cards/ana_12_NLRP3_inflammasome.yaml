@@ -1,0 +1,19 @@
+id: ana_12_NLRP3_inflammasome
+label: NLRP3 Inflammasome
+entity_type: concept
+compartment: other
+tier: HUB
+community: 1
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules: []
+inbound_edges:
+- source_id: ana_12_ANA_12
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: all candidate rules refuted or none found
+source_note: ana-12.md

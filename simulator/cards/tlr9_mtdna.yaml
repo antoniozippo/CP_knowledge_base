@@ -1,0 +1,15 @@
+id: tlr9_mtdna
+label: Mitochondrial DNA (mtDNA, TLR9 endogenous ligand)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 10
+baseline_state: 0.5
+normal_role: Mitochondrial DNA (mtDNA, TLR9 endogenous ligand) is a receptor located
+  in other. Baseline activity level 0.50. It receives 0 regulatory influences and
+  exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: TLR9.md

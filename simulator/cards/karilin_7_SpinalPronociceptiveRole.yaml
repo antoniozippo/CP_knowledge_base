@@ -1,0 +1,26 @@
+id: karilin-7_SpinalPronociceptiveRole
+label: Spinal Pronociceptive Kalirin-7 Role
+entity_type: molecule
+compartment: dorsal_horn
+tier: PERIPHERAL
+community: 9
+baseline_state: 0.5
+normal_role: Spinal Pronociceptive Kalirin-7 Role is a molecule located in dorsal_horn.
+  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-karilin_7_SpinalPronociceptiveRole-01
+  description: Spinal Pronociceptive Kalirin-7 Role causes Mechanical Allodynia
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: karilin7_Kalirin7
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- shared_mechanical_allodynia
+rule_gap_reason: null
+source_note: karilin-7.md

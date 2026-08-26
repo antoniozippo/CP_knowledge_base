@@ -1,0 +1,52 @@
+id: CSF1-CSF1R_SpinalMicroglia
+label: Spinal Microglia (Activated)
+entity_type: cell_type
+compartment: dorsal_horn
+tier: MID
+community: 1
+baseline_state: 0.5
+normal_role: Spinal Microglia (Activated) is a cell_type located in dorsal_horn. Baseline
+  activity level 0.50. It receives 3 regulatory influences and exerts 3.
+pathological_rules:
+- rule_id: RULE-CSF1_CSF1R_SpinalMicroglia-01
+  description: Spinal Microglia (Activated) causes Brain-Derived Neurotrophic Factor
+    (BDNF)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-CSF1_CSF1R_SpinalMicroglia-02
+  description: Spinal Microglia (Activated) inhibits Blood-Brain/Spinal Cord Barrier
+    Integrity
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-CSF1_CSF1R_SpinalMicroglia-03
+  description: Spinal Microglia (Activated) inhibits Parvalbumin (PV) Interneurons
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+inbound_edges:
+- source_id: hif1a_HIF1alpha
+  relation: activates
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: cb2_cb2
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: PPARy_PPARgamma
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- assaying_molecularly_structural_plasticity_BDNF
+- BBB_BloodBrainBarrier
+- PV_interneurons_PV_interneurons
+rule_gap_reason: null
+source_note: CSF1-CSF1R.md

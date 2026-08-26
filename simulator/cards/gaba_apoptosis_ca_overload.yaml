@@ -1,0 +1,45 @@
+id: gaba_apoptosis_ca_overload
+label: GABAergic Ca2+ Overload Cascade
+entity_type: pathway
+compartment: other
+tier: MID
+community: 24
+baseline_state: 0.5
+normal_role: GABAergic Ca2+ Overload Cascade is a pathway located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 3.
+pathological_rules:
+- rule_id: RULE-gaba_apoptosis_ca_overload-01
+  description: GABAergic Ca2+ Overload Cascade drives CP-AMPARs (GluA2-lacking) in
+    PV Neurons
+  claim_refs:
+  - EC-0037
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-gaba_apoptosis_ca_overload-02
+  description: GABAergic Ca2+ Overload Cascade causes mPTP Opening / Mitochondrial
+    Failure
+  claim_refs:
+  - EC-0036
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-gaba_apoptosis_ca_overload-03
+  description: GABAergic Ca2+ Overload Cascade activates Calpain-Mediated Cleavage
+    (Ca2+-Activated)
+  claim_refs:
+  - EC-0035
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-gaba_apoptosis_ca_overload-04
+  description: GABAergic Ca2+ Overload Cascade drives via ros HIF1α (Hypoxia-Inducible
+    Factor 1 Alpha)
+  claim_refs:
+  - EC-0148
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- gaba_apoptosis_cpampar
+- GABA_apoptosis_Calpain
+- GABA_apoptosis_HIF1alpha
+rule_gap_reason: null
+source_note: GABA_apoptosis.md

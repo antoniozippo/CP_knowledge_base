@@ -1,0 +1,13 @@
+id: tlr4_tlr4
+label: TLR4 (Toll-like Receptor 4)
+entity_type: receptor
+compartment: other
+tier: HUB
+community: 0
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: all candidate rules refuted or none found
+source_note: TLR4.md

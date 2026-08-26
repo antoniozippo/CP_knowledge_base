@@ -1,0 +1,20 @@
+id: ana_12_MAPK_pathway
+label: MAPK Pathway (TrkB Downstream Effector)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 1
+baseline_state: 0.5
+normal_role: MAPK Pathway (TrkB Downstream Effector) is a receptor located in other.
+  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: ana_12_TrkB_signaling_pain
+  relation: activates
+  sign: 1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: ana-12.md

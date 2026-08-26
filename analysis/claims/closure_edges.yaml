@@ -286,3 +286,32 @@
   source_file: analysis/literature/theme_07_CGRP_bradykinin_prostaglandins.md
   source_ref: 'theme_07#A7.1 | Stemper et al., Pain 2025, doi:10.1097/j.pain.0000000000003642, NCT05219812 | quarantine: BRADiNP Ph2a negative in painful diabetic neuropathy; preclinical B1-blockade edges unaffected'
   confidence: INFERRED_CLOSURE
+- category: A6
+  source_label: RhoA_ROCK_RhoA
+  target_label: karilin7_Kalirin7
+  relation: antagonizes_pathway
+  sign: 0
+  validation_status: REFUTED
+  quote: 'Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#A10.1 | Tian et al. Sci Rep 2017 s41598-017-11113-3 (fasudil prevents TBI spine loss); Calabrese et al. Nat Commun 2015 ncomms7820 (spinal Kal7 = Rac1-GEF, pronociceptive); quarantine: sign-0 edges with NO_EVIDENCE_FOUND contradicted by fasudil behavioral data'
+  confidence: INFERRED_CLOSURE
+- category: A6
+  source_label: RhoA_ROCK_ROCK
+  target_label: karilin7_Kalirin7
+  relation: antagonizes_pathway
+  sign: 0
+  validation_status: REFUTED
+  quote: 'Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#A10.1 | Tian et al. Sci Rep 2017 s41598-017-11113-3 (fasudil prevents TBI spine loss); Calabrese et al. Nat Commun 2015 ncomms7820 (spinal Kal7 = Rac1-GEF, pronociceptive); quarantine: sign-0 edges with NO_EVIDENCE_FOUND contradicted by fasudil behavioral data'
+  confidence: INFERRED_CLOSURE
+- category: A6
+  source_label: RhoA_ROCK_ROCK
+  target_label: karilin7_DendriticSpineLoss
+  relation: promotes_pathological_spine_remodeling
+  sign: 1
+  quote: 'Fasudil prevented the pathological spine remodeling induced by TBI — RhoA-ROCK activation drives dendritic spine loss via spine retraction pathways'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#A10.1 | Tian et al. Sci Rep 2017 s41598-017-11113-3 (fasudil prevents TBI spine loss); adds corrected +1 edge replacing quarantined −1 edges; resolves fasudil paradox: ROCK inhibitor → reduces spine loss → preserves Kal7/Rac1 spine gain → analgesic'
+  confidence: INFERRED_CLOSURE

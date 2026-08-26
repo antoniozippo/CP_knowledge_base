@@ -1,0 +1,28 @@
+id: proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade
+label: TNFR1-Selective TNF Blockade Pillar (XPro1595)
+entity_type: drug
+compartment: systemic
+tier: PERIPHERAL
+community: 9
+baseline_state: 0.0
+normal_role: TNFR1-Selective TNF Blockade Pillar (XPro1595) is a drug located in systemic.
+  Baseline activity level 0.00. It receives 0 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade-01
+  description: TNFR1-Selective TNF Blockade Pillar (XPro1595) inhibits Mechanical
+    Allodynia
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade-02
+  description: TNFR1-Selective TNF Blockade Pillar (XPro1595) rationale for Four-Pillar
+    Chronic Pain Treatment Strategy
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- shared_mechanical_allodynia
+- proposal_chronic_pain_treatment_FourPillarStrategy
+rule_gap_reason: null
+source_note: proposals/proposal_chronic_pain_treatment.md

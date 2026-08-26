@@ -1,0 +1,42 @@
+id: vegf_VEGFR2
+label: VEGFR2 (Flk-1/KDR)
+entity_type: concept
+compartment: other
+tier: MID
+community: 4
+baseline_state: 0.5
+normal_role: VEGFR2 (Flk-1/KDR) is a concept located in other. Baseline activity level
+  0.50. It receives 2 regulatory influences and exerts 2.
+pathological_rules:
+- rule_id: RULE-vegf_VEGFR2-01
+  description: VEGFR2 (Flk-1/KDR) enhances signaling of Neuropilin-1 (NRP-1) Co-Receptor
+  claim_refs:
+  - EC-0128
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-vegf_VEGFR2-02
+  description: '[MIXED:Context-dependent (chemotherapy neurotoxicity vs nerve-injury
+    models); treat as contested, consider VEGFR1 reassignment] VEGFR2 (Flk-1/KDR)
+    downregulates via bdnf trkb KCC2 (Potassium-Chloride '
+  claim_refs:
+  - EC-0168
+  direction: down
+  magnitude_hint: null
+inbound_edges:
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: stimulates_microglial_release_of
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: BBB_tight_junction_proteins
+  relation: downregulates
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids:
+- vegf_nrp1
+- BDNF_TrkB_KCC2
+rule_gap_reason: null
+source_note: vegf.md

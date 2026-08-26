@@ -1,0 +1,22 @@
+id: karilin7_LIMK
+label: LIM Kinase (Actin Cytoskeleton Regulator)
+entity_type: molecule
+compartment: other
+tier: MID
+community: 7
+baseline_state: 0.5
+normal_role: LIM Kinase (Actin Cytoskeleton Regulator) is a molecule located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-karilin7_LIMK-01
+  description: LIM Kinase (Actin Cytoskeleton Regulator) phosphorylates and inhibits
+    Cofilin (Actin Depolymerization Factor)
+  claim_refs:
+  - EC-0069
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- karilin7_Cofilin
+rule_gap_reason: null
+source_note: karilin-7.md

@@ -1,0 +1,14 @@
+id: hdac_vorinostat
+label: Vorinostat/SAHA (pan-HDAC inhibitor)
+entity_type: drug
+compartment: other
+tier: PERIPHERAL
+community: 12
+baseline_state: 0.0
+normal_role: Vorinostat/SAHA (pan-HDAC inhibitor) is a drug located in other. Baseline
+  activity level 0.00. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: HDAC.md

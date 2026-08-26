@@ -1,0 +1,20 @@
+id: karilin7_FK506
+label: Tacrolimus/FK506 (Calcineurin Inhibitor)
+entity_type: drug
+compartment: other
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.0
+normal_role: Tacrolimus/FK506 (Calcineurin Inhibitor) is a drug located in other.
+  Baseline activity level 0.00. It receives 1 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: karilin7_Calcineurin
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: karilin-7.md

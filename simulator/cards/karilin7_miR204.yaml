@@ -1,0 +1,14 @@
+id: karilin7_miR204
+label: miR-204 (Kalrn-Targeting Circulating miRNA)
+entity_type: concept
+compartment: systemic
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.5
+normal_role: miR-204 (Kalrn-Targeting Circulating miRNA) is a concept located in systemic.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: karilin-7.md

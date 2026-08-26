@@ -1,0 +1,14 @@
+id: shared_nav17
+label: Nav1.7 (SCN9A voltage-gated sodium channel)
+entity_type: channel
+compartment: other
+tier: MID
+community: 6
+baseline_state: 0.5
+normal_role: Nav1.7 (SCN9A voltage-gated sodium channel) is a channel located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: epigenetic_mechanisms_pain.md

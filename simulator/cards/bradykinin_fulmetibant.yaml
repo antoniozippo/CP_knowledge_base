@@ -1,0 +1,20 @@
+id: bradykinin_fulmetibant
+label: Fulmetibant (BAY 2395840)
+entity_type: concept
+compartment: other
+tier: PERIPHERAL
+community: 2
+baseline_state: 0.5
+normal_role: Fulmetibant (BAY 2395840) is a concept located in other. Baseline activity
+  level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-bradykinin_fulmetibant-01
+  description: Fulmetibant (BAY 2395840) inhibits Bradykinin B1 Receptor (Inducible)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- Bradykinin_B1Receptor
+rule_gap_reason: null
+source_note: Bradykinin.md

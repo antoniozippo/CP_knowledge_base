@@ -1,0 +1,62 @@
+id: BDNF_TrkB_KCC2
+label: KCC2 (Potassium-Chloride Cotransporter)
+entity_type: channel
+compartment: other
+tier: HUB
+community: 8
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules:
+- rule_id: RULE-BDNF_TrkB_KCC2-01
+  description: KCC2 (Potassium-Chloride Cotransporter) causes Mechanical Allodynia
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-BDNF_TrkB_KCC2-02
+  description: KCC2 (Potassium-Chloride Cotransporter) causes Central Sensitization
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-BDNF_TrkB_KCC2-03
+  description: KCC2 (Potassium-Chloride Cotransporter) supports inhibitory output
+    of Parvalbumin (PV) Interneurons
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: bdnftrkb_trkb_fl
+  relation: downregulates
+  sign: -1
+  weight: 0.9
+  validation_status: MIXED
+  neutral_ok: false
+- source_id: GABA_apoptosis_Calpain
+  relation: cleaves
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
+- source_id: vegf_VEGFR2
+  relation: downregulates_via_bdnf_trkb
+  sign: -1
+  weight: 0.5
+  validation_status: MIXED
+  neutral_ok: false
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: downregulates
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: TNF_TNF_alpha
+  relation: downregulates_via_tnfr1_nfkb_pkc
+  sign: -1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- shared_mechanical_allodynia
+- shared_central_sensitization
+- PV_interneurons_PV_interneurons
+rule_gap_reason: null
+source_note: BDNF-TrkB.md
