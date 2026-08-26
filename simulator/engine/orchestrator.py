@@ -36,7 +36,7 @@ from pathlib import Path
 
 import yaml
 
-from simulator.engine.llm_agent import DeltaCache, OpenCodeClient, evaluate_llm_delta
+from simulator.engine.llm_agent import DeltaCache, LocalLLMClient, OpenCodeClient, evaluate_llm_delta
 from simulator.engine.rule_fallback import DRIVE_GAIN, compute_influence, rule_next_state
 from simulator.readouts import compute_readouts
 from simulator.schemas import (
@@ -400,11 +400,28 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cards", required=True)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--llm-bin", default=None, help="enable LLM hub path via this CLI binary")
+    parser.add_argument("--llm-endpoint", default=None,
+                        help="local OpenAI-compatible endpoint (e.g. http://192.168.1.13:1234)")
+    parser.add_argument("--llm-model", default=None,
+                        help="model name for local endpoint (default: qwen/qwen3.8-27b)")
+    parser.add_argument("--llm-max-tokens", type=int, default=256,
+                        help="max_tokens for local LLM calls (default: 256)")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
     scenario = load_scenario(args.scenario)
     cards = load_cards(args.cards)
-    client = OpenCodeClient(bin_path=args.llm_bin) if args.llm_bin else None
+
+    if args.llm_endpoint:
+        client = LocalLLMClient(
+            endpoint=args.llm_endpoint,
+            model=args.llm_model,
+            max_tokens=args.llm_max_tokens,
+        )
+    elif args.llm_bin:
+        client = OpenCodeClient(bin_path=args.llm_bin)
+    else:
+        client = None
+
     orch = Orchestrator(cards=cards, scenario=scenario, llm_client=client, seed=args.seed)
     logs = orch.run()
     out_dir = orch.save_run(logs, args.out)

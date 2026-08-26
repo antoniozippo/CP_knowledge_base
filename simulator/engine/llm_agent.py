@@ -1,7 +1,7 @@
-"""LLM-driven state updates via the `opencode` CLI, with a deterministic
-cache so identical (card, tick, packet-context) requests never re-invoke
-the subprocess. All failures degrade to None; the caller falls back to
-the rule engine.
+"""LLM-driven state updates via the `opencode` CLI or a local OpenAI-compatible
+endpoint, with a deterministic cache so identical (card, tick, packet-context)
+requests never re-invoke the subprocess/client. All failures degrade to None;
+the caller falls back to the rule engine.
 """
 
 import hashlib
@@ -11,13 +11,15 @@ import os
 import subprocess
 import time
 from dataclasses import dataclass
+from urllib.request import Request, urlopen
+from urllib.error import URLError
 
 from simulator.schemas import AgentCard, Epoch, InfluencePacket, StateDelta
 
 logger = logging.getLogger(__name__)
 
 DEFAULT_OPENCODE_BIN = "opencode"
-CLIENT_TIMEOUT_S = 120
+CLIENT_TIMEOUT_S = 180
 MAX_RATIONALE_CHARS = 300
 
 
@@ -37,6 +39,51 @@ class OpenCodeClient:
                 f"opencode CLI failed with exit code {result.returncode}: {result.stderr}"
             )
         return result.stdout.strip()
+
+
+class LocalLLMClient:
+    """OpenAI-compatible client for local LM Studio / vLLM / ollama endpoints."""
+
+    def __init__(
+        self,
+        endpoint: str | None = None,
+        model: str | None = None,
+        max_tokens: int = 2048,
+        temperature: float = 0.0,
+    ):
+        self.endpoint = (
+            endpoint
+            or os.environ.get("LLM_ENDPOINT", "http://192.168.1.13:1234")
+        ).rstrip("/")
+        self.model = model or os.environ.get("LLM_MODEL", "qwen/qwen3.8-27b")
+        self.max_tokens = max_tokens
+        self.temperature = temperature
+
+    def complete(self, prompt: str) -> str:
+        url = f"{self.endpoint}/v1/chat/completions"
+        payload = json.dumps({
+            "model": self.model,
+            "messages": [
+                {"role": "user", "content": prompt},
+            ],
+            "max_tokens": self.max_tokens,
+            "temperature": self.temperature,
+            "extra_body": {"enable_thinking": False},
+        }).encode("utf-8")
+
+        req = Request(url, data=payload, headers={"Content-Type": "application/json"})
+        with urlopen(req, timeout=CLIENT_TIMEOUT_S) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+
+        content = data["choices"][0]["message"]["content"] or ""
+        finish = data["choices"][0].get("finish_reason", "")
+
+        if finish == "length" and not content.strip():
+            raise RuntimeError(
+                f"LLM response truncated; increase max_tokens"
+            )
+
+        return content.strip()
 
 
 def card_sha256(card: AgentCard) -> str:
@@ -148,8 +195,10 @@ def _validated_delta(card: AgentCard, tick: int, delta_dict: dict) -> StateDelta
         raise ValueError(f"new_state out of range: {new_state}")
     if not isinstance(rationale, str):
         raise ValueError("rationale must be a string")
-    if not isinstance(refs, list) or not refs or not all(isinstance(r, str) for r in refs):
-        raise ValueError("refs must be a non-empty list of strings")
+    if not isinstance(refs, list) or not all(isinstance(r, str) for r in refs):
+        raise ValueError("refs must be a list of strings")
+    if not refs:
+        refs = ["LLM_NO_REFS"]
     return StateDelta(
         agent_id=card.id,
         tick=tick,
