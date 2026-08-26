@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-08-26T10:33:51Z
+generated: 2026-08-26T11:01:35Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -132,6 +132,14 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 - dropped candidate rules (all refs REFUTED):
   - `RULE-karilin7_Kalirin7-13` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Spared Nerve Injury (SNI) Model — refs: EC-0059 (REFUTED)
   - `RULE-karilin7_Kalirin7-14` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Chronic Constriction Injury (CCI) Model — refs: EC-0058 (REFUTED)
+
+## rage_rage (RAGE (Receptor for Advanced Glycation End-products / AGER))
+
+- tier: HUB | entity_type: receptor | compartment: other | community: 10
+- proposed_normal_role: <LLM_ENRICH>
+- rule_gap_reason: all candidate rules refuted or none found
+- pathological rules (0):
+  - (none surviving verdict filtering)
 
 ## tlr4_tlr4 (TLR4 (Toll-like Receptor 4))
 

@@ -6,7 +6,7 @@ tier: MID
 community: 1
 baseline_state: 0.5
 normal_role: ANA-12 (Selective TrkB Antagonist) is a receptor located in other. Baseline
-  activity level 0.50. It receives 1 regulatory influences and exerts 5.
+  activity level 0.50. It receives 2 regulatory influences and exerts 5.
 pathological_rules:
 - rule_id: RULE-ana_12_ANA_12-01
   description: ANA-12 (Selective TrkB Antagonist) inhibits TrkB Signaling in Neuropathic
@@ -43,6 +43,12 @@ pathological_rules:
   direction: down
   magnitude_hint: null
 inbound_edges:
+- source_id: bdnftrkb_trkb_fl
+  relation: antagonizes
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
 - source_id: ana_12_TrkB_T1
   relation: inhibits
   sign: -1

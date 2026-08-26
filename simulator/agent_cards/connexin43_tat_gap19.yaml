@@ -1,0 +1,14 @@
+id: connexin43_tat_gap19
+label: TAT-Gap19 (Cx43 hemichannel blocker)
+entity_type: drug
+compartment: other
+tier: PERIPHERAL
+community: 13
+baseline_state: 0.0
+normal_role: TAT-Gap19 (Cx43 hemichannel blocker) is a drug located in other. Baseline
+  activity level 0.00. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: Connexin43.md

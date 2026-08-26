@@ -2758,7 +2758,7 @@
     },
     {
       "label": "ALK5 (TGF-β receptor type I)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TGF-beta.md",
       "source_location": "Section signaling",
       "source_url": null,
@@ -2814,7 +2814,7 @@
     },
     {
       "label": "MyD88 (TLR4 adaptor protein)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR4.md",
       "source_location": "Section signaling",
       "source_url": null,
@@ -2831,7 +2831,7 @@
     },
     {
       "label": "TRIF (TLR4 adaptor protein)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR4.md",
       "source_location": "Section signaling",
       "source_url": null,
@@ -2931,7 +2931,7 @@
     },
     {
       "label": "MEK1/2 (MAP2K upstream of ERK)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "ERK-MAPK.md",
       "source_location": "Section core module",
       "source_url": null,
@@ -3004,7 +3004,7 @@
     },
     {
       "label": "Ceftriaxone (GLT-1 upregulator)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "GLT-1.md",
       "source_location": "Section preclinical 1",
       "source_url": null,
@@ -3071,7 +3071,7 @@
     },
     {
       "label": "EP4 receptor (PGE2 receptor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "prostaglandins.md",
       "source_location": "Section EP4",
       "source_url": null,
@@ -3121,7 +3121,7 @@
     },
     {
       "label": "CSF1R (receptor tyrosine kinase)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CSF1-CSF1R.md",
       "source_location": "Section system",
       "source_url": null,
@@ -3134,7 +3134,7 @@
       "id": "csf1_csf1r",
       "entity_type": "receptor",
       "compartment": "other",
-      "tier": "peripheral"
+      "tier": "mid"
     },
     {
       "label": "IL-34 (alternative CSF1R ligand)",
@@ -3188,7 +3188,7 @@
     },
     {
       "label": "DAPT (γ-secretase inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Notch.md",
       "source_location": "Section preclinical",
       "source_url": null,
@@ -3254,7 +3254,7 @@
     },
     {
       "label": "AMG487 (CXCR3 antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CCL21-CXCR3.md",
       "source_location": "Section preclinical",
       "source_url": null,
@@ -3461,7 +3461,7 @@
     },
     {
       "label": "ARN23746 (next-gen KCC2 activator)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "KCC2_enhancers_new.md",
       "source_location": "Structural classes",
       "source_url": null,
@@ -3547,7 +3547,7 @@
     },
     {
       "label": "IRF8 (P2X4 transcriptional regulator)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "P2X4.md",
       "source_location": "Section upregulation",
       "source_url": null,
@@ -3697,7 +3697,7 @@
     },
     {
       "label": "Suzetrigine/VX-548 (Nav1.8 inhibitor, FDA-approved 2025)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "nav1.7-1.8.md",
       "source_location": "Section 5.2",
       "source_url": null,
@@ -3714,7 +3714,7 @@
     },
     {
       "label": "ANP-230 (multi-Nav blocker Nav1.7/1.8/1.9)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "nav1.7-1.8.md",
       "source_location": "Section 5.2",
       "source_url": null,
@@ -3748,7 +3748,7 @@
     },
     {
       "label": "CX3CL1 (Fractalkine)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CX3CL1-CX3CR1.md",
       "source_location": null,
       "source_url": null,
@@ -3764,7 +3764,7 @@
     },
     {
       "label": "CX3CR1 Receptor",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CX3CL1-CX3CR1.md",
       "source_location": null,
       "source_url": null,
@@ -3828,7 +3828,7 @@
     },
     {
       "label": "CX3CR1 Antagonists (analgesics)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CX3CL1-CX3CR1.md",
       "source_location": null,
       "source_url": null,
@@ -3860,7 +3860,7 @@
     },
     {
       "label": "S1PR1 Receptor",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "S1P.md",
       "source_location": null,
       "source_url": null,
@@ -3876,7 +3876,7 @@
     },
     {
       "label": "S1PR2 Receptor (pronociceptive)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "S1P.md",
       "source_location": null,
       "source_url": null,
@@ -3892,7 +3892,7 @@
     },
     {
       "label": "S1PR3 Receptor (astrogliosis)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "S1P.md",
       "source_location": null,
       "source_url": null,
@@ -3908,7 +3908,7 @@
     },
     {
       "label": "Sphingosine Kinase 1 (SphK1)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "S1P.md",
       "source_location": null,
       "source_url": null,
@@ -3924,7 +3924,7 @@
     },
     {
       "label": "Sphingosine Kinase 2 (SphK2)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "S1P.md",
       "source_location": null,
       "source_url": null,
@@ -3972,7 +3972,7 @@
     },
     {
       "label": "Gap Junction Channels (Cx43)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Connexin43.md",
       "source_location": null,
       "source_url": null,
@@ -4004,7 +4004,7 @@
     },
     {
       "label": "TAT-Gap19 (Cx43 hemichannel blocker)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Connexin43.md",
       "source_location": null,
       "source_url": null,
@@ -4340,7 +4340,7 @@
     },
     {
       "label": "1400W (selective iNOS inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "iNOS.md",
       "source_location": null,
       "source_url": null,
@@ -4372,7 +4372,7 @@
     },
     {
       "label": "P2X7 Receptor (P2RX7)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "P2X7.md",
       "source_location": null,
       "source_url": null,
@@ -4388,7 +4388,7 @@
     },
     {
       "label": "Pannexin-1 (Panx1, P2X7 large pore partner)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "P2X7.md",
       "source_location": null,
       "source_url": null,
@@ -4420,7 +4420,7 @@
     },
     {
       "label": "A438079 (P2X7 antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "P2X7.md",
       "source_location": null,
       "source_url": null,
@@ -4436,7 +4436,7 @@
     },
     {
       "label": "JNJ-54175446 (AFC-5128, brain-penetrant P2X7 antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "P2X7.md",
       "source_location": null,
       "source_url": null,
@@ -4452,7 +4452,7 @@
     },
     {
       "label": "TLR9 (Toll-Like Receptor 9)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR9.md",
       "source_location": null,
       "source_url": null,
@@ -4468,7 +4468,7 @@
     },
     {
       "label": "Mitochondrial DNA (mtDNA, TLR9 endogenous ligand)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR9.md",
       "source_location": null,
       "source_url": null,
@@ -4484,7 +4484,7 @@
     },
     {
       "label": "ODN2088 (TLR9 antagonist oligodeoxynucleotide)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR9.md",
       "source_location": null,
       "source_url": null,
@@ -4516,7 +4516,7 @@
     },
     {
       "label": "Substance P (SP / TAC1)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Substance_P-NK1.md",
       "source_location": null,
       "source_url": null,
@@ -4532,7 +4532,7 @@
     },
     {
       "label": "NK1 Receptor (TACR1)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Substance_P-NK1.md",
       "source_location": null,
       "source_url": null,
@@ -4548,7 +4548,7 @@
     },
     {
       "label": "Substance P-Saporin (SP-SAP neurotoxin conjugate)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Substance_P-NK1.md",
       "source_location": null,
       "source_url": null,
@@ -4564,7 +4564,7 @@
     },
     {
       "label": "Aprepitant (NK1 antagonist, clinical failures)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Substance_P-NK1.md",
       "source_location": null,
       "source_url": null,
@@ -4628,7 +4628,7 @@
     },
     {
       "label": "MCC950 / CRID3 (NLRP3 inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "NLRP3.md",
       "source_location": null,
       "source_url": null,
@@ -4660,7 +4660,7 @@
     },
     {
       "label": "TLR2 (Toll-Like Receptor 2)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR2.md",
       "source_location": null,
       "source_url": null,
@@ -4692,7 +4692,7 @@
     },
     {
       "label": "C29 / CU-CPT22 (small-molecule TLR2 inhibitors)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TLR2.md",
       "source_location": null,
       "source_url": null,
@@ -4708,7 +4708,7 @@
     },
     {
       "label": "HDAC1 (Class I, nuclear corepressor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4724,7 +4724,7 @@
     },
     {
       "label": "HDAC2 (Class I, restrains Cacna2d1)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4740,7 +4740,7 @@
     },
     {
       "label": "HDAC3 (Class I, suppresses GABAergic genes)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4756,7 +4756,7 @@
     },
     {
       "label": "HDAC4 (Class IIa, represses KCC2/GAD65)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4775,7 +4775,7 @@
     },
     {
       "label": "HDAC6 (Class IIb, cytoplasmic, alpha-tubulin)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4807,7 +4807,7 @@
     },
     {
       "label": "Vorinostat/SAHA (pan-HDAC inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4823,7 +4823,7 @@
     },
     {
       "label": "RGFP966 (HDAC3-selective inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4839,7 +4839,7 @@
     },
     {
       "label": "ACY-1083 / Tubastatin A (HDAC6 inhibitors)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "HDAC.md",
       "source_location": null,
       "source_url": null,
@@ -4871,7 +4871,7 @@
     },
     {
       "label": "m6A RNA Methylation (epitranscriptomic layer)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "epigenetic_mechanisms_pain.md",
       "source_location": null,
       "source_url": null,
@@ -4887,7 +4887,7 @@
     },
     {
       "label": "METTL3 (m6A writer, stabilises Nav1.7/Nav1.8 mRNA)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "epigenetic_mechanisms_pain.md",
       "source_location": null,
       "source_url": null,
@@ -4951,7 +4951,7 @@
     },
     {
       "label": "Cav3.2 T-type Calcium Channel (CACNA1H)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "cav3.2.md",
       "source_location": null,
       "source_url": null,
@@ -4967,7 +4967,7 @@
     },
     {
       "label": "Z944 (selective T-type blocker, Phase II)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "cav3.2.md",
       "source_location": null,
       "source_url": null,
@@ -4983,7 +4983,7 @@
     },
     {
       "label": "Ethosuximide (T-type channel blocker, repurposing)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "cav3.2.md",
       "source_location": null,
       "source_url": null,
@@ -5015,7 +5015,7 @@
     },
     {
       "label": "RAGE (Receptor for Advanced Glycation End-products / AGER)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "RAGE.md",
       "source_location": null,
       "source_url": null,
@@ -5047,7 +5047,7 @@
     },
     {
       "label": "Soluble RAGE (sRAGE, decoy receptor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "RAGE.md",
       "source_location": null,
       "source_url": null,
@@ -5063,7 +5063,7 @@
     },
     {
       "label": "FPS-ZM1 (brain-penetrant RAGE antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "RAGE.md",
       "source_location": null,
       "source_url": null,
@@ -5079,7 +5079,7 @@
     },
     {
       "label": "Azeliragon (TTP488, oral RAGE antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "RAGE.md",
       "source_location": null,
       "source_url": null,
@@ -5143,7 +5143,7 @@
     },
     {
       "label": "Neurosteroids (allopregnanolone, GABA-A potentiators)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TSPO.md",
       "source_location": null,
       "source_url": null,
@@ -5207,7 +5207,7 @@
     },
     {
       "label": "CXCR4 Receptor",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CXCL12-CXCR4.md",
       "source_location": null,
       "source_url": null,
@@ -5223,7 +5223,7 @@
     },
     {
       "label": "AMD3100 / Plerixafor (CXCR4 antagonist, FDA-approved)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CXCL12-CXCR4.md",
       "source_location": null,
       "source_url": null,
@@ -5255,7 +5255,7 @@
     },
     {
       "label": "GlyRalpha3 (glycine receptor, CXCR4-regulated)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "CXCL12-CXCR4.md",
       "source_location": null,
       "source_url": null,
@@ -5303,7 +5303,7 @@
     },
     {
       "label": "Resiniferatoxin (RTX, ultrapotent TRPV1 agonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TRPV1.md",
       "source_location": null,
       "source_url": null,
@@ -5319,7 +5319,7 @@
     },
     {
       "label": "ACD440 (topical TRPV1 antagonist, Phase II)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TRPV1.md",
       "source_location": null,
       "source_url": null,
@@ -5367,7 +5367,7 @@
     },
     {
       "label": "Endothelin ETA Receptor (pronociceptive)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Endothelin.md",
       "source_location": null,
       "source_url": null,
@@ -5383,7 +5383,7 @@
     },
     {
       "label": "Endothelin ETB Receptor (dual: analgesic/pronociceptive)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Endothelin.md",
       "source_location": null,
       "source_url": null,
@@ -5399,7 +5399,7 @@
     },
     {
       "label": "Bosentan (dual ETA/ETB antagonist, PAH-approved)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Endothelin.md",
       "source_location": null,
       "source_url": null,
@@ -5415,7 +5415,7 @@
     },
     {
       "label": "Atrasentan / ABT-627 (ETA-selective antagonist)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Endothelin.md",
       "source_location": null,
       "source_url": null,
@@ -5431,7 +5431,7 @@
     },
     {
       "label": "PI3K (Phosphoinositide 3-Kinase)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "PI3K-Akt-mTOR.md",
       "source_location": null,
       "source_url": null,
@@ -5447,7 +5447,7 @@
     },
     {
       "label": "Akt / PKB (PI3K effector kinase)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "PI3K-Akt-mTOR.md",
       "source_location": null,
       "source_url": null,
@@ -5463,7 +5463,7 @@
     },
     {
       "label": "Rapamycin / Sirolimus (mTORC1 inhibitor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "PI3K-Akt-mTOR.md",
       "source_location": null,
       "source_url": null,
@@ -5575,7 +5575,7 @@
     },
     {
       "label": "Extracellular ATP (DAMP / purinergic signal)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Connexin43.md",
       "source_location": null,
       "source_url": null,
@@ -5591,7 +5591,7 @@
     },
     {
       "label": "Nav1.7 (SCN9A voltage-gated sodium channel)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "epigenetic_mechanisms_pain.md",
       "source_location": null,
       "source_url": null,
@@ -5607,7 +5607,7 @@
     },
     {
       "label": "Nav1.8 (SCN10A voltage-gated sodium channel)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "epigenetic_mechanisms_pain.md",
       "source_location": null,
       "source_url": null,
@@ -5639,7 +5639,7 @@
     },
     {
       "label": "CGRP (Calcitonin Gene-Related Peptide)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "Substance_P-NK1.md",
       "source_location": null,
       "source_url": null,
@@ -5658,7 +5658,7 @@
     },
     {
       "label": "TRPA1 Channel (co-expressed with TRPV1)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "TRPV1.md",
       "source_location": null,
       "source_url": null,
@@ -6122,7 +6122,7 @@
     },
     {
       "label": "CGRP Receptor (CLR/RAMP1 Heterodimer)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "cgrp.md",
       "source_location": null,
       "source_url": null,
@@ -6426,7 +6426,7 @@
     },
     {
       "label": "P2X4-P2X7 Receptor Heteromerization",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "microglial_biology_pain_update.md",
       "source_location": null,
       "source_url": null,
@@ -7002,7 +7002,7 @@
     },
     {
       "label": "TrkB.FL (Full-Length TrkB Receptor)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "BDNF-TrkB.md",
       "source_location": "Section Central Sensitization",
       "source_url": null,
@@ -7036,7 +7036,7 @@
     },
     {
       "label": "BDNF Val66Met Polymorphism",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "BDNF-TrkB.md",
       "source_location": "Section Clinical",
       "source_url": null,
@@ -7053,7 +7053,7 @@
     },
     {
       "label": "TrkB-Fc (BDNF Sequestering Chimera)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "BDNF-TrkB.md",
       "source_location": "Section Preclinical",
       "source_url": null,
@@ -7154,7 +7154,7 @@
     },
     {
       "label": "CP-AMPARs (GluA2-lacking) in PV Neurons",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "GABA_apoptosis.md",
       "source_location": "Section Ca2+ Sources",
       "source_url": null,
@@ -7442,7 +7442,7 @@
     },
     {
       "label": "Neuropilin-1 (NRP-1) Co-Receptor",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "vegf.md",
       "source_location": "Section Receptors",
       "source_url": null,
@@ -7661,7 +7661,7 @@
     },
     {
       "label": "Ruxolitinib (JAK1/2 Inhibitor, FDA-Approved)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "JAK-STAT.md",
       "source_location": "Section Preclinical",
       "source_url": null,
@@ -7678,7 +7678,7 @@
     },
     {
       "label": "Baricitinib (JAK1/2 Inhibitor, RA-Approved)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "JAK-STAT.md",
       "source_location": "Section Clinical",
       "source_url": null,
@@ -7711,7 +7711,7 @@
     },
     {
       "label": "NMDAR (GluN2B/GluN2A) as Plasticity Marker",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "assaying_molecularly_structural_plasticity.md",
       "source_location": "Section 2",
       "source_url": null,
@@ -7728,7 +7728,7 @@
     },
     {
       "label": "CaMKII (LTP Kinase, Structural Plasticity)",
-      "file_type": "rationale",
+      "file_type": "document",
       "source_file": "assaying_molecularly_structural_plasticity.md",
       "source_location": "Section 2",
       "source_url": null,

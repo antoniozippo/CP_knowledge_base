@@ -6,7 +6,7 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: VEGFR2 (Flk-1/KDR) is a concept located in other. Baseline activity level
-  0.50. It receives 2 regulatory influences and exerts 1.
+  0.50. It receives 2 regulatory influences and exerts 2.
 pathological_rules:
 - rule_id: RULE-vegf_VEGFR2-01
   description: VEGFR2 (Flk-1/KDR) enhances signaling of Neuropilin-1 (NRP-1) Co-Receptor
@@ -36,6 +36,7 @@ inbound_edges:
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
 outbound_ids:
+- vegf_nrp1
 - BDNF_TrkB_KCC2
 rule_gap_reason: null
 source_note: vegf.md

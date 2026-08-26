@@ -24,6 +24,12 @@ pathological_rules:
   direction: up
   magnitude_hint: null
 inbound_edges:
+- source_id: bdnftrkb_trkb_fl
+  relation: downregulates
+  sign: -1
+  weight: 0.9
+  validation_status: MIXED
+  neutral_ok: false
 - source_id: GABA_apoptosis_Calpain
   relation: cleaves
   sign: -1

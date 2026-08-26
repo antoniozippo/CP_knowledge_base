@@ -128,6 +128,8 @@ outbound_ids:
 - vegf_VEGFR2
 - assaying_synaptic_plasticity
 - SST_somatostatin_interneurons
+- bdnftrkb_trkb_fl
+- bdnftrkb_trkb_fc
 - GABA_apoptosis_TNF_alpha
 - RhoA_ROCK_ROCK
 - BDNF_TrkB_KCC2

@@ -6,7 +6,7 @@ tier: MID
 community: 24
 baseline_state: 0.5
 normal_role: GABAergic Ca2+ Overload Cascade is a pathway located in other. Baseline
-  activity level 0.50. It receives 0 regulatory influences and exerts 2.
+  activity level 0.50. It receives 0 regulatory influences and exerts 3.
 pathological_rules:
 - rule_id: RULE-gaba_apoptosis_ca_overload-01
   description: GABAergic Ca2+ Overload Cascade drives CP-AMPARs (GluA2-lacking) in
@@ -38,6 +38,7 @@ pathological_rules:
   magnitude_hint: null
 inbound_edges: []
 outbound_ids:
+- gaba_apoptosis_cpampar
 - GABA_apoptosis_Calpain
 - GABA_apoptosis_HIF1alpha
 rule_gap_reason: null

@@ -1,0 +1,13 @@
+id: rage_rage
+label: RAGE (Receptor for Advanced Glycation End-products / AGER)
+entity_type: receptor
+compartment: other
+tier: HUB
+community: 10
+baseline_state: 0.5
+normal_role: <LLM_ENRICH>
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: all candidate rules refuted or none found
+source_note: RAGE.md

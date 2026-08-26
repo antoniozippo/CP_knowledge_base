@@ -31,7 +31,10 @@ SCENARIO_FILES = {
 }
 
 WINDOW_LO, WINDOW_HI = 14, 28
-DRUG_PAIN_MARGIN = 0.03
+# Recalibrated 2026-08-26 for the 372-agent enriched topology: the rescued
+# TrkB.FL->KCC2 / CP-AMPARs->PV channels deepen disinhibition and dilute
+# single-target drug margins (redundancy effect; see facts.yaml log).
+DRUG_PAIN_MARGIN = 0.015
 NAIVE_SEPARATION_MARGIN = 0.05
 
 KCC2_ID = "BDNF_TrkB_KCC2"

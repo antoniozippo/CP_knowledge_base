@@ -1,0 +1,14 @@
+id: pi3k_akt_mtor_akt
+label: Akt / PKB (PI3K effector kinase)
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 6
+baseline_state: 0.5
+normal_role: Akt / PKB (PI3K effector kinase) is a molecule located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: PI3K-Akt-mTOR.md

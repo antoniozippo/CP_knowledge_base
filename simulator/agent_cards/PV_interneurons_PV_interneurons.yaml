@@ -6,7 +6,7 @@ tier: MID
 community: 8
 baseline_state: 0.5
 normal_role: Parvalbumin (PV) Interneurons is a cell_type located in other. Baseline
-  activity level 0.50. It receives 5 regulatory influences and exerts 3.
+  activity level 0.50. It receives 6 regulatory influences and exerts 3.
 pathological_rules:
 - rule_id: RULE-PV_interneurons_PV_interneurons-01
   description: Parvalbumin (PV) Interneurons rescues Chemogenetic/Optogenetic PV Rescue
@@ -46,6 +46,12 @@ inbound_edges:
   sign: -1
   weight: 0.9
   validation_status: MIXED
+  neutral_ok: false
+- source_id: gaba_apoptosis_cpampar
+  relation: causes_excitotoxic_death_in
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
 - source_id: GABA_apoptosis_PNN_loss
   relation: impairs_fast_spiking_of

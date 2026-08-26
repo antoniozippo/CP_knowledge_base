@@ -1,0 +1,15 @@
+id: epigenetic_m6a
+label: m6A RNA Methylation (epitranscriptomic layer)
+entity_type: molecule
+compartment: other
+tier: PERIPHERAL
+community: 6
+baseline_state: 0.5
+normal_role: m6A RNA Methylation (epitranscriptomic layer) is a molecule located in
+  other. Baseline activity level 0.50. It receives 0 regulatory influences and exerts
+  0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: epigenetic_mechanisms_pain.md

@@ -1,0 +1,14 @@
+id: tgfbeta_alk5
+label: ALK5 (TGF-β receptor type I)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 0
+baseline_state: 0.5
+normal_role: ALK5 (TGF-β receptor type I) is a receptor located in other. Baseline
+  activity level 0.50. It receives 0 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges: []
+outbound_ids: []
+rule_gap_reason: null
+source_note: TGF-beta.md

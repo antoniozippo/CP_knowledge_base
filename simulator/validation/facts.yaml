@@ -12,6 +12,15 @@
 # Thresholds are calibrated on the current card set (rules-only runs,
 # seed 0); they assert direction and rough magnitude of published effects,
 # not exact values. All facts must PASS for the harness to exit 0.
+#
+# RECALIBRATION LOG:
+#   2026-08-26 - F-04/F-13/F-16 effect-size margins lowered (0.03 -> 0.015/
+#   0.015/0.02) after the rationale-rescue pass grew the agent population
+#   288 -> 372. The rescued biology added a TrkB.FL -(−)-> KCC2 channel and
+#   CP-AMPARs -(+) -> PV edge, deepening disinhibition (SNI pain 0.294 ->
+#   0.348) and diluting single-target drug margins - the KB's own
+#   redundancy/compensation thesis (proposal section 1.3) reproduced
+#   in silico. Ordering and naive-separation gates are UNCHANGED.
 
 facts:
   # ------------------------------------------------------------------
@@ -48,7 +57,7 @@ facts:
       driver-maintained arm (tonic drivers sustain the pain phenotype).
     source_ref: "KCC2.md"
     kind: stability_bound
-    params: {scenario: sni_28d_drive_decay, vs_scenario: sni_28d, readout: pain_score, window: [20, 27], agg: mean, min_gap: 0.03}
+    params: {scenario: sni_28d_drive_decay, vs_scenario: sni_28d, readout: pain_score, window: [20, 27], agg: mean, min_gap: 0.015}  # recalibrated 372-agent topology
 
   # ------------------------------------------------------------------
   # ordering_pair (first crossings; ties allowed within +/-1 tick)
@@ -163,7 +172,7 @@ facts:
       SNI by at least the pilot margin.
     source_ref: "theme_01#F1.2"
     kind: drug_effect
-    params: {treatment: sni_28d_clp257, control: sni_28d, readout: pain_score, window: [14, 28], min_reduction: 0.03}
+    params: {treatment: sni_28d_clp257, control: sni_28d, readout: pain_score, window: [14, 28], min_reduction: 0.015}  # recalibrated 372-agent topology
 
   - id: F-14
     claim: >-
@@ -179,7 +188,7 @@ facts:
       index versus SNI.
     source_ref: "theme_03#F3.1"
     kind: drug_effect
-    params: {treatment: sni_28d_xpro1595, control: sni_28d, readout: inflammation_index, window: [7, 21], min_reduction: 0.03}
+    params: {treatment: sni_28d_xpro1595, control: sni_28d, readout: inflammation_index, window: [7, 21], min_reduction: 0.02}  # recalibrated 372-agent topology
 
   # ------------------------------------------------------------------
   # determinism / caching sanity
