@@ -4,51 +4,51 @@
 
 ## 1. Run Overview
 
-- run_dir: simulator/reports/runs/sni_28d
+- run_dir: simulator/reports/runs/SNI_28d
 - scenario: sni_28d
 - injury_model: SNI
 - injury_tick: 0
 - horizon_days: 28
 - seed: 0
 - engine_version: 0.1.0
-- started_at_utc: 2026-08-25T21:15:24Z
-- generated_at: 2026-08-25T21:16:11Z
+- started_at_utc: 2026-08-26T13:27:11Z
+- generated_at: 2026-08-26T13:29:05Z
 - llm_calls_made: 0
 - llm_calls_deferred: 0
 - notes: SNI pilot scenario. Seeds are proximal injury drivers resolved against the real card set: microglial activation, TNF-alpha, ROS/oxidative stress, MMP-9, BDNF, HIF1-alpha. No DAMP card exists in the set; its canonical receptor TLR4 (tlr4_tlr4) is seeded as the DAMP-signaling proxy. Seed magnitude 0.92: orphan nodes contract toward baseline by a factor of ~0.637 per tick, so only seeds >= ~0.87 satisfy first_crossing with delta=0.15 and sustain=2 for two consecutive logged ticks. Sustained drives model tonic injury drivers after SNI: ongoing ectopic afferent firing and persistent glial activation keep microglia and TNF-a elevated through the whole horizon (value 0.9 from tick 0, no end tick = active while start <= tick < horizon).
 
 ## 2. Readout Trajectories
 
-![readout trajectories](plots/sni_28d_readouts.png)
+![readout trajectories](plots/SNI_28d_readouts.png)
 
 | day | pain_score | inflammation_index | barrier_integrity |
 |---|---|---|---|
-| 2 | 0.1734 | 0.6064 | 0.4921 |
-| 4 | 0.2622 | 0.6230 | 0.4678 |
-| 6 | 0.2879 | 0.6299 | 0.4489 |
-| 8 | 0.2894 | 0.6337 | 0.4399 |
-| 10 | 0.2918 | 0.6359 | 0.4376 |
-| 12 | 0.2936 | 0.6372 | 0.4379 |
-| 14 | 0.2947 | 0.6379 | 0.4388 |
-| 16 | 0.2954 | 0.6382 | 0.4393 |
-| 18 | 0.2957 | 0.6383 | 0.4394 |
-| 20 | 0.2959 | 0.6383 | 0.4393 |
-| 22 | 0.2960 | 0.6384 | 0.4391 |
-| 24 | 0.2961 | 0.6384 | 0.4390 |
-| 26 | 0.2961 | 0.6384 | 0.4389 |
-| 28 | 0.2962 | 0.6384 | 0.4388 |
+| 2 | 0.1822 | 0.5827 | 0.4292 |
+| 4 | 0.2931 | 0.5975 | 0.3805 |
+| 6 | 0.3368 | 0.6063 | 0.3503 |
+| 8 | 0.3457 | 0.6131 | 0.3358 |
+| 10 | 0.3461 | 0.6187 | 0.3306 |
+| 12 | 0.3465 | 0.6233 | 0.3291 |
+| 14 | 0.3467 | 0.6273 | 0.3282 |
+| 16 | 0.3469 | 0.6305 | 0.3269 |
+| 18 | 0.3473 | 0.6332 | 0.3251 |
+| 20 | 0.3478 | 0.6353 | 0.3232 |
+| 22 | 0.3483 | 0.6370 | 0.3215 |
+| 24 | 0.3488 | 0.6383 | 0.3200 |
+| 26 | 0.3493 | 0.6394 | 0.3188 |
+| 28 | 0.3497 | 0.6403 | 0.3178 |
 
 ## 3. Key Entity Traces
 
-### microbio_nad_augmentation — NAD⁺ Augmentation (NR/NMN) for Microglial Mitochondria in Pain (key: microglia)
+### CSF1-CSF1R_SpinalMicroglia — Spinal Microglia (Activated) (key: microglia)
 
-state ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
-final 0.5000 vs baseline 0.5000 -> delta +0.0000
+state ▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+final 0.7725 vs baseline 0.5000 -> delta +0.2725
 
 ### GABA_apoptosis_TNF_alpha — TNF-α (Pro-Inflammatory Cytokine) (key: TNF)
 
-state ▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
-final 0.6918 vs baseline 0.5000 -> delta +0.1918
+state ▅▅▆▆▆▆▆▆▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+final 0.8452 vs baseline 0.5000 -> delta +0.3452
 
 ### BDNF_TrkB_proBDNF — proBDNF (key: BDNF)
 
@@ -58,7 +58,7 @@ final 0.5000 vs baseline 0.5000 -> delta +0.0000
 ### BBB_CypA_MMP9_pathway — CypA-MMP-9 Pathway (key: MMP-9)
 
 state ▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
-final 0.6892 vs baseline 0.5000 -> delta +0.1892
+final 0.7370 vs baseline 0.5000 -> delta +0.2370
 
 ### BDNF_TrkB_CLP257 — CLP257 (KCC2 Enhancer) (key: KCC2)
 
@@ -68,17 +68,17 @@ final 0.0000 vs baseline 0.0000 -> delta +0.0000
 ### GABA_apoptosis_PNN_loss — Perineuronal Net (PNN) Loss and GABAergic Hyperactivity (key: perineuronal)
 
 state ▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
-final 0.7075 vs baseline 0.5000 -> delta +0.2075
+final 0.7418 vs baseline 0.5000 -> delta +0.2418
 
 ### PV_interneurons_PV_interneurons — Parvalbumin (PV) Interneurons (key: parvalbumin)
 
-state ▄▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
-final 0.1375 vs baseline 0.5000 -> delta -0.3625
+state ▄▃▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+final 0.0270 vs baseline 0.5000 -> delta -0.4730
 
 ### shared_mechanical_allodynia — Mechanical Allodynia (key: allodynia)
 
-state ▂▃▃▄▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
-final 0.5896 vs baseline 0.0500 -> delta +0.5396
+state ▂▃▄▄▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+final 0.6967 vs baseline 0.0500 -> delta +0.6467
 
 
 ## 4. Emergent Events
@@ -90,13 +90,13 @@ Top single-tick state changes (pre-tick 0 reconstructed from card baselines and 
 | 1 | 1 | GABA_apoptosis_ROS_oxidative_stress | Reactive Oxygen Species (ROS) and Oxidative Stress | -0.1554 | down |  |
 | 2 | 1 | tlr4_tlr4 | TLR4 (Toll-like Receptor 4) | -0.1554 | down |  |
 | 3 | 1 | RhoA_ROCK_ROCK | ROCK (ROCK1/ROCK2) | +0.1480 | up | cross-community |
-| 4 | 1 | BDNF_TrkB_KCC2 | KCC2 (Potassium-Chloride Cotransporter) | -0.1111 | down | cross-community |
-| 5 | 1 | shared_mechanical_allodynia | Mechanical Allodynia | +0.1111 | up | cross-community |
-| 6 | 1 | SST_somatostatin_interneurons | Somatostatin (SST) Interneurons | +0.1111 | up | cross-community |
-| 7 | 1 | vegf_VEGFA | Vascular Endothelial Growth Factor A (VEGFA) | +0.1111 | up | cross-community |
-| 8 | 2 | vegf_VEGFA | Vascular Endothelial Growth Factor A (VEGFA) | +0.1072 | up | cross-community |
-| 9 | 2 | shared_mechanical_allodynia | Mechanical Allodynia | +0.1066 | up | cross-community |
-| 10 | 1 | BDNF_TrkB_rationale_dual_roles | Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles | +0.1011 | up | cross-community |
+| 4 | 2 | shared_mechanical_allodynia | Mechanical Allodynia | +0.1241 | up | cross-community |
+| 5 | 1 | BDNF_TrkB_KCC2 | KCC2 (Potassium-Chloride Cotransporter) | -0.1111 | down | cross-community |
+| 6 | 1 | shared_mechanical_allodynia | Mechanical Allodynia | +0.1111 | up | cross-community |
+| 7 | 1 | SST_somatostatin_interneurons | Somatostatin (SST) Interneurons | +0.1111 | up | cross-community |
+| 8 | 1 | vegf_VEGFA | Vascular Endothelial Growth Factor A (VEGFA) | +0.1111 | up | cross-community |
+| 9 | 3 | shared_mechanical_allodynia | Mechanical Allodynia | +0.1106 | up | cross-community |
+| 10 | 2 | vegf_VEGFA | Vascular Endothelial Growth Factor A (VEGFA) | +0.1072 | up | cross-community |
 
 ## 5. Perturbation & Drug Accounting
 
@@ -114,7 +114,7 @@ Top single-tick state changes (pre-tick 0 reconstructed from card baselines and 
 - TNF_TNF_alpha: value 0.9000, window [0, 28)
 - observed effect @ TNF_TNF_alpha: mean-in 0.9676 vs mean-out n/a
 - shared_microglia: value 0.9000, window [0, 28)
-- observed effect @ shared_microglia: mean-in 0.9555 vs mean-out n/a
+- observed effect @ shared_microglia: mean-in 0.9575 vs mean-out n/a
 
 ### drug_arms (0)
 - none
@@ -135,23 +135,47 @@ Rule-based flags:
 - PINNED: Simvastatin (RhoA Inhibitor) (RhoA_ROCK_simvastatin) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: XPro1595 (solTNF/TNFR1 Blocker) (TNF_XPro1595) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) (autophagy-apoptosis_inhibition_Bcl_xL) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Ethosuximide (T-type channel blocker, repurposing) (cav32_ethosuximide) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Z944 (selective T-type blocker, Phase II) (cav32_z944) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: AMG487 (CXCR3 antagonist) (ccl21_amg487) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: TAT-Gap19 (Cx43 hemichannel blocker) (connexin43_tat_gap19) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: CX3CR1 Antagonists (analgesics) (cx3cl1_cx3cr1_amd3100_analog) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: AMD3100 / Plerixafor (CXCR4 antagonist, FDA-approved) (cxcl12_cxcr4_amd3100) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Atrasentan / ABT-627 (ETA-selective antagonist) (endothelin_atrasentan) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Bosentan (dual ETA/ETB antagonist, PAH-approved) (endothelin_bosentan) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: ACY-1083 / Tubastatin A (HDAC6 inhibitors) (hdac_acy1083) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: RGFP966 (HDAC3-selective inhibitor) (hdac_rgfp966) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Vorinostat/SAHA (pan-HDAC inhibitor) (hdac_vorinostat) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: PX-478 (HIF1α Inhibitor) (hif1a_PX478) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: YC-1 (HIF1α Inhibitor) (hif1a_YC1) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: 1400W (selective iNOS inhibitor) (inos_1400w) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: MCC950 (NLRP3 Inhibitor) (insights_nlrp3_mcc950) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Baricitinib (JAK1/2 Inhibitor, RA-Approved) (jakstat_baricitinib) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Ruxolitinib (JAK1/2 Inhibitor, FDA-Approved) (jakstat_ruxolitinib) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Cofilin-Modulating Peptides (Slingshot Phosphatase Inhibitor) (karilin7_CofilinModulatingPeptides) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: LIMK Inhibitors (Therapeutic Strategy) (karilin7_LIMK_Inhibitors) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: NSC23766 (Rac1 Inhibitor, ACC Microinjection) (karilin7_NSC23766) at 0.0000 for 21.43% of ticks (> 20%)
+- PINNED: ARN23746 (next-gen KCC2 activator) (kcc2enhancers_arn23746) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Urolithin A (Mitophagy Enhancer for Pain) (microbio_urolithin_a) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: MCC950 / CRID3 (NLRP3 inhibitor) (nlrp3_mcc950) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: DAPT (γ-secretase inhibitor) (notch_dapt) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Rapamycin / Sirolimus (mTORC1 inhibitor) (pi3k_akt_mtor_rapamycin) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Selective PPARγ Modulators (SPPARγMs) (ppary_spppargms) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: KCC2 Enhancement Pillar (CLP257/AAV-KCC2) (proposal_chronic_pain_treatment_Kcc2Enhancement) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: ROCK Inhibition Pillar (Fasudil/AS1892802) (proposal_chronic_pain_treatment_RockInhibition) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: TNFR1-Selective TNF Blockade Pillar (XPro1595) (proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Azeliragon (TTP488, oral RAGE antagonist) (rage_azeliragon) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: FPS-ZM1 (brain-penetrant RAGE antagonist) (rage_fps_zm1) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Aprepitant (NK1 antagonist, clinical failures) (substance_p_nk1_aprepitant) at 0.0000 for 100.00% of ticks (> 20%)
 
 Unresolved key-label warnings:
 - none
 
 ## 7. Reproducibility
 
-- manifest.json sha256: 0fd01a833558902f5f6f26a799ec7f2bebf30310f655e0a32daf67622efe7ae2
-- tick_log.jsonl sha256: 74e24e08a18dbf4988b19bcd0f089430d7327218c7d741506a99a6a65fa9fdfe
-- states.csv sha256: 0e7ecf32e48eaf45b617503041b86dc3c9702704ab63d2a6e4a9c1bfb6d6e748
-- card_set_hash: 6b44c2de7e76c8c59202fb72992f91883465a8946bdc4c6aa1c2519555df2a1b (cards manifest hash)
+- manifest.json sha256: 31558785eef2410f79466f2673265bd24c9f77079432b2841212d77ab097b3cb
+- tick_log.jsonl sha256: 40f233d862b42fb1766655d93d94c2c57539dfd37b763df9a6c9c8f8299524ab
+- states.csv sha256: 26ebd6f9dae2857cfb2d692a9ff6437981fb09690c2eaa21b452492961edd65f
+- card_set_hash: a401244b561d1172edf5890609d3ac5f038a3837083ffd7c35ec7763613cee6c (cards manifest hash)
 - determinism: rules-only engine runs are byte-reproducible (identical manifest.json / tick_log.jsonl / states.csv); the generation timestamp above and the embedded PNG plot are excluded from determinism claims (PNG bytes are not guaranteed reproducible).
-- command: python3 -m simulator.reports.generate_report --run simulator/reports/runs/sni_28d --out simulator/reports/report_sni_28d.md
+- command: python3 -m simulator.reports.generate_report --run simulator/reports/runs/SNI_28d --out simulator/reports/report_SNI_28d.md --plots-dir simulator/reports/plots

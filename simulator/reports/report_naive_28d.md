@@ -11,8 +11,8 @@
 - horizon_days: 28
 - seed: 0
 - engine_version: 0.1.0
-- started_at_utc: 2026-08-25T21:15:37Z
-- generated_at: 2026-08-25T21:16:12Z
+- started_at_utc: 2026-08-26T13:26:38Z
+- generated_at: 2026-08-26T13:29:06Z
 - llm_calls_made: 0
 - llm_calls_deferred: 0
 - notes: Naive control arm for the SNI pilot: no injury tick, no perturbations, no drug arms. All agents start at their card baselines.
@@ -40,7 +40,7 @@
 
 ## 3. Key Entity Traces
 
-### microbio_nad_augmentation — NAD⁺ Augmentation (NR/NMN) for Microglial Mitochondria in Pain (key: microglia)
+### CSF1-CSF1R_SpinalMicroglia — Spinal Microglia (Activated) (key: microglia)
 
 state ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
 final 0.5000 vs baseline 0.5000 -> delta +0.0000
@@ -118,24 +118,48 @@ Rule-based flags:
 - PINNED: Simvastatin (RhoA Inhibitor) (RhoA_ROCK_simvastatin) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: XPro1595 (solTNF/TNFR1 Blocker) (TNF_XPro1595) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Bcl-xL (Dual-Functional Apoptosis/Autophagy Inhibitor) (autophagy-apoptosis_inhibition_Bcl_xL) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Ethosuximide (T-type channel blocker, repurposing) (cav32_ethosuximide) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Z944 (selective T-type blocker, Phase II) (cav32_z944) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: AMG487 (CXCR3 antagonist) (ccl21_amg487) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: TAT-Gap19 (Cx43 hemichannel blocker) (connexin43_tat_gap19) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: CX3CR1 Antagonists (analgesics) (cx3cl1_cx3cr1_amd3100_analog) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: AMD3100 / Plerixafor (CXCR4 antagonist, FDA-approved) (cxcl12_cxcr4_amd3100) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Atrasentan / ABT-627 (ETA-selective antagonist) (endothelin_atrasentan) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Bosentan (dual ETA/ETB antagonist, PAH-approved) (endothelin_bosentan) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: ACY-1083 / Tubastatin A (HDAC6 inhibitors) (hdac_acy1083) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: RGFP966 (HDAC3-selective inhibitor) (hdac_rgfp966) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Vorinostat/SAHA (pan-HDAC inhibitor) (hdac_vorinostat) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: PX-478 (HIF1α Inhibitor) (hif1a_PX478) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: YC-1 (HIF1α Inhibitor) (hif1a_YC1) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: 1400W (selective iNOS inhibitor) (inos_1400w) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: MCC950 (NLRP3 Inhibitor) (insights_nlrp3_mcc950) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Baricitinib (JAK1/2 Inhibitor, RA-Approved) (jakstat_baricitinib) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Ruxolitinib (JAK1/2 Inhibitor, FDA-Approved) (jakstat_ruxolitinib) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Cofilin-Modulating Peptides (Slingshot Phosphatase Inhibitor) (karilin7_CofilinModulatingPeptides) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Tacrolimus/FK506 (Calcineurin Inhibitor) (karilin7_FK506) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: LIMK Inhibitors (Therapeutic Strategy) (karilin7_LIMK_Inhibitors) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: NSC23766 (Rac1 Inhibitor, ACC Microinjection) (karilin7_NSC23766) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: ARN23746 (next-gen KCC2 activator) (kcc2enhancers_arn23746) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Urolithin A (Mitophagy Enhancer for Pain) (microbio_urolithin_a) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: MCC950 / CRID3 (NLRP3 inhibitor) (nlrp3_mcc950) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: DAPT (γ-secretase inhibitor) (notch_dapt) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Rapamycin / Sirolimus (mTORC1 inhibitor) (pi3k_akt_mtor_rapamycin) at 0.0000 for 100.00% of ticks (> 20%)
 - PINNED: Selective PPARγ Modulators (SPPARγMs) (ppary_spppargms) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: KCC2 Enhancement Pillar (CLP257/AAV-KCC2) (proposal_chronic_pain_treatment_Kcc2Enhancement) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: ROCK Inhibition Pillar (Fasudil/AS1892802) (proposal_chronic_pain_treatment_RockInhibition) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: TNFR1-Selective TNF Blockade Pillar (XPro1595) (proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Azeliragon (TTP488, oral RAGE antagonist) (rage_azeliragon) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: FPS-ZM1 (brain-penetrant RAGE antagonist) (rage_fps_zm1) at 0.0000 for 100.00% of ticks (> 20%)
+- PINNED: Aprepitant (NK1 antagonist, clinical failures) (substance_p_nk1_aprepitant) at 0.0000 for 100.00% of ticks (> 20%)
 
 Unresolved key-label warnings:
 - none
 
 ## 7. Reproducibility
 
-- manifest.json sha256: 0cf1e0ee1f429f5cccba7a7ec71b1f378638023e9f3e7b1314264d6d1b831a88
-- tick_log.jsonl sha256: 1bbfa9a4ac066b95a7b72124522220752f9057b90296ec3e22e424a8b0dfe719
-- states.csv sha256: b14e356ad87cdfc535ee6b11c1fb4ca3c530c5e0e61817af3c3761e9b5c5365e
-- card_set_hash: 6b44c2de7e76c8c59202fb72992f91883465a8946bdc4c6aa1c2519555df2a1b (cards manifest hash)
+- manifest.json sha256: d1d4a973a3fd4c8a4ac746e0f7c10600459c555941bb739f307772393583fcc0
+- tick_log.jsonl sha256: 87004f2ad00aeb5d106c6a888e2f04639b2f4eecf4ee2eeba692f53bfca3aeea
+- states.csv sha256: 0fe2b03eb4362818ba318ea13bec69854b2885dafaf5fcced28d21bcc5fd6f0c
+- card_set_hash: a401244b561d1172edf5890609d3ac5f038a3837083ffd7c35ec7763613cee6c (cards manifest hash)
 - determinism: rules-only engine runs are byte-reproducible (identical manifest.json / tick_log.jsonl / states.csv); the generation timestamp above and the embedded PNG plot are excluded from determinism claims (PNG bytes are not guaranteed reproducible).
-- command: python3 -m simulator.reports.generate_report --run simulator/reports/runs/naive_28d --out simulator/reports/report_naive_28d.md
+- command: python3 -m simulator.reports.generate_report --run simulator/reports/runs/naive_28d --out simulator/reports/report_naive_28d.md --plots-dir simulator/reports/plots
