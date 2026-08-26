@@ -18089,6 +18089,19 @@
       "origin": "dynamic_closure",
       "quote": "downstream deregulated genes identified were SST (upregulated), PTGIR (↓2.4-fold), GFRA3 (↓), GAL (most downregulated), Fam89a, with ChIP-seq AG-rich motif upstream of neuropeptide-signalling genes",
       "source_ref": "analysis/literature/theme_06_DRG_excitability_channels_splicing.md"
+    },
+    {
+      "relation": "supports_integrity_via_tight_junctions",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_04_HIF1_metabolism_vascular_barriers.md",
+      "source_location": null,
+      "weight": null,
+      "source": "assaying_molecularly_structural_plasticity_BDNF",
+      "target": "bbb_bbb",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "upregulates BDNF in LPS-injured hCMEC/D3 cells, increasing TEER and tight-junction proteins (ZO-1, Claudin-5, AQP4) and reducing permeability in rats; causality established because miR-155 mimic or **sh-BDNF knockdown partially reversed** the protective effects on TEER, tight-junction expression, and cytokine levels",
+      "source_ref": "analysis/literature/theme_04_HIF1_metabolism_vascular_barriers.md"
     }
   ],
   "hyperedges": [],

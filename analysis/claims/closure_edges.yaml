@@ -1,18 +1,9 @@
-# Dynamic-closure edge proposals (Task 2.4b Part A).
-# Curated from repo dossiers + analysis/literature theme findings.
-# Every quote is a verbatim sentence of `source_file`; confidence
-# INFERRED_CLOSURE maps to weight 0.5 in simulator/build_cards.py.
-# Categories: A1 symptom causation, A2 cascade completion,
-# A3 reinforcing/self-sustaining loops. A4 drug coverage holds because
-# CLP257 raises KCC2, which now reaches PV/allodynia/central-sensitization.
 - category: A1
   source_label: BDNF_TrkB_KCC2
   target_label: shared_mechanical_allodynia
   relation: causes
   sign: -1
-  quote: This loss of KCC2 collapses the chloride gradient, converting GABA/glycine‑mediated inhibition
-    into excitation or reduced inhibition (disinhibition), and is a core mechanism underlying mechanical
-    allodynia, hyperalgesia, and central sensitisation in neuropathic pain.
+  quote: This loss of KCC2 collapses the chloride gradient, converting GABA/glycine‑mediated inhibition into excitation or reduced inhibition (disinhibition), and is a core mechanism underlying mechanical allodynia, hyperalgesia, and central sensitisation in neuropathic pain.
   source_file: KCC2.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -20,9 +11,7 @@
   target_label: shared_central_sensitization
   relation: causes
   sign: -1
-  quote: This loss of KCC2 collapses the chloride gradient, converting GABA/glycine‑mediated inhibition
-    into excitation or reduced inhibition (disinhibition), and is a core mechanism underlying mechanical
-    allodynia, hyperalgesia, and central sensitisation in neuropathic pain.
+  quote: This loss of KCC2 collapses the chloride gradient, converting GABA/glycine‑mediated inhibition into excitation or reduced inhibition (disinhibition), and is a core mechanism underlying mechanical allodynia, hyperalgesia, and central sensitisation in neuropathic pain.
   source_file: KCC2.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -30,8 +19,7 @@
   target_label: shared_mechanical_allodynia
   relation: gates_touch_evoked_pain
   sign: -1
-  quote: Light touch, normally processed through a dedicated non-nociceptive pathway, now activates nociceptive
-    projection neurons due to disinhibition.
+  quote: Light touch, normally processed through a dedicated non-nociceptive pathway, now activates nociceptive projection neurons due to disinhibition.
   source_file: PV+_interneurons.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -39,9 +27,7 @@
   target_label: shared_mechanical_allodynia
   relation: drives
   sign: 1
-  quote: They play a crucial role in transmitting mechanical sensory information and become pathologically
-    hyperactive after nerve injury, directly driving mechanical allodynia—the perception of pain from
-    light touch.
+  quote: They play a crucial role in transmitting mechanical sensory information and become pathologically hyperactive after nerve injury, directly driving mechanical allodynia—the perception of pain from light touch.
   source_file: SST.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -49,11 +35,9 @@
   target_label: shared_mechanical_allodynia
   relation: promotes
   sign: 1
-  quote: '### F3.1: Soluble-TNF/TNFR1 selective inhibition relieves peripheral nerve injury pain — XPro1595
-    validated in vivo
+  quote: '### F3.1: Soluble-TNF/TNFR1 selective inhibition relieves peripheral nerve injury pain — XPro1595 validated in vivo
 
-    - **Evidence:** XPro1595 (selective solTNF neutralizer sparing tmTNF/TNFR2) reduced mechanical hypersensitivity
-    in a mouse sciatic PNI model, phenocopied by TNFR1 knockout [MDPI *Cells* 14(22):1749, 2025, doi:10.3390/cells14221749].'
+    - **Evidence:** XPro1595 (selective solTNF neutralizer sparing tmTNF/TNFR2) reduced mechanical hypersensitivity in a mouse sciatic PNI model, phenocopied by TNFR1 knockout [MDPI *Cells* 14(22):1749, 2025, doi:10.3390/cells14221749].'
   source_file: analysis/literature/theme_03_neuroinflammation_TNF_NLRP3_TLR_microglia.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -61,8 +45,7 @@
   target_label: shared_mechanical_allodynia
   relation: gates_early_phase
   sign: 1
-  quote: MMP-9 rapid/transient DRG-neuron upregulation gates early-phase allodynia (TIMP-1, siRNA, KO,
-    inhibitor-I all effective early; exogenous i.t. MMP-9 sufficient)
+  quote: MMP-9 rapid/transient DRG-neuron upregulation gates early-phase allodynia (TIMP-1, siRNA, KO, inhibitor-I all effective early; exogenous i.t. MMP-9 sufficient)
   source_file: analysis/literature/theme_02_MMP9_PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A1
@@ -70,9 +53,7 @@
   target_label: shared_mechanical_allodynia
   relation: emergence_of
   sign: 1
-  quote: '**Enzymatic PNN Removal Triggers Pain**: Injection of **chondroitinase ABC** (an enzyme that
-    degrades CSPGs) into the spinal dorsal horn of naïve animals is sufficient to induce mechanical allodynia
-    and thermal hyperalgesia.'
+  quote: '**Enzymatic PNN Removal Triggers Pain**: Injection of **chondroitinase ABC** (an enzyme that degrades CSPGs) into the spinal dorsal horn of naïve animals is sufficient to induce mechanical allodynia and thermal hyperalgesia.'
   source_file: PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -88,9 +69,7 @@
   target_label: BDNF_TrkB_KCC2
   relation: downregulates
   sign: -1
-  quote: After peripheral nerve injury, KCC2 is rapidly and persistently downregulated in spinal lamina
-    I and II neurons—and in some supraspinal pain‑processing regions—via a cascade that is driven primarily
-    by microglial‑derived brain‑derived neurotrophic factor (BDNF) acting on neuronal TrkB receptors.
+  quote: After peripheral nerve injury, KCC2 is rapidly and persistently downregulated in spinal lamina I and II neurons—and in some supraspinal pain‑processing regions—via a cascade that is driven primarily by microglial‑derived brain‑derived neurotrophic factor (BDNF) acting on neuronal TrkB receptors.
   source_file: KCC2.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -114,8 +93,7 @@
   target_label: PV_interneurons_PV_interneurons
   relation: impairs_fast_spiking_of
   sign: -1
-  quote: This degrades the polyanionic shield, impairing ion buffering and directly reducing the fast‑spiking
-    capacity of PV interneurons.
+  quote: This degrades the polyanionic shield, impairing ion buffering and directly reducing the fast‑spiking capacity of PV interneurons.
   source_file: PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -123,8 +101,7 @@
   target_label: PV_interneurons_PV_interneurons
   relation: supports_inhibitory_output_of
   sign: 1
-  quote: '**Altered Chloride Homeostasis**: The robust inhibitory output of PV interneurons depends on
-    a low intracellular chloride concentration maintained by KCC2.'
+  quote: '**Altered Chloride Homeostasis**: The robust inhibitory output of PV interneurons depends on a low intracellular chloride concentration maintained by KCC2.'
   source_file: PV+_interneurons.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -132,9 +109,7 @@
   target_label: hif1a_HIF1alpha
   relation: stabilizes
   sign: 1
-  quote: '- **Normoxic Stabilization in Pain**: After nerve injury, reactive oxygen species (ROS), succinate,
-    nitric oxide, and pro‑inflammatory cytokines (e.g., TNF‑α) inhibit PHDs or directly stabilize HIF1α
-    via NF‑κB, allowing its accumulation even in the presence of oxygen.'
+  quote: '- **Normoxic Stabilization in Pain**: After nerve injury, reactive oxygen species (ROS), succinate, nitric oxide, and pro‑inflammatory cytokines (e.g., TNF‑α) inhibit PHDs or directly stabilize HIF1α via NF‑κB, allowing its accumulation even in the presence of oxygen.'
   source_file: hif1a.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -150,8 +125,7 @@
   target_label: vegf_VEGFA
   relation: transcribes
   sign: 1
-  quote: '- **Upregulation of VEGFA and Vascular Remodeling**: HIF1α is the principal transcriptional
-    driver of VEGFA.'
+  quote: '- **Upregulation of VEGFA and Vascular Remodeling**: HIF1α is the principal transcriptional driver of VEGFA.'
   source_file: hif1a.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -159,9 +133,7 @@
   target_label: AngPt_angiopoietin_2
   relation: transcribes
   sign: 1
-  quote: '- **Disruption of Neural Barriers**: By inducing VEGFA and angiopoietin‑2, HIF1α weakens tight
-    junctions (downregulating occludin and claudin‑5) and activates MMP‑9, leading to blood‑spinal cord
-    barrier (BSCB) disruption.'
+  quote: '- **Disruption of Neural Barriers**: By inducing VEGFA and angiopoietin‑2, HIF1α weakens tight junctions (downregulating occludin and claudin‑5) and activates MMP‑9, leading to blood‑spinal cord barrier (BSCB) disruption.'
   source_file: hif1a.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -169,9 +141,7 @@
   target_label: PNN_ECM_MMP9
   relation: activates
   sign: 1
-  quote: '- **Disruption of Neural Barriers**: By inducing VEGFA and angiopoietin‑2, HIF1α weakens tight
-    junctions (downregulating occludin and claudin‑5) and activates MMP‑9, leading to blood‑spinal cord
-    barrier (BSCB) disruption.'
+  quote: '- **Disruption of Neural Barriers**: By inducing VEGFA and angiopoietin‑2, HIF1α weakens tight junctions (downregulating occludin and claudin‑5) and activates MMP‑9, leading to blood‑spinal cord barrier (BSCB) disruption.'
   source_file: hif1a.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -179,9 +149,7 @@
   target_label: GABA_apoptosis_calcium_overload
   relation: stimulates_mitochondrial_ca_overload
   sign: 1
-  quote: "- **Interactions with the Wider Pain Network**:\n    - **TNF‑α** and **BDNF/TrkB** signalling\
-    \ can directly stimulate mitochondrial Ca²⁺ overload and ROS production, feeding into the apoptosis/autophagy\
-    \ axis."
+  quote: "- **Interactions with the Wider Pain Network**:\n    - **TNF‑α** and **BDNF/TrkB** signalling can directly stimulate mitochondrial Ca²⁺ overload and ROS production, feeding into the apoptosis/autophagy axis."
   source_file: GABA_apoptosis.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -189,8 +157,7 @@
   target_label: SST_somatostatin_interneurons
   relation: enhances_excitability_of
   sign: 1
-  quote: Microglial-derived TNF-α and BDNF can enhance SST neuron excitability, and blood-brain barrier
-    breakdown may allow circulating factors to modulate their function.
+  quote: Microglial-derived TNF-α and BDNF can enhance SST neuron excitability, and blood-brain barrier breakdown may allow circulating factors to modulate their function.
   source_file: SST.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -198,9 +165,7 @@
   target_label: TNF_TNF_alpha
   relation: releases
   sign: 1
-  quote: It is released after nerve injury by activated immune and glial cells, and its binding to the
-    **TNFR1** receptor initiates inflammatory signals that contribute to the development and maintenance
-    of pain.
+  quote: It is released after nerve injury by activated immune and glial cells, and its binding to the **TNFR1** receptor initiates inflammatory signals that contribute to the development and maintenance of pain.
   source_file: TNF.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -208,8 +173,7 @@
   target_label: shared_microglia
   relation: recruits_and_activates
   sign: 1
-  quote: '**Inflammatory Activation**: Ang-2 promotes the inflammatory activation of macrophages and other
-    immune cells[reference:6].'
+  quote: '**Inflammatory Activation**: Ang-2 promotes the inflammatory activation of macrophages and other immune cells[reference:6].'
   source_file: AngPt.md
   confidence: INFERRED_CLOSURE
   source_ref_note: macrophage≈CNS-resident-macrophage/microglia mapping per dossier context
@@ -218,9 +182,7 @@
   target_label: TNF_TNF_alpha
   relation: drives_cytokine_release_from_macrophages
   sign: 1
-  quote: In the context of nerve injury, Ang-2-driven recruitment and activation of macrophages at the
-    injury site and within the dorsal root ganglia (DRG) contribute to the release of pro-inflammatory
-    cytokines (e.g., TNF-α, IL-1β), which sensitize nociceptors.
+  quote: In the context of nerve injury, Ang-2-driven recruitment and activation of macrophages at the injury site and within the dorsal root ganglia (DRG) contribute to the release of pro-inflammatory cytokines (e.g., TNF-α, IL-1β), which sensitize nociceptors.
   source_file: AngPt.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -244,9 +206,7 @@
   target_label: bbb_bbb
   relation: disrupts
   sign: 1
-  quote: In the spinal cord, elevated VEGFA can directly compromise the blood‑spinal cord barrier (BSCB)
-    by downregulating tight junction proteins (occludin, claudin‑5) and upregulating matrix metalloproteinases
-    (MMPs).
+  quote: In the spinal cord, elevated VEGFA can directly compromise the blood‑spinal cord barrier (BSCB) by downregulating tight junction proteins (occludin, claudin‑5) and upregulating matrix metalloproteinases (MMPs).
   source_file: vegf.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -254,9 +214,7 @@
   target_label: bbb_bbb
   relation: disrupts
   sign: 1
-  quote: In neuropathic pain, elevated Ang-2 compromises these barriers, facilitating the entry of circulating
-    immune cells and pronociceptive mediators into the CNS, which amplifies neuroinflammation and central
-    sensitization.
+  quote: In neuropathic pain, elevated Ang-2 compromises these barriers, facilitating the entry of circulating immune cells and pronociceptive mediators into the CNS, which amplifies neuroinflammation and central sensitization.
   source_file: AngPt.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -264,8 +222,7 @@
   target_label: PNN_ECM_MMP9
   relation: induces_expression_of
   sign: 1
-  quote: '**TNF‑α and IL‑1β**: Pro‑inflammatory cytokines induce MMP‑9 expression, directly connecting
-    neuroinflammation to PNN degradation.'
+  quote: '**TNF‑α and IL‑1β**: Pro‑inflammatory cytokines induce MMP‑9 expression, directly connecting neuroinflammation to PNN degradation.'
   source_file: PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A3
@@ -273,8 +230,7 @@
   target_label: shared_microglia
   relation: activates_via_p38
   sign: 1
-  quote: rapid upregulation in injured DRG neurons, IL-1β cleavage, microglial activation via p38, BSCB/BBB
-    opening
+  quote: rapid upregulation in injured DRG neurons, IL-1β cleavage, microglial activation via p38, BSCB/BBB opening
   source_file: analysis/literature/theme_02_MMP9_PNN_ECM.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -290,7 +246,7 @@
   target_label: TNF_TNF_alpha
   relation: promotes_release_via_p38_m1_switch
   sign: 1
-  quote: 'This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators'
+  quote: This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators
   source_file: RhoA-ROCK.md
   confidence: INFERRED_CLOSURE
 - category: A2
@@ -301,4 +257,13 @@
   quote: downstream deregulated genes identified were SST (upregulated), PTGIR (↓2.4-fold), GFRA3 (↓), GAL (most downregulated), Fam89a, with ChIP-seq AG-rich motif upstream of neuropeptide-signalling genes
   source_file: analysis/literature/theme_06_DRG_excitability_channels_splicing.md
   source_ref: theme_06#F6.8 | Habib et al., Brain 141(2):365-376, 2018 | corrected regulome replacing REFUTED EC-0131/EC-0133 mechanism claims; PTGIR/GFRA3/GAL not yet KB nodes
+  confidence: INFERRED_CLOSURE
+- category: A2
+  source_label: assaying_molecularly_structural_plasticity_BDNF
+  target_label: bbb_bbb
+  relation: supports_integrity_via_tight_junctions
+  sign: 1
+  quote: upregulates BDNF in LPS-injured hCMEC/D3 cells, increasing TEER and tight-junction proteins (ZO-1, Claudin-5, AQP4) and reducing permeability in rats; causality established because miR-155 mimic or **sh-BDNF knockdown partially reversed** the protective effects on TEER, tight-junction expression, and cytokine levels
+  source_file: analysis/literature/theme_04_HIF1_metabolism_vascular_barriers.md
+  source_ref: theme_04#A4.1 | Zhang, Zhao & Kuang 2025, doi:10.1159/000547276 | resolves raw-graph AMBIGUOUS edge BDNF--[regulates]-->BBB Integrity; context = meningitis/LPS + aging-vascular models
   confidence: INFERRED_CLOSURE

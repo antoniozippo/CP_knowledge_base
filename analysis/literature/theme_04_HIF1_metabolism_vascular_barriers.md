@@ -133,6 +133,13 @@ _Sweep date: 2026-08-25 · Scope: 2021-2026 + landmark classics_
 43. HIF-1α/MMP-9 promotes spinal central sensitization. Eur J Pharmacol (2023) pii S0014299923003692
 44. PNI induces persistent vascular dysfunction and endoneurial hypoxia. J Neurosci (2015) 35:3346–3361
 
+## Post-Round Adjudications (2026-08-26)
+
+### A4.1: BDNF supports barrier integrity — direction resolved (was graph AMBIGUOUS edge `BDNF--[regulates]-->BBB Integrity`)
+- **Evidence:** Hyperoside mitigates BBB damage in bacterial meningitis via the miR-155/BDNF pathway: hyperoside downregulates miR-155, upregulates BDNF in LPS-injured hCMEC/D3 cells, increasing TEER and tight-junction proteins (ZO-1, Claudin-5, AQP4) and reducing permeability in rats; causality established because miR-155 mimic or **sh-BDNF knockdown partially reversed** the protective effects on TEER, tight-junction expression, and cytokine levels [Zhang, Zhao & Kuang, 2025, doi:10.1159/000547276]. Convergent support: BDNF supports pericyte and vascular homeostasis — conditional TrkB deletion in pericytes/SMCs increases vascular permeability, and BDNF induces PDGF-B/Akt/Erk signaling in pericytes [TrkB-pericyte aging study, springermedizin 51781984]; cerebral endothelium itself secretes mBDNF with luminal autocrine TrkB signaling [doi:10.1177/0271678X18766772].
+- **Relation to KB:** raw-graph edge `BDNF --[regulates]--> Blood-Brain/Spinal Cord Barrier Integrity` (AMBIGUOUS 0.3, from BDNF-TrkB.md) → CONFIRMED with sign +1 (supports integrity via tight-junction upregulation). KB's hyperoside claim (BBB.md "upregulating BDNF, leading to increased tight junction protein expression and reduced permeability") now mechanistically anchored including causal reversal control.
+- **New candidate nodes:** miR-155 --(−1)--> BDNF; hyperoside --(+1)--> BDNF (via miR-155 suppression). Context caveat: demonstrated in meningitis/LPS + aging-vascular models; not yet tested in neuropathic-pain models specifically.
+
 ## Sweep Limitations
 - No full-text access: classifications rest on abstracts/excerpts returned by websearch; DOIs/PMIDs given where surfaced, but quotes were not verified against PDFs.
 - PX-478/YC-1 pain-efficacy absence is an absence-of-evidence result from one search engine pass; a targeted PubMed query could still surface niche reports.

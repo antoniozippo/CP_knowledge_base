@@ -32,7 +32,7 @@ The dual nature of BBB modulation creates a therapeutic paradox. It can increase
     *   **Pro-Resolving Mediators**: **Resolvin D1 (RvD1)** and **lipoxin A4** are specialized pro-resolving mediators that actively resolve inflammation. Research indicates that these mediators can "reseal" the blood-nerve barrier, representing a potential disease-modifying treatment for neuropathic pain[reference:17].
     *   **Pathway Inhibition**: Targeting the pathways that cause disruption is a logical strategy. Inhibiting the **CypA-MMP-9 pathway** with agents like cyclosporine A (CsA) has been shown to promote repair of the blood-spinal cord barrier (BSCB) and alleviate neuropathic pain in animal models[reference:18].
     *   **BBB Permeable Glial Inhibitors**: Drugs like **AV411** that can cross the BBB and attenuate glial cell activation have shown efficacy in reducing neuropathic pain in various models, including chronic constriction injury (CCI) and chemotherapy-induced neuropathy[reference:19].
-    *   **Natural Compounds**: Certain natural compounds may also help. **Hyperoside** has been shown to reduce BBB damage by upregulating BDNF, leading to increased tight junction protein expression and reduced permeability[reference:20].
+    *   **Natural Compounds**: Certain natural compounds may also help. **Hyperoside** has been shown to reduce BBB damage by upregulating BDNF, leading to increased tight junction protein expression and reduced permeability[reference:20]. Mechanistically confirmed 2025 in the miR-155/BDNF pathway: hyperoside ↓miR-155 → ↑BDNF → ↑ZO-1/Claudin-5/AQP4 + ↑TEER, with **sh-BDNF knockdown partially reversing the protection** — establishing BDNF as a causal barrier-supportive mediator (Zhang, Zhao & Kuang, doi:10.1159/000547276; see theme_04#A4.1).
 
 ### ⚠️ Remaining Challenges and Future Directions
 
@@ -49,3 +49,4 @@ Despite significant progress, translating these findings into clinical practice 
 | Claim | Verdict | Evidence | Note |
 |-------|---------|----------|------|
 | EC-0014 | ✅ EXTENDED | theme_08#F8.1–F8.4, theme_04#F4.5 · Wang YH et al. 2022, Neuroscience 494:12; Eur J Med Res 2025;30:189; Ji 2023 Annu Rev Pharmacol Toxicol | SPM (RvD1/LXA4) pro-resolution role multiply replicated; barrier-resealing framing is an instance of the general resolution program — no approved resolvin drug; precursor supplementation weak/null |
+| Hyperoside→BDNF→tight junctions | ✅ CONFIRMED + mechanistic anchor | theme_04#A4.1 · Zhang, Zhao & Kuang 2025, doi:10.1159/000547276 | miR-155↓→BDNF↑→↑ZO-1/Claudin-5/AQP4+TEER in LPS-hCMEC/D3 and meningitis rats; sh-BDNF knockdown partially reverses protection — causal direction established |

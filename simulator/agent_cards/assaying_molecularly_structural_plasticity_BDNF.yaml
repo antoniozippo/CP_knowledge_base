@@ -97,6 +97,12 @@ pathological_rules:
   claim_refs: []
   direction: down
   magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-14
+  description: Brain-Derived Neurotrophic Factor (BDNF) supports integrity via tight
+    junctions Blood-Brain/Spinal Cord Barrier (BBB/BSCB)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges:
 - source_id: shared_microglia
   relation: releases
@@ -113,5 +119,6 @@ outbound_ids:
 - GABA_apoptosis_TNF_alpha
 - RhoA_ROCK_ROCK
 - BDNF_TrkB_KCC2
+- bbb_bbb
 rule_gap_reason: null
 source_note: assaying_molecularly_structural_plasticity.md
