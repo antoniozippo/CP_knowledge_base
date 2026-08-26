@@ -123,3 +123,22 @@ ZFHX2 binds directly to the promoter/enhancer regions of multiple key pain genes
 |-------|---------|----------|------|
 | EC-0131 | ⚠️ REFUTED | theme_06#F6.8 · Habib et al. 2018, Brain 141:365 (Marsili syndrome) | ZFHX2 ChIP-seq regulome excludes BDNF; Zfhx2-null mice are heat-HYPERsensitive — BDNF–TrkB–KCC2 rationale contradicted. Human R1913K genetics premise stands; rebuild mechanism cards on SST/PTGIR/GFRA3/GAL regulome |
 | EC-0133 | ⚠️ REFUTED | theme_06#F6.8 · Habib et al. 2018, Brain 141:365 | Claimed Nav1.7/Nav1.8/TRPV1/TRPA1/CGRP transactivation contradicted by published regulome (neuropeptide-signalling gene set instead); Zfhx2-null heat hypersensitivity guards against naive LOF-analgesia modelling |
+| EC-0132 | NO_EVIDENCE_FOUND | theme_06#F6.8 | No SNI/CCI/SNL injury-model ZFHX2 study exists; central-sensitisation maintenance role unevidenced |
+| EC-0134 | NO_EVIDENCE_FOUND | theme_06#F6.8 | No ZFHX2-ASO/siRNA preclinical therapy study surfaced in any database searched |
+
+### Corrected Mechanism Hypothesis (post-validation)
+
+**What survives (EXTRACTED, human genetics):** the Marsili syndrome anchor is real — heterozygous **ZFHX2 p.R1913K** in one Italian kindred segregates with hyposensitivity to noxious heat/capsaicin and painless fractures; BAC-transgenic mice carrying orthologous R1907K show elevated heat-pain thresholds with copy-number dependence [Habib et al., *Brain* 141(2):365–376, 2018, doi:10.1093/brain/awx326]. ZFHX2 therefore genuinely modulates pain physiology in humans.
+
+**What replaces the refuted mechanism:** the published ZFHX2 regulome is a **neuropeptide-signalling gene set**, explicitly *not* SCN9A/SCN10A/TRPV1/CALCA/BDNF:
+
+| Regulated gene | Direction (ZFHX2 altered-function context) | KB node exists? |
+|---|---|---|
+| **SST** (somatostatin) | ↑ upregulated | yes → see closure edge `ZFHX2→SST` |
+| **PTGIR** (prostacyclin receptor) | ↓ 2.4-fold | no — future addition |
+| **GFRA3** (GDNF-family α3) | ↓ | no — future addition |
+| **GAL** (galanin) | ↓ most strongly downregulated | no — future addition |
+
+Supporting details: ChIP-seq identifies an AG-rich ZFHX2 motif upstream of neuropeptide-signalling genes (+ Fam89a). CRITICAL NUANCE for modelling: **Zfhx2-null mice are heat-HYPERsensitive** (opposite of a clean loss-of-function analgesic), yet show impaired Randall-Selitto noxious-mechanical responses — any therapeutic framing must be direction-specific and modality-specific. The human R1913K mutation is an inherited dominant missense (possible altered/gain-of-function), not LOF.
+
+**Simulator note:** the legacy `ZFHX2 --[regulates]--> Mechanical Allodynia` edge remains sign-0 (quarantined from agent dynamics); the corrected `ZFHX2 --(+1)--> SST` edge carries verbatim-quote provenance via `analysis/claims/closure_edges.yaml`.

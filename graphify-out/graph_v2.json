@@ -18076,6 +18076,19 @@
       "origin": "dynamic_closure",
       "quote": "This triggers the phosphorylation of p38 mitogen‑activated protein kinase (p38 MAPK), a key switch that promotes the M1 pro‑inflammatory phenotype, leading to the release of TNF‑α, IL‑1β, and other pronociceptive mediators",
       "source_ref": "RhoA-ROCK.md"
+    },
+    {
+      "relation": "upregulates_corrected_regulome",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_06_DRG_excitability_channels_splicing.md",
+      "source_location": null,
+      "weight": null,
+      "source": "ZFHX2_ZFHX2",
+      "target": "SST_somatostatin_interneurons",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "downstream deregulated genes identified were SST (upregulated), PTGIR (↓2.4-fold), GFRA3 (↓), GAL (most downregulated), Fam89a, with ChIP-seq AG-rich motif upstream of neuropeptide-signalling genes",
+      "source_ref": "analysis/literature/theme_06_DRG_excitability_channels_splicing.md"
     }
   ],
   "hyperedges": [],
