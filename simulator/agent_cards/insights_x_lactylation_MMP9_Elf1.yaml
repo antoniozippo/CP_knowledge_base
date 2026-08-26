@@ -1,0 +1,20 @@
+id: insights_x_lactylation_MMP9_Elf1
+label: ELF1 (MMP-9 Transcriptional Activator)
+entity_type: process
+compartment: other
+tier: PERIPHERAL
+community: 9
+baseline_state: 0.5
+normal_role: ELF1 (MMP-9 Transcriptional Activator) is a process located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-insights_x_lactylation_MMP9_Elf1-01
+  description: ELF1 (MMP-9 Transcriptional Activator) activates MMP-9 (Matrix Metalloproteinase-9)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- PNN_ECM_MMP9
+rule_gap_reason: null
+source_note: insights_x_lactylation_MMP9.md

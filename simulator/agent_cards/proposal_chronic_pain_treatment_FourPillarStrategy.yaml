@@ -1,0 +1,38 @@
+id: proposal_chronic_pain_treatment_FourPillarStrategy
+label: Four-Pillar Chronic Pain Treatment Strategy
+entity_type: concept
+compartment: other
+tier: MID
+community: 9
+baseline_state: 0.5
+normal_role: Four-Pillar Chronic Pain Treatment Strategy is a concept located in other.
+  Baseline activity level 0.50. It receives 4 regulatory influences and exerts 0.
+pathological_rules: []
+inbound_edges:
+- source_id: proposal_chronic_pain_treatment_Kcc2Enhancement
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_RockInhibition
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_SstInterneuronSilencing
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_chronic_pain_treatment_Tnfr1SelectiveBlockade
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: proposals/proposal_chronic_pain_treatment.md

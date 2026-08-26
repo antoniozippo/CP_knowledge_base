@@ -1,0 +1,27 @@
+id: NogoA-NgR1_NgR1
+label: NgR1 Receptor Complex (LINGO-1/p75NTR-TROY)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 1
+baseline_state: 0.5
+normal_role: NgR1 Receptor Complex (LINGO-1/p75NTR-TROY) is a receptor located in
+  other. Baseline activity level 0.50. It receives 1 regulatory influences and exerts
+  1.
+pathological_rules:
+- rule_id: RULE-NogoA_NgR1_NgR1-01
+  description: NgR1 Receptor Complex (LINGO-1/p75NTR-TROY) activates RhoA/ROCK Pathway
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: NogoA_NgR1_NogoA
+  relation: activates
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- RhoA-ROCK_RhoAROCK
+rule_gap_reason: null
+source_note: NogoA-NgR1.md

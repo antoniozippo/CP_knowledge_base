@@ -109,6 +109,12 @@ pathological_rules:
   - EC-0066
   direction: up
   magnitude_hint: null
+- rule_id: RULE-karilin7_Kalirin7-18
+  description: Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7
+    Role
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges:
 - source_id: RhoA_ROCK_RhoA
   relation: antagonizes_pathway
@@ -146,5 +152,6 @@ outbound_ids:
 - karilin-7_Rac1_pathway
 - karilin7_DendriticSpineLoss
 - karilin7_PainRelatedAnxiety
+- karilin-7_SpinalPronociceptiveRole
 rule_gap_reason: null
 source_note: karilin-7.md

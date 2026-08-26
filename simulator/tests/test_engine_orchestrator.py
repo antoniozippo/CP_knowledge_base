@@ -311,7 +311,7 @@ def test_yaml_loaders_round_trip(tmp_path):
     assert scenario.injury_model == "CCI"
     assert scenario.initial_perturbations[0].agent_id == "tnf_hub"
     cards = load_cards(CARDS_DIR)
-    assert len(cards) == 255
+    assert len(cards) == 288
     by_id = {c.id: c for c in cards}
     assert by_id["TNF_TNF_alpha"].tier == AgentTier.MID
 
@@ -324,8 +324,8 @@ def test_g_real_card_set_smoke_run_bounds():
     final = logs[-1]
     assert final.tick == 2
     assert final.world_after.tick == 3
-    assert len(final.deltas_applied) == 255
-    assert len(final.audit) == 255
+    assert len(final.deltas_applied) == 288
+    assert len(final.audit) == 288
     for state in final.world_after.states.values():
         assert 0.0 <= state <= 1.0
     readout = final.world_after.readouts

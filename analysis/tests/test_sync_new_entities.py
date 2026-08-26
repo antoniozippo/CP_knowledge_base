@@ -12,39 +12,82 @@ def _write(tmp_path, nodes, links, name="graph_v2.json"):
     return p
 
 
-def test_syncs_only_missing_document_nodes(tmp_path):
-    raw = {
-        "nodes": [
-            {"id": "a", "label": "NKCC1 (SLC12A2)", "file_type": "document", "community": 1},
-            {"id": "rat_x", "label": "rationale thing", "file_type": "rationale", "community": 1},
-            {"id": "b", "label": "KCC2", "file_type": "document", "community": 1},
-        ],
-        "links": [],
-    }
-    v2p = _write(tmp_path, [{"id": "b", "label": "KCC2", "file_type": "document"}], [])
-    rawp = _write(tmp_path, raw["nodes"], raw["links"], name="raw.json")
-    summary = sne.sync(str(v2p), str(rawp))
-    assert summary["added"] == 1 and summary["ids"] == ["a"]
+def _raw_graph_fixture():
+    raw_nodes = [
+        {"id": "kcc2_survivor", "label": "KCC2", "file_type": "document", "community": 1},
+        {"id": "old_dup", "label": "KCC2 (SLC12A5)", "file_type": "document", "community": 1},
+        {"id": "new_mol", "label": "Interleukin-34", "file_type": "document", "community": 2},
+        {"id": "new_cell", "label": "Spinal Microglia (Activated)", "file_type": "document", "community": 2},
+    ]
+    raw_links = [
+        {"source": "old_dup", "target": "new_mol", "relation": "activates", "confidence": "EXTRACTED"},
+        {"source": "new_cell", "target": "new_mol", "relation": "causes", "confidence": "EXTRACTED"},
+        {"source": "old_dup", "target": "new_mol", "relation": "references", "confidence": "EXTRACTED"},
+        {"source": "new_cell", "target": "new_cell", "relation": "activates", "confidence": "EXTRACTED"},
+    ]
+    return raw_nodes, raw_links
+
+
+def _survivor():
+    return {"id": "kcc2_survivor", "label": "KCC2", "file_type": "document",
+            "entity_type": "molecule", "compartment": "other", "tier": "mid"}
+
+
+def test_merge_sources_skipped_and_links_canonicalized(tmp_path):
+    raw_nodes, raw_links = _raw_graph_fixture()
+    v2p = _write(tmp_path, [_survivor()], [])
+    rawp = _write(tmp_path, raw_nodes, raw_links, name="raw.json")
+    summary = sne.sync(str(v2p), str(rawp), with_links=True)
+    assert summary["skipped_merge_sources"] == 1  # old_dup folded into kcc2_survivor
+    assert sorted(summary["added_node_ids"]) == ["new_cell", "new_mol"]
+    assert summary["added_links"] == 3  # self-loop dropped; three links imported (one redirects to survivor)
     out = json.loads(v2p.read_text())
-    assert len(out["nodes"]) == 2
-    new = out["nodes"][1]
+    imported = [(l["source"], l["target"], l["sign"]) for l in out["links"] if l.get("sign") in (1, -1)]
+    # merge-source endpoint redirected onto its survivor
+    assert ("kcc2_survivor", "new_mol", 1) in imported
+    assert ("new_cell", "new_mol", 1) in imported
+    ids = {n["id"] for n in out["nodes"]}
+    assert "old_dup" not in ids
+    tiers = {n["id"]: n["tier"] for n in out["nodes"]}
+    assert tiers["new_mol"] == "mid"  # degree 3 post-import (2 neighbors via 3 links)
+    s2 = sne.sync(str(v2p), str(rawp), with_links=True)
+    assert s2["added_nodes"] == 0 and s2["added_links"] == 0  # idempotent
+
+
+def test_without_links_keeps_topology_untouched(tmp_path):
+    raw_nodes, raw_links = _raw_graph_fixture()
+    v2p = _write(tmp_path, [_survivor()], [])
+    rawp = _write(tmp_path, raw_nodes, raw_links, name="raw.json")
+    summary = sne.sync(str(v2p), str(rawp), with_links=False)
+    assert summary["added_nodes"] == 2 and summary["added_links"] == 0
+    out = json.loads(v2p.read_text())
+    assert len(out["links"]) == 0
+    tiers = {n["id"]: n["tier"] for n in out["nodes"]}
+    assert tiers["new_mol"] == "peripheral"
+
+
+def test_syncs_only_missing_document_nodes(tmp_path):
+    raw_nodes = [
+        {"id": "a", "label": "NKCC1 (SLC12A2)", "file_type": "document", "community": 1},
+        {"id": "rat_x", "label": "rationale thing", "file_type": "rationale", "community": 1},
+        {"id": "b", "label": "KCC2", "file_type": "document", "community": 1},
+    ]
+    v2p = _write(tmp_path, [_survivor()], [])
+    rawp = _write(tmp_path, raw_nodes, [], name="raw.json")
+    summary = sne.sync(str(v2p), str(rawp))
+    assert summary["added_nodes"] == 1
+    out = json.loads(v2p.read_text())
+    new = [n for n in out["nodes"] if n["id"] == "a"][0]
     assert new["entity_type"] in ("channel", "molecule", "receptor")
     assert new["compartment"] in ("dorsal_horn", "DRG", "peripheral", "other", "systemic")
     assert new["tier"] == "peripheral"
 
 
-def test_idempotent_and_degree_aware(tmp_path):
-    nodes = [
-        {"id": "a", "label": "NKCC1 (SLC12A2)", "file_type": "document", "community": 1},
-        {"id": "b", "label": "KCC2", "file_type": "document", "community": 1},
-    ]
-    links = [{"source": "b", "target": "a"}] * 5
-    v2p = _write(tmp_path, [nodes[1]], links)
-    rawp = _write(tmp_path, nodes, links, name="raw.json")
-    s1 = sne.sync(str(v2p), str(rawp))
-    assert s1["added"] == 1
-    out = json.loads(v2p.read_text())
-    nkcc = [n for n in out["nodes"] if n["id"] == "a"][0]
-    assert nkcc["tier"] == "mid"  # degree 5
-    s2 = sne.sync(str(v2p), str(rawp))
-    assert s2["added"] == 0
+def test_neutral_sign_zero_links_importable_after_quarantine_feature(tmp_path):
+    raw_nodes, raw_links = _raw_graph_fixture()
+    raw_links.append({"source": "old_dup", "target": "new_mol",
+                      "relation": "regulates", "confidence": "EXTRACTED"})
+    v2p = _write(tmp_path, [_survivor()], [])
+    rawp = _write(tmp_path, raw_nodes, raw_links, name="raw.json")
+    summary = sne.sync(str(v2p), str(rawp), with_links=True)
+    assert summary["added_links"] == 4  # includes sign-0 regulates link

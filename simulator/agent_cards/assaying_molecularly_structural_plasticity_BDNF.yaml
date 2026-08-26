@@ -110,6 +110,18 @@ inbound_edges:
   weight: 0.5
   validation_status: null
   neutral_ok: false
+- source_id: CSF1-CSF1R_SpinalMicroglia
+  relation: causes
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: JAK-STAT_JAKSTAT3Axis
+  relation: upregulates
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
 outbound_ids:
 - BDNF_TrkB_rationale_dual_roles
 - karilin7_Kalirin7

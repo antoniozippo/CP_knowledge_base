@@ -6,7 +6,7 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: Hypoxia-Inducible Factor 1 Alpha (HIF1α) is a concept located in other.
-  Baseline activity level 0.50. It receives 2 regulatory influences and exerts 4.
+  Baseline activity level 0.50. It receives 2 regulatory influences and exerts 6.
 pathological_rules:
 - rule_id: RULE-hif1a_HIF1alpha-01
   description: 'Hypoxia-Inducible Factor 1 Alpha (HIF1α) rationale for Rationale:
@@ -33,6 +33,18 @@ pathological_rules:
   claim_refs: []
   direction: up
   magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-05
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) activates Spinal Microglia
+    (Activated)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-hif1a_HIF1alpha-06
+  description: Hypoxia-Inducible Factor 1 Alpha (HIF1α) upregulates Histone Lactylation
+    (H3K18la)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges:
 - source_id: GABA_apoptosis_ROS_oxidative_stress
   relation: stabilizes
@@ -51,5 +63,7 @@ outbound_ids:
 - vegf_VEGFA
 - AngPt_angiopoietin_2
 - PNN_ECM_MMP9
+- CSF1-CSF1R_SpinalMicroglia
+- epigenetic_mechanisms_pain_HistoneLactylation
 rule_gap_reason: null
 source_note: hif1a.md

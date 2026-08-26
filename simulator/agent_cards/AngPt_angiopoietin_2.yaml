@@ -6,7 +6,7 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: Angiopoietin-2 (Ang-2) is a concept located in other. Baseline activity
-  level 0.50. It receives 3 regulatory influences and exerts 5.
+  level 0.50. It receives 3 regulatory influences and exerts 6.
 pathological_rules:
 - rule_id: RULE-AngPt_angiopoietin_2-01
   description: Angiopoietin-2 (Ang-2) antagonizes in inflammation Tie2 Receptor Tyrosine
@@ -39,6 +39,11 @@ pathological_rules:
   - EC-0013
   direction: up
   magnitude_hint: null
+- rule_id: RULE-AngPt_angiopoietin_2-06
+  description: Angiopoietin-2 (Ang-2) inhibits Blood-Brain/Spinal Cord Barrier Integrity
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
 inbound_edges:
 - source_id: GABA_apoptosis_HIF1alpha
   relation: transcribes
@@ -64,5 +69,6 @@ outbound_ids:
 - shared_microglia
 - TNF_TNF_alpha
 - bbb_bbb
+- BBB_BloodBrainBarrier
 rule_gap_reason: null
 source_note: AngPt.md

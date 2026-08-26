@@ -42,16 +42,16 @@ baseline +/- 0.15 held for 2 consecutive ticks
 
 ## Drug effect and separation numbers
 
-- mean pain_score ticks 14-28: SNI 0.2956, CLP257 0.2411, naive 0.0500
-- mean KCC2 state ticks >= 14: SNI 0.1099, CLP257 0.5220
+- mean pain_score ticks 14-28: SNI 0.3442, CLP257 0.3092, naive 0.0500
+- mean KCC2 state ticks >= 14: SNI 0.0458, CLP257 0.4566
 
 ## Criteria verdicts
 
 | criterion | verdict | detail |
 |---|---|---|
-| drug_effect_pain_lower | **PASS** | mean pain_score ticks 14-28: SNI=0.2956 CLP257=0.2411 SNI-CLP257=+0.0545 (required >=0.03) |
-| drug_effect_kcc2_higher | **PASS** | mean BDNF_TrkB_KCC2 state ticks >= 14: SNI=0.1099 CLP257=0.5220 margin=+0.4121 |
-| naive_separation | **PASS** | mean pain_score ticks 14-28: SNI=0.2956 naive=0.0500 SNI-naive=+0.2456 (required >=0.05) |
+| drug_effect_pain_lower | **PASS** | mean pain_score ticks 14-28: SNI=0.3442 CLP257=0.3092 SNI-CLP257=+0.0350 (required >=0.03) |
+| drug_effect_kcc2_higher | **PASS** | mean BDNF_TrkB_KCC2 state ticks >= 14: SNI=0.0458 CLP257=0.4566 margin=+0.4108 |
+| naive_separation | **PASS** | mean pain_score ticks 14-28: SNI=0.3442 naive=0.0500 SNI-naive=+0.2942 (required >=0.05) |
 | event_ordering | **PASS** | microglia <= tnf/bdnf:ok; tnf/bdnf <= mmp9:ok; mmp9 <= kcc2-drop/pnn:ok; kcc2-drop/pnn <= pv-dysfunction:ok; pv-dysfunction <= pain-rise:ok |
 
 Overall: PASS

@@ -666,6 +666,19 @@ def graph_sha256_of(graph, input_graph_path=None):
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+def reconcile_output_dir(output_dir, entries):
+    """Remove stale card YAMLs left by earlier builds (e.g. files of nodes
+    later renamed, merged away, or collision-renumbered). Returns removed names."""
+    keep = {e["file"] for e in entries}
+    removed = []
+    for p in sorted(Path(output_dir).glob("*.yaml")):
+        if p.name == "_manifest.yaml" or p.name in keep:
+            continue
+        p.unlink()
+        removed.append(p.name)
+    return removed
+
+
 def generate_outputs(graph, claims, verdicts, *, output_dir, report_path,
                      vault_dir=None, input_graph_path=None, hub_enrich=False,
                      only_hubs=False):
@@ -680,9 +693,11 @@ def generate_outputs(graph, claims, verdicts, *, output_dir, report_path,
         tier_filter=tier_filter,
     )
     entries = write_cards(cards, output_dir)
+    removed = reconcile_output_dir(output_dir, entries)
     manifest = build_manifest(
         entries, graph_sha256_of(graph, input_graph_path), stats, cards
     )
+    manifest["stale_files_removed"] = removed
     manifest_path = Path(output_dir) / "_manifest.yaml"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(

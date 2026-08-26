@@ -1,0 +1,33 @@
+id: proposal_acute_to_chronic_prevention_TimeStaggeredProphylaxis
+label: Time-Staggered Quadruple Prophylaxis Strategy
+entity_type: concept
+compartment: other
+tier: MID
+community: 9
+baseline_state: 0.5
+normal_role: Time-Staggered Quadruple Prophylaxis Strategy is a concept located in
+  other. Baseline activity level 0.50. It receives 3 regulatory influences and exerts
+  0.
+pathological_rules: []
+inbound_edges:
+- source_id: insights_x_lactylation_MMP9_LactylationPhaseGate
+  relation: rationale_for
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_acute_to_chronic_prevention_TransientHif1aInhibition
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+- source_id: proposal_acute_to_chronic_prevention_Mmp9Inhibition
+  relation: rationale_for
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids: []
+rule_gap_reason: null
+source_note: proposals/proposal_acute_to_chronic_prevention.md

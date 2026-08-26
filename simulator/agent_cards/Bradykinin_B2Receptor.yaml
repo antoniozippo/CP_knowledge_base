@@ -1,0 +1,26 @@
+id: Bradykinin_B2Receptor
+label: Bradykinin B2 Receptor (Constitutive)
+entity_type: receptor
+compartment: other
+tier: PERIPHERAL
+community: 31
+baseline_state: 0.5
+normal_role: Bradykinin B2 Receptor (Constitutive) is a receptor located in other.
+  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-Bradykinin_B2Receptor-01
+  description: Bradykinin B2 Receptor (Constitutive) activates TRPV1 Channel
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: bradykinin_bradykinin
+  relation: activates
+  sign: 1
+  weight: 0.9
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- NogoA_NgR1_TRPV1
+rule_gap_reason: null
+source_note: Bradykinin.md

@@ -1,0 +1,34 @@
+id: proposal_acute_to_chronic_prevention_TransientHif1aInhibition
+label: Transient HIF1alpha Inhibition (T=6-72h)
+entity_type: concept
+compartment: other
+tier: MID
+community: 9
+baseline_state: 0.5
+normal_role: Transient HIF1alpha Inhibition (T=6-72h) is a concept located in other.
+  Baseline activity level 0.50. It receives 0 regulatory influences and exerts 3.
+pathological_rules:
+- rule_id: RULE-proposal_acute_to_chronic_prevention_TransientHif1aInhibition-01
+  description: Transient HIF1alpha Inhibition (T=6-72h) downregulates Vascular Endothelial
+    Growth Factor A (VEGFA)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-proposal_acute_to_chronic_prevention_TransientHif1aInhibition-02
+  description: Transient HIF1alpha Inhibition (T=6-72h) inhibits MMP-9 (Matrix Metalloproteinase-9)
+  claim_refs: []
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-proposal_acute_to_chronic_prevention_TransientHif1aInhibition-03
+  description: Transient HIF1alpha Inhibition (T=6-72h) rationale for Time-Staggered
+    Quadruple Prophylaxis Strategy
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges: []
+outbound_ids:
+- vegf_VEGFA
+- PNN_ECM_MMP9
+- proposal_acute_to_chronic_prevention_TimeStaggeredProphylaxis
+rule_gap_reason: null
+source_note: proposals/proposal_acute_to_chronic_prevention.md

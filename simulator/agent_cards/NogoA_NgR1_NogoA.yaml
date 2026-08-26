@@ -6,7 +6,7 @@ tier: MID
 community: 7
 baseline_state: 0.5
 normal_role: Nogo-A is a concept located in other. Baseline activity level 0.50. It
-  receives 0 regulatory influences and exerts 2.
+  receives 0 regulatory influences and exerts 3.
 pathological_rules:
 - rule_id: RULE-NogoA_NgR1_NogoA-01
   description: 'Nogo-A rationale for Rationale: Nogo-A/NgR1 have physiological circuit-stabilizing
@@ -23,9 +23,15 @@ pathological_rules:
   - EC-0094
   direction: down
   magnitude_hint: null
+- rule_id: RULE-NogoA_NgR1_NogoA-03
+  description: Nogo-A activates NgR1 Receptor Complex (LINGO-1/p75NTR-TROY)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges: []
 outbound_ids:
 - NogoA_NgR1_rationale_physiological_roles
 - NogoA_NgR1_NG101
+- NogoA-NgR1_NgR1
 rule_gap_reason: null
 source_note: NogoA-NgR1.md

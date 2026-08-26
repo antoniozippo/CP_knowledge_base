@@ -6,9 +6,15 @@ tier: MID
 community: 0
 baseline_state: 0.5
 normal_role: P2X4 Receptor is a channel located in other. Baseline activity level
-  0.50. It receives 0 regulatory influences and exerts 0.
-pathological_rules: []
+  0.50. It receives 0 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-p2x4_p2x4-01
+  description: P2X4 Receptor causes KCC2-Dependent Disinhibition (Hit 2)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges: []
-outbound_ids: []
+outbound_ids:
+- insights_x_lamina_I_dual_hit_Kcc2Disinhibition
 rule_gap_reason: null
 source_note: P2X4.md

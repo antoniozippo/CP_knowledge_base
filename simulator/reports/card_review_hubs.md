@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-08-26T10:19:59Z
+generated: 2026-08-26T10:33:51Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -96,7 +96,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 5
 - proposed_normal_role: <LLM_ENRICH>
-- pathological rules (15):
+- pathological rules (16):
   - `RULE-karilin7_Kalirin7-01` [up] Kalirin-7 (GEF for Rac1/RhoG) activates GEF Rac1 GTPase
     - claim_refs: EC-0052 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-02` [up] Kalirin-7 (GEF for Rac1/RhoG) activates GEF RhoG GTPase
@@ -127,6 +127,8 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
     - claim_refs: EC-0065 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-17` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC Kalirin-7 Dependent)
     - claim_refs: EC-0066 (EXTENDED)
+  - `RULE-karilin7_Kalirin7-18` [up] Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7 Role
+    - claim_refs: (none)
 - dropped candidate rules (all refs REFUTED):
   - `RULE-karilin7_Kalirin7-13` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Spared Nerve Injury (SNI) Model — refs: EC-0059 (REFUTED)
   - `RULE-karilin7_Kalirin7-14` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Chronic Constriction Injury (CCI) Model — refs: EC-0058 (REFUTED)

@@ -575,3 +575,15 @@ def test_inferred_closure_confidence_maps_to_half_weight():
     }
     edge = bc.build_influence_edge(link)
     assert edge.weight == 0.5
+
+
+def test_reconcile_removes_stale_files(tmp_path):
+    bc_reconcile = bc.reconcile_output_dir
+    keep = tmp_path / "keep.yaml"
+    stale = tmp_path / "stale_old_id.yaml"
+    manifest = tmp_path / "_manifest.yaml"
+    for p in (keep, stale, manifest):
+        p.write_text("x: 1\n")
+    removed = bc_reconcile(tmp_path, [{"id": "keep", "file": "keep.yaml"}])
+    assert removed == ["stale_old_id.yaml"]
+    assert keep.exists() and not stale.exists() and manifest.exists()
