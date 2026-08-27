@@ -1,0 +1,3 @@
+Command: /opt/anaconda3/bin/python3 -m simulator.engine.orchestrator --scenario simulator/scenarios/CCI_28d.yaml --cards simulator/cards --out simulator/out/llm_battery_20260827/CCI_28d_LLM --llm-endpoint http://192.168.1.13:1234 --llm-model qwen/qwen3.8-27b --llm-max-tokens 4096 --seed 42
+Started: 2026-08-27T14:30:04.559465
+

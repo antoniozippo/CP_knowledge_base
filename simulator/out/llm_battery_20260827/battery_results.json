@@ -1,0 +1,19 @@
+{
+  "started": "2026-08-27T13:50:14.801215",
+  "endpoint": "http://192.168.1.13:1234",
+  "model": "qwen/qwen3.8-27b",
+  "results": [
+    {
+      "name": "SNI_28d",
+      "days": 28,
+      "elapsed_sec": 2329.747452020645,
+      "elapsed_min": 38.82912420034408,
+      "pain": "N/A",
+      "llm_calls": 27,
+      "llm_deferred": 0,
+      "returncode": 0,
+      "log": "simulator/out/llm_battery_20260827/SNI_28d_LLM.log",
+      "output": "simulator/out/llm_battery_20260827/SNI_28d_LLM"
+    }
+  ]
+}

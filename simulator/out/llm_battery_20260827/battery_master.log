@@ -1,0 +1,22 @@
+Starting Remaining LLM Battery at 2026-08-27T13:50:14.800826
+Endpoint: http://192.168.1.13:1234 (qwen/qwen3.8-27b)
+Output dir: simulator/out/llm_battery_20260827
+Scenarios: 9
+
+>>> Arm 1/9: SNI_28d
+
+============================================================
+[13:50:14] Starting SNI_28d (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4811 inflammation=0.6416 barrier_integrity=0.3166 -> simulator/out/llm_battery_20260827/SNI_28d_LLM
+
+[14:29:04] SNI_28d COMPLETE in 38.8 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 2/9: CCI_28d
+
+============================================================
+[14:30:04] Starting CCI_28d (28d)
+============================================================

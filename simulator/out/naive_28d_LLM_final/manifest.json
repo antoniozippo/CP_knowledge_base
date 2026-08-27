@@ -1,0 +1,38 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 18,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [],
+      "horizon_days": 28,
+      "initial_perturbations": [],
+      "injury_model": "naive",
+      "injury_tick": null,
+      "name": "naive_28d",
+      "notes": "Naive control arm for the SNI pilot: no injury tick, no perturbations, no drug arms. All agents start at their card baselines.",
+      "sustained_drives": []
+    },
+    "seed": 42,
+    "started_at_utc": "2026-08-27T11:16:13Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [],
+    "horizon_days": 28,
+    "initial_perturbations": [],
+    "injury_model": "naive",
+    "injury_tick": null,
+    "name": "naive_28d",
+    "notes": "Naive control arm for the SNI pilot: no injury tick, no perturbations, no drug arms. All agents start at their card baselines.",
+    "sustained_drives": []
+  }
+}
