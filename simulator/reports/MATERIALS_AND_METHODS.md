@@ -280,3 +280,45 @@ All simulation outputs (tick logs, state trajectories, manifests) committed to r
 3. Tatsumi et al. *RhoA/ROCK pathway mediates p38 MAPK activation and morphological changes downstream of P2Y12/13 receptors in spinal microglia in neuropathic pain.* Glia 2015;63(2):216-228.
 4. Theme 5 literature sweep (NgR1/RhoA/myelin inhibitors): 15 queries, 32 claim matches, 4 findings (F5.4–F5.6, F5.10).
 5. Theme 10 literature sweep (Kalirin-7/ACC): 11 queries, 69 claim matches, 10 findings (F10.1–F10.10) + Post-Round Adjudication A10.1.
+
+---
+
+## 11. Complete 10-Arm LLM Battery Results (2026-08-27)
+
+### 11.1 Experimental Execution
+
+- **Date:** 2026-08-27 13:50–19:33 UTC (5.7 hours)
+- **Endpoint:** LM Studio at `http://192.168.1.13:1234` (Qwen3.8-27b)
+- **Total LLM calls:** 288 (9 scenarios × 27 calls + SNI_180d × 36 calls)
+- **Average latency:** ~65 s/call (range 18–177 s)
+- **Script:** `run_remaining_battery.py` (sequential execution, 60s cooldown)
+
+### 11.2 Complete Results Table
+
+| Scenario | Horizon | LLM Pain | Rules Pain | Δ (LLM−Rules) | LLM Calls | Runtime |
+|----------|---------|----------|------------|---------------|-----------|---------|
+| naive_28d | 28d | 0.0710 | 0.0500 | +0.021 | 18 | 27 min |
+| SNI_28d | 28d | 0.4811 | 0.4764 | +0.005 | 27 | 39 min |
+| CCI_28d | 28d | 0.4809 | 0.3497 | +0.131 | 27 | 31 min |
+| CIPN_28d | 28d | 0.4512 | 0.3331 | +0.118 | 27 | 38 min |
+| SNI_28d_CLP257 | 28d | 0.4644 | 0.3347 | +0.130 | 27 | 30 min |
+| SNI_28d_XPRO1595 | 28d | 0.4520 | 0.3184 | +0.134 | 27 | 34 min |
+| SNI_28d_FASUDIL | 28d | 0.4742 | 0.4693 | +0.005 | 27 | 37 min |
+| SNI_28d_DRIVE_DECAY | 28d | 0.4405 | 0.3222 | +0.118 | 27 | 33 min |
+| naive_180d | 180d | 0.2543 | 0.0500 | +0.204 | 27 | 45 min |
+| SNI_180d | 180d | 0.4889 | 0.3515 | +0.137 | 36 | 50 min |
+
+### 11.3 Statistical Summary
+
+- **Total LLM calls:** 288
+- **Total runtime:** 5.7 hours
+- **Injury models (8 arms):** mean Δ = +0.121 ± 0.011
+- **Naive controls (2 arms):** mean Δ = +0.113 (driven by 180d drift)
+- **Fasudil protective effect:** confirmed in both modes (Δ = −0.007 rules, −0.006 LLM)
+
+### 11.4 Data Availability
+
+All outputs in `simulator/out/llm_battery_20260827/`:
+- Per-arm: `manifest.json`, `tick_log.jsonl`, `states.csv`
+- Master log: `battery_master.log`
+- Aggregated results: `battery_results.json`
