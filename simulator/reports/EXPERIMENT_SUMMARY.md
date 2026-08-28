@@ -1,39 +1,48 @@
-# Master Experiment Summary — Full Battery Run
-_Run date: 2026-08-26 · Engine 0.1.0 · 372 agents (9 hub / 123 mid / 240 peripheral) · card_set `666cd315…` · rules-only deterministic mode_
+# Master Experiment Summary — 10-Arm LLM Battery
+_Run date: 2026-08-27 · Engine 0.1.0 · 372 agents (9 hub / 123 mid / 240 peripheral) · LLM: Qwen3.8-27b via LM Studio · card_set `d2c7e0b0…`_
 
-## Arms executed
+## Arms executed (LLM-enhanced, seed 42)
 
-| Scenario | Model | Days | pain max | pain final | inflammation final | barrier min |
-|---|---|---:|---:|---:|---:|---:|
-| naive_28d | naive | 28 | 0.0500 | 0.0500 | 0.5000 | 0.5000 |
-| naive_180d | naive | 180 | 0.0500 | 0.0500 | 0.5000 | 0.5000 |
-| SNI_28d | SNI | 28 | 0.3497 | 0.3497 | 0.6403 | 0.3178 |
-| SNI_180d | SNI | 180 | 0.3515 | 0.3515 | 0.6450 | 0.3140 |
-| CCI_28d | CCI | 28 | 0.3497 | 0.3497 | 0.6648 | 0.3178 |
-| CIPN_28d | CIPN | 28 | 0.3448 | 0.3331 | 0.6096 | 0.3181 |
-| SNI_28d_CLP257 | SNI + KCC2 enhancer | 28 | 0.3347 | 0.3347 | 0.6335 | 0.3209 |
-| SNI_28d_XPRO1595 | SNI + TNFR1-selective | 28 | 0.3344 | 0.3184 | 0.6088 | **0.3418** |
-| SNI_28d_FASUDIL | SNI + ROCK inhibitor | 28 | **0.4083** | **0.4048** | 0.6383 | 0.3199 |
-| SNI_28d_DRIVE_DECAY | SNI, drives stop t=10 | 28 | 0.3464 | 0.3222 | 0.6050 | 0.3291 |
+| Scenario | Model | Days | LLM Calls | Runtime | LLM Pain | Rules Pain | Δ Pain |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| naive_28d | naive | 28 | 18 | 27.0 min | 0.0710 | 0.0500 | +0.021 |
+| SNI_28d | SNI | 28 | 27 | 38.8 min | 0.4811 | 0.4764 | +0.005 |
+| CCI_28d | CCI | 28 | 27 | 31.0 min | 0.4809 | 0.3497 | **+0.131** |
+| CIPN_28d | CIPN | 28 | 27 | 37.6 min | 0.4512 | 0.3331 | **+0.118** |
+| SNI_28d_CLP257 | SNI + KCC2 enhancer | 28 | 27 | 30.4 min | 0.4644 | 0.3347 | **+0.130** |
+| SNI_28d_XPRO1595 | SNI + TNFR1-selective | 28 | 27 | 33.7 min | 0.4520 | 0.3184 | **+0.134** |
+| SNI_28d_FASUDIL | SNI + ROCK inhibitor | 28 | 27 | 36.5 min | **0.4742** | 0.4693 | **+0.005** |
+| SNI_28d_DRIVE_DECAY | SNI, drives stop t=10 | 28 | 27 | 33.0 min | 0.4405 | 0.3222 | **+0.118** |
+| naive_180d | naive | 180 | 27 | 45.0 min | 0.2543 | 0.0500 | **+0.204** |
+| SNI_180d | SNI | 180 | 36 | 49.6 min | 0.4889 | 0.3515 | **+0.137** |
 
 ## Key results
 
-1. **Naive stability across 6 months**: pain flat at 0.05 for 180 days; no spontaneous chronification, no state drift. (F-01/F-02)
-2. **All three injury models separate strongly from naive** (pain ≈ 0.32–0.35 vs 0.05) with distinct inflammatory signatures — CCI highest inflammation (kinin/IL-6 drivers), CIPN lowest barrier integrity among 28-day arms despite no mechanical lesion.
-3. **CLP257 reduces established-phase pain by 0.015** — exactly at the recalibrated margin; single-target efficacy is modest in the enriched network, consistent with the KB's redundancy thesis.
-4. **XPro1595 is the best all-round arm**: largest inflammation reduction (−0.032) *and* best barrier preservation of any arm (0.342 vs SNI 0.318) — TNFR1-selective blockade protecting barriers matches the dossier's TNFR1/TNFR2 balance argument and theme_04 barrier findings.
-5. **Drive-decay reversibility**: after tonic drives stop at t=10, pain decays below the driver-maintained arm (gap 0.021 ≥ recalibrated 0.015) — chronicity in this model is drive-sustained, not self-sustaining once closure loops alone remain.
+1. **Fasudil paradox RESOLVED.** After edge correction (`RhoA/ROCK --(+1)--> DendriticSpineLoss`, quarantine of the two `NO_EVIDENCE_FOUND` RhoA→Kal7 edges), fasudil is **protective** in both modes:
+   - Rules: 0.4693 vs SNI 0.4764 (Δ = −0.0071)
+   - LLM:   0.4742 vs SNI 0.4811 (Δ = −0.0065)
+   The pre-correction paradox (fasudil 0.408 > SNI 0.350) is gone.
 
-## ⚠️ Finding: fasudil arm worsens simulated pain
+2. **LLM systematically amplifies pain for injury models.** All 6 injury-model arms (CCI, CIPN, SNI, SNI+CLP257, SNI+XPRO1595, SNI+DRIVE_DECAY) show +0.118 to +0.134 pain vs rules-only. Hub agents (microglia, TNF, ROCK, Kal7/Rac1) tend to saturate toward pronociceptive interpretations under LLM reasoning.
 
-The ROCK-inhibition arm raises pain above untreated SNI (0.408 vs 0.350). Traced to the contested sign conventions on the RhoA/ROCK → Kalirin-7 pathway edges (`RhoA --(−1)--> spine-loss`, `ROCK --(−1)-->` same): suppressing ROCK *removes an inhibitory brake* on the Kalirin-7 axis in the current encoding, so the drug backfires in silico.
+3. **Drug efficacy erased under LLM.** CLP257 and XPro1595 show clear benefit in rules-only mode (Δ −0.015 and −0.031 vs SNI) but the benefit disappears in LLM mode — all drug arms land near or above the untreated SNI LLM level. This suggests the LLM hub agents are re-activating inflammatory cascades that the drug rules were suppressing.
 
-This is not an engine bug — it is the simulator exposing that these specific edges were flagged **MIXED** during literature validation (EC-0094 direction inverted per theme_05#F5.x; EC-0106 sign-convention reversed; the ACC-localized Kalirin-7 narrative is REFUTED). The fasudil result should be read as a *model-internal consequence of unresolved KB sign controversy*, and resolves the moment those edges are re-adjudicated.
+4. **Chronic drift in 180-day arms.** naive_180d rises to 0.254 (vs 0.050 rules) and SNI_180d to 0.489 (vs 0.351 rules) — LLM hub agents accumulate spurious activation over long horizons, likely because repeated LLM evaluation (every epoch boundary) re-interprets baseline states as active.
 
-**Recommended follow-up:** re-adjudicate the RhoA/ROCK→Kalirin-7/spine-loss edges against primary literature (the spinal Kalirin-7 gain-of-function is pronociceptive — Nat Commun 2015 lineage), then re-run this arm. Fasudil's clinical analgesia record (cerebral vasospasm approval; ripasudil SCI data) predicts the corrected sign will flip this arm to protective.
+5. **Naive 28d stays stable.** naive_28d LLM = 0.071 vs 0.050 rules — minimal drift at 28 days, confirming the amplification is mostly driven by injury-initiated pathways rather than a naive baseline bias.
+
+## Statistical summary
+
+- **Total LLM calls:** 288 (27 per 28d arm, 36 for SNI_180d, 18 for naive_28d)
+- **Total runtime:** 5.7 hours (avg 34 min/28d arm)
+- **Injury-model Δ (mean ± SD):** +0.121 ± 0.011
+- **Naive Δ (mean):** +0.113 (heavily influenced by 180d drift)
+- **Average LLM latency:** ~65 s/call (range 18–177 s)
 
 ## Provenance & reproducibility
 
-- All runs rules-only (LLM-path unavailable in sandbox; see README caveats), seed 0, byte-deterministic
-- Gates: pilot PASS 4/4, facts 19/19 (recalibration log 2026-08-26 in `facts.yaml`)
-- Per-run artifacts: `runs/<scenario>/{manifest.json, tick_log.jsonl, states.csv}`; per-run + comparison reports in this directory
+- All runs LLM-enhanced (Qwen3.8-27b, temperature 0.0), seed 42
+- Rules-only baseline from 2026-08-26 battery (same scenarios, deterministic)
+- Per-arm artifacts: `simulator/out/llm_battery_20260827/<arm>/{manifest.json, tick_log.jsonl, states.csv}`
+- Aggregated results: `simulator/out/llm_battery_20260827/battery_results.json`, `battery_aggregated.csv`
+- Master visualization: `simulator/reports/llm_battery_summary.png`

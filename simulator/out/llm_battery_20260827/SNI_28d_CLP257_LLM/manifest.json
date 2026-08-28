@@ -1,0 +1,144 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 27,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [
+        {
+          "effect_sign": 1,
+          "end_tick": null,
+          "magnitude": 0.6,
+          "name": "clp257",
+          "start_tick": 3,
+          "target_agent_ids": [
+            "BDNF_TrkB_KCC2"
+          ]
+        }
+      ],
+      "horizon_days": 28,
+      "initial_perturbations": [
+        {
+          "agent_id": "shared_microglia",
+          "value": 0.92
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "value": 0.92
+        },
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "value": 0.92
+        },
+        {
+          "agent_id": "tlr4_tlr4",
+          "value": 0.92
+        },
+        {
+          "agent_id": "PNN_ECM_MMP9",
+          "value": 0.92
+        },
+        {
+          "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+          "value": 0.92
+        },
+        {
+          "agent_id": "hif1a_HIF1alpha",
+          "value": 0.92
+        }
+      ],
+      "injury_model": "SNI",
+      "injury_tick": 0,
+      "name": "sni_28d_clp257",
+      "notes": "SNI pilot plus CLP257 (KCC2 enhancer) arm. Target is the canonical merged KCC2 molecule card BDNF_TrkB_KCC2. Seed magnitudes match sni_28d (0.92, see that scenario's notes for the sustain=2 visibility rationale). Sustained drives are identical to sni_28d (microglia and TNF-a tonic at 0.9 from tick 0) so the only inter-arm difference is the drug. end_tick is intentionally omitted on the drug arm: ScenarioConfig forbids end_tick >= horizon_days, and omitting it yields exactly the intended active window [3, 28) because the horizon caps the run at tick 27.",
+      "sustained_drives": [
+        {
+          "agent_id": "shared_microglia",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        }
+      ]
+    },
+    "seed": 42,
+    "started_at_utc": "2026-08-27T13:40:37Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [
+      {
+        "effect_sign": 1,
+        "end_tick": null,
+        "magnitude": 0.6,
+        "name": "clp257",
+        "start_tick": 3,
+        "target_agent_ids": [
+          "BDNF_TrkB_KCC2"
+        ]
+      }
+    ],
+    "horizon_days": 28,
+    "initial_perturbations": [
+      {
+        "agent_id": "shared_microglia",
+        "value": 0.92
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "value": 0.92
+      },
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "value": 0.92
+      },
+      {
+        "agent_id": "tlr4_tlr4",
+        "value": 0.92
+      },
+      {
+        "agent_id": "PNN_ECM_MMP9",
+        "value": 0.92
+      },
+      {
+        "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+        "value": 0.92
+      },
+      {
+        "agent_id": "hif1a_HIF1alpha",
+        "value": 0.92
+      }
+    ],
+    "injury_model": "SNI",
+    "injury_tick": 0,
+    "name": "sni_28d_clp257",
+    "notes": "SNI pilot plus CLP257 (KCC2 enhancer) arm. Target is the canonical merged KCC2 molecule card BDNF_TrkB_KCC2. Seed magnitudes match sni_28d (0.92, see that scenario's notes for the sustain=2 visibility rationale). Sustained drives are identical to sni_28d (microglia and TNF-a tonic at 0.9 from tick 0) so the only inter-arm difference is the drug. end_tick is intentionally omitted on the drug arm: ScenarioConfig forbids end_tick >= horizon_days, and omitting it yields exactly the intended active window [3, 28) because the horizon caps the run at tick 27.",
+    "sustained_drives": [
+      {
+        "agent_id": "shared_microglia",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      }
+    ]
+  }
+}

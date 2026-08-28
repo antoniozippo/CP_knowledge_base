@@ -1,0 +1,4 @@
+Command: /opt/anaconda3/bin/python3 -m simulator.engine.orchestrator --scenario simulator/scenarios/SNI_28d_XPRO1595.yaml --cards simulator/cards --out simulator/out/llm_battery_20260827/SNI_28d_XPRO1595_LLM --llm-endpoint http://192.168.1.13:1234 --llm-model qwen/qwen3.8-27b --llm-max-tokens 4096 --seed 42
+Started: 2026-08-27T16:12:00.972025
+
+run complete: ticks=28 final_tick=28 pain=0.4520 inflammation=0.6133 barrier_integrity=0.3463 -> simulator/out/llm_battery_20260827/SNI_28d_XPRO1595_LLM

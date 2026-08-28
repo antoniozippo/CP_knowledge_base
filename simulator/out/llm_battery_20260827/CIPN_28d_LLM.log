@@ -1,0 +1,4 @@
+Command: /opt/anaconda3/bin/python3 -m simulator.engine.orchestrator --scenario simulator/scenarios/CIPN_28d.yaml --cards simulator/cards --out simulator/out/llm_battery_20260827/CIPN_28d_LLM --llm-endpoint http://192.168.1.13:1234 --llm-model qwen/qwen3.8-27b --llm-max-tokens 4096 --seed 42
+Started: 2026-08-27T15:02:01.791197
+
+run complete: ticks=28 final_tick=28 pain=0.4512 inflammation=0.6137 barrier_integrity=0.3334 -> simulator/out/llm_battery_20260827/CIPN_28d_LLM

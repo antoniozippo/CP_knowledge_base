@@ -63,6 +63,9 @@
 
 ## Visualizations
 
+### 0. Complete 10-Arm LLM Battery
+![LLM Battery Summary](llm_battery_summary.png)
+
 ### 1. Pain Trajectories & Treatment Effect
 ![Pain Trajectories](results_summary.png)
 

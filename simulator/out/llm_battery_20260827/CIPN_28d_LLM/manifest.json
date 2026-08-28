@@ -1,0 +1,134 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 27,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [],
+      "horizon_days": 28,
+      "initial_perturbations": [
+        {
+          "agent_id": "tlr4_tlr4",
+          "value": 0.9
+        },
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "value": 0.9
+        },
+        {
+          "agent_id": "GABA_apoptosis_mitochondrial_dysfunction",
+          "value": 0.92
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "value": 0.85
+        },
+        {
+          "agent_id": "il6_il6",
+          "value": 0.8
+        },
+        {
+          "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+          "value": 0.8
+        },
+        {
+          "agent_id": "PNN_ECM_MMP9",
+          "value": 0.75
+        }
+      ],
+      "injury_model": "CIPN",
+      "injury_tick": 0,
+      "name": "cipn_28d",
+      "notes": "Chemotherapy-induced peripheral neuropathy (paclitaxel-type). Mechanistically distinct from traumatic models: NO mechanical nerve lesion; axonal mitochondrial dysfunction and oxidative stress are the primary drivers, with TLR4-dependent glial activation. Seeds emphasize the axonal-mitotoxic axis (mitochondrial dysfunction, ROS) plus TLR4/TNF/IL-6 neuroinflammation; BDNF and MMP-9 seeded lower than SNI/CCI reflecting their secondary role. Sustained drives model a fractional dosing schedule: tonic ROS/mitochondrial/ TNF elevation during the treatment window only (ticks 0-11), so the post-treatment trajectory probes partial reversibility versus persistence, the clinically decisive question for CIPN.",
+      "sustained_drives": [
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "end_tick": 12,
+          "start_tick": 0,
+          "value": 0.85
+        },
+        {
+          "agent_id": "GABA_apoptosis_mitochondrial_dysfunction",
+          "end_tick": 12,
+          "start_tick": 0,
+          "value": 0.88
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "end_tick": 12,
+          "start_tick": 0,
+          "value": 0.8
+        }
+      ]
+    },
+    "seed": 42,
+    "started_at_utc": "2026-08-27T13:02:02Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [],
+    "horizon_days": 28,
+    "initial_perturbations": [
+      {
+        "agent_id": "tlr4_tlr4",
+        "value": 0.9
+      },
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "value": 0.9
+      },
+      {
+        "agent_id": "GABA_apoptosis_mitochondrial_dysfunction",
+        "value": 0.92
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "value": 0.85
+      },
+      {
+        "agent_id": "il6_il6",
+        "value": 0.8
+      },
+      {
+        "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+        "value": 0.8
+      },
+      {
+        "agent_id": "PNN_ECM_MMP9",
+        "value": 0.75
+      }
+    ],
+    "injury_model": "CIPN",
+    "injury_tick": 0,
+    "name": "cipn_28d",
+    "notes": "Chemotherapy-induced peripheral neuropathy (paclitaxel-type). Mechanistically distinct from traumatic models: NO mechanical nerve lesion; axonal mitochondrial dysfunction and oxidative stress are the primary drivers, with TLR4-dependent glial activation. Seeds emphasize the axonal-mitotoxic axis (mitochondrial dysfunction, ROS) plus TLR4/TNF/IL-6 neuroinflammation; BDNF and MMP-9 seeded lower than SNI/CCI reflecting their secondary role. Sustained drives model a fractional dosing schedule: tonic ROS/mitochondrial/ TNF elevation during the treatment window only (ticks 0-11), so the post-treatment trajectory probes partial reversibility versus persistence, the clinically decisive question for CIPN.",
+    "sustained_drives": [
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "end_tick": 12,
+        "start_tick": 0,
+        "value": 0.85
+      },
+      {
+        "agent_id": "GABA_apoptosis_mitochondrial_dysfunction",
+        "end_tick": 12,
+        "start_tick": 0,
+        "value": 0.88
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "end_tick": 12,
+        "start_tick": 0,
+        "value": 0.8
+      }
+    ]
+  }
+}

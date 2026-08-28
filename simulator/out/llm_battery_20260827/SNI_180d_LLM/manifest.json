@@ -1,0 +1,122 @@
+{
+  "manifest": {
+    "card_set_hash": "d2c7e0b018edf137d056604eb507c82d2dfb0df4ba550dec0d57b2760f024bf3",
+    "engine_version": "0.1.0",
+    "llm_calls_deferred": 0,
+    "llm_calls_made": 36,
+    "scenario": {
+      "budget": {
+        "max_llm_calls": null,
+        "max_wall_minutes": null
+      },
+      "drug_arms": [],
+      "horizon_days": 180,
+      "initial_perturbations": [
+        {
+          "agent_id": "shared_microglia",
+          "value": 0.92
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "value": 0.92
+        },
+        {
+          "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+          "value": 0.92
+        },
+        {
+          "agent_id": "tlr4_tlr4",
+          "value": 0.92
+        },
+        {
+          "agent_id": "PNN_ECM_MMP9",
+          "value": 0.92
+        },
+        {
+          "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+          "value": 0.92
+        },
+        {
+          "agent_id": "hif1a_HIF1alpha",
+          "value": 0.92
+        }
+      ],
+      "injury_model": "SNI",
+      "injury_tick": 0,
+      "name": "sni_180d",
+      "notes": "Long-horizon SNI arm: identical seeds and tonic sustained_drives to sni_28d extended to 180 days. Used for chronic-phase persistence facts (pain remains elevated far beyond the transition epoch).",
+      "sustained_drives": [
+        {
+          "agent_id": "shared_microglia",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        },
+        {
+          "agent_id": "TNF_TNF_alpha",
+          "end_tick": null,
+          "start_tick": 0,
+          "value": 0.9
+        }
+      ]
+    },
+    "seed": 42,
+    "started_at_utc": "2026-08-27T16:44:13Z"
+  },
+  "scenario_echo": {
+    "budget": {
+      "max_llm_calls": null,
+      "max_wall_minutes": null
+    },
+    "drug_arms": [],
+    "horizon_days": 180,
+    "initial_perturbations": [
+      {
+        "agent_id": "shared_microglia",
+        "value": 0.92
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "value": 0.92
+      },
+      {
+        "agent_id": "GABA_apoptosis_ROS_oxidative_stress",
+        "value": 0.92
+      },
+      {
+        "agent_id": "tlr4_tlr4",
+        "value": 0.92
+      },
+      {
+        "agent_id": "PNN_ECM_MMP9",
+        "value": 0.92
+      },
+      {
+        "agent_id": "assaying_molecularly_structural_plasticity_BDNF",
+        "value": 0.92
+      },
+      {
+        "agent_id": "hif1a_HIF1alpha",
+        "value": 0.92
+      }
+    ],
+    "injury_model": "SNI",
+    "injury_tick": 0,
+    "name": "sni_180d",
+    "notes": "Long-horizon SNI arm: identical seeds and tonic sustained_drives to sni_28d extended to 180 days. Used for chronic-phase persistence facts (pain remains elevated far beyond the transition epoch).",
+    "sustained_drives": [
+      {
+        "agent_id": "shared_microglia",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      },
+      {
+        "agent_id": "TNF_TNF_alpha",
+        "end_tick": null,
+        "start_tick": 0,
+        "value": 0.9
+      }
+    ]
+  }
+}

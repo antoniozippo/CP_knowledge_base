@@ -1,0 +1,4 @@
+Command: /opt/anaconda3/bin/python3 -m simulator.engine.orchestrator --scenario simulator/scenarios/naive_180d.yaml --cards simulator/cards --out simulator/out/llm_battery_20260827/naive_180d_LLM --llm-endpoint http://192.168.1.13:1234 --llm-model qwen/qwen3.8-27b --llm-max-tokens 4096 --seed 42
+Started: 2026-08-27T17:58:12.348242
+
+run complete: ticks=180 final_tick=180 pain=0.2543 inflammation=0.5466 barrier_integrity=0.4369 -> simulator/out/llm_battery_20260827/naive_180d_LLM

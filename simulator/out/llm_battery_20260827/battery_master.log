@@ -20,3 +20,108 @@ run complete: ticks=28 final_tick=28 pain=0.4811 inflammation=0.6416 barrier_int
 ============================================================
 [14:30:04] Starting CCI_28d (28d)
 ============================================================
+run complete: ticks=28 final_tick=28 pain=0.4809 inflammation=0.6660 barrier_integrity=0.3166 -> simulator/out/llm_battery_20260827/CCI_28d_LLM
+
+[15:01:01] CCI_28d COMPLETE in 31.0 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 3/9: CIPN_28d
+
+============================================================
+[15:02:01] Starting CIPN_28d (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4512 inflammation=0.6137 barrier_integrity=0.3334 -> simulator/out/llm_battery_20260827/CIPN_28d_LLM
+
+[15:39:36] CIPN_28d COMPLETE in 37.6 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 4/9: SNI_28d_CLP257
+
+============================================================
+[15:40:36] Starting SNI_28d_CLP257 (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4644 inflammation=0.6366 barrier_integrity=0.3188 -> simulator/out/llm_battery_20260827/SNI_28d_CLP257_LLM
+
+[16:11:00] SNI_28d_CLP257 COMPLETE in 30.4 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 5/9: SNI_28d_XPRO1595
+
+============================================================
+[16:12:00] Starting SNI_28d_XPRO1595 (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4520 inflammation=0.6133 barrier_integrity=0.3463 -> simulator/out/llm_battery_20260827/SNI_28d_XPRO1595_LLM
+
+[16:45:42] SNI_28d_XPRO1595 COMPLETE in 33.7 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 6/9: SNI_28d_FASUDIL
+
+============================================================
+[16:46:42] Starting SNI_28d_FASUDIL (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4742 inflammation=0.6397 barrier_integrity=0.3185 -> simulator/out/llm_battery_20260827/SNI_28d_FASUDIL_LLM
+
+[17:23:10] SNI_28d_FASUDIL COMPLETE in 36.5 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 7/9: SNI_28d_DRIVE_DECAY
+
+============================================================
+[17:24:10] Starting SNI_28d_DRIVE_DECAY (28d)
+============================================================
+run complete: ticks=28 final_tick=28 pain=0.4405 inflammation=0.6085 barrier_integrity=0.3464 -> simulator/out/llm_battery_20260827/SNI_28d_DRIVE_DECAY_LLM
+
+[17:57:12] SNI_28d_DRIVE_DECAY COMPLETE in 33.0 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 8/9: naive_180d
+
+============================================================
+[17:58:12] Starting naive_180d (180d)
+============================================================
+run complete: ticks=180 final_tick=180 pain=0.2543 inflammation=0.5466 barrier_integrity=0.4369 -> simulator/out/llm_battery_20260827/naive_180d_LLM
+
+[18:43:13] naive_180d COMPLETE in 45.0 min
+  Pain: N/A, LLM calls: 27, Deferred: 0
+  Return code: 0
+  Cooling down 60s...
+
+>>> Arm 9/9: SNI_180d
+
+============================================================
+[18:44:13] Starting SNI_180d (180d)
+============================================================
+run complete: ticks=180 final_tick=180 pain=0.4889 inflammation=0.6450 barrier_integrity=0.3140 -> simulator/out/llm_battery_20260827/SNI_180d_LLM
+
+[19:33:52] SNI_180d COMPLETE in 49.6 min
+  Pain: N/A, LLM calls: 36, Deferred: 0
+  Return code: 0
+
+============================================================
+BATTERY COMPLETE in 5.7 hours
+============================================================
+
+Scenario                  Days Time(min)     Pain   LLM Deferred Status
+----------------------------------------------------------------------
+SNI_28d                     28     38.8      N/A    27        0 OK
+CCI_28d                     28     31.0      N/A    27        0 OK
+CIPN_28d                    28     37.6      N/A    27        0 OK
+SNI_28d_CLP257              28     30.4      N/A    27        0 OK
+SNI_28d_XPRO1595            28     33.7      N/A    27        0 OK
+SNI_28d_FASUDIL             28     36.5      N/A    27        0 OK
+SNI_28d_DRIVE_DECAY         28     33.0      N/A    27        0 OK
+naive_180d                 180     45.0      N/A    27        0 OK
+SNI_180d                   180     49.6      N/A    36        0 OK
