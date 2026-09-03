@@ -19,7 +19,7 @@ from simulator.schemas import AgentCard, Epoch, InfluencePacket, StateDelta
 logger = logging.getLogger(__name__)
 
 DEFAULT_OPENCODE_BIN = "opencode"
-CLIENT_TIMEOUT_S = 180
+CLIENT_TIMEOUT_S = 600
 MAX_RATIONALE_CHARS = 300
 
 
