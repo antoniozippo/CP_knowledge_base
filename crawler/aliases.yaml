@@ -1,0 +1,62 @@
+# Gene symbol / alias → standard name mappings
+# Used by crawler/matcher.py for entity resolution
+
+SLC12A5: KCC2
+SCN9A: Nav1.7
+SCN10A: Nav1.8
+A2BP1: Rbfox1
+KALRN: Kalirin-7
+HMOX1: HO-1
+AGER: RAGE
+NOS2: iNOS
+GJA1: Connexin-43
+CACNA1H: Cav3.2
+TAC1: Substance P
+TACR1: NK1 Receptor
+P2RX4: P2X4
+P2RX7: P2X7
+TNFRSF1A: TNFR1
+TNFRSF1B: TNFR2
+TNF: TNF-alpha
+IL1B: IL-1beta
+IL6: IL-6
+CX3CL1: Fractalkine
+CX3CR1: CX3CR1 Receptor
+CCL2: MCP-1
+CCR2: CCR2
+NLRP3: NLRP3 Inflammasome
+TLR4: TLR4
+TLR9: TLR9
+HMGB1: HMGB1
+TRPV1: TRPV1
+TRPA1: TRPA1
+TRPV4: TRPV4
+CNCN1: Nav1.7
+RAC1: Rac1
+RHOA: RhoA
+ROCK1: ROCK
+ROCK2: ROCK
+MAPK1: ERK
+MAPK14: p38 MAPK
+PRKCA: PKC
+PRKCE: PKCepsilon
+PRKCG: PKCgamma
+BDNF: BDNF
+NTRK2: TrkB
+NGF: NGF
+NTRK1: NTRK1
+VEGFA: VEGF
+VEGFR2: VEGFR2
+NRP1: Neuropilin-1
+EDN1: Endothelin-1
+EDNRA: ETA Receptor
+EDNRB: ETB Receptor
+PTGS2: COX-2
+PPARG: PPAR-gamma
+NFE2L2: Nrf2
+SOD2: SOD2
+CAT: Catalase
+NR3C1: GR
+HIF1A: HIF1-alpha
+EPAS1: HIF2-alpha
+ARNT: HIF1-beta

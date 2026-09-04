@@ -1,0 +1,265 @@
+# Theme Registry for Automated Literature Crawler
+# Each theme defines search queries, key entities, and MeSH terms
+# for periodic PubMed/PMC crawling.
+
+T01:
+  name: spinal_disinhibition_KCC2_PV_SST
+  keywords:
+    - "KCC2 enhancer CLP257 neuropathic pain"
+    - "KCC2 downregulation spinal cord neuropathic pain"
+    - "parvalbumin interneuron ablation allodynia spinal cord"
+    - "somatostatin interneuron mechanical allodynia disinhibition"
+    - "chloride homeostasis GABA reversal neuropathic pain"
+    - "BDNF TrkB microglia KCC2 downregulation dorsal horn"
+    - "ARN23746 KCC2 potentiator neuropathic pain"
+    - "STEP61 KCC2 human spinal cord"
+  mesh_terms:
+    - "Potassium Chloride Symporters"
+    - "Interneurons"
+    - "Neuropathic Pain"
+    - "Chlorides"
+    - "GABAergic Neurons"
+  entities:
+    - KCC2
+    - NKCC1
+    - CLP257
+    - BDNF
+    - TrkB
+    - Parvalbumin
+    - Somatostatin
+    - STEP61
+    - GABA
+
+T02:
+  name: MMP9_PNN_ECM
+  keywords:
+    - "MMP-9 perineuronal net degradation neuropathic pain"
+    - "perineuronal net parvalbumin inhibitory synapses pain"
+    - "chondroitin sulfate proteoglycan spinal cord pain"
+    - "MMP-9 inhibitor SB-3CT neuropathic pain"
+    - "TIMP-1 perineuronal net preservation pain"
+    - "tenascin-R perineuronal net pain"
+    - "MMP-9 biomarker neuropathic pain"
+  mesh_terms:
+    - "Matrix Metalloproteinase 9"
+    - "Perineuronal Net"
+    - "Extracellular Matrix"
+    - "Chondroitin Sulfate Proteoglycans"
+    - "Neuropathic Pain"
+  entities:
+    - MMP-9
+    - PNN
+    - CSPGs
+    - Tenascin-R
+    - SB-3CT
+    - TIMP-1
+    - Chondroitinase ABC
+
+T03:
+  name: neuroinflammation_TNF_NLRP3_TLR_microglia
+  keywords:
+    - "NLRP3 inflammasome neuropathic pain"
+    - "TNF alpha microglia neuropathic pain"
+    - "TLR4 HMGB1 neuropathic pain"
+    - "microglia P2X4 BDNF neuropathic pain"
+    - "NLRP3 MCC950 neuropathic pain"
+    - "microglial activation dorsal horn pain chronification"
+    - "TREM2 microglia neuropathic pain"
+    - "P2X7 pannexin-1 pyroptosis pain"
+  mesh_terms:
+    - "NLRP3 Inflammasome"
+    - "Tumor Necrosis Factor-alpha"
+    - "Microglia"
+    - "Toll-Like Receptor 4"
+    - "Neuropathic Pain"
+  entities:
+    - NLRP3
+    - TNF-alpha
+    - TLR4
+    - HMGB1
+    - P2X4
+    - P2X7
+    - Caspase-1
+    - Gasdermin D
+    - TREM2
+
+T04:
+  name: HIF1_metabolism_vascular_barriers
+  keywords:
+    - "HIF1 alpha neuropathic pain spinal cord"
+    - "blood spinal cord barrier neuropathic pain"
+    - "VEGF neuropathic pain BBB"
+    - "HIF1 alpha microglia metabolic reprogramming pain"
+    - "CypA MMP9 blood brain barrier pain"
+    - "RAGE blood brain barrier neuropathic pain"
+    - "HIF1 alpha PHD prolyl hydroxylase pain"
+  mesh_terms:
+    - "Hypoxia-Inducible Factor 1"
+    - "Blood-Brain Barrier"
+    - "Vascular Endothelial Growth Factor A"
+    - "Neuropathic Pain"
+    - "Neurovascular Unit"
+  entities:
+    - HIF1-alpha
+    - VEGF
+    - RAGE
+    - BBB
+    - BSCB
+    - CypA
+    - MMP-9
+
+T05:
+  name: NgR1_RhoA_myelin_inhibitors
+  keywords:
+    - "Nogo-A NgR1 neuropathic pain"
+    - "RhoA ROCK neuropathic pain"
+    - "fasudil ROCK inhibitor neuropathic pain"
+    - "myelin associated inhibitor pain spinal cord"
+    - "LINGO-1 neuropathic pain"
+    - "RhoA ROCK dendritic spine"
+    - "Y-27632 ROCK inhibitor pain"
+  mesh_terms:
+    - "Nogo Proteins"
+    - "Rho-Associated Kinases"
+    - "Myelin Sheath"
+    - "Neuropathic Pain"
+    - "Rho GTPases"
+  entities:
+    - Nogo-A
+    - NgR1
+    - RhoA
+    - ROCK
+    - Fasudil
+    - LINGO-1
+    - MAG
+    - OMgp
+
+T06:
+  name: DRG_excitability_channels_splicing
+  keywords:
+    - "Nav1.7 SCN9A neuropathic pain"
+    - "Nav1.8 sodium channel pain"
+    - "TRPV1 neuropathic pain"
+    - "Rbfox1 splicing neuropathic pain"
+    - "DRGX nociceptor pain"
+    - "ZFHX2 pain transcription factor"
+    - "suzetrigine VX-548 Nav1.8"
+    - "T-type calcium channel neuropathic pain"
+  mesh_terms:
+    - "Sodium Channels"
+    - "Dorsal Root Ganglion"
+    - "TRPV Cation Channels"
+    - "Neuropathic Pain"
+    - "RNA Splicing"
+  entities:
+    - Nav1.7
+    - Nav1.8
+    - TRPV1
+    - Rbfox1
+    - DRGX
+    - ZFHX2
+    - Cav3.2
+
+T07:
+  name: CGRP_bradykinin_prostaglandins
+  keywords:
+    - "CGRP neuropathic pain"
+    - "bradykinin B1 B2 receptor pain"
+    - "prostaglandin E2 COX-2 neuropathic pain"
+    - "CGRP receptor antagonist neuropathic pain"
+    - "galcanezumab CGRP pain"
+    - "bradykinin kallikrein kinin neuropathic pain"
+    - "CGRP TRPV1 pain sensitization"
+  mesh_terms:
+    - "Calcitonin Gene-Related Peptide"
+    - "Bradykinin"
+    - "Prostaglandins"
+    - "Neuropathic Pain"
+    - "CGRP Receptor"
+  entities:
+    - CGRP
+    - Bradykinin
+    - B1 Receptor
+    - B2 Receptor
+    - PGE2
+    - COX-2
+    - Galcanezumab
+    - TRPV1
+
+T08:
+  name: resolution_SPM_HO1_PPARg_CB2
+  keywords:
+    - "specialized pro-resolving mediator neuropathic pain"
+    - "resolvin D1 neuropathic pain"
+    - "HO-1 heme oxygenase neuropathic pain"
+    - "PPAR gamma neuropathic pain"
+    - "CB2 cannabinoid receptor pain"
+    - "maresin lipoxin resolution pain"
+    - "dimethyl fumarate Nrf2 neuropathic pain"
+  mesh_terms:
+    - "Specialized Pro-Resolving Mediators"
+    - "Heme Oxygenase-1"
+    - "PPAR gamma"
+    - "Cannabinoid Receptors"
+    - "Neuropathic Pain"
+  entities:
+    - Resolvin D1
+    - HO-1
+    - Nrf2
+    - PPAR-gamma
+    - CB2
+    - Lipoxin A4
+    - Maresin 1
+
+T09:
+  name: epigenetics_HDAC_lactylation_JAKSTAT
+  keywords:
+    - "HDAC inhibitor neuropathic pain"
+    - "histone lactylation H3K18la chronic pain"
+    - "JAK STAT3 neuropathic pain"
+    - "m6A RNA methylation neuropathic pain"
+    - "EZH2 PRC2 pain gene repression"
+    - "METTL3 Nav1.7 neuropathic pain"
+    - "epigenetic regulation chronic pain"
+  mesh_terms:
+    - "Histone Deacetylases"
+    - "JAK-STAT Signaling Pathway"
+    - "Epigenesis, Genetic"
+    - "Neuropathic Pain"
+    - "RNA Methylation"
+  entities:
+    - HDAC1
+    - HDAC3
+    - HDAC4
+    - STAT3
+    - JAK2
+    - EZH2
+    - METTL3
+    - BRD4
+
+T10:
+  name: Kalirin7_ACC_structural_plasticity
+  keywords:
+    - "Kalirin-7 neuropathic pain"
+    - "Rac1 cofilin ACC chronic pain"
+    - "ACC synaptic plasticity neuropathic pain"
+    - "BDNF TrkB ACC pain anxiety"
+    - "PSD-95 dorsal horn neuropathic pain"
+    - "CaMKII AMPAR trafficking chronic pain"
+    - "dendritic spine remodeling chronic pain"
+    - "ACC LTP pain-related anxiety"
+  mesh_terms:
+    - "Rho Guanine Nucleotide Exchange Factors"
+    - "Anterior Cingulate Cortex"
+    - "Synaptic Plasticity"
+    - "Neuropathic Pain"
+    - "Dendritic Spines"
+  entities:
+    - Kalirin-7
+    - Rac1
+    - PSD-95
+    - CaMKII
+    - PAK
+    - LIMK
+    - Cofilin
+    - ACC
