@@ -114,6 +114,69 @@ python3 run_remaining_battery.py
 
 Runs all scenarios sequentially (~5.7h for LLM mode).
 
+## Automated literature crawler
+
+The crawler pulls new PubMed/PMC papers, extracts entities and relationships via LLM, and merges them into the graph — keeping the KB current without manual sweeps.
+
+### Quick start
+
+```bash
+# Dry-run (no API calls, no graph writes)
+python3 crawler/run.py --dry-run
+
+# Crawl one theme since 2025-01-01
+python3 crawler/run.py --theme kcc2_gating --since 2025-01-01
+
+# Full crawl with LLM budget cap
+python3 crawler/run.py --since 2026-01-01 --budget 2000
+
+# List available themes
+python3 crawler/run.py --list-themes
+```
+
+### Pipeline stages
+
+1. **Search** — PubMed queries from `themes.yaml` (87 queries across 10 themes)
+2. **Fetch** — abstracts + PMC full-text (JATS XML), cached
+3. **Extract** — LLM extracts entities, relationships, key findings
+4. **Match** — fuzzy match against existing graph (rapidfuzz ≥85%)
+5. **Update** — add new nodes/edges, update verdicts, detect conflicts
+6. **Discover** — adjacent MeSH terms for theme expansion
+7. **Commit** — auto-commit if tests pass
+
+### Safety guardrails
+
+- Dedup via `processed_pmids.json` (never re-process)
+- LLM budget cap (default 2000 calls/run)
+- Never auto-refute CONFIRMED edges (flag for human review)
+- Conflict detection: sign contradictions → `HUMAN_REVIEW`
+- Full provenance on every new node/edge
+- Test gate before commit
+
+### Cron setup (weekly)
+
+```bash
+# Every Sunday at 02:00
+0 2 * * 0 cd /path/to/CP_knowledge_base && python3 crawler/run.py --since 7d --budget 2000 >> crawler/logs/cron.log 2>&1
+```
+
+### Architecture
+
+```
+crawler/
+├── themes.yaml          # 10 themes, keywords, MeSH, entities
+├── aliases.yaml         # 61 gene symbol mappings
+├── search.py            # PubMed via Biopython Entrez
+├── fetcher.py           # abstract + PMC full-text
+├── extractor.py         # LLM entity/relationship extraction
+├── matcher.py           # fuzzy match (rapidfuzz)
+├── updater.py           # graph update + conflict detection
+├── discovery.py         # adjacent MeSH term discovery
+├── conflict.py          # contradiction resolution
+├── run.py               # CLI orchestrator
+└── tests/               # 26 tests, all passing
+```
+
 ## Validation
 
 The simulator passes a 19-fact regression harness asserting published dynamics:
