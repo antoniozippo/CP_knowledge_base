@@ -12,7 +12,7 @@ def test_build_pubmed_query_keywords_only():
     )
     assert "KCC2 neuropathic pain" in q
     assert "BDNF spinal cord" in q
-    assert "2021-01-01" in q
+    assert "2021/01/01:3000[dp]" in q
     assert "OR" in q
 
 
@@ -24,7 +24,7 @@ def test_build_pubmed_query_mesh_only():
     )
     assert "Neuropathic Pain" in q
     assert "Microglia" in q
-    assert "2020-01-01" in q
+    assert "2020/01/01:3000[dp]" in q
 
 
 def test_build_pubmed_query_combined():

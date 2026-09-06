@@ -1,0 +1,478 @@
+2026-09-06 13:44:27,427 [INFO] Crawler starting — 10 themes, budget=2000, dry_run=True
+2026-09-06 13:44:27,427 [INFO] === Phase 1: PubMed Search ===
+2026-09-06 13:44:27,427 [INFO]   Searching T01: spinal_disinhibition_KCC2_PV_SST
+2026-09-06 13:44:27,427 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:28,300 [INFO] PubMed search returned 1 results (fetching up to 50)
+2026-09-06 13:44:29,220 [INFO] Fetched 1 papers total
+2026-09-06 13:44:29,220 [INFO]   kw0: 1 papers (1 unique so far)
+2026-09-06 13:44:29,575 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:29,857 [INFO] PubMed search returned 1 results (fetching up to 50)
+2026-09-06 13:44:30,614 [INFO] Fetched 1 papers total
+2026-09-06 13:44:30,614 [INFO]   kw1: 1 papers (2 unique so far)
+2026-09-06 13:44:30,969 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:31,238 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:31,238 [INFO]   kw2: 0 papers (2 unique so far)
+2026-09-06 13:44:31,590 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:31,883 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:31,883 [INFO]   kw3: 0 papers (2 unique so far)
+2026-09-06 13:44:32,238 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:32,681 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:32,681 [INFO]   kw4: 0 papers (2 unique so far)
+2026-09-06 13:44:33,035 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:33,300 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:33,300 [INFO]   kw5: 0 papers (2 unique so far)
+2026-09-06 13:44:33,654 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:33,889 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:33,889 [INFO]   kw6: 0 papers (2 unique so far)
+2026-09-06 13:44:34,244 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:34,499 [INFO] PubMed search returned 0 results (fetching up to 50)
+2026-09-06 13:44:34,499 [INFO]   kw7: 0 papers (2 unique so far)
+2026-09-06 13:44:34,853 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:35,102 [INFO] PubMed search returned 68 results (fetching up to 50)
+2026-09-06 13:44:36,944 [INFO] Fetched 50 papers total
+2026-09-06 13:44:36,944 [INFO]   mesh0: 50 papers (50 unique so far)
+2026-09-06 13:44:37,299 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:37,565 [INFO] PubMed search returned 822 results (fetching up to 50)
+2026-09-06 13:44:39,589 [INFO] Fetched 50 papers total
+2026-09-06 13:44:39,589 [INFO]   mesh1: 50 papers (100 unique so far)
+2026-09-06 13:44:39,944 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:40,449 [INFO] PubMed search returned 1930 results (fetching up to 50)
+2026-09-06 13:44:43,894 [INFO] Fetched 50 papers total
+2026-09-06 13:44:43,895 [INFO]   mesh2: 50 papers (150 unique so far)
+2026-09-06 13:44:44,250 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:44,527 [INFO] PubMed search returned 2262 results (fetching up to 50)
+2026-09-06 13:44:45,986 [INFO] Fetched 50 papers total
+2026-09-06 13:44:45,987 [INFO]   mesh3: 50 papers (200 unique so far)
+2026-09-06 13:44:46,342 [INFO] Executing PubMed search (max_results=50)
+2026-09-06 13:44:46,646 [INFO] PubMed search returned 606 results (fetching up to 50)
+2026-09-06 13:44:48,552 [INFO] Fetched 50 papers total
+2026-09-06 13:44:48,552 [INFO]   mesh4: 50 papers (243 unique so far)
+2026-09-06 13:44:55,677 [INFO] Cached 243 papers for theme unknown
+2026-09-06 13:44:55,678 [INFO]     Found 243 papers
+2026-09-06 13:44:55,678 [INFO]   Searching T02: MMP9_PNN_ECM
+2026-09-06 13:44:55,679 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,680 [INFO]     Found 243 papers
+2026-09-06 13:44:55,680 [INFO]   Searching T03: neuroinflammation_TNF_NLRP3_TLR_microglia
+2026-09-06 13:44:55,681 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,681 [INFO]     Found 243 papers
+2026-09-06 13:44:55,681 [INFO]   Searching T04: HIF1_metabolism_vascular_barriers
+2026-09-06 13:44:55,683 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,683 [INFO]     Found 243 papers
+2026-09-06 13:44:55,683 [INFO]   Searching T05: NgR1_RhoA_myelin_inhibitors
+2026-09-06 13:44:55,684 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,684 [INFO]     Found 243 papers
+2026-09-06 13:44:55,684 [INFO]   Searching T06: DRG_excitability_channels_splicing
+2026-09-06 13:44:55,686 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,686 [INFO]     Found 243 papers
+2026-09-06 13:44:55,686 [INFO]   Searching T07: CGRP_bradykinin_prostaglandins
+2026-09-06 13:44:55,687 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,687 [INFO]     Found 243 papers
+2026-09-06 13:44:55,687 [INFO]   Searching T08: resolution_SPM_HO1_PPARg_CB2
+2026-09-06 13:44:55,688 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,688 [INFO]     Found 243 papers
+2026-09-06 13:44:55,688 [INFO]   Searching T09: epigenetics_HDAC_lactylation_JAKSTAT
+2026-09-06 13:44:55,689 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,690 [INFO]     Found 243 papers
+2026-09-06 13:44:55,690 [INFO]   Searching T10: Kalirin7_ACC_structural_plasticity
+2026-09-06 13:44:55,691 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:44:55,691 [INFO]     Found 243 papers
+2026-09-06 13:44:55,691 [INFO]   Total unique papers: 243
+2026-09-06 13:44:55,691 [INFO] === Phase 2: Fetch Abstracts + Full-text ===
+2026-09-06 13:44:58,188 [INFO] Fetched PMID 41433127 [fulltext]
+2026-09-06 13:44:59,263 [INFO] Fetched PMID 41944547 [abstract-only]
+2026-09-06 13:45:00,319 [INFO] Fetched PMID 42385945 [abstract-only]
+2026-09-06 13:45:01,361 [INFO] Fetched PMID 42497573 [abstract-only]
+2026-09-06 13:45:02,410 [INFO] Fetched PMID 42637326 [abstract-only]
+2026-09-06 13:45:05,143 [INFO] Fetched PMID 42113554 [fulltext]
+2026-09-06 13:45:06,223 [INFO] Fetched PMID 42498091 [abstract-only]
+2026-09-06 13:45:07,283 [INFO] Fetched PMID 42681815 [abstract-only]
+2026-09-06 13:45:08,273 [INFO] Fetched PMID 42398890 [abstract-only]
+2026-09-06 13:45:10,095 [INFO] Fetched PMID 42411311 [fulltext]
+2026-09-06 13:45:11,427 [INFO] Fetched PMID 42085369 [abstract-only]
+2026-09-06 13:45:13,832 [INFO] Fetched PMID 42320264 [fulltext]
+2026-09-06 13:45:15,733 [INFO] Fetched PMID 42636362 [abstract-only]
+2026-09-06 13:45:16,807 [INFO] Fetched PMID 42611455 [abstract-only]
+2026-09-06 13:45:18,200 [INFO] Fetched PMID 42494298 [abstract-only]
+2026-09-06 13:45:20,307 [INFO] Fetched PMID 41872520 [fulltext]
+2026-09-06 13:45:21,509 [INFO] Fetched PMID 42333532 [abstract-only]
+2026-09-06 13:45:22,546 [INFO] Fetched PMID 42287820 [abstract-only]
+2026-09-06 13:45:23,548 [INFO] Fetched PMID 42379697 [abstract-only]
+2026-09-06 13:45:24,521 [INFO] Fetched PMID 42208662 [abstract-only]
+2026-09-06 13:45:25,730 [INFO] Fetched PMID 42217042 [abstract-only]
+2026-09-06 13:45:26,748 [INFO] Fetched PMID 42442377 [abstract-only]
+2026-09-06 13:45:27,806 [INFO] Fetched PMID 42296582 [abstract-only]
+2026-09-06 13:45:29,515 [INFO] Fetched PMID 42082008 [abstract-only]
+2026-09-06 13:45:30,579 [INFO] Fetched PMID 42173291 [abstract-only]
+2026-09-06 13:45:31,842 [INFO] Fetched PMID 42480472 [abstract-only]
+2026-09-06 13:45:32,911 [INFO] Fetched PMID 42208767 [abstract-only]
+2026-09-06 13:45:33,888 [INFO] Fetched PMID 42554722 [abstract-only]
+2026-09-06 13:45:35,202 [INFO] Fetched PMID 42470638 [abstract-only]
+2026-09-06 13:45:37,456 [INFO] Fetched PMID 42509233 [fulltext]
+2026-09-06 13:45:38,522 [INFO] Fetched PMID 42060310 [abstract-only]
+2026-09-06 13:45:40,377 [INFO] Fetched PMID 42589204 [fulltext]
+2026-09-06 13:45:42,489 [INFO] Fetched PMID 42479062 [fulltext]
+2026-09-06 13:45:44,501 [INFO] Fetched PMID 42505236 [fulltext]
+2026-09-06 13:45:46,549 [INFO] Fetched PMID 42511712 [fulltext]
+2026-09-06 13:45:49,045 [INFO] Fetched PMID 42457652 [fulltext]
+2026-09-06 13:45:50,073 [INFO] Fetched PMID 41916279 [abstract-only]
+2026-09-06 13:45:51,134 [INFO] Fetched PMID 42458037 [abstract-only]
+2026-09-06 13:45:52,190 [INFO] Fetched PMID 42455194 [abstract-only]
+2026-09-06 13:45:53,264 [INFO] Fetched PMID 42370411 [abstract-only]
+2026-09-06 13:45:55,283 [INFO] Fetched PMID 42307244 [fulltext]
+2026-09-06 13:45:56,564 [INFO] Fetched PMID 41810945 [abstract-only]
+2026-09-06 13:45:58,718 [INFO] Fetched PMID 42294699 [fulltext]
+2026-09-06 13:46:01,251 [INFO] Fetched PMID 42393467 [fulltext]
+2026-09-06 13:46:02,658 [INFO] Fetched PMID 42143463 [abstract-only]
+2026-09-06 13:46:04,759 [INFO] Fetched PMID 42189557 [fulltext]
+2026-09-06 13:46:06,909 [INFO] Fetched PMID 42377991 [fulltext]
+2026-09-06 13:46:09,225 [INFO] Fetched PMID 42159924 [fulltext]
+2026-09-06 13:46:10,495 [INFO] Fetched PMID 42228335 [abstract-only]
+2026-09-06 13:46:11,625 [INFO] Fetched PMID 42209084 [abstract-only]
+2026-09-06 13:46:13,111 [INFO] Fetched PMID 42253059 [abstract-only]
+2026-09-06 13:46:14,873 [INFO] Fetched PMID 42113191 [abstract-only]
+2026-09-06 13:46:15,898 [INFO] Fetched PMID 41995161 [abstract-only]
+2026-09-06 13:46:17,914 [INFO] Fetched PMID 42454984 [fulltext]
+2026-09-06 13:46:19,092 [INFO] Fetched PMID 42114205 [abstract-only]
+2026-09-06 13:46:20,204 [INFO] Fetched PMID 42139977 [abstract-only]
+2026-09-06 13:46:21,209 [INFO] Fetched PMID 42384283 [abstract-only]
+2026-09-06 13:46:22,774 [INFO] Fetched PMID 41741705 [abstract-only]
+2026-09-06 13:46:24,726 [INFO] Fetched PMID 41673357 [fulltext]
+2026-09-06 13:46:25,779 [INFO] Fetched PMID 42207640 [abstract-only]
+2026-09-06 13:46:27,222 [INFO] Fetched PMID 42309007 [abstract-only]
+2026-09-06 13:46:31,150 [INFO] Crawler starting — 10 themes, budget=2000, dry_run=True
+2026-09-06 13:46:31,150 [INFO] === Phase 1: PubMed Search ===
+2026-09-06 13:46:31,150 [INFO]   Searching T01: spinal_disinhibition_KCC2_PV_SST
+2026-09-06 13:46:31,151 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,151 [INFO]     Found 243 papers
+2026-09-06 13:46:31,151 [INFO]   Searching T02: MMP9_PNN_ECM
+2026-09-06 13:46:31,152 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,152 [INFO]     Found 243 papers
+2026-09-06 13:46:31,152 [INFO]   Searching T03: neuroinflammation_TNF_NLRP3_TLR_microglia
+2026-09-06 13:46:31,153 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,153 [INFO]     Found 243 papers
+2026-09-06 13:46:31,153 [INFO]   Searching T04: HIF1_metabolism_vascular_barriers
+2026-09-06 13:46:31,153 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,153 [INFO]     Found 243 papers
+2026-09-06 13:46:31,153 [INFO]   Searching T05: NgR1_RhoA_myelin_inhibitors
+2026-09-06 13:46:31,154 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,154 [INFO]     Found 243 papers
+2026-09-06 13:46:31,154 [INFO]   Searching T06: DRG_excitability_channels_splicing
+2026-09-06 13:46:31,155 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,155 [INFO]     Found 243 papers
+2026-09-06 13:46:31,155 [INFO]   Searching T07: CGRP_bradykinin_prostaglandins
+2026-09-06 13:46:31,156 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,156 [INFO]     Found 243 papers
+2026-09-06 13:46:31,156 [INFO]   Searching T08: resolution_SPM_HO1_PPARg_CB2
+2026-09-06 13:46:31,156 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,156 [INFO]     Found 243 papers
+2026-09-06 13:46:31,156 [INFO]   Searching T09: epigenetics_HDAC_lactylation_JAKSTAT
+2026-09-06 13:46:31,157 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,157 [INFO]     Found 243 papers
+2026-09-06 13:46:31,157 [INFO]   Searching T10: Kalirin7_ACC_structural_plasticity
+2026-09-06 13:46:31,158 [INFO] Cache hit for theme unknown (243 papers)
+2026-09-06 13:46:31,158 [INFO]     Found 243 papers
+2026-09-06 13:46:31,158 [INFO]   Total unique papers: 243
+2026-09-06 13:46:31,158 [INFO] === Phase 2: Fetch Abstracts + Full-text ===
+2026-09-06 13:46:33,722 [INFO] Fetched PMID 42156173 [fulltext]
+2026-09-06 13:46:35,768 [INFO] Fetched PMID 42304218 [fulltext]
+2026-09-06 13:46:37,722 [INFO] Fetched PMID 42186973 [fulltext]
+2026-09-06 13:46:40,157 [INFO] Fetched PMID 42258716 [fulltext]
+2026-09-06 13:46:42,548 [INFO] Fetched PMID 42060359 [fulltext]
+2026-09-06 13:46:43,796 [INFO] Fetched PMID 42277490 [abstract-only]
+2026-09-06 13:46:45,646 [INFO] Fetched PMID 41876207 [fulltext]
+2026-09-06 13:46:47,530 [INFO] Fetched PMID 41922759 [fulltext]
+2026-09-06 13:46:49,689 [INFO] Fetched PMID 41922770 [fulltext]
+2026-09-06 13:46:50,884 [INFO] Fetched PMID 42060456 [abstract-only]
+2026-09-06 13:46:52,892 [INFO] Fetched PMID 41781500 [fulltext]
+2026-09-06 13:46:54,910 [INFO] Fetched PMID 41611905 [abstract-only]
+2026-09-06 13:46:57,003 [INFO] Fetched PMID 41962531 [fulltext]
+2026-09-06 13:46:58,067 [INFO] Fetched PMID 41956020 [abstract-only]
+2026-09-06 13:46:59,280 [INFO] Fetched PMID 41997424 [abstract-only]
+2026-09-06 13:47:00,477 [INFO] Fetched PMID 41956659 [abstract-only]
+2026-09-06 13:47:01,475 [INFO] Fetched PMID 42143008 [abstract-only]
+2026-09-06 13:47:03,465 [INFO] Fetched PMID 42201411 [fulltext]
+2026-09-06 13:47:05,335 [INFO] Fetched PMID 42174715 [fulltext]
+2026-09-06 13:47:07,600 [INFO] Fetched PMID 42174628 [fulltext]
+2026-09-06 13:47:09,550 [INFO] Fetched PMID 42065994 [fulltext]
+2026-09-06 13:47:10,568 [INFO] Fetched PMID 42185094 [abstract-only]
+2026-09-06 13:47:12,274 [INFO] Fetched PMID 42154301 [abstract-only]
+2026-09-06 13:47:14,314 [INFO] Fetched PMID 42152301 [fulltext]
+2026-09-06 13:47:16,394 [INFO] Fetched PMID 41720091 [fulltext]
+2026-09-06 13:47:17,653 [INFO] Fetched PMID 42081017 [abstract-only]
+2026-09-06 13:47:18,986 [INFO] Fetched PMID 42116729 [abstract-only]
+2026-09-06 13:47:20,272 [INFO] Fetched PMID 41950774 [abstract-only]
+2026-09-06 13:47:21,965 [INFO] Fetched PMID 41921975 [fulltext]
+2026-09-06 13:47:23,220 [INFO] Fetched PMID 42082157 [abstract-only]
+2026-09-06 13:47:25,628 [INFO] Fetched PMID 42030928 [abstract-only]
+2026-09-06 13:47:27,559 [INFO] Fetched PMID 42045243 [fulltext]
+2026-09-06 13:47:29,758 [INFO] Fetched PMID 42014724 [fulltext]
+2026-09-06 13:47:31,764 [INFO] Fetched PMID 41997967 [fulltext]
+2026-09-06 13:47:33,893 [INFO] Fetched PMID 41964703 [fulltext]
+2026-09-06 13:47:34,931 [INFO] Fetched PMID 41864197 [abstract-only]
+2026-09-06 13:47:37,244 [INFO] Fetched PMID 41844155 [fulltext]
+2026-09-06 13:47:38,531 [INFO] Fetched PMID 41628782 [abstract-only]
+2026-09-06 13:47:39,534 [INFO] Fetched PMID 41910420 [abstract-only]
+2026-09-06 13:47:40,703 [INFO] Fetched PMID 41844157 [abstract-only]
+2026-09-06 13:47:42,885 [INFO] Fetched PMID 41977367 [fulltext]
+2026-09-06 13:47:45,010 [INFO] Fetched PMID 41912527 [fulltext]
+2026-09-06 13:47:47,420 [INFO] Fetched PMID 41896899 [fulltext]
+2026-09-06 13:47:49,331 [INFO] Fetched PMID 41876491 [fulltext]
+2026-09-06 13:47:50,523 [INFO] Fetched PMID 41973684 [abstract-only]
+2026-09-06 13:47:51,921 [INFO] Fetched PMID 41855333 [abstract-only]
+2026-09-06 13:47:54,190 [INFO] Fetched PMID 41832447 [fulltext]
+2026-09-06 13:47:56,629 [INFO] Fetched PMID 41832154 [fulltext]
+2026-09-06 13:47:58,651 [INFO] Fetched PMID 41500801 [fulltext]
+2026-09-06 13:48:01,207 [INFO] Fetched PMID 41814168 [fulltext]
+2026-09-06 13:48:03,335 [INFO] Fetched PMID 41774803 [fulltext]
+2026-09-06 13:48:04,394 [INFO] Fetched PMID 41883203 [abstract-only]
+2026-09-06 13:48:05,450 [INFO] Fetched PMID 41619725 [abstract-only]
+2026-09-06 13:48:07,765 [INFO] Fetched PMID 41401811 [fulltext]
+2026-09-06 13:48:09,602 [INFO] Fetched PMID 41709000 [fulltext]
+2026-09-06 13:48:10,938 [INFO] Fetched PMID 40632480 [abstract-only]
+2026-09-06 13:48:13,080 [INFO] Fetched PMID 41606339 [fulltext]
+2026-09-06 13:48:14,128 [INFO] Fetched PMID 40987885 [abstract-only]
+2026-09-06 13:48:16,274 [INFO] Fetched PMID 41736153 [fulltext]
+2026-09-06 13:48:18,329 [INFO] Fetched PMID 41730862 [fulltext]
+2026-09-06 13:48:20,329 [INFO] Fetched PMID 41698908 [fulltext]
+2026-09-06 13:48:22,296 [INFO] Fetched PMID 41137395 [abstract-only]
+2026-09-06 13:48:24,361 [INFO] Fetched PMID 41240912 [abstract-only]
+2026-09-06 13:48:26,286 [INFO] Fetched PMID 41634012 [fulltext]
+2026-09-06 13:48:27,334 [INFO] Fetched PMID 42225529 [abstract-only]
+2026-09-06 13:48:29,591 [INFO] Fetched PMID 41689206 [fulltext]
+2026-09-06 13:48:30,637 [INFO] Fetched PMID 41294285 [abstract-only]
+2026-09-06 13:48:32,905 [INFO] Fetched PMID 41265445 [fulltext]
+2026-09-06 13:48:33,914 [INFO] Fetched PMID 41553637 [abstract-only]
+2026-09-06 13:48:35,918 [INFO] Fetched PMID 41549079 [fulltext]
+2026-09-06 13:48:37,904 [INFO] Fetched PMID 41530127 [fulltext]
+2026-09-06 13:48:39,058 [INFO] Fetched PMID 41118757 [abstract-only]
+2026-09-06 13:48:41,466 [INFO] Fetched PMID 41485044 [fulltext]
+2026-09-06 13:48:43,786 [INFO] Fetched PMID 40932659 [fulltext]
+2026-09-06 13:48:46,109 [INFO] Fetched PMID 41929507 [fulltext]
+2026-09-06 13:48:47,621 [INFO] Fetched PMID 39995119 [abstract-only]
+2026-09-06 13:48:48,805 [INFO] Fetched PMID 42087707 [abstract-only]
+2026-09-06 13:48:49,880 [INFO] Fetched PMID 42053064 [abstract-only]
+2026-09-06 13:48:51,494 [INFO] Fetched PMID 42242564 [abstract-only]
+2026-09-06 13:48:53,179 [INFO] Fetched PMID 42267792 [fulltext]
+2026-09-06 13:48:54,221 [INFO] Fetched PMID 42139036 [abstract-only]
+2026-09-06 13:48:55,469 [INFO] Fetched PMID 41944258 [abstract-only]
+2026-09-06 13:48:56,509 [INFO] Fetched PMID 42070770 [abstract-only]
+2026-09-06 13:48:57,608 [INFO] Fetched PMID 41503987 [abstract-only]
+2026-09-06 13:48:59,594 [INFO] Fetched PMID 41444479 [fulltext]
+2026-09-06 13:49:01,792 [INFO] Fetched PMID 41391149 [fulltext]
+2026-09-06 13:49:02,902 [INFO] Fetched PMID 41412061 [abstract-only]
+2026-09-06 13:49:04,135 [INFO] Fetched PMID 41101308 [abstract-only]
+2026-09-06 13:49:06,279 [INFO] Fetched PMID 41359836 [fulltext]
+2026-09-06 13:49:08,708 [INFO] Fetched PMID 41166439 [fulltext]
+2026-09-06 13:49:10,829 [INFO] Fetched PMID 41365903 [fulltext]
+2026-09-06 13:49:12,887 [INFO] Fetched PMID 41365887 [fulltext]
+2026-09-06 13:49:15,378 [INFO] Fetched PMID 41353441 [fulltext]
+2026-09-06 13:49:17,721 [INFO] Fetched PMID 41348875 [fulltext]
+2026-09-06 13:49:20,197 [INFO] Fetched PMID 41339603 [fulltext]
+2026-09-06 13:49:22,495 [INFO] Fetched PMID 41299887 [fulltext]
+2026-09-06 13:49:24,557 [INFO] Fetched PMID 41346011 [fulltext]
+2026-09-06 13:49:26,331 [INFO] Fetched PMID 40752724 [fulltext]
+2026-09-06 13:49:28,442 [INFO] Fetched PMID 41276712 [abstract-only]
+2026-09-06 13:49:30,710 [INFO] Fetched PMID 41324993 [fulltext]
+2026-09-06 13:49:33,005 [INFO] Fetched PMID 41252153 [fulltext]
+2026-09-06 13:49:34,854 [INFO] Fetched PMID 40939593 [abstract-only]
+2026-09-06 13:49:36,358 [INFO] Fetched PMID 40967218 [abstract-only]
+2026-09-06 13:49:38,792 [INFO] Fetched PMID 41122815 [fulltext]
+2026-09-06 13:49:40,982 [INFO] Fetched PMID 41219181 [fulltext]
+2026-09-06 13:49:43,343 [INFO] Fetched PMID 41193423 [fulltext]
+2026-09-06 13:49:45,332 [INFO] Fetched PMID 40667986 [fulltext]
+2026-09-06 13:49:46,337 [INFO] Fetched PMID 40882919 [abstract-only]
+2026-09-06 13:49:47,581 [INFO] Fetched PMID 40841473 [abstract-only]
+2026-09-06 13:49:49,541 [INFO] Fetched PMID 41193842 [fulltext]
+2026-09-06 13:49:51,720 [INFO] Fetched PMID 40781544 [fulltext]
+2026-09-06 13:49:53,848 [INFO] Fetched PMID 41193843 [fulltext]
+2026-09-06 13:49:54,888 [INFO] Fetched PMID 40915475 [abstract-only]
+2026-09-06 13:49:57,060 [INFO] Fetched PMID 41173941 [fulltext]
+2026-09-06 13:49:59,054 [INFO] Fetched PMID 40971296 [fulltext]
+2026-09-06 13:49:59,998 [WARNING] Rate limited (429), waiting 5s
+2026-09-06 13:50:05,720 [INFO] Fetched PMID 41016031 [abstract-only]
+2026-09-06 13:50:08,138 [INFO] Fetched PMID 41120720 [fulltext]
+2026-09-06 13:50:10,442 [INFO] Fetched PMID 41107227 [fulltext]
+2026-09-06 13:50:11,966 [INFO] Fetched PMID 40935238 [abstract-only]
+2026-09-06 13:50:14,284 [INFO] Fetched PMID 41090351 [fulltext]
+2026-09-06 13:50:16,233 [INFO] Fetched PMID 41083506 [fulltext]
+2026-09-06 13:50:18,260 [INFO] Fetched PMID 40795403 [fulltext]
+2026-09-06 13:50:20,222 [INFO] Fetched PMID 40945510 [fulltext]
+2026-09-06 13:50:22,485 [INFO] Fetched PMID 41044154 [fulltext]
+2026-09-06 13:50:23,679 [INFO] Fetched PMID 40669459 [abstract-only]
+2026-09-06 13:50:24,690 [INFO] Fetched PMID 40880166 [abstract-only]
+2026-09-06 13:50:26,715 [INFO] Fetched PMID 40906931 [fulltext]
+2026-09-06 13:50:27,743 [INFO] Fetched PMID 40623670 [abstract-only]
+2026-09-06 13:50:29,692 [INFO] Fetched PMID 40875335 [fulltext]
+2026-09-06 13:50:31,726 [INFO] Fetched PMID 40695284 [fulltext]
+2026-09-06 13:50:34,099 [INFO] Fetched PMID 41042799 [fulltext]
+2026-09-06 13:50:35,989 [INFO] Fetched PMID 40586216 [fulltext]
+2026-09-06 13:50:38,106 [INFO] Fetched PMID 40770097 [fulltext]
+2026-09-06 13:50:39,272 [INFO] Fetched PMID 41021144 [abstract-only]
+2026-09-06 13:50:40,486 [INFO] Fetched PMID 40865515 [abstract-only]
+2026-09-06 13:50:41,599 [INFO] Fetched PMID 40592329 [abstract-only]
+2026-09-06 13:50:43,486 [INFO] Fetched PMID 40924452 [fulltext]
+2026-09-06 13:50:44,542 [INFO] Fetched PMID 40617701 [abstract-only]
+2026-09-06 13:50:45,742 [INFO] Fetched PMID 40934318 [abstract-only]
+2026-09-06 13:50:48,159 [INFO] Fetched PMID 40906860 [fulltext]
+2026-09-06 13:50:49,371 [INFO] Fetched PMID 40818450 [abstract-only]
+2026-09-06 13:50:51,500 [INFO] Fetched PMID 40509965 [fulltext]
+2026-09-06 13:50:52,651 [INFO] Fetched PMID 40570963 [abstract-only]
+2026-09-06 13:50:54,891 [INFO] Fetched PMID 40750687 [fulltext]
+2026-09-06 13:50:56,979 [INFO] Fetched PMID 40604289 [fulltext]
+2026-09-06 13:50:59,200 [INFO] Fetched PMID 40867008 [fulltext]
+2026-09-06 13:51:01,075 [INFO] Fetched PMID 40700018 [fulltext]
+2026-09-06 13:51:03,049 [INFO] Fetched PMID 40749675 [fulltext]
+2026-09-06 13:51:05,155 [INFO] Fetched PMID 40815647 [fulltext]
+2026-09-06 13:51:06,409 [INFO] Fetched PMID 40466637 [abstract-only]
+2026-09-06 13:51:08,170 [INFO] Fetched PMID 40686063 [abstract-only]
+2026-09-06 13:51:11,177 [INFO] Fetched PMID 40659844 [fulltext]
+2026-09-06 13:51:13,462 [INFO] Fetched PMID 40750771 [fulltext]
+2026-09-06 13:51:15,790 [INFO] Fetched PMID 40759564 [fulltext]
+2026-09-06 13:51:17,798 [INFO] Fetched PMID 40878478 [fulltext]
+2026-09-06 13:51:19,041 [INFO] Fetched PMID 40495064 [abstract-only]
+2026-09-06 13:51:21,202 [INFO] Fetched PMID 40721582 [fulltext]
+2026-09-06 13:51:23,369 [INFO] Fetched PMID 40675952 [fulltext]
+2026-09-06 13:51:25,696 [INFO] Fetched PMID 40578350 [fulltext]
+2026-09-06 13:51:27,502 [INFO] Fetched PMID 40541173 [fulltext]
+2026-09-06 13:51:28,718 [INFO] Fetched PMID 40920646 [abstract-only]
+2026-09-06 13:51:31,176 [INFO] Fetched PMID 40335695 [fulltext]
+2026-09-06 13:51:33,572 [INFO] Fetched PMID 40192524 [fulltext]
+2026-09-06 13:51:36,223 [INFO] Fetched PMID 40512619 [fulltext]
+2026-09-06 13:51:37,500 [INFO] Fetched PMID 40205044 [abstract-only]
+2026-09-06 13:51:39,716 [INFO] Fetched PMID 40382338 [fulltext]
+2026-09-06 13:51:41,803 [INFO] Fetched PMID 40429905 [fulltext]
+2026-09-06 13:51:43,675 [INFO] Fetched PMID 40044848 [fulltext]
+2026-09-06 13:51:45,499 [INFO] Fetched PMID 40281446 [fulltext]
+2026-09-06 13:51:47,979 [INFO] Fetched PMID 39779249 [fulltext]
+2026-09-06 13:51:50,165 [INFO] Fetched PMID 40240334 [fulltext]
+2026-09-06 13:51:52,644 [INFO] Fetched PMID 40229297 [fulltext]
+2026-09-06 13:51:54,866 [INFO] Fetched PMID 40074080 [fulltext]
+2026-09-06 13:51:56,447 [INFO] Fetched PMID 40009635 [abstract-only]
+2026-09-06 13:51:58,723 [INFO] Fetched PMID 39884421 [abstract-only]
+2026-09-06 13:52:00,649 [INFO] Fetched PMID 39909157 [abstract-only]
+2026-09-06 13:52:02,510 [INFO] Fetched PMID 40037548 [abstract-only]
+2026-09-06 13:52:05,821 [INFO] Fetched PMID 39106285 [fulltext]
+2026-09-06 13:52:08,063 [INFO] Fetched PMID 39793039 [fulltext]
+2026-09-06 13:52:09,388 [INFO] Fetched PMID 39647722 [abstract-only]
+2026-09-06 13:52:11,670 [INFO] Fetched PMID 41668766 [fulltext]
+2026-09-06 13:52:12,960 [INFO] Fetched PMID 42023789 [abstract-only]
+2026-09-06 13:52:12,960 [INFO] Batch fetch complete: 243 papers, 132 with full-text (54%)
+2026-09-06 13:52:12,960 [INFO]   Fetched 243 papers (132 with full-text)
+2026-09-06 13:52:12,960 [INFO] === Phase 3: LLM Entity/Relationship Extraction ===
+2026-09-06 13:52:12,960 [INFO]   DRY RUN — skipping LLM extraction
+2026-09-06 13:52:12,960 [INFO] === Phase 4: Match Against Existing Graph ===
+2026-09-06 13:52:12,968 [INFO] Loaded 59 alias entries from crawler/aliases.yaml
+2026-09-06 13:52:12,969 [INFO] Batch match: 0 entities (0 exact, 0 alias, 0 fuzzy, 0 no_match), 0 edges (0 exists, 0 inverse, 0 new)
+2026-09-06 13:52:12,969 [INFO]   New entities: 0, New edges: 0
+2026-09-06 13:52:12,969 [INFO] === Phase 5: Update Graph ===
+2026-09-06 13:52:12,969 [INFO]   DRY RUN — skipping graph update
+2026-09-06 13:52:12,969 [INFO] === Phase 6: Conflict Detection ===
+2026-09-06 13:52:12,969 [INFO]   Conflicts: 0 pending, 0 need review
+2026-09-06 13:52:12,969 [INFO] === Phase 7: MeSH Discovery ===
+2026-09-06 13:52:12,973 [INFO] Observed 0 distinct MeSH terms across 243 papers
+2026-09-06 13:52:12,973 [INFO] Discovered 0 new MeSH terms (>= 3 papers, not in registry)
+2026-09-06 13:52:12,973 [INFO]   Discovered 0 new MeSH terms
+2026-09-06 13:52:12,973 [INFO] === Phase 8: Run Tests ===
+2026-09-06 13:52:12,973 [INFO]   Run log: crawler/logs/run_2026-09-06_1352.json
+2026-09-06 13:52:12,973 [INFO] Pipeline complete in 341.8s
+2026-09-06 13:53:53,094 [INFO] Crawler starting — 10 themes, budget=2000, dry_run=True
+2026-09-06 13:53:53,095 [INFO] === Phase 1: PubMed Search ===
+2026-09-06 13:53:53,095 [INFO]   Searching T01: spinal_disinhibition_KCC2_PV_SST
+2026-09-06 13:53:53,095 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:53,590 [INFO] PubMed search returned 1 results (fetching up to 30)
+2026-09-06 13:53:54,489 [INFO] Fetched 1 papers total
+2026-09-06 13:53:54,490 [INFO]   kw0: 1 papers (1 unique so far)
+2026-09-06 13:53:54,850 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:55,119 [INFO] PubMed search returned 1 results (fetching up to 30)
+2026-09-06 13:53:56,140 [INFO] Fetched 1 papers total
+2026-09-06 13:53:56,140 [INFO]   kw1: 1 papers (2 unique so far)
+2026-09-06 13:53:56,491 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:56,974 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:53:56,974 [INFO]   kw2: 0 papers (2 unique so far)
+2026-09-06 13:53:57,332 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:57,598 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:53:57,598 [INFO]   kw3: 0 papers (2 unique so far)
+2026-09-06 13:53:57,958 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:58,220 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:53:58,220 [INFO]   kw4: 0 papers (2 unique so far)
+2026-09-06 13:53:58,573 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:59,045 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:53:59,045 [INFO]   kw5: 0 papers (2 unique so far)
+2026-09-06 13:53:59,402 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:53:59,874 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:53:59,874 [INFO]   kw6: 0 papers (2 unique so far)
+2026-09-06 13:54:00,230 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:00,473 [INFO] PubMed search returned 0 results (fetching up to 30)
+2026-09-06 13:54:00,473 [INFO]   kw7: 0 papers (2 unique so far)
+2026-09-06 13:54:00,826 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:01,186 [INFO] PubMed search returned 68 results (fetching up to 30)
+2026-09-06 13:54:02,643 [INFO] Fetched 30 papers total
+2026-09-06 13:54:02,644 [INFO]   mesh0: 30 papers (31 unique so far)
+2026-09-06 13:54:02,994 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:03,621 [INFO] PubMed search returned 822 results (fetching up to 30)
+2026-09-06 13:54:05,129 [INFO] Fetched 30 papers total
+2026-09-06 13:54:05,130 [INFO]   mesh1: 30 papers (60 unique so far)
+2026-09-06 13:54:05,490 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:05,754 [INFO] PubMed search returned 1930 results (fetching up to 30)
+2026-09-06 13:54:08,877 [INFO] Fetched 30 papers total
+2026-09-06 13:54:08,877 [INFO]   mesh2: 30 papers (90 unique so far)
+2026-09-06 13:54:09,233 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:09,502 [INFO] PubMed search returned 2262 results (fetching up to 30)
+2026-09-06 13:54:10,963 [INFO] Fetched 30 papers total
+2026-09-06 13:54:10,964 [INFO]   mesh3: 30 papers (120 unique so far)
+2026-09-06 13:54:11,316 [INFO] Executing PubMed search (max_results=30)
+2026-09-06 13:54:11,802 [INFO] PubMed search returned 606 results (fetching up to 30)
+2026-09-06 13:54:13,175 [INFO] Fetched 30 papers total
+2026-09-06 13:54:13,176 [INFO]   mesh4: 30 papers (145 unique so far)
+2026-09-06 13:54:16,359 [INFO] Cached 145 papers for theme unknown
+2026-09-06 13:54:16,359 [INFO]     Found 145 papers
+2026-09-06 13:54:16,359 [INFO]   Searching T02: MMP9_PNN_ECM
+2026-09-06 13:54:16,359 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,359 [INFO]     Found 145 papers
+2026-09-06 13:54:16,359 [INFO]   Searching T03: neuroinflammation_TNF_NLRP3_TLR_microglia
+2026-09-06 13:54:16,360 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,360 [INFO]     Found 145 papers
+2026-09-06 13:54:16,360 [INFO]   Searching T04: HIF1_metabolism_vascular_barriers
+2026-09-06 13:54:16,361 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,361 [INFO]     Found 145 papers
+2026-09-06 13:54:16,361 [INFO]   Searching T05: NgR1_RhoA_myelin_inhibitors
+2026-09-06 13:54:16,361 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,361 [INFO]     Found 145 papers
+2026-09-06 13:54:16,361 [INFO]   Searching T06: DRG_excitability_channels_splicing
+2026-09-06 13:54:16,362 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,362 [INFO]     Found 145 papers
+2026-09-06 13:54:16,362 [INFO]   Searching T07: CGRP_bradykinin_prostaglandins
+2026-09-06 13:54:16,363 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,363 [INFO]     Found 145 papers
+2026-09-06 13:54:16,363 [INFO]   Searching T08: resolution_SPM_HO1_PPARg_CB2
+2026-09-06 13:54:16,363 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,363 [INFO]     Found 145 papers
+2026-09-06 13:54:16,363 [INFO]   Searching T09: epigenetics_HDAC_lactylation_JAKSTAT
+2026-09-06 13:54:16,364 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,364 [INFO]     Found 145 papers
+2026-09-06 13:54:16,364 [INFO]   Searching T10: Kalirin7_ACC_structural_plasticity
+2026-09-06 13:54:16,364 [INFO] Cache hit for theme unknown (145 papers)
+2026-09-06 13:54:16,365 [INFO]     Found 145 papers
+2026-09-06 13:54:16,365 [INFO]   Total unique papers: 145
+2026-09-06 13:54:16,365 [INFO] === Phase 2: Fetch Abstracts + Full-text ===
+2026-09-06 13:54:17,557 [INFO] Fetched PMID 42692679 [abstract-only]
+2026-09-06 13:54:18,658 [INFO] Fetched PMID 42406251 [abstract-only]
+2026-09-06 13:54:18,693 [INFO] Batch fetch complete: 145 papers, 84 with full-text (58%)
+2026-09-06 13:54:18,694 [INFO]   Fetched 145 papers (84 with full-text)
+2026-09-06 13:54:18,694 [INFO] === Phase 3: LLM Entity/Relationship Extraction ===
+2026-09-06 13:54:18,694 [INFO]   DRY RUN — skipping LLM extraction
+2026-09-06 13:54:18,694 [INFO] === Phase 4: Match Against Existing Graph ===
+2026-09-06 13:54:18,700 [INFO] Loaded 59 alias entries from crawler/aliases.yaml
+2026-09-06 13:54:18,700 [INFO] Batch match: 0 entities (0 exact, 0 alias, 0 fuzzy, 0 no_match), 0 edges (0 exists, 0 inverse, 0 new)
+2026-09-06 13:54:18,700 [INFO]   New entities: 0, New edges: 0
+2026-09-06 13:54:18,700 [INFO] === Phase 5: Update Graph ===
+2026-09-06 13:54:18,700 [INFO]   DRY RUN — skipping graph update
+2026-09-06 13:54:18,700 [INFO] === Phase 6: Conflict Detection ===
+2026-09-06 13:54:18,700 [INFO]   Conflicts: 0 pending, 0 need review
+2026-09-06 13:54:18,700 [INFO] === Phase 7: MeSH Discovery ===
+2026-09-06 13:54:18,706 [INFO] Observed 690 distinct MeSH terms across 145 papers
+2026-09-06 13:54:18,709 [INFO] Discovered 108 new MeSH terms (>= 3 papers, not in registry)
+2026-09-06 13:54:18,709 [INFO]   Discovered 108 new MeSH terms
+2026-09-06 13:54:18,709 [INFO] === Phase 8: Run Tests ===
+2026-09-06 13:54:18,709 [INFO]   Run log: crawler/logs/run_2026-09-06_1354.json
+2026-09-06 13:54:18,709 [INFO] Pipeline complete in 25.6s

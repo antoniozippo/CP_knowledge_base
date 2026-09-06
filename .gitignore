@@ -23,3 +23,7 @@ __pycache__/
 
 # simulator run artifacts (regeneratable via orchestrator CLI)
 simulator/reports/runs/
+
+# crawler cache and runtime state (regeneratable)
+crawler/cache/
+crawler/processed_pmids.json

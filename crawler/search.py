@@ -63,8 +63,8 @@ def _save_processed_pmids(pmids: set[str]) -> None:
     PROCESSED_PMIDS_PATH.write_text(json.dumps(sorted(pmids), indent=2))
 
 
-def _cache_path(theme_id: str, query: str) -> Path:
-    qhash = hashlib.sha256(query.encode()).hexdigest()[:12]
+def _cache_path(theme_id: str, since: str) -> Path:
+    qhash = hashlib.sha256(since.encode()).hexdigest()[:12]
     return CACHE_DIR / f"pubmed_{theme_id}_{qhash}.json"
 
 
@@ -95,7 +95,12 @@ def _parse_article(article: dict) -> PaperMeta:
 
     # Authors
     authors: list[str] = []
-    for author in article_data.get("AuthorList", []):
+    author_list = article_data.get("AuthorList", [])
+    if not isinstance(author_list, list):
+        author_list = [author_list]
+    for author in author_list:
+        if not isinstance(author, dict):
+            continue
         last = author.get("LastName", "")
         fore = author.get("ForeName", "")
         name = f"{last} {fore}".strip()
@@ -131,14 +136,21 @@ def _parse_article(article: dict) -> PaperMeta:
 
     # MeSH terms
     mesh_terms: list[str] = []
-    for mesh in medline.get("MeshHeadingList", []):
-        descriptor = mesh.get("MeshHeading", {}).get("DescriptorName", "")
+    mesh_list = medline.get("MeshHeadingList", [])
+    if not isinstance(mesh_list, list):
+        mesh_list = [mesh_list]
+    for mesh in mesh_list:
+        heading = mesh if isinstance(mesh, dict) else {}
+        descriptor = heading.get("DescriptorName") or heading.get("MeshHeading", {}).get("DescriptorName", "")
         if descriptor:
             mesh_terms.append(str(descriptor))
 
     # Abstract
     abstract_parts: list[str] = []
-    for abs_text in article_data.get("Abstract", {}).get("AbstractText", []):
+    abs_text_list = article_data.get("Abstract", {}).get("AbstractText", [])
+    if not isinstance(abs_text_list, list):
+        abs_text_list = [abs_text_list]
+    for abs_text in abs_text_list:
         if isinstance(abs_text, dict):
             label = abs_text.get("@Label", "")
             text = abs_text.get("#text", "")
@@ -152,20 +164,25 @@ def _parse_article(article: dict) -> PaperMeta:
 
     # DOI
     doi: Optional[str] = None
-    for eid in article_data.get("ELocationID", []):
-        if eid.get("@EIdType") == "doi":
-            doi = str(eid)
+    eids = article_data.get("ELocationID", [])
+    if not isinstance(eids, list):
+        eids = [eids]
+    for eid in eids:
+        if isinstance(eid, dict) and eid.get("@EIdType") == "doi":
+            doi = eid.get("#text") or str(eid.get("#text", "")) or ""
+            if not doi:
+                doi = str(eid)
             break
     if not doi:
         for id_obj in article.get("PubmedData", {}).get("ArticleIdList", []):
-            if id_obj.attributes.get("IdType") == "doi":
+            if getattr(id_obj, "attributes", {}).get("IdType") == "doi":
                 doi = str(id_obj)
                 break
 
     # PMCID
     pmcid: Optional[str] = None
     for id_obj in article.get("PubmedData", {}).get("ArticleIdList", []):
-        if id_obj.attributes.get("IdType") == "pmc":
+        if getattr(id_obj, "attributes", {}).get("IdType") == "pmc":
             pmcid = str(id_obj)
             break
 
@@ -208,6 +225,15 @@ def _fetch_batch(ids: list[str]) -> list[PaperMeta]:
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+def _pubmed_date(since: str) -> str:
+    """Normalize YYYY-MM-DD or YYYY-MM to PubMed's YYYY/MM/DD format."""
+    s = since.strip()
+    s = s.replace("-", "/")
+    if s.count("/") == 1:
+        return f"{s}/01"
+    return s
+
+
 def build_pubmed_query(
     keywords: list[str],
     mesh_terms: list[str],
@@ -217,6 +243,10 @@ def build_pubmed_query(
 
     Strategy: (keyword1 OR keyword2 OR ...) AND (mesh1 OR mesh2 OR ...)
     AND (date filter). Each keyword is a quoted phrase.
+
+    Note: for better recall, `search_theme` runs each keyword and MeSH
+    term as its own query and unions the PMIDs. This builder is kept for
+    single-query use and tests.
     """
     parts: list[str] = []
 
@@ -231,10 +261,37 @@ def build_pubmed_query(
         parts.append(f"({mesh_group})")
 
     if since:
-        parts.append(f'("since"[Date - Publication] : "{since}"[Date - Publication])')
+        parts.append(f"({_pubmed_date(since)}:3000[dp])")
 
     query = " AND ".join(parts)
     return query
+
+
+def _build_single_queries(
+    theme_config: dict, since: str
+) -> list[tuple[str, str]]:
+    """Build one query per keyword and per MeSH term (for unioned recall).
+
+    Returns list of (query_label, query_string).
+    """
+    keywords = theme_config.get("keywords", [])
+    mesh_terms = theme_config.get("mesh_terms", [])
+    queries: list[tuple[str, str]] = []
+    since_fmt = _pubmed_date(since) if since else ""
+
+    for i, kw in enumerate(keywords):
+        q = f"({kw})"
+        if since_fmt:
+            q += f" AND ({since_fmt}:3000[dp])"
+        queries.append((f"kw{i}", q))
+
+    for i, mt in enumerate(mesh_terms):
+        q = f"{mt}[MeSH Terms]"
+        if since_fmt:
+            q += f" AND ({since_fmt}:3000[dp])"
+        queries.append((f"mesh{i}", q))
+
+    return queries
 
 
 def search_pubmed(
@@ -297,38 +354,57 @@ def search_theme(
 ) -> list[PaperMeta]:
     """Search for a single theme using its keywords and MeSH terms.
 
-    Deduplicates across multiple queries by PMID.
+    Runs one query per keyword and per MeSH term, then unions by PMID.
+    This maximizes recall compared to AND-combining all terms.
     Optionally caches results per theme.
     """
     theme_id = theme_config.get("id", "unknown")
-    keywords = theme_config.get("keywords", [])
-    mesh_terms = theme_config.get("mesh_terms", [])
     effective_since = since or "2021-01-01"
-
-    query = build_pubmed_query(keywords, mesh_terms, since=effective_since)
 
     if cache:
         _ensure_dirs()
-        cp = _cache_path(theme_id, query)
+        cp = _cache_path(theme_id, effective_since)
         cached = _cache_read(cp)
         if cached is not None:
             log.info("Cache hit for theme %s (%d papers)", theme_id, len(cached))
             return cached
 
-    papers = search_pubmed(query, since=effective_since, max_results=max_results)
+    query_specs = _build_single_queries(theme_config, effective_since)
+    if not query_specs:
+        log.info("No keywords or MeSH terms for theme %s", theme_id)
+        return []
+
+    # Union of PMIDs across all per-term queries
+    pmid_order: list[str] = []
+    for label, q in query_specs:
+        try:
+            papers = search_pubmed(q, since=effective_since, max_results=max_results)
+            for p in papers:
+                if p.pmid not in pmid_order:
+                    pmid_order.append(p.pmid)
+            log.info("  %s: %d papers (%d unique so far)", label, len(papers), len(pmid_order))
+        except Exception as exc:
+            log.warning("Query %s failed: %s", label, exc)
+        time.sleep(_rate_delay)
+
+    # Fetch all unique PMIDs in one batch via efetch
+    all_papers: list[PaperMeta] = []
+    for start in range(0, len(pmid_order), BATCH_SIZE):
+        batch_ids = pmid_order[start : start + BATCH_SIZE]
+        try:
+            all_papers.extend(_fetch_batch(batch_ids))
+        except Exception as exc:
+            log.warning("Failed to fetch batch starting at %d: %s", start, exc)
+
+    # Sort by recency (publication date desc)
+    all_papers.sort(key=lambda p: p.publication_date, reverse=True)
 
     if cache:
-        cp = _cache_path(theme_id, query)
-        _cache_write(cp, papers)
-        log.info("Cached %d papers for theme %s", len(papers), theme_id)
+        cp = _cache_path(theme_id, effective_since)
+        _cache_write(cp, all_papers)
+        log.info("Cached %d papers for theme %s", len(all_papers), theme_id)
 
-    # Track processed PMIDs
-    processed = _load_processed_pmids()
-    new_pmids = {p.pmid for p in papers} - processed
-    processed.update(new_pmids)
-    _save_processed_pmids(processed)
-
-    return papers
+    return all_papers
 
 
 def search_themes(

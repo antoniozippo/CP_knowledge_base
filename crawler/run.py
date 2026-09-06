@@ -3,15 +3,21 @@
 
 import argparse
 import json
+import os
 import sys
 import time
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
 
+# Allow direct execution: `python3 crawler/run.py`
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
 import yaml
 
-from crawler.search import search_theme, PaperMeta
+from crawler.search import search_theme, PaperMeta, _load_processed_pmids, _save_processed_pmids
 from crawler.fetcher import fetch_papers, PaperContent
 from crawler.extractor import LLMExtractor, extract_batch, ExtractionResult
 from crawler.matcher import EntityMatcher
@@ -34,10 +40,11 @@ def load_themes(themes_path: str = "crawler/themes.yaml") -> dict:
     return yaml.safe_load(Path(themes_path).read_text()) or {}
 
 
-def run_pipeline(args):
+def run_pipeline(args, themes=None):
     """Execute the full crawl-extract-update pipeline."""
     start = time.time()
-    themes = load_themes(args.themes)
+    if themes is None:
+        themes = load_themes(args.themes_path)
 
     log.info(f"Crawler starting — {len(themes)} themes, budget={args.budget}, dry_run={args.dry_run}")
 
@@ -71,6 +78,10 @@ def run_pipeline(args):
         log.info("  DRY RUN — skipping LLM extraction")
         extractions = []
     else:
+        # Skip papers already successfully extracted in previous runs
+        processed = _load_processed_pmids()
+        to_extract = [c for c in contents if c.pmid not in processed]
+        log.info(f"  {len(contents)} papers fetched, {len(to_extract)} not yet extracted")
         extractor = LLMExtractor(
             endpoint=args.llm_endpoint,
             model=args.llm_model,
@@ -80,18 +91,22 @@ def run_pipeline(args):
         all_extractions = []
         for theme_id, theme_config in themes.items():
             theme_entities = theme_config.get("entities", [])
-            theme_papers = [c for c in contents if any(
+            theme_papers = [c for c in to_extract if any(
                 t in c.abstract.lower() for t in [e.lower() for e in theme_entities]
             )]
             log.info(f"  Extracting from {len(theme_papers)} papers for {theme_id}")
-            extractions = extract_batch(
+            extracted = extract_batch(
                 theme_papers, theme_config, args.llm_endpoint, args.llm_model,
                 budget=args.budget - extractor.call_count,
                 cache_dir=Path("crawler/cache"),
             )
-            all_extractions.extend(extractions)
+            all_extractions.extend(extracted)
         extractions = all_extractions
         log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls)")
+
+        # Mark successfully extracted PMIDs as processed (dedupe for future runs)
+        processed.update({e.pmid for e in extractions})
+        _save_processed_pmids(processed)
 
     # --- Phase 4: Match ---
     log.info("=== Phase 4: Match Against Existing Graph ===")
@@ -199,6 +214,8 @@ Examples:
     )
     parser.add_argument("--theme", action="append", dest="themes",
                         help="Theme ID(s) to search (default: all)")
+    parser.add_argument("--themes-path", default="crawler/themes.yaml",
+                        help="Path to themes.yaml (default: crawler/themes.yaml)")
     parser.add_argument("--since", default="2021-01-01",
                         help="Start date for PubMed search (default: 2021-01-01)")
     parser.add_argument("--max-results", type=int, default=200,
@@ -219,15 +236,14 @@ Examples:
 
     # Filter themes if specified
     if args.themes:
-        all_themes = load_themes()
-        args.themes = {k: v for k, v in all_themes.items() if k in args.themes}
-        if not args.themes:
+        all_themes = load_themes(args.themes_path)
+        filtered = {k: v for k, v in all_themes.items() if k in args.themes}
+        if not filtered:
             print(f"Error: no valid themes in {args.themes}", file=sys.stderr)
             sys.exit(1)
+        sys.exit(run_pipeline(args, themes=filtered))
     else:
-        args.themes = load_themes()
-
-    sys.exit(run_pipeline(args))
+        sys.exit(run_pipeline(args))
 
 
 if __name__ == "__main__":

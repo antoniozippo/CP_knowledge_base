@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-09-06T11:52:12.973357+00:00",
+  "themes_searched": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08",
+    "T09",
+    "T10"
+  ],
+  "papers_found": 243,
+  "papers_fetched": 243,
+  "fulltext_count": 132,
+  "extractions": 0,
+  "new_entities": 0,
+  "new_edges": 0,
+  "conflicts": {
+    "total": 0,
+    "pending": 0,
+    "human_review": 0,
+    "auto_update": 0,
+    "resolved": 0
+  },
+  "discoveries": 0,
+  "elapsed_sec": 341.8,
+  "dry_run": true
+}
