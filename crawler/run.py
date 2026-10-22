@@ -3,7 +3,6 @@
 
 import argparse
 import json
-import os
 import sys
 import time
 import logging
@@ -19,7 +18,7 @@ import yaml
 
 from crawler.search import search_theme, PaperMeta, _load_processed_pmids, _save_processed_pmids
 from crawler.fetcher import fetch_papers, PaperContent
-from crawler.extractor import LLMExtractor, extract_batch, ExtractionResult
+from crawler.extractor import LLMExtractor, extract_batch
 from crawler.matcher import EntityMatcher
 from crawler.updater import GraphUpdater
 from crawler.discovery import MeshDiscovery
@@ -38,6 +37,30 @@ log = logging.getLogger(__name__)
 
 def load_themes(themes_path: str = "crawler/themes.yaml") -> dict:
     return yaml.safe_load(Path(themes_path).read_text()) or {}
+
+
+def build_extraction_inputs(metas: list[PaperMeta], contents: list[PaperContent]) -> list[dict]:
+    """Join search metadata and fetched content into extractor input dicts.
+
+    Each dict has the keys extract_batch expects: pmid, title, content. Content
+    is the abstract (falling back to the PubMed record's abstract) followed by
+    any full-text sections. Contents without matching metadata are skipped.
+    """
+    meta_by_pmid = {m.pmid: m for m in metas}
+    inputs = []
+    for c in contents:
+        meta = meta_by_pmid.get(c.pmid)
+        if meta is None:
+            log.warning(f"  No search metadata for PMID {c.pmid}; skipping")
+            continue
+        parts = [c.abstract_text or meta.abstract]
+        parts.extend((c.fulltext_sections or {}).values())
+        inputs.append({
+            "pmid": c.pmid,
+            "title": meta.title,
+            "content": "\n\n".join(p for p in parts if p),
+        })
+    return inputs
 
 
 def run_pipeline(args, themes=None):
@@ -80,7 +103,10 @@ def run_pipeline(args, themes=None):
     else:
         # Skip papers already successfully extracted in previous runs
         processed = _load_processed_pmids()
-        to_extract = [c for c in contents if c.pmid not in processed]
+        to_extract = [
+            i for i in build_extraction_inputs(unique_papers, contents)
+            if i["pmid"] not in processed
+        ]
         log.info(f"  {len(contents)} papers fetched, {len(to_extract)} not yet extracted")
         extractor = LLMExtractor(
             endpoint=args.llm_endpoint,
@@ -91,9 +117,11 @@ def run_pipeline(args, themes=None):
         all_extractions = []
         for theme_id, theme_config in themes.items():
             theme_entities = theme_config.get("entities", [])
-            theme_papers = [c for c in to_extract if any(
-                t in c.abstract.lower() for t in [e.lower() for e in theme_entities]
-            )]
+            theme_terms = [e.lower() for e in theme_entities]
+            theme_papers = [
+                i for i in to_extract
+                if any(t in i["content"].lower() for t in theme_terms)
+            ]
             log.info(f"  Extracting from {len(theme_papers)} papers for {theme_id}")
             extracted = extract_batch(
                 theme_papers, theme_config, args.llm_endpoint, args.llm_model,
@@ -116,13 +144,17 @@ def run_pipeline(args, themes=None):
     new_edges = sum(1 for m in edge_matches if m.status == "NEW")
     log.info(f"  New entities: {new_entities}, New edges: {new_edges}")
 
+    conflict_mgr = ConflictManager(conflicts_path="crawler/conflicts.yaml")
+
     # --- Phase 5: Update Graph ---
     log.info("=== Phase 5: Update Graph ===")
     if args.dry_run:
         log.info("  DRY RUN — skipping graph update")
         report = {"new_nodes": new_entities, "new_edges": new_edges, "skipped": len(entity_matches)}
     else:
-        updater = GraphUpdater(graph_path="graphify-out/graph_v2.json")
+        updater = GraphUpdater(
+            graph_path="graphify-out/graph_v2.json", conflict_manager=conflict_mgr
+        )
         report = updater.update(entity_matches, edge_matches, extractions)
         updater.save()
         log.info(f"  Update: +{report.new_nodes} nodes, +{report.new_edges} edges, "
@@ -130,7 +162,6 @@ def run_pipeline(args, themes=None):
 
     # --- Phase 6: Conflict Detection ---
     log.info("=== Phase 6: Conflict Detection ===")
-    conflict_mgr = ConflictManager(conflicts_path="crawler/conflicts.yaml")
     conflict_summary = conflict_mgr.summary()
     log.info(f"  Conflicts: {conflict_summary['pending']} pending, "
              f"{conflict_summary['human_review']} need review")
@@ -145,7 +176,8 @@ def run_pipeline(args, themes=None):
 
     # --- Phase 8: Run Tests ---
     log.info("=== Phase 8: Run Tests ===")
-    if not args.dry_run:
+    commit_enabled = not (args.dry_run or args.no_commit)
+    if commit_enabled:
         import subprocess
         result = subprocess.run(
             ["python3", "-m", "pytest", "simulator/tests/", "-x", "-q"],
@@ -181,7 +213,7 @@ def run_pipeline(args, themes=None):
     run_log_path.write_text(json.dumps(run_log, indent=2))
     log.info(f"  Run log: {run_log_path}")
 
-    if not args.dry_run:
+    if commit_enabled:
         import subprocess
         # Stage and commit
         subprocess.run(["git", "add", "graphify-out/graph_v2.json"], check=True)
@@ -232,6 +264,8 @@ Examples:
                         help="Min frequency for MeSH discovery (default: 3)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Report only, no graph changes or commits")
+    parser.add_argument("--no-commit", action="store_true",
+                        help="Update the graph but skip the test gate and git commit")
     args = parser.parse_args()
 
     # Filter themes if specified

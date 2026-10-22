@@ -8,6 +8,10 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
+# Edges whose verdict a human (or a validated literature sweep) already set.
+HUMAN_REVIEW_STATUSES = ("CONFIRMED", "EXTENDED", "REFUTED", "MIXED")
+
+
 class Conflict(BaseModel):
     conflict_id: str
     edge_index: int
@@ -51,7 +55,15 @@ class ConflictManager:
     def add_conflict(self, edge_index: int, subject_label: str, object_label: str,
                      current_sign: int, current_validation: str, new_sign: int,
                      new_evidence_quote: str, new_pmid: str) -> Conflict:
-        """Record a new conflict. Never auto-refute CONFIRMED edges."""
+        """Record a new conflict. Never auto-refute CONFIRMED edges.
+
+        An unresolved conflict for the same edge and PMID is returned as-is
+        instead of being recorded again.
+        """
+        for c in self.get_pending():
+            if c.edge_index == edge_index and c.new_pmid == new_pmid:
+                return c
+
         existing_ids = {c.conflict_id for c in self.conflicts}
         idx = len(self.conflicts) + 1
         cid = f"CONFLICT-{idx:04d}"
@@ -59,8 +71,8 @@ class ConflictManager:
             idx += 1
             cid = f"CONFLICT-{idx:04d}"
 
-        # CONFIRMED edges always require human review
-        if current_validation in ("CONFIRMED", "EXTENDED"):
+        # Edges with an established verdict always require human review
+        if current_validation in HUMAN_REVIEW_STATUSES:
             recommendation = "HUMAN_REVIEW"
         else:
             recommendation = "AUTO_UPDATE"

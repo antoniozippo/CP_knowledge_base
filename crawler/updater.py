@@ -9,6 +9,9 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from crawler.conflict import ConflictManager
+from crawler.records import EdgeMatch, EntityMatch
+
 log = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -45,6 +48,9 @@ ACRONYM_ALIASES = {
     "vascular endothelial growth factor a": "vegfa",
 }
 SPELLING_VARIANTS = {"isation": "ization"}
+MATCHED_ENTITY_STATUSES = ("EXACT", "ALIAS", "FUZZY")
+# New evidence never flips these verdicts; it goes to human review instead.
+PROTECTED_VALIDATION_STATUSES = ("REFUTED", "MIXED")
 
 
 # ---------------------------------------------------------------------------
@@ -93,7 +99,12 @@ def _node_id_from_name(name: str) -> str:
 # GraphUpdater
 # ---------------------------------------------------------------------------
 class GraphUpdater:
-    def __init__(self, graph_path: str = "graphify-out/graph_v2.json"):
+    def __init__(
+        self,
+        graph_path: str = "graphify-out/graph_v2.json",
+        conflict_manager: Optional[ConflictManager] = None,
+    ):
+        self.conflict_manager = conflict_manager
         self.graph_path = Path(graph_path)
         if not self.graph_path.exists():
             raise FileNotFoundError(f"Graph file not found: {self.graph_path}")
@@ -101,6 +112,7 @@ class GraphUpdater:
         self.nodes: list[dict] = self.graph.get("nodes", [])
         self.links: list[dict] = self.graph.get("links", [])
         self.node_ids: set[str] = {n["id"] for n in self.nodes}
+        self.nodes_by_id: dict[str, dict] = {n["id"]: n for n in self.nodes}
         self.norm_to_id: dict[str, str] = {
             n["norm_label"]: n["id"] for n in self.nodes
         }
@@ -173,7 +185,7 @@ class GraphUpdater:
         label = name.strip()
         norm_label = _normalize_label(label)
 
-        node = {
+        node: dict = {
             "label": label,
             "file_type": "crawled",
             "source_file": None,
@@ -194,6 +206,7 @@ class GraphUpdater:
         }
         self.nodes.append(node)
         self.node_ids.add(node_id)
+        self.nodes_by_id[node_id] = node
         self.norm_to_id[norm_label] = node_id
         log.info("Added node %s (type=%s, compartment=%s)", node_id, node["entity_type"], node["compartment"])
         return node
@@ -318,27 +331,70 @@ class GraphUpdater:
     # ------------------------------------------------------------------
     # Main orchestrator
     # ------------------------------------------------------------------
+    def _conflict_reason(self, edge_idx: int, em: EdgeMatch) -> str:
+        """Why new evidence must not be applied to this edge, or '' if it can."""
+        if em.relation_type == "CONTRADICTS" and self.detect_conflict(
+            edge_idx, em.sign, em.source_pmid
+        ):
+            return "sign contradiction"
+        status = self.links[edge_idx].get("validation_status")
+        if status in PROTECTED_VALIDATION_STATUSES:
+            return f"new evidence on {status} edge"
+        return ""
+
+    def _record_conflict(self, edge_idx: int, em: EdgeMatch) -> None:
+        """Hand a conflict to the ConflictManager; the edge itself is left unchanged."""
+        if self.conflict_manager is None:
+            return
+        edge = self.links[edge_idx]
+        subject = self.nodes_by_id.get(edge.get("source", ""), {})
+        target = self.nodes_by_id.get(edge.get("target", ""), {})
+        self.conflict_manager.add_conflict(
+            edge_index=edge_idx,
+            subject_label=subject.get("label", edge.get("source", "")),
+            object_label=target.get("label", edge.get("target", "")),
+            current_sign=edge.get("sign", 0),
+            current_validation=edge.get("validation_status", "UNREVIEWED"),
+            new_sign=em.sign,
+            new_evidence_quote=em.evidence_quote,
+            new_pmid=em.source_pmid,
+        )
+
+    def _resolve_entity(self, match: EntityMatch, report: "UpdateReport") -> dict:
+        """Return the graph node for a matched entity, creating it if needed."""
+        name = match.extracted_name
+        if match.status in MATCHED_ENTITY_STATUSES and match.matched_node_id:
+            node = self.nodes_by_id.get(match.matched_node_id)
+            if node:
+                report.details.append(f"{match.status} match: {name} -> {node['id']}")
+                return node
+        existing = self._find_node_by_label(name)
+        if existing:
+            report.details.append(f"Found existing by label: {name} -> {existing['id']}")
+            return existing
+        node = self.add_node(
+            name, match.entity_type, match.compartment,
+            match.source_pmid, match.source_doi,
+        )
+        report.new_nodes += 1
+        report.details.append(f"New node: {name} -> {node['id']}")
+        return node
+
     def update(
         self,
-        entity_matches: list,
-        edge_matches: list,
+        entity_matches: list[EntityMatch],
+        edge_matches: list[EdgeMatch],
         extractions: list,
     ) -> UpdateReport:
-        """Main update orchestrator.
+        """Apply matcher output to the graph.
 
         Parameters
         ----------
-        entity_matches : list of dicts
-            Each dict has keys: name, entity_type, compartment,
-            match_status ('NO_MATCH' | 'EXACT' | 'FUZZY'),
-            matched_node_id (if EXACT/FUZZY), source_pmid, source_doi.
-        edge_matches : list of dicts
-            Each dict has keys: subject, predicate, object, sign,
-            match_status ('NEW' | 'EXISTS'), edge_index (if EXISTS),
-            relation_type ('CONFIRMS' | 'EXTENDS' | 'CONTRADICTS'),
-            evidence_quote, source_pmid, source_doi, confidence.
-        extractions : list of dicts
-            Raw LLM extractions (used only for metadata provenance).
+        entity_matches : EntityMatch records from EntityMatcher.match_batch.
+        edge_matches : EdgeMatch records from EntityMatcher.match_batch;
+            endpoints are already graph node ids.
+        extractions : raw ExtractionResult objects (unused; kept for provenance
+            hooks and call-site compatibility).
 
         Returns
         -------
@@ -346,155 +402,45 @@ class GraphUpdater:
         """
         report = UpdateReport()
 
-        # --- Phase 1: resolve entities --------------------------------
-        resolved_entities: dict[str, dict] = {}  # name -> node dict
+        # --- Phase 1: resolve entities (creates nodes for NO_MATCH) ---
         for match in entity_matches:
-            name = match["name"]
-            status = match.get("match_status", "NO_MATCH")
-            pmid = match.get("source_pmid", "")
-            doi = match.get("source_doi", "")
+            self._resolve_entity(match, report)
 
-            if status == "EXACT":
-                node_id = match.get("matched_node_id", "")
-                node = next((n for n in self.nodes if n["id"] == node_id), None)
-                if node:
-                    resolved_entities[name] = node
-                    report.details.append(f"EXACT match: {name} -> {node_id}")
-                else:
-                    # Fallback: try label lookup
-                    node = self._find_node_by_label(name)
-                    if node:
-                        resolved_entities[name] = node
-                        report.details.append(f"EXACT (label-fallback): {name} -> {node['id']}")
-                    else:
-                        node = self.add_node(
-                            name, match.get("entity_type", ""),
-                            match.get("compartment", ""), pmid, doi,
-                        )
-                        resolved_entities[name] = node
-                        report.new_nodes += 1
-                        report.details.append(f"FALLBACK new node: {name}")
-
-            elif status == "FUZZY":
-                node_id = match.get("matched_node_id", "")
-                node = next((n for n in self.nodes if n["id"] == node_id), None)
-                if node:
-                    resolved_entities[name] = node
-                    report.details.append(f"FUZZY match: {name} -> {node_id}")
-                else:
-                    node = self._find_node_by_label(name)
-                    if node:
-                        resolved_entities[name] = node
-                    else:
-                        node = self.add_node(
-                            name, match.get("entity_type", ""),
-                            match.get("compartment", ""), pmid, doi,
-                        )
-                        resolved_entities[name] = node
-                        report.new_nodes += 1
-
-            else:  # NO_MATCH
-                # Check if it already exists in the graph by label
-                existing = self._find_node_by_label(name)
-                if existing:
-                    resolved_entities[name] = existing
-                    report.details.append(f"NO_MATCH but found existing: {name} -> {existing['id']}")
-                else:
-                    node = self.add_node(
-                        name, match.get("entity_type", ""),
-                        match.get("compartment", ""), pmid, doi,
-                    )
-                    resolved_entities[name] = node
-                    report.new_nodes += 1
-                    report.details.append(f"New node: {name} -> {node['id']}")
-
-        # --- Phase 2: resolve edges -----------------------------------
-        for edge_match in edge_matches:
-            subj_name = edge_match.get("subject", "")
-            obj_name = edge_match.get("object", "")
-            status = edge_match.get("match_status", "NEW")
-            relation_type = edge_match.get("relation_type", "")
-            predicate = edge_match.get("predicate", "interacts_with")
-            sign = edge_match.get("sign", 0)
-            quote = edge_match.get("evidence_quote", "")
-            pmid = edge_match.get("source_pmid", "")
-            doi = edge_match.get("source_doi", "")
-            confidence = edge_match.get("confidence", "INFERRED")
-
-            # Resolve subject/object to node IDs
-            subj_node = resolved_entities.get(subj_name)
-            obj_node = resolved_entities.get(obj_name)
-            if not subj_node or not obj_node:
+        # --- Phase 2: apply edges --------------------------------------
+        for em in edge_matches:
+            subj_id, obj_id = em.subject_id, em.object_id
+            if subj_id not in self.node_ids or obj_id not in self.node_ids:
                 report.skipped += 1
-                report.details.append(f"Skipped edge (unresolved): {subj_name} -> {obj_name}")
+                report.details.append(f"Skipped edge (unknown node): {subj_id} -> {obj_id}")
                 continue
-
-            subj_id = subj_node["id"]
-            obj_id = obj_node["id"]
-
-            # Self-loop check
             if subj_id == obj_id:
                 report.skipped += 1
                 report.details.append(f"Skipped self-loop: {subj_id}")
                 continue
 
-            if status == "NEW":
-                self.add_edge(subj_id, predicate, obj_id, sign, quote, pmid, doi, confidence)
+            edge_idx = em.existing_edge_index if em.status == "EXISTS" else None
+            if edge_idx is None:
+                self.add_edge(
+                    subj_id, em.predicate, obj_id, em.sign,
+                    em.evidence_quote, em.source_pmid, em.source_doi,
+                )
                 report.new_edges += 1
-                report.details.append(f"New edge: {subj_id} --[{predicate}]--> {obj_id}")
+                report.details.append(f"New edge: {subj_id} --[{em.predicate}]--> {obj_id}")
+                continue
 
-            elif status == "EXISTS":
-                edge_idx = edge_match.get("edge_index")
-                if edge_idx is None:
-                    # Try to find the edge by source+target+relation
-                    found_idx = None
-                    for i, link in enumerate(self.links):
-                        if (link.get("source") == subj_id
-                                and link.get("target") == obj_id
-                                and link.get("relation") == predicate):
-                            found_idx = i
-                            break
-                    if found_idx is not None:
-                        edge_idx = found_idx
-                    else:
-                        # Edge not found; add as new
-                        self.add_edge(subj_id, predicate, obj_id, sign, quote, pmid, doi, confidence)
-                        report.new_edges += 1
-                        report.details.append(f"EXISTS but not found; added new: {subj_id} --[{predicate}]--> {obj_id}")
-                        continue
+            reason = self._conflict_reason(edge_idx, em)
+            if reason:
+                self._record_conflict(edge_idx, em)
+                report.conflicts += 1
+                report.details.append(f"CONFLICT edge {edge_idx}: {reason}")
+                continue
 
-                if relation_type == "CONTRADICTS":
-                    conflict = self.detect_conflict(edge_idx, sign, pmid)
-                    if conflict:
-                        report.conflicts += 1
-                        report.details.append(
-                            f"CONFLICT edge {edge_idx}: {conflict['relation']} "
-                            f"sign {conflict['existing_sign']} vs {conflict['conflicting_sign']}"
-                        )
-                    else:
-                        # Sign same or undetermined; treat as confirms
-                        self.update_edge_validation(edge_idx, "CONFIRMED", pmid, quote)
-                        report.updated_edges += 1
-
-                elif relation_type == "CONFIRMS":
-                    self.update_edge_validation(edge_idx, "CONFIRMED", pmid, quote)
-                    report.updated_edges += 1
-                    report.details.append(f"Confirmed edge {edge_idx}")
-
-                elif relation_type == "EXTENDS":
-                    self.update_edge_validation(edge_idx, "CONFIRMED", pmid, quote)
-                    # Bump confidence score by additional 0.05 (total +0.10)
-                    if 0 <= edge_idx < len(self.links):
-                        old = self.links[edge_idx].get("confidence_score", 0.5)
-                        self.links[edge_idx]["confidence_score"] = min(old + 0.05, 1.0)
-                    report.updated_edges += 1
-                    report.details.append(f"Extended edge {edge_idx}")
-
-                else:
-                    # Unknown relation_type; treat as confirms
-                    self.update_edge_validation(edge_idx, "CONFIRMED", pmid, quote)
-                    report.updated_edges += 1
-                    report.details.append(f"Updated edge {edge_idx} (type={relation_type})")
+            self.update_edge_validation(edge_idx, "CONFIRMED", em.source_pmid, em.evidence_quote)
+            if em.relation_type == "EXTENDS":
+                old = self.links[edge_idx].get("confidence_score", 0.5)
+                self.links[edge_idx]["confidence_score"] = min(old + 0.05, 1.0)
+            report.updated_edges += 1
+            report.details.append(f"Updated edge {edge_idx} ({em.relation_type or 'CONFIRMS'})")
 
         log.info(
             "Update complete: +%d nodes, +%d edges, %d updated, %d conflicts, %d skipped",

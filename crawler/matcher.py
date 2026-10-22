@@ -2,12 +2,14 @@
 
 import json
 import logging
-from dataclasses import dataclass, field
+import re
 from pathlib import Path
 from typing import Optional
 
 import yaml
 from rapidfuzz import fuzz, process
+
+from crawler.records import EdgeMatch, EntityMatch
 
 logger = logging.getLogger(__name__)
 
@@ -78,23 +80,55 @@ _DEFAULT_ALIASES = {
 }
 
 
-@dataclass
-class EntityMatch:
-    extracted_name: str
-    status: str  # EXACT, FUZZY, ALIAS, NO_MATCH
-    matched_node_id: Optional[str] = None
-    matched_label: Optional[str] = None
-    confidence: float = 0.0
+# Words that name a class of thing rather than a specific one. They never
+# justify a merge on their own ("Zorblax-9 kinase" must not become PKC).
+GENERIC_TOKENS = frozenset({
+    "protein", "kinase", "receptor", "factor", "pathway", "signaling", "signalling",
+    "cell", "neuron", "channel", "transporter", "cotransporter", "enzyme", "gene",
+    "expression", "activation", "inhibitor", "antagonist", "agonist", "axis",
+    "cascade", "complex", "family", "level", "gtpase",
+})
+STOPWORDS = frozenset({"of", "for", "and", "the", "in", "by", "to", "with", "via", "a", "an", "on", "or", "as"})
+# Fraction of a node's head tokens the extracted name must cover to merge.
+MIN_COVERAGE = 0.6
+FUZZY_THRESHOLD = 85
+
+_GREEK = str.maketrans({
+    "\u03b1": "alpha", "\u03b2": "beta", "\u03b3": "gamma",
+    "\u03b4": "delta", "\u03ba": "kappa", "\u03bc": "mu",
+})
+_TOKEN_RE = re.compile(r"[^\W_]+")
+_PAREN_GROUP_RE = re.compile(r"\(([^)]*)\)")
+_DIGITS_RE = re.compile(r"\d+")
 
 
-@dataclass
-class EdgeMatch:
-    subject_id: str
-    predicate: str
-    object_id: str
-    status: str  # EXISTS, INVERSE, NEW
-    existing_edge_index: Optional[int] = None
-    confidence: float = 0.0
+def _stem(token: str) -> str:
+    if len(token) > 3 and token.endswith("s") and not token.endswith("ss"):
+        return token[:-1]
+    return token
+
+
+def _content_tokens(text: str) -> frozenset[str]:
+    """Lowercased, Greek-spelled-out, plural-stripped tokens minus stopwords."""
+    tokens = (_stem(t) for t in _TOKEN_RE.findall(text.lower().translate(_GREEK)))
+    return frozenset(t for t in tokens if t not in STOPWORDS)
+
+
+def _distinctive(text: str) -> frozenset[str]:
+    """Content tokens minus generic words."""
+    return _content_tokens(text) - GENERIC_TOKENS
+
+
+def _informative(tokens: frozenset[str]) -> bool:
+    """Enough signal to merge on; rejects empty sets and lone single letters."""
+    return sum(len(t) for t in tokens) >= 3
+
+
+def _field(obj, name: str, default):
+    """Read a field from a pydantic/dataclass object or a plain dict."""
+    if isinstance(obj, dict):
+        return obj.get(name, default)
+    return getattr(obj, name, default)
 
 
 class EntityMatcher:
@@ -119,13 +153,27 @@ class EntityMatcher:
         # Build lookup: node id → node
         self.nodes_by_id: dict[str, dict] = {n["id"]: n for n in self.nodes}
 
-        # Build lookup: (source_id, target_id, relation) → link index
-        self.edge_index: dict[tuple[str, str, str], list[int]] = {}
+        # Build lookup: (source_id, target_id) → link indices, any relation
+        self.pair_index: dict[tuple[str, str], list[int]] = {}
         for i, link in enumerate(self.links):
-            key = (link.get("source", ""), link.get("target", ""), link.get("relation", ""))
-            self.edge_index.setdefault(key, []).append(i)
+            pair = (link.get("source", ""), link.get("target", ""))
+            self.pair_index.setdefault(pair, []).append(i)
+
+        degree: dict[str, int] = {}
+        for link in self.links:
+            for end in (link.get("source", ""), link.get("target", "")):
+                degree[end] = degree.get(end, 0) + 1
+        # id -> (distinctive head tokens, full content-token sets of (...) groups)
+        self._forms: dict[str, tuple[frozenset[str], list[frozenset[str]]]] = {}
+        self._degree = degree
+        for node in self.nodes:
+            label = node.get("label", "")
+            head_text = label.split("(")[0].strip() or label
+            parens = [_content_tokens(g) for g in _PAREN_GROUP_RE.findall(label)]
+            self._forms[node["id"]] = (_distinctive(head_text), parens)
 
         self.aliases = self._load_aliases()
+        self._alias_groups = self._build_alias_groups()
 
     def _load_aliases(self) -> dict[str, list[str]]:
         """Load alias registry. Falls back to built-in defaults if no file exists."""
@@ -140,220 +188,209 @@ class EntityMatcher:
         logger.info("Using built-in default aliases (%d entries)", len(_DEFAULT_ALIASES))
         return dict(_DEFAULT_ALIASES)
 
-    def _build_reverse_aliases(self) -> dict[str, str]:
-        """Map alias (lowercase) → canonical symbol."""
-        reverse: dict[str, str] = {}
+    def _build_alias_groups(self) -> dict[str, frozenset[str]]:
+        """Map each alias name (lowercase) to its whole alias group.
+
+        Entries that list each other (KCC2 <-> SLC12A5) fall into one group, so
+        the registry cannot shadow itself.
+        """
+        parent: dict[str, str] = {}
+
+        def find(x: str) -> str:
+            parent.setdefault(x, x)
+            while parent[x] != x:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
+
         for canonical, alias_list in self.aliases.items():
-            reverse[canonical.lower()] = canonical
+            names = [canonical]
             if isinstance(alias_list, list):
-                for alias in alias_list:
-                    reverse[alias.lower()] = canonical
+                names += alias_list
             elif isinstance(alias_list, str):
-                reverse[alias_list.lower()] = canonical
-        return reverse
+                names.append(alias_list)
+            roots = [find(n.strip().lower()) for n in names if n and n.strip()]
+            for r in roots[1:]:
+                parent[find(r)] = find(roots[0])
+
+        groups: dict[str, set[str]] = {}
+        for name in list(parent):
+            groups.setdefault(find(name), set()).add(name)
+        return {name: frozenset(members) for members in groups.values() for name in members}
 
     def _match_exact(self, name_lower: str) -> Optional[dict]:
         """Try exact norm_label match."""
         return self.norm_labels.get(name_lower)
 
+    def _token_candidates(self, name: str) -> list[tuple[tuple, dict]]:
+        """Nodes this name may merge into, each with a ranking key.
+
+        A node qualifies when the name's distinctive tokens sit inside its head
+        (the label before the first "(") and cover at least MIN_COVERAGE of it,
+        or when the name's tokens, generic words included, equal the content of a
+        "(...)" group (a symbol alias such as "(SCN9A)"; "(RhoA Inhibitor)" is
+        not an alias of RhoA). Words inside a description never match. Rank: coverage,
+        then graph degree, then the shorter label.
+        """
+        wanted_full = _content_tokens(name)
+        wanted = wanted_full - GENERIC_TOKENS
+        if not _informative(wanted):
+            return []
+        found = []
+        for node in self.nodes:
+            head, parens = self._forms[node["id"]]
+            coverage = 0.0
+            if head and wanted <= head:
+                coverage = len(wanted) / len(head)
+            if wanted_full in parens:
+                coverage = 1.0
+            if coverage >= MIN_COVERAGE:
+                key = (coverage, self._degree.get(node["id"], 0), -len(node.get("label", "")))
+                found.append((key, node))
+        return found
+
     def _match_alias(self, name_lower: str) -> Optional[dict]:
-        """Try alias match. Returns matching node or None.
-
-        Checks if the extracted name resolves to a canonical symbol via aliases,
-        then finds the best-matching node in the graph.
-        """
-        rev = self._build_reverse_aliases()
-        canonical = rev.get(name_lower)
-        if not canonical:
+        """Resolve a name through its alias group to the best graph node."""
+        group = self._alias_groups.get(name_lower)
+        if not group:
             return None
+        found = []
+        for member in group | {name_lower}:
+            exact = self._match_exact(member)
+            if exact:
+                found.append(((1.0, self._degree.get(exact["id"], 0), 0), exact))
+            found.extend(self._token_candidates(member))
+        return max(found, key=lambda kn: kn[0])[1] if found else None
 
-        canon_lower = canonical.lower()
+    def _match_token(self, name_lower: str) -> Optional[dict]:
+        found = self._token_candidates(name_lower)
+        return max(found, key=lambda kn: kn[0])[1] if found else None
 
-        # Try exact norm_label match first
-        node = self._match_exact(canon_lower)
-        if node:
-            return node
+    def _match_fuzzy(self, name_lower: str, threshold: int = FUZZY_THRESHOLD) -> Optional[tuple[dict, float]]:
+        """Fuzzy match using rapidfuzz, never across differing digits.
 
-        # Check if canonical is contained in any norm_label
-        for nl, nd in self.norm_labels.items():
-            if canon_lower in nl:
-                return nd
-
-        return None
-
-    def _match_token_prefix(self, name_lower: str) -> Optional[dict]:
-        """Try token-prefix and substring match strategies.
-
-        1. Exact token match: any space-delimited token of name matches a norm_label token
-        2. Substring containment: name is contained within a norm_label
-        3. Reverse containment: a norm_label token is contained within the name
+        "Caspase-1" and "Caspase-3" score 89 but are different genes.
         """
-        name_tokens = name_lower.split()
-        if not name_tokens:
-            return None
-
-        best_match = None
-        best_score = 0
-
-        for nl, node in self.norm_labels.items():
-            nl_tokens = nl.split()
-
-            # Strategy 1: exact token overlap (prefix matching)
-            for nt in name_tokens:
-                for nlt in nl_tokens:
-                    if nlt.startswith(nt) and len(nt) >= 3:
-                        score = len(nt) / max(len(nl), 1) + 0.1
-                        if score > best_score:
-                            best_score = score
-                            best_match = node
-                    elif nt.startswith(nlt) and len(nlt) >= 3:
-                        score = len(nlt) / max(len(name_lower), 1) + 0.1
-                        if score > best_score:
-                            best_score = score
-                            best_match = node
-
-            # Strategy 2: name is a substring of norm_label
-            if name_lower in nl and len(name_lower) >= 3:
-                # Score higher for shorter norm_labels (more specific match)
-                score = len(name_lower) / max(len(nl), 1) + 0.3
-                if score > best_score:
-                    best_score = score
-                    best_match = node
-
-            # Strategy 3: a norm_label token matches the name (for parenthetical abbreviations)
-            # e.g., norm_label="kcc2 (potassium-chloride cotransporter)" has token "kcc2"
-            for nlt in nl_tokens:
-                # Strip parentheses content for comparison
-                nlt_clean = nlt.strip("()")
-                if nlt_clean == name_lower and len(name_lower) >= 2:
-                    score = 0.95
-                    if score > best_score:
-                        best_score = score
-                        best_match = node
-
-        return best_match if best_score > 0.3 else None
-
-    def _match_fuzzy(self, name_lower: str, threshold: int = 85) -> Optional[tuple[dict, float]]:
-        """Fuzzy match using rapidfuzz. Returns (node, score) or None."""
         if not self.norm_labels:
             return None
-
-        labels_list = list(self.norm_labels.keys())
-        best = process.extractOne(
-            name_lower,
-            labels_list,
-            scorer=fuzz.ratio,
-            score_cutoff=threshold,
-        )
-
-        if best is not None:
-            matched_label, score, _ = best
-            node = self.norm_labels.get(matched_label)
-            if node and score >= threshold:
-                return (node, score)
-
+        digits = _DIGITS_RE.findall(name_lower)
+        for label, score, _ in process.extract(
+            name_lower, list(self.norm_labels), scorer=fuzz.ratio,
+            score_cutoff=threshold, limit=5,
+        ):
+            if _DIGITS_RE.findall(label) == digits:
+                return (self.norm_labels[label], score)
         return None
 
     def match_entity(self, name: str) -> EntityMatch:
         """Match an extracted entity name against the graph.
 
-        Strategy (ordered):
+        Strategy (ordered, precision first):
         1. Exact norm_label match
-        2. Alias match (canonical symbol exists in graph)
-        3. Token-prefix match
-        4. Fuzzy match (rapidfuzz ratio >= 85)
+        2. Alias group match
+        3. Distinctive-token match (see _token_candidates)
+        4. Fuzzy match (rapidfuzz ratio >= 85, digits must agree)
         """
         name_lower = name.strip().lower()
         if not name_lower:
             return EntityMatch(extracted_name=name, status="NO_MATCH", confidence=0.0)
 
-        # 1. Exact match
+        def matched(status: str, node: dict, confidence: float) -> EntityMatch:
+            return EntityMatch(
+                extracted_name=name,
+                status=status,
+                matched_node_id=node["id"],
+                matched_label=node.get("label", ""),
+                confidence=confidence,
+            )
+
         exact_node = self._match_exact(name_lower)
         if exact_node:
-            return EntityMatch(
-                extracted_name=name,
-                status="EXACT",
-                matched_node_id=exact_node["id"],
-                matched_label=exact_node.get("label", ""),
-                confidence=1.0,
-            )
+            return matched("EXACT", exact_node, 1.0)
 
-        # 2. Alias match
         alias_node = self._match_alias(name_lower)
         if alias_node:
-            return EntityMatch(
-                extracted_name=name,
-                status="ALIAS",
-                matched_node_id=alias_node["id"],
-                matched_label=alias_node.get("label", ""),
-                confidence=0.9,
-            )
+            return matched("ALIAS", alias_node, 0.9)
 
-        # 3. Token-prefix match
-        prefix_node = self._match_token_prefix(name_lower)
-        if prefix_node:
-            return EntityMatch(
-                extracted_name=name,
-                status="FUZZY",
-                matched_node_id=prefix_node["id"],
-                matched_label=prefix_node.get("label", ""),
-                confidence=0.8,
-            )
+        token_node = self._match_token(name_lower)
+        if token_node:
+            return matched("FUZZY", token_node, 0.8)
 
-        # 4. Fuzzy match
         fuzzy_result = self._match_fuzzy(name_lower)
         if fuzzy_result:
             fuzzy_node, score = fuzzy_result
-            return EntityMatch(
-                extracted_name=name,
-                status="FUZZY",
-                matched_node_id=fuzzy_node["id"],
-                matched_label=fuzzy_node.get("label", ""),
-                confidence=score / 100.0,
-            )
+            return matched("FUZZY", fuzzy_node, score / 100.0)
 
-        return EntityMatch(
-            extracted_name=name,
-            status="NO_MATCH",
-            confidence=0.0,
-        )
+        return EntityMatch(extracted_name=name, status="NO_MATCH", confidence=0.0)
+
+    def _pick_edge(self, indices: list[int], predicate: str) -> int:
+        """Choose the most informative existing edge between a node pair.
+
+        Prefers an edge with the same predicate, then one that carries a sign,
+        then the first edge.
+        """
+        for i in indices:
+            if self.links[i].get("relation") == predicate:
+                return i
+        for i in indices:
+            if self.links[i].get("sign", 0) != 0:
+                return i
+        return indices[0]
+
+    @staticmethod
+    def derive_relation_type(existing_sign: int, new_sign: int) -> str:
+        """Classify new evidence against an existing edge by sign.
+
+        CONTRADICTS: both signed, opposite. EXTENDS: existing edge unsigned and
+        the evidence adds a direction. CONFIRMS: otherwise (same sign, or the
+        evidence is unsigned and only supports that the relationship exists).
+        """
+        if existing_sign != 0 and new_sign != 0 and existing_sign != new_sign:
+            return "CONTRADICTS"
+        if existing_sign == 0 and new_sign != 0:
+            return "EXTENDS"
+        return "CONFIRMS"
 
     def match_edge(
-        self, subject_id: str, predicate: str, object_id: str
+        self, subject_id: str, predicate: str, object_id: str, **evidence
     ) -> EdgeMatch:
         """Match an extracted relationship against existing edges.
 
-        Checks:
-        - Exact triple match (source, target, relation)
-        - Inverse triple (target, source, same_relation) with opposite sign
+        - EXISTS: an edge subject→object exists (any relation). The predicate
+          vocabularies differ (LLM verbs vs. graph relations), so the pair is
+          matched and the sign comparison decides CONFIRMS / EXTENDS /
+          CONTRADICTS.
+        - INVERSE: only object→subject exists; reported but makes no claim
+          about the existing edge.
+        - NEW: no edge between the pair.
         """
-        # 1. Exact triple match
-        key_forward = (subject_id, object_id, predicate)
-        if key_forward in self.edge_index:
-            indices = self.edge_index[key_forward]
+        forward = self.pair_index.get((subject_id, object_id))
+        if forward:
+            idx = self._pick_edge(forward, predicate)
+            link = self.links[idx]
             return EdgeMatch(
                 subject_id=subject_id,
                 predicate=predicate,
                 object_id=object_id,
                 status="EXISTS",
-                existing_edge_index=indices[0],
-                confidence=1.0,
+                existing_edge_index=idx,
+                confidence=1.0 if link.get("relation") == predicate else 0.7,
+                relation_type=self.derive_relation_type(
+                    link.get("sign", 0), evidence.get("sign", 0)
+                ),
+                **evidence,
             )
 
-        # 2. Inverse check: does (target→source, relation) exist?
-        key_inverse = (object_id, subject_id, predicate)
-        if key_inverse in self.edge_index:
-            indices = self.edge_index[key_inverse]
-            # Check sign on the existing inverse edge
-            existing_link = self.links[indices[0]]
-            existing_sign = existing_link.get("sign", 0)
+        inverse = self.pair_index.get((object_id, subject_id))
+        if inverse:
             return EdgeMatch(
                 subject_id=subject_id,
                 predicate=predicate,
                 object_id=object_id,
                 status="INVERSE",
-                existing_edge_index=indices[0],
+                existing_edge_index=inverse[0],
                 confidence=0.8,
+                **evidence,
             )
 
         return EdgeMatch(
@@ -362,6 +399,7 @@ class EntityMatcher:
             object_id=object_id,
             status="NEW",
             confidence=0.0,
+            **evidence,
         )
 
     def match_batch(
@@ -388,6 +426,10 @@ class EntityMatcher:
                 if not ent_name or ent_name in name_to_node:
                     continue
                 match = self.match_entity(ent_name)
+                match.entity_type = _field(ent, "entity_type", "")
+                match.compartment = _field(ent, "compartment", "")
+                match.source_pmid = _field(extraction, "pmid", "")
+                match.source_doi = _field(extraction, "doi", "")
                 name_to_node[ent_name] = match
                 entity_matches.append(match)
 
@@ -404,13 +446,18 @@ class EntityMatcher:
 
                 if not subj_match or not obj_match:
                     continue
-                if subj_match.status == "NO_MATCH" or obj_match.status == "NO_MATCH":
+                if not subj_match.matched_node_id or not obj_match.matched_node_id:
                     continue
 
                 edge = self.match_edge(
                     subj_match.matched_node_id,
                     predicate,
                     obj_match.matched_node_id,
+                    sign=_field(rel, "sign", 0),
+                    evidence_quote=_field(rel, "evidence_quote", ""),
+                    source_pmid=_field(extraction, "pmid", ""),
+                    source_doi=_field(extraction, "doi", ""),
+                    extraction_confidence=_field(rel, "confidence", ""),
                 )
                 edge_matches.append(edge)
 
