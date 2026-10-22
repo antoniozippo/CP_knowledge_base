@@ -3,6 +3,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from pydantic import BaseModel, Field
+
 ENTITY_STATUSES = ("EXACT", "ALIAS", "FUZZY", "NO_MATCH")
 EDGE_STATUSES = ("EXISTS", "INVERSE", "NEW")
 
@@ -40,3 +42,14 @@ class EdgeMatch:
     relation_type: str = ""
     # LLM-reported confidence (HIGH | MEDIUM | LOW).
     extraction_confidence: str = ""
+
+
+class UpdateReport(BaseModel):
+    """Counts and a human-readable trail from one GraphUpdater.update() call."""
+
+    new_nodes: int = 0
+    new_edges: int = 0
+    updated_edges: int = 0
+    conflicts: int = 0
+    skipped: int = 0
+    details: list[str] = Field(default_factory=list)

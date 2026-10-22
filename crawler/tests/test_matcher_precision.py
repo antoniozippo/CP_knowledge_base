@@ -154,7 +154,7 @@ def test_real_graph_resolves_slc12a5_to_the_kcc2_transporter(real):
 @pytest.mark.parametrize("name, expected", [
     ("IL-6", "IL-6"), ("Caspase-1", "Caspase-1"), ("Nav1.7", "Nav1.7"),
     ("TNF-alpha", "Tumor Necrosis Factor"), ("TrkB receptor", "TrkB"),
-    ("RhoA", "RhoA GTPase"),
+    ("RhoA", "RhoA GTPase"), ("Kalirin", "Kalirin-7"),
 ])
 def test_real_graph_still_resolves_legitimate_names(real, name, expected):
     assert (real.match_entity(name).matched_label or "").startswith(expected)

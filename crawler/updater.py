@@ -2,102 +2,26 @@
 
 import json
 import logging
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from pydantic import BaseModel, Field
-
+from crawler.classify import (
+    COMPARTMENT_RULES,
+    ENTITY_TYPE_RULES,
+    first_match,
+    node_id_from_name,
+    normalize_label,
+)
 from crawler.conflict import ConflictManager
-from crawler.records import EdgeMatch, EntityMatch
+from crawler.records import EdgeMatch, EntityMatch, UpdateReport
 
 log = logging.getLogger(__name__)
 
-# ---------------------------------------------------------------------------
-# Regex rules ported from build_graph_v2.py
-# ---------------------------------------------------------------------------
-ENTITY_TYPE_RULES = [
-    ("channel", r"nav1\.\d|nav1\.7|trpv\d|trpa1|trpm\d|trpc\d|cav\d(\.\d)?|p2x\d|ampar|nmdar|cotransporter|transporter|ion channel|chloride channel"),
-    ("receptor", r"\breceptors?\b|trkb|trka|trkc|p75ntr|igf-?1r|tlr\d|bradykinin b\d|gar\b"),
-    ("cell_type", r"interneuron|microgli[a,e]|astrocyte|oligodendrocyte|\bsst\b|satellite glia|\bt[- ]?cells?\b|treg|neurons?\b|nociceptor|schwann|pericyte|macrophage|monocyte|neutrophil|fibroblast|keratinocyte|keratinocytes|pyramidal"),
-    ("symptom", r"allodynia|hyperalgesia|anxiety|depression[- ]like|pain behavior|hypoesthesia|paresthesia|spontaneous pain|hyperexcitabilit|burning|numbness"),
-    ("drug", r"clp257|clp290|fasudil|ana-12|xpro1595|ibuprofen|mcc950|rapamycin|minocycline|gabapentin|pregabalin|duloxetine|arn23746|vu0\d+|zoniporide|\binhibitors?\b|\bantagonists?\b|\bblockers?\b|\benhancers?\b|\bmodulators?\b"),
-    ("pathway", r"\bpathway\b|\bsignaling\b|\bcascade\b|\baxis\b"),
-    ("process", r"(osis|esis|ation|ition|sion|ance|ence)$|sensitization|phosphorylation|transcription|translation"),
-    ("structure", r"\bbbb\b|\bbscb\b|blood.brain barrier|blood.spinal|perineuronal nets?\b|\bpnns?\b|synapse|synaptic cleft|dorsal horn|lamina|myelin sheath|node of ranvier|meninges|axon|dendrite|postsynaptic density|peripheral nerve|neuroma"),
-    ("molecule", r"\b(bdnf|ngf|gdnf|igf-?1|vegf|cntf|il-?\d+|tnf[ -]?alpha?|tnf\b|cx3cl1|ccl2|cgrp|substance p|atp|mmp-?\d+|kynuren|tryptophan|serotonin|dopamine|noradrenaline|glutamate|gaba\b|endocannabinoid)\b|kinase|phosphatase|\bmrna\b|\brna\b|creb|erk|p38|jnk|nf-?kb|rock|rhoa|cofilin|gephyrin|nkcc1|slc\d+\w*|hdac\d*|sirtuin|parkin|synapsin|kalirin|tiam1|stathmin|crmp2|zfhx2|drgx\b|trkb\b|ion channel protein"),
-]
-
-COMPARTMENT_RULES = [
-    ("DRG", r"\bdrg\b|dorsal root ganglion|dorsal root ganglia"),
-    ("dorsal_horn", r"spinal|dorsal horn|lamina"),
-    ("ACC", r"\bacc\b|anterior cingulate|cingulate cortex|prefrontal cortex|cortical"),
-    ("barrier", r"\bbbb\b|\bbscb\b|blood.brain|blood.spinal|\bbarrier\b|tight junction|endothelial"),
-    ("peripheral", r"peripheral nerve|peripheral nerves|neuroma|nociceptor|\bperiphery\b|sciatic|distal axon"),
-    ("systemic", r"circulating|systemic|\bcytokines?\b|il-?\d+|tnf\b|chemokine"),
-]
-
-PAREN_RE = re.compile(r"\([^)]*\)")
-NON_WORD_RE = re.compile(r"[^\w\s]+")
-WHITESPACE_RE = re.compile(r"\s+")
-
-GENE_SYNONYMS = {"slc12a5": "kcc2"}
-ACRONYM_ALIASES = {
-    "brain derived neurotrophic factor": "bdnf",
-    "vascular endothelial growth factor a": "vegfa",
-}
-SPELLING_VARIANTS = {"isation": "ization"}
 MATCHED_ENTITY_STATUSES = ("EXACT", "ALIAS", "FUZZY")
 # New evidence never flips these verdicts; it goes to human review instead.
 PROTECTED_VALIDATION_STATUSES = ("REFUTED", "MIXED")
 
-
-# ---------------------------------------------------------------------------
-# Pydantic models
-# ---------------------------------------------------------------------------
-class UpdateReport(BaseModel):
-    new_nodes: int = 0
-    new_edges: int = 0
-    updated_edges: int = 0
-    conflicts: int = 0
-    skipped: int = 0
-    details: list[str] = Field(default_factory=list)
-
-
-# ---------------------------------------------------------------------------
-# Helpers (ported from build_graph_v2.py)
-# ---------------------------------------------------------------------------
-def _normalize_label(label: str) -> str:
-    text = PAREN_RE.sub(" ", label.lower())
-    text = NON_WORD_RE.sub(" ", text)
-    tokens = [GENE_SYNONYMS.get(t, t) for t in text.split()]
-    key = WHITESPACE_RE.sub(" ", " ".join(tokens)).strip()
-    for variant, replacement in SPELLING_VARIANTS.items():
-        key = key.replace(variant, replacement)
-    return ACRONYM_ALIASES.get(key, key)
-
-
-def _first_match(label_lower: str, rules: list[tuple[str, str]]) -> str | None:
-    for value, pattern in rules:
-        if re.search(pattern, label_lower):
-            return value
-    return None
-
-
-def _node_id_from_name(name: str) -> str:
-    """Derive a graph node ID from a human-readable entity name."""
-    norm = _normalize_label(name)
-    # collapse whitespace to underscores, strip leading/trailing underscores
-    raw = re.sub(r"\s+", "_", norm).strip("_")
-    # remove consecutive underscores
-    raw = re.sub(r"_+", "_", raw)
-    return f"CRAWLED_{raw}"
-
-
-# ---------------------------------------------------------------------------
-# GraphUpdater
-# ---------------------------------------------------------------------------
 class GraphUpdater:
     def __init__(
         self,
@@ -126,12 +50,12 @@ class GraphUpdater:
         Falls back to the *extracted_type* supplied by the LLM extraction
         step, then to 'concept' if no regex matches.
         """
-        match = _first_match(name.lower(), ENTITY_TYPE_RULES)
+        match = first_match(name.lower(), ENTITY_TYPE_RULES)
         return match or extracted_type or "concept"
 
     def _classify_compartment(self, name: str, extracted_compartment: str = "") -> str:
         """Classify compartment using regex rules from build_graph_v2.py."""
-        match = _first_match(name.lower(), COMPARTMENT_RULES)
+        match = first_match(name.lower(), COMPARTMENT_RULES)
         return match or extracted_compartment or "other"
 
     def _assign_tier(self) -> str:
@@ -146,7 +70,7 @@ class GraphUpdater:
     # ------------------------------------------------------------------
     def _find_node_by_label(self, label: str) -> Optional[dict]:
         """Find existing node by label (case-insensitive)."""
-        norm = _normalize_label(label)
+        norm = normalize_label(label)
         # Try exact normalized label match first
         if norm in self.norm_to_id:
             node_id = self.norm_to_id[norm]
@@ -174,7 +98,7 @@ class GraphUpdater:
         Node ID: derived from name (e.g., 'NewProtein' -> 'CRAWLED_NewProtein').
         Returns the new node dict.
         """
-        node_id = _node_id_from_name(name)
+        node_id = node_id_from_name(name)
 
         # Avoid duplicates
         if node_id in self.node_ids:
@@ -183,7 +107,7 @@ class GraphUpdater:
 
         now = datetime.now(timezone.utc).isoformat()
         label = name.strip()
-        norm_label = _normalize_label(label)
+        norm_label = normalize_label(label)
 
         node: dict = {
             "label": label,

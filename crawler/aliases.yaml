@@ -5,7 +5,9 @@ SLC12A5: KCC2
 SCN9A: Nav1.7
 SCN10A: Nav1.8
 A2BP1: Rbfox1
-KALRN: Kalirin-7
+KALRN:
+- Kalirin-7
+- Kalirin
 HMOX1: HO-1
 AGER: RAGE
 NOS2: iNOS

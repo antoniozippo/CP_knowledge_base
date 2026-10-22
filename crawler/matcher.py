@@ -2,126 +2,28 @@
 
 import json
 import logging
-import re
 from pathlib import Path
 from typing import Optional
 
 import yaml
 from rapidfuzz import fuzz, process
 
+from crawler.default_aliases import DEFAULT_ALIASES
 from crawler.records import EdgeMatch, EntityMatch
+from crawler.tokens import (
+    DIGITS_RE,
+    FUZZY_THRESHOLD,
+    GENERIC_TOKENS,
+    MIN_COVERAGE,
+    PAREN_GROUP_RE,
+    content_tokens,
+    distinctive_tokens,
+    is_informative,
+)
 
 logger = logging.getLogger(__name__)
 
 ALIASES_PATH = Path("crawler/aliases.yaml")
-
-_DEFAULT_ALIASES = {
-    "SLC12A5": ["KCC2"],
-    "SCN9A": ["Nav1.7"],
-    "SCN10A": ["Nav1.8"],
-    "A2BP1": ["Rbfox1"],
-    "KALRN": ["Kalirin-7", "Kalirin7"],
-    "HMOX1": ["HO-1", "Heme oxygenase-1"],
-    "AGER": ["RAGE"],
-    "NOS2": ["iNOS", "NOS2"],
-    "GJA1": ["Connexin-43", "Cx43"],
-    "CACNA1H": ["Cav3.2", "Cav3.2 T-type"],
-    "TAC1": ["Substance P", "Substance-P"],
-    "TACR1": ["NK1 Receptor", "NK1R", "NK-1"],
-    "NLRP3": ["NLRP3 inflammasome"],
-    "TNF": ["TNF-alpha", "TNFa", "TNF\u03b1"],
-    "TLR4": ["TLR4", "Toll-like receptor 4"],
-    "PTGS2": ["COX-2", "COX2"],
-    "CALCA": ["CGRP", "\u03b1-CGRP"],
-    "TRPV1": ["TRPV1", "VR1"],
-    "SCN11A": ["Nav1.9"],
-    "KCC2": ["SLC12A5", "KCC2"],
-    "RHOA": ["RhoA", "Rho-a"],
-    "ROCK1": ["ROCK", "ROCK-I"],
-    "ROCK2": ["ROCK-II"],
-    "BDNF": ["Brain-derived neurotrophic factor"],
-    "NTRK2": ["TrkB", "TrkB receptor"],
-    "GAP43": ["GAP-43", "B-50"],
-    "MBP": ["Myelin basic protein"],
-    "PLP1": ["PLP", "Proteolipid protein"],
-    "MAG": ["MAG", "Myelin-associated glycoprotein"],
-    "OMG": ["OMgp", "Oligodendrocyte myelin glycoprotein"],
-    "LINGO1": ["LINGO-1", "LRR and Ig domain-containing Nogo receptor-interacting protein 1"],
-    "RBFOX1": ["Rbfox1", "A2BP1", "Fox-1"],
-    "DRGX": ["DRGX", "DRGx", "Prdm12"],
-    "ZFHX2": ["ZFHX2"],
-    "P2RX4": ["P2X4", "P2X4R"],
-    "P2RX7": ["P2X7", "P2X7R"],
-    "PANX1": ["Pannexin-1", "Panx1"],
-    "GSDMD": ["Gasdermin D", "GSDMD"],
-    "CASP1": ["Caspase-1", "Casp1"],
-    "IL1B": ["IL-1\u03b2", "IL1beta"],
-    "CX3CR1": ["CX3CR1", "CX3C chemokine receptor 1"],
-    "CCL2": ["MCP-1", "CCL2", "Monocyte chemoattractant protein-1"],
-    "HIF1A": ["HIF-1\u03b1", "HIF1-alpha", "Hypoxia-inducible factor 1-alpha"],
-    "VEGFA": ["VEGF", "VEGF-A", "Vascular endothelial growth factor A"],
-    "EDN1": ["Endothelin-1", "ET-1"],
-    "NFE2L2": ["Nrf2", "NRF2"],
-    "PPARG": ["PPAR-\u03b3", "PPARgamma", "Peroxisome proliferator-activated receptor gamma"],
-    "CNR2": ["CB2", "CB2 receptor", "Cannabinoid receptor 2"],
-    "HDAC1": ["HDAC1"],
-    "HDAC3": ["HDAC3"],
-    "HDAC4": ["HDAC4"],
-    "STAT3": ["STAT3", "Signal transducer and activator of transcription 3"],
-    "JAK2": ["JAK2", "Janus kinase 2"],
-    "EZH2": ["EZH2", "Enhancer of zeste homolog 2"],
-    "METTL3": ["METTL3", "Methyltransferase-like 3"],
-    "BRD4": ["BRD4", "Bromodomain-containing protein 4"],
-    "RAC1": ["Rac1", "Rac1 GTPase"],
-    "CAMK2A": ["CaMKII", "CaMKII\u03b1"],
-    "DLG4": ["PSD-95", "PSD95"],
-    "ACTA1": ["Cofilin"],
-    "LIMK1": ["LIMK", "LIM kinase"],
-}
-
-
-# Words that name a class of thing rather than a specific one. They never
-# justify a merge on their own ("Zorblax-9 kinase" must not become PKC).
-GENERIC_TOKENS = frozenset({
-    "protein", "kinase", "receptor", "factor", "pathway", "signaling", "signalling",
-    "cell", "neuron", "channel", "transporter", "cotransporter", "enzyme", "gene",
-    "expression", "activation", "inhibitor", "antagonist", "agonist", "axis",
-    "cascade", "complex", "family", "level", "gtpase",
-})
-STOPWORDS = frozenset({"of", "for", "and", "the", "in", "by", "to", "with", "via", "a", "an", "on", "or", "as"})
-# Fraction of a node's head tokens the extracted name must cover to merge.
-MIN_COVERAGE = 0.6
-FUZZY_THRESHOLD = 85
-
-_GREEK = str.maketrans({
-    "\u03b1": "alpha", "\u03b2": "beta", "\u03b3": "gamma",
-    "\u03b4": "delta", "\u03ba": "kappa", "\u03bc": "mu",
-})
-_TOKEN_RE = re.compile(r"[^\W_]+")
-_PAREN_GROUP_RE = re.compile(r"\(([^)]*)\)")
-_DIGITS_RE = re.compile(r"\d+")
-
-
-def _stem(token: str) -> str:
-    if len(token) > 3 and token.endswith("s") and not token.endswith("ss"):
-        return token[:-1]
-    return token
-
-
-def _content_tokens(text: str) -> frozenset[str]:
-    """Lowercased, Greek-spelled-out, plural-stripped tokens minus stopwords."""
-    tokens = (_stem(t) for t in _TOKEN_RE.findall(text.lower().translate(_GREEK)))
-    return frozenset(t for t in tokens if t not in STOPWORDS)
-
-
-def _distinctive(text: str) -> frozenset[str]:
-    """Content tokens minus generic words."""
-    return _content_tokens(text) - GENERIC_TOKENS
-
-
-def _informative(tokens: frozenset[str]) -> bool:
-    """Enough signal to merge on; rejects empty sets and lone single letters."""
-    return sum(len(t) for t in tokens) >= 3
 
 
 def _field(obj, name: str, default):
@@ -169,8 +71,8 @@ class EntityMatcher:
         for node in self.nodes:
             label = node.get("label", "")
             head_text = label.split("(")[0].strip() or label
-            parens = [_content_tokens(g) for g in _PAREN_GROUP_RE.findall(label)]
-            self._forms[node["id"]] = (_distinctive(head_text), parens)
+            parens = [content_tokens(g) for g in PAREN_GROUP_RE.findall(label)]
+            self._forms[node["id"]] = (distinctive_tokens(head_text), parens)
 
         self.aliases = self._load_aliases()
         self._alias_groups = self._build_alias_groups()
@@ -185,8 +87,8 @@ class EntityMatcher:
             except Exception as exc:
                 logger.warning("Failed to load aliases from %s: %s", ALIASES_PATH, exc)
 
-        logger.info("Using built-in default aliases (%d entries)", len(_DEFAULT_ALIASES))
-        return dict(_DEFAULT_ALIASES)
+        logger.info("Using built-in default aliases (%d entries)", len(DEFAULT_ALIASES))
+        return dict(DEFAULT_ALIASES)
 
     def _build_alias_groups(self) -> dict[str, frozenset[str]]:
         """Map each alias name (lowercase) to its whole alias group.
@@ -232,9 +134,9 @@ class EntityMatcher:
         not an alias of RhoA). Words inside a description never match. Rank: coverage,
         then graph degree, then the shorter label.
         """
-        wanted_full = _content_tokens(name)
+        wanted_full = content_tokens(name)
         wanted = wanted_full - GENERIC_TOKENS
-        if not _informative(wanted):
+        if not is_informative(wanted):
             return []
         found = []
         for node in self.nodes:
@@ -273,12 +175,12 @@ class EntityMatcher:
         """
         if not self.norm_labels:
             return None
-        digits = _DIGITS_RE.findall(name_lower)
+        digits = DIGITS_RE.findall(name_lower)
         for label, score, _ in process.extract(
             name_lower, list(self.norm_labels), scorer=fuzz.ratio,
             score_cutoff=threshold, limit=5,
         ):
-            if _DIGITS_RE.findall(label) == digits:
+            if DIGITS_RE.findall(label) == digits:
                 return (self.norm_labels[label], score)
         return None
 
@@ -482,5 +384,5 @@ def ensure_aliases(path: Path | None = None):
     target = path or ALIASES_PATH
     if not target.exists():
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(yaml.dump(_DEFAULT_ALIASES, default_flow_style=False, sort_keys=True))
+        target.write_text(yaml.dump(DEFAULT_ALIASES, default_flow_style=False, sort_keys=True))
         logger.info("Created default aliases at %s", target)
