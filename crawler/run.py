@@ -3,6 +3,7 @@
 
 import argparse
 import json
+import subprocess
 import sys
 import time
 import logging
@@ -61,6 +62,18 @@ def build_extraction_inputs(metas: list[PaperMeta], contents: list[PaperContent]
             "content": "\n\n".join(p for p in parts if p),
         })
     return inputs
+
+
+TEST_GATE_SUITES = ["crawler/tests", "analysis/tests", "simulator/tests"]
+
+
+def run_test_gate() -> tuple[bool, str]:
+    """Run every suite the crawler's output can affect; (passed, output)."""
+    result = subprocess.run(
+        ["python3", "-m", "pytest", *TEST_GATE_SUITES, "-x", "-q"],
+        capture_output=True, text=True, timeout=600,
+    )
+    return result.returncode == 0, f"{result.stdout}\n{result.stderr}"
 
 
 def run_pipeline(args, themes=None):
@@ -125,16 +138,14 @@ def run_pipeline(args, themes=None):
             log.info(f"  Extracting from {len(theme_papers)} papers for {theme_id}")
             extracted = extract_batch(
                 theme_papers, theme_config, args.llm_endpoint, args.llm_model,
-                budget=args.budget - extractor.call_count,
+                budget=args.budget,
                 cache_dir=Path("crawler/cache"),
+                extractor=extractor,
             )
             all_extractions.extend(extracted)
         extractions = all_extractions
         log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls)")
 
-        # Mark successfully extracted PMIDs as processed (dedupe for future runs)
-        processed.update({e.pmid for e in extractions})
-        _save_processed_pmids(processed)
 
     # --- Phase 4: Match ---
     log.info("=== Phase 4: Match Against Existing Graph ===")
@@ -157,6 +168,9 @@ def run_pipeline(args, themes=None):
         )
         report = updater.update(entity_matches, edge_matches, extractions)
         updater.save()
+        # Only now are these papers safe to skip next run: their results are on disk.
+        processed = _load_processed_pmids() | {e.pmid for e in extractions}
+        _save_processed_pmids(processed)
         log.info(f"  Update: +{report.new_nodes} nodes, +{report.new_edges} edges, "
                  f"~{report.updated_edges} updated, {report.conflicts} conflicts")
 
@@ -178,13 +192,9 @@ def run_pipeline(args, themes=None):
     log.info("=== Phase 8: Run Tests ===")
     commit_enabled = not (args.dry_run or args.no_commit)
     if commit_enabled:
-        import subprocess
-        result = subprocess.run(
-            ["python3", "-m", "pytest", "simulator/tests/", "-x", "-q"],
-            capture_output=True, text=True, timeout=300,
-        )
-        if result.returncode != 0:
-            log.error(f"  Tests FAILED:\n{result.stdout}\n{result.stderr}")
+        ok, output = run_test_gate()
+        if not ok:
+            log.error(f"  Tests FAILED:\n{output}")
             log.error("  Aborting commit — fix tests first")
             return 1
         log.info("  All tests pass")
@@ -214,7 +224,6 @@ def run_pipeline(args, themes=None):
     log.info(f"  Run log: {run_log_path}")
 
     if commit_enabled:
-        import subprocess
         # Stage and commit
         subprocess.run(["git", "add", "graphify-out/graph_v2.json"], check=True)
         subprocess.run(["git", "add", "crawler/conflicts.yaml", "crawler/discovered_mesh.yaml",

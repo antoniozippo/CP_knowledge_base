@@ -184,3 +184,74 @@ def test_pipeline_records_contradiction_of_confirmed_edge_for_human_review(works
     assert [(c["new_pmid"], c["recommendation"], c["resolved"]) for c in conflicts] == [(PMID, "HUMAN_REVIEW", False)]
     run_log = json.loads(next((tmp / "crawler/logs").glob("run_*.json")).read_text())
     assert run_log["conflicts"]["human_review"] == 1
+
+
+# --- robustness: run-wide budget, PMID bookkeeping, test gate -----------------
+
+THEMES_TWO = {
+    "T01": {"name": "a", "keywords": ["x"], "mesh_terms": [], "entities": ["KCC2"]},
+    "T02": {"name": "b", "keywords": ["y"], "mesh_terms": [], "entities": ["BDNF"]},
+}
+
+
+def test_llm_budget_is_shared_across_themes(workspace, llm_calls, monkeypatch):
+    _, _ = workspace
+    metas = [_meta(pmid="1", title="t1"), _meta(pmid="2", title="t2")]
+    contents = [_content(pmid="1", abstract="KCC2 paper."), _content(pmid="2", abstract="BDNF paper.")]
+    _stub_io(monkeypatch, metas, contents)
+
+    run.run_pipeline(_args(budget=1), themes=THEMES_TWO)
+
+    assert len(llm_calls) == 1
+
+
+def test_budget_is_not_spent_twice_on_a_paper_matching_two_themes(workspace, llm_calls, monkeypatch):
+    _, _ = workspace
+    _stub_io(monkeypatch, [_meta(pmid="1")], [_content(pmid="1", abstract="KCC2 and BDNF paper.")])
+
+    run.run_pipeline(_args(budget=5), themes=THEMES_TWO)
+
+    assert len(llm_calls) == 1
+
+
+def test_pmid_is_not_marked_processed_when_the_graph_save_fails(workspace, llm_calls, monkeypatch):
+    tmp, themes = workspace
+    _stub_io(monkeypatch, [_meta()], [_content()])
+
+    def boom(self):
+        raise OSError("disk full")
+
+    monkeypatch.setattr("crawler.run.GraphUpdater.save", boom)
+    with pytest.raises(OSError):
+        run.run_pipeline(_args(), themes=themes)
+
+    assert not (tmp / "crawler/processed_pmids.json").exists()
+
+
+def test_test_gate_covers_crawler_analysis_and_simulator_suites(monkeypatch):
+    seen = {}
+
+    class Done:
+        returncode, stdout, stderr = 0, "", ""
+
+    def fake_run(cmd, **kwargs):
+        seen["cmd"] = cmd
+        return Done()
+
+    monkeypatch.setattr(run.subprocess, "run", fake_run)
+    ok, _ = run.run_test_gate()
+
+    assert ok is True
+    for suite in ("crawler/tests", "analysis/tests", "simulator/tests"):
+        assert suite in seen["cmd"]
+
+
+def test_failing_gate_aborts_before_any_git_command(workspace, llm_calls, monkeypatch):
+    _, themes = workspace
+    _stub_io(monkeypatch, [_meta()], [_content()])
+    git_calls = []
+    monkeypatch.setattr(run, "run_test_gate", lambda: (False, "1 failed"))
+    monkeypatch.setattr(run.subprocess, "run", lambda cmd, **kw: git_calls.append(cmd))
+
+    assert run.run_pipeline(_args(no_commit=False), themes=themes) == 1
+    assert git_calls == []

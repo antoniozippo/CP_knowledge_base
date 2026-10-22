@@ -304,15 +304,20 @@ def extract_batch(
     model: str,
     budget: int = 2000,
     cache_dir: Path | None = None,
+    extractor: "LLMExtractor | None" = None,
 ) -> list[ExtractionResult]:
     """Extract from a batch of papers, respecting an LLM call budget.
+
+    Pass a shared ``extractor`` to make ``budget`` apply across several
+    batches: its ``call_count`` carries over, and cache hits are free.
 
     Each paper dict should have keys: pmid, title, content.
     Theme config is a themes.yaml-style dict with a 'entities' list.
 
     Returns list of ExtractionResult for papers that produced new findings.
     """
-    extractor = LLMExtractor(endpoint=endpoint, model=model, cache_dir=cache_dir)
+    if extractor is None:
+        extractor = LLMExtractor(endpoint=endpoint, model=model, cache_dir=cache_dir)
     results: list[ExtractionResult] = []
     theme_entities = theme_config.get("entities", [])
 
