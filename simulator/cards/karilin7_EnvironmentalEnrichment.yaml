@@ -10,7 +10,7 @@ normal_role: Environmental Enrichment (Boosts ACC Kalirin-7) is a molecule locat
   0.
 pathological_rules: []
 inbound_edges:
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: upregulates
   sign: 1
   weight: 0.9

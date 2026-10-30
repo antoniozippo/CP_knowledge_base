@@ -17,7 +17,7 @@ pathological_rules:
   direction: down
   magnitude_hint: null
 inbound_edges:
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: dephosphorylates_and_degrades
   sign: -1
   weight: 0.9

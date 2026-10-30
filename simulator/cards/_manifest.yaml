@@ -1,15 +1,15 @@
-generated_at_utc: '2026-10-30T15:22:15Z'
-input_graph_sha256: c62b24d067435f895b9b7a5812704941f703488ce34041c5a07e936a55acf4a4
+generated_at_utc: '2026-10-30T15:32:38Z'
+input_graph_sha256: 95d2b768e097742b95aa6f9dbf07868de7dec7e801e9f62a9a36f6eb567a1cb4
 counts_by_tier:
   HUB: 9
-  MID: 123
+  MID: 124
   PERIPHERAL: 240
 counts_by_entity_type:
   cell_type: 18
   channel: 34
   concept: 114
   drug: 46
-  molecule: 69
+  molecule: 70
   pathway: 15
   process: 10
   receptor: 51
@@ -705,7 +705,7 @@ cards:
   sha256: e891ea65fabe4b4ebe5fe80d75c9d2ce9ed4c8005dd694ac72e5b43d85ea3228
 - id: karilin7_AAV_Kalirin7
   file: karilin7_AAV_Kalirin7.yaml
-  sha256: 609da94a40ed9560a7f5b462914c5cb5611217418d1ed338fa5d3a5c2a72d1cc
+  sha256: 67dd8cd3cf838bb351a1a635c768940da22066202d72501e2eb2901dad708b39
 - id: karilin7_ACC
   file: karilin7_ACC.yaml
   sha256: 60a05de8277546ebf2a78f13570a14b372a1ecb4d302e04ecdc2c3bd816e696e
@@ -723,13 +723,13 @@ cards:
   sha256: 3cb9e0bf5f4b771a233144251949fcee274d80c3000383b0f03b06017848dc17
 - id: karilin7_CCI
   file: karilin7_CCI.yaml
-  sha256: 83aaaa769e53d379e0492d5d734efbb7bb11cdce8d8cf39704e2079ceb4649f0
+  sha256: b4abe1b42413ff24facc5537689b8ea4c6fbba40ee0d5951c57747a030d290d0
 - id: karilin7_CEBPbeta
   file: karilin7_CEBPbeta.yaml
   sha256: 615732f652e868f6b152e348abf0ac1a5056c52910a5dcb771a0a3d314176166
 - id: karilin7_Calcineurin
   file: karilin7_Calcineurin.yaml
-  sha256: f4934be7a1e5896e38a5486afa6911fc347eac2294e79d3a930f0e312b1158c5
+  sha256: 2b30b5d184b1e87dd19c7f9eb92a3b9dec49443a18fd53abbbf32fbf4942edf6
 - id: karilin7_Cofilin
   file: karilin7_Cofilin.yaml
   sha256: b0137cd3c491e827726adb1e6cb64decd98655ee9f6d546f514f82a657978299
@@ -738,7 +738,7 @@ cards:
   sha256: 992b64a8e023200b3086ad50208f48b8b6c02f71706362b9802a82e6ab460723
 - id: karilin7_DBS_ACC
   file: karilin7_DBS_ACC.yaml
-  sha256: 4809eb030cc0030a8b87480c95a78d21f86103180e5043f83e4e21d042d9401b
+  sha256: 0bc01afa587634d05605212c0f384599f7f424569a56ed77ac2ed7209084b574
 - id: karilin7_DH1_domain
   file: karilin7_DH1_domain.yaml
   sha256: 4c71cdc40f3bbc7b96bd54d3f33b529ef0f80c306236bb7bc4e75c57da76f09a
@@ -747,10 +747,10 @@ cards:
   sha256: 5d6b738628ce7f14f693639ec88a018d05bfb20072945b2a99c1277d025e4c13
 - id: karilin7_DendriticSpineLoss
   file: karilin7_DendriticSpineLoss.yaml
-  sha256: 3b9b54f61ffcb99fab17ae0e822c9524bbfa4165609418dba45bbb949aae7d3e
+  sha256: d674828e5517fe2f43c5c493550604a2911154e471e04796614aed3c63b607fe
 - id: karilin7_EnvironmentalEnrichment
   file: karilin7_EnvironmentalEnrichment.yaml
-  sha256: f01018129be759705802f523fe9661680d9bc76ef42940acb71924f3ac7f271e
+  sha256: 98dc7ad82d7e057f96914fbbd0265aaeed93fdf73fe1b6cca96f899d2230f757
 - id: karilin7_FK506
   file: karilin7_FK506.yaml
   sha256: 7d0c19c7da3f8dc4718ed7936996e46c525cdc2ae386a8d9db6b41ed0b514be7
@@ -762,7 +762,10 @@ cards:
   sha256: b9a22676805e8920c383328c8a3d994927dbbc285d8c052af45038757476c110
 - id: karilin7_Kalirin7
   file: karilin7_Kalirin7.yaml
-  sha256: 838163cac5cf7afc90a64367653c7928c529dd56c3ef88cb76df1ef1c7630fe0
+  sha256: 5ef17f6e05c8eb8c7187ccabc901593d32592422e69a561893f31abc65cc192f
+- id: karilin7_Kalirin7_ACC
+  file: karilin7_Kalirin7_ACC.yaml
+  sha256: d1109d354f8417c7c1e7b0dd887de1bb4f23e65561a283929418166b7fe7938b
 - id: karilin7_Kalirin7_KO
   file: karilin7_Kalirin7_KO.yaml
   sha256: 8f7cab57b66fa509e270382024467a9e0505e9c215f117ebbc7dec4608b6cd40
@@ -777,7 +780,7 @@ cards:
   sha256: 77e11a2e326006da474c92e6363d7e4fbaefbdbafef222516f41d55e9a2d5ae4
 - id: karilin7_NMDAR
   file: karilin7_NMDAR.yaml
-  sha256: 93a6c929fa46907637e45fbfe6ac8c5de6f208c03f115c857cbc6f75fdfac09e
+  sha256: 7b4888910a4624a5912a0c1ce507e4d748b74ba31c65e5c60ba4969617f7c9a0
 - id: karilin7_NSC23766
   file: karilin7_NSC23766.yaml
   sha256: b7eb9c1887e7edeebbfd5c5c771dd84d9715d74bc8b17ae93ec1cd6b94415aee
@@ -789,7 +792,7 @@ cards:
   sha256: 1a40c86d3c1b24b1e910fe2b5315b95c0cc40c0786ce3331c9268fed681d39f4
 - id: karilin7_PainRelatedAnxiety
   file: karilin7_PainRelatedAnxiety.yaml
-  sha256: 6bc66a72ba594e1e4d8389f7df1c5db1bc9c1fc6705b4084d3636733a86f711e
+  sha256: 2e74134317e99e94b092d3136f4ca0db6b0e3835ab7f5a5ed73a3d67b67aea63
 - id: karilin7_Rac1
   file: karilin7_Rac1.yaml
   sha256: a4a482238f34c05e6574aa53d9d07991f4461b8f35b49cf1b466819ae543e473
@@ -801,7 +804,7 @@ cards:
   sha256: ef0741ed01a154ce610ab633861b1447c9e65e2fb2c562d91c6ae7382f00dbc8
 - id: karilin7_SNI
   file: karilin7_SNI.yaml
-  sha256: deb084f2cae8fe1ba2fdb9b5d771814e6b36c63bbda60c95535f542f3725c037
+  sha256: 47d707ed75125e7d9782a80a271880e6f8522082dcc0098c17fcc777493c7163
 - id: karilin7_SexDifferences
   file: karilin7_SexDifferences.yaml
   sha256: 3b21ae0bff887a42fb64c32acd83f340cb62d5c128a2247b724ffe8dfa7a7a89
@@ -819,7 +822,7 @@ cards:
   sha256: 766d9e005d244713c330b53f23c9c79282acbc313e3d7754e4e14c375ee3aeb5
 - id: karilin7_shRNA_Kalirin7
   file: karilin7_shRNA_Kalirin7.yaml
-  sha256: f5b6c0f5d0f2acb4628ac29ab94629482f12422b707cd3645190e0401aa37f53
+  sha256: 16fec5bdf7bb76140b696d384dc0ee998276e87a30cbb24f23c2f7b1a0946188
 - id: kcc2enhancers_arn23746
   file: kcc2enhancers_arn23746.yaml
   sha256: 4c1dad455bd7e89d4b611e9634a63ca3dad30c0b732a06f906758507d57e6b45
@@ -1132,7 +1135,7 @@ cards:
 - id: wnt_wnt
   file: wnt_wnt.yaml
   sha256: 91f6343dcbcbfc44f6968581f8a49fd29da3b9da9ea3aa12d19a2d10dafc3c1b
-card_set_hash: 63dbd55f0e933191e7ec762e47d3ba146a00942c2ffaef22e4b719cdb31ae28f
+card_set_hash: 971af6f74c3f15027d43aee6a7d6e4e4f32b846b36cb3f740e50102993227025
 dropped_refuted_rules: 8
 mixed_annotated: 5
 unresolved_endpoint_drops: 27

@@ -9,7 +9,7 @@ normal_role: AAV-Kalirin-7 (Gene Therapy, ACC-Targeted) is a molecule located in
   Baseline activity level 0.50. It receives 1 regulatory influences and exerts 0.
 pathological_rules: []
 inbound_edges:
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: delivers_and_restores
   sign: 1
   weight: 0.9

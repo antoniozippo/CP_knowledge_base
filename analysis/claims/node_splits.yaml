@@ -1,0 +1,39 @@
+# Curated node splits applied to graphify-out/graph_v2.json by
+# analysis/scripts/split_nodes.py.
+#
+# A split creates `new_node` from a copy of `source` and moves to it every
+# link between `source` and each id in `move_with` (both directions).
+# Links to endpoints not listed stay on `source`. Used where one graph node
+# conflates biologically distinct pools whose dynamics oppose each other.
+
+- source: karilin7_Kalirin7
+  new_node:
+    id: karilin7_Kalirin7_ACC
+    label: ACC Kalirin-7 (Layer II/III Pyramidal Neurons)
+    compartment: ACC
+  source_ref: 'theme_10#F10.1'
+  rationale: >-
+    One Kalirin-7 node carried both the spinal pool (the only role with
+    primary pain literature: up after injury, pronociceptive; theme_10
+    F10.1) and the dossier's ACC pool (loss drives spine loss and
+    pain-related anxiety). With the corrected -1 loss_causes signs, the
+    injury-driven spinal rise suppressed anxiety. The ACC-specific edges
+    move to their own node; the spinal node keeps its id and label, so
+    crawler matching, scenarios and reports are unchanged.
+  move_with:
+    # ACC dendritic spines and pain-related anxiety (dossier sections 2-3)
+    - karilin7_PainRelatedAnxiety
+    - karilin7_DendriticSpineLoss
+    - karilin7_ACC
+    # ACC downregulation narrative (dossier section 1; REFUTED / no source)
+    - karilin7_NMDAR
+    - karilin7_Calcineurin
+    - karilin7_SNI
+    - karilin7_CCI
+    - karilin-7_AccDownregulationRefuted
+    # ACC-targeted interventions and ACC-specific observations
+    - karilin7_AAV_Kalirin7
+    - karilin7_shRNA_Kalirin7
+    - karilin7_EnvironmentalEnrichment
+    - karilin7_DBS_ACC
+    - karilin7_SexDifferences

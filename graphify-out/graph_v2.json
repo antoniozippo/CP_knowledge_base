@@ -9145,6 +9145,25 @@
       "entity_type": "drug",
       "compartment": "systemic",
       "tier": "peripheral"
+    },
+    {
+      "label": "ACC Kalirin-7 (Layer II/III Pyramidal Neurons)",
+      "file_type": "document",
+      "source_file": "karilin-7.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 5,
+      "norm_label": "acc kalirin-7 (layer ii/iii pyramidal neurons)",
+      "id": "karilin7_Kalirin7_ACC",
+      "merged_from": [],
+      "entity_type": "molecule",
+      "compartment": "ACC",
+      "tier": "mid",
+      "split_from": "karilin7_Kalirin7",
+      "split_source_ref": "theme_10#F10.1"
     }
   ],
   "links": [
@@ -17611,7 +17630,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_ACC",
       "sign": 0
     },
@@ -17711,7 +17730,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_Calcineurin",
       "sign": -1,
       "validation_status": "NO_EVIDENCE_FOUND"
@@ -17723,7 +17742,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_NMDAR",
       "sign": -1,
       "validation_status": "NO_EVIDENCE_FOUND"
@@ -17735,7 +17754,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_AAV_Kalirin7",
       "sign": 1,
       "validation_status": "NO_EVIDENCE_FOUND"
@@ -17747,7 +17766,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_shRNA_Kalirin7",
       "sign": -1,
       "validation_status": "NO_EVIDENCE_FOUND"
@@ -17771,7 +17790,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_EnvironmentalEnrichment",
       "sign": 1,
       "validation_status": "EXTENDED"
@@ -17783,7 +17802,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_DBS_ACC",
       "sign": 1,
       "validation_status": "NO_EVIDENCE_FOUND"
@@ -17795,7 +17814,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_PainRelatedAnxiety",
       "sign": -1,
       "validation_status": "EXTENDED"
@@ -17807,7 +17826,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_DendriticSpineLoss",
       "sign": -1,
       "validation_status": "CONFIRMED"
@@ -17819,7 +17838,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_SNI",
       "sign": -1,
       "validation_status": "REFUTED"
@@ -17831,7 +17850,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_CCI",
       "sign": -1,
       "validation_status": "REFUTED"
@@ -17843,7 +17862,7 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_SexDifferences",
       "sign": 0
     },
@@ -18122,7 +18141,7 @@
       "source_file": "karilin-7.md",
       "source_location": "### 1. Injury‑Induced Downregulation of Kalirin‑7 in the ACC",
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_ACC",
       "sign": 0
     },
@@ -18133,7 +18152,7 @@
       "source_file": "karilin-7.md",
       "source_location": "### 2. Consequent Rac1 Hypoactivity and Actin Disruption",
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_DendriticSpineLoss",
       "sign": -1,
       "validation_status": "CONFIRMED"
@@ -18145,7 +18164,7 @@
       "source_file": "karilin-7.md",
       "source_location": "### 3. Dissociation of Emotional and Sensory Pain Components",
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
+      "source": "karilin7_Kalirin7_ACC",
       "target": "karilin7_PainRelatedAnxiety",
       "sign": -1,
       "validation_status": "EXTENDED"
@@ -19091,7 +19110,7 @@
       "source_location": "Validation 2026 (refutation documentation node)",
       "weight": 1.0,
       "source": "karilin-7_AccDownregulationRefuted",
-      "target": "karilin7_Kalirin7",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": 0
     },
     {

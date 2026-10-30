@@ -9,7 +9,7 @@ normal_role: Chronic Constriction Injury (CCI) Model is a concept located in oth
   Baseline activity level 0.50. It receives 1 regulatory influences and exerts 0.
 pathological_rules: []
 inbound_edges:
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: induces_downregulation
   sign: -1
   weight: 0.9

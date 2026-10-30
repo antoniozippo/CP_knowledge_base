@@ -105,13 +105,31 @@ def resolve_label_ids(label, index):
     return resolved
 
 
-def prepare_edge_claims(claims, index):
-    """Pre-resolve edge-claim endpoint labels into a predicate-keyed lookup."""
+def split_children_of(nodes):
+    """source id -> ids of nodes split from it (analysis/scripts/split_nodes.py)."""
+    children = defaultdict(set)
+    for node in nodes:
+        if node.get("split_from"):
+            children[node["split_from"]].add(node["id"])
+    return children
+
+
+def prepare_edge_claims(claims, index, split_children=None):
+    """Pre-resolve edge-claim endpoint labels into a predicate-keyed lookup.
+
+    A claim naming a node also names the nodes split from it, so its
+    evidence follows each link to whichever node now carries it.
+    """
+    split_children = split_children or {}
+
+    def expand(ids):
+        return ids.union(*(split_children.get(i, set()) for i in ids))
+
     prepared = defaultdict(list)
     edges = sorted((c for c in claims if c.get("kind") == "edge"), key=lambda c: c.get("id", ""))
     for claim in edges:
-        subject_ids = resolve_label_ids(claim.get("subject", ""), index)
-        object_ids = resolve_label_ids(claim.get("object", ""), index)
+        subject_ids = expand(resolve_label_ids(claim.get("subject", ""), index))
+        object_ids = expand(resolve_label_ids(claim.get("object", ""), index))
         if not subject_ids or not object_ids:
             continue
         prepared[claim.get("predicate")].append(
@@ -508,7 +526,7 @@ def build_cards(graph, claims, verdicts, *, hub_enrich=False, vault_dir=None,
         outbound_by_source[link["source"]].append(link)
 
     index = build_label_index(nodes)
-    prepared_claims = prepare_edge_claims(claims, index)
+    prepared_claims = prepare_edge_claims(claims, index, split_children_of(nodes))
     verdict_map = build_verdict_map(verdicts)
     endpoint_ctx = build_endpoint_indexes(nodes_by_id)
 

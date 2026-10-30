@@ -10,7 +10,7 @@ normal_role: Pain-Related Anxiety (ACC Kalirin-7 Dependent) is a symptom located
   0.
 pathological_rules: []
 inbound_edges:
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: loss_causes
   sign: -1
   weight: 0.9

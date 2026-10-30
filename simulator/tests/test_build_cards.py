@@ -604,3 +604,20 @@ def test_parallel_same_sign_edges_merged_keeping_max_weight():
         ("k7", "rationale_for", 1, 0.9),
         ("k7", "inhibits", -1, 0.5),
     ]
+
+
+def test_claims_follow_links_onto_split_nodes():
+    nodes = [
+        {"id": "k", "label": "Kalirin-7"},
+        {"id": "k_acc", "label": "ACC Kalirin-7", "split_from": "k"},
+        {"id": "anx", "label": "Anxiety"},
+        {"id": "rac1", "label": "Rac1"},
+    ]
+    claims = [
+        {"id": "EC-1", "kind": "edge", "subject": "Kalirin-7", "predicate": "loss_causes", "object": "Anxiety"},
+        {"id": "EC-2", "kind": "edge", "subject": "Kalirin-7", "predicate": "activates", "object": "Rac1"},
+    ]
+    prepared = bc.prepare_edge_claims(claims, bc.build_label_index(nodes), bc.split_children_of(nodes))
+    assert bc.matching_claim_ids(prepared, "loss_causes", "k_acc", "anx") == ["EC-1"]
+    assert bc.matching_claim_ids(prepared, "activates", "k", "rac1") == ["EC-2"]
+    assert bc.matching_claim_ids(prepared, "activates", "rac1", "anx") == []

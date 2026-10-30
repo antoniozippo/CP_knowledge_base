@@ -16,7 +16,7 @@ inbound_edges:
   weight: 0.5
   validation_status: EXTENDED
   neutral_ok: false
-- source_id: karilin7_Kalirin7
+- source_id: karilin7_Kalirin7_ACC
   relation: loss_causes
   sign: -1
   weight: 0.9

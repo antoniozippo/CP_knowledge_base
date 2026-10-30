@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-10-30T15:22:15Z
+generated: 2026-10-30T15:32:38Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -96,42 +96,19 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 5
 - proposed_normal_role: <LLM_ENRICH>
-- pathological rules (16):
+- pathological rules (6):
   - `RULE-karilin7_Kalirin7-01` [up] Kalirin-7 (GEF for Rac1/RhoG) activates GEF Rac1 GTPase
     - claim_refs: EC-0052 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-02` [up] Kalirin-7 (GEF for Rac1/RhoG) activates GEF RhoG GTPase
     - claim_refs: EC-0053 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-03` [up] Kalirin-7 (GEF for Rac1/RhoG) initiates Rac1-PAK-LIMK-Cofilin Actin Remodelling Pathway
     - claim_refs: EC-0060 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-04` [down] Kalirin-7 (GEF for Rac1/RhoG) dephosphorylates and degrades Calcineurin (Ca2+-Dependent Kalirin-7 Phosphatase)
-    - claim_refs: EC-0055 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-05` [down] Kalirin-7 (GEF for Rac1/RhoG) downregulates via calcineurin NMDAR (ACC Kalirin-7 Downregulation Driver)
-    - claim_refs: EC-0056 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-06` [up] Kalirin-7 (GEF for Rac1/RhoG) delivers and restores AAV-Kalirin-7 (Gene Therapy, ACC-Targeted)
-    - claim_refs: EC-0054 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-07` [down] Kalirin-7 (GEF for Rac1/RhoG) knocks down shRNA Kalirin-7 Knockdown (ACC)
-    - claim_refs: EC-0061 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-08` [down] Kalirin-7 (GEF for Rac1/RhoG) genetic deletion Kalirin-7 Global Knockout Mouse
+  - `RULE-karilin7_Kalirin7-04` [down] Kalirin-7 (GEF for Rac1/RhoG) genetic deletion Kalirin-7 Global Knockout Mouse
     - claim_refs: EC-0057 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-09` [up] Kalirin-7 (GEF for Rac1/RhoG) upregulates Environmental Enrichment (Boosts ACC Kalirin-7)
-    - claim_refs: EC-0068 (EXTENDED)
-  - `RULE-karilin7_Kalirin7-10` [up] Kalirin-7 (GEF for Rac1/RhoG) normalizes signaling Deep Brain Stimulation of ACC
-    - claim_refs: EC-0064 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-11` [down] Kalirin-7 (GEF for Rac1/RhoG) loss causes Pain-Related Anxiety (ACC Kalirin-7 Dependent)
-    - claim_refs: EC-0063 (EXTENDED)
-  - `RULE-karilin7_Kalirin7-12` [down] Kalirin-7 (GEF for Rac1/RhoG) loss causes Dendritic Spine Loss (ACC Layer II/III Pyramidal)
-    - claim_refs: EC-0062 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-15` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
+  - `RULE-karilin7_Kalirin7-05` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
     - claim_refs: EC-0067 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-16` [down] Kalirin-7 (GEF for Rac1/RhoG) rationale for Dendritic Spine Loss (ACC Layer II/III Pyramidal)
-    - claim_refs: EC-0065 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-17` [down] Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC Kalirin-7 Dependent)
-    - claim_refs: EC-0066 (EXTENDED)
-  - `RULE-karilin7_Kalirin7-18` [up] Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7 Role
+  - `RULE-karilin7_Kalirin7-06` [up] Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7 Role
     - claim_refs: (none)
-- dropped candidate rules (all refs REFUTED):
-  - `RULE-karilin7_Kalirin7-13` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Spared Nerve Injury (SNI) Model — refs: EC-0059 (REFUTED)
-  - `RULE-karilin7_Kalirin7-14` [down] Kalirin-7 (GEF for Rac1/RhoG) induces downregulation Chronic Constriction Injury (CCI) Model — refs: EC-0058 (REFUTED)
 
 ## rage_rage (RAGE (Receptor for Advanced Glycation End-products / AGER))
 
