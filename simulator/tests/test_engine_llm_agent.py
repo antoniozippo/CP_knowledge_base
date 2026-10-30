@@ -4,6 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from simulator.engine.llm_agent import (
+    CLIENT_TIMEOUT_S,
     DeltaCache,
     OpenCodeClient,
     build_prompt,
@@ -70,7 +71,7 @@ def test_client_invokes_opencode_run_subprocess(monkeypatch):
     out = client.complete("MYPROMPT")
     assert out == "out"
     assert seen["cmd"] == ["/fake/opencode", "run", "--format", "default", "MYPROMPT"]
-    assert seen["timeout"] == 120
+    assert seen["timeout"] == CLIENT_TIMEOUT_S
 
 
 def test_client_raises_on_nonzero_exit(monkeypatch):
@@ -168,6 +169,22 @@ def test_llm_next_state_none_on_garbage_or_invalid_ranges():
         '{"new_state": 0.5, "rationale": "x"}',
     ]:
         assert llm_next_state(make_card(), [], 0.5, Epoch.INITIATION, 0, FakeClient(bad)) is None
+
+
+def test_refs_must_come_from_the_card():
+    fabricated = '{"new_state": 0.5, "rationale": "x", "refs": ["RULE-tnf_hub-01", "EC-9999"]}'
+    assert llm_next_state(make_card(), [], 0.5, Epoch.INITIATION, 0, FakeClient(fabricated)) is None
+    claim = '{"new_state": 0.5, "rationale": "x", "refs": ["EC-0001"]}'
+    assert llm_next_state(make_card(), [], 0.5, Epoch.INITIATION, 0, FakeClient(claim)) is not None
+
+
+def test_empty_refs_accepted_only_for_rule_less_card():
+    ruleless = make_card().model_copy(
+        update={"pathological_rules": [], "rule_gap_reason": "none found"}
+    )
+    empty = '{"new_state": 0.5, "rationale": "x", "refs": []}'
+    delta = llm_next_state(ruleless, [], 0.5, Epoch.INITIATION, 0, FakeClient(empty))
+    assert delta is not None and delta.refs == ["LLM_NO_REFS"]
 
 
 def test_second_identical_call_hits_cache_and_skips_client():

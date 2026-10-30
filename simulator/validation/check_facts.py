@@ -66,9 +66,11 @@ class FakeLLMClient:
 
     def complete(self, prompt: str) -> str:
         self.calls += 1
-        return (
-            '{"new_state": 0.85, "rationale": "fake client deterministic response", '
-            '"refs": ["fake-ref"]}'
+        # cite the card's first rule, as a valid response must (none if rule-less)
+        rule = re.search(r"^- (RULE-\S+?):", prompt, re.MULTILINE)
+        refs = [rule.group(1)] if rule else []
+        return json.dumps(
+            {"new_state": 0.85, "rationale": "fake client deterministic response", "refs": refs}
         )
 
 

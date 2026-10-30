@@ -211,7 +211,16 @@ def _validated_delta(card: AgentCard, tick: int, delta_dict: dict) -> StateDelta
         raise ValueError("rationale must be a string")
     if not isinstance(refs, list) or not all(isinstance(r, str) for r in refs):
         raise ValueError("refs must be a list of strings")
+    citable = {rule.rule_id for rule in card.pathological_rules} | {
+        claim for rule in card.pathological_rules for claim in rule.claim_refs
+    }
+    unknown = sorted(set(refs) - citable)
+    if unknown:
+        raise ValueError(f"refs not on this card: {', '.join(unknown)}")
     if not refs:
+        # only a card with nothing to cite may answer without refs
+        if citable:
+            raise ValueError("refs empty although the card has citable rules")
         refs = ["LLM_NO_REFS"]
     return StateDelta(
         agent_id=card.id,
