@@ -587,7 +587,7 @@ def render_markdown(results: list[FactResult]) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run the facts validation harness")
-    parser.add_argument("--cards", default="simulator/agent_cards")
+    parser.add_argument("--cards", default="simulator/cards")
     parser.add_argument("--scenarios-dir", default="simulator/scenarios")
     parser.add_argument("--facts", default=str(FACTS_YAML))
     parser.add_argument("--out-dir", default=None, help="optional per-run output directory")

@@ -5,7 +5,7 @@ One agent per knowledge-graph entity. Agents perceive signed influence packets f
 ## Architecture
 
 ```
-graph_v2.json ──build_cards.py──> agent_cards/*.yaml (254 cards)
+graph_v2.json ──build_cards.py──> cards/*.yaml (372 cards)
                                         │
 scenarios/*.yaml ──────┐                v
                        └────> engine/orchestrator.py  <── engine/rule_fallback.py (every agent)

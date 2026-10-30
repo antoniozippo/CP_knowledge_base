@@ -16,7 +16,7 @@ from simulator.validation.pilot_acceptance import (
     run_pilot,
 )
 
-CARDS_DIR = Path(__file__).resolve().parents[1] / "agent_cards"
+CARDS_DIR = Path(__file__).resolve().parents[1] / "cards"
 SCENARIOS_DIR = Path(__file__).resolve().parents[1] / "scenarios"
 
 

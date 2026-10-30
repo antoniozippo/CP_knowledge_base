@@ -17,7 +17,7 @@ from simulator.reports.generate_report import (
 )
 
 REAL_RUN = Path(__file__).resolve().parents[1] / "reports" / "runs" / "pilot_acceptance" / "sni_28d"
-CARDS_DIR = Path(__file__).resolve().parents[1] / "agent_cards"
+CARDS_DIR = Path(__file__).resolve().parents[1] / "cards"
 
 SECTIONS_SINGLE = [
     "## 1. Run Overview",

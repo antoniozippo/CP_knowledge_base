@@ -17,7 +17,7 @@ from simulator.validation.check_facts import (
     run_checks,
 )
 
-CARDS_DIR = Path(__file__).resolve().parents[1] / "agent_cards"
+CARDS_DIR = Path(__file__).resolve().parents[1] / "cards"
 SCENARIOS_DIR = Path(__file__).resolve().parents[1] / "scenarios"
 FACTS_YAML = Path(__file__).resolve().parents[1] / "validation" / "facts.yaml"
 REPO_ROOT = Path(__file__).resolve().parents[2]

@@ -20,7 +20,7 @@ from simulator.schemas import (
     ScenarioConfig,
 )
 
-CARDS_DIR = Path(__file__).resolve().parents[1] / "agent_cards"
+CARDS_DIR = Path(__file__).resolve().parents[1] / "cards"
 
 
 def fixture_cards():

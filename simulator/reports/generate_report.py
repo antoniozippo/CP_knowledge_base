@@ -7,7 +7,7 @@ deterministic markdown report with matplotlib trajectory plots.
 CLI:
     python3 -m simulator.reports.generate_report --run <run_dir> \
         [--compare <run_dir2>] --out <report.md> [--plots-dir <dir>] \
-        [--cards <agent_cards_dir>]
+        [--cards <cards_dir>]
 
 Determinism: all text output uses fixed %.4f float formatting and sorted
 iteration; rules-only engine runs are byte-identical across reruns. The
@@ -44,7 +44,7 @@ STATE_EPS = 1e-9
 OSC_WINDOW_TICKS = 10
 OSC_MIN_FLIPS = 4
 TOP_EVENTS = 10
-DEFAULT_CARDS_DIR = "simulator/agent_cards"
+DEFAULT_CARDS_DIR = "simulator/cards"
 SPARK_CHARS = "▁▂▃▄▅▆▇█"
 
 

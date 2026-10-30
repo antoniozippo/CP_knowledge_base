@@ -9,7 +9,7 @@ Part A  deterministic assembly: one AgentCard per document-type node, with
 Part B  LLM enrichment for HUB tier only, gated behind --hub-enrich and
         delegated to enrich_hub_card() which shells out to the `opencode`
         CLI; every failure degrades to template text.
-Part C  outputs: simulator/agent_cards/<safe_id>.yaml, _manifest.yaml with
+Part C  outputs: simulator/cards/<safe_id>.yaml, _manifest.yaml with
         deterministic hashes, and a hub review digest markdown report.
 
 Claim matching replicates the label normalizer of
@@ -36,7 +36,7 @@ from simulator.schemas import AgentCard, AgentTier, DynamicsRule, InfluenceEdge
 DEFAULT_GRAPH = Path("graphify-out/graph_v2.json")
 DEFAULT_CLAIMS = Path("analysis/claims/claims.json")
 DEFAULT_VERDICTS = Path("analysis/claims/verdicts.json")
-DEFAULT_OUTPUT_DIR = Path("simulator/agent_cards")
+DEFAULT_OUTPUT_DIR = Path("simulator/cards")
 DEFAULT_REPORT = Path("simulator/reports/card_review_hubs.md")
 
 CONFIDENCE_WEIGHTS = {
