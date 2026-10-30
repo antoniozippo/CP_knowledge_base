@@ -1,6 +1,12 @@
 # Theme Registry for Automated Literature Crawler
 # Each theme defines search queries, key entities, and MeSH terms
 # for periodic PubMed/PMC crawling.
+#
+# mesh_terms must be real MeSH descriptor names (PubMed silently returns
+# nothing for an unknown one; search.py now logs a warning). Verified
+# 2026-10-30 against eutils: e.g. neuropathic pain is "Neuralgia", ACC is
+# "Gyrus Cinguli", DRG is "Ganglia, Spinal". Every query is ANDed with
+# search.PAIN_FILTER unless a theme sets scope_filter.
 
 T01:
   name: spinal_disinhibition_KCC2_PV_SST
@@ -14,9 +20,9 @@ T01:
     - "ARN23746 KCC2 potentiator neuropathic pain"
     - "STEP61 KCC2 human spinal cord"
   mesh_terms:
-    - "Potassium Chloride Symporters"
+    - "K Cl- Cotransporters"
     - "Interneurons"
-    - "Neuropathic Pain"
+    - "Neuralgia"
     - "Chlorides"
     - "GABAergic Neurons"
   entities:
@@ -42,10 +48,10 @@ T02:
     - "MMP-9 biomarker neuropathic pain"
   mesh_terms:
     - "Matrix Metalloproteinase 9"
-    - "Perineuronal Net"
+    - "Perineuronal Nets"
     - "Extracellular Matrix"
     - "Chondroitin Sulfate Proteoglycans"
-    - "Neuropathic Pain"
+    - "Neuralgia"
   entities:
     - MMP-9
     - PNN
@@ -67,11 +73,11 @@ T03:
     - "TREM2 microglia neuropathic pain"
     - "P2X7 pannexin-1 pyroptosis pain"
   mesh_terms:
-    - "NLRP3 Inflammasome"
+    - "NLR Family, Pyrin Domain-Containing 3 Protein"
     - "Tumor Necrosis Factor-alpha"
     - "Microglia"
     - "Toll-Like Receptor 4"
-    - "Neuropathic Pain"
+    - "Neuralgia"
   entities:
     - NLRP3
     - TNF-alpha
@@ -97,8 +103,8 @@ T04:
     - "Hypoxia-Inducible Factor 1"
     - "Blood-Brain Barrier"
     - "Vascular Endothelial Growth Factor A"
-    - "Neuropathic Pain"
-    - "Neurovascular Unit"
+    - "Neuralgia"
+    - "Endothelial Cells"
   entities:
     - HIF1-alpha
     - VEGF
@@ -122,8 +128,8 @@ T05:
     - "Nogo Proteins"
     - "Rho-Associated Kinases"
     - "Myelin Sheath"
-    - "Neuropathic Pain"
-    - "Rho GTPases"
+    - "Neuralgia"
+    - "rho GTP-Binding Proteins"
   entities:
     - Nogo-A
     - NgR1
@@ -147,9 +153,9 @@ T06:
     - "T-type calcium channel neuropathic pain"
   mesh_terms:
     - "Sodium Channels"
-    - "Dorsal Root Ganglion"
+    - "Ganglia, Spinal"
     - "TRPV Cation Channels"
-    - "Neuropathic Pain"
+    - "Neuralgia"
     - "RNA Splicing"
   entities:
     - Nav1.7
@@ -174,8 +180,8 @@ T07:
     - "Calcitonin Gene-Related Peptide"
     - "Bradykinin"
     - "Prostaglandins"
-    - "Neuropathic Pain"
-    - "CGRP Receptor"
+    - "Neuralgia"
+    - "Receptors, Calcitonin Gene-Related Peptide"
   entities:
     - CGRP
     - Bradykinin
@@ -200,8 +206,8 @@ T08:
     - "Specialized Pro-Resolving Mediators"
     - "Heme Oxygenase-1"
     - "PPAR gamma"
-    - "Cannabinoid Receptors"
-    - "Neuropathic Pain"
+    - "Receptors, Cannabinoid"
+    - "Neuralgia"
   entities:
     - Resolvin D1
     - HO-1
@@ -223,9 +229,9 @@ T09:
     - "epigenetic regulation chronic pain"
   mesh_terms:
     - "Histone Deacetylases"
-    - "JAK-STAT Signaling Pathway"
+    - "Janus Kinases"
     - "Epigenesis, Genetic"
-    - "Neuropathic Pain"
+    - "Neuralgia"
     - "RNA Methylation"
   entities:
     - HDAC1
@@ -250,9 +256,9 @@ T10:
     - "ACC LTP pain-related anxiety"
   mesh_terms:
     - "Rho Guanine Nucleotide Exchange Factors"
-    - "Anterior Cingulate Cortex"
-    - "Synaptic Plasticity"
-    - "Neuropathic Pain"
+    - "Gyrus Cinguli"
+    - "Neuronal Plasticity"
+    - "Neuralgia"
     - "Dendritic Spines"
   entities:
     - Kalirin-7

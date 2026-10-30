@@ -19,9 +19,22 @@ log = logging.getLogger(__name__)
 Entrez.email = os.environ.get("NCBI_EMAIL", "cp-knowledge-base@example.com")
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY")
 BATCH_SIZE = 100
-RATE_LIMIT_NO_KEY = 0.35   # 3 req/s
+RATE_LIMIT_NO_KEY = 0.5    # NCBI allows 3 req/s; cloud egress gets 429s near that
 RATE_LIMIT_WITH_KEY = 0.10  # 10 req/s
 _rate_delay = RATE_LIMIT_WITH_KEY if NCBI_API_KEY else RATE_LIMIT_NO_KEY
+# Biopython retries 429/5xx itself; give it more room than the default 3.
+Entrez.max_tries = 6
+
+# ANDed onto every query unless a theme sets scope_filter (null disables).
+# Without it, MeSH-only queries such as "Tumor Necrosis Factor-alpha"
+# return the top-200 of ~21k mostly non-pain papers.
+PAIN_FILTER = (
+    "(pain[MeSH Terms] OR pain[tiab] OR nocicept*[tiab] "
+    "OR allodynia[tiab] OR hyperalgesia[tiab])"
+)
+
+# query string + max_results -> PMIDs, shared across themes within a run
+_query_memo: dict[tuple[str, int], list[str]] = {}
 
 if NCBI_API_KEY:
     Entrez.api_key = NCBI_API_KEY
@@ -75,6 +88,7 @@ def _cache_path(theme_config: dict, since: str, max_results: int) -> Path:
         {
             "keywords": theme_config.get("keywords") or [],
             "mesh_terms": theme_config.get("mesh_terms") or [],
+            "scope_filter": _scope_filter(theme_config),
             "since": since,
             "max_results": max_results,
         },
@@ -292,22 +306,55 @@ def _build_single_queries(
     """
     keywords = theme_config.get("keywords", [])
     mesh_terms = theme_config.get("mesh_terms", [])
+    scope = _scope_filter(theme_config)
     queries: list[tuple[str, str]] = []
     since_fmt = _pubmed_date(since) if since else ""
 
-    for i, kw in enumerate(keywords):
-        q = f"({kw})"
+    def finish(q: str) -> str:
+        if scope:
+            q += f" AND {scope}"
         if since_fmt:
             q += f" AND ({since_fmt}:3000[dp])"
-        queries.append((f"kw{i}", q))
+        return q
+
+    for i, kw in enumerate(keywords):
+        queries.append((f"kw{i}", finish(f"({kw})")))
 
     for i, mt in enumerate(mesh_terms):
-        q = f"{mt}[MeSH Terms]"
-        if since_fmt:
-            q += f" AND ({since_fmt}:3000[dp])"
-        queries.append((f"mesh{i}", q))
+        queries.append((f"mesh{i}", finish(f'"{mt}"[MeSH Terms]')))
 
     return queries
+
+
+def _scope_filter(theme_config: dict) -> str | None:
+    """The theme's scope filter: PAIN_FILTER unless overridden (None disables)."""
+    if "scope_filter" in theme_config:
+        return theme_config["scope_filter"] or None
+    return PAIN_FILTER
+
+
+def esearch_ids(query: str, max_results: int = 200) -> list[str]:
+    """PMIDs for a query, relevance-sorted (no metadata fetch).
+
+    Identical queries (e.g. a MeSH term shared by several themes) hit
+    PubMed once per run. Unknown MeSH terms are logged: PubMed silently
+    returns nothing for them.
+    """
+    key = (query, max_results)
+    if key in _query_memo:
+        return _query_memo[key]
+    handle = Entrez.esearch(db="pubmed", term=query, retmax=max_results, sort="relevance")
+    result = Entrez.read(handle)
+    handle.close()
+    not_found = list(result.get("ErrorList", {}).get("PhraseNotFound", [])) + list(
+        result.get("WarningList", {}).get("QuotedPhraseNotFound", [])
+    )
+    if not_found:
+        log.warning("PubMed did not recognise %s in query: %s", not_found, query)
+    ids = [str(i) for i in result.get("IdList", [])]
+    _query_memo[key] = ids
+    time.sleep(_rate_delay)
+    return ids
 
 
 def search_pubmed(
@@ -390,18 +437,19 @@ def search_theme(
         log.info("No keywords or MeSH terms for theme %s", theme_id)
         return []
 
-    # Union of PMIDs across all per-term queries
+    # Union of PMIDs across all per-term queries (ids only; metadata once below)
     pmid_order: list[str] = []
+    seen: set[str] = set()
     for label, q in query_specs:
         try:
-            papers = search_pubmed(q, since=effective_since, max_results=max_results)
-            for p in papers:
-                if p.pmid not in pmid_order:
-                    pmid_order.append(p.pmid)
-            log.info("  %s: %d papers (%d unique so far)", label, len(papers), len(pmid_order))
+            ids = esearch_ids(q, max_results=max_results)
+            for pmid in ids:
+                if pmid not in seen:
+                    seen.add(pmid)
+                    pmid_order.append(pmid)
+            log.info("  %s: %d papers (%d unique so far)", label, len(ids), len(pmid_order))
         except Exception as exc:
             log.warning("Query %s failed: %s", label, exc)
-        time.sleep(_rate_delay)
 
     # Fetch all unique PMIDs in one batch via efetch
     all_papers: list[PaperMeta] = []
@@ -411,6 +459,7 @@ def search_theme(
             all_papers.extend(_fetch_batch(batch_ids))
         except Exception as exc:
             log.warning("Failed to fetch batch starting at %d: %s", start, exc)
+        time.sleep(_rate_delay)
 
     # Sort by recency (publication date desc)
     all_papers.sort(key=lambda p: p.publication_date, reverse=True)
