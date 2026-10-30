@@ -6,7 +6,7 @@ tier: MID
 community: 7
 baseline_state: 0.5
 normal_role: RhoA GTPase is a molecule located in other. Baseline activity level 0.50.
-  It receives 1 regulatory influences and exerts 6.
+  It receives 1 regulatory influences and exerts 5.
 pathological_rules:
 - rule_id: RULE-RhoA_ROCK_RhoA-01
   description: 'RhoA GTPase rationale for Rationale: RhoA/ROCK has context-dependent
@@ -16,36 +16,30 @@ pathological_rules:
   direction: up
   magnitude_hint: null
 - rule_id: RULE-RhoA_ROCK_RhoA-02
-  description: RhoA GTPase antagonizes pathway Kalirin-7 (GEF for Rac1/RhoG)
-  claim_refs:
-  - EC-0160
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-RhoA_ROCK_RhoA-03
   description: RhoA GTPase functionally antagonistic Rac1 GTPase
   claim_refs:
   - EC-0161
   direction: down
   magnitude_hint: null
-- rule_id: RULE-RhoA_ROCK_RhoA-04
+- rule_id: RULE-RhoA_ROCK_RhoA-03
   description: RhoA GTPase activates ROCK (ROCK1/ROCK2)
   claim_refs:
   - EC-0107
   direction: up
   magnitude_hint: null
-- rule_id: RULE-RhoA_ROCK_RhoA-05
+- rule_id: RULE-RhoA_ROCK_RhoA-04
   description: RhoA GTPase activates via lpar1 LPA-RhoA-Demyelination Cascade
   claim_refs:
   - EC-0108
   direction: up
   magnitude_hint: null
-- rule_id: RULE-RhoA_ROCK_RhoA-06
+- rule_id: RULE-RhoA_ROCK_RhoA-05
   description: RhoA GTPase blocks membrane anchoring Simvastatin (RhoA Inhibitor)
   claim_refs:
   - EC-0109
   direction: down
   magnitude_hint: null
-- rule_id: RULE-RhoA_ROCK_RhoA-07
+- rule_id: RULE-RhoA_ROCK_RhoA-06
   description: '[MIXED:Invert direction; qualify NgR1-centric convergence to acute
     signaling; PirB/NgR2 redundancy] RhoA GTPase activates NgR1 (Nogo-66 Receptor
     1)'
@@ -62,7 +56,6 @@ inbound_edges:
   neutral_ok: false
 outbound_ids:
 - RhoA_ROCK_rationale_dual_role
-- karilin7_Kalirin7
 - karilin7_Rac1
 - RhoA_ROCK_ROCK
 - RhoA_ROCK_simvastatin
