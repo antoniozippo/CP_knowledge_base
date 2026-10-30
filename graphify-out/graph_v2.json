@@ -11384,9 +11384,15 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_mTORC1",
-      "target": "GABA_apoptosis_Rapamycin",
-      "sign": -1
+      "source": "GABA_apoptosis_Rapamycin",
+      "target": "GABA_apoptosis_mTORC1",
+      "sign": -1,
+      "correction": "reversed",
+      "original_source": "GABA_apoptosis_mTORC1",
+      "original_target": "GABA_apoptosis_Rapamycin",
+      "original_sign": -1,
+      "correction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux",
+      "correction_source_ref": "GABA_apoptosis.md:L66"
     },
     {
       "relation": "rationale_for",
@@ -11406,9 +11412,15 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_PINK1_Parkin_mitophagy",
-      "target": "GABA_apoptosis_Rapamycin",
-      "sign": 1
+      "source": "GABA_apoptosis_Rapamycin",
+      "target": "GABA_apoptosis_PINK1_Parkin_mitophagy",
+      "sign": 1,
+      "correction": "reversed",
+      "original_source": "GABA_apoptosis_PINK1_Parkin_mitophagy",
+      "original_target": "GABA_apoptosis_Rapamycin",
+      "original_sign": 1,
+      "correction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria",
+      "correction_source_ref": "GABA_apoptosis.md:L66"
     },
     {
       "relation": "conceptually_related_to",
@@ -15175,10 +15187,16 @@
       "source_file": "ana-12.md",
       "source_location": null,
       "rationale": null,
-      "source": "shared_nfkb",
-      "target": "ana12_mechanism",
+      "source": "ana12_mechanism",
+      "target": "shared_nfkb",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "shared_nfkb",
+      "original_target": "ana12_mechanism",
+      "original_sign": -1,
+      "correction_quote": "intrathecal ANA-12 reduced spinal levels of TNF-α, IL-1β, Iba1 (a microglial marker), and NF-κB",
+      "correction_source_ref": "ana-12.md:L18"
     },
     {
       "relation": "drives_upstream_activation_of",
@@ -16464,10 +16482,16 @@
       "source_file": "BDNF-TrkB.md",
       "source_location": null,
       "rationale": null,
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "bdnftrkb_trkb_fc",
+      "source": "bdnftrkb_trkb_fc",
+      "target": "assaying_molecularly_structural_plasticity_BDNF",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "assaying_molecularly_structural_plasticity_BDNF",
+      "original_target": "bdnftrkb_trkb_fc",
+      "original_sign": -1,
+      "correction_quote": "**TrkB-Fc**, a soluble receptor chimera that scavenges BDNF.",
+      "correction_source_ref": "BDNF-TrkB.md:L25"
     },
     {
       "relation": "induces_release_of",
@@ -16557,10 +16581,16 @@
       "source_file": "ana-12.md",
       "source_location": null,
       "rationale": null,
-      "source": "bdnftrkb_trkb_fl",
-      "target": "ana_12_ANA_12",
+      "source": "ana_12_ANA_12",
+      "target": "bdnftrkb_trkb_fl",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "bdnftrkb_trkb_fl",
+      "original_target": "ana_12_ANA_12",
+      "original_sign": -1,
+      "correction_quote": "ANA-12 is a non-competitive antagonist that binds directly and selectively to TrkB.",
+      "correction_source_ref": "ana-12.md:L8"
     },
     {
       "relation": "cross_talks_with_at_igf1r",
@@ -16582,8 +16612,14 @@
       "rationale": null,
       "source": "ana_12_TrkB_T1",
       "target": "ana_12_ANA_12",
-      "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "sign": 0,
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "neutralized_duplicate",
+      "original_source": "ana_12_TrkB_T1",
+      "original_target": "ana_12_ANA_12",
+      "original_sign": -1,
+      "correction_quote": "ANA-12 inhibits these processes in a concentration-dependent manner",
+      "correction_source_ref": "ana-12.md:L21"
     },
     {
       "relation": "shares_p75ntr_with",
@@ -16696,10 +16732,16 @@
       "source_file": "TNF.md",
       "source_location": null,
       "rationale": null,
-      "source": "tnf_tnfr1",
-      "target": "TNF_XPro1595",
+      "source": "TNF_XPro1595",
+      "target": "tnf_tnfr1",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "correction": "reversed",
+      "original_source": "tnf_tnfr1",
+      "original_target": "TNF_XPro1595",
+      "original_sign": -1,
+      "correction_quote": "Blocking the solTNF-α/TNFR1 pathway alleviates pain.",
+      "correction_source_ref": "TNF.md:L11"
     },
     {
       "relation": "preserves",
@@ -16777,9 +16819,15 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "rationale": null,
-      "source": "gaba_apoptosis_mptp",
-      "target": "gaba_apoptosis_rapamycin",
-      "sign": -1
+      "source": "gaba_apoptosis_rapamycin",
+      "target": "gaba_apoptosis_mptp",
+      "sign": -1,
+      "correction": "reversed",
+      "original_source": "gaba_apoptosis_mptp",
+      "original_target": "gaba_apoptosis_rapamycin",
+      "original_sign": -1,
+      "correction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis.",
+      "correction_source_ref": "GABA_apoptosis.md:L66"
     },
     {
       "relation": "prevents",
@@ -16788,9 +16836,15 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "rationale": null,
-      "source": "gaba_apoptosis_mptp",
-      "target": "gaba_apoptosis_ru360",
-      "sign": -1
+      "source": "gaba_apoptosis_ru360",
+      "target": "gaba_apoptosis_mptp",
+      "sign": -1,
+      "correction": "reversed",
+      "original_source": "gaba_apoptosis_mptp",
+      "original_target": "gaba_apoptosis_ru360",
+      "original_sign": -1,
+      "correction_quote": "The MCU inhibitor **Ru360** or knockdown of MCU expression reduces mitochondrial Ca²⁺ accumulation, prevents mPTP opening",
+      "correction_source_ref": "GABA_apoptosis.md:L71"
     },
     {
       "relation": "cleaves",
@@ -16822,10 +16876,16 @@
       "source_file": "PV+_interneurons.md",
       "source_location": null,
       "rationale": null,
-      "source": "PV_interneurons_PV_interneurons",
-      "target": "pv_interneuron_dreads_optogenetics",
+      "source": "pv_interneuron_dreads_optogenetics",
+      "target": "PV_interneurons_PV_interneurons",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "correction": "reversed",
+      "original_source": "PV_interneurons_PV_interneurons",
+      "original_target": "pv_interneuron_dreads_optogenetics",
+      "original_sign": 1,
+      "correction_quote": "Directly activating surviving PV interneurons via designer receptors (DREADDs) or optogenetics",
+      "correction_source_ref": "PV+_interneurons.md:L47"
     },
     {
       "relation": "hyperactivates_when_pv_fails",
@@ -16858,10 +16918,16 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": "NogoA-NgR1.md links NgR1→RhoA→MMP-9→PNN degradation→PV interneuron dysfunction cascade.",
-      "source": "PV_interneurons_PV_interneurons",
-      "target": "nogoa_ngr1_ngr1",
+      "source": "nogoa_ngr1_ngr1",
+      "target": "PV_interneurons_PV_interneurons",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "PV_interneurons_PV_interneurons",
+      "original_target": "nogoa_ngr1_ngr1",
+      "original_sign": -1,
+      "correction_quote": "Nogo-A signaling through RhoA can regulate MMP-9 expression, linking myelin inhibitors to perineuronal net degradation and PV interneuron dysfunction.",
+      "correction_source_ref": "NogoA-NgR1.md:L65"
     },
     {
       "relation": "depends_on",
@@ -16926,10 +16992,16 @@
       "source_file": "SST.md",
       "source_location": null,
       "rationale": null,
-      "source": "SST_somatostatin_interneurons",
-      "target": "SST_Prdm12",
+      "source": "SST_Prdm12",
+      "target": "SST_somatostatin_interneurons",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "SST_somatostatin_interneurons",
+      "original_target": "SST_Prdm12",
+      "original_sign": 1,
+      "correction_quote": "Many spinal SST interneurons are specified by the transcription factor **Prdm12**",
+      "correction_source_ref": "SST.md:L10"
     },
     {
       "relation": "indirectly_modulates_via_nav17",
@@ -16973,10 +17045,16 @@
       "source_file": "RhoA-ROCK.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "RhoA_ROCK_simvastatin",
+      "source": "RhoA_ROCK_simvastatin",
+      "target": "RhoA_ROCK_RhoA",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "RhoA_ROCK_RhoA",
+      "original_target": "RhoA_ROCK_simvastatin",
+      "original_sign": -1,
+      "correction_quote": "This HMG‑CoA reductase inhibitor depletes mevalonate and downstream isoprenoids, thereby preventing RhoA membrane anchoring.",
+      "correction_source_ref": "RhoA-ROCK.md:L48"
     },
     {
       "relation": "activates",
@@ -16985,10 +17063,16 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "nogoa_ngr1_ngr1",
+      "source": "nogoa_ngr1_ngr1",
+      "target": "RhoA_ROCK_RhoA",
       "sign": 1,
-      "validation_status": "MIXED"
+      "validation_status": "MIXED",
+      "correction": "reversed",
+      "original_source": "RhoA_ROCK_RhoA",
+      "original_target": "nogoa_ngr1_ngr1",
+      "original_sign": 1,
+      "correction_quote": "NgR1 activation by any of its ligands (Nogo-A, MAG, OMgp) converges on the activation of RhoA.",
+      "correction_source_ref": "NogoA-NgR1.md:L17"
     },
     {
       "relation": "inhibits",
@@ -16997,10 +17081,16 @@
       "source_file": "RhoA-ROCK.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_ROCK",
-      "target": "RhoA_ROCK_fasudil",
+      "source": "RhoA_ROCK_fasudil",
+      "target": "RhoA_ROCK_ROCK",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "RhoA_ROCK_ROCK",
+      "original_target": "RhoA_ROCK_fasudil",
+      "original_sign": -1,
+      "correction_quote": "**Fasudil**: A clinically approved ROCK inhibitor",
+      "correction_source_ref": "RhoA-ROCK.md:L41"
     },
     {
       "relation": "is_activated_by",
@@ -17044,10 +17134,16 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "GABA_apoptosis_HIF1alpha",
-      "target": "hif1a_YC1",
+      "source": "hif1a_YC1",
+      "target": "GABA_apoptosis_HIF1alpha",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "GABA_apoptosis_HIF1alpha",
+      "original_target": "hif1a_YC1",
+      "original_sign": -1,
+      "correction_quote": "**YC‑1**: A small molecule that destabilizes HIF1α by promoting its degradation.",
+      "correction_source_ref": "hif1a.md:L33"
     },
     {
       "relation": "inhibits_translation_of",
@@ -17056,10 +17152,16 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "GABA_apoptosis_HIF1alpha",
-      "target": "hif1a_PX478",
+      "source": "hif1a_PX478",
+      "target": "GABA_apoptosis_HIF1alpha",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "GABA_apoptosis_HIF1alpha",
+      "original_target": "hif1a_PX478",
+      "original_sign": -1,
+      "correction_quote": "**PX‑478**: An inhibitor of HIF1α translation.",
+      "correction_source_ref": "hif1a.md:L34"
     },
     {
       "relation": "targets",
@@ -17172,10 +17274,16 @@
       "source_file": "BBB.md",
       "source_location": null,
       "rationale": null,
-      "source": "BBB_tight_junction_proteins",
-      "target": "BBB_CypA_MMP9_pathway",
+      "source": "BBB_CypA_MMP9_pathway",
+      "target": "BBB_tight_junction_proteins",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "BBB_tight_junction_proteins",
+      "original_target": "BBB_CypA_MMP9_pathway",
+      "original_sign": -1,
+      "correction_quote": "activated cyclophilin A (CypA) stimulates matrix metalloproteinase-9 (MMP-9), which degrades the basement membrane and tight junction proteins",
+      "correction_source_ref": "BBB.md:L13"
     },
     {
       "relation": "downregulates",
@@ -17278,10 +17386,16 @@
       "source_file": "vegf.md",
       "source_location": null,
       "rationale": null,
-      "source": "vegf_VEGFR2",
-      "target": "vegf_nrp1",
+      "source": "vegf_nrp1",
+      "target": "vegf_VEGFR2",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "vegf_VEGFR2",
+      "original_target": "vegf_nrp1",
+      "original_sign": 1,
+      "correction_quote": "A co‑receptor that enhances VEGFR2 signaling",
+      "correction_source_ref": "vegf.md:L11"
     },
     {
       "relation": "downregulates_via_bdnf_trkb",
@@ -17359,10 +17473,16 @@
       "source_file": "rbfox1.md",
       "source_location": null,
       "rationale": null,
-      "source": "rbfox1_rbfox1",
-      "target": "rbfox1_AAV5_Rbfox1",
+      "source": "rbfox1_AAV5_Rbfox1",
+      "target": "rbfox1_rbfox1",
       "sign": 1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "rbfox1_rbfox1",
+      "original_target": "rbfox1_AAV5_Rbfox1",
+      "original_sign": 1,
+      "correction_quote": "Delivery of AAV5‑Rbfox1 into the DRG prior to SNL preserves Rbfox1 levels",
+      "correction_source_ref": "rbfox1.md:L19"
     },
     {
       "relation": "potentially_interacts_via_cell_adhesion",
@@ -17416,10 +17536,16 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": null,
-      "source": "NogoA_NgR1_NogoA",
-      "target": "NogoA_NgR1_NG101",
+      "source": "NogoA_NgR1_NG101",
+      "target": "NogoA_NgR1_NogoA",
       "sign": -1,
-      "validation_status": "MIXED"
+      "validation_status": "MIXED",
+      "correction": "reversed",
+      "original_source": "NogoA_NgR1_NogoA",
+      "original_target": "NogoA_NgR1_NG101",
+      "original_sign": -1,
+      "correction_quote": "**Anti-Nogo-A Antibodies**: Systemic or intrathecal administration of neutralizing anti-Nogo-A antibodies",
+      "correction_source_ref": "NogoA-NgR1.md:L29"
     },
     {
       "relation": "co_receptor_of",
@@ -17450,10 +17576,16 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_socs3",
+      "source": "jakstat_socs3",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "il6_jak_stat3",
+      "original_target": "jakstat_socs3",
+      "original_sign": -1,
+      "correction_quote": "STAT3 itself induces SOCS3, which binds to the receptor and JAKs to terminate signalling in a negative‑feedback loop.",
+      "correction_source_ref": "JAK-STAT.md:L16"
     },
     {
       "relation": "inhibits",
@@ -17462,10 +17594,16 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_ruxolitinib",
+      "source": "jakstat_ruxolitinib",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "correction": "reversed",
+      "original_source": "il6_jak_stat3",
+      "original_target": "jakstat_ruxolitinib",
+      "original_sign": -1,
+      "correction_quote": "**Ruxolitinib (INCB018424)** : A dual JAK1/JAK2 inhibitor",
+      "correction_source_ref": "JAK-STAT.md:L53"
     },
     {
       "relation": "inhibits",
@@ -17474,10 +17612,16 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_baricitinib",
+      "source": "jakstat_baricitinib",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "correction": "reversed",
+      "original_source": "il6_jak_stat3",
+      "original_target": "jakstat_baricitinib",
+      "original_sign": -1,
+      "correction_quote": "baricitinib (JAK1/JAK2)",
+      "correction_source_ref": "JAK-STAT.md:L71"
     },
     {
       "relation": "downregulates_via_stat3",
@@ -17711,10 +17855,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_Calcineurin",
+      "source": "karilin7_Calcineurin",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_Calcineurin",
+      "original_sign": -1,
+      "correction_quote": "Chronic NMDAR overactivation leads to **Ca²⁺‑dependent activation of the phosphatase calcineurin**, which dephosphorylates and destabilises Kalirin‑7, targeting it for proteasomal degradation.",
+      "correction_source_ref": "karilin-7.md:L21"
     },
     {
       "relation": "downregulates_via_calcineurin",
@@ -17723,10 +17873,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_NMDAR",
+      "source": "karilin7_NMDAR",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_NMDAR",
+      "original_sign": -1,
+      "correction_quote": "**NMDA receptor**: The primary driver of Kalirin‑7 downregulation. Excessive NMDAR activation leads to calcineurin‑mediated Kalirin‑7 degradation.",
+      "correction_source_ref": "karilin-7.md:L92"
     },
     {
       "relation": "delivers_and_restores",
@@ -17735,10 +17891,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_AAV_Kalirin7",
+      "source": "karilin7_AAV_Kalirin7",
+      "target": "karilin7_Kalirin7",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_AAV_Kalirin7",
+      "original_sign": 1,
+      "correction_quote": "**ACC‑targeted Kalirin‑7 overexpression**: AAV vectors driving the expression of Kalirin‑7 under a synapsin‑1 (neuron‑specific) promoter were injected into the ACC of rats with established SNI.",
+      "correction_source_ref": "karilin-7.md:L52"
     },
     {
       "relation": "knocks_down",
@@ -17747,10 +17909,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_shRNA_Kalirin7",
+      "source": "karilin7_shRNA_Kalirin7",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_shRNA_Kalirin7",
+      "original_sign": -1,
+      "correction_quote": "Conversely, shRNA‑mediated knockdown of Kalirin‑7 in the ACC of naïve rats is sufficient to induce anxiety‑like behaviour",
+      "correction_source_ref": "karilin-7.md:L34"
     },
     {
       "relation": "genetic_deletion",
@@ -17759,10 +17927,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_Kalirin7_KO",
+      "source": "karilin7_Kalirin7_KO",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_Kalirin7_KO",
+      "original_sign": -1,
+      "correction_quote": "**Kalirin‑7 global knockout (KO) mice**: Mice lacking the *Kalrn* gene show deficits in hippocampal‑dependent learning, reduced cortical spine density",
+      "correction_source_ref": "karilin-7.md:L59"
     },
     {
       "relation": "upregulates",
@@ -17771,10 +17945,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_EnvironmentalEnrichment",
+      "source": "karilin7_EnvironmentalEnrichment",
+      "target": "karilin7_Kalirin7",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_EnvironmentalEnrichment",
+      "original_sign": 1,
+      "correction_quote": "**Environmental enrichment**: Chronic neuropathic pain animals housed in enriched environments show higher ACC Kalirin‑7 levels, greater spine density, and reduced anxiety compared to standard‑housed controls. This suggests that enhanced sensory, cognitive, and physical activity can boost endogenous Kalirin‑7 expression and resilience.",
+      "correction_source_ref": "karilin-7.md:L74"
     },
     {
       "relation": "normalizes_signaling",
@@ -17783,10 +17963,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_DBS_ACC",
+      "source": "karilin7_DBS_ACC",
+      "target": "karilin7_Kalirin7",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_DBS_ACC",
+      "original_sign": 1,
+      "correction_quote": "**Deep brain stimulation (DBS) of the ACC**: Preclinical DBS of the ACC in neuropathic pain models has been shown to normalise Kalirin‑7 signalling",
+      "correction_source_ref": "karilin-7.md:L75"
     },
     {
       "relation": "loss_causes",
@@ -17819,10 +18005,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_SNI",
+      "source": "karilin7_SNI",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "REFUTED"
+      "validation_status": "REFUTED",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_SNI",
+      "original_sign": -1,
+      "correction_quote": "including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced.",
+      "correction_source_ref": "karilin-7.md:L19"
     },
     {
       "relation": "induces_downregulation",
@@ -17831,10 +18023,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_CCI",
+      "source": "karilin7_CCI",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "REFUTED"
+      "validation_status": "REFUTED",
+      "correction": "reversed",
+      "original_source": "karilin7_Kalirin7",
+      "original_target": "karilin7_CCI",
+      "original_sign": -1,
+      "correction_quote": "including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced.",
+      "correction_source_ref": "karilin-7.md:L19"
     },
     {
       "relation": "expression_differs_by_sex",
@@ -17876,10 +18074,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_KALRN",
-      "target": "karilin7_CEBPbeta",
+      "source": "karilin7_CEBPbeta",
+      "target": "karilin7_KALRN",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_KALRN",
+      "original_target": "karilin7_CEBPbeta",
+      "original_sign": 1,
+      "correction_quote": "since C/EBPβ drives *Kalrn* transcription, its loss contributes to reduced Kalirin‑7 synthesis.",
+      "correction_source_ref": "karilin-7.md:L21"
     },
     {
       "relation": "represses_transcription",
@@ -17888,10 +18092,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_KALRN",
-      "target": "hdac_hdac4",
+      "source": "hdac_hdac4",
+      "target": "karilin7_KALRN",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_KALRN",
+      "original_target": "hdac_hdac4",
+      "original_sign": -1,
+      "correction_quote": "Increased association of **HDAC4** with the *Kalrn* promoter leads to histone H3 deacetylation and transcriptional repression, further suppressing Kalirin‑7 expression.",
+      "correction_source_ref": "karilin-7.md:L22"
     },
     {
       "relation": "targets_mRNA",
@@ -17934,10 +18144,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Rac1",
-      "target": "karilin7_NSC23766",
+      "source": "karilin7_NSC23766",
+      "target": "karilin7_Rac1",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "correction": "reversed",
+      "original_source": "karilin7_Rac1",
+      "original_target": "karilin7_NSC23766",
+      "original_sign": -1,
+      "correction_quote": "Microinjection of the Rac1 inhibitor NSC23766 into the ACC mimics the synaptic and behavioural effects of Kalirin‑7 loss, inducing spine elimination and anxiety.",
+      "correction_source_ref": "karilin-7.md:L63"
     },
     {
       "relation": "activates_Ca_dependent",
@@ -17958,10 +18174,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_NMDAR",
-      "target": "karilin7_Ketamine",
+      "source": "karilin7_Ketamine",
+      "target": "karilin7_NMDAR",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_NMDAR",
+      "original_target": "karilin7_Ketamine",
+      "original_sign": -1,
+      "correction_quote": "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7",
+      "correction_source_ref": "karilin-7.md:L69"
     },
     {
       "relation": "antagonizes",
@@ -17970,10 +18192,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_NMDAR",
-      "target": "karilin7_AP5",
+      "source": "karilin7_AP5",
+      "target": "karilin7_NMDAR",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_NMDAR",
+      "original_target": "karilin7_AP5",
+      "original_sign": -1,
+      "correction_quote": "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7",
+      "correction_source_ref": "karilin-7.md:L69"
     },
     {
       "relation": "phosphorylates",
@@ -18028,10 +18256,16 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Calcineurin",
-      "target": "karilin7_FK506",
+      "source": "karilin7_FK506",
+      "target": "karilin7_Calcineurin",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "correction": "reversed",
+      "original_source": "karilin7_Calcineurin",
+      "original_target": "karilin7_FK506",
+      "original_sign": -1,
+      "correction_quote": "Tacrolimus (FK506) microinjected into the ACC partially preserves Kalirin‑7 levels and reduces anxiety after nerve injury, confirming the role of calcineurin in its degradation.",
+      "correction_source_ref": "karilin-7.md:L70"
     },
     {
       "relation": "references",

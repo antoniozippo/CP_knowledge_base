@@ -1,0 +1,454 @@
+# Curated edge-direction corrections for graphify-out/graph_v2.json.
+#
+# Applied by analysis/scripts/reverse_edges.py. Each entry names an existing
+# signed link by its STORED (source, target, relation, sign). The relation
+# describes an action of the stored TARGET on the stored SOURCE (a drug,
+# tool, intervention, injury model or upstream regulator acting on the
+# source), so read along source->target the sign drove the wrong node.
+#
+# action: reverse     swap source/target; relation and sign are kept (the
+#                     sign was already correct for the corrected direction).
+# action: neutralize  set sign to 0 because the corrected orientation is
+#                     already encoded by another link (reversing would
+#                     duplicate the pair).
+#
+# Every entry carries a verbatim dossier quote (byte substring of
+# source_file, <=400 chars) supporting the corrected direction;
+# source_location is the dossier line. claim_refs list edge claims whose
+# verdicts independently flag the inversion or cover the edge.
+# Validation statuses are never changed: a direction correction is not new
+# evidence (e.g. the ACC Kalirin-7 downregulation edges stay REFUTED per
+# theme_10 F10.1).
+#
+# Edges whose direction is ambiguous, or that need a sign/relation change
+# rather than a pure reversal, are NOT listed here; see
+# analysis/claims/edge_reversals_review.md.
+- source: karilin7_Kalirin7
+  target: karilin7_Calcineurin
+  relation: dephosphorylates_and_degrades
+  sign: -1
+  action: reverse
+  quote: Chronic NMDAR overactivation leads to **Ca²⁺‑dependent activation of the phosphatase calcineurin**,
+    which dephosphorylates and destabilises Kalirin‑7, targeting it for proteasomal degradation.
+  source_file: karilin-7.md
+  source_location: L21
+  claim_refs:
+  - EC-0055
+- source: karilin7_Kalirin7
+  target: karilin7_NMDAR
+  relation: downregulates_via_calcineurin
+  sign: -1
+  action: reverse
+  quote: '**NMDA receptor**: The primary driver of Kalirin‑7 downregulation. Excessive NMDAR activation
+    leads to calcineurin‑mediated Kalirin‑7 degradation.'
+  source_file: karilin-7.md
+  source_location: L92
+  claim_refs:
+  - EC-0056
+- source: karilin7_Kalirin7
+  target: karilin7_AAV_Kalirin7
+  relation: delivers_and_restores
+  sign: 1
+  action: reverse
+  quote: '**ACC‑targeted Kalirin‑7 overexpression**: AAV vectors driving the expression of Kalirin‑7 under
+    a synapsin‑1 (neuron‑specific) promoter were injected into the ACC of rats with established SNI.'
+  source_file: karilin-7.md
+  source_location: L52
+  claim_refs:
+  - EC-0054
+- source: karilin7_Kalirin7
+  target: karilin7_shRNA_Kalirin7
+  relation: knocks_down
+  sign: -1
+  action: reverse
+  quote: Conversely, shRNA‑mediated knockdown of Kalirin‑7 in the ACC of naïve rats is sufficient to induce
+    anxiety‑like behaviour
+  source_file: karilin-7.md
+  source_location: L34
+  claim_refs:
+  - EC-0061
+- source: karilin7_Kalirin7
+  target: karilin7_Kalirin7_KO
+  relation: genetic_deletion
+  sign: -1
+  action: reverse
+  quote: '**Kalirin‑7 global knockout (KO) mice**: Mice lacking the *Kalrn* gene show deficits in hippocampal‑dependent
+    learning, reduced cortical spine density'
+  source_file: karilin-7.md
+  source_location: L59
+  claim_refs:
+  - EC-0057
+- source: karilin7_Kalirin7
+  target: karilin7_EnvironmentalEnrichment
+  relation: upregulates
+  sign: 1
+  action: reverse
+  quote: '**Environmental enrichment**: Chronic neuropathic pain animals housed in enriched environments
+    show higher ACC Kalirin‑7 levels, greater spine density, and reduced anxiety compared to standard‑housed
+    controls. This suggests that enhanced sensory, cognitive, and physical activity can boost endogenous
+    Kalirin‑7 expression and resilience.'
+  source_file: karilin-7.md
+  source_location: L74
+  claim_refs:
+  - EC-0068
+  note: EC-0068 (EXTENDED) notes the enrichment mediator is not established as Kal7; direction is corrected,
+    mediator caveat unchanged.
+- source: karilin7_Kalirin7
+  target: karilin7_DBS_ACC
+  relation: normalizes_signaling
+  sign: 1
+  action: reverse
+  quote: '**Deep brain stimulation (DBS) of the ACC**: Preclinical DBS of the ACC in neuropathic pain
+    models has been shown to normalise Kalirin‑7 signalling'
+  source_file: karilin-7.md
+  source_location: L75
+  claim_refs:
+  - EC-0064
+- source: karilin7_Kalirin7
+  target: karilin7_SNI
+  relation: induces_downregulation
+  sign: -1
+  action: reverse
+  quote: including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7
+    protein and mRNA levels in the ACC are significantly reduced.
+  source_file: karilin-7.md
+  source_location: L19
+  claim_refs:
+  - EC-0059
+  note: 'Verdict REFUTED (theme_10 F10.1): the ACC downregulation narrative is unsupported. Direction
+    is corrected to match the dossier claim; the REFUTED status is kept on the link and this is not new
+    evidence.'
+- source: karilin7_Kalirin7
+  target: karilin7_CCI
+  relation: induces_downregulation
+  sign: -1
+  action: reverse
+  quote: including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7
+    protein and mRNA levels in the ACC are significantly reduced.
+  source_file: karilin-7.md
+  source_location: L19
+  claim_refs:
+  - EC-0058
+  note: 'Verdict REFUTED (theme_10 F10.1): see the SNI entry; direction corrected only.'
+- source: karilin7_KALRN
+  target: karilin7_CEBPbeta
+  relation: drives_transcription
+  sign: 1
+  action: reverse
+  quote: since C/EBPβ drives *Kalrn* transcription, its loss contributes to reduced Kalirin‑7 synthesis.
+  source_file: karilin-7.md
+  source_location: L21
+  claim_refs:
+  - EC-0050
+- source: karilin7_KALRN
+  target: hdac_hdac4
+  relation: represses_transcription
+  sign: -1
+  action: reverse
+  quote: Increased association of **HDAC4** with the *Kalrn* promoter leads to histone H3 deacetylation
+    and transcriptional repression, further suppressing Kalirin‑7 expression.
+  source_file: karilin-7.md
+  source_location: L22
+  claim_refs:
+  - EC-0051
+- source: karilin7_Rac1
+  target: karilin7_NSC23766
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: Microinjection of the Rac1 inhibitor NSC23766 into the ACC mimics the synaptic and behavioural
+    effects of Kalirin‑7 loss, inducing spine elimination and anxiety.
+  source_file: karilin-7.md
+  source_location: L63
+  claim_refs:
+  - EC-0102
+- source: karilin7_NMDAR
+  target: karilin7_Ketamine
+  relation: antagonizes
+  sign: -1
+  action: reverse
+  quote: Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist)
+    can prevent the injury‑induced downregulation of Kalirin‑7
+  source_file: karilin-7.md
+  source_location: L69
+  claim_refs:
+  - EC-0087
+- source: karilin7_NMDAR
+  target: karilin7_AP5
+  relation: antagonizes
+  sign: -1
+  action: reverse
+  quote: Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist)
+    can prevent the injury‑induced downregulation of Kalirin‑7
+  source_file: karilin-7.md
+  source_location: L69
+  claim_refs:
+  - EC-0086
+- source: karilin7_Calcineurin
+  target: karilin7_FK506
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: Tacrolimus (FK506) microinjected into the ACC partially preserves Kalirin‑7 levels and reduces
+    anxiety after nerve injury, confirming the role of calcineurin in its degradation.
+  source_file: karilin-7.md
+  source_location: L70
+  claim_refs:
+  - EC-0026
+- source: GABA_apoptosis_mTORC1
+  target: GABA_apoptosis_Rapamycin
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic
+    flux
+  source_file: GABA_apoptosis.md
+  source_location: L66
+  claim_refs:
+  - EC-0137
+- source: GABA_apoptosis_PINK1_Parkin_mitophagy
+  target: GABA_apoptosis_Rapamycin
+  relation: activates
+  sign: 1
+  action: reverse
+  quote: Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic
+    flux, clear damaged mitochondria
+  source_file: GABA_apoptosis.md
+  source_location: L66
+  claim_refs:
+  - EC-0096
+- source: gaba_apoptosis_mptp
+  target: gaba_apoptosis_rapamycin
+  relation: indirectly_protects_against
+  sign: -1
+  action: reverse
+  quote: Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic
+    flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis.
+  source_file: GABA_apoptosis.md
+  source_location: L66
+  claim_refs:
+  - EC-0135
+  note: Dossier support for the mPTP step is indirect (rapamycin clears damaged mitochondria); the stored
+    reading 'mPTP protects against rapamycin' is incoherent, the relation name already says 'indirectly'.
+- source: gaba_apoptosis_mptp
+  target: gaba_apoptosis_ru360
+  relation: prevents
+  sign: -1
+  action: reverse
+  quote: The MCU inhibitor **Ru360** or knockdown of MCU expression reduces mitochondrial Ca²⁺ accumulation,
+    prevents mPTP opening
+  source_file: GABA_apoptosis.md
+  source_location: L71
+  claim_refs:
+  - EC-0136
+- source: shared_nfkb
+  target: ana12_mechanism
+  relation: suppresses
+  sign: -1
+  action: reverse
+  quote: intrathecal ANA-12 reduced spinal levels of TNF-α, IL-1β, Iba1 (a microglial marker), and NF-κB
+  source_file: ana-12.md
+  source_location: L18
+  claim_refs:
+  - EC-0084
+  note: EC-0084 (NO_EVIDENCE_FOUND) calls the stored edge an extraction artifact; the corrected reading
+    is what the dossier states.
+- source: bdnftrkb_trkb_fl
+  target: ana_12_ANA_12
+  relation: antagonizes
+  sign: -1
+  action: reverse
+  quote: ANA-12 is a non-competitive antagonist that binds directly and selectively to TrkB.
+  source_file: ana-12.md
+  source_location: L8
+  claim_refs:
+  - EC-0123
+- source: ana_12_TrkB_T1
+  target: ana_12_ANA_12
+  relation: inhibits
+  sign: -1
+  action: neutralize
+  quote: ANA-12 inhibits these processes in a concentration-dependent manner
+  source_file: ana-12.md
+  source_location: L21
+  claim_refs:
+  - EC-0004
+  - EC-0126
+  note: Reversed duplicate of the existing ana_12_ANA_12 -inhibits-> ana_12_TrkB_T1 edge; zeroed instead
+    of reversed so the pair is not encoded twice.
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: bdnftrkb_trkb_fc
+  relation: sequesters
+  sign: -1
+  action: reverse
+  quote: '**TrkB-Fc**, a soluble receptor chimera that scavenges BDNF.'
+  source_file: BDNF-TrkB.md
+  source_location: L25
+  claim_refs:
+  - EC-0022
+- source: tnf_tnfr1
+  target: TNF_XPro1595
+  relation: selectively_blocks
+  sign: -1
+  action: reverse
+  quote: Blocking the solTNF-α/TNFR1 pathway alleviates pain.
+  source_file: TNF.md
+  source_location: L11
+  claim_refs:
+  - EC-0117
+- source: RhoA_ROCK_RhoA
+  target: RhoA_ROCK_simvastatin
+  relation: blocks_membrane_anchoring
+  sign: -1
+  action: reverse
+  quote: This HMG‑CoA reductase inhibitor depletes mevalonate and downstream isoprenoids, thereby preventing
+    RhoA membrane anchoring.
+  source_file: RhoA-ROCK.md
+  source_location: L48
+  claim_refs:
+  - EC-0109
+- source: RhoA_ROCK_ROCK
+  target: RhoA_ROCK_fasudil
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: '**Fasudil**: A clinically approved ROCK inhibitor'
+  source_file: RhoA-ROCK.md
+  source_location: L41
+  claim_refs:
+  - EC-0100
+- source: RhoA_ROCK_RhoA
+  target: nogoa_ngr1_ngr1
+  relation: activates
+  sign: 1
+  action: reverse
+  quote: NgR1 activation by any of its ligands (Nogo-A, MAG, OMgp) converges on the activation of RhoA.
+  source_file: NogoA-NgR1.md
+  source_location: L17
+  claim_refs:
+  - EC-0106
+- source: PV_interneurons_PV_interneurons
+  target: nogoa_ngr1_ngr1
+  relation: indirectly_impairs_via_rhoa_mmp9_pnn
+  sign: -1
+  action: reverse
+  quote: Nogo-A signaling through RhoA can regulate MMP-9 expression, linking myelin inhibitors to perineuronal
+    net degradation and PV interneuron dysfunction.
+  source_file: NogoA-NgR1.md
+  source_location: L65
+  claim_refs:
+  - EC-0156
+- source: NogoA_NgR1_NogoA
+  target: NogoA_NgR1_NG101
+  relation: neutralizes
+  sign: -1
+  action: reverse
+  quote: '**Anti-Nogo-A Antibodies**: Systemic or intrathecal administration of neutralizing anti-Nogo-A
+    antibodies'
+  source_file: NogoA-NgR1.md
+  source_location: L29
+  claim_refs:
+  - EC-0094
+  note: NG101 is the anti-Nogo-A antibody named in the NISCI trial paragraph of the same dossier.
+- source: GABA_apoptosis_HIF1alpha
+  target: hif1a_YC1
+  relation: destabilizes
+  sign: -1
+  action: reverse
+  quote: '**YC‑1**: A small molecule that destabilizes HIF1α by promoting its degradation.'
+  source_file: hif1a.md
+  source_location: L33
+  claim_refs:
+  - EC-0038
+- source: GABA_apoptosis_HIF1alpha
+  target: hif1a_PX478
+  relation: inhibits_translation_of
+  sign: -1
+  action: reverse
+  quote: '**PX‑478**: An inhibitor of HIF1α translation.'
+  source_file: hif1a.md
+  source_location: L34
+  claim_refs:
+  - EC-0040
+- source: il6_jak_stat3
+  target: jakstat_socs3
+  relation: terminates
+  sign: -1
+  action: reverse
+  quote: STAT3 itself induces SOCS3, which binds to the receptor and JAKs to terminate signalling in a
+    negative‑feedback loop.
+  source_file: JAK-STAT.md
+  source_location: L16
+  claim_refs:
+  - EC-0049
+- source: il6_jak_stat3
+  target: jakstat_ruxolitinib
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: '**Ruxolitinib (INCB018424)** : A dual JAK1/JAK2 inhibitor'
+  source_file: JAK-STAT.md
+  source_location: L53
+  claim_refs:
+  - EC-0048
+- source: il6_jak_stat3
+  target: jakstat_baricitinib
+  relation: inhibits
+  sign: -1
+  action: reverse
+  quote: baricitinib (JAK1/JAK2)
+  source_file: JAK-STAT.md
+  source_location: L71
+  claim_refs:
+  - EC-0047
+- source: rbfox1_rbfox1
+  target: rbfox1_AAV5_Rbfox1
+  relation: restores_expression_of
+  sign: 1
+  action: reverse
+  quote: Delivery of AAV5‑Rbfox1 into the DRG prior to SNL preserves Rbfox1 levels
+  source_file: rbfox1.md
+  source_location: L19
+  claim_refs:
+  - EC-0105
+- source: PV_interneurons_PV_interneurons
+  target: pv_interneuron_dreads_optogenetics
+  relation: rescues
+  sign: 1
+  action: reverse
+  quote: Directly activating surviving PV interneurons via designer receptors (DREADDs) or optogenetics
+  source_file: PV+_interneurons.md
+  source_location: L47
+  claim_refs:
+  - EC-0097
+- source: BBB_tight_junction_proteins
+  target: BBB_CypA_MMP9_pathway
+  relation: degrades
+  sign: -1
+  action: reverse
+  quote: activated cyclophilin A (CypA) stimulates matrix metalloproteinase-9 (MMP-9), which degrades
+    the basement membrane and tight junction proteins
+  source_file: BBB.md
+  source_location: L13
+  claim_refs:
+  - EC-0118
+- source: vegf_VEGFR2
+  target: vegf_nrp1
+  relation: enhances_signaling_of
+  sign: 1
+  action: reverse
+  quote: A co‑receptor that enhances VEGFR2 signaling
+  source_file: vegf.md
+  source_location: L11
+  claim_refs:
+  - EC-0128
+- source: SST_somatostatin_interneurons
+  target: SST_Prdm12
+  relation: specifies_development_of
+  sign: 1
+  action: reverse
+  quote: Many spinal SST interneurons are specified by the transcription factor **Prdm12**
+  source_file: SST.md
+  source_location: L10
+  claim_refs:
+  - EC-0112

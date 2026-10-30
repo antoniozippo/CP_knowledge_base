@@ -40,8 +40,8 @@ CP_knowledge_base/
 ├── graphify-out/
 │   └── graph_v2.json          # Authoritative graph (554 nodes / 914 edges)
 ├── analysis/
-│   ├── claims/                 # 262 claim cards + closure_edges.yaml
-│   ├── scripts/                # build_graph_v2.py, add_closure_edges.py
+│   ├── claims/                 # 262 claim cards + closure_edges.yaml, edge_reversals.yaml
+│   ├── scripts/                # build_graph_v2.py, add_closure_edges.py, reverse_edges.py
 │   └── literature/             # 10 thematic dossier sweeps
 ├── simulator/
 │   ├── schemas.py              # Pydantic: AgentCard, WorldState, StateDelta
