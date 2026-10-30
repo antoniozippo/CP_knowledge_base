@@ -18,7 +18,7 @@ inbound_edges:
   neutral_ok: false
 - source_id: karilin7_Kalirin7
   relation: loss_causes
-  sign: 1
+  sign: -1
   weight: 0.9
   validation_status: CONFIRMED
   neutral_ok: false

@@ -12,6 +12,12 @@ decreases/inhibits it, 0 means neutral/reference or undetermined. Passive-voice
 relations ("*_by" patterns) invert that reading ("A destabilized_by B" means B
 acts -1 on A); rather than silently flipping endpoints we map them to sign 0
 and report them to stdout for later claim-card review.
+
+Loss-of-function relations ("A loss_causes B") mean that LESS A gives MORE B,
+so they map to -1. A rationale_for edge restates a mechanistic link and has
+no direction of its own: when the same (source, target) pair also carries a
+signed causal edge, the rationale edge takes that sign (0 if the causal edges
+disagree), so the two never cancel or double up with opposite readings.
 """
 
 import argparse
@@ -51,6 +57,7 @@ RELATION_SIGN = {
     "upregulates": 1,
     "promotes": 1,
     "rationale_for": 1,
+    "loss_causes": -1,
     "specifies_development_of": 1,
     "inhibits": -1,
     "downregulates": -1,
@@ -305,6 +312,29 @@ def find_near_misses(nodes, threshold=0.6, limit=10):
     return near_misses
 
 
+def align_rationale_signs(links):
+    """Give rationale_for edges the sign of their pair's causal edges.
+
+    Returns (links, n_changed). Pairs without a signed causal edge keep the
+    default rationale_for sign; conflicting causal signs yield 0.
+    """
+    causal_signs = defaultdict(set)
+    for link in links:
+        if link["relation"] != "rationale_for" and link["sign"] != 0:
+            causal_signs[(link["source"], link["target"])].add(link["sign"])
+    aligned = []
+    changed = 0
+    for link in links:
+        signs = causal_signs.get((link["source"], link["target"]))
+        if link["relation"] == "rationale_for" and signs:
+            sign = next(iter(signs)) if len(signs) == 1 else 0
+            if sign != link["sign"]:
+                link = {**link, "sign": sign}
+                changed += 1
+        aligned.append(link)
+    return aligned, changed
+
+
 def build_graph(graph_in, hub_threshold=HUB_TIER_THRESHOLD, mid_threshold=MID_TIER_THRESHOLD):
     nodes_before = len(graph_in["nodes"])
     links_before = len(graph_in["links"])
@@ -314,6 +344,7 @@ def build_graph(graph_in, hub_threshold=HUB_TIER_THRESHOLD, mid_threshold=MID_TI
     redirected, dropped_loops, dropped_dups = redirect_links(graph_in["links"], canonical)
 
     signed, flagged_passives = sign_edges(redirected)
+    signed, rationale_aligned = align_rationale_signs(signed)
     degrees = compute_degrees(survivors, signed)
     final_nodes = []
     for node in survivors:
@@ -337,6 +368,7 @@ def build_graph(graph_in, hub_threshold=HUB_TIER_THRESHOLD, mid_threshold=MID_TI
         "links_dropped_duplicate": dropped_dups,
         "links_after": len(signed),
         "flagged_passive_relations": flagged_passives,
+        "rationale_signs_aligned": rationale_aligned,
         "signs": Counter(l["sign"] for l in signed),
         "entity_types": Counter(n["entity_type"] for n in final_nodes),
         "compartments": Counter(n["compartment"] for n in final_nodes),

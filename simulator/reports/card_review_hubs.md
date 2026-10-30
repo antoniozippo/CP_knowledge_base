@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-10-30T15:15:40Z
+generated: 2026-10-30T15:22:15Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -117,15 +117,15 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
     - claim_refs: EC-0068 (EXTENDED)
   - `RULE-karilin7_Kalirin7-10` [up] Kalirin-7 (GEF for Rac1/RhoG) normalizes signaling Deep Brain Stimulation of ACC
     - claim_refs: EC-0064 (NO_EVIDENCE_FOUND)
-  - `RULE-karilin7_Kalirin7-11` [up] Kalirin-7 (GEF for Rac1/RhoG) loss causes Pain-Related Anxiety (ACC Kalirin-7 Dependent)
+  - `RULE-karilin7_Kalirin7-11` [down] Kalirin-7 (GEF for Rac1/RhoG) loss causes Pain-Related Anxiety (ACC Kalirin-7 Dependent)
     - claim_refs: EC-0063 (EXTENDED)
-  - `RULE-karilin7_Kalirin7-12` [up] Kalirin-7 (GEF for Rac1/RhoG) loss causes Dendritic Spine Loss (ACC Layer II/III Pyramidal)
+  - `RULE-karilin7_Kalirin7-12` [down] Kalirin-7 (GEF for Rac1/RhoG) loss causes Dendritic Spine Loss (ACC Layer II/III Pyramidal)
     - claim_refs: EC-0062 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-15` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
     - claim_refs: EC-0067 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-16` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Dendritic Spine Loss (ACC Layer II/III Pyramidal)
+  - `RULE-karilin7_Kalirin7-16` [down] Kalirin-7 (GEF for Rac1/RhoG) rationale for Dendritic Spine Loss (ACC Layer II/III Pyramidal)
     - claim_refs: EC-0065 (CONFIRMED)
-  - `RULE-karilin7_Kalirin7-17` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC Kalirin-7 Dependent)
+  - `RULE-karilin7_Kalirin7-17` [down] Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC Kalirin-7 Dependent)
     - claim_refs: EC-0066 (EXTENDED)
   - `RULE-karilin7_Kalirin7-18` [up] Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7 Role
     - claim_refs: (none)

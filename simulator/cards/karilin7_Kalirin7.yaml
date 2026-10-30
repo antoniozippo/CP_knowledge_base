@@ -80,14 +80,14 @@ pathological_rules:
     Kalirin-7 Dependent)
   claim_refs:
   - EC-0063
-  direction: up
+  direction: down
   magnitude_hint: null
 - rule_id: RULE-karilin7_Kalirin7-12
   description: Kalirin-7 (GEF for Rac1/RhoG) loss causes Dendritic Spine Loss (ACC
     Layer II/III Pyramidal)
   claim_refs:
   - EC-0062
-  direction: up
+  direction: down
   magnitude_hint: null
 - rule_id: RULE-karilin7_Kalirin7-15
   description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
@@ -100,14 +100,14 @@ pathological_rules:
     Layer II/III Pyramidal)
   claim_refs:
   - EC-0065
-  direction: up
+  direction: down
   magnitude_hint: null
 - rule_id: RULE-karilin7_Kalirin7-17
   description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Pain-Related Anxiety (ACC
     Kalirin-7 Dependent)
   claim_refs:
   - EC-0066
-  direction: up
+  direction: down
   magnitude_hint: null
 - rule_id: RULE-karilin7_Kalirin7-18
   description: Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7

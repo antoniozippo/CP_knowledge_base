@@ -194,7 +194,7 @@ class TestSignInference:
 
     @pytest.mark.parametrize(
         "relation",
-        ["upregulates_translation", "loss_causes", "activates_GEF", "enhances_excitability_of"],
+        ["upregulates_translation", "causes_sensitization", "activates_GEF", "enhances_excitability_of"],
     )
     def test_positive_stems(self, relation):
         sign, _summary = self._signed_pair(relation)
@@ -207,6 +207,39 @@ class TestSignInference:
     def test_negative_stems(self, relation):
         sign, _summary = self._signed_pair(relation)
         assert sign == -1
+
+    def test_loss_of_function_relation_is_negative(self):
+        # "A loss_causes B": less A -> more B
+        sign, _summary = self._signed_pair("loss_causes")
+        assert sign == -1
+
+    @staticmethod
+    def _signed_links(relations):
+        nodes = [make_node("a", "Alpha kinase"), make_node("b", "Beta peptide")]
+        graph = {
+            "directed": True,
+            "multigraph": True,
+            "graph": {},
+            "nodes": nodes,
+            "links": [make_link("a", "b", r) for r in relations],
+            "hyperedges": [],
+        }
+        out, summary = bg.build_graph(graph)
+        return {l["relation"]: l["sign"] for l in out["links"]}, summary
+
+    def test_rationale_takes_sign_of_parallel_causal_edge(self):
+        signs, summary = self._signed_links(["loss_causes", "rationale_for"])
+        assert signs == {"loss_causes": -1, "rationale_for": -1}
+        assert summary["rationale_signs_aligned"] == 1
+
+    def test_rationale_zeroed_when_parallel_causal_edges_disagree(self):
+        signs, _summary = self._signed_links(["activates", "inhibits", "rationale_for"])
+        assert signs["rationale_for"] == 0
+
+    def test_lone_rationale_keeps_default_sign(self):
+        signs, summary = self._signed_links(["rationale_for", "references"])
+        assert signs["rationale_for"] == 1
+        assert summary["rationale_signs_aligned"] == 0
 
     def test_unmatched_relation_is_neutral(self):
         sign, _summary = self._signed_pair("mechanistically_parallels")

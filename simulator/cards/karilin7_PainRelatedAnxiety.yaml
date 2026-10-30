@@ -12,7 +12,7 @@ pathological_rules: []
 inbound_edges:
 - source_id: karilin7_Kalirin7
   relation: loss_causes
-  sign: 1
+  sign: -1
   weight: 0.9
   validation_status: EXTENDED
   neutral_ok: false
