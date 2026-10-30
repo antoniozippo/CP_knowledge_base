@@ -17241,8 +17241,14 @@
       "rationale": null,
       "source": "bbb_bbb",
       "target": "AngPt_angiopoietin_2",
-      "sign": -1,
-      "validation_status": "EXTENDED"
+      "sign": 0,
+      "validation_status": "EXTENDED",
+      "correction": "neutralized_duplicate",
+      "original_source": "bbb_bbb",
+      "original_target": "AngPt_angiopoietin_2",
+      "original_sign": -1,
+      "correction_quote": "Ang-2 is a known disruptor of the blood-brain barrier (BBB) and blood-spinal cord barrier (BSCB)",
+      "correction_source_ref": "AngPt.md:L18"
     },
     {
       "relation": "stabilizes",

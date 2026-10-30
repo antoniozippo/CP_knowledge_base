@@ -1,5 +1,5 @@
-generated_at_utc: '2026-10-30T16:29:08Z'
-input_graph_sha256: 40bc3494bd5fb7e160ebaf18f561236d357795d1e8aaefdde5986ce1913af43e
+generated_at_utc: '2026-10-30T16:31:40Z'
+input_graph_sha256: daa1f013929e0f39a10d889a2f933534e750906773103c66b19caa08e36efbcd
 counts_by_tier:
   HUB: 9
   MID: 123
@@ -27,7 +27,7 @@ cards:
   sha256: e00b838653461ca9074d94797d41b4e9634dac5a4dc78748a4be80a85f8e8bd8
 - id: AngPt_angiopoietin_2
   file: AngPt_angiopoietin_2.yaml
-  sha256: 682cdfea6dfc51b411eede7b4af42a60fff3c23cde1a37f2df57be7224756e42
+  sha256: 93c96048cd6f20532a84b9c2a6f29d768211dd802ab46bdd6ada380f9f033210
 - id: AngPt_fumagillin
   file: AngPt_fumagillin.yaml
   sha256: d08ae33a79dbce0b57ca10eec8477fb9c745a5d113a393a8bef87b937391ef6b
@@ -474,7 +474,7 @@ cards:
   sha256: 3032d6c44ef941181ac213ab3f5c2414e1d3eb3f2a783badbc42e30759f4fcad
 - id: bbb_bbb
   file: bbb_bbb.yaml
-  sha256: c10a98e0c4211ff42cbaa59d7d7a66c47113355edbca1058a38fef89f60e12ff
+  sha256: a90f711fbc6f9b8d497dbed253693b79152f95de2558e7ba4a670997b4540e91
 - id: bdnftrkb_trkb_fc
   file: bdnftrkb_trkb_fc.yaml
   sha256: 6fdc12b772c5ddfbae1e3c0ce95ee6e4cb01b3c02027a01792d772b7ae7716ae
@@ -1132,7 +1132,7 @@ cards:
 - id: wnt_wnt
   file: wnt_wnt.yaml
   sha256: 91f6343dcbcbfc44f6968581f8a49fd29da3b9da9ea3aa12d19a2d10dafc3c1b
-card_set_hash: f6f739b899783ac0c3fe710d2b9a315aa8905945de72d93810de1a576709e15e
+card_set_hash: 25476efaab95eb0281bb86aa2d94cd6407235ea569a54034f4ed52397ef4556f
 dropped_refuted_rules: 8
 mixed_annotated: 4
 unresolved_endpoint_drops: 27

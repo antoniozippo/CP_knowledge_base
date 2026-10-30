@@ -432,6 +432,18 @@
   source_location: L13
   claim_refs:
   - EC-0118
+- source: bbb_bbb
+  target: AngPt_angiopoietin_2
+  relation: disrupts
+  sign: -1
+  action: neutralize
+  quote: Ang-2 is a known disruptor of the blood-brain barrier (BBB) and blood-spinal cord barrier (BSCB)
+  source_file: AngPt.md
+  source_location: L18
+  claim_refs:
+  - EC-0013
+  note: Corrected orientation already exists as closure edge AngPt_angiopoietin_2 -disrupts(+1)-> bbb_bbb;
+    zeroed rather than reversed to avoid a parallel edge with conflicting sign.
 - source: vegf_VEGFR2
   target: vegf_nrp1
   relation: enhances_signaling_of
