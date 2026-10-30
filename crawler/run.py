@@ -308,7 +308,7 @@ Examples:
   python3 crawler/run.py --dry-run                # Report only, no changes
   python3 crawler/run.py --since 2026-01-01       # Override date range
   python3 crawler/run.py --budget 500             # Override LLM budget
-  python3 crawler/run.py --min-mesh-freq 5        # Higher discovery threshold
+  python3 crawler/run.py --min-mesh-freq 50       # Stricter discovery threshold
         """,
     )
     parser.add_argument("--theme", action="append", dest="themes",
@@ -337,8 +337,8 @@ Examples:
                         help="Claude effort level (anthropic provider only; default medium)")
     parser.add_argument("--llm-max-tokens", type=int, default=4096,
                         help="Max tokens for LLM extraction (default: 4096)")
-    parser.add_argument("--min-mesh-freq", type=int, default=3,
-                        help="Min frequency for MeSH discovery (default: 3)")
+    parser.add_argument("--min-mesh-freq", type=int, default=20,
+                        help="Min papers for a MeSH term to be proposed (default: 20)")
     parser.add_argument("--dry-run", action="store_true",
                         help="Report only, no graph changes or commits")
     parser.add_argument("--no-commit", action="store_true",

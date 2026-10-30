@@ -82,7 +82,7 @@ class MeshDiscovery:
     def discover(
         self,
         papers: list,
-        min_frequency: int = 3,
+        min_frequency: int = 20,
     ) -> list[DiscoveredTerm]:
         """Discover new MeSH terms from crawled papers.
 
@@ -94,7 +94,8 @@ class MeshDiscovery:
             ``PaperMeta`` dataclass instances.
         min_frequency : int
             Minimum number of distinct papers in which a MeSH term must
-            appear to be proposed.
+            appear to be proposed. Default 20: at 3, a full crawl (~5.5k
+            papers) proposed 1,942 terms, mostly generic study descriptors.
 
         Returns
         -------
