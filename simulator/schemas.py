@@ -113,6 +113,7 @@ class Readout(_StrictModel):
     pain_score: float = Field(ge=0.0, le=1.0)
     barrier_integrity: float = Field(ge=0.0, le=1.0)
     inflammation_index: float = Field(ge=0.0, le=1.0)
+    affect_index: float = Field(ge=0.0, le=1.0)
 
 
 class WorldState(_StrictModel):

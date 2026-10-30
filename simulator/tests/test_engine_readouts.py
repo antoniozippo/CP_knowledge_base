@@ -1,6 +1,8 @@
 import pytest
 
 from simulator.readouts import (
+    AFFECT_ENTITY_TYPES,
+    AFFECT_LABELS,
     BARRIER_ENTITY_TYPES,
     BARRIER_LABELS,
     INFLAMMATION_ENTITY_TYPES,
@@ -128,3 +130,26 @@ def test_drug_and_rationale_nodes_excluded_from_readouts():
     }
     states = {"tnf": 0.6, "ifx": 0.0, "why": 0.0, "ant": 0.0}
     assert compute_readouts(states, cards).inflammation_index == pytest.approx(0.6)
+
+
+def test_affect_labels_and_entity_restriction():
+    assert AFFECT_LABELS == ["anxiety", "aversi", "depress", "fear", "affective"]
+    assert AFFECT_ENTITY_TYPES == {"symptom"}
+
+
+def test_affective_symptoms_leave_pain_and_form_affect_index():
+    cards = {
+        "allo": card("allo", "Mechanical Allodynia", entity_type="symptom"),
+        "anx": card("anx", "Pain-Related Anxiety (ACC Kalirin-7 Dependent)", entity_type="symptom"),
+        "dep": card("dep", "Pain-induced depression", entity_type="symptom"),
+        "conc": card("conc", "Anxiety concept", entity_type="concept"),
+    }
+    states = {"allo": 0.7, "anx": 0.2, "dep": 0.4, "conc": 0.9}
+    r = compute_readouts(states, cards)
+    assert r.pain_score == pytest.approx(0.7)
+    assert r.affect_index == pytest.approx((0.2 + 0.4) / 2)
+
+
+def test_affect_index_zero_when_no_affective_symptom():
+    cards = {"allo": card("allo", "Mechanical Allodynia", entity_type="symptom")}
+    assert compute_readouts({"allo": 0.7}, cards).affect_index == 0.0

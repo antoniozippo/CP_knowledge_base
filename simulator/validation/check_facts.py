@@ -35,7 +35,7 @@ DEFAULT_REPORT = Path("simulator/reports/facts_report.md")
 KINDS = frozenset(
     {"readout_threshold", "ordering_pair", "drug_effect", "stability_bound", "determinism"}
 )
-READOUT_NAMES = ("pain_score", "inflammation_index", "barrier_integrity")
+READOUT_NAMES = ("pain_score", "inflammation_index", "barrier_integrity", "affect_index")
 COMPARATORS = {
     "<": operator.lt,
     "<=": operator.le,

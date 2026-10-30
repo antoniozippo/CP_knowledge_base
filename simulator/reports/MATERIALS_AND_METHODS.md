@@ -102,10 +102,11 @@ where `sign_ji ∈ {−1, +1}` (inhibitory/excitatory), `weight_ji` = edge weigh
 
 ### 3.3 Readouts
 
-Computed per tick from agent states:
-- **pain_score**: weighted sum over `shared_pain`, `shared_mechanical_allodynia`, `shared_central_sensitization`, `shared_neuroinflammation`
-- **inflammation_index**: `shared_microglia` + `TNF_TNF_alpha` + `shared_neuroinflammation`
-- **barrier_integrity**: inverse of `bbb_bbb` disruption + `PNN_ECM_MMP9` degradation
+Computed per tick in `simulator/readouts.py` as unweighted means of agent states, selected by label substring and entity type. Nodes whose label marks a drug or argument node (`Rationale:`, antibody, mAb, antagonist, inhibitor, blocker) never count. An empty selection gives 0.0.
+- **pain_score** (sensory): `symptom` nodes matching allodynia / hyperalgesia / pain, excluding affective symptoms. Current card set: `shared_mechanical_allodynia`.
+- **affect_index** (emotional): `symptom` nodes matching anxiety / aversion / depression / fear / affective. Current card set: `karilin7_PainRelatedAnxiety`. Reported separately so the sensory and emotional dimensions of pain are not averaged together.
+- **inflammation_index**: molecule / receptor / channel / pathway / process nodes matching TNF / IL-1 / IL-6 / NLRP3 / prostaglandin / PGE2 (7 nodes in the current set).
+- **barrier_integrity**: 1 − mean of `structure` nodes matching BBB / BSCB / barrier integrity / vascular permeability (high state = disruption).
 
 ---
 

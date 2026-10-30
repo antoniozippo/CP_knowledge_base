@@ -95,7 +95,7 @@ def make_world(**overrides):
         tick=4,
         epoch=Epoch.SUBACUTE,
         states={"TNF_tnf": 0.7, "KCC2_kcc2": 0.2},
-        readouts=Readout(pain_score=0.6, barrier_integrity=0.8, inflammation_index=0.5),
+        readouts=Readout(pain_score=0.6, barrier_integrity=0.8, inflammation_index=0.5, affect_index=0.05),
     )
     base.update(overrides)
     return WorldState(**base)
@@ -267,12 +267,12 @@ class TestStateDelta:
 
 class TestReadout:
     def test_valid_readout(self):
-        readout = Readout(pain_score=0.0, barrier_integrity=1.0, inflammation_index=0.5)
+        readout = Readout(pain_score=0.0, barrier_integrity=1.0, inflammation_index=0.5, affect_index=0.05)
         assert readout.pain_score == 0.0
 
     def test_pain_score_bounded(self):
         with pytest.raises(ValidationError):
-            Readout(pain_score=1.5, barrier_integrity=0.5, inflammation_index=0.5)
+            Readout(pain_score=1.5, barrier_integrity=0.5, inflammation_index=0.5, affect_index=0.05)
 
 
 class TestWorldState:

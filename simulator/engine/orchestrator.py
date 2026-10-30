@@ -456,7 +456,8 @@ def main(argv: list[str] | None = None) -> int:
         f"run complete: ticks={len(logs)} final_tick={final.tick} "
         f"pain={final.readouts.pain_score:.4f} "
         f"inflammation={final.readouts.inflammation_index:.4f} "
-        f"barrier_integrity={final.readouts.barrier_integrity:.4f} -> {out_dir}"
+        f"barrier_integrity={final.readouts.barrier_integrity:.4f} "
+        f"affect={final.readouts.affect_index:.4f} -> {out_dir}"
     )
     return 0
 

@@ -42,6 +42,7 @@ def make_log(
                 pain_score=pain,
                 barrier_integrity=barrier,
                 inflammation_index=inflammation,
+                affect_index=0.05,
             ),
         ),
     )

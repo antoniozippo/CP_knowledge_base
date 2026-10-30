@@ -419,6 +419,23 @@ class TestCompareMode:
         heading = text.split("\n## 8")[1].splitlines()[0]
         assert "A vs B" in heading and "alpha" in heading and "beta" in heading
 
+    def test_compare_skips_readout_missing_from_older_run(self, tmp_path):
+        common = range(1, 5)
+        states = {t: {"mig": 0.5} for t in common}
+        new_readouts = {t: {**r, "affect_index": 0.3} for t, r in const_readouts(common).items()}
+        old = make_run(tmp_path / "old", name="old", horizon=4,
+                       readouts_by_tick=const_readouts(common), states_by_tick=states)
+        new = make_run(tmp_path / "new", name="new", horizon=4,
+                       readouts_by_tick=new_readouts, states_by_tick=states)
+        cards = tmp_path / "c"
+        write_card(cards, base_card("mig", "Microglia"))
+        mixed = generate_report(run_dir=old, compare_dir=new, out_path=tmp_path / "a.md",
+                                cards_dir=cards).split("## 8")[1]
+        both = generate_report(run_dir=new, compare_dir=new, out_path=tmp_path / "b.md",
+                               cards_dir=cards).split("## 8")[1]
+        assert "| pain_score |" in mixed and "| affect_index |" not in mixed
+        assert "| affect_index | 0.3000 |" in both
+
     def test_compare_section_absent_without_compare(self, simple_run, simple_cards, tmp_path):
         text = generate(simple_run, simple_cards, tmp_path)
         assert "## 8" not in text

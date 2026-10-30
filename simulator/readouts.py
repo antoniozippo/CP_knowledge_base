@@ -3,10 +3,15 @@
 Matching is lowercase substring against card labels AND restricted per
 readout to appropriate entity types (pain reports are symptoms; inflam-
 mation mediators are molecular species/pathways; barriers are anatomical
-structures). Matched-id sets are sorted so results are deterministic
+structures).
+
+pain_score is the sensory component only. Affective symptoms (anxiety,
+aversion, depression, fear) form the separate affect_index and are removed
+from pain_score even when their label also says "pain" (e.g. "Pain-Related
+Anxiety"), so emotional and sensory dimensions of pain are reported apart. Matched-id sets are sorted so results are deterministic
 regardless of dict insertion order. Empty match convention: a mean over
-an empty match set is defined as 0.0, so pain_score/inflammation_index
-report 0.0 when nothing matches; barrier nodes model leak/disruption by
+an empty match set is defined as 0.0, so pain_score/inflammation_index/
+affect_index report 0.0 when nothing matches; barrier nodes model leak/disruption by
 HIGH activity, therefore barrier_integrity = 1 - mean(matched barrier
 states), which yields 1.0 when no barrier node matches (no modeled
 disruption).
@@ -24,6 +29,8 @@ from simulator.schemas import AgentCard, Readout
 
 PAIN_LABELS = ["allodynia", "hyperalgesia", "pain"]
 PAIN_ENTITY_TYPES = {"symptom"}
+AFFECT_LABELS = ["anxiety", "aversi", "depress", "fear", "affective"]
+AFFECT_ENTITY_TYPES = {"symptom"}
 INFLAMMATION_LABELS = ["tnf", "il-1", "il-6", "nlrp3", "prostaglandin", "pge2"]
 INFLAMMATION_ENTITY_TYPES = {"molecule", "receptor", "channel", "pathway", "process"}
 BARRIER_LABELS = [
@@ -63,7 +70,11 @@ def _mean_or_zero(ids: list[str], states_by_id: dict[str, float]) -> float:
 def compute_readouts(
     states_by_id: dict[str, float], cards_by_id: dict[str, AgentCard]
 ) -> Readout:
-    pain_ids = _matched_ids(PAIN_LABELS, PAIN_ENTITY_TYPES, cards_by_id)
+    affect_ids = _matched_ids(AFFECT_LABELS, AFFECT_ENTITY_TYPES, cards_by_id)
+    pain_ids = [
+        cid for cid in _matched_ids(PAIN_LABELS, PAIN_ENTITY_TYPES, cards_by_id)
+        if cid not in set(affect_ids)
+    ]
     inflammation_ids = _matched_ids(
         INFLAMMATION_LABELS, INFLAMMATION_ENTITY_TYPES, cards_by_id
     )
@@ -75,4 +86,5 @@ def compute_readouts(
         pain_score=pain,
         barrier_integrity=barrier_integrity,
         inflammation_index=inflammation,
+        affect_index=_mean_or_zero(affect_ids, states_by_id),
     )

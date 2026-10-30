@@ -30,7 +30,8 @@ def make_log(tick: int, states: dict[str, float], pain: float = 0.05) -> TickLog
             epoch=Epoch.from_tick(tick + 1),
             states=states,
             readouts=Readout(
-                pain_score=pain, barrier_integrity=1.0, inflammation_index=0.5
+                pain_score=pain, barrier_integrity=1.0, inflammation_index=0.5,
+                affect_index=0.05,
             ),
         ),
     )

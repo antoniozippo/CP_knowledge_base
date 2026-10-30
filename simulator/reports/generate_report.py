@@ -38,7 +38,7 @@ KEY_LABELS = [
     "parvalbumin",
     "allodynia",
 ]
-READOUT_FIELDS = ("pain_score", "inflammation_index", "barrier_integrity")
+READOUT_FIELDS = ("pain_score", "inflammation_index", "barrier_integrity", "affect_index")
 PIN_THRESHOLD = 0.20
 STATE_EPS = 1e-9
 OSC_WINDOW_TICKS = 10
@@ -313,7 +313,12 @@ def write_readout_plot(run: RunData, png_path: Path) -> Path:
 
     ticks = sorted(set(run.readouts_by_tick) & set(run.states_by_tick))
     fig, ax = plt.subplots(figsize=(8, 4.5))
-    colors = {"pain_score": "#d62728", "inflammation_index": "#ff7f0e", "barrier_integrity": "#1f77b4"}
+    colors = {
+        "pain_score": "#d62728",
+        "inflammation_index": "#ff7f0e",
+        "barrier_integrity": "#1f77b4",
+        "affect_index": "#9467bd",
+    }
     for name in READOUT_FIELDS:
         ys = [run.readouts_by_tick[t].get(name, float("nan")) for t in ticks]
         ax.plot(ticks, ys, label=name, color=colors[name], linewidth=1.5)
@@ -371,8 +376,8 @@ def _section_trajectories(run: RunData, embed_rel: str | None) -> str:
     if embed_rel:
         lines += [f"![readout trajectories]({embed_rel})", ""]
     lines += [
-        "| day | pain_score | inflammation_index | barrier_integrity |",
-        "|---|---|---|---|",
+        "| day | pain_score | inflammation_index | barrier_integrity | affect_index |",
+        "|---|---|---|---|---|",
     ]
     for tick in sampled_ticks(ticks, horizon):
         ro = run.readouts_by_tick[tick]
@@ -567,6 +572,9 @@ def _section_compare(run_a: RunData, run_b: RunData) -> str:
         "|---|---|---|---|---|---|",
     ]
     for name in READOUT_FIELDS:
+        # runs saved before a readout existed (e.g. affect_index) lack it
+        if not all(name in run.readouts_by_tick[t] for run in (run_a, run_b) for t in common):
+            continue
         mean_a = sum(run_a.readouts_by_tick[t][name] for t in common) / len(common)
         mean_b = sum(run_b.readouts_by_tick[t][name] for t in common) / len(common)
         lines.append(
