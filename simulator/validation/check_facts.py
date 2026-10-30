@@ -56,6 +56,19 @@ class FactResult:
     expected: str
     observed: str
     passed: bool
+    known_gap: str | None = None
+
+    @property
+    def verdict(self) -> str:
+        """PASS / FAIL, or for a known gap KNOWN_GAP (still failing, as
+        documented) / XPASS (now passing: drop the known_gap marker)."""
+        if self.known_gap:
+            return "XPASS" if self.passed else "KNOWN_GAP"
+        return "PASS" if self.passed else "FAIL"
+
+    @property
+    def ok(self) -> bool:
+        return self.verdict in ("PASS", "KNOWN_GAP")
 
 
 class FakeLLMClient:
@@ -128,6 +141,10 @@ def load_facts(path: str | Path = FACTS_YAML) -> list[dict]:
             raise ValueError(f"{where}: unknown kind '{fact['kind']}'")
         if not isinstance(fact["params"], dict):
             raise ValueError(f"{where}: params must be a mapping")
+        if "known_gap" in fact and not (
+            isinstance(fact["known_gap"], str) and fact["known_gap"].strip()
+        ):
+            raise ValueError(f"{where}: known_gap must be a non-empty reason string")
         _validate_params(fact["kind"], fact["params"], where)
     return facts
 
@@ -447,6 +464,7 @@ def evaluate_fact(fact: dict, ctx: dict) -> FactResult:
         expected=expected,
         observed=observed,
         passed=bool(passed),
+        known_gap=(fact.get("known_gap") or "").strip() or None,
     )
 
 
@@ -575,16 +593,29 @@ def render_markdown(results: list[FactResult]) -> str:
         observed = r.observed.replace("|", "/")
         lines.append(
             f"| {r.id} | {claim} | {r.source_ref} | {expected} | {observed} "
-            f"| {'PASS' if r.passed else 'FAIL'} |"
+            f"| {r.verdict} |"
         )
-    total = len(results)
-    passed = sum(1 for r in results if r.passed)
-    lines += [
-        "",
-        f"Overall: {'PASS' if passed == total else 'FAIL'} ({passed}/{total} facts)",
-        "",
-    ]
+    lines += ["", f"Overall: {summary_line(results)}", ""]
+    gaps = [r for r in results if r.known_gap]
+    if gaps:
+        lines += ["## Known gaps", ""]
+        lines += [f"- **{r.id}** ({r.verdict}): {r.known_gap}" for r in gaps]
+        lines.append("")
     return "\n".join(lines)
+
+
+def summary_line(results: list[FactResult]) -> str:
+    """'PASS (19/19 facts, 1 known gap)'; FAIL on any FAIL or XPASS."""
+    graded = [r for r in results if not r.known_gap]
+    passed = sum(1 for r in graded if r.passed)
+    text = f"{'PASS' if all(r.ok for r in results) else 'FAIL'} ({passed}/{len(graded)} facts"
+    gaps = len(results) - len(graded)
+    if gaps:
+        text += f", {gaps} known gap{'s' if gaps > 1 else ''}"
+    xpass = [r.id for r in results if r.verdict == "XPASS"]
+    if xpass:
+        text += f"; now passing, remove known_gap: {', '.join(xpass)}"
+    return text + ")"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -600,12 +631,8 @@ def main(argv: list[str] | None = None) -> int:
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(render_markdown(results))
-    passed = sum(1 for r in results if r.passed)
-    print(
-        f"facts harness: {'PASS' if passed == len(results) else 'FAIL'} "
-        f"({passed}/{len(results)} facts) -> {report_path}"
-    )
-    return 0 if passed == len(results) else 1
+    print(f"facts harness: {summary_line(results)} -> {report_path}")
+    return 0 if all(r.ok for r in results) else 1
 
 
 if __name__ == "__main__":

@@ -510,9 +510,9 @@ def checked(tmp_path_factory):
 class TestRunChecksIntegration:
     def test_all_facts_pass(self, checked):
         results, _ = checked
-        failures = [r for r in results if not r.passed]
+        failures = [r for r in results if not r.ok]
         assert not failures, "\n".join(
-            f"{r.id}: expected {r.expected}, observed {r.observed}" for r in failures
+            f"{r.id} ({r.verdict}): expected {r.expected}, observed {r.observed}" for r in failures
         )
 
     def test_report_written_and_deterministic(self, checked):
@@ -521,8 +521,10 @@ class TestRunChecksIntegration:
         path = out_dir / "facts_report.md"
         assert path.exists()
         assert path.read_text() == report
-        assert report.count("| PASS |") == len(results)
-        assert "| FAIL |" not in report
+        gaps = sum(1 for r in results if r.known_gap)
+        assert report.count("| PASS |") == len(results) - gaps
+        assert report.count("| KNOWN_GAP |") == gaps
+        assert "| FAIL |" not in report and "| XPASS |" not in report
 
     def test_covers_all_kinds(self, checked):
         results, _ = checked
@@ -530,7 +532,7 @@ class TestRunChecksIntegration:
         assert kinds == set(KINDS)
 
 
-def _single_fact_yaml(path: Path, value: float) -> Path:
+def _single_fact_yaml(path: Path, value: float, known_gap: str | None = None) -> Path:
     fact = {
         "id": "F-90",
         "claim": "naive pain stays below threshold (synthetic exit-code probe)",
@@ -543,13 +545,15 @@ def _single_fact_yaml(path: Path, value: float) -> Path:
             "value": value,
         },
     }
+    if known_gap is not None:
+        fact["known_gap"] = known_gap
     path.write_text(yaml.safe_dump({"facts": [fact]}))
     return path
 
 
 class TestMainExitCode:
-    def _run_main(self, tmp_path, value):
-        facts = _single_fact_yaml(tmp_path / "facts.yaml", value)
+    def _run_main(self, tmp_path, value, known_gap=None):
+        facts = _single_fact_yaml(tmp_path / "facts.yaml", value, known_gap)
         report = tmp_path / "facts_report.md"
         code = main(
             [
@@ -574,3 +578,25 @@ class TestMainExitCode:
         text = report.read_text()
         assert "| PASS |" in text
         assert "| FAIL |" not in text
+
+
+class TestKnownGap:
+    def test_failing_known_gap_reports_known_gap_and_exits_zero(self, tmp_path):
+        code, report = TestMainExitCode()._run_main(tmp_path, 0.01, known_gap="not modeled yet")
+        text = report.read_text()
+        assert code == 0
+        assert "| KNOWN_GAP |" in text and "| FAIL |" not in text
+        assert "Overall: PASS (0/0 facts, 1 known gap)" in text
+        assert "- **F-90** (KNOWN_GAP): not modeled yet" in text
+
+    def test_passing_known_gap_is_xpass_and_fails_harness(self, tmp_path):
+        code, report = TestMainExitCode()._run_main(tmp_path, 0.5, known_gap="not modeled yet")
+        text = report.read_text()
+        assert code == 1
+        assert "| XPASS |" in text
+        assert "now passing, remove known_gap: F-90" in text
+
+    def test_blank_known_gap_rejected(self, tmp_path):
+        path = _single_fact_yaml(tmp_path / "facts.yaml", 0.5, known_gap="  ")
+        with pytest.raises(ValueError, match="known_gap"):
+            load_facts(path)

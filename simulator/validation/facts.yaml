@@ -11,7 +11,10 @@
 #
 # Thresholds are calibrated on the current card set (rules-only runs,
 # seed 0); they assert direction and rough magnitude of published effects,
-# not exact values. All facts must PASS for the harness to exit 0.
+# not exact values. All facts must PASS for the harness to exit 0, except
+# those carrying a known_gap reason: a published effect the model does not
+# yet reproduce. They report KNOWN_GAP while failing; if one starts passing
+# it reports XPASS and fails the harness until the marker is removed.
 #
 # RECALIBRATION LOG:
 #   2026-08-26 - F-04/F-13/F-16 effect-size margins lowered (0.03 -> 0.015/
@@ -162,6 +165,21 @@ facts:
     source_ref: "theme_03#F3.1"
     kind: readout_threshold
     params: {scenario: cipn_28d, vs_scenario: naive_28d, readout: pain_score, window: [14, 28], min_gap: 0.05}
+
+  - id: F-22
+    claim: >-
+      Nerve injury produces pain-related anxiety: in the established chronic
+      phase (day 29 onward) the affect index of SNI animals sits above naive
+      by more than the separation margin.
+    source_ref: "theme_10#F10.6"
+    kind: readout_threshold
+    params: {scenario: sni_180d, vs_scenario: naive_180d, readout: affect_index, window: [29, 179], min_gap: 0.05}
+    known_gap: >-
+      The comorbidity is supported (theme_10 F10.6) but the KB has no
+      evidence-backed path from injury to the affect readout: its only input
+      is ACC Kalirin-7, whose injury-induced downregulation is REFUTED
+      (F10.1). The verified ACC mechanisms (pre-LTP via kainate/AC1/HCN,
+      F10.2; rACC BDNF-TrkB aversion, F10.4) are not yet encoded.
 
   # ------------------------------------------------------------------
   # drug_effect
