@@ -621,3 +621,12 @@ def test_claims_follow_links_onto_split_nodes():
     assert bc.matching_claim_ids(prepared, "loss_causes", "k_acc", "anx") == ["EC-1"]
     assert bc.matching_claim_ids(prepared, "activates", "k", "rac1") == ["EC-2"]
     assert bc.matching_claim_ids(prepared, "activates", "rac1", "anx") == []
+
+
+def test_unreviewed_crawled_links_do_not_reach_cards():
+    reviewed = {"origin": "auto_crawled", "validation_status": "CONFIRMED"}
+    assert not bc.simulation_eligible({"origin": "auto_crawled", "validation_status": "UNREVIEWED"})
+    assert not bc.simulation_eligible({"origin": "auto_crawled"})
+    assert bc.simulation_eligible(reviewed)
+    assert bc.simulation_eligible({"origin": "dynamic_closure"})
+    assert bc.simulation_eligible({"validation_status": None})

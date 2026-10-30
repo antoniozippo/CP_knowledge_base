@@ -21,6 +21,10 @@ log = logging.getLogger(__name__)
 MATCHED_ENTITY_STATUSES = ("EXACT", "ALIAS", "FUZZY")
 # New evidence never flips these verdicts; it goes to human review instead.
 PROTECTED_VALIDATION_STATUSES = ("REFUTED", "MIXED")
+# Evidence policy: the crawler never rewrites validation_status (those
+# verdicts come from the literature sweeps). Supporting extractions are
+# appended to the link's crawler_evidence list, once per PMID, for review.
+EVIDENCE_FIELD = "crawler_evidence"
 
 class GraphUpdater:
     def __init__(
@@ -155,6 +159,8 @@ class GraphUpdater:
         Returns the new link dict.
         """
         now = datetime.now(timezone.utc).isoformat()
+        evidence = [{"pmid": source_pmid, "doi": source_doi, "quote": evidence_quote,
+                     "predicate": predicate, "sign": sign, "crawled_at": now}]
 
         link = {
             "relation": predicate,
@@ -173,6 +179,7 @@ class GraphUpdater:
             "source_doi": source_doi,
             "validation_status": "UNREVIEWED",
             "crawled_at": now,
+            EVIDENCE_FIELD: evidence,
         }
         self.links.append(link)
         log.info(
@@ -180,6 +187,27 @@ class GraphUpdater:
             subject_id, predicate, object_id, sign,
         )
         return link
+
+    def add_evidence(self, edge_index: int, em: EdgeMatch) -> bool:
+        """Append em as supporting evidence on a link; False if that PMID is
+        already recorded there (reruns and repeat mentions add nothing).
+
+        validation_status is left alone; confidence_score rises 0.05 per new
+        PMID (0.10 when the evidence adds a sign to an unsigned edge).
+        """
+        edge = self.links[edge_index]
+        evidence = edge.setdefault(EVIDENCE_FIELD, [])
+        if any(e.get("pmid") == em.source_pmid for e in evidence):
+            return False
+        evidence.append({
+            "pmid": em.source_pmid, "doi": em.source_doi, "quote": em.evidence_quote,
+            "predicate": em.predicate, "sign": em.sign,
+            "relation_type": em.relation_type or "CONFIRMS",
+            "crawled_at": datetime.now(timezone.utc).isoformat(),
+        })
+        bump = 0.10 if em.relation_type == "EXTENDS" else 0.05
+        edge["confidence_score"] = min((edge.get("confidence_score") or 0.5) + bump, 1.0)
+        return True
 
     def update_edge_validation(
         self,
@@ -325,14 +353,34 @@ class GraphUpdater:
         UpdateReport
         """
         report = UpdateReport()
+        by_name = {m.extracted_name: m for m in entity_matches}
 
-        # --- Phase 1: resolve entities (creates nodes for NO_MATCH) ---
+        # --- Phase 1: matched entities (new ones are created on demand below,
+        # only when a relationship links them to the graph) --------------------
         for match in entity_matches:
-            self._resolve_entity(match, report)
+            if match.status in MATCHED_ENTITY_STATUSES and match.matched_node_id:
+                self._resolve_entity(match, report)
+
+        # (source, target, sign) -> index of an auto-crawled link, so the same
+        # finding from several papers or reruns becomes one edge with evidence
+        crawled = {
+            (l["source"], l["target"], l.get("sign", 0)): i
+            for i, l in enumerate(self.links) if l.get("origin") == "auto_crawled"
+        }
+        linked_new: set[str] = set()
 
         # --- Phase 2: apply edges --------------------------------------
         for em in edge_matches:
             subj_id, obj_id = em.subject_id, em.object_id
+            if not subj_id or not obj_id:
+                new_name = em.subject_name if not subj_id else em.object_name
+                new_match = by_name.get(new_name)
+                if new_match is None:
+                    report.skipped += 1
+                    continue
+                node_id = self._resolve_entity(new_match, report)["id"]
+                linked_new.add(new_name)
+                subj_id, obj_id = (node_id, obj_id) if not subj_id else (subj_id, node_id)
             if subj_id not in self.node_ids or obj_id not in self.node_ids:
                 report.skipped += 1
                 report.details.append(f"Skipped edge (unknown node): {subj_id} -> {obj_id}")
@@ -344,10 +392,16 @@ class GraphUpdater:
 
             edge_idx = em.existing_edge_index if em.status == "EXISTS" else None
             if edge_idx is None:
+                key = (subj_id, obj_id, em.sign)
+                if key in crawled:
+                    if self.add_evidence(crawled[key], em):
+                        report.updated_edges += 1
+                    continue
                 self.add_edge(
                     subj_id, em.predicate, obj_id, em.sign,
                     em.evidence_quote, em.source_pmid, em.source_doi,
                 )
+                crawled[key] = len(self.links) - 1
                 report.new_edges += 1
                 report.details.append(f"New edge: {subj_id} --[{em.predicate}]--> {obj_id}")
                 continue
@@ -359,17 +413,19 @@ class GraphUpdater:
                 report.details.append(f"CONFLICT edge {edge_idx}: {reason}")
                 continue
 
-            self.update_edge_validation(edge_idx, "CONFIRMED", em.source_pmid, em.evidence_quote)
-            if em.relation_type == "EXTENDS":
-                old = self.links[edge_idx].get("confidence_score", 0.5)
-                self.links[edge_idx]["confidence_score"] = min(old + 0.05, 1.0)
-            report.updated_edges += 1
-            report.details.append(f"Updated edge {edge_idx} ({em.relation_type or 'CONFIRMS'})")
+            if self.add_evidence(edge_idx, em):
+                report.updated_edges += 1
+                report.details.append(f"Evidence on edge {edge_idx} ({em.relation_type or 'CONFIRMS'})")
 
+        report.unlinked_entities = sum(
+            1 for m in entity_matches
+            if m.status == "NO_MATCH" and m.extracted_name not in linked_new
+        )
         log.info(
-            "Update complete: +%d nodes, +%d edges, %d updated, %d conflicts, %d skipped",
+            "Update complete: +%d nodes, +%d edges, %d updated, %d conflicts, %d skipped, "
+            "%d new entities left out (no link to the graph)",
             report.new_nodes, report.new_edges, report.updated_edges,
-            report.conflicts, report.skipped,
+            report.conflicts, report.skipped, report.unlinked_entities,
         )
         return report
 
@@ -381,7 +437,7 @@ class GraphUpdater:
         self.graph["nodes"] = self.nodes
         self.graph["links"] = self.links
         self.graph_path.write_text(
-            json.dumps(self.graph, indent=2, ensure_ascii=False)
+            json.dumps(self.graph, indent=2, ensure_ascii=False) + "\n"
         )
         log.info(
             "Saved graph: %d nodes, %d links -> %s",

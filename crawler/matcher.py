@@ -348,19 +348,27 @@ class EntityMatcher:
 
                 if not subj_match or not obj_match:
                     continue
-                if not subj_match.matched_node_id or not obj_match.matched_node_id:
+                subj_id, obj_id = subj_match.matched_node_id, obj_match.matched_node_id
+                # A relationship with one new endpoint is what links a new
+                # entity to the graph, so it is kept; the updater creates the
+                # node. Two new endpoints would form an island: dropped.
+                if not subj_id and not obj_id:
                     continue
 
-                edge = self.match_edge(
-                    subj_match.matched_node_id,
-                    predicate,
-                    obj_match.matched_node_id,
+                evidence = dict(
                     sign=_field(rel, "sign", 0),
                     evidence_quote=_field(rel, "evidence_quote", ""),
                     source_pmid=_field(extraction, "pmid", ""),
                     source_doi=_field(extraction, "doi", ""),
                     extraction_confidence=_field(rel, "confidence", ""),
+                    subject_name=subj_name,
+                    object_name=obj_name,
                 )
+                if subj_id and obj_id:
+                    edge = self.match_edge(subj_id, predicate, obj_id, **evidence)
+                else:
+                    edge = EdgeMatch(subject_id=subj_id, predicate=predicate, object_id=obj_id,
+                                     status="NEW", **evidence)
                 edge_matches.append(edge)
 
         logger.info(

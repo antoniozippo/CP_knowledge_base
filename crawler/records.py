@@ -42,6 +42,10 @@ class EdgeMatch:
     relation_type: str = ""
     # LLM-reported confidence (HIGH | MEDIUM | LOW).
     extraction_confidence: str = ""
+    # Extracted names; subject_id/object_id is None while that endpoint is a
+    # new (NO_MATCH) entity the updater may create.
+    subject_name: str = ""
+    object_name: str = ""
 
 
 class UpdateReport(BaseModel):
@@ -52,4 +56,6 @@ class UpdateReport(BaseModel):
     updated_edges: int = 0
     conflicts: int = 0
     skipped: int = 0
+    # NO_MATCH entities left out because no relationship ties them to the graph
+    unlinked_entities: int = 0
     details: list[str] = Field(default_factory=list)

@@ -132,14 +132,27 @@ def test_supporting_evidence_for_a_refuted_edge_goes_to_human_review(tmp_path):
     assert manager.get_pending()[0].recommendation == "HUMAN_REVIEW"
 
 
-def test_confirming_an_unreviewed_edge_bumps_score_without_conflict(tmp_path):
-    updater, manager = _updater(tmp_path, [_link("activates", 1)])
+@pytest.mark.parametrize("status", [None, "UNREVIEWED", "NO_EVIDENCE_FOUND", "EXTENDED"])
+def test_confirming_evidence_is_recorded_without_touching_the_verdict(tmp_path, status):
+    updater, manager = _updater(tmp_path, [_link("activates", 1, status=status)])
     report = updater.update([], [_edge_match("CONFIRMS", 1)], [])
 
     assert (report.updated_edges, report.conflicts) == (1, 0)
-    assert updater.links[0]["validation_status"] == "CONFIRMED"
-    assert updater.links[0]["confidence_score"] == pytest.approx(0.55)
+    edge = updater.links[0]
+    assert edge.get("validation_status") == status
+    assert edge["confidence_score"] == pytest.approx(0.55)
+    assert [(e["pmid"], e["quote"], e["relation_type"]) for e in edge["crawler_evidence"]] == [
+        ("777", "evidence", "CONFIRMS")]
     assert manager.get_pending() == []
+
+
+def test_same_pmid_is_recorded_once_per_edge(tmp_path):
+    updater, _ = _updater(tmp_path, [_link("activates", 1)])
+    updater.update([], [_edge_match("CONFIRMS", 1)], [])
+    report = updater.update([], [_edge_match("CONFIRMS", 1)], [])
+    assert report.updated_edges == 0
+    assert len(updater.links[0]["crawler_evidence"]) == 1
+    assert updater.links[0]["confidence_score"] == pytest.approx(0.55)
 
 
 def test_extends_bumps_score_twice(tmp_path):

@@ -105,6 +105,19 @@ def resolve_label_ids(label, index):
     return resolved
 
 
+def simulation_eligible(link):
+    """False for crawler-added links nobody has reviewed yet.
+
+    crawler/run.py appends LLM-extracted links (origin auto_crawled,
+    validation_status UNREVIEWED). They stay in the graph as candidates but
+    only drive agents once a reviewer sets another validation_status.
+    """
+    return not (
+        link.get("origin") == "auto_crawled"
+        and link.get("validation_status") in (None, "UNREVIEWED")
+    )
+
+
 def split_children_of(nodes):
     """source id -> ids of nodes split from it (analysis/scripts/split_nodes.py)."""
     children = defaultdict(set)
@@ -522,6 +535,8 @@ def build_cards(graph, claims, verdicts, *, hub_enrich=False, vault_dir=None,
     inbound_by_target = defaultdict(list)
     outbound_by_source = defaultdict(list)
     for link in links:
+        if not simulation_eligible(link):
+            continue
         inbound_by_target[link["target"]].append(link)
         outbound_by_source[link["source"]].append(link)
 

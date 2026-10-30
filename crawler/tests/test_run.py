@@ -29,7 +29,15 @@ LLM_OUTPUT = {
             "sign": -1,
             "evidence_quote": "KCC2 is reduced in BDNF Val66Met carriers.",
             "confidence": "HIGH",
-        }
+        },
+        {
+            "subject": "Zorblax-9",
+            "predicate": "inhibits",
+            "object": "KCC2",
+            "sign": -1,
+            "evidence_quote": "Zorblax-9 inhibits KCC2 in DRG neurons.",
+            "confidence": "MEDIUM",
+        },
     ],
     "key_findings": [],
     "novel_terms": [],
@@ -43,7 +51,8 @@ def _meta(pmid=PMID, title="KCC2 in Val66Met carriers", abstract="meta abstract"
     )
 
 
-def _content(pmid=PMID, abstract="KCC2 is reduced in BDNF Val66Met carriers.", sections=None):
+def _content(pmid=PMID, abstract="KCC2 is reduced in BDNF Val66Met carriers. "
+             "Zorblax-9 inhibits KCC2 in DRG neurons.", sections=None):
     return PaperContent(
         pmid=pmid, pmcid=None, abstract_text=abstract, fulltext_xml=None,
         fulltext_sections=sections, is_fulltext=bool(sections),
@@ -58,7 +67,8 @@ def test_inputs_carry_title_from_meta_and_abstract_as_content():
         {
             "pmid": PMID,
             "title": "KCC2 in Val66Met carriers",
-            "content": "KCC2 is reduced in BDNF Val66Met carriers.",
+            "content": "KCC2 is reduced in BDNF Val66Met carriers. "
+                       "Zorblax-9 inhibits KCC2 in DRG neurons.",
         }
     ]
 
@@ -130,7 +140,8 @@ def test_pipeline_writes_new_node_and_edge_and_marks_pmid_processed(workspace, l
 
     graph = json.loads((tmp / "graphify-out/graph_v2.json").read_text())
     assert [n["label"] for n in graph["nodes"] if n.get("contributor") == "auto_crawler"] == ["Zorblax-9"]
-    (edge,) = [link for link in graph["links"] if link.get("origin") == "auto_crawled"]
+    (edge,) = [link for link in graph["links"]
+               if link.get("origin") == "auto_crawled" and link["relation"] == "downregulates"]
     assert edge["source_pmid"] == PMID and edge["sign"] == -1
     assert json.loads((tmp / "crawler/processed_pmids.json").read_text()) == [PMID]
 
@@ -209,8 +220,9 @@ def test_pipeline_records_contradiction_of_confirmed_edge_for_human_review(works
     assert run.run_pipeline(_args(), themes=themes) == 0
 
     saved = json.loads(graph_path.read_text())
-    assert [link for link in saved["links"] if link.get("origin") == "auto_crawled"] == []
-    assert saved["links"][-1] == seeded
+    assert [link for link in saved["links"] if link.get("origin") == "auto_crawled"
+            and (link["source"], link["target"]) == (val66, kcc2)] == []
+    assert seeded in saved["links"]
     conflicts = yaml.safe_load((tmp / "crawler/conflicts.yaml").read_text())["conflicts"]
     assert [(c["new_pmid"], c["recommendation"], c["resolved"]) for c in conflicts] == [(PMID, "HUMAN_REVIEW", False)]
     run_log = json.loads(next((tmp / "crawler/logs").glob("run_*.json")).read_text())

@@ -42,6 +42,13 @@ def extraction():
                 evidence_quote="Val66Met carriers showed reduced KCC2.",
                 confidence="HIGH",
             ),
+            ExtractedRelationship(
+                subject=NEW_ENTITY,
+                predicate="inhibits",
+                object="KCC2",
+                sign=-1,
+                evidence_quote="Zorblax-9 inhibits KCC2.",
+            ),
         ],
     )
 
@@ -58,7 +65,8 @@ def _run_pipeline(graph_copy, extraction):
 def test_matcher_output_feeds_updater_without_error(graph_copy, extraction):
     report, _, _, _ = _run_pipeline(graph_copy, extraction)
     assert report.new_nodes == 1
-    assert report.new_edges == 1
+    assert report.new_edges == 2
+    assert report.unlinked_entities == 0
 
 
 def test_new_entity_saved_with_provenance(graph_copy, extraction):
@@ -72,7 +80,8 @@ def test_new_entity_saved_with_provenance(graph_copy, extraction):
 def test_new_edge_saved_between_matched_nodes_with_provenance(graph_copy, extraction):
     _, entity_matches, _, saved = _run_pipeline(graph_copy, extraction)
     ids = {m.extracted_name: m.matched_node_id for m in entity_matches}
-    new_edges = [link for link in saved["links"] if link.get("origin") == "auto_crawled"]
+    new_edges = [link for link in saved["links"] if link.get("origin") == "auto_crawled"
+                 and link["source"] == ids["BDNF Val66Met Polymorphism"]]
     assert len(new_edges) == 1
     edge = new_edges[0]
     assert edge["source"] == ids["BDNF Val66Met Polymorphism"]
@@ -104,3 +113,36 @@ def test_novel_entity_sharing_generic_token_is_not_merged(graph_copy):
     matcher = EntityMatcher(graph_path=str(graph_copy))
     result = matcher.match_entity("Zorblax-9 kinase")
     assert result.status == "NO_MATCH"
+
+
+def test_new_entity_gets_its_linking_edge(graph_copy, extraction):
+    _, entity_matches, _, saved = _run_pipeline(graph_copy, extraction)
+    kcc2 = {m.extracted_name: m.matched_node_id for m in entity_matches}["KCC2"]
+    node = next(n for n in saved["nodes"] if n.get("label") == NEW_ENTITY)
+    (edge,) = [l for l in saved["links"] if l["source"] == node["id"]]
+    assert (edge["target"], edge["sign"], edge["origin"]) == (kcc2, -1, "auto_crawled")
+    assert edge["crawler_evidence"][0]["pmid"] == PMID
+
+
+def test_entity_without_a_link_to_the_graph_is_not_added(graph_copy, extraction):
+    orphan_only = extraction.model_copy(update={"relationships": extraction.relationships[:1]})
+    report, _, _, saved = _run_pipeline(graph_copy, orphan_only)
+    assert report.new_nodes == 0 and report.unlinked_entities == 1
+    assert not [n for n in saved["nodes"] if n.get("contributor") == "auto_crawler"]
+
+
+def test_same_finding_from_two_papers_is_one_edge_with_two_evidence_entries(graph_copy, extraction):
+    second = extraction.model_copy(update={"pmid": "99999902"})
+    _run_pipeline(graph_copy, extraction)
+    report, _, _, saved = _run_pipeline(graph_copy, second)
+    assert report.new_edges == 0 and report.new_nodes == 0
+    crawled = [l for l in saved["links"] if l.get("origin") == "auto_crawled"]
+    assert len(crawled) == 2
+    assert all([e["pmid"] for e in l["crawler_evidence"]] == [PMID, "99999902"] for l in crawled)
+
+
+def test_rerun_of_the_same_paper_changes_nothing(graph_copy, extraction):
+    _, _, _, first = _run_pipeline(graph_copy, extraction)
+    report, _, _, second = _run_pipeline(graph_copy, extraction)
+    assert (report.new_nodes, report.new_edges, report.updated_edges) == (0, 0, 0)
+    assert len(second["links"]) == len(first["links"])
