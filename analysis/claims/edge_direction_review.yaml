@@ -1,0 +1,150 @@
+# Signed links from the edge-direction audit that are NOT reversed by
+# analysis/claims/edge_reversals.yaml, each named as stored in
+# graphify-out/graph_v2.json (source, target, relation).
+#
+# decision:
+#   keep             direction checked against the dossier and correct; listed
+#                    because reverse_edges.find_direction_suspects() flags it
+#   review_direction direction suspect but ambiguous (dossier states both
+#                    directions, a review verdict supports the stored one, or
+#                    the relation needs rewording, not just a swap); for a human
+#   review_sign      direction correct, sign suspect; out of scope for reversal
+#
+# analysis/tests/test_reverse_edges.py requires every audit suspect in the
+# committed graph to be listed here.
+
+# --- keep: heuristic false positives (mTORC1 is typed `drug` in the graph) ---
+- source: autophagy-apoptosis_inhibition_myr_Akt
+  target: GABA_apoptosis_mTORC1
+  relation: activates
+  decision: keep
+  note: Constitutively active Akt payload acting on mTORC1; forward is correct.
+- source: GABA_apoptosis_calcium_overload
+  target: GABA_apoptosis_mTORC1
+  relation: activates
+  decision: keep
+  note: "GABA_apoptosis.md: Ca2+ influx through CP-AMPARs and VGCCs can stimulate mTORC1."
+
+# --- review_direction ---
+- source: autophagy-apoptosis_inhibition_Beclin_1
+  target: GABA_apoptosis_mTORC1
+  relation: inhibits
+  decision: review_direction
+  note: >-
+    No dossier text has Beclin-1 inhibiting mTORC1; GABA_apoptosis.md has
+    mTORC1 as the master suppressor of autophagy initiation, which suggests
+    mTORC1 -inhibits-> Beclin-1, but Beclin-1 is not named there.
+- source: autophagy-apoptosis_inhibition_Beclin_1
+  target: GABA_apoptosis_Calpain
+  relation: causes
+  decision: review_direction
+  note: >-
+    GABA_apoptosis.md: calpain cleaves ATG5, Beclin-1 and other autophagy
+    proteins. The corrected edge is calpain acting negatively on Beclin-1, so
+    the relation and sign need rewriting (causes/+1 -> cleaves/-1), not a swap.
+- source: GABA_apoptosis_mitochondrial_dysfunction
+  target: GABA_apoptosis_TNF_alpha
+  relation: causes
+  decision: review_direction
+  note: >-
+    GABA_apoptosis.md lists TNF-alpha as an upstream driver of mitochondrial
+    Ca2+ overload, but the CONFIRMED verdict (EC-0079) supports the stored
+    direction via mtROS/mtDNA -> NLRP3. Plausibly a feedback loop.
+- source: GABA_apoptosis_mitochondrial_dysfunction
+  target: GABA_apoptosis_HIF1alpha
+  relation: causes
+  decision: review_direction
+  note: >-
+    GABA_apoptosis.md has HIF1alpha's glycolytic shift worsening
+    mitochondrial vulnerability (HIF1alpha upstream); verdict NO_EVIDENCE_FOUND
+    (EC-0076) for either direction.
+- source: GABA_apoptosis_mitochondrial_dysfunction
+  target: GABA_apoptosis_RhoA_ROCK
+  relation: causes
+  decision: review_direction
+  note: >-
+    GABA_apoptosis.md has RhoA/ROCK disrupting mitochondrial trafficking and
+    fission (RhoA upstream), but the CONFIRMED verdict (EC-0078) supports the
+    stored direction.
+- source: GABA_apoptosis_mitochondrial_dysfunction
+  target: GABA_apoptosis_PINK1_Parkin_mitophagy
+  relation: inhibits
+  decision: review_direction
+  note: >-
+    Dossier only says PINK1/Parkin is downregulated or overwhelmed, leaving
+    damaged mitochondria intact; either direction fits.
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: vegf_VEGFR2
+  relation: stimulates_microglial_release_of
+  decision: review_direction
+  note: >-
+    EC-0023: predicate malformed (release of a receptor). Needs a new
+    relation, not a swap.
+- source: shared_nfkb
+  target: tnf_tnfr1
+  relation: activates
+  decision: review_direction
+  note: >-
+    Canonically TNFR1 activates NF-kB, but TNF.md does not mention NF-kB and
+    the CONFIRMED verdict (EC-0083) frames an NF-kB-driven TNFR1 programme.
+- source: pnn_ecm_mmp9
+  target: RhoA_ROCK_ROCK
+  relation: upregulates
+  decision: review_direction
+  note: >-
+    RhoA-ROCK.md has ROCK driving MMP activation, but the CONFIRMED verdict
+    (EC-0074) supports MMP-9 -> ROCK in the microglial RhoA/ROCK-p38 cascade.
+- source: pnn_ecm_mmp9
+  target: nogoa_ngr1_ngr1
+  relation: upregulates_via_rhoa_rock
+  decision: review_direction
+  note: >-
+    NogoA-NgR1.md has Nogo-A signalling through RhoA regulating MMP-9, but the
+    CONFIRMED verdict (EC-0151) supports the stored direction.
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: GABA_apoptosis_TNF_alpha
+  relation: induces_release_of
+  decision: review_direction
+  note: >-
+    hif1a.md has glycolytic microglia releasing both TNF-alpha and BDNF;
+    neither dossier states BDNF -> TNF or the reverse (EC-0019
+    NO_EVIDENCE_FOUND).
+- source: RhoA_ROCK_RhoA
+  target: rhoa_rock_lpa_demyelination
+  relation: activates_via_lpar1
+  decision: review_direction
+  note: >-
+    LPA activates RhoA via LPAR1, which then drives demyelination; the target
+    node bundles the upstream ligand and the downstream outcome, so neither
+    direction is clean. Splitting the node is the likely fix.
+- source: igf_igf2
+  target: igf_igf2bp2
+  relation: stabilizes_mrna_of
+  decision: review_direction
+  note: >-
+    IGF1-2.md: IGF2BP2 stabilizes transcripts and "is not IGF2 itself"; no
+    text has IGF2BP2 stabilizing IGF2 mRNA (EC-0044 flags possible entity
+    conflation).
+- source: shared_central_sensitization
+  target: PPARy_PPARgamma
+  relation: downregulates
+  decision: review_direction
+  note: >-
+    PPARy.md states both directions: cytokine/NF-kB signalling suppresses
+    PPARgamma, and PPARgamma agonists inhibit central sensitization.
+
+# --- review_sign ---
+- source: PV_interneurons_PV_interneurons
+  target: SST_somatostatin_interneurons
+  relation: hyperactivates_when_pv_fails
+  decision: review_sign
+  note: >-
+    Direction is right, but the relation describes PV loss raising SST
+    activity, so the sign should be -1, not +1 (EC-0154 NO_EVIDENCE_FOUND).
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: bbb_bbb
+  relation: supports_integrity_via_tight_junctions
+  decision: review_sign
+  note: >-
+    bbb_bbb models leak by high state (simulator/readouts.py), so a factor
+    supporting integrity should carry -1 into it; the closure edge has +1.

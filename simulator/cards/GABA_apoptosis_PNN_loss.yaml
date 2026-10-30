@@ -6,28 +6,29 @@ tier: PERIPHERAL
 community: 1
 baseline_state: 0.5
 normal_role: Perineuronal Net (PNN) Loss and GABAergic Hyperactivity is a structure
-  located in other. Baseline activity level 0.50. It receives 2 regulatory influences
-  and exerts 2.
+  located in other. Baseline activity level 0.50. It receives 1 regulatory influences
+  and exerts 3.
 pathological_rules:
 - rule_id: RULE-GABA_apoptosis_PNN_loss-01
+  description: Perineuronal Net (PNN) Loss and GABAergic Hyperactivity causes Neuronal
+    Calcium (Ca²⁺) Overload
+  claim_refs:
+  - EC-0093
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-GABA_apoptosis_PNN_loss-02
   description: Perineuronal Net (PNN) Loss and GABAergic Hyperactivity emergence of
     Mechanical Allodynia
   claim_refs: []
   direction: up
   magnitude_hint: null
-- rule_id: RULE-GABA_apoptosis_PNN_loss-02
+- rule_id: RULE-GABA_apoptosis_PNN_loss-03
   description: Perineuronal Net (PNN) Loss and GABAergic Hyperactivity impairs fast
     spiking of Parvalbumin (PV) Interneurons
   claim_refs: []
   direction: down
   magnitude_hint: null
 inbound_edges:
-- source_id: GABA_apoptosis_calcium_overload
-  relation: causes
-  sign: 1
-  weight: 0.9
-  validation_status: EXTENDED
-  neutral_ok: false
 - source_id: PNN_ECM_MMP9
   relation: degrades_pnn_lattice
   sign: 1
@@ -35,6 +36,7 @@ inbound_edges:
   validation_status: null
   neutral_ok: false
 outbound_ids:
+- GABA_apoptosis_calcium_overload
 - shared_mechanical_allodynia
 - PV_interneurons_PV_interneurons
 rule_gap_reason: null

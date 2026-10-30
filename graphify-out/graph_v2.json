@@ -11289,9 +11289,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_calcium_overload",
-      "target": "PV_interneurons_CP_AMPARs",
-      "sign": 1
+      "source": "PV_interneurons_CP_AMPARs",
+      "target": "GABA_apoptosis_calcium_overload",
+      "sign": 1,
+      "direction_corrected": true,
+      "direction_quote": "PV interneurons are enriched in GluA2‑lacking, Ca²⁺‑permeable AMPA receptors. Sustained glutamatergic drive from injured primary afferents and local excitatory interneurons causes massive Ca²⁺ entry through these channels.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "activates",
@@ -11322,10 +11325,13 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_calcium_overload",
-      "target": "GABA_apoptosis_PNN_loss",
+      "source": "GABA_apoptosis_PNN_loss",
+      "target": "GABA_apoptosis_calcium_overload",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "**Perineuronal net (PNN) loss** exacerbates hyperactivity, pushing more Ca²⁺ into the neuron and accelerating mitochondrial failure.",
+      "direction_ref": "GABA_apoptosis.md | EC-0093: demonstrated direction is PNN degradation -> Ca2+ overload"
     },
     {
       "relation": "causes",
@@ -11403,9 +11409,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_mTORC1",
-      "target": "GABA_apoptosis_Rapamycin",
-      "sign": -1
+      "source": "GABA_apoptosis_Rapamycin",
+      "target": "GABA_apoptosis_mTORC1",
+      "sign": -1,
+      "direction_corrected": true,
+      "direction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "rationale_for",
@@ -11425,9 +11434,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_PINK1_Parkin_mitophagy",
-      "target": "GABA_apoptosis_Rapamycin",
-      "sign": 1
+      "source": "GABA_apoptosis_Rapamycin",
+      "target": "GABA_apoptosis_PINK1_Parkin_mitophagy",
+      "sign": 1,
+      "direction_corrected": true,
+      "direction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "conceptually_related_to",
@@ -11447,9 +11459,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "GABA_apoptosis_caspase_cascade",
-      "target": "GABA_apoptosis_ER_stress_UPR",
-      "sign": 1
+      "source": "GABA_apoptosis_ER_stress_UPR",
+      "target": "GABA_apoptosis_caspase_cascade",
+      "sign": 1,
+      "direction_corrected": true,
+      "direction_quote": "If unresolved, the UPR activates caspase‑12 (in rodents; caspase‑4/‑5 in humans) and the transcription factor CHOP, both of which drive apoptosis.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "conceptually_related_to",
@@ -15111,10 +15126,13 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "hif1a_microglial_glycolysis",
+      "source": "hif1a_microglial_glycolysis",
+      "target": "assaying_molecularly_structural_plasticity_BDNF",
       "sign": 1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "This glycolytic microglia are highly pro‑inflammatory, secreting TNF‑α, IL‑1β, and BDNF.",
+      "direction_ref": "hif1a.md"
     },
     {
       "relation": "stimulates_microglial_release_of",
@@ -15135,10 +15153,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "jakstat_il6_gp130",
+      "source": "jakstat_il6_gp130",
+      "target": "assaying_molecularly_structural_plasticity_BDNF",
       "sign": 1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "STAT3 drives the expression of **BDNF** and downregulates **KCC2**",
+      "direction_ref": "JAK-STAT.md"
     },
     {
       "relation": "promotes_via_trkb",
@@ -15299,10 +15320,13 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "pnn_ecm_mmp9",
-      "target": "GABA_apoptosis_HIF1alpha",
+      "source": "GABA_apoptosis_HIF1alpha",
+      "target": "pnn_ecm_mmp9",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "It induces **MMP‑9**, connecting it to PV interneuron dysfunction and perineuronal net breakdown.",
+      "direction_ref": "hif1a.md | EC-0073: literature also supports a co-driver axis; the source dossier states HIF1alpha -> MMP-9 only"
     },
     {
       "relation": "degrades",
@@ -15323,10 +15347,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "pnn_ecm_mmp9",
-      "target": "jakstat_il6_gp130",
+      "source": "jakstat_il6_gp130",
+      "target": "pnn_ecm_mmp9",
       "sign": 1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "It promotes **VEGF** and **MMP‑9** expression, linking to vascular remodelling and barrier disruption.",
+      "direction_ref": "JAK-STAT.md"
     },
     {
       "relation": "upregulates_via_rhoa_rock",
@@ -16483,10 +16510,13 @@
       "source_file": "BDNF-TrkB.md",
       "source_location": null,
       "rationale": null,
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "bdnftrkb_trkb_fc",
+      "source": "bdnftrkb_trkb_fc",
+      "target": "assaying_molecularly_structural_plasticity_BDNF",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "The most widely used tool is **TrkB-Fc**, a soluble receptor chimera that scavenges BDNF.",
+      "direction_ref": "BDNF-TrkB.md | EC-0022: should read TrkB-Fc sequesters BDNF"
     },
     {
       "relation": "induces_release_of",
@@ -16507,10 +16537,13 @@
       "source_file": "RhoA-ROCK.md",
       "source_location": null,
       "rationale": "RhoA-ROCK.md states RhoA/ROCK→p38 MAPK drives microglial M1 phenotype and BDNF release; BDNF-TrkB.md confirms microglial BDNF as pronociceptive source.",
-      "source": "assaying_molecularly_structural_plasticity_BDNF",
-      "target": "RhoA_ROCK_ROCK",
+      "source": "RhoA_ROCK_ROCK",
+      "target": "assaying_molecularly_structural_plasticity_BDNF",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "It mediates **BDNF** release from microglia through p38 MAPK.",
+      "direction_ref": "RhoA-ROCK.md | EC-0146: kinases are not released; RhoA/ROCK mediates microglial BDNF release"
     },
     {
       "relation": "is_induced_by_indirectly",
@@ -16576,10 +16609,13 @@
       "source_file": "ana-12.md",
       "source_location": null,
       "rationale": null,
-      "source": "bdnftrkb_trkb_fl",
-      "target": "ana_12_ANA_12",
+      "source": "ana_12_ANA_12",
+      "target": "bdnftrkb_trkb_fl",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "ANA-12 is a potent, selective, small-molecule antagonist of the tropomyosin receptor kinase B (TrkB), the high-affinity receptor for brain-derived neurotrophic factor (BDNF).",
+      "direction_ref": "ana-12.md | EC-0123: card predicate inverted"
     },
     {
       "relation": "cross_talks_with_at_igf1r",
@@ -16591,18 +16627,6 @@
       "source": "bdnftrkb_trkb_fl",
       "target": "igf_igf1",
       "sign": 0
-    },
-    {
-      "relation": "inhibits",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "ana-12.md",
-      "source_location": null,
-      "rationale": null,
-      "source": "ana_12_TrkB_T1",
-      "target": "ana_12_ANA_12",
-      "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
     },
     {
       "relation": "shares_p75ntr_with",
@@ -16715,10 +16739,13 @@
       "source_file": "TNF.md",
       "source_location": null,
       "rationale": null,
-      "source": "tnf_tnfr1",
-      "target": "TNF_XPro1595",
+      "source": "TNF_XPro1595",
+      "target": "tnf_tnfr1",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "Blocking the solTNF-α/TNFR1 pathway alleviates pain. The study *\"TNFR1 Suppression by XPro1595 Reduces Peripheral Neuropathies\"* is a recent example of this approach.",
+      "direction_ref": "TNF.md | EC-0117: card predicate phrasing inverted"
     },
     {
       "relation": "preserves",
@@ -16739,9 +16766,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "rationale": null,
-      "source": "gaba_apoptosis_ca_overload",
-      "target": "gaba_apoptosis_cpampar",
-      "sign": 1
+      "source": "gaba_apoptosis_cpampar",
+      "target": "gaba_apoptosis_ca_overload",
+      "sign": 1,
+      "direction_corrected": true,
+      "direction_quote": "PV interneurons are enriched in GluA2‑lacking, Ca²⁺‑permeable AMPA receptors. Sustained glutamatergic drive from injured primary afferents and local excitatory interneurons causes massive Ca²⁺ entry through these channels.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "causes",
@@ -16796,9 +16826,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "rationale": null,
-      "source": "gaba_apoptosis_mptp",
-      "target": "gaba_apoptosis_rapamycin",
-      "sign": -1
+      "source": "gaba_apoptosis_rapamycin",
+      "target": "gaba_apoptosis_mptp",
+      "sign": -1,
+      "direction_corrected": true,
+      "direction_quote": "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "prevents",
@@ -16807,9 +16840,12 @@
       "source_file": "GABA_apoptosis.md",
       "source_location": null,
       "rationale": null,
-      "source": "gaba_apoptosis_mptp",
-      "target": "gaba_apoptosis_ru360",
-      "sign": -1
+      "source": "gaba_apoptosis_ru360",
+      "target": "gaba_apoptosis_mptp",
+      "sign": -1,
+      "direction_corrected": true,
+      "direction_quote": "The MCU inhibitor **Ru360** or knockdown of MCU expression reduces mitochondrial Ca²⁺ accumulation, prevents mPTP opening, and protects GABAergic neurons from apoptosis, reducing pain.",
+      "direction_ref": "GABA_apoptosis.md"
     },
     {
       "relation": "cleaves",
@@ -16841,10 +16877,13 @@
       "source_file": "PV+_interneurons.md",
       "source_location": null,
       "rationale": null,
-      "source": "PV_interneurons_PV_interneurons",
-      "target": "pv_interneuron_dreads_optogenetics",
+      "source": "pv_interneuron_dreads_optogenetics",
+      "target": "PV_interneurons_PV_interneurons",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "Directly activating surviving PV interneurons via designer receptors (DREADDs) or optogenetics can powerfully suppress mechanical allodynia in nerve-injured animals",
+      "direction_ref": "PV+_interneurons.md"
     },
     {
       "relation": "hyperactivates_when_pv_fails",
@@ -16865,10 +16904,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": "JAK-STAT.md states STAT3 drives BDNF expression and downregulates KCC2, both of which directly impair PV interneuron inhibitory function.",
-      "source": "PV_interneurons_PV_interneurons",
-      "target": "il6_jak_stat3",
+      "source": "il6_jak_stat3",
+      "target": "PV_interneurons_PV_interneurons",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "STAT3 drives the expression of **BDNF** and downregulates **KCC2**, contributing to disinhibition.",
+      "direction_ref": "JAK-STAT.md"
     },
     {
       "relation": "indirectly_impairs_via_rhoa_mmp9_pnn",
@@ -16877,10 +16919,13 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": "NogoA-NgR1.md links NgR1→RhoA→MMP-9→PNN degradation→PV interneuron dysfunction cascade.",
-      "source": "PV_interneurons_PV_interneurons",
-      "target": "nogoa_ngr1_ngr1",
+      "source": "nogoa_ngr1_ngr1",
+      "target": "PV_interneurons_PV_interneurons",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Nogo-A signaling through RhoA can regulate MMP-9 expression, linking myelin inhibitors to perineuronal net degradation and PV interneuron dysfunction.",
+      "direction_ref": "NogoA-NgR1.md"
     },
     {
       "relation": "depends_on",
@@ -16945,10 +16990,13 @@
       "source_file": "SST.md",
       "source_location": null,
       "rationale": null,
-      "source": "SST_somatostatin_interneurons",
-      "target": "SST_Prdm12",
+      "source": "SST_Prdm12",
+      "target": "SST_somatostatin_interneurons",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Many spinal SST interneurons are specified by the transcription factor **Prdm12**",
+      "direction_ref": "SST.md | EC-0112: Prdm12 specifies SST fate"
     },
     {
       "relation": "indirectly_modulates_via_nav17",
@@ -16992,10 +17040,13 @@
       "source_file": "RhoA-ROCK.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "RhoA_ROCK_simvastatin",
+      "source": "RhoA_ROCK_simvastatin",
+      "target": "RhoA_ROCK_RhoA",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "This HMG‑CoA reductase inhibitor depletes mevalonate and downstream isoprenoids, thereby preventing RhoA membrane anchoring.",
+      "direction_ref": "RhoA-ROCK.md | EC-0109: predicate inverted"
     },
     {
       "relation": "activates",
@@ -17004,10 +17055,13 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_RhoA",
-      "target": "nogoa_ngr1_ngr1",
+      "source": "nogoa_ngr1_ngr1",
+      "target": "RhoA_ROCK_RhoA",
       "sign": 1,
-      "validation_status": "MIXED"
+      "validation_status": "MIXED",
+      "direction_corrected": true,
+      "direction_quote": "NgR1 activation by any of its ligands (Nogo-A, MAG, OMgp) converges on the activation of RhoA.",
+      "direction_ref": "NogoA-NgR1.md | EC-0106 MIXED: card direction inverted"
     },
     {
       "relation": "inhibits",
@@ -17016,10 +17070,13 @@
       "source_file": "RhoA-ROCK.md",
       "source_location": null,
       "rationale": null,
-      "source": "RhoA_ROCK_ROCK",
-      "target": "RhoA_ROCK_fasudil",
+      "source": "RhoA_ROCK_fasudil",
+      "target": "RhoA_ROCK_ROCK",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "**Fasudil**: A clinically approved ROCK inhibitor (for cerebral vasospasm)",
+      "direction_ref": "RhoA-ROCK.md | EC-0100: fasudil inhibits ROCK"
     },
     {
       "relation": "is_activated_by",
@@ -17063,10 +17120,13 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "GABA_apoptosis_HIF1alpha",
-      "target": "hif1a_YC1",
+      "source": "hif1a_YC1",
+      "target": "GABA_apoptosis_HIF1alpha",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "A small molecule that destabilizes HIF1α by promoting its degradation.",
+      "direction_ref": "hif1a.md | EC-0038: card inverted"
     },
     {
       "relation": "inhibits_translation_of",
@@ -17075,10 +17135,13 @@
       "source_file": "hif1a.md",
       "source_location": null,
       "rationale": null,
-      "source": "GABA_apoptosis_HIF1alpha",
-      "target": "hif1a_PX478",
+      "source": "hif1a_PX478",
+      "target": "GABA_apoptosis_HIF1alpha",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "An inhibitor of HIF1α translation.",
+      "direction_ref": "hif1a.md | EC-0040: card predicate inverted"
     },
     {
       "relation": "targets",
@@ -17144,22 +17207,14 @@
       "source_file": "BBB.md",
       "source_location": null,
       "rationale": null,
-      "source": "bbb_bbb",
-      "target": "bbb_rvd1_barrier_reseal",
-      "sign": 1,
-      "validation_status": "EXTENDED"
-    },
-    {
-      "relation": "disrupts",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "AngPt.md",
-      "source_location": null,
-      "rationale": null,
-      "source": "bbb_bbb",
-      "target": "AngPt_angiopoietin_2",
+      "source": "bbb_rvd1_barrier_reseal",
+      "target": "bbb_bbb",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "Research indicates that these mediators can \"reseal\" the blood-nerve barrier",
+      "direction_ref": "BBB.md",
+      "sign_before_reversal": 1
     },
     {
       "relation": "stabilizes",
@@ -17168,10 +17223,14 @@
       "source_file": "AngPt.md",
       "source_location": null,
       "rationale": null,
-      "source": "bbb_bbb",
-      "target": "AngPt_angiopoietin_1",
-      "sign": 1,
-      "validation_status": "CONFIRMED"
+      "source": "AngPt_angiopoietin_1",
+      "target": "bbb_bbb",
+      "sign": -1,
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "Restoring Ang-1 levels can help reseal the BBB/BSCB",
+      "direction_ref": "AngPt.md",
+      "sign_before_reversal": 1
     },
     {
       "relation": "is_disrupted_by",
@@ -17191,10 +17250,13 @@
       "source_file": "BBB.md",
       "source_location": null,
       "rationale": null,
-      "source": "BBB_tight_junction_proteins",
-      "target": "BBB_CypA_MMP9_pathway",
+      "source": "BBB_CypA_MMP9_pathway",
+      "target": "BBB_tight_junction_proteins",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "activated cyclophilin A (CypA) stimulates matrix metalloproteinase-9 (MMP-9), which degrades the basement membrane and tight junction proteins, directly opening the barrier",
+      "direction_ref": "BBB.md | EC-0118: encoding inverted"
     },
     {
       "relation": "downregulates",
@@ -17203,10 +17265,13 @@
       "source_file": "vegf.md",
       "source_location": null,
       "rationale": null,
-      "source": "BBB_tight_junction_proteins",
-      "target": "vegf_VEGFR2",
+      "source": "vegf_VEGFR2",
+      "target": "BBB_tight_junction_proteins",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "The major receptor mediating nociceptive, angiogenic, and permeability effects.",
+      "direction_ref": "vegf.md | EC-0119: encoding inverted; VEGFR2 valence contested (EC-0168)"
     },
     {
       "relation": "complementary_barrier_stabilizer_to",
@@ -17297,10 +17362,13 @@
       "source_file": "vegf.md",
       "source_location": null,
       "rationale": null,
-      "source": "vegf_VEGFR2",
-      "target": "vegf_nrp1",
+      "source": "vegf_nrp1",
+      "target": "vegf_VEGFR2",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "A co‑receptor that enhances VEGFR2 signaling and is expressed on nociceptors.",
+      "direction_ref": "vegf.md"
     },
     {
       "relation": "downregulates_via_bdnf_trkb",
@@ -17378,10 +17446,13 @@
       "source_file": "rbfox1.md",
       "source_location": null,
       "rationale": null,
-      "source": "rbfox1_rbfox1",
-      "target": "rbfox1_AAV5_Rbfox1",
+      "source": "rbfox1_AAV5_Rbfox1",
+      "target": "rbfox1_rbfox1",
       "sign": 1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "Delivery of AAV5‑Rbfox1 into the DRG prior to SNL preserves Rbfox1 levels",
+      "direction_ref": "rbfox1.md"
     },
     {
       "relation": "potentially_interacts_via_cell_adhesion",
@@ -17435,10 +17506,13 @@
       "source_file": "NogoA-NgR1.md",
       "source_location": null,
       "rationale": null,
-      "source": "NogoA_NgR1_NogoA",
-      "target": "NogoA_NgR1_NG101",
+      "source": "NogoA_NgR1_NG101",
+      "target": "NogoA_NgR1_NogoA",
       "sign": -1,
-      "validation_status": "MIXED"
+      "validation_status": "MIXED",
+      "direction_corrected": true,
+      "direction_quote": "investigated the anti-Nogo-A antibody **NG101**",
+      "direction_ref": "NogoA-NgR1.md | EC-0094: invert subject/object"
     },
     {
       "relation": "co_receptor_of",
@@ -17469,10 +17543,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_socs3",
+      "source": "jakstat_socs3",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "STAT3 itself induces SOCS3, which binds to the receptor and JAKs to terminate signalling in a negative‑feedback loop.",
+      "direction_ref": "JAK-STAT.md | EC-0049: SOCS3 terminates JAK/STAT3"
     },
     {
       "relation": "inhibits",
@@ -17481,10 +17558,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_ruxolitinib",
+      "source": "jakstat_ruxolitinib",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "A dual JAK1/JAK2 inhibitor approved for myelofibrosis. In preclinical pain models, ruxolitinib attenuates mechanical allodynia, reduces glial activation, and normalises STAT3‑dependent gene expression.",
+      "direction_ref": "JAK-STAT.md | EC-0048: predicate inverted"
     },
     {
       "relation": "inhibits",
@@ -17493,10 +17573,13 @@
       "source_file": "JAK-STAT.md",
       "source_location": null,
       "rationale": null,
-      "source": "il6_jak_stat3",
-      "target": "jakstat_baricitinib",
+      "source": "jakstat_baricitinib",
+      "target": "il6_jak_stat3",
       "sign": -1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "Several JAK inhibitors are already approved for rheumatoid arthritis, psoriatic arthritis, ulcerative colitis, and other inflammatory conditions, including tofacitinib (JAK1/JAK3), baricitinib (JAK1/JAK2)",
+      "direction_ref": "JAK-STAT.md | EC-0047: drug inhibits pathway"
     },
     {
       "relation": "downregulates_via_stat3",
@@ -17730,10 +17813,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_Calcineurin",
+      "source": "karilin7_Calcineurin",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Chronic NMDAR overactivation leads to **Ca²⁺‑dependent activation of the phosphatase calcineurin**, which dephosphorylates and destabilises Kalirin‑7, targeting it for proteasomal degradation.",
+      "direction_ref": "karilin-7.md | EC-0055: card direction inverted"
     },
     {
       "relation": "downregulates_via_calcineurin",
@@ -17742,10 +17828,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_NMDAR",
+      "source": "karilin7_NMDAR",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "**NMDA receptor**: The primary driver of Kalirin‑7 downregulation. Excessive NMDAR activation leads to calcineurin‑mediated Kalirin‑7 degradation.",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "delivers_and_restores",
@@ -17754,10 +17843,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_AAV_Kalirin7",
+      "source": "karilin7_AAV_Kalirin7",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "AAV vectors driving the expression of Kalirin‑7 under a synapsin‑1 (neuron‑specific) promoter were injected into the ACC of rats with established SNI.",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "knocks_down",
@@ -17766,10 +17858,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_shRNA_Kalirin7",
+      "source": "karilin7_shRNA_Kalirin7",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "**ACC‑targeted Kalirin‑7 knockdown**: Lentiviral or AAV delivery of shRNA against Kalirin‑7 in the ACC of naïve rats or mice:",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "genetic_deletion",
@@ -17778,10 +17873,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7",
-      "target": "karilin7_Kalirin7_KO",
+      "source": "karilin7_Kalirin7_KO",
+      "target": "karilin7_Kalirin7",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "Mice lacking the *Kalrn* gene show deficits in hippocampal‑dependent learning, reduced cortical spine density, and enhanced anxiety‑like behaviour at baseline.",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "upregulates",
@@ -17790,10 +17888,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_EnvironmentalEnrichment",
+      "source": "karilin7_EnvironmentalEnrichment",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": 1,
-      "validation_status": "EXTENDED"
+      "validation_status": "EXTENDED",
+      "direction_corrected": true,
+      "direction_quote": "Chronic neuropathic pain animals housed in enriched environments show higher ACC Kalirin‑7 levels, greater spine density, and reduced anxiety compared to standard‑housed controls.",
+      "direction_ref": "karilin-7.md | EC-0068: mediator may not be Kal7"
     },
     {
       "relation": "normalizes_signaling",
@@ -17802,10 +17903,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_DBS_ACC",
+      "source": "karilin7_DBS_ACC",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Preclinical DBS of the ACC in neuropathic pain models has been shown to normalise Kalirin‑7 signalling, promote spine formation, and relieve anxiety.",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "loss_causes",
@@ -17838,10 +17942,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_SNI",
+      "source": "karilin7_SNI",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": -1,
-      "validation_status": "REFUTED"
+      "validation_status": "REFUTED",
+      "direction_corrected": true,
+      "direction_quote": "In rodent models of neuropathic pain, including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced.",
+      "direction_ref": "karilin-7.md | EC-0059 REFUTED; verdict kept on the link"
     },
     {
       "relation": "induces_downregulation",
@@ -17850,10 +17957,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Kalirin7_ACC",
-      "target": "karilin7_CCI",
+      "source": "karilin7_CCI",
+      "target": "karilin7_Kalirin7_ACC",
       "sign": -1,
-      "validation_status": "REFUTED"
+      "validation_status": "REFUTED",
+      "direction_corrected": true,
+      "direction_quote": "In rodent models of neuropathic pain, including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced.",
+      "direction_ref": "karilin-7.md | EC-0058 REFUTED; verdict kept on the link"
     },
     {
       "relation": "expression_differs_by_sex",
@@ -17895,10 +18005,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_KALRN",
-      "target": "karilin7_CEBPbeta",
+      "source": "karilin7_CEBPbeta",
+      "target": "karilin7_KALRN",
       "sign": 1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "since C/EBPβ drives *Kalrn* transcription, its loss contributes to reduced Kalirin‑7 synthesis.",
+      "direction_ref": "karilin-7.md | EC-0050: C/EBPbeta canonically upstream of Kalrn"
     },
     {
       "relation": "represses_transcription",
@@ -17907,10 +18020,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_KALRN",
-      "target": "hdac_hdac4",
+      "source": "hdac_hdac4",
+      "target": "karilin7_KALRN",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Increased association of **HDAC4** with the *Kalrn* promoter leads to histone H3 deacetylation and transcriptional repression, further suppressing Kalirin‑7 expression.",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "targets_mRNA",
@@ -17953,10 +18069,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Rac1",
-      "target": "karilin7_NSC23766",
+      "source": "karilin7_NSC23766",
+      "target": "karilin7_Rac1",
       "sign": -1,
-      "validation_status": "CONFIRMED"
+      "validation_status": "CONFIRMED",
+      "direction_corrected": true,
+      "direction_quote": "Microinjection of the Rac1 inhibitor NSC23766 into the ACC mimics the synaptic and behavioural effects of Kalirin‑7 loss, inducing spine elimination and anxiety.",
+      "direction_ref": "karilin-7.md | EC-0102: predicate inverted"
     },
     {
       "relation": "activates_Ca_dependent",
@@ -17977,10 +18096,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_NMDAR",
-      "target": "karilin7_Ketamine",
+      "source": "karilin7_Ketamine",
+      "target": "karilin7_NMDAR",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7 and the subsequent spine loss",
+      "direction_ref": "karilin-7.md"
     },
     {
       "relation": "antagonizes",
@@ -17989,10 +18111,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_NMDAR",
-      "target": "karilin7_AP5",
+      "source": "karilin7_AP5",
+      "target": "karilin7_NMDAR",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7 and the subsequent spine loss",
+      "direction_ref": "karilin-7.md | EC-0086: card predicate inverted"
     },
     {
       "relation": "phosphorylates",
@@ -18047,10 +18172,13 @@
       "source_file": "karilin-7.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "karilin7_Calcineurin",
-      "target": "karilin7_FK506",
+      "source": "karilin7_FK506",
+      "target": "karilin7_Calcineurin",
       "sign": -1,
-      "validation_status": "NO_EVIDENCE_FOUND"
+      "validation_status": "NO_EVIDENCE_FOUND",
+      "direction_corrected": true,
+      "direction_quote": "Tacrolimus (FK506) microinjected into the ACC partially preserves Kalirin‑7 levels and reduces anxiety after nerve injury",
+      "direction_ref": "karilin-7.md | EC-0026: card direction inverted"
     },
     {
       "relation": "references",

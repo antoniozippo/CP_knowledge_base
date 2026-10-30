@@ -1,0 +1,329 @@
+# Curated edge-direction corrections applied to graphify-out/graph_v2.json by
+# analysis/scripts/reverse_edges.py.
+#
+# Each entry names a link as it is STORED (source, target, relation) whose
+# relation describes the target acting on the source: an intervention, tool,
+# injury model or upstream regulator was extracted as the link's target, so
+# in simulation the source drove it instead of being driven by it. The tool
+# swaps source and target and keeps the relation, whose sign
+# (build_graph_v2.relation_sign) then reads correctly; `sign` overrides it
+# only where the corrected target's state has inverted polarity.
+#
+# Every entry needs a verbatim `quote` from `source_file` stating the
+# corrected direction. Links whose direction is ambiguous are not listed
+# here; they are kept for human review in edge_direction_review.yaml.
+# A direction fix is not new evidence: validation_status stays as it was.
+
+# ACC Kalirin-7 (split node, theme_10 F10.1: the ACC downregulation narrative is
+# unsupported; these entries fix extraction direction only, they add no evidence)
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_Calcineurin
+  relation: dephosphorylates_and_degrades
+  source_file: karilin-7.md
+  quote: "Chronic NMDAR overactivation leads to **Ca²⁺‑dependent activation of the phosphatase calcineurin**, which dephosphorylates and destabilises Kalirin‑7, targeting it for proteasomal degradation."
+  note: "EC-0055: card direction inverted"
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_NMDAR
+  relation: downregulates_via_calcineurin
+  source_file: karilin-7.md
+  quote: "**NMDA receptor**: The primary driver of Kalirin‑7 downregulation. Excessive NMDAR activation leads to calcineurin‑mediated Kalirin‑7 degradation."
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_SNI
+  relation: induces_downregulation
+  source_file: karilin-7.md
+  quote: "In rodent models of neuropathic pain, including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced."
+  note: "EC-0059 REFUTED; verdict kept on the link"
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_CCI
+  relation: induces_downregulation
+  source_file: karilin-7.md
+  quote: "In rodent models of neuropathic pain, including **spared nerve injury (SNI)** and **chronic constriction injury (CCI)** , Kalirin‑7 protein and mRNA levels in the ACC are significantly reduced."
+  note: "EC-0058 REFUTED; verdict kept on the link"
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_AAV_Kalirin7
+  relation: delivers_and_restores
+  source_file: karilin-7.md
+  quote: "AAV vectors driving the expression of Kalirin‑7 under a synapsin‑1 (neuron‑specific) promoter were injected into the ACC of rats with established SNI."
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_shRNA_Kalirin7
+  relation: knocks_down
+  source_file: karilin-7.md
+  quote: "**ACC‑targeted Kalirin‑7 knockdown**: Lentiviral or AAV delivery of shRNA against Kalirin‑7 in the ACC of naïve rats or mice:"
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_EnvironmentalEnrichment
+  relation: upregulates
+  source_file: karilin-7.md
+  quote: "Chronic neuropathic pain animals housed in enriched environments show higher ACC Kalirin‑7 levels, greater spine density, and reduced anxiety compared to standard‑housed controls."
+  note: "EC-0068: mediator may not be Kal7"
+- source: karilin7_Kalirin7_ACC
+  target: karilin7_DBS_ACC
+  relation: normalizes_signaling
+  source_file: karilin-7.md
+  quote: "Preclinical DBS of the ACC in neuropathic pain models has been shown to normalise Kalirin‑7 signalling, promote spine formation, and relieve anxiety."
+
+# Spinal Kalirin-7 / KALRN tools and regulators
+- source: karilin7_Kalirin7
+  target: karilin7_Kalirin7_KO
+  relation: genetic_deletion
+  source_file: karilin-7.md
+  quote: "Mice lacking the *Kalrn* gene show deficits in hippocampal‑dependent learning, reduced cortical spine density, and enhanced anxiety‑like behaviour at baseline."
+- source: karilin7_KALRN
+  target: karilin7_CEBPbeta
+  relation: drives_transcription
+  source_file: karilin-7.md
+  quote: "since C/EBPβ drives *Kalrn* transcription, its loss contributes to reduced Kalirin‑7 synthesis."
+  note: "EC-0050: C/EBPbeta canonically upstream of Kalrn"
+- source: karilin7_KALRN
+  target: hdac_hdac4
+  relation: represses_transcription
+  source_file: karilin-7.md
+  quote: "Increased association of **HDAC4** with the *Kalrn* promoter leads to histone H3 deacetylation and transcriptional repression, further suppressing Kalirin‑7 expression."
+- source: karilin7_Rac1
+  target: karilin7_NSC23766
+  relation: inhibits
+  source_file: karilin-7.md
+  quote: "Microinjection of the Rac1 inhibitor NSC23766 into the ACC mimics the synaptic and behavioural effects of Kalirin‑7 loss, inducing spine elimination and anxiety."
+  note: "EC-0102: predicate inverted"
+- source: karilin7_NMDAR
+  target: karilin7_Ketamine
+  relation: antagonizes
+  source_file: karilin-7.md
+  quote: "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7 and the subsequent spine loss"
+- source: karilin7_NMDAR
+  target: karilin7_AP5
+  relation: antagonizes
+  source_file: karilin-7.md
+  quote: "Low‑dose systemic **ketamine** or direct ACC infusion of **AP‑5** (a competitive NMDAR antagonist) can prevent the injury‑induced downregulation of Kalirin‑7 and the subsequent spine loss"
+  note: "EC-0086: card predicate inverted"
+- source: karilin7_Calcineurin
+  target: karilin7_FK506
+  relation: inhibits
+  source_file: karilin-7.md
+  quote: "Tacrolimus (FK506) microinjected into the ACC partially preserves Kalirin‑7 levels and reduces anxiety after nerve injury"
+  note: "EC-0026: card direction inverted"
+
+# GABAergic Ca2+ overload / autophagy / apoptosis
+- source: GABA_apoptosis_calcium_overload
+  target: PV_interneurons_CP_AMPARs
+  relation: causes
+  source_file: GABA_apoptosis.md
+  quote: "PV interneurons are enriched in GluA2‑lacking, Ca²⁺‑permeable AMPA receptors. Sustained glutamatergic drive from injured primary afferents and local excitatory interneurons causes massive Ca²⁺ entry through these channels."
+- source: gaba_apoptosis_ca_overload
+  target: gaba_apoptosis_cpampar
+  relation: drives
+  source_file: GABA_apoptosis.md
+  quote: "PV interneurons are enriched in GluA2‑lacking, Ca²⁺‑permeable AMPA receptors. Sustained glutamatergic drive from injured primary afferents and local excitatory interneurons causes massive Ca²⁺ entry through these channels."
+- source: GABA_apoptosis_calcium_overload
+  target: GABA_apoptosis_PNN_loss
+  relation: causes
+  source_file: GABA_apoptosis.md
+  quote: "**Perineuronal net (PNN) loss** exacerbates hyperactivity, pushing more Ca²⁺ into the neuron and accelerating mitochondrial failure."
+  note: "EC-0093: demonstrated direction is PNN degradation -> Ca2+ overload"
+- source: GABA_apoptosis_caspase_cascade
+  target: GABA_apoptosis_ER_stress_UPR
+  relation: causes
+  source_file: GABA_apoptosis.md
+  quote: "If unresolved, the UPR activates caspase‑12 (in rodents; caspase‑4/‑5 in humans) and the transcription factor CHOP, both of which drive apoptosis."
+- source: GABA_apoptosis_mTORC1
+  target: GABA_apoptosis_Rapamycin
+  relation: inhibits
+  source_file: GABA_apoptosis.md
+  quote: "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis."
+- source: GABA_apoptosis_PINK1_Parkin_mitophagy
+  target: GABA_apoptosis_Rapamycin
+  relation: activates
+  source_file: GABA_apoptosis.md
+  quote: "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis."
+- source: gaba_apoptosis_mptp
+  target: gaba_apoptosis_rapamycin
+  relation: indirectly_protects_against
+  source_file: GABA_apoptosis.md
+  quote: "Early treatment with the mTOR inhibitor **rapamycin** or its analogues can restore autophagic flux, clear damaged mitochondria, reduce ROS, and protect GABAergic neurons from progressing to apoptosis."
+- source: gaba_apoptosis_mptp
+  target: gaba_apoptosis_ru360
+  relation: prevents
+  source_file: GABA_apoptosis.md
+  quote: "The MCU inhibitor **Ru360** or knockdown of MCU expression reduces mitochondrial Ca²⁺ accumulation, prevents mPTP opening, and protects GABAergic neurons from apoptosis, reducing pain."
+
+# BDNF / TrkB tools
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: bdnftrkb_trkb_fc
+  relation: sequesters
+  source_file: BDNF-TrkB.md
+  quote: "The most widely used tool is **TrkB-Fc**, a soluble receptor chimera that scavenges BDNF."
+  note: "EC-0022: should read TrkB-Fc sequesters BDNF"
+- source: bdnftrkb_trkb_fl
+  target: ana_12_ANA_12
+  relation: antagonizes
+  source_file: ana-12.md
+  quote: "ANA-12 is a potent, selective, small-molecule antagonist of the tropomyosin receptor kinase B (TrkB), the high-affinity receptor for brain-derived neurotrophic factor (BDNF)."
+  note: "EC-0123: card predicate inverted"
+- source: ana_12_TrkB_T1
+  target: ana_12_ANA_12
+  relation: inhibits
+  source_file: ana-12.md
+  quote: "ANA-12 inhibits these processes in a concentration-dependent manner"
+  note: "reversed link duplicates the existing ANA-12 -inhibits-> TrkB.T1 link and is dropped"
+
+# TNF / spinal disinhibition
+- source: tnf_tnfr1
+  target: TNF_XPro1595
+  relation: selectively_blocks
+  source_file: TNF.md
+  quote: "Blocking the solTNF-α/TNFR1 pathway alleviates pain. The study *\"TNFR1 Suppression by XPro1595 Reduces Peripheral Neuropathies\"* is a recent example of this approach."
+  note: "EC-0117: card predicate phrasing inverted"
+- source: PV_interneurons_PV_interneurons
+  target: pv_interneuron_dreads_optogenetics
+  relation: rescues
+  source_file: PV+_interneurons.md
+  quote: "Directly activating surviving PV interneurons via designer receptors (DREADDs) or optogenetics can powerfully suppress mechanical allodynia in nerve-injured animals"
+- source: PV_interneurons_PV_interneurons
+  target: il6_jak_stat3
+  relation: impairs_via_kcc2_bdnf
+  source_file: JAK-STAT.md
+  quote: "STAT3 drives the expression of **BDNF** and downregulates **KCC2**, contributing to disinhibition."
+- source: PV_interneurons_PV_interneurons
+  target: nogoa_ngr1_ngr1
+  relation: indirectly_impairs_via_rhoa_mmp9_pnn
+  source_file: NogoA-NgR1.md
+  quote: "Nogo-A signaling through RhoA can regulate MMP-9 expression, linking myelin inhibitors to perineuronal net degradation and PV interneuron dysfunction."
+- source: SST_somatostatin_interneurons
+  target: SST_Prdm12
+  relation: specifies_development_of
+  source_file: SST.md
+  quote: "Many spinal SST interneurons are specified by the transcription factor **Prdm12**"
+  note: "EC-0112: Prdm12 specifies SST fate"
+
+# RhoA / ROCK / Nogo
+- source: RhoA_ROCK_RhoA
+  target: RhoA_ROCK_simvastatin
+  relation: blocks_membrane_anchoring
+  source_file: RhoA-ROCK.md
+  quote: "This HMG‑CoA reductase inhibitor depletes mevalonate and downstream isoprenoids, thereby preventing RhoA membrane anchoring."
+  note: "EC-0109: predicate inverted"
+- source: RhoA_ROCK_ROCK
+  target: RhoA_ROCK_fasudil
+  relation: inhibits
+  source_file: RhoA-ROCK.md
+  quote: "**Fasudil**: A clinically approved ROCK inhibitor (for cerebral vasospasm)"
+  note: "EC-0100: fasudil inhibits ROCK"
+- source: RhoA_ROCK_RhoA
+  target: nogoa_ngr1_ngr1
+  relation: activates
+  source_file: NogoA-NgR1.md
+  quote: "NgR1 activation by any of its ligands (Nogo-A, MAG, OMgp) converges on the activation of RhoA."
+  note: "EC-0106 MIXED: card direction inverted"
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: RhoA_ROCK_ROCK
+  relation: mediates_microglial_release_of
+  source_file: RhoA-ROCK.md
+  quote: "It mediates **BDNF** release from microglia through p38 MAPK."
+  note: "EC-0146: kinases are not released; RhoA/ROCK mediates microglial BDNF release"
+- source: NogoA_NgR1_NogoA
+  target: NogoA_NgR1_NG101
+  relation: neutralizes
+  source_file: NogoA-NgR1.md
+  quote: "investigated the anti-Nogo-A antibody **NG101**"
+  note: "EC-0094: invert subject/object"
+
+# HIF1alpha
+- source: GABA_apoptosis_HIF1alpha
+  target: hif1a_YC1
+  relation: destabilizes
+  source_file: hif1a.md
+  quote: "A small molecule that destabilizes HIF1α by promoting its degradation."
+  note: "EC-0038: card inverted"
+- source: GABA_apoptosis_HIF1alpha
+  target: hif1a_PX478
+  relation: inhibits_translation_of
+  source_file: hif1a.md
+  quote: "An inhibitor of HIF1α translation."
+  note: "EC-0040: card predicate inverted"
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: hif1a_microglial_glycolysis
+  relation: stimulates_release_of
+  source_file: hif1a.md
+  quote: "This glycolytic microglia are highly pro‑inflammatory, secreting TNF‑α, IL‑1β, and BDNF."
+- source: pnn_ecm_mmp9
+  target: GABA_apoptosis_HIF1alpha
+  relation: induces
+  source_file: hif1a.md
+  quote: "It induces **MMP‑9**, connecting it to PV interneuron dysfunction and perineuronal net breakdown."
+  note: "EC-0073: literature also supports a co-driver axis; the source dossier states HIF1alpha -> MMP-9 only"
+
+# Barriers. bbb_bbb is a barrier readout node whose HIGH state is leak/disruption
+# (simulator/readouts.py; closure edges VEGFA/Ang-2 -disrupts(+1)-> bbb_bbb), so
+# the corrected edges carry the sign of their effect on leak
+- source: bbb_bbb
+  target: bbb_rvd1_barrier_reseal
+  relation: restores_integrity_of
+  sign: -1
+  source_file: BBB.md
+  quote: "Research indicates that these mediators can \"reseal\" the blood-nerve barrier"
+- source: bbb_bbb
+  target: AngPt_angiopoietin_2
+  relation: disrupts
+  sign: 1
+  source_file: AngPt.md
+  quote: "In the presence of inflammation or injury, Ang-2 acts as a functional antagonist, destabilizing the vasculature, increasing vascular permeability"
+  note: "EC-0013: predicate encoding inverted (Ang-2 disrupts barrier); reversed link duplicates the closure edge and is dropped"
+- source: bbb_bbb
+  target: AngPt_angiopoietin_1
+  relation: stabilizes
+  sign: -1
+  source_file: AngPt.md
+  quote: "Restoring Ang-1 levels can help reseal the BBB/BSCB"
+- source: BBB_tight_junction_proteins
+  target: BBB_CypA_MMP9_pathway
+  relation: degrades
+  source_file: BBB.md
+  quote: "activated cyclophilin A (CypA) stimulates matrix metalloproteinase-9 (MMP-9), which degrades the basement membrane and tight junction proteins, directly opening the barrier"
+  note: "EC-0118: encoding inverted"
+- source: BBB_tight_junction_proteins
+  target: vegf_VEGFR2
+  relation: downregulates
+  source_file: vegf.md
+  quote: "The major receptor mediating nociceptive, angiogenic, and permeability effects."
+  note: "EC-0119: encoding inverted; VEGFR2 valence contested (EC-0168)"
+- source: vegf_VEGFR2
+  target: vegf_nrp1
+  relation: enhances_signaling_of
+  source_file: vegf.md
+  quote: "A co‑receptor that enhances VEGFR2 signaling and is expressed on nociceptors."
+
+# Rbfox1
+- source: rbfox1_rbfox1
+  target: rbfox1_AAV5_Rbfox1
+  relation: restores_expression_of
+  source_file: rbfox1.md
+  quote: "Delivery of AAV5‑Rbfox1 into the DRG prior to SNL preserves Rbfox1 levels"
+
+# IL-6 / JAK / STAT3
+- source: il6_jak_stat3
+  target: jakstat_socs3
+  relation: terminates
+  source_file: JAK-STAT.md
+  quote: "STAT3 itself induces SOCS3, which binds to the receptor and JAKs to terminate signalling in a negative‑feedback loop."
+  note: "EC-0049: SOCS3 terminates JAK/STAT3"
+- source: il6_jak_stat3
+  target: jakstat_ruxolitinib
+  relation: inhibits
+  source_file: JAK-STAT.md
+  quote: "A dual JAK1/JAK2 inhibitor approved for myelofibrosis. In preclinical pain models, ruxolitinib attenuates mechanical allodynia, reduces glial activation, and normalises STAT3‑dependent gene expression."
+  note: "EC-0048: predicate inverted"
+- source: il6_jak_stat3
+  target: jakstat_baricitinib
+  relation: inhibits
+  source_file: JAK-STAT.md
+  quote: "Several JAK inhibitors are already approved for rheumatoid arthritis, psoriatic arthritis, ulcerative colitis, and other inflammatory conditions, including tofacitinib (JAK1/JAK3), baricitinib (JAK1/JAK2)"
+  note: "EC-0047: drug inhibits pathway"
+- source: assaying_molecularly_structural_plasticity_BDNF
+  target: jakstat_il6_gp130
+  relation: drives_transcription_of
+  source_file: JAK-STAT.md
+  quote: "STAT3 drives the expression of **BDNF** and downregulates **KCC2**"
+- source: pnn_ecm_mmp9
+  target: jakstat_il6_gp130
+  relation: drives_transcription_of
+  source_file: JAK-STAT.md
+  quote: "It promotes **VEGF** and **MMP‑9** expression, linking to vascular remodelling and barrier disruption."

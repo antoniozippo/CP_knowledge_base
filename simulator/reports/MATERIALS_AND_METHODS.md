@@ -30,6 +30,10 @@ We developed a literature-driven, LLM-agent-based simulator of chronic pain path
 
 **Quarantine protocol.** Edges with `sign=0` and `validation_status ∈ {REFUTED, MIXED}` are quarantine entries that override existing non-zero-sign edges. Implemented by direct graph mutation prior to closure application.
 
+**Node splits.** `analysis/scripts/split_nodes.py` applies `analysis/claims/node_splits.yaml`, moving the links of a biologically distinct pool onto its own node (ACC Kalirin-7 split from the spinal Kalirin-7 node).
+
+**Edge-direction corrections.** `analysis/scripts/reverse_edges.py` applies `analysis/claims/edge_reversals.yaml` after the splits. Each entry names a stored link whose relation describes the target acting on the source (a drug, tool, intervention, injury model or upstream regulator extracted as the target) and carries a verbatim dossier `quote` for the corrected direction. Endpoints are swapped and the relation kept, so its sign reads correctly; a `sign` override is used only where the corrected target has inverted polarity (the `bbb_bbb` barrier node models leak). The audit heuristic `find_direction_suspects()` flags signed mechanism→intervention links; every flagged link not reversed, and every ambiguous case, is listed in `analysis/claims/edge_direction_review.yaml` for human review. A direction fix keeps the link's `validation_status`: it is not new evidence.
+
 ---
 
 ## 2. RhoA/ROCK→Kalirin-7 Edge Correction

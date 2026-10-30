@@ -6,39 +6,37 @@ tier: MID
 community: 5
 baseline_state: 0.5
 normal_role: NMDAR (ACC Kalirin-7 Downregulation Driver) is a channel located in ACC.
-  Baseline activity level 0.50. It receives 1 regulatory influences and exerts 3.
+  Baseline activity level 0.50. It receives 2 regulatory influences and exerts 2.
 pathological_rules:
 - rule_id: RULE-karilin7_NMDAR-01
+  description: NMDAR (ACC Kalirin-7 Downregulation Driver) downregulates via calcineurin
+    ACC Kalirin-7 (Layer II/III Pyramidal Neurons)
+  claim_refs:
+  - EC-0056
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-karilin7_NMDAR-02
   description: NMDAR (ACC Kalirin-7 Downregulation Driver) activates Ca dependent
     Calcineurin (Ca2+-Dependent Kalirin-7 Phosphatase)
   claim_refs:
   - EC-0085
   direction: up
   magnitude_hint: null
-- rule_id: RULE-karilin7_NMDAR-02
-  description: NMDAR (ACC Kalirin-7 Downregulation Driver) antagonizes Ketamine (NMDAR
-    Antagonist, Preserves Kalirin-7)
-  claim_refs:
-  - EC-0087
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-karilin7_NMDAR-03
-  description: NMDAR (ACC Kalirin-7 Downregulation Driver) antagonizes AP-5 (Competitive
-    NMDAR Antagonist)
-  claim_refs:
-  - EC-0086
-  direction: down
-  magnitude_hint: null
 inbound_edges:
-- source_id: karilin7_Kalirin7_ACC
-  relation: downregulates_via_calcineurin
+- source_id: karilin7_Ketamine
+  relation: antagonizes
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_AP5
+  relation: antagonizes
   sign: -1
   weight: 0.9
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
 outbound_ids:
+- karilin7_Kalirin7_ACC
 - karilin7_Calcineurin
-- karilin7_Ketamine
-- karilin7_AP5
 rule_gap_reason: null
 source_note: karilin-7.md

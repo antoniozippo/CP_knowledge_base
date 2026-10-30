@@ -27,19 +27,12 @@ pathological_rules:
   direction: up
   magnitude_hint: null
 - rule_id: RULE-karilin7_Kalirin7-04
-  description: Kalirin-7 (GEF for Rac1/RhoG) genetic deletion Kalirin-7 Global Knockout
-    Mouse
-  claim_refs:
-  - EC-0057
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7-05
   description: Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
   claim_refs:
   - EC-0067
   direction: up
   magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7-06
+- rule_id: RULE-karilin7_Kalirin7-05
   description: Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7
     Role
   claim_refs: []
@@ -64,11 +57,16 @@ inbound_edges:
   weight: 0.5
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
+- source_id: karilin7_Kalirin7_KO
+  relation: genetic_deletion
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
 outbound_ids:
 - karilin7_Rac1
 - karilin7_RhoG
 - karilin7_Rac1_PAK_LIMK_Cofilin_Pathway
-- karilin7_Kalirin7_KO
 - karilin-7_Rac1_pathway
 - karilin-7_SpinalPronociceptiveRole
 rule_gap_reason: null

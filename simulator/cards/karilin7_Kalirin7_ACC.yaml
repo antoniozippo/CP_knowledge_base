@@ -6,91 +6,89 @@ tier: MID
 community: 5
 baseline_state: 0.5
 normal_role: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) is a molecule located
-  in ACC. Baseline activity level 0.50. It receives 0 regulatory influences and exerts
-  12.
+  in ACC. Baseline activity level 0.50. It receives 8 regulatory influences and exerts
+  4.
 pathological_rules:
 - rule_id: RULE-karilin7_Kalirin7_ACC-01
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) dephosphorylates and
-    degrades Calcineurin (Ca2+-Dependent Kalirin-7 Phosphatase)
-  claim_refs:
-  - EC-0055
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-02
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) downregulates via calcineurin
-    NMDAR (ACC Kalirin-7 Downregulation Driver)
-  claim_refs:
-  - EC-0056
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-03
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) delivers and restores
-    AAV-Kalirin-7 (Gene Therapy, ACC-Targeted)
-  claim_refs:
-  - EC-0054
-  direction: up
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-04
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) knocks down shRNA Kalirin-7
-    Knockdown (ACC)
-  claim_refs:
-  - EC-0061
-  direction: down
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-05
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) upregulates Environmental
-    Enrichment (Boosts ACC Kalirin-7)
-  claim_refs:
-  - EC-0068
-  direction: up
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-06
-  description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) normalizes signaling
-    Deep Brain Stimulation of ACC
-  claim_refs:
-  - EC-0064
-  direction: up
-  magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-07
   description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) loss causes Pain-Related
     Anxiety (ACC Kalirin-7 Dependent)
   claim_refs:
   - EC-0063
   direction: down
   magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-08
+- rule_id: RULE-karilin7_Kalirin7_ACC-02
   description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) loss causes Dendritic
     Spine Loss (ACC Layer II/III Pyramidal)
   claim_refs:
   - EC-0062
   direction: down
   magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-11
+- rule_id: RULE-karilin7_Kalirin7_ACC-03
   description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) rationale for Dendritic
     Spine Loss (ACC Layer II/III Pyramidal)
   claim_refs:
   - EC-0065
   direction: down
   magnitude_hint: null
-- rule_id: RULE-karilin7_Kalirin7_ACC-12
+- rule_id: RULE-karilin7_Kalirin7_ACC-04
   description: ACC Kalirin-7 (Layer II/III Pyramidal Neurons) rationale for Pain-Related
     Anxiety (ACC Kalirin-7 Dependent)
   claim_refs:
   - EC-0066
   direction: down
   magnitude_hint: null
-inbound_edges: []
+inbound_edges:
+- source_id: karilin7_Calcineurin
+  relation: dephosphorylates_and_degrades
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_NMDAR
+  relation: downregulates_via_calcineurin
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_AAV_Kalirin7
+  relation: delivers_and_restores
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_shRNA_Kalirin7
+  relation: knocks_down
+  sign: -1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_EnvironmentalEnrichment
+  relation: upregulates
+  sign: 1
+  weight: 0.9
+  validation_status: EXTENDED
+  neutral_ok: false
+- source_id: karilin7_DBS_ACC
+  relation: normalizes_signaling
+  sign: 1
+  weight: 0.9
+  validation_status: NO_EVIDENCE_FOUND
+  neutral_ok: false
+- source_id: karilin7_SNI
+  relation: induces_downregulation
+  sign: -1
+  weight: 0.9
+  validation_status: REFUTED
+  neutral_ok: false
+- source_id: karilin7_CCI
+  relation: induces_downregulation
+  sign: -1
+  weight: 0.9
+  validation_status: REFUTED
+  neutral_ok: false
 outbound_ids:
-- karilin7_Calcineurin
-- karilin7_NMDAR
-- karilin7_AAV_Kalirin7
-- karilin7_shRNA_Kalirin7
-- karilin7_EnvironmentalEnrichment
-- karilin7_DBS_ACC
 - karilin7_PainRelatedAnxiety
 - karilin7_DendriticSpineLoss
-- karilin7_SNI
-- karilin7_CCI
 - karilin7_DendriticSpineLoss
 - karilin7_PainRelatedAnxiety
 rule_gap_reason: null

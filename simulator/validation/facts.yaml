@@ -179,7 +179,10 @@ facts:
       evidence-backed path from injury to the affect readout: its only input
       is ACC Kalirin-7, whose injury-induced downregulation is REFUTED
       (F10.1). The verified ACC mechanisms (pre-LTP via kainate/AC1/HCN,
-      F10.2; rACC BDNF-TrkB aversion, F10.4) are not yet encoded.
+      F10.2; rACC BDNF-TrkB aversion, F10.4) are not yet encoded. The
+      direction-corrected regulators of ACC Kalirin-7 (NMDAR/calcineurin,
+      SNI/CCI model nodes; analysis/claims/edge_reversals.yaml) are reached by
+      no injury scenario, so correcting them leaves the gap unchanged.
 
   # ------------------------------------------------------------------
   # drug_effect

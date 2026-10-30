@@ -9,10 +9,11 @@ normal_role: ROCK (ROCK1/ROCK2) is a molecule located in other. Baseline activit
   level 0.50. It receives 3 regulatory influences and exerts 4.
 pathological_rules:
 - rule_id: RULE-RhoA_ROCK_ROCK-01
-  description: ROCK (ROCK1/ROCK2) inhibits Fasudil (ROCK Inhibitor)
+  description: ROCK (ROCK1/ROCK2) mediates microglial release of Brain-Derived Neurotrophic
+    Factor (BDNF)
   claim_refs:
-  - EC-0100
-  direction: down
+  - EC-0146
+  direction: up
   magnitude_hint: null
 - rule_id: RULE-RhoA_ROCK_ROCK-02
   description: ROCK (ROCK1/ROCK2) activates via p38 mapk Microglia
@@ -38,20 +39,20 @@ inbound_edges:
   weight: 0.9
   validation_status: CONFIRMED
   neutral_ok: false
-- source_id: assaying_molecularly_structural_plasticity_BDNF
-  relation: mediates_microglial_release_of
-  sign: 1
-  weight: 0.5
-  validation_status: EXTENDED
-  neutral_ok: false
 - source_id: RhoA_ROCK_RhoA
   relation: activates
   sign: 1
   weight: 0.9
   validation_status: CONFIRMED
   neutral_ok: false
+- source_id: RhoA_ROCK_fasudil
+  relation: inhibits
+  sign: -1
+  weight: 0.9
+  validation_status: CONFIRMED
+  neutral_ok: false
 outbound_ids:
-- RhoA_ROCK_fasudil
+- assaying_molecularly_structural_plasticity_BDNF
 - shared_microglia
 - TNF_TNF_alpha
 - karilin7_DendriticSpineLoss

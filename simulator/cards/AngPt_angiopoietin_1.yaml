@@ -6,28 +6,29 @@ tier: MID
 community: 4
 baseline_state: 0.5
 normal_role: Angiopoietin-1 (Ang-1) is a concept located in other. Baseline activity
-  level 0.50. It receives 1 regulatory influences and exerts 2.
+  level 0.50. It receives 0 regulatory influences and exerts 3.
 pathological_rules:
 - rule_id: RULE-AngPt_angiopoietin_1-01
+  description: Angiopoietin-1 (Ang-1) stabilizes Blood-Brain/Spinal Cord Barrier (BBB/BSCB)
+  claim_refs:
+  - EC-0015
+  direction: down
+  magnitude_hint: null
+- rule_id: RULE-AngPt_angiopoietin_1-02
   description: Angiopoietin-1 (Ang-1) activates Tie2 Receptor Tyrosine Kinase
   claim_refs:
   - EC-0006
   direction: up
   magnitude_hint: null
-- rule_id: RULE-AngPt_angiopoietin_1-02
+- rule_id: RULE-AngPt_angiopoietin_1-03
   description: Angiopoietin-1 (Ang-1) upregulates Blood-Brain/Spinal Cord Barrier
     Integrity
   claim_refs: []
   direction: up
   magnitude_hint: null
-inbound_edges:
-- source_id: bbb_bbb
-  relation: stabilizes
-  sign: 1
-  weight: 0.9
-  validation_status: CONFIRMED
-  neutral_ok: false
+inbound_edges: []
 outbound_ids:
+- bbb_bbb
 - AngPt_Tie2
 - BBB_BloodBrainBarrier
 rule_gap_reason: null
