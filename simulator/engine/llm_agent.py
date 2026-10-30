@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 DEFAULT_OPENCODE_BIN = "opencode"
 CLIENT_TIMEOUT_S = 600
 MAX_RATIONALE_CHARS = 300
+ROLE_PLACEHOLDER = "<LLM_ENRICH>"
 
 
 class OpenCodeClient:
@@ -108,11 +109,24 @@ def build_prompt(
         f"sender_state={p.sender_state:.4f} (baseline {p.sender_baseline:.4f})"
         for p in packets
     ]
+    role_line = (
+        f"normal_role: {card.normal_role}\n"
+        if card.normal_role and card.normal_role != ROLE_PLACEHOLDER
+        else ""
+    )
     return (
         f'You are simulating agent "{card.id}" ({card.label}), entity_type={card.entity_type}, '
         f"compartment={card.compartment}, tier={card.tier.value}.\n"
+        + role_line
+        + "States are activity levels in [0,1]. baseline_state is this agent's resting level "
+        "in an uninjured animal. Inbound influences act only through each sender's deviation "
+        "from its own baseline: if every sender is at its baseline, there is no net input and "
+        "the state should stay at, or relax toward, baseline_state. Report the agent's "
+        "endogenous state; scenario drugs and tonic drives are applied by the engine "
+        "afterwards, so do not account for them.\n"
         f"tick: {tick}\n"
         f"epoch: {epoch.value}\n"
+        f"baseline_state: {card.baseline_state:.6f}\n"
         f"current_state: {current_state:.6f}\n"
         "pathological_rules:\n"
         + ("\n".join(rules_lines) if rules_lines else "- (none)")

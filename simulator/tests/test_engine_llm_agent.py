@@ -96,6 +96,21 @@ def test_build_prompt_contains_rules_packets_state_epoch():
     assert "refs" in prompt
 
 
+def test_build_prompt_states_baseline_and_resting_semantics():
+    card = make_card()
+    prompt = build_prompt(card, pkts(), 0.42, Epoch.SUBACUTE)
+    assert "baseline_state: 0.300000" in prompt
+    assert "relax toward" in prompt
+    assert "drugs and tonic drives are applied by the engine" in prompt
+
+
+def test_build_prompt_omits_placeholder_role_but_includes_real_one():
+    placeholder = make_card().model_copy(update={"normal_role": "<LLM_ENRICH>"})
+    assert "normal_role" not in build_prompt(placeholder, pkts(), 0.3, Epoch.SUBACUTE)
+    real = make_card().model_copy(update={"normal_role": "Pro-inflammatory cytokine."})
+    assert "normal_role: Pro-inflammatory cytokine." in build_prompt(real, pkts(), 0.3, Epoch.SUBACUTE)
+
+
 def test_parse_delta_plain_and_fenced():
     plain = parse_delta(VALID)
     assert plain == json.loads(VALID)
