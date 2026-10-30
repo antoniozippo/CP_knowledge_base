@@ -135,6 +135,23 @@ def test_pipeline_writes_new_node_and_edge_and_marks_pmid_processed(workspace, l
     assert json.loads((tmp / "crawler/processed_pmids.json").read_text()) == [PMID]
 
 
+def test_each_theme_searched_with_its_own_id(workspace, llm_calls, monkeypatch):
+    _, _ = workspace
+    themes = {
+        "T01": {"name": "a", "keywords": ["KCC2"], "mesh_terms": []},
+        "T02": {"name": "b", "keywords": ["NLRP3"], "mesh_terms": []},
+    }
+    seen = []
+    monkeypatch.setattr(
+        run, "search_theme", lambda cfg, since=None, max_results=0: seen.append(cfg) or []
+    )
+    monkeypatch.setattr(run, "fetch_papers", lambda papers, cache_dir=None: [])
+
+    run.run_pipeline(_args(), themes=themes)
+
+    assert [(c["id"], c["keywords"]) for c in seen] == [("T01", ["KCC2"]), ("T02", ["NLRP3"])]
+
+
 def test_prompt_contains_paper_title_and_text(workspace, llm_calls, monkeypatch):
     _, themes = workspace
     _stub_io(monkeypatch, [_meta()], [_content()])

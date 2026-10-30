@@ -63,8 +63,24 @@ def _save_processed_pmids(pmids: set[str]) -> None:
     PROCESSED_PMIDS_PATH.write_text(json.dumps(sorted(pmids), indent=2))
 
 
-def _cache_path(theme_id: str, since: str) -> Path:
-    qhash = hashlib.sha256(since.encode()).hexdigest()[:12]
+def _cache_path(theme_config: dict, since: str, max_results: int) -> Path:
+    """Cache file for one theme search.
+
+    The key hashes everything that determines the result set (keywords, MeSH
+    terms, since, max_results), so two themes can never share a cache entry
+    and editing a theme's queries invalidates its cached results.
+    """
+    theme_id = theme_config.get("id", "unknown")
+    key = json.dumps(
+        {
+            "keywords": theme_config.get("keywords") or [],
+            "mesh_terms": theme_config.get("mesh_terms") or [],
+            "since": since,
+            "max_results": max_results,
+        },
+        sort_keys=True,
+    )
+    qhash = hashlib.sha256(key.encode()).hexdigest()[:12]
     return CACHE_DIR / f"pubmed_{theme_id}_{qhash}.json"
 
 
@@ -363,7 +379,7 @@ def search_theme(
 
     if cache:
         _ensure_dirs()
-        cp = _cache_path(theme_id, effective_since)
+        cp = _cache_path(theme_config, effective_since, max_results)
         cached = _cache_read(cp)
         if cached is not None:
             log.info("Cache hit for theme %s (%d papers)", theme_id, len(cached))
@@ -400,7 +416,7 @@ def search_theme(
     all_papers.sort(key=lambda p: p.publication_date, reverse=True)
 
     if cache:
-        cp = _cache_path(theme_id, effective_since)
+        cp = _cache_path(theme_config, effective_since, max_results)
         _cache_write(cp, all_papers)
         log.info("Cached %d papers for theme %s", len(all_papers), theme_id)
 

@@ -89,7 +89,9 @@ def run_pipeline(args, themes=None):
     all_papers: list[PaperMeta] = []
     for theme_id, theme_config in themes.items():
         log.info(f"  Searching {theme_id}: {theme_config['name']}")
-        papers = search_theme(theme_config, since=args.since, max_results=args.max_results)
+        papers = search_theme(
+            {**theme_config, "id": theme_id}, since=args.since, max_results=args.max_results
+        )
         all_papers.extend(papers)
         log.info(f"    Found {len(papers)} papers")
 
