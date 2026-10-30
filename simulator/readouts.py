@@ -10,7 +10,15 @@ report 0.0 when nothing matches; barrier nodes model leak/disruption by
 HIGH activity, therefore barrier_integrity = 1 - mean(matched barrier
 states), which yields 1.0 when no barrier node matches (no modeled
 disruption).
+
+Cards whose label marks them as a drug or an argument node (EXCLUDED_LABEL
+pattern: "Rationale: ...", antibodies, antagonists, inhibitors, blockers)
+never count toward a readout. Many such nodes are typed "molecule" in the
+graph, so the entity-type gate alone let e.g. Infliximab into the
+inflammation index.
 """
+
+import re
 
 from simulator.schemas import AgentCard, Readout
 
@@ -27,6 +35,9 @@ BARRIER_LABELS = [
     "vascular permeability",
 ]
 BARRIER_ENTITY_TYPES = {"structure"}
+EXCLUDED_LABEL = re.compile(
+    r"^rationale:|\bantibody\b|\bmab\b|antagonist|inhibitor|blocker", re.IGNORECASE
+)
 
 
 def _matched_ids(
@@ -37,7 +48,9 @@ def _matched_ids(
     return sorted(
         cid
         for cid, card in cards_by_id.items()
-        if card.entity_type in allowed_types and any(s in card.label.lower() for s in labels)
+        if card.entity_type in allowed_types
+        and any(s in card.label.lower() for s in labels)
+        and not EXCLUDED_LABEL.search(card.label)
     )
 
 

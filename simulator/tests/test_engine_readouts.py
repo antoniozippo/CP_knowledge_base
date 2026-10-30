@@ -117,3 +117,14 @@ def test_deterministic_regardless_of_dict_order():
     cards_b = dict(reversed(list(cards_a.items())))
     states = {"a": 0.1, "b": 0.2, "c": 0.3}
     assert compute_readouts(states, cards_a) == compute_readouts(states, cards_b)
+
+
+def test_drug_and_rationale_nodes_excluded_from_readouts():
+    cards = {
+        "tnf": card("tnf", "TNF-α (Pro-Inflammatory Cytokine)"),
+        "ifx": card("ifx", "Infliximab (Anti-TNF Antibody)"),
+        "why": card("why", "Rationale: Anti-TNF can paradoxically trigger neuropathies"),
+        "ant": card("ant", "IL-6 receptor antagonist", entity_type="receptor"),
+    }
+    states = {"tnf": 0.6, "ifx": 0.0, "why": 0.0, "ant": 0.0}
+    assert compute_readouts(states, cards).inflammation_index == pytest.approx(0.6)
