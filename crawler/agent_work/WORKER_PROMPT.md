@@ -1,14 +1,19 @@
 # Worker brief: extraction of one shard by a Claude Code session
 
 Paste into a new cloud session on branch `claude/happy-dijkstra-wounz6`,
-replacing `{SHARD}` (0-37) and `{MODEL}` (`opus` or `sonnet`).
+replacing `{SHARDS}` (one or more shard numbers 0-37, e.g. `5 and 6`) and
+`{MODEL}` (`opus` or `sonnet`). The wave of 2026-10-30 measured, per paper
+(API-equivalent): opus $0.14 / ~6 relationships, sonnet $0.05 / ~2.5 but
+with skimming of long papers, hence the full-read rule below.
 
 ---
 
 You are a worker for this repository's literature crawler. Do the LLM
-extraction step yourself for shard {SHARD} (about 100 papers); no API key is
-involved. Background: "Alternative: extraction by Claude Code sessions" in
-`crawler/RUNBOOK.md`.
+extraction step yourself for shard(s) {SHARDS} (about 100 papers each),
+one shard at a time: finish steps 2-6 for a shard (including its push)
+before starting the next. No API key is involved. Background: "Alternative:
+extraction by Claude Code sessions" in `crawler/RUNBOOK.md`. Below, {SHARD}
+means the shard currently being processed.
 
 1. `pip install -q -r requirements.txt`
 2. `python3 crawler/agent_extract.py materialize --shard {SHARD}` and read
@@ -20,7 +25,10 @@ involved. Background: "Alternative: extraction by Claude Code sessions" in
    time. You only orchestrate: do not read the papers yourself. Give every
    subagent the INSTRUCTIONS.md path, its exact list of prompt files (check
    the list is filled in before launching), and these rules:
-   - Read each prompt file once, then write `crawler/extractions/<pmid>.json`.
+   - Read each prompt file ONCE AND COMPLETELY: a single Read call with no
+     offset/limit, then write `crawler/extractions/<pmid>.json`. Never grep
+     or search a paper for passages and never stop at the abstract or the
+     first sections; results and discussion are where most findings are.
    - Every `evidence_quote` is copied verbatim from that paper's Content.
    - Write compact JSON (no indentation). Omit `aliases` when empty; at most
      2 `key_findings`; `novel_terms` may be `[]`.
@@ -40,5 +48,5 @@ involved. Background: "Alternative: extraction by Claude Code sessions" in
    `claude/happy-dijkstra-wounz6` (other shards push there too; files are
    disjoint, so just rebase and retry). Do not run run.py or touch
    graphify-out/.
-7. Report: papers, entities, relationships, quotes dropped before fixes,
-   wall-clock time, and anything a reviewer should know.
+7. Report per shard: papers, entities, relationships, quotes dropped before
+   fixes, wall-clock time, and anything a reviewer should know.
