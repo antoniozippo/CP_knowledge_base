@@ -12,6 +12,26 @@ from pydantic import BaseModel, Field
 
 log = logging.getLogger(__name__)
 
+# MeSH check tags and population descriptors: indexers attach them to most
+# papers regardless of topic (in the 2026-10 crawl Animals, Humans and Male
+# topped the list at 2,000-3,500 papers each), so they are never proposed.
+# Species and strains are matched by prefix ("Mice, Knockout", "Rats, Wistar").
+GENERIC_MESH = frozenset(t.lower() for t in (
+    "Humans", "Animals", "Male", "Female", "Pregnancy",
+    "Infant, Newborn", "Infant", "Child, Preschool", "Child", "Adolescent",
+    "Young Adult", "Adult", "Middle Aged", "Aged", "Aged, 80 and over",
+    "Mice", "Rats", "Rabbits", "Swine", "Dogs", "Cats", "Cattle", "Sheep", "Horses",
+    "Guinea Pigs", "Cricetinae", "Chick Embryo", "Macaca mulatta", "Zebrafish",
+    "Disease Models, Animal",
+))
+GENERIC_MESH_PREFIXES = ("mice, ", "rats, ")
+
+
+def is_generic_mesh(term: str) -> bool:
+    """True for a check tag, population descriptor, or species/strain heading."""
+    lower = term.lower().strip()
+    return lower in GENERIC_MESH or lower.startswith(GENERIC_MESH_PREFIXES)
+
 
 # ---------------------------------------------------------------------------
 # Pydantic models
@@ -136,6 +156,8 @@ class MeshDiscovery:
                 break  # Counter is sorted descending; once below threshold, done
             if mesh_term.lower().strip() in self.existing_mesh:
                 continue  # already in theme registry
+            if is_generic_mesh(mesh_term):
+                continue  # check tag / species, not a topic
 
             # --- Step 3: adjacency -----------------------------------
             adjacent_themes = self._theme_ids_for_mesh(mesh_term)
@@ -156,7 +178,7 @@ class MeshDiscovery:
             discoveries.append(disc)
 
         log.info(
-            "Discovered %d new MeSH terms (>= %d papers, not in registry)",
+            "Discovered %d new MeSH terms (>= %d papers, not in registry, not check tags)",
             len(discoveries), min_frequency,
         )
         return discoveries

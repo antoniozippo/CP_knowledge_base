@@ -14,3 +14,13 @@ def test_default_threshold_is_twenty_papers(tmp_path):
     )
     found = {t.mesh_term: t.frequency for t in MeshDiscovery(themes_path=str(themes)).discover(papers)}
     assert found == {"Microglia": 20}  # Astrocytes at 19 papers, Neuralgia already registered
+
+
+def test_check_tags_species_and_strains_are_never_proposed(tmp_path):
+    themes = tmp_path / "themes.yaml"
+    themes.write_text(yaml.safe_dump({}))
+    tags = ["Humans", "Animals", "Male", "Aged, 80 and over", "Mice, Inbred C57BL",
+            "Rats, Sprague-Dawley", "Disease Models, Animal", "Hyperalgesia"]
+    papers = [{"pmid": str(i), "mesh_terms": tags} for i in range(25)]
+    found = [t.mesh_term for t in MeshDiscovery(themes_path=str(themes)).discover(papers)]
+    assert found == ["Hyperalgesia"]
