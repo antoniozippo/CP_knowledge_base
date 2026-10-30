@@ -19393,7 +19393,7 @@
       "target": "karilin7_Kalirin7",
       "sign": 0,
       "origin": "dynamic_closure",
-      "quote": "Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.",
+      "quote": "These are **antithetical pathways** operating in parallel, not a sequential RhoA→Kal7 cascade. The current edges incorrectly encode RhoA/ROCK as *causing* Kal7 loss.",
       "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
       "validation_status": "REFUTED"
     },
@@ -19407,7 +19407,7 @@
       "target": "karilin7_Kalirin7",
       "sign": 0,
       "origin": "dynamic_closure",
-      "quote": "Kal7 activates Rac1 (not RhoA); RhoA-ROCK promotes spine retraction/loss (antithetical to Kal7 spine-gain). No evidence that RhoA/ROCK directly degrades Kal7 protein. Fasudil (ROCK inhibitor) is analgesic in vivo (77% SNL allodynia reduction, Theme 5 F5.5), contradicting the current encoding which predicts fasudil worsens pain.",
+      "quote": "These are **antithetical pathways** operating in parallel, not a sequential RhoA→Kal7 cascade. The current edges incorrectly encode RhoA/ROCK as *causing* Kal7 loss.",
       "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
       "validation_status": "REFUTED"
     },
@@ -19421,7 +19421,7 @@
       "target": "karilin7_DendriticSpineLoss",
       "sign": 1,
       "origin": "dynamic_closure",
-      "quote": "Fasudil prevented the pathological spine remodeling induced by TBI — RhoA-ROCK activation drives dendritic spine loss via spine retraction pathways",
+      "quote": "RhoA-ROCK activation drives dendritic spine loss, not Kal7 downregulation. The edge sign is inverted: RhoA/ROCK **promotes** spine loss (+1), not Kal7 reduction (−1).",
       "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
     }
   ],
