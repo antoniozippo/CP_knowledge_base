@@ -6,18 +6,12 @@ tier: PERIPHERAL
 community: 5
 baseline_state: 0.05
 normal_role: Pain-Related Anxiety (ACC Kalirin-7 Dependent) is a symptom located in
-  ACC. Baseline activity level 0.05. It receives 2 regulatory influences and exerts
+  ACC. Baseline activity level 0.05. It receives 1 regulatory influences and exerts
   0.
 pathological_rules: []
 inbound_edges:
 - source_id: karilin7_Kalirin7
   relation: loss_causes
-  sign: 1
-  weight: 0.9
-  validation_status: EXTENDED
-  neutral_ok: false
-- source_id: karilin7_Kalirin7
-  relation: rationale_for
   sign: 1
   weight: 0.9
   validation_status: EXTENDED

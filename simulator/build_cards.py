@@ -386,6 +386,23 @@ def build_influence_edge(link, source_id=None):
     )
 
 
+def merge_parallel_edges(edges):
+    """Collapse inbound edges sharing (source_id, sign) into one.
+
+    The graph often records one finding under several relations (e.g.
+    loss_causes + rationale_for); summing them would multiply that source's
+    influence. The highest-weight edge is kept, first occurrence on ties,
+    in original order.
+    """
+    best = {}
+    for idx, edge in enumerate(edges):
+        key = (edge.source_id, edge.sign)
+        if key not in best or edge.weight > edges[best[key]].weight:
+            best[key] = idx
+    keep = set(best.values())
+    return [edge for idx, edge in enumerate(edges) if idx in keep]
+
+
 def build_card(node, nodes_by_id, inbound_links, outbound_links, prepared_claims,
                verdict_map, endpoint_ctx=None, hub_enrich=False, vault_dir=None):
     label = node["label"]
@@ -414,6 +431,7 @@ def build_card(node, nodes_by_id, inbound_links, outbound_links, prepared_claims
             unresolved_drops += 1
             continue
         inbound_edges.append(build_influence_edge(link, source_id=source))
+    inbound_edges = merge_parallel_edges(inbound_edges)
     outbound_ids = []
     for link in outbound_links:
         target = resolve(link["target"])

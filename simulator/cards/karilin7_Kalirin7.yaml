@@ -134,18 +134,6 @@ inbound_edges:
   weight: 0.5
   validation_status: NO_EVIDENCE_FOUND
   neutral_ok: false
-- source_id: RhoA_ROCK_RhoA
-  relation: antagonizes_pathway
-  sign: 0
-  weight: 0.5
-  validation_status: REFUTED
-  neutral_ok: true
-- source_id: RhoA_ROCK_ROCK
-  relation: antagonizes_pathway
-  sign: 0
-  weight: 0.5
-  validation_status: REFUTED
-  neutral_ok: true
 outbound_ids:
 - karilin7_Rac1
 - karilin7_RhoG

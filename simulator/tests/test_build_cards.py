@@ -587,3 +587,20 @@ def test_reconcile_removes_stale_files(tmp_path):
     removed = bc_reconcile(tmp_path, [{"id": "keep", "file": "keep.yaml"}])
     assert removed == ["stale_old_id.yaml"]
     assert keep.exists() and not stale.exists() and manifest.exists()
+
+
+def test_parallel_same_sign_edges_merged_keeping_max_weight():
+    from simulator.schemas import InfluenceEdge
+
+    edges = [
+        InfluenceEdge(source_id="k7", relation="loss_causes", sign=1, weight=0.5),
+        InfluenceEdge(source_id="x", relation="drives", sign=1, weight=0.5),
+        InfluenceEdge(source_id="k7", relation="rationale_for", sign=1, weight=0.9),
+        InfluenceEdge(source_id="k7", relation="inhibits", sign=-1, weight=0.5),
+    ]
+    merged = bc.merge_parallel_edges(edges)
+    assert [(e.source_id, e.relation, e.sign, e.weight) for e in merged] == [
+        ("x", "drives", 1, 0.5),
+        ("k7", "rationale_for", 1, 0.9),
+        ("k7", "inhibits", -1, 0.5),
+    ]
