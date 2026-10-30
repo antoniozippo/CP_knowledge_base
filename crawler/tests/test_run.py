@@ -335,3 +335,13 @@ def test_cache_only_run_makes_no_llm_calls_and_uses_cached_extractions(workspace
 
     assert len(llm_calls) == 1  # paper 2 deferred, not sent
     assert json.loads((tmp / "crawler/processed_pmids.json").read_text()) == ["1"]
+
+
+def test_theme_entities_match_whole_tokens_only():
+    assert run.mentions("KCC2", "KCC2-mediated inhibition") and run.mentions("Rac1", "Rac1-GTP levels")
+    assert run.mentions("MMP-9", "elevated MMP-9.") and run.mentions("acc", "the ACC and insula")
+    assert not run.mentions("ACC", "is frequently accompanied by")
+    assert not run.mentions("RAGE", "on average") and not run.mentions("MAG", "magnitude")
+    themes = {"T10": {"entities": ["ACC", "Kalirin-7"]}, "T01": {"entities": ["KCC2"]}}
+    papers = [{"pmid": "1", "content": "Pain is accompanied by low KCC2."}]
+    assert run.select_for_extraction(papers, themes) == [(papers[0], ["KCC2"])]

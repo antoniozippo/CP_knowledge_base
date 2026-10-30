@@ -30,3 +30,6 @@ crawler/processed_pmids.json
 
 # crawler verbose log (appended every run; per-run summaries are crawler/logs/run_*.json)
 crawler/logs/crawler.log
+
+# per-shard prompt/content files written by crawler/agent_extract.py materialize
+crawler/agent_work/shard_*/

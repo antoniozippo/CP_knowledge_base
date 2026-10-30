@@ -3,12 +3,14 @@
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import time
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
+from functools import lru_cache
 
 # Allow direct execution: `python3 crawler/run.py`
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -98,6 +100,23 @@ def search_all(themes: dict, since: str, max_results: int) -> list[PaperMeta]:
     return unique_papers
 
 
+@lru_cache(maxsize=None)
+def _entities_pattern(entities: tuple[str, ...]) -> re.Pattern:
+    # whole token, case-insensitive: "KCC2-mediated" and "Rac1-GTP" match,
+    # "accompanied" no longer counts as ACC nor "average" as RAGE. One
+    # alternation per theme keeps this to a single scan of each paper.
+    alternatives = "|".join(re.escape(e) for e in sorted(entities, key=len, reverse=True))
+    return re.compile(rf"(?<![A-Za-z0-9])(?:{alternatives})(?![A-Za-z0-9])", re.IGNORECASE)
+
+
+def mentions_any(entities: list[str], text: str) -> bool:
+    return bool(entities) and _entities_pattern(tuple(entities)).search(text) is not None
+
+
+def mentions(entity: str, text: str) -> bool:
+    return mentions_any([entity], text)
+
+
 def select_for_extraction(inputs: list[dict], themes: dict) -> list[tuple[dict, list[str]]]:
     """(paper, focus entities) for each paper mentioning a theme entity.
 
@@ -107,11 +126,9 @@ def select_for_extraction(inputs: list[dict], themes: dict) -> list[tuple[dict, 
     """
     focused = []
     for paper in inputs:
-        text = paper["content"].lower()
-        focus = list(dict.fromkeys(
-            e for t in themes.values() for e in t.get("entities", [])
-            if any(x.lower() in text for x in t.get("entities", []))
-        ))
+        text = paper["content"]
+        matched = [t for t in themes.values() if mentions_any(t.get("entities", []), text)]
+        focus = list(dict.fromkeys(e for t in matched for e in t.get("entities", [])))
         if focus:
             focused.append((paper, focus))
     return focused
@@ -132,6 +149,8 @@ def make_extractor(args):
 
 
 LOCAL_DEFAULT_MODEL = "qwen/qwen3.8-27b"
+# extractions committed by Claude Code worker sessions (crawler/agent_extract.py)
+EXTRACTIONS_DIR = Path("crawler/extractions")
 TEST_GATE_SUITES = ["crawler/tests", "analysis/tests", "simulator/tests"]
 
 
@@ -178,6 +197,7 @@ def run_pipeline(args, themes=None):
         log.info(f"  {len(contents)} papers fetched, {len(to_extract)} not yet extracted")
         extractor = make_extractor(args)
         extractor.cache_only = args.cache_only
+        extractor.extractions_dir = EXTRACTIONS_DIR
         focused = select_for_extraction(to_extract, themes)
         log.info(f"  {len(focused)} papers mention a theme entity; "
                  f"{len(to_extract) - len(focused)} skipped as off-theme")

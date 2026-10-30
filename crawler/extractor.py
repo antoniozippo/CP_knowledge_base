@@ -155,6 +155,10 @@ class LLMExtractor:
         # cache_only: never call the model; a cache miss raises like an
         # exhausted budget (run.py defers the paper)
         self.cache_only = False
+        # committed extractions written by Claude Code sessions
+        # (crawler/agent_extract.py), one <pmid>.json per paper; used when the
+        # hash-keyed cache has no entry for this exact content
+        self.extractions_dir: Optional[Path] = None
         self.dropped_unverified = 0
         self.sign_overridden = 0
 
@@ -217,6 +221,15 @@ class LLMExtractor:
                 return json.loads(cache_path.read_text())
             except (json.JSONDecodeError, OSError) as exc:
                 logger.warning("Cache read failed for %s: %s", cache_path, exc)
+        if self.extractions_dir is not None:
+            # keyed by PMID only: the paper text fetched here can differ
+            # slightly from the worker's, so quotes are re-verified against it
+            committed = self.extractions_dir / f"{pmid}.json"
+            if committed.exists():
+                try:
+                    return json.loads(committed.read_text())
+                except (json.JSONDecodeError, OSError) as exc:
+                    logger.warning("Extraction file unreadable %s: %s", committed, exc)
         return None
 
     def _save_cache(self, pmid: str, content_hash: str, result: dict):

@@ -58,3 +58,22 @@ merges verified findings into `graphify-out/graph_v2.json`.
 New links are `UNREVIEWED` and stay out of the simulator's agent cards
 (`simulator/build_cards.py: simulation_eligible`) until a reviewer sets a
 `validation_status`; evidence on existing links is in `crawler_evidence`.
+
+## Alternative: extraction by Claude Code sessions (Claude subscription, no API key)
+
+`crawler/agent_extract.py` replaces steps 3-4: Claude Code cloud sessions do
+the extraction themselves, on the subscription, and commit one JSON file per
+paper to `crawler/extractions/`. The merge (step 5) is unchanged:
+`run.py --cache-only` reads those files, re-verifies every quote against the
+paper text and updates the graph.
+
+1. `python3 crawler/agent_extract.py plan` (once; writes
+   `crawler/agent_work/plan.json`, 100 papers per shard, committed).
+2. Per worker session, shard N:
+   `python3 crawler/agent_extract.py materialize --shard N`, then follow
+   `crawler/agent_work/shard_NNN/INSTRUCTIONS.md`, then
+   `python3 crawler/agent_extract.py check --shard N` until clean, then commit
+   `crawler/extractions/*.json` and push (`git pull --rebase` first: shards
+   touch disjoint files).
+3. `python3 crawler/agent_extract.py status` shows progress per shard.
+4. Merge as in step 5 above.
