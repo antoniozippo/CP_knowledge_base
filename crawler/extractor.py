@@ -152,6 +152,9 @@ class LLMExtractor:
         self.cache_dir = cache_dir or Path("crawler/cache")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.call_count = 0
+        # cache_only: never call the model; a cache miss raises like an
+        # exhausted budget (run.py defers the paper)
+        self.cache_only = False
         self.dropped_unverified = 0
         self.sign_overridden = 0
 
@@ -277,6 +280,8 @@ class LLMExtractor:
                 return self._verified(validated, content)
             logger.warning("Cached result invalid for PMID %s, re-extracting", pmid)
 
+        if self.cache_only:
+            raise RuntimeError(f"no cached extraction for PMID {pmid} (cache-only run)")
         if max_budget > 0 and self.call_count >= max_budget:
             raise RuntimeError(
                 f"LLM budget exhausted ({self.call_count}/{max_budget} calls)"

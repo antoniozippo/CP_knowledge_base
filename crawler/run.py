@@ -177,6 +177,7 @@ def run_pipeline(args, themes=None):
         ]
         log.info(f"  {len(contents)} papers fetched, {len(to_extract)} not yet extracted")
         extractor = make_extractor(args)
+        extractor.cache_only = args.cache_only
         focused = select_for_extraction(to_extract, themes)
         log.info(f"  {len(focused)} papers mention a theme entity; "
                  f"{len(to_extract) - len(focused)} skipped as off-theme")
@@ -194,8 +195,9 @@ def run_pipeline(args, themes=None):
             if result is not None and (result.entities or result.relationships):
                 extractions.append(result)
         if deferred:
-            log.warning(f"  LLM budget of {args.budget} calls reached; "
-                        f"{deferred} papers deferred to the next run")
+            reason = "cache-only run" if args.cache_only else f"LLM budget of {args.budget} calls reached"
+            log.warning(f"  {reason}; {deferred} papers without a cached extraction "
+                        f"deferred to the next run")
         log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls); "
                  f"{extractor.dropped_unverified} relationships dropped (quote not in paper), "
                  f"{extractor.sign_overridden} signs set from predicate")
@@ -318,7 +320,10 @@ Examples:
     parser.add_argument("--max-results", type=int, default=200,
                         help="Max results per theme query (default: 200)")
     parser.add_argument("--budget", type=int, default=2000,
-                        help="LLM call budget per run (default: 2000)")
+                        help="LLM call budget per run (default: 2000; 0 = unlimited)")
+    parser.add_argument("--cache-only", action="store_true",
+                        help="make no LLM calls; use cached extractions only (e.g. after "
+                             "crawler/batch_extract.py collect) and defer the rest")
     parser.add_argument("--llm-provider", choices=["local", "anthropic"], default="local",
                         help="local OpenAI-compatible endpoint, or the Claude API "
                              "(CRAWLER_ANTHROPIC_API_KEY); for full runs see crawler/batch_extract.py")

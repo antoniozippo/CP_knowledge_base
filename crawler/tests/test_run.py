@@ -120,7 +120,7 @@ def llm_calls(monkeypatch):
 def _args(**overrides):
     base = dict(
         themes_path="crawler/themes.yaml", since="2026-01-01", max_results=10, budget=50,
-        llm_provider="local", llm_effort="medium",
+        llm_provider="local", llm_effort="medium", cache_only=False,
         llm_endpoint="http://stub", llm_model="stub", llm_max_tokens=256,
         min_mesh_freq=3, dry_run=False, no_commit=True,
     )
@@ -321,3 +321,17 @@ def test_inputs_put_results_and_discussion_before_methods():
     sections = {"Methods": "M.", "Introduction": "I.", "Results": "R.", "Discussion": "D.", "Other": "O."}
     (item,) = run.build_extraction_inputs([_meta()], [_content(abstract="A.", sections=sections)])
     assert item["content"] == "A.\n\nR.\n\nD.\n\nI.\n\nO.\n\nM."
+
+
+def test_cache_only_run_makes_no_llm_calls_and_uses_cached_extractions(workspace, llm_calls, monkeypatch):
+    tmp, themes = workspace
+    _stub_io(monkeypatch, [_meta(pmid="1"), _meta(pmid="2")],
+             [_content(pmid="1"), _content(pmid="2", abstract="KCC2 only, uncached.")])
+    run.run_pipeline(_args(budget=1, no_commit=True), themes=themes)  # caches paper 1 only
+    assert len(llm_calls) == 1
+    (tmp / "crawler/processed_pmids.json").unlink()
+
+    assert run.run_pipeline(_args(cache_only=True, budget=0), themes=themes) == 0
+
+    assert len(llm_calls) == 1  # paper 2 deferred, not sent
+    assert json.loads((tmp / "crawler/processed_pmids.json").read_text()) == ["1"]
