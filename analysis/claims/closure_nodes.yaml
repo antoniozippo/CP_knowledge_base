@@ -1,0 +1,22 @@
+# Curated nodes for mechanisms verified in the literature sweeps that had no
+# graph node to attach closure edges to. Applied by
+# analysis/scripts/add_closure_edges.py (before closure_edges.yaml) and held
+# to the same rule: quote is a verbatim substring of source_file.
+
+- id: closure_ACC_PresynapticLTP
+  label: ACC Presynaptic LTP (Kainate/AC1/HCN)
+  entity_type: process
+  compartment: ACC
+  community: 5
+  quote: 'pre-LTP requires kainate receptors, AC1/PKA, expressed via HCN channels and mediates pain-related anxiety'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#F10.2 | Koga K et al., Neuron 2015;85(2):377-389'
+
+- id: closure_rACC_PainAversion
+  label: Pain-Related Aversion (rACC)
+  entity_type: symptom
+  compartment: ACC
+  community: 5
+  quote: 'rACC BDNF-TrkB blockade (cyclotraxin-B) reduces bone-cancer-pain aversion'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#F10.4a | Li TT et al., Brain Res Bull 2022'

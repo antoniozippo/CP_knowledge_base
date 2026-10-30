@@ -103,6 +103,18 @@ pathological_rules:
   claim_refs: []
   direction: up
   magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-15
+  description: Brain-Derived Neurotrophic Factor (BDNF) drives AC1 dependent synaptic
+    enhancement ACC Presynaptic LTP (Kainate/AC1/HCN)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+- rule_id: RULE-assaying_molecularly_structural_plasticity_BDNF-16
+  description: Brain-Derived Neurotrophic Factor (BDNF) drives Pain-Related Aversion
+    (rACC)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
 inbound_edges:
 - source_id: shared_microglia
   relation: releases
@@ -134,5 +146,7 @@ outbound_ids:
 - RhoA_ROCK_ROCK
 - BDNF_TrkB_KCC2
 - bbb_bbb
+- closure_ACC_PresynapticLTP
+- closure_rACC_PainAversion
 rule_gap_reason: null
 source_note: assaying_molecularly_structural_plasticity.md

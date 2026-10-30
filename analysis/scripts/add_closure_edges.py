@@ -19,6 +19,13 @@ maps confidence to a numeric weight via its CONFIDENCE_WEIGHTS map
 (INFERRED_CLOSURE -> 0.5).
 The tool is idempotent: a second run adds nothing because every applied
 pair is then skipped as a duplicate.
+
+Closure nodes (analysis/claims/closure_nodes.yaml): a mechanism the
+literature sweeps verified sometimes has no node to attach to. Each curated
+node carries its own verbatim quote and source_file, is added (if absent)
+before the edges so proposals can resolve it by id, is marked
+origin=="dynamic_closure", and gets its tier from its degree once the
+edges are in.
 """
 
 import argparse
@@ -31,8 +38,13 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_graph_v2 import assign_tier, compute_degrees  # noqa: E402
+
 DEFAULT_GRAPH = Path("graphify-out/graph_v2.json")
 DEFAULT_PROPOSALS = Path("analysis/claims/closure_edges.yaml")
+DEFAULT_NODES = Path("analysis/claims/closure_nodes.yaml")
+NODE_REQUIRED_FIELDS = ("id", "label", "entity_type", "compartment", "quote", "source_file")
 
 REQUIRED_FIELDS = ("source_label", "target_label", "relation", "sign", "quote", "source_file")
 
@@ -143,6 +155,50 @@ def _validate_proposal(proposal, position):
         raise ValueError(f"proposal #{position} quote exceeds 400 chars")
 
 
+def add_closure_nodes(graph, node_specs):
+    """Return (new_graph, n_added); nodes whose id already exists are skipped."""
+    new_graph = copy.deepcopy(graph)
+    existing = {n["id"] for n in new_graph["nodes"]}
+    added = 0
+    for position, spec in enumerate(node_specs):
+        missing = [f for f in NODE_REQUIRED_FIELDS if not spec.get(f)]
+        if missing:
+            raise ValueError(f"closure node #{position} missing fields: {', '.join(missing)}")
+        if spec["id"] in existing:
+            continue
+        new_graph["nodes"].append(
+            {
+                "id": spec["id"],
+                "label": spec["label"],
+                "norm_label": spec["label"].lower(),
+                "file_type": "document",
+                "source_file": spec["source_file"],
+                "source_location": None,
+                "community": spec.get("community", 0),
+                "entity_type": spec["entity_type"],
+                "compartment": spec["compartment"],
+                "tier": "peripheral",
+                "merged_from": [],
+                "origin": "dynamic_closure",
+                "quote": spec["quote"],
+                "source_ref": spec.get("source_ref", spec["source_file"]),
+            }
+        )
+        existing.add(spec["id"])
+        added += 1
+    return new_graph, added
+
+
+def retier_closure_nodes(graph):
+    """Set each closure node's tier from its current degree (in place)."""
+    closure = [n for n in graph["nodes"] if n.get("origin") == "dynamic_closure"]
+    if closure:
+        degrees = compute_degrees(graph["nodes"], graph["links"])
+        for node in closure:
+            node["tier"] = assign_tier(degrees[node["id"]])
+    return graph
+
+
 def apply_closure_edges(graph, proposals, update_quotes=False):
     """Pure core: return (new_graph, ClosureSummary); raises ValueError when
     any endpoint fails to resolve (graph left untouched in that case).
@@ -210,7 +266,15 @@ def apply_closure_edges(graph, proposals, update_quotes=False):
                     closure_links[0]["source_ref"] = new_ref
                     summary.updated += 1
                 continue
-        if pair in existing_signed_pairs:
+        same_closure = any(
+            l.get("origin") == "dynamic_closure"
+            and l["relation"] == resolved["relation"]
+            and l.get("sign") == int(resolved["sign"])
+            for l in links_by_pair.get(pair, [])
+        )
+        # sign-0 quarantine links never enter existing_signed_pairs, so an
+        # identical closure link must be checked too or reruns duplicate them
+        if pair in existing_signed_pairs or same_closure:
             summary.skipped_duplicates += 1
             continue
         new_graph["links"].append(
@@ -240,6 +304,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--graph", type=Path, default=DEFAULT_GRAPH)
     parser.add_argument("--proposals", type=Path, default=DEFAULT_PROPOSALS)
+    parser.add_argument("--nodes", type=Path, default=DEFAULT_NODES)
     parser.add_argument(
         "--update-quotes", action="store_true",
         help="rewrite quote/source_ref on existing origin=='dynamic_closure' "
@@ -249,11 +314,15 @@ def main(argv=None):
 
     graph = json.loads(args.graph.read_text())
     proposals = yaml.safe_load(args.proposals.read_text()) or []
+    node_specs = (yaml.safe_load(args.nodes.read_text()) or []) if args.nodes.exists() else []
+    graph, nodes_added = add_closure_nodes(graph, node_specs)
     new_graph, summary = apply_closure_edges(graph, proposals, update_quotes=args.update_quotes)
     if summary.unresolved:
         raise SystemExit(summary.render())
-    if summary.added or summary.updated:
+    if nodes_added or summary.added or summary.updated:
+        retier_closure_nodes(new_graph)
         args.graph.write_text(json.dumps(new_graph, indent=2, ensure_ascii=False) + "\n")
+    print(f"closure nodes: added={nodes_added}")
     print(summary.render())
     return 0
 

@@ -174,12 +174,11 @@ facts:
     source_ref: "theme_10#F10.6"
     kind: readout_threshold
     params: {scenario: sni_180d, vs_scenario: naive_180d, readout: affect_index, window: [29, 179], min_gap: 0.05}
-    known_gap: >-
-      The comorbidity is supported (theme_10 F10.6) but the KB has no
-      evidence-backed path from injury to the affect readout: its only input
-      is ACC Kalirin-7, whose injury-induced downregulation is REFUTED
-      (F10.1). The verified ACC mechanisms (pre-LTP via kainate/AC1/HCN,
-      F10.2; rACC BDNF-TrkB aversion, F10.4) are not yet encoded.
+    # Was a known_gap while the affect readout's only input was ACC
+    # Kalirin-7 (injury-induced downregulation REFUTED, F10.1). Closed by the
+    # verified ACC mechanisms in analysis/claims/closure_nodes.yaml and
+    # closure_edges.yaml: BDNF -> ACC pre-LTP -> pain-related anxiety
+    # (F10.4b, F10.2) and BDNF -> rACC pain aversion (F10.4a).
 
   # ------------------------------------------------------------------
   # drug_effect

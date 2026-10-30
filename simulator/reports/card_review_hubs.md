@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-10-30T15:32:38Z
+generated: 2026-10-30T15:45:33Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -62,7 +62,7 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
 
 - tier: HUB | entity_type: molecule | compartment: other | community: 1
 - proposed_normal_role: <LLM_ENRICH>
-- pathological rules (14):
+- pathological rules (16):
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-01` [up] Brain-Derived Neurotrophic Factor (BDNF) rationale for Rationale: BDNF has both pro-nociceptive and anti-nociceptive roles
     - claim_refs: EC-0021 (CONFIRMED)
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-02` [up] Brain-Derived Neurotrophic Factor (BDNF) upregulates translation Kalirin-7 (GEF for Rac1/RhoG)
@@ -90,6 +90,10 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-13` [down] Brain-Derived Neurotrophic Factor (BDNF) downregulates KCC2 (Potassium-Chloride Cotransporter)
     - claim_refs: (none)
   - `RULE-assaying_molecularly_structural_plasticity_BDNF-14` [up] Brain-Derived Neurotrophic Factor (BDNF) supports integrity via tight junctions Blood-Brain/Spinal Cord Barrier (BBB/BSCB)
+    - claim_refs: (none)
+  - `RULE-assaying_molecularly_structural_plasticity_BDNF-15` [up] Brain-Derived Neurotrophic Factor (BDNF) drives AC1 dependent synaptic enhancement ACC Presynaptic LTP (Kainate/AC1/HCN)
+    - claim_refs: (none)
+  - `RULE-assaying_molecularly_structural_plasticity_BDNF-16` [up] Brain-Derived Neurotrophic Factor (BDNF) drives Pain-Related Aversion (rACC)
     - claim_refs: (none)
 
 ## karilin7_Kalirin7 (Kalirin-7 (GEF for Rac1/RhoG))

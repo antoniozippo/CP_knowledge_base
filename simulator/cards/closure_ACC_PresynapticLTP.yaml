@@ -1,0 +1,27 @@
+id: closure_ACC_PresynapticLTP
+label: ACC Presynaptic LTP (Kainate/AC1/HCN)
+entity_type: process
+compartment: ACC
+tier: PERIPHERAL
+community: 5
+baseline_state: 0.5
+normal_role: ACC Presynaptic LTP (Kainate/AC1/HCN) is a process located in ACC. Baseline
+  activity level 0.50. It receives 1 regulatory influences and exerts 1.
+pathological_rules:
+- rule_id: RULE-closure_ACC_PresynapticLTP-01
+  description: ACC Presynaptic LTP (Kainate/AC1/HCN) mediates Pain-Related Anxiety
+    (ACC Kalirin-7 Dependent)
+  claim_refs: []
+  direction: up
+  magnitude_hint: null
+inbound_edges:
+- source_id: assaying_molecularly_structural_plasticity_BDNF
+  relation: drives_AC1_dependent_synaptic_enhancement
+  sign: 1
+  weight: 0.5
+  validation_status: null
+  neutral_ok: false
+outbound_ids:
+- karilin7_PainRelatedAnxiety
+rule_gap_reason: null
+source_note: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md

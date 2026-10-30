@@ -9164,6 +9164,38 @@
       "tier": "mid",
       "split_from": "karilin7_Kalirin7",
       "split_source_ref": "theme_10#F10.1"
+    },
+    {
+      "id": "closure_ACC_PresynapticLTP",
+      "label": "ACC Presynaptic LTP (Kainate/AC1/HCN)",
+      "norm_label": "acc presynaptic ltp (kainate/ac1/hcn)",
+      "file_type": "document",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "community": 5,
+      "entity_type": "process",
+      "compartment": "ACC",
+      "tier": "peripheral",
+      "merged_from": [],
+      "origin": "dynamic_closure",
+      "quote": "pre-LTP requires kainate receptors, AC1/PKA, expressed via HCN channels and mediates pain-related anxiety",
+      "source_ref": "theme_10#F10.2 | Koga K et al., Neuron 2015;85(2):377-389"
+    },
+    {
+      "id": "closure_rACC_PainAversion",
+      "label": "Pain-Related Aversion (rACC)",
+      "norm_label": "pain-related aversion (racc)",
+      "file_type": "document",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "community": 5,
+      "entity_type": "symptom",
+      "compartment": "ACC",
+      "tier": "peripheral",
+      "merged_from": [],
+      "origin": "dynamic_closure",
+      "quote": "rACC BDNF-TrkB blockade (cyclotraxin-B) reduces bone-cancer-pain aversion",
+      "source_ref": "theme_10#F10.4a | Li TT et al., Brain Res Bull 2022"
     }
   ],
   "links": [
@@ -19441,6 +19473,45 @@
       "sign": 1,
       "origin": "dynamic_closure",
       "quote": "RhoA-ROCK activation drives dendritic spine loss, not Kal7 downregulation. The edge sign is inverted: RhoA/ROCK **promotes** spine loss (+1), not Kal7 reduction (−1).",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
+    },
+    {
+      "relation": "drives_AC1_dependent_synaptic_enhancement",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "assaying_molecularly_structural_plasticity_BDNF",
+      "target": "closure_ACC_PresynapticLTP",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "BDNF application produces long-lasting synaptic enhancement in adult ACC, blocked by the AC1 inhibitor NB001",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
+    },
+    {
+      "relation": "mediates",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "closure_ACC_PresynapticLTP",
+      "target": "karilin7_PainRelatedAnxiety",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "pre-LTP requires kainate receptors, AC1/PKA, expressed via HCN channels and mediates pain-related anxiety",
+      "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
+    },
+    {
+      "relation": "drives",
+      "confidence": "INFERRED_CLOSURE",
+      "source_file": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md",
+      "source_location": null,
+      "weight": null,
+      "source": "assaying_molecularly_structural_plasticity_BDNF",
+      "target": "closure_rACC_PainAversion",
+      "sign": 1,
+      "origin": "dynamic_closure",
+      "quote": "BDNF in rACC drives spontaneous-pain aversion via NR2B (Brain Res Bull 2016) and SNI aversion via ERK (Brain Res 2017)",
       "source_ref": "analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md"
     }
   ],

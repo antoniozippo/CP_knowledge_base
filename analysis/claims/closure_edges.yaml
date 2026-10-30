@@ -315,3 +315,30 @@
   source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
   source_ref: 'theme_10#A10.1 | Tian et al. Sci Rep 2017 s41598-017-11113-3 (fasudil prevents TBI spine loss); adds corrected +1 edge replacing quarantined −1 edges; resolves fasudil paradox: ROCK inhibitor → reduces spine loss → preserves Kal7/Rac1 spine gain → analgesic'
   confidence: INFERRED_CLOSURE
+- category: A2
+  source_label: assaying_molecularly_structural_plasticity_BDNF
+  target_label: closure_ACC_PresynapticLTP
+  relation: drives_AC1_dependent_synaptic_enhancement
+  sign: 1
+  quote: 'BDNF application produces long-lasting synaptic enhancement in adult ACC, blocked by the AC1 inhibitor NB001'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#F10.4b | Mol Brain 2021, doi:10.1186/s13041-021-00853-z | the BDNF node is not region-specific (it also carries spinal/microglial BDNF)'
+  confidence: INFERRED_CLOSURE
+- category: A1
+  source_label: closure_ACC_PresynapticLTP
+  target_label: karilin7_PainRelatedAnxiety
+  relation: mediates
+  sign: 1
+  quote: 'pre-LTP requires kainate receptors, AC1/PKA, expressed via HCN channels and mediates pain-related anxiety'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#F10.2 | Koga K et al., Neuron 2015;85(2):377-389; Bliss/Collingridge/Kaang/Zhuo, Nat Rev Neurosci 2016'
+  confidence: INFERRED_CLOSURE
+- category: A1
+  source_label: assaying_molecularly_structural_plasticity_BDNF
+  target_label: closure_rACC_PainAversion
+  relation: drives
+  sign: 1
+  quote: 'BDNF in rACC drives spontaneous-pain aversion via NR2B (Brain Res Bull 2016) and SNI aversion via ERK (Brain Res 2017)'
+  source_file: analysis/literature/theme_10_Kalirin7_ACC_structural_plasticity.md
+  source_ref: 'theme_10#F10.4a | Brain Res Bull 2016; Brain Res 2017; Li TT et al., Brain Res Bull 2022 | the BDNF node is not region-specific (it also carries spinal/microglial BDNF)'
+  confidence: INFERRED_CLOSURE

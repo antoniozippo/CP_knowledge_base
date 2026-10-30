@@ -1,9 +1,9 @@
-generated_at_utc: '2026-10-30T15:32:38Z'
-input_graph_sha256: 95d2b768e097742b95aa6f9dbf07868de7dec7e801e9f62a9a36f6eb567a1cb4
+generated_at_utc: '2026-10-30T15:45:33Z'
+input_graph_sha256: 351a8de0b3a264cb994cf6679e18f8f8752d72f437f5a6f663b3affd632d5cea
 counts_by_tier:
   HUB: 9
   MID: 124
-  PERIPHERAL: 240
+  PERIPHERAL: 242
 counts_by_entity_type:
   cell_type: 18
   channel: 34
@@ -11,10 +11,10 @@ counts_by_entity_type:
   drug: 46
   molecule: 70
   pathway: 15
-  process: 10
+  process: 11
   receptor: 51
   structure: 12
-  symptom: 3
+  symptom: 4
 cards:
 - id: AngPt_COMP_Ang1
   file: AngPt_COMP_Ang1.yaml
@@ -396,7 +396,7 @@ cards:
   sha256: b56fa4ef58492d493615c9434053e9920e55733c4dae3509ae9cb088180d67b3
 - id: assaying_molecularly_structural_plasticity_BDNF
   file: assaying_molecularly_structural_plasticity_BDNF.yaml
-  sha256: 24d2d7d878567f2d163fb8d87da1a97b5105a96478dcd8d378e1667dc448af62
+  sha256: 8e22d536810978e78c34f1a73c747b0050747540e13ed818d3f108e087d881f1
 - id: assaying_molecularly_structural_plasticity_CaMKII
   file: assaying_molecularly_structural_plasticity_CaMKII.yaml
   sha256: 2c8b738df142f7a72c4c4b9ad393db4f419462e73ef3a5aeb1367cb2ca0d31be
@@ -529,6 +529,12 @@ cards:
 - id: cgrp_rimegepant
   file: cgrp_rimegepant.yaml
   sha256: 22df17d504e6b98120484f07b950e9d66048168cd7edbe059ceaa40286b985a8
+- id: closure_ACC_PresynapticLTP
+  file: closure_ACC_PresynapticLTP.yaml
+  sha256: bd929d775fcffc8f4c20bc40c08f67064d8bc05d27f6b095ba8dc95006c74728
+- id: closure_rACC_PainAversion
+  file: closure_rACC_PainAversion.yaml
+  sha256: 6035497971551b1426505fb3ad2d154da3feb31e4aca4f45506e300fa1947271
 - id: connexin43_gap_junction
   file: connexin43_gap_junction.yaml
   sha256: 339472c5556ea8695cfce1910bc105c0fa9ec4d95f88733d0f1d4401c09e0a2a
@@ -792,7 +798,7 @@ cards:
   sha256: 1a40c86d3c1b24b1e910fe2b5315b95c0cc40c0786ce3331c9268fed681d39f4
 - id: karilin7_PainRelatedAnxiety
   file: karilin7_PainRelatedAnxiety.yaml
-  sha256: 2e74134317e99e94b092d3136f4ca0db6b0e3835ab7f5a5ed73a3d67b67aea63
+  sha256: ee71d22530558286e0157994f0be5254da4a89196639f79635060e723b87c6cf
 - id: karilin7_Rac1
   file: karilin7_Rac1.yaml
   sha256: a4a482238f34c05e6574aa53d9d07991f4461b8f35b49cf1b466819ae543e473
@@ -1135,7 +1141,7 @@ cards:
 - id: wnt_wnt
   file: wnt_wnt.yaml
   sha256: 91f6343dcbcbfc44f6968581f8a49fd29da3b9da9ea3aa12d19a2d10dafc3c1b
-card_set_hash: 971af6f74c3f15027d43aee6a7d6e4e4f32b846b36cb3f740e50102993227025
+card_set_hash: 0ce39d7814d59e552f710db1742c956def6e1513693d479bd368aa91ffda8c29
 dropped_refuted_rules: 8
 mixed_annotated: 5
 unresolved_endpoint_drops: 27

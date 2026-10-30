@@ -200,11 +200,13 @@ def test_idempotent_rerun_adds_nothing(graph, tmp_path, capsys):
     graph_path.write_text(json.dumps(graph))
     proposals_path.write_text(yaml.safe_dump([proposal()]))
 
-    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path)])
+    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path),
+              "--nodes", str(tmp_path / "no_nodes.yaml")])
     after_first = json.loads(graph_path.read_text())
     n_links_first = len(after_first["links"])
 
-    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path)])
+    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path),
+              "--nodes", str(tmp_path / "no_nodes.yaml")])
     after_second = json.loads(graph_path.read_text())
     assert len(after_second["links"]) == n_links_first
     assert "added=0" in capsys.readouterr().out
@@ -215,7 +217,8 @@ def test_cli_writes_graph_with_appended_links(graph, tmp_path):
     proposals_path = tmp_path / "closure.yaml"
     graph_path.write_text(json.dumps(graph))
     proposals_path.write_text(yaml.safe_dump([proposal()]))
-    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path)])
+    ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path),
+              "--nodes", str(tmp_path / "no_nodes.yaml")])
     written = json.loads(graph_path.read_text())
     assert any(l.get("origin") == "dynamic_closure" for l in written["links"])
 
@@ -313,6 +316,7 @@ def test_cli_update_quotes_flag_rewrites_file(tmp_path, capsys):
     p["quote"] = "NEW causal sentence with direct mechanism."
     proposals_path.write_text(yaml.safe_dump([p]))
     ace.main(["--graph", str(graph_path), "--proposals", str(proposals_path),
+              "--nodes", str(tmp_path / "no_nodes.yaml"),
               "--update-quotes"])
     written = json.loads(graph_path.read_text())
     link = next(l for l in written["links"] if l.get("origin") == "dynamic_closure")
@@ -403,3 +407,71 @@ def test_quarantine_entry_applied_inert_with_status(graph):
     assert summary.added == 1
     link = [l for l in new_graph["links"] if l.get("origin") == "dynamic_closure"][0]
     assert link["sign"] == 0 and link["validation_status"] == "REFUTED"
+
+
+# ---------------------------------------------------------------------------
+# quarantine reruns and closure nodes
+# ---------------------------------------------------------------------------
+
+def test_rerun_does_not_duplicate_sign0_quarantine_links(graph):
+    quarantine = {**proposal(sign=0), "validation_status": "REFUTED"}
+    once, first = ace.apply_closure_edges(graph, [quarantine])
+    twice, second = ace.apply_closure_edges(once, [quarantine])
+    assert first.added == 1
+    assert second.added == 0 and second.skipped_duplicates == 1
+    assert len(twice["links"]) == len(once["links"])
+
+
+def closure_node_spec(**overrides):
+    spec = {
+        "id": "closure_preltp",
+        "label": "ACC Presynaptic LTP",
+        "entity_type": "process",
+        "compartment": "ACC",
+        "community": 5,
+        "quote": "pre-LTP mediates pain-related anxiety",
+        "source_file": "theme.md",
+    }
+    spec.update(overrides)
+    return spec
+
+
+def test_closure_node_added_once_and_resolvable_by_id(graph):
+    with_node, added = ace.add_closure_nodes(graph, [closure_node_spec()])
+    again, added_again = ace.add_closure_nodes(with_node, [closure_node_spec()])
+    assert added == 1 and added_again == 0 and again == with_node
+    node = next(n for n in with_node["nodes"] if n["id"] == "closure_preltp")
+    assert node["file_type"] == "document" and node["origin"] == "dynamic_closure"
+    assert node["norm_label"] == "acc presynaptic ltp" and node["quote"]
+    edge = proposal(source="Brain-Derived Neurotrophic Factor (BDNF)", target="closure_preltp",
+                    relation="drives", sign=1)
+    out, summary = ace.apply_closure_edges(with_node, [edge])
+    assert summary.added == 1
+    assert out["links"][-1]["target"] == "closure_preltp"
+
+
+def test_closure_node_missing_quote_rejected(graph):
+    with pytest.raises(ValueError, match="quote"):
+        ace.add_closure_nodes(graph, [closure_node_spec(quote="")])
+
+
+def test_closure_node_tier_follows_degree(graph):
+    with_node, _ = ace.add_closure_nodes(graph, [closure_node_spec()])
+    edges = [proposal(source=src, target="closure_preltp", relation="drives", sign=1)
+             for src in ("Brain-Derived Neurotrophic Factor (BDNF)", "Microglia", "Mechanical Allodynia")]
+    out, _ = ace.apply_closure_edges(with_node, edges)
+    ace.retier_closure_nodes(out)
+    node = next(n for n in out["nodes"] if n["id"] == "closure_preltp")
+    assert node["tier"] == "mid"  # degree 3 meets the mid threshold
+
+
+def test_every_curated_closure_node_quote_is_verbatim_and_applied():
+    """Corpus guard for closure_nodes.yaml, mirroring the edge-quote guard."""
+    specs = yaml.safe_load((REPO_ROOT / "analysis" / "claims" / "closure_nodes.yaml").read_text())
+    graph = json.loads((REPO_ROOT / "graphify-out" / "graph_v2.json").read_text())
+    by_id = {n["id"]: n for n in graph["nodes"]}
+    for spec in specs:
+        source = (REPO_ROOT / spec["source_file"]).read_bytes()
+        assert spec["quote"].encode("utf-8") in source, f"{spec['id']}: quote not verbatim"
+        assert spec["id"] in by_id, f"{spec['id']}: not applied to graph_v2.json"
+        assert by_id[spec["id"]]["quote"] == spec["quote"]
