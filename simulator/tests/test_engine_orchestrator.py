@@ -237,6 +237,37 @@ def test_c_drug_arm_partially_reverses_sni_effect():
     assert drugged[4].world_after.readouts.pain_score < undrugged[4].world_after.readouts.pain_score
 
 
+def test_drug_on_hub_still_acts_on_llm_ticks():
+    from simulator.engine.rule_fallback import rule_next_state
+
+    drug = DrugArm(name="anti_tnf", target_agent_ids=["tnf_hub"], start_tick=0,
+                   effect_sign=-1, magnitude=0.6)
+    drugged = Orchestrator(fixture_cards(), sni_scenario(6, [drug]), llm_client=ScriptedLLM())
+    plain = Orchestrator(fixture_cards(), sni_scenario(6), llm_client=ScriptedLLM())
+    # tick 0 is an LLM tick (injury_tick) and both arms start from the same state
+    card = drugged.cards_by_id["tnf_hub"]
+    current = drugged.world.states["tnf_hub"]
+    expected_offset = rule_next_state(card, current, [], -0.6) - rule_next_state(card, current, [])
+    d0, p0 = drugged.step(), plain.step()
+
+    (d_delta,) = [d for d in d0.deltas_applied if d.agent_id == "tnf_hub"]
+    (p_delta,) = [d for d in p0.deltas_applied if d.agent_id == "tnf_hub"]
+    assert d_delta.emitter == p_delta.emitter == "llm"
+    assert p_delta.new_state == pytest.approx(0.85)
+    assert expected_offset < 0
+    assert d_delta.new_state == pytest.approx(0.85 + expected_offset)
+    assert "drug=-0.6000" in d_delta.rationale
+
+
+def test_drug_offset_not_applied_to_untargeted_llm_agent():
+    drug = DrugArm(name="other", target_agent_ids=["microglia"], start_tick=0,
+                   effect_sign=-1, magnitude=0.6)
+    log = Orchestrator(fixture_cards(), sni_scenario(6, [drug]), llm_client=ScriptedLLM()).step()
+    (hub,) = [d for d in log.deltas_applied if d.agent_id == "tnf_hub"]
+    assert hub.new_state == pytest.approx(0.85)
+    assert hub.rationale == "hub reasoning"
+
+
 def test_d_llm_called_only_on_hub_boundary_and_injury_ticks_then_cached():
     cache = DeltaCache()
     llm = ScriptedLLM()

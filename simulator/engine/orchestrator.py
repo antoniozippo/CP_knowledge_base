@@ -10,11 +10,17 @@ Drug arms act as additive pressure on their targets' rule computation
 same way: while start_tick <= tick < end_tick (None = whole horizon) each
 drive contributes (value - baseline_agent) * DRIVE_GAIN to that agent's
 inbound excitation before tanh — a constant tonic deviation modeling
-drivers like ectopic firing or sustained glial activation. Drives only
-enter the deterministic rules path; LLM prompts and the delta cache are
-unaffected, and audit entries keep emitter='rules'. All StateDeltas for a
-tick are computed against the same pre-tick snapshot and applied
+drivers like ectopic firing or sustained glial activation. All StateDeltas
+for a tick are computed against the same pre-tick snapshot and applied
 atomically.
+
+On LLM ticks the LLM proposes the agent's endogenous next state (prompts
+and the delta cache never see drugs or drives); if a drug or drive is
+active on that agent, the engine then adds the exact shift the same
+pressure produces in the rule path for that agent and tick:
+    offset = rule_next_state(with pressure) - rule_next_state(without)
+so a drug acting on a HUB keeps the same effect on LLM ticks as on rule
+ticks instead of being silently dropped.
 
 Run budgets (scenario.budget): a gate client wraps the LLM client and
 counts actual complete() invocations (cache hits never reach it, so they
@@ -272,6 +278,22 @@ class Orchestrator:
             emitter="rules",
         )
 
+    def _apply_external_pressure(self, delta: StateDelta, card: AgentCard, packets,
+                                 drug_pressure: float, drive_pressure: float) -> StateDelta:
+        """Shift an LLM delta by the drug/drive effect the rule path would apply."""
+        if drug_pressure == 0.0 and drive_pressure == 0.0:
+            return delta
+        current = self.world.states[card.id]
+        offset = rule_next_state(card, current, packets, drug_pressure, drive_pressure) - (
+            rule_next_state(card, current, packets)
+        )
+        new_state = min(1.0, max(0.0, delta.new_state + offset))
+        rationale = (
+            f"[llm={delta.new_state:.4f} drug={drug_pressure:+.4f} "
+            f"drive={drive_pressure:+.4f} offset={offset:+.4f}] {delta.rationale}"
+        )
+        return delta.model_copy(update={"new_state": new_state, "rationale": rationale[:500]})
+
     def step(self) -> TickLog:
         tick = self.world.tick
         pressures = self._drug_pressures(tick)
@@ -313,7 +335,11 @@ class Orchestrator:
                     )
                 )
                 if attempt.delta is not None:
-                    deltas.append(attempt.delta)
+                    deltas.append(
+                        self._apply_external_pressure(
+                            attempt.delta, card, packets, drug_pressure, drive_pressure
+                        )
+                    )
                     continue
             deltas.append(self._rule_delta(agent_id, tick, packets, drug_pressure, drive_pressure))
             if not use_llm:
