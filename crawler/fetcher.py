@@ -20,7 +20,7 @@ Entrez.email = os.environ.get("NCBI_EMAIL", "cp-knowledge-base@example.com")
 NCBI_API_KEY = os.environ.get("NCBI_API_KEY")
 
 CACHE_DIR = Path(__file__).resolve().parent / "cache"
-RATE_LIMIT_DELAY = 0.10 if NCBI_API_KEY else 0.35
+RATE_LIMIT_DELAY = 0.10 if NCBI_API_KEY else 0.5
 REQUEST_TIMEOUT = 30
 MAX_RETRIES = 2
 RETRY_BACKOFF = 5
@@ -179,6 +179,29 @@ def _fetch_abstract_xml(pmid: str) -> str:
     return fetch_abstract(pmid)
 
 
+# Back-matter carrying no findings; dropped so it doesn't eat the LLM budget.
+BOILERPLATE_SECTIONS = (
+    "acknowledg", "funding", "supplementary", "author contribution", "conflict",
+    "competing interest", "declaration", "data availability", "availability of data",
+    "abbreviation", "reference", "ethics", "consent", "disclosure",
+)
+
+
+def _is_boilerplate(section_name: str) -> bool:
+    lower = section_name.lower()
+    return any(marker in lower for marker in BOILERPLATE_SECTIONS)
+
+
+def _paragraph_text(p) -> str:
+    """Paragraph text with whitespace collapsed.
+
+    get_text(strip=True) strips every text node and joins them with no
+    separator, gluing words at inline tags ("KCC2 <i>in vivo</i> was"
+    -> "KCC2in vivowas"); joining the raw text keeps the source spacing.
+    """
+    return " ".join(p.get_text().split())
+
+
 def fetch_pmc_fulltext(pmcid: str) -> Optional[dict[str, str]]:
     """Fetch full-text XML from PMC OA API.
 
@@ -249,7 +272,7 @@ def fetch_pmc_fulltext(pmcid: str) -> Optional[dict[str, str]]:
         """Extract all paragraph text from a <sec> element."""
         paragraphs: list[str] = []
         for p in sec_element.find_all("p", recursive=False):
-            text = " ".join(p.get_text(strip=True).split())
+            text = _paragraph_text(p)
             if text:
                 paragraphs.append(text)
         # Also handle nested sections
@@ -281,6 +304,8 @@ def fetch_pmc_fulltext(pmcid: str) -> Optional[dict[str, str]]:
         else:
             section_counter[section_name] = 1
 
+        if _is_boilerplate(section_name):
+            continue
         text = _extract_section_text(sec)
         if text:
             sections[section_name] = text
@@ -289,7 +314,7 @@ def fetch_pmc_fulltext(pmcid: str) -> Optional[dict[str, str]]:
     if not sections:
         all_paragraphs: list[str] = []
         for p in body.find_all("p", recursive=False):
-            text = " ".join(p.get_text(strip=True).split())
+            text = _paragraph_text(p)
             if text:
                 all_paragraphs.append(text)
         if all_paragraphs:
@@ -298,11 +323,22 @@ def fetch_pmc_fulltext(pmcid: str) -> Optional[dict[str, str]]:
     return sections if sections else None
 
 
-def fetch_paper(pmid: str, use_cache: bool = True) -> PaperContent:
+def fetch_paper(
+    pmid: str,
+    use_cache: bool = True,
+    abstract: str | None = None,
+    pmcid: str | None = None,
+    pmcid_known: bool = False,
+) -> PaperContent:
     """Fetch paper content: abstract always, full-text if available in PMC.
 
     Try full-text first; fall back to abstract-only.
     Cache results to avoid re-fetching.
+
+    A caller holding the PubMed record (PaperMeta) passes its abstract and
+    pmcid with pmcid_known=True: the PubMed record lists the PMC id
+    whenever one exists, so the per-paper abstract efetch and ID-converter
+    call are skipped (3 NCBI requests -> at most 1).
     """
     if use_cache:
         cached = _cache_read(pmid)
@@ -310,19 +346,16 @@ def fetch_paper(pmid: str, use_cache: bool = True) -> PaperContent:
             log.debug("Cache hit for PMID %s", pmid)
             return cached
 
-    # Fetch abstract
-    abstract = _fetch_abstract_xml(pmid)
+    if not abstract:
+        abstract = _fetch_abstract_xml(pmid)
 
-    # Try PMC full-text
-    pmcid: Optional[str] = None
     fulltext_xml: Optional[str] = None
     fulltext_sections: Optional[dict[str, str]] = None
     is_fulltext = False
 
-    # Check if PMID already has a PMCID (from search results)
-    # If not, try to convert
-    pmcid = pmid_to_pmcid(pmid)
-    time.sleep(RATE_LIMIT_DELAY)
+    if not pmcid and not pmcid_known:
+        pmcid = pmid_to_pmcid(pmid)
+        time.sleep(RATE_LIMIT_DELAY)
 
     if pmcid:
         sections = fetch_pmc_fulltext(pmcid)
@@ -370,11 +403,18 @@ def fetch_papers(
     seen_pmids: set[str] = set()
 
     for item in papers:
-        # Handle both dataclass and dict inputs
+        # Handle both dataclass and dict inputs; a PaperMeta carries its
+        # abstract and PMC id, so they are not fetched again
         if isinstance(item, dict):
             pmid = item.get("pmid", "")
+            meta = {}
         else:
             pmid = getattr(item, "pmid", "")
+            meta = {
+                "abstract": getattr(item, "abstract", None),
+                "pmcid": getattr(item, "pmcid", None),
+                "pmcid_known": hasattr(item, "pmcid"),
+            }
 
         if not pmid or pmid in seen_pmids:
             continue
@@ -387,7 +427,7 @@ def fetch_papers(
                 results.append(cached)
                 continue
 
-        paper = fetch_paper(pmid, use_cache=use_cache)
+        paper = fetch_paper(pmid, use_cache=use_cache, **meta)
         results.append(paper)
 
         status = "fulltext" if paper.is_fulltext else "abstract-only"
