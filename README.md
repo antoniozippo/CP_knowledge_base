@@ -136,21 +136,21 @@ python3 crawler/run.py --list-themes
 
 ### Pipeline stages
 
-1. **Search** — PubMed queries from `themes.yaml` (87 queries across 10 themes)
-2. **Fetch** — abstracts + PMC full-text (JATS XML), cached
-3. **Extract** — LLM extracts entities, relationships, key findings
-4. **Match** — fuzzy match against existing graph (rapidfuzz ≥85%)
-5. **Update** — add new nodes/edges, update verdicts, detect conflicts
+1. **Search** — per-term PubMed queries from `themes.yaml` (10 themes), each ANDed with a pain filter; MeSH terms must be real descriptors (unknown ones are logged)
+2. **Fetch** — abstract from the PubMed record + PMC full text (JATS XML) when the record lists a PMC id, cached
+3. **Extract** — one LLM call per paper (focused on the entities of every theme it mentions); relationships whose evidence quote is not found verbatim in the paper are dropped; fixed-direction predicates set the sign
+4. **Match** — exact → alias → distinctive-token → fuzzy (≥85, digits must agree) against existing nodes
+5. **Update** — new nodes only when a relationship links them to the graph; evidence on existing edges is appended to `crawler_evidence`; conflicts recorded
 6. **Discover** — adjacent MeSH terms for theme expansion
-7. **Commit** — auto-commit if tests pass
+7. **Commit** — auto-commit if tests pass (`--no-commit` to skip)
 
 ### Safety guardrails
 
-- Dedup via `processed_pmids.json` (never re-process)
-- LLM budget cap (default 2000 calls/run)
-- Never auto-refute CONFIRMED edges (flag for human review)
-- Conflict detection: sign contradictions → `HUMAN_REVIEW`
-- Full provenance on every new node/edge
+- Dedup via `processed_pmids.json` (never re-process) and one auto-crawled edge per (source, target, sign), with an evidence entry per paper
+- LLM budget cap (default 2000 calls/run; cached extractions are free)
+- Verdicts are never rewritten by the crawler: supporting evidence goes to `crawler_evidence`, sign contradictions and evidence on REFUTED/MIXED edges go to `conflicts.yaml` for human review
+- New edges are `validation_status: UNREVIEWED` and are excluded from the simulator's agent cards until a reviewer sets another status
+- Full provenance (PMID, DOI, verbatim quote) on every new node/edge
 - Test gate before commit
 
 ### Cron setup (weekly)
@@ -169,12 +169,12 @@ crawler/
 ├── search.py            # PubMed via Biopython Entrez
 ├── fetcher.py           # abstract + PMC full-text
 ├── extractor.py         # LLM entity/relationship extraction
-├── matcher.py           # fuzzy match (rapidfuzz)
+├── matcher.py           # exact/alias/token/fuzzy match
 ├── updater.py           # graph update + conflict detection
 ├── discovery.py         # adjacent MeSH term discovery
 ├── conflict.py          # contradiction resolution
 ├── run.py               # CLI orchestrator
-└── tests/               # 26 tests, all passing
+└── tests/               # pytest suite
 ```
 
 ## Validation
