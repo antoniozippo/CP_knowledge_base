@@ -80,6 +80,58 @@ def build_extraction_inputs(metas: list[PaperMeta], contents: list[PaperContent]
     return inputs
 
 
+def search_all(themes: dict, since: str, max_results: int) -> list[PaperMeta]:
+    """Phase 1: search every theme; papers deduplicated by PMID, in order."""
+    all_papers: list[PaperMeta] = []
+    for theme_id, theme_config in themes.items():
+        log.info(f"  Searching {theme_id}: {theme_config['name']}")
+        papers = search_theme({**theme_config, "id": theme_id}, since=since, max_results=max_results)
+        all_papers.extend(papers)
+        log.info(f"    Found {len(papers)} papers")
+    seen_pmids = set()
+    unique_papers = []
+    for p in all_papers:
+        if p.pmid not in seen_pmids:
+            seen_pmids.add(p.pmid)
+            unique_papers.append(p)
+    log.info(f"  Total unique papers: {len(unique_papers)}")
+    return unique_papers
+
+
+def select_for_extraction(inputs: list[dict], themes: dict) -> list[tuple[dict, list[str]]]:
+    """(paper, focus entities) for each paper mentioning a theme entity.
+
+    Each paper is extracted once, focused on the entities of every theme it
+    mentions (it used to go once per matching theme, and the duplicates all
+    reached the graph updater).
+    """
+    focused = []
+    for paper in inputs:
+        text = paper["content"].lower()
+        focus = list(dict.fromkeys(
+            e for t in themes.values() for e in t.get("entities", [])
+            if any(x.lower() in text for x in t.get("entities", []))
+        ))
+        if focus:
+            focused.append((paper, focus))
+    return focused
+
+
+def make_extractor(args):
+    """The extractor for --llm-provider (local OpenAI-compatible or Claude API)."""
+    if args.llm_provider == "anthropic":
+        from crawler.anthropic_backend import DEFAULT_MODEL, AnthropicExtractor
+        return AnthropicExtractor(model=args.llm_model or DEFAULT_MODEL, effort=args.llm_effort,
+                                  cache_dir=Path("crawler/cache"))
+    return LLMExtractor(
+        endpoint=args.llm_endpoint,
+        model=args.llm_model or LOCAL_DEFAULT_MODEL,
+        max_tokens=args.llm_max_tokens,
+        cache_dir=Path("crawler/cache"),
+    )
+
+
+LOCAL_DEFAULT_MODEL = "qwen/qwen3.8-27b"
 TEST_GATE_SUITES = ["crawler/tests", "analysis/tests", "simulator/tests"]
 
 
@@ -102,23 +154,7 @@ def run_pipeline(args, themes=None):
 
     # --- Phase 1: Search ---
     log.info("=== Phase 1: PubMed Search ===")
-    all_papers: list[PaperMeta] = []
-    for theme_id, theme_config in themes.items():
-        log.info(f"  Searching {theme_id}: {theme_config['name']}")
-        papers = search_theme(
-            {**theme_config, "id": theme_id}, since=args.since, max_results=args.max_results
-        )
-        all_papers.extend(papers)
-        log.info(f"    Found {len(papers)} papers")
-
-    # Deduplicate across themes by PMID
-    seen_pmids = set()
-    unique_papers = []
-    for p in all_papers:
-        if p.pmid not in seen_pmids:
-            seen_pmids.add(p.pmid)
-            unique_papers.append(p)
-    log.info(f"  Total unique papers: {len(unique_papers)}")
+    unique_papers = search_all(themes, args.since, args.max_results)
 
     # --- Phase 2: Fetch ---
     log.info("=== Phase 2: Fetch Abstracts + Full-text ===")
@@ -140,24 +176,8 @@ def run_pipeline(args, themes=None):
             if i["pmid"] not in processed
         ]
         log.info(f"  {len(contents)} papers fetched, {len(to_extract)} not yet extracted")
-        extractor = LLMExtractor(
-            endpoint=args.llm_endpoint,
-            model=args.llm_model,
-            max_tokens=args.llm_max_tokens,
-            cache_dir=Path("crawler/cache"),
-        )
-        # Each paper is extracted once, focused on the entities of every
-        # theme it mentions (it used to go once per matching theme, and the
-        # duplicates all reached the graph updater).
-        focused = []
-        for paper in to_extract:
-            text = paper["content"].lower()
-            focus = list(dict.fromkeys(
-                e for t in themes.values() for e in t.get("entities", [])
-                if any(x.lower() in text for x in t.get("entities", []))
-            ))
-            if focus:
-                focused.append((paper, focus))
+        extractor = make_extractor(args)
+        focused = select_for_extraction(to_extract, themes)
         log.info(f"  {len(focused)} papers mention a theme entity; "
                  f"{len(to_extract) - len(focused)} skipped as off-theme")
         extractions = []
@@ -299,10 +319,17 @@ Examples:
                         help="Max results per theme query (default: 200)")
     parser.add_argument("--budget", type=int, default=2000,
                         help="LLM call budget per run (default: 2000)")
+    parser.add_argument("--llm-provider", choices=["local", "anthropic"], default="local",
+                        help="local OpenAI-compatible endpoint, or the Claude API "
+                             "(CRAWLER_ANTHROPIC_API_KEY); for full runs see crawler/batch_extract.py")
     parser.add_argument("--llm-endpoint", default="http://192.168.1.13:1234",
-                        help="LLM API endpoint (default: http://192.168.1.13:1234)")
-    parser.add_argument("--llm-model", default="qwen/qwen3.8-27b",
-                        help="LLM model name (default: qwen/qwen3.8-27b)")
+                        help="local LLM API endpoint (default: http://192.168.1.13:1234)")
+    parser.add_argument("--llm-model", default=None,
+                        help=f"model name (default: {LOCAL_DEFAULT_MODEL} for local, "
+                             "claude-opus-5-5 for anthropic)")
+    parser.add_argument("--llm-effort", default="medium",
+                        choices=["low", "medium", "high", "xhigh", "max"],
+                        help="Claude effort level (anthropic provider only; default medium)")
     parser.add_argument("--llm-max-tokens", type=int, default=4096,
                         help="Max tokens for LLM extraction (default: 4096)")
     parser.add_argument("--min-mesh-freq", type=int, default=3,

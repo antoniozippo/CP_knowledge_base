@@ -120,6 +120,7 @@ def llm_calls(monkeypatch):
 def _args(**overrides):
     base = dict(
         themes_path="crawler/themes.yaml", since="2026-01-01", max_results=10, budget=50,
+        llm_provider="local", llm_effort="medium",
         llm_endpoint="http://stub", llm_model="stub", llm_max_tokens=256,
         min_mesh_freq=3, dry_run=False, no_commit=True,
     )

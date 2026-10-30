@@ -1,0 +1,12 @@
+# Runtime and test dependencies for analysis/, simulator/ and crawler/.
+# Versions are the ones the test suites last passed with (2026-10-30).
+pydantic>=2.13
+PyYAML>=6.0
+matplotlib>=3.11          # simulator/reports
+biopython>=1.88           # crawler: PubMed via Entrez (retries HTTP 429)
+requests>=2.34
+beautifulsoup4>=4.15
+lxml>=6.1                 # bs4 "xml" parser for PMC JATS
+rapidfuzz>=3.14
+anthropic>=2.3            # crawler: Claude API extraction (--llm-provider anthropic, batch_extract.py)
+pytest>=9.2
