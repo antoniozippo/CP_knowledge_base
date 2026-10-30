@@ -27,3 +27,6 @@ simulator/reports/runs/
 # crawler cache and runtime state (regeneratable)
 crawler/cache/
 crawler/processed_pmids.json
+
+# crawler verbose log (appended every run; per-run summaries are crawler/logs/run_*.json)
+crawler/logs/crawler.log
