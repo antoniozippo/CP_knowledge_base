@@ -1,0 +1,38 @@
+{
+  "pmid": "42249078",
+  "extracted_by": "claude-code-session",
+  "entities": [
+    {"name": "fentanyl", "entity_type": "drug", "aliases": [], "compartment": "systemic", "mentions": 40},
+    {"name": "fentanyl withdrawal", "entity_type": "process", "aliases": ["WD", "opioid withdrawal"], "compartment": "systemic", "mentions": 40},
+    {"name": "GABAergic vlPAG neurons", "entity_type": "cell_type", "aliases": ["vlPAG GABA neurons", "Vgat+ vlPAG neurons"], "compartment": "other", "mentions": 25},
+    {"name": "ventrolateral periaqueductal gray", "entity_type": "structure", "aliases": ["vlPAG"], "compartment": "other", "mentions": 30},
+    {"name": "periaqueductal gray", "entity_type": "structure", "aliases": ["PAG"], "compartment": "other", "mentions": 10},
+    {"name": "Fos", "entity_type": "molecule", "aliases": ["c-Fos"], "compartment": "other", "mentions": 15},
+    {"name": "GAD67", "entity_type": "molecule", "aliases": ["Gad1"], "compartment": "other", "mentions": 6},
+    {"name": "GABA", "entity_type": "molecule", "aliases": ["gamma-aminobutyric acid"], "compartment": "other", "mentions": 2},
+    {"name": "naloxone", "entity_type": "drug", "aliases": [], "compartment": "systemic", "mentions": 5},
+    {"name": "CNO", "entity_type": "drug", "aliases": ["clozapine-N-oxide"], "compartment": "other", "mentions": 6},
+    {"name": "hM4Di", "entity_type": "receptor", "aliases": ["Gi-DREADD"], "compartment": "other", "mentions": 4},
+    {"name": "withdrawal-induced hyperalgesia", "entity_type": "symptom", "aliases": ["mechanical hypersensitivity", "mechanical hyperalgesia"], "compartment": "peripheral", "mentions": 15},
+    {"name": "inhibitory synaptic transmission", "entity_type": "process", "aliases": ["IPSC amplitude", "inhibitory tone"], "compartment": "other", "mentions": 6},
+    {"name": "fentanyl self-administration", "entity_type": "process", "aliases": ["IVSA", "fentanyl intake"], "compartment": "systemic", "mentions": 10}
+  ],
+  "relationships": [
+    {"subject": "fentanyl withdrawal", "predicate": "activates", "object": "GABAergic vlPAG neurons", "sign": 1, "evidence_quote": "fentanyl withdrawal is associated with increased engagement of GABAergic vlPAG neurons in the context of an overall elevation in neuronal activity", "confidence": "HIGH"},
+    {"subject": "fentanyl withdrawal", "predicate": "upregulates", "object": "Fos", "sign": 1, "evidence_quote": "Fentanyl withdrawal increases Fos expression in GABAergic vlPAG neurons.", "confidence": "HIGH"},
+    {"subject": "fentanyl withdrawal", "predicate": "upregulates", "object": "inhibitory synaptic transmission", "sign": 1, "evidence_quote": "Fentanyl withdrawal enhances inhibitory synaptic transmission in the vlPAG.", "confidence": "HIGH"},
+    {"subject": "fentanyl withdrawal", "predicate": "causes", "object": "withdrawal-induced hyperalgesia", "sign": 1, "evidence_quote": "fentanyl-exposed mice displayed dose- and time-dependent decreases in paw withdrawal thresholds", "confidence": "HIGH"},
+    {"subject": "GABAergic vlPAG neurons", "predicate": "causes", "object": "withdrawal-induced hyperalgesia", "sign": 1, "evidence_quote": "These results indicate that inhibition of GABAergic vlPAG neurons reverses mechanical hypersensitivity during fentanyl withdrawal.", "confidence": "HIGH"},
+    {"subject": "GABAergic vlPAG neurons", "predicate": "modulates", "object": "fentanyl self-administration", "sign": 1, "evidence_quote": "chemogenetic inhibition of GABAergic vlPAG neurons altered fentanyl self-administration in a sex-dependent manner", "confidence": "MEDIUM"},
+    {"subject": "CNO", "predicate": "inhibits", "object": "GABAergic vlPAG neurons", "sign": -1, "evidence_quote": "Bath application of CNO (10 µM) reduced action potential firing and decreased membrane excitability in GABAergic vlPAG neurons expressing Gi-DREADD", "confidence": "HIGH"},
+    {"subject": "naloxone", "predicate": "causes", "object": "withdrawal-induced hyperalgesia", "sign": 1, "evidence_quote": "Fentanyl minipump- implanted mice receiving naloxone exhibited a significant decrease in paw withdrawal thresholds during withdrawal relative to baseline", "confidence": "MEDIUM"}
+  ],
+  "key_findings": [
+    "Fentanyl withdrawal (0.4 mg/kg/day minipump, 48 h) produces dose- and time-dependent mechanical hyperalgesia in mice.",
+    "Whole-brain Fos network analysis identifies the PAG as the central hub of the fentanyl withdrawal network.",
+    "Fentanyl withdrawal increases Fos expression in vlPAG neurons, including GAD67+ GABAergic neurons, and enhances inhibitory synaptic transmission (CRACM IPSCs).",
+    "Chemogenetic (hM4Di/CNO) inhibition of GABAergic vlPAG neurons reverses withdrawal-induced mechanical hyperalgesia.",
+    "Inhibiting GABAergic vlPAG neurons prevents escalation of fentanyl self-administration in males but not females."
+  ],
+  "novel_terms": ["fentanyl withdrawal network", "channelrhodopsin-assisted circuit mapping (CRACM)"]
+}

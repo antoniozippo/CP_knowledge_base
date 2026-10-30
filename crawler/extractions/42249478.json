@@ -1,0 +1,46 @@
+{
+  "pmid": "42249478",
+  "extracted_by": "claude-code-session",
+  "entities": [
+    {"name": "NRCAM", "entity_type": "molecule", "aliases": ["neuronal cell adhesion molecule", "astrocytic NRCAM"], "compartment": "dorsal_horn", "mentions": 30},
+    {"name": "astrocytes", "entity_type": "cell_type", "aliases": ["reactive astrocytes", "SDH astrocytes"], "compartment": "dorsal_horn", "mentions": 50},
+    {"name": "GABAergic synapses", "entity_type": "structure", "aliases": ["inhibitory synapses"], "compartment": "dorsal_horn", "mentions": 20},
+    {"name": "excitatory synapses", "entity_type": "structure", "aliases": [], "compartment": "dorsal_horn", "mentions": 8},
+    {"name": "bone cancer pain", "entity_type": "symptom", "aliases": ["BCP", "cancer-induced bone pain"], "compartment": "systemic", "mentions": 40},
+    {"name": "synaptic phagocytosis", "entity_type": "process", "aliases": ["synaptic engulfment", "synapse pruning"], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "central sensitization", "entity_type": "process", "aliases": [], "compartment": "dorsal_horn", "mentions": 3},
+    {"name": "fluorocitrate", "entity_type": "drug", "aliases": [], "compartment": "dorsal_horn", "mentions": 8},
+    {"name": "VGLUT1", "entity_type": "molecule", "aliases": [], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "PSD95", "entity_type": "molecule", "aliases": ["PSD-95"], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "VGAT", "entity_type": "molecule", "aliases": [], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "Gephyrin", "entity_type": "molecule", "aliases": [], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "GFAP", "entity_type": "molecule", "aliases": [], "compartment": "dorsal_horn", "mentions": 15},
+    {"name": "C3", "entity_type": "molecule", "aliases": ["complement C3"], "compartment": "dorsal_horn", "mentions": 6},
+    {"name": "S100a10", "entity_type": "molecule", "aliases": [], "compartment": "dorsal_horn", "mentions": 6},
+    {"name": "mechanical hyperalgesia", "entity_type": "symptom", "aliases": ["decreased PWMT"], "compartment": "peripheral", "mentions": 5},
+    {"name": "spinal dorsal horn", "entity_type": "structure", "aliases": ["SDH"], "compartment": "dorsal_horn", "mentions": 15}
+  ],
+  "relationships": [
+    {"subject": "bone cancer pain", "predicate": "upregulates", "object": "VGLUT1", "sign": 1, "evidence_quote": "In the spinal cord, expression of the excitatory synaptic markers VGLUT1 and PSD95 was increased, whereas expression of the inhibitory synaptic markers VGAT and Gephyrin was decreased, together with marked astrocytic activation.", "confidence": "HIGH"},
+    {"subject": "bone cancer pain", "predicate": "upregulates", "object": "PSD95", "sign": 1, "evidence_quote": "In the spinal cord, expression of the excitatory synaptic markers VGLUT1 and PSD95 was increased, whereas expression of the inhibitory synaptic markers VGAT and Gephyrin was decreased, together with marked astrocytic activation.", "confidence": "HIGH"},
+    {"subject": "bone cancer pain", "predicate": "downregulates", "object": "VGAT", "sign": -1, "evidence_quote": "In the spinal cord, expression of the excitatory synaptic markers VGLUT1 and PSD95 was increased, whereas expression of the inhibitory synaptic markers VGAT and Gephyrin was decreased, together with marked astrocytic activation.", "confidence": "HIGH"},
+    {"subject": "bone cancer pain", "predicate": "downregulates", "object": "Gephyrin", "sign": -1, "evidence_quote": "In the spinal cord, expression of the excitatory synaptic markers VGLUT1 and PSD95 was increased, whereas expression of the inhibitory synaptic markers VGAT and Gephyrin was decreased, together with marked astrocytic activation.", "confidence": "HIGH"},
+    {"subject": "bone cancer pain", "predicate": "activates", "object": "astrocytes", "sign": 1, "evidence_quote": "Astrocytic markers GFAP, C3 and S100a10 were time-dependently upregulated in SDH astrocytes of mice with bone cancer pain, indicating a reactive phenotype of astrocytes", "confidence": "HIGH"},
+    {"subject": "bone cancer pain", "predicate": "downregulates", "object": "NRCAM", "sign": -1, "evidence_quote": "Immunofluorescence results indicated that astrocytic NRCAM was significantly downregulated, while neuronal NRCAM was barely influenced in tumor-bearing mice", "confidence": "HIGH"},
+    {"subject": "astrocytes", "predicate": "degrades", "object": "GABAergic synapses", "sign": -1, "evidence_quote": "Reactive astrocytes preferentially phagocytose GABAergic synapses in BCP, thereby contributing to synaptic imbalance and central sensitization.", "confidence": "HIGH"},
+    {"subject": "astrocytes", "predicate": "causes", "object": "central sensitization", "sign": 1, "evidence_quote": "Reactive astrocytes preferentially phagocytose GABAergic synapses in BCP, thereby contributing to synaptic imbalance and central sensitization.", "confidence": "HIGH"},
+    {"subject": "NRCAM", "predicate": "inhibits", "object": "synaptic phagocytosis", "sign": -1, "evidence_quote": "Restoration of astrocytic NRCAM expression by AAV markedly reduced astrocyte-mediated engulfment towards GABAergic synapses, had minimal effect on excitatory synapses, and significantly attenuated BCP.", "confidence": "HIGH"},
+    {"subject": "NRCAM", "predicate": "prevents", "object": "bone cancer pain", "sign": -1, "evidence_quote": "Restoring astrocytic NRCAM alleviates BCP by suppressing excessive astrocyte-mediated phagocytosis of GABAergic synapses.", "confidence": "HIGH"},
+    {"subject": "NRCAM", "predicate": "interacts_with", "object": "Gephyrin", "sign": 0, "evidence_quote": "NRCAM protects GABAergic synapses against excessive phagocytosis via coupling with Gephyrin at GABAergic postsynaptic sites.", "confidence": "MEDIUM"},
+    {"subject": "fluorocitrate", "predicate": "inhibits", "object": "astrocytes", "sign": -1, "evidence_quote": "Pharmacological inhibition of astrocytic activation with fluorocitrate alleviated pain behaviors and improved synaptic remodeling.", "confidence": "HIGH"},
+    {"subject": "fluorocitrate", "predicate": "prevents", "object": "bone cancer pain", "sign": -1, "evidence_quote": "An intrathecal injection of fluorocitrate produced a significant antinociceptive effect in tumor-bearing mice inoculated with NCTC-2472 cells, peaking at 3 h", "confidence": "HIGH"}
+  ],
+  "key_findings": [
+    "Intrafemoral NCTC-2472 fibrosarcoma inoculation in C3H/HeN mice produces persistent spontaneous pain and mechanical hyperalgesia with osteolysis.",
+    "In BCP spinal dorsal horn, excitatory markers VGLUT1 and PSD95 increase while inhibitory markers VGAT and Gephyrin decrease, shifting E/I balance toward excitation with enlarged neuronal Ca2+ responses.",
+    "Reactive (GFAP+/C3+/S100a10+) SDH astrocytes engulf both excitatory and inhibitory synapses but preferentially GABAergic synapses.",
+    "Fluorocitrate inhibition of astrocytic activation is antinociceptive and partially restores synaptic remodeling.",
+    "Astrocytic (not neuronal) NRCAM is downregulated in BCP; AAV-mediated astrocytic NRCAM overexpression reduces GABAergic synapse engulfment and attenuates BCP."
+  ],
+  "novel_terms": ["astrocytic NRCAM-dependent synaptic phagocytosis", "GABAergic synapse pruning"]
+}

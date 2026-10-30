@@ -1,0 +1,272 @@
+{
+ "pmid": "42060359",
+ "extracted_by": "claude-code-session",
+ "entities": [
+  {
+   "name": "Langerhans cells",
+   "entity_type": "cell_type",
+   "aliases": [
+    "LCs",
+    "epidermal Langerhans cells",
+    "CD207+ cells"
+   ],
+   "compartment": "peripheral",
+   "mentions": 40
+  },
+  {
+   "name": "CCL2",
+   "entity_type": "molecule",
+   "aliases": [
+    "MCP-1",
+    "monocyte chemoattractant protein-1"
+   ],
+   "compartment": "peripheral",
+   "mentions": 10
+  },
+  {
+   "name": "CCR2",
+   "entity_type": "receptor",
+   "aliases": [
+    "CCR2R"
+   ],
+   "compartment": "peripheral",
+   "mentions": 5
+  },
+  {
+   "name": "CCR2 antagonist",
+   "entity_type": "drug",
+   "aliases": [
+    "CCR2RA"
+   ],
+   "compartment": "peripheral",
+   "mentions": 2
+  },
+  {
+   "name": "mechanical allodynia",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 15
+  },
+  {
+   "name": "spontaneous pain",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 4
+  },
+  {
+   "name": "painful diabetic neuropathy",
+   "entity_type": "concept",
+   "aliases": [
+    "PDN"
+   ],
+   "compartment": "peripheral",
+   "mentions": 30
+  },
+  {
+   "name": "high-fat diet",
+   "entity_type": "concept",
+   "aliases": [
+    "HFD"
+   ],
+   "compartment": "systemic",
+   "mentions": 30
+  },
+  {
+   "name": "diphtheria toxin",
+   "entity_type": "drug",
+   "aliases": [
+    "DT"
+   ],
+   "compartment": "peripheral",
+   "mentions": 6
+  },
+  {
+   "name": "NP1 nociceptors",
+   "entity_type": "cell_type",
+   "aliases": [
+    "nonpeptidergic nociceptor type 1",
+    "Mrgprd+ DRG neurons"
+   ],
+   "compartment": "DRG",
+   "mentions": 6
+  },
+  {
+   "name": "Plxnb2",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 5
+  },
+  {
+   "name": "Plxna1",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 5
+  },
+  {
+   "name": "Sema4d",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "DRG",
+   "mentions": 3
+  },
+  {
+   "name": "Sema6d",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "DRG",
+   "mentions": 3
+  },
+  {
+   "name": "IL-18",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 1
+  },
+  {
+   "name": "CCL4",
+   "entity_type": "molecule",
+   "aliases": [
+    "MIP-1beta"
+   ],
+   "compartment": "peripheral",
+   "mentions": 1
+  },
+  {
+   "name": "TNFA",
+   "entity_type": "molecule",
+   "aliases": [
+    "TNF-alpha"
+   ],
+   "compartment": "peripheral",
+   "mentions": 3
+  },
+  {
+   "name": "CGRP",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 1
+  },
+  {
+   "name": "Ramp1",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 1
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "high-fat diet",
+   "predicate": "upregulates",
+   "object": "Langerhans cells",
+   "sign": 1,
+   "evidence_quote": "we observed an increase in LC density in the whole-mount epidermis of wild-type male mice fed an HFD for 10 weeks",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Langerhans cells",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "indicating that LCs are necessary for the development of mechanical allodynia in the HFD model of PDN",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Langerhans cells",
+   "predicate": "causes",
+   "object": "spontaneous pain",
+   "sign": 1,
+   "evidence_quote": "showed that HFD male mice developed spontaneous pain, which was reversed by LC ablation",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "diphtheria toxin",
+   "predicate": "prevents",
+   "object": "mechanical allodynia",
+   "sign": -1,
+   "evidence_quote": "Behavioral testing revealed that repeated DT injections prevented the development of mechanical allodynia in the HFD male mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Langerhans cells",
+   "predicate": "releases",
+   "object": "CCL2",
+   "sign": 1,
+   "evidence_quote": "LC secretome profiling showed increased CCL2 release",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CCR2 antagonist",
+   "predicate": "inhibits",
+   "object": "mechanical allodynia",
+   "sign": -1,
+   "evidence_quote": "Local intraplantar administration of a selective CCR2R antagonist (CCR2RA) transiently but robustly reversed mechanical allodynia in HFD mice for approximately 2 hours",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CCL2",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "these findings demonstrate that peripheral CCL2-CCR2 signaling is required for the development of mechanical allodynia in the HFD model of PDN",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CCL2",
+   "predicate": "activates",
+   "object": "CCR2",
+   "sign": 1,
+   "evidence_quote": "these findings demonstrate that peripheral CCL2-CCR2 signaling is required for the development of mechanical allodynia in the HFD model of PDN",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "Langerhans cells",
+   "predicate": "expresses",
+   "object": "Plxnb2",
+   "sign": 1,
+   "evidence_quote": "revealed upregulation of Plxnb2 and Plxna1 receptors in HFD LCs, while their ligands, Sema4d and Sema6d, respectively, were expressed by HFD nonpeptidergic nociceptor type 1 (NP1) DRG neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "NP1 nociceptors",
+   "predicate": "expresses",
+   "object": "Sema4d",
+   "sign": 1,
+   "evidence_quote": "In-situ RNA scope in DRG sections also confirmed the expression of Sema4d and Sema6d in NP1 Mrgprd+ DRG neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "Sema4d",
+   "predicate": "binds",
+   "object": "Plxnb2",
+   "sign": 0,
+   "evidence_quote": "revealed upregulation of Plxnb2 and Plxna1 receptors in HFD LCs, while their ligands, Sema4d and Sema6d, respectively, were expressed by HFD nonpeptidergic nociceptor type 1 (NP1) DRG neurons",
+   "confidence": "LOW"
+  },
+  {
+   "subject": "Sema6d",
+   "predicate": "binds",
+   "object": "Plxna1",
+   "sign": 0,
+   "evidence_quote": "revealed upregulation of Plxnb2 and Plxna1 receptors in HFD LCs, while their ligands, Sema4d and Sema6d, respectively, were expressed by HFD nonpeptidergic nociceptor type 1 (NP1) DRG neurons",
+   "confidence": "LOW"
+  }
+ ],
+ "key_findings": [
+  "Epidermal Langerhans cell density increases in paw skin of male HFD mice in parallel with mechanical allodynia; in human PDN skin LC volume and dendritic complexity correlate with diabetes duration.",
+  "Genetic LC depletion (hLC-DTR + diphtheria toxin) prevents mechanical allodynia and spontaneous pain in male but not female HFD mice.",
+  "Male HFD LCs upregulate chemokine (CCL2, IL-18) and axon-guidance (Plxnb2, Plxna1) programs and are predicted to communicate with Mrgprd+ NP1 nociceptors via Sema4d/Sema6d and CCL2.",
+  "LCs release more CCL2 in HFD, and local intraplantar CCR2 antagonism reverses mechanical allodynia."
+ ],
+ "novel_terms": [
+  "Langerhans cell-nociceptor communication",
+  "Ly6g6c+ LCs",
+  "hLC-DTR"
+ ]
+}

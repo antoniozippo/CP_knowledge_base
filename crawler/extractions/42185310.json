@@ -1,0 +1,40 @@
+{
+  "pmid": "42185310",
+  "extracted_by": "claude-code-session",
+  "entities": [
+    {"name": "NG2 glia", "entity_type": "cell_type", "aliases": ["oligodendrocyte precursor cells", "NG2 glial cells"], "compartment": "other", "mentions": 30},
+    {"name": "MeA GABAergic neurons", "entity_type": "cell_type", "aliases": ["Vgat+ GABAergic neurons", "medial amygdala GABAergic neurons"], "compartment": "other", "mentions": 20},
+    {"name": "MeA glutamatergic neurons", "entity_type": "cell_type", "aliases": ["VGLUT2 neurons", "Glu+ neurons"], "compartment": "other", "mentions": 8},
+    {"name": "medial amygdala", "entity_type": "structure", "aliases": ["MeA"], "compartment": "other", "mentions": 20},
+    {"name": "GABA", "entity_type": "molecule", "aliases": ["gamma-aminobutyric acid"], "compartment": "other", "mentions": 8},
+    {"name": "Gad1", "entity_type": "molecule", "aliases": ["GAD67"], "compartment": "other", "mentions": 2},
+    {"name": "corticosterone", "entity_type": "molecule", "aliases": [], "compartment": "systemic", "mentions": 1},
+    {"name": "cFos", "entity_type": "molecule", "aliases": ["c-Fos"], "compartment": "other", "mentions": 4},
+    {"name": "gephyrin", "entity_type": "molecule", "aliases": [], "compartment": "other", "mentions": 4},
+    {"name": "PSD95", "entity_type": "molecule", "aliases": ["PSD-95"], "compartment": "other", "mentions": 2},
+    {"name": "observational social defeat", "entity_type": "concept", "aliases": ["OSD"], "compartment": "other", "mentions": 30},
+    {"name": "allogrooming", "entity_type": "process", "aliases": ["consolation behavior", "prosocial allogrooming"], "compartment": "other", "mentions": 30},
+    {"name": "inhibitory synaptic transmission", "entity_type": "process", "aliases": ["mIPSC frequency"], "compartment": "other", "mentions": 5},
+    {"name": "empathy", "entity_type": "concept", "aliases": ["emotional contagion"], "compartment": "other", "mentions": 6},
+    {"name": "anterior cingulate cortex", "entity_type": "structure", "aliases": ["ACC"], "compartment": "ACC", "mentions": 2}
+  ],
+  "relationships": [
+    {"subject": "NG2 glia", "predicate": "inhibits", "object": "MeA GABAergic neurons", "sign": -1, "evidence_quote": "their specific ablation in the MeA reduces inhibitory synaptic transmission, disinhibiting neighboring GABAergic neurons and increasing allogrooming", "confidence": "HIGH"},
+    {"subject": "NG2 glia", "predicate": "inhibits", "object": "allogrooming", "sign": -1, "evidence_quote": "Optogenetic inhibition of NG2 glia during phase 3 significantly enhanced allogrooming in OSD-exposed observers", "confidence": "HIGH"},
+    {"subject": "NG2 glia", "predicate": "expresses", "object": "Gad1", "sign": 0, "evidence_quote": "Single-cell RNA analysis reveals that GABA signaling originates from Gad1-expressing NG2 glia.", "confidence": "HIGH"},
+    {"subject": "NG2 glia", "predicate": "releases", "object": "GABA", "sign": 1, "evidence_quote": "Single-cell RNA analysis reveals that GABA signaling originates from Gad1-expressing NG2 glia.", "confidence": "MEDIUM"},
+    {"subject": "MeA GABAergic neurons", "predicate": "causes", "object": "allogrooming", "sign": 1, "evidence_quote": "Prosocial allogrooming requires activation of GABAergic neurons in the MeA.", "confidence": "HIGH"},
+    {"subject": "observational social defeat", "predicate": "inhibits", "object": "NG2 glia", "sign": -1, "evidence_quote": "under OSD conditions, we observed a remarkable reduction in [Ca²⁺]i fluctuations, primarily in the NG2 glial processes", "confidence": "HIGH"},
+    {"subject": "observational social defeat", "predicate": "upregulates", "object": "corticosterone", "sign": 1, "evidence_quote": "This mechanism requires elevated corticosterone induced by social defeat.", "confidence": "MEDIUM"},
+    {"subject": "observational social defeat", "predicate": "causes", "object": "allogrooming", "sign": 1, "evidence_quote": "we find that OSD-exposed mice display enhanced allogrooming toward defeated conspecifics, indicating increased consolation behavior", "confidence": "HIGH"}
+  ],
+  "key_findings": [
+    "Mice witnessing a cagemate's social defeat (OSD) show increased consolation allogrooming toward the familiar defeated partner; visual but not olfactory cues are required.",
+    "OSD selectively activates MeA GABAergic (not glutamatergic) neurons during allogrooming; ACC and BLA were not significantly activated.",
+    "OSD reduces mIPSC frequency onto MeA GABAergic neurons without changing intrinsic excitability, causing disinhibition.",
+    "NG2 glia preferentially contact gephyrin-positive inhibitory synapses on MeA GABAergic neurons and become Ca2+-quiescent during OSD.",
+    "Optogenetic inhibition or ablation of MeA NG2 glia reduces inhibitory input to GABAergic neurons and enhances allogrooming; Gad1 knockout in NG2 glia recapitulates this.",
+    "The mechanism requires elevated corticosterone induced by social defeat."
+  ],
+  "novel_terms": ["observational social defeat (OSD)", "NG2 glia-derived GABA", "Gad1-expressing NG2 glia"]
+}

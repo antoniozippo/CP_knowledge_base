@@ -1,0 +1,233 @@
+{
+ "entities": [
+  {
+   "name": "TREM-1",
+   "entity_type": "receptor",
+   "aliases": [
+    "triggering receptor expressed on myeloid cells-1",
+    "Trem1"
+   ],
+   "compartment": "systemic",
+   "mentions": 12
+  },
+  {
+   "name": "Mo/MΦ",
+   "entity_type": "cell_type",
+   "aliases": [
+    "peripheral monocytes/macrophages",
+    "Ly6C+ monocytes"
+   ],
+   "compartment": "systemic",
+   "mentions": 20
+  },
+  {
+   "name": "vlPAG GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "ventrolateral periaqueductal gray GABAergic neurons"
+   ],
+   "compartment": "other",
+   "mentions": 15
+  },
+  {
+   "name": "visceral hypersensitivity",
+   "entity_type": "symptom",
+   "aliases": [
+    "visceral pain"
+   ],
+   "compartment": "systemic",
+   "mentions": 20
+  },
+  {
+   "name": "DSS-induced colitis",
+   "entity_type": "process",
+   "aliases": [
+    "dextran sodium sulfate colitis",
+    "IBD"
+   ],
+   "compartment": "systemic",
+   "mentions": 10
+  },
+  {
+   "name": "occludin",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "barrier",
+   "mentions": 3
+  },
+  {
+   "name": "ZO-1",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "barrier",
+   "mentions": 3
+  },
+  {
+   "name": "BBB",
+   "entity_type": "structure",
+   "aliases": [
+    "blood-brain barrier"
+   ],
+   "compartment": "barrier",
+   "mentions": 6
+  },
+  {
+   "name": "RS102895",
+   "entity_type": "drug",
+   "aliases": [
+    "CCR2 inhibitor"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "CCR2",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 1
+  },
+  {
+   "name": "microglia",
+   "entity_type": "cell_type",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "neutrophils",
+   "entity_type": "cell_type",
+   "aliases": [
+    "PMN"
+   ],
+   "compartment": "systemic",
+   "mentions": 6
+  },
+  {
+   "name": "periaqueductal gray",
+   "entity_type": "structure",
+   "aliases": [
+    "PAG"
+   ],
+   "compartment": "other",
+   "mentions": 15
+  },
+  {
+   "name": "c-Fos",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "GABA",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 4
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "TREM-1",
+   "predicate": "activates",
+   "object": "Mo/MΦ",
+   "sign": 1,
+   "evidence_quote": "Pharmacological inhibition and gene knockout of TREM-1 both reduced Mo/MΦ infiltration, leading to decreased vlPAG GABAergic neuronal activity and mitigatory visceral pain.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Mo/MΦ",
+   "predicate": "activates",
+   "object": "vlPAG GABAergic neurons",
+   "sign": 1,
+   "evidence_quote": "These findings demonstrate that peripheral-derived Mo/MΦ in the PAG promote acute visceral pain via vlPAG GABAergic neuron activation during the acute phase of colitis.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Mo/MΦ",
+   "predicate": "causes",
+   "object": "visceral hypersensitivity",
+   "sign": 1,
+   "evidence_quote": "These findings demonstrate that peripheral-derived Mo/MΦ in the PAG promote acute visceral pain via vlPAG GABAergic neuron activation during the acute phase of colitis.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "vlPAG GABAergic neurons",
+   "predicate": "causes",
+   "object": "visceral hypersensitivity",
+   "sign": 1,
+   "evidence_quote": "In normal Vgat-Cre mice, the activation of vlPAG GABAergic neurons decreased the visceral pain threshold significantly",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Mo/MΦ",
+   "predicate": "expresses",
+   "object": "TREM-1",
+   "sign": 0,
+   "evidence_quote": "Furthermore, TREM-1 expression on peripheral Mo/MΦ by flow cytometry was markedly increased at W1 and normalized at W4.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "DSS-induced colitis",
+   "predicate": "downregulates",
+   "object": "occludin",
+   "sign": -1,
+   "evidence_quote": "The levels of occludin and ZO-1 were significantly reduced in both the colon and cerebral cortex at W1, but returned to normal levels at W4",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "DSS-induced colitis",
+   "predicate": "downregulates",
+   "object": "ZO-1",
+   "sign": -1,
+   "evidence_quote": "The levels of occludin and ZO-1 were significantly reduced in both the colon and cerebral cortex at W1, but returned to normal levels at W4",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "DSS-induced colitis",
+   "predicate": "inhibits",
+   "object": "BBB",
+   "sign": -1,
+   "evidence_quote": "Evans blue dye extravasation analysis further indicated that the BBB was disrupted at W1, leading to increased permeability.",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "RS102895",
+   "predicate": "inhibits",
+   "object": "Mo/MΦ",
+   "sign": -1,
+   "evidence_quote": "The efficacy of RS102895 was confirmed by flow cytometry, which demonstrated a significant decrease in the number of peripheral Mo/MΦ within the PAG at W1.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "RS102895",
+   "predicate": "prevents",
+   "object": "visceral hypersensitivity",
+   "sign": -1,
+   "evidence_quote": "Notably, at W4, chronic visceral pain in mice with colitis was also alleviated following RS102895 administration during W1",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "microglia",
+   "predicate": "causes",
+   "object": "visceral hypersensitivity",
+   "sign": 1,
+   "evidence_quote": "However, when DT was injected into the vlPAG for three consecutive days before W4, microglia depletion alleviated visceral sensitivity markedly",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "key_findings": [
+  "Peripheral TREM-1+ Mo/MΦ infiltrate the PAG (most strongly among pain-related nuclei) during acute DSS colitis.",
+  "Infiltrating Mo/MΦ activate vlPAG GABAergic neurons, driving acute visceral hypersensitivity that persists into remission.",
+  "Blocking Mo/MΦ infiltration (CCR2 inhibitor RS102895, TREM-1 inhibition/knockout) reduces vlPAG GABAergic activity and visceral pain.",
+  "Colitis reduces occludin/ZO-1 in colon and cortex and disrupts BBB at W1.",
+  "Microglia contribute to visceral pain mainly in the remission phase (W4), whereas neutrophils have minor roles."
+ ],
+ "novel_terms": [
+  "TREM-1+ Mo/MΦ PAG infiltration",
+  "vlPAG GABAergic neuron activation in visceral pain"
+ ],
+ "pmid": "42289647",
+ "extracted_by": "claude-code-session"
+}

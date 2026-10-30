@@ -1,0 +1,50 @@
+{
+  "pmid": "42213967",
+  "extracted_by": "claude-code-session",
+  "entities": [
+    {"name": "delta opioid receptor", "entity_type": "receptor", "aliases": ["DOR", "OPRD1"], "compartment": "systemic", "mentions": 60},
+    {"name": "SNC80", "entity_type": "drug", "aliases": [], "compartment": "systemic", "mentions": 40},
+    {"name": "DPDPE", "entity_type": "drug", "aliases": [], "compartment": "ACC", "mentions": 6},
+    {"name": "Tipp-psi", "entity_type": "drug", "aliases": [], "compartment": "ACC", "mentions": 2},
+    {"name": "parvalbumin interneurons", "entity_type": "cell_type", "aliases": ["PV-INs", "parvalbumin-expressing interneurons"], "compartment": "ACC", "mentions": 30},
+    {"name": "Parvalbumin", "entity_type": "molecule", "aliases": ["PV"], "compartment": "ACC", "mentions": 10},
+    {"name": "GABA", "entity_type": "molecule", "aliases": ["gamma-aminobutyric acid"], "compartment": "ACC", "mentions": 5},
+    {"name": "Layer V pyramidal neurons", "entity_type": "cell_type", "aliases": ["Layer V ACC pyramidal neurons"], "compartment": "ACC", "mentions": 2},
+    {"name": "anterior cingulate cortex", "entity_type": "structure", "aliases": ["ACC"], "compartment": "ACC", "mentions": 10},
+    {"name": "medial thalamus", "entity_type": "structure", "aliases": ["MThal"], "compartment": "other", "mentions": 6},
+    {"name": "feed-forward inhibition", "entity_type": "process", "aliases": ["feedforward inhibitory signaling", "oIPSC"], "compartment": "ACC", "mentions": 8},
+    {"name": "convulsions", "entity_type": "symptom", "aliases": ["seizures", "convulsant activity"], "compartment": "systemic", "mentions": 15},
+    {"name": "anxiolysis", "entity_type": "process", "aliases": ["anxiolytic effect"], "compartment": "systemic", "mentions": 10},
+    {"name": "locomotor activity", "entity_type": "process", "aliases": ["hyperlocomotion"], "compartment": "systemic", "mentions": 10},
+    {"name": "respiratory rate", "entity_type": "process", "aliases": ["breathing frequency"], "compartment": "systemic", "mentions": 4},
+    {"name": "nitroglycerin", "entity_type": "drug", "aliases": ["NTG"], "compartment": "systemic", "mentions": 8},
+    {"name": "NTG-induced hyperalgesia", "entity_type": "symptom", "aliases": ["migraine-like pain", "orbitofacial mechanical hypersensitivity"], "compartment": "peripheral", "mentions": 6},
+    {"name": "pentylenetetrazol", "entity_type": "drug", "aliases": ["PTZ"], "compartment": "systemic", "mentions": 1},
+    {"name": "GABAA receptor", "entity_type": "receptor", "aliases": [], "compartment": "systemic", "mentions": 1},
+    {"name": "somatostatin interneurons", "entity_type": "cell_type", "aliases": [], "compartment": "other", "mentions": 2}
+  ],
+  "relationships": [
+    {"subject": "parvalbumin interneurons", "predicate": "expresses", "object": "delta opioid receptor", "sign": 0, "evidence_quote": "Parvalbumin-expressing interneurons (PV-INs) express high levels of DOR transcript ( OPRD1 ) and protein.", "confidence": "HIGH"},
+    {"subject": "DPDPE", "predicate": "inhibits", "object": "feed-forward inhibition", "sign": -1, "evidence_quote": "the DOR agonist DPDPE reduces feed-forward inhibitory synaptic transmission onto Layer V Pyramidal cells", "confidence": "HIGH"},
+    {"subject": "Tipp-psi", "predicate": "inhibits", "object": "delta opioid receptor", "sign": -1, "evidence_quote": "The effect of DPDPE in PV-DOR-WT was pharmacologically blocked by the DOR antagonist Tipp-psi (1 μM) indicating this is a DOR-dependent effect", "confidence": "HIGH"},
+    {"subject": "delta opioid receptor", "predicate": "inhibits", "object": "GABA", "sign": -1, "evidence_quote": "These results demonstrate there is a functional loss of DOR-mediated inhibition of GABA release from PV-INs in the MThal-ACC circuit in PV-DOR-KO mice.", "confidence": "HIGH"},
+    {"subject": "parvalbumin interneurons", "predicate": "modulates", "object": "feed-forward inhibition", "sign": 1, "evidence_quote": "parvalbumin neurons have been shown to be exclusive mediators of feed-forward inhibitory signaling following stimulation of MThal inputs to the ACC", "confidence": "MEDIUM"},
+    {"subject": "SNC80", "predicate": "causes", "object": "convulsions", "sign": 1, "evidence_quote": "Administration of SNC80 elicits convulsions in both rodents and primates", "confidence": "HIGH"},
+    {"subject": "SNC80", "predicate": "activates", "object": "delta opioid receptor", "sign": 1, "evidence_quote": "the convulsant and anxiolytic effects of the DOR agonist SNC80 were diminished in Floxed DOR; PV-Cre animals", "confidence": "HIGH"},
+    {"subject": "delta opioid receptor", "predicate": "causes", "object": "convulsions", "sign": 1, "evidence_quote": "This finding suggests that DOR expressed on PV-INs is necessary for SNC80-mediated convulsant and cataleptic activity, but not all convulsions mediated by GABA inhibition.", "confidence": "HIGH"},
+    {"subject": "SNC80", "predicate": "causes", "object": "anxiolysis", "sign": 1, "evidence_quote": "SNC80 increased the time spent in the open arms in WT littermates suggestive of an anxiolytic effect of SNC80", "confidence": "HIGH"},
+    {"subject": "SNC80", "predicate": "activates", "object": "locomotor activity", "sign": 1, "evidence_quote": "This suggests that the pro-locomotive effects of SNC80 are maintained in PV-DOR-KO mice.", "confidence": "HIGH"},
+    {"subject": "SNC80", "predicate": "upregulates", "object": "respiratory rate", "sign": 1, "evidence_quote": "SNC80 injection increased frequency of breathing across all genotypes compared to vehicles", "confidence": "HIGH"},
+    {"subject": "nitroglycerin", "predicate": "causes", "object": "NTG-induced hyperalgesia", "sign": 1, "evidence_quote": "Intraperitoneal injections of 10 mg/kg NTG significantly decreased the orbitofacial mechanical threshold in vehicle injected WT (0.22 ± 0.08) and PV-DOR-KO (0.17 ± 0.09) to a similar extent", "confidence": "HIGH"},
+    {"subject": "SNC80", "predicate": "prevents", "object": "NTG-induced hyperalgesia", "sign": -1, "evidence_quote": "this NTG-induced decrease in mechanical threshold was prevented by SNC80 treatment in both WT and PV-DOR-KO mice", "confidence": "HIGH"},
+    {"subject": "pentylenetetrazol", "predicate": "inhibits", "object": "GABAA receptor", "sign": -1, "evidence_quote": "a nono-pioid convulsant Pentylenetetrazol (56 mg/kg), a GABAA receptor antagonist", "confidence": "MEDIUM"}
+  ],
+  "key_findings": [
+    "Conditional deletion of DOR from parvalbumin cells (Floxed DOR; PV-Cre) abolishes DPDPE-mediated suppression of MThal-to-ACC feed-forward inhibition onto Layer V pyramidal neurons.",
+    "PV-DOR-KO reduces SNC80-induced convulsions and eliminates SNC80-induced catalepsy, but not PTZ-induced seizures.",
+    "SNC80's anxiolytic effect in the elevated plus maze is lost in PV-DOR-KO mice.",
+    "SNC80-induced hyperlocomotion and respiratory stimulation are preserved in PV-DOR-KO mice.",
+    "NTG-induced orbitofacial hyperalgesia develops normally in PV-DOR-KO mice and SNC80's antihyperalgesic effect is preserved, suggesting PV-DOR is not required for these pain effects."
+  ],
+  "novel_terms": ["PV-DOR-KO", "Floxed DOR; PV-Cre"]
+}

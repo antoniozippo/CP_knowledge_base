@@ -1,0 +1,273 @@
+{
+ "pmid": "42049514",
+ "extracted_by": "claude-code-session",
+ "entities": [
+  {
+   "name": "lamina I spinoparabrachial neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "ascending projection neurons",
+    "spinal projection neurons"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 15
+  },
+  {
+   "name": "GABAergic interneurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "VGAT+ interneurons"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 4
+  },
+  {
+   "name": "glutamatergic interneurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "VGAT- interneurons"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "primary afferents",
+   "entity_type": "cell_type",
+   "aliases": [
+    "sensory afferents"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "non-Hebbian LTP",
+   "entity_type": "process",
+   "aliases": [
+    "non-Hebbian long-term potentiation"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 20
+  },
+  {
+   "name": "glutamate release",
+   "entity_type": "process",
+   "aliases": [
+    "presynaptic glutamate release"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 8
+  },
+  {
+   "name": "NMDAR",
+   "entity_type": "receptor",
+   "aliases": [
+    "NMDA receptor"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "mGluR5",
+   "entity_type": "receptor",
+   "aliases": [
+    "Grm5"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 8
+  },
+  {
+   "name": "group I mGluRs",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 2
+  },
+  {
+   "name": "AP5",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "MK801",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 2
+  },
+  {
+   "name": "MPEP",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "BAPTA",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "intracellular Ca2+",
+   "entity_type": "molecule",
+   "aliases": [
+    "postsynaptic Ca2+"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 6
+  },
+  {
+   "name": "PGE2",
+   "entity_type": "molecule",
+   "aliases": [
+    "prostaglandin E2"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "EP2 receptor",
+   "entity_type": "receptor",
+   "aliases": [
+    "EP2"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 3
+  },
+  {
+   "name": "PF 04418948",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 1
+  },
+  {
+   "name": "ERK",
+   "entity_type": "molecule",
+   "aliases": [
+    "ERK1",
+    "ERK2",
+    "extracellular signal-regulated kinases"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 2
+  },
+  {
+   "name": "endocannabinoids",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 2
+  },
+  {
+   "name": "CB1 receptor",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 1
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "NMDAR",
+   "predicate": "activates",
+   "object": "non-Hebbian LTP",
+   "sign": 1,
+   "evidence_quote": "thus suggesting that postsynaptic NMDAR activation was required for the induction of non-Hebbian LTP at these synapses under our chosen experimental conditions",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "AP5",
+   "predicate": "inhibits",
+   "object": "non-Hebbian LTP",
+   "sign": -1,
+   "evidence_quote": "In the presence of AP5, a reduced magnitude of LTP was observed in lamina I projection neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "MPEP",
+   "predicate": "inhibits",
+   "object": "non-Hebbian LTP",
+   "sign": -1,
+   "evidence_quote": "MPEP application disrupted the generation of LTP at these synapses",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "mGluR5",
+   "predicate": "activates",
+   "object": "non-Hebbian LTP",
+   "sign": 1,
+   "evidence_quote": "supporting an important role for mGluR5 in the generation of non-Hebbian plasticity",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "BAPTA",
+   "predicate": "inhibits",
+   "object": "non-Hebbian LTP",
+   "sign": -1,
+   "evidence_quote": "found that buffering internal Ca2+ in the projection neuron significantly reduced non-Hebbian LTP at primary afferent synapses",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "intracellular Ca2+",
+   "predicate": "upregulates",
+   "object": "glutamate release",
+   "sign": 1,
+   "evidence_quote": "elevations in intracellular Ca2+ within spinoparabrachial neurons promote enhanced glutamate release from the presynaptic terminals of sensory afferents in the SDH",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "PGE2",
+   "predicate": "activates",
+   "object": "EP2 receptor",
+   "sign": 1,
+   "evidence_quote": "PGE2 signaling at EP2 receptors can drive Hebbian spike timing-dependent LTP at primary afferent synapses onto lamina I projection neurons by retrogradely increasing presynaptic glutamate release",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "EP2 receptor",
+   "predicate": "upregulates",
+   "object": "glutamate release",
+   "sign": 1,
+   "evidence_quote": "PGE2 signaling at EP2 receptors can drive Hebbian spike timing-dependent LTP at primary afferent synapses onto lamina I projection neurons by retrogradely increasing presynaptic glutamate release",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "group I mGluRs",
+   "predicate": "activates",
+   "object": "ERK",
+   "sign": 1,
+   "evidence_quote": "group I mGluRs activate extracellular signal-regulated kinases (ERK1 and ERK2) in dorsal horn neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "endocannabinoids",
+   "predicate": "inhibits",
+   "object": "glutamate release",
+   "sign": -1,
+   "evidence_quote": "they suppress glutamate release in the SDH, including from the terminals of sensory afferents, via the activation of presynaptic CB1 receptors",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "endocannabinoids",
+   "predicate": "activates",
+   "object": "CB1 receptor",
+   "sign": 1,
+   "evidence_quote": "they suppress glutamate release in the SDH, including from the terminals of sensory afferents, via the activation of presynaptic CB1 receptors",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "key_findings": [
+  "Prolonged low-frequency (1 Hz x 150) primary afferent stimulation evokes non-Hebbian LTP at sensory synapses onto lamina I spinoparabrachial neurons in naive adult mouse SDH, independent of postsynaptic depolarization.",
+  "Non-Hebbian LTP requires postsynaptic NMDAR and mGluR5 activation and postsynaptic Ca2+, and reflects increased presynaptic glutamate release probability (reduced PPR).",
+  "EP2 antagonist PF 04418948 did not block non-Hebbian LTP, suggesting a retrograde messenger other than PGE2.",
+  "Prevalence and magnitude of non-Hebbian LTP are greater in spinoparabrachial projection neurons than in GABAergic or glutamatergic interneurons, and LTP occurs at Abeta, Adelta and C-fiber inputs."
+ ],
+ "novel_terms": [
+  "non-Hebbian LTP",
+  "Pre Only (VC) conditioning stimulation"
+ ]
+}

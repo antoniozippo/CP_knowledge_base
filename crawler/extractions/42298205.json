@@ -1,0 +1,102 @@
+{
+ "entities": [
+  {
+   "name": "DNMT1",
+   "entity_type": "molecule",
+   "aliases": [
+    "DNA methyltransferase 1"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "CeA GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "CeA-GABAergic neurons",
+    "central amygdala GABAergic neurons"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "LC noradrenergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "LC-NAergic neurons",
+    "locus coeruleus noradrenergic neurons"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "depression-like behavior",
+   "entity_type": "symptom",
+   "aliases": [
+    "pain-related depression"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "chronic pain",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 5
+  },
+  {
+   "name": "spared nerve injury",
+   "entity_type": "process",
+   "aliases": [
+    "SNI",
+    "sciatic nerve ligation"
+   ],
+   "compartment": "peripheral",
+   "mentions": 3
+  },
+  {
+   "name": "GABA",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 2
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "DNMT1",
+   "predicate": "inhibits",
+   "object": "CeA GABAergic neurons",
+   "sign": -1,
+   "evidence_quote": "our findings suggest that DNMT1 may suppress the GABAergic projections from the CeA to LC-NAergic neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "LC noradrenergic neurons",
+   "predicate": "causes",
+   "object": "depression-like behavior",
+   "sign": 1,
+   "evidence_quote": "activation of LC-NAergic neurons induced depression-like behaviors",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CeA GABAergic neurons",
+   "predicate": "interacts_with",
+   "object": "LC noradrenergic neurons",
+   "sign": 0,
+   "evidence_quote": "Immunohistochemical staining and electrophysiological recordings confirmed the functional synaptic connection between CeA-GABAergic neurons and LC-NAergic neurons.",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "LC is a major downstream target of CeA; CeA GABAergic neurons form functional synapses onto LC noradrenergic neurons.",
+  "Activation of LC-NA neurons induces depression-like behavior; inhibition improves SNI-induced depression-like behavior.",
+  "DNMT1 knockdown improves pain-related depression in a CeA-GABA to LC-NA circuit-dependent manner; DNMT1 may suppress this inhibitory projection."
+ ],
+ "novel_terms": [
+  "DNMT1-regulated CeA-GABA to LC-NA circuit"
+ ],
+ "pmid": "42298205",
+ "extracted_by": "claude-code-session"
+}

@@ -1,0 +1,205 @@
+{
+ "pmid": "42162244",
+ "extracted_by": "claude-code-session",
+ "entities": [
+  {
+   "name": "PTP1B",
+   "entity_type": "molecule",
+   "aliases": [
+    "protein tyrosine phosphatase-1B"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 40
+  },
+  {
+   "name": "GlyR alpha1",
+   "entity_type": "receptor",
+   "aliases": [
+    "GlyR α1",
+    "glycine receptor α1 subunit"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 30
+  },
+  {
+   "name": "GPR39",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "SOM+ interneurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "somatostatin-positive interneurons"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 30
+  },
+  {
+   "name": "glycinergic transmission",
+   "entity_type": "process",
+   "aliases": [
+    "glycinergic inhibition"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "glycinergic disinhibition",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "peripheral inflammation",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 5
+  },
+  {
+   "name": "CFA",
+   "entity_type": "drug",
+   "aliases": [
+    "complete Freund's adjuvant"
+   ],
+   "compartment": "peripheral",
+   "mentions": 20
+  },
+  {
+   "name": "PTP1B inhibitor XXII",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 8
+  },
+  {
+   "name": "mechanical allodynia",
+   "entity_type": "symptom",
+   "aliases": [
+    "mechanical pain hypersensitivity"
+   ],
+   "compartment": "dorsal_horn",
+   "mentions": 10
+  },
+  {
+   "name": "strychnine",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "dorsal_horn",
+   "mentions": 2
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "PTP1B",
+   "predicate": "binds",
+   "object": "GlyR alpha1",
+   "sign": 0,
+   "evidence_quote": "PTP1B directly binds to and dephosphorylates the glycine receptor α1 subunit (GlyR α1).",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B",
+   "predicate": "dephosphorylates",
+   "object": "GlyR alpha1",
+   "sign": -1,
+   "evidence_quote": "PTP1B directly binds to and dephosphorylates the glycine receptor α1 subunit (GlyR α1).",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B",
+   "predicate": "inhibits",
+   "object": "glycinergic transmission",
+   "sign": -1,
+   "evidence_quote": "These data confirmed an intrinsic inhibition of glycinergic transmission by PTP1B.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "peripheral inflammation",
+   "predicate": "upregulates",
+   "object": "PTP1B",
+   "sign": 1,
+   "evidence_quote": "Peripheral inflammation-induced hyperexpression of PTP1B competitively interrupts the interaction of GlyR α1 with GPR39",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B",
+   "predicate": "inhibits",
+   "object": "GPR39",
+   "sign": -1,
+   "evidence_quote": "suggesting that PTP1B could mutually block GPR39 incorporation into GlyR α1 complex",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "GPR39",
+   "predicate": "activates",
+   "object": "glycinergic transmission",
+   "sign": 1,
+   "evidence_quote": "Pharmacological activation of GPR39, however, could disrupt the PTP1B-GlyR α1 interaction and resume GPR39 binding, resulting in reinstated glycinergic inhibition.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B",
+   "predicate": "causes",
+   "object": "glycinergic disinhibition",
+   "sign": 1,
+   "evidence_quote": "suggesting that the enhancement of PTP1B expression in SOM+ interneurons contributed to glycinergic disinhibition and mechanical allodynia in neuropathic pain model of mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "suggesting that the enhancement of PTP1B expression in SOM+ interneurons contributed to glycinergic disinhibition and mechanical allodynia in neuropathic pain model of mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B inhibitor XXII",
+   "predicate": "activates",
+   "object": "GlyR alpha1",
+   "sign": 1,
+   "evidence_quote": "extracellular perfusion of PTP1B inhibitor XXII significantly increased the amplitudes of GlyR α1 currents",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PTP1B inhibitor XXII",
+   "predicate": "inhibits",
+   "object": "mechanical allodynia",
+   "sign": -1,
+   "evidence_quote": "Intrathecal injection of PTP1B inhibitor XXII reversed the reduction of the paw withdrawal thresholds induced by CFA",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CFA",
+   "predicate": "activates",
+   "object": "SOM+ interneurons",
+   "sign": 1,
+   "evidence_quote": "CFA injection led to a notable increase in the AP firing frequencies of SOM+ interneurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "SOM+ interneurons",
+   "predicate": "expresses",
+   "object": "PTP1B",
+   "sign": 1,
+   "evidence_quote": "Immunofluorescence showed that the majority of SOM+ neurons expressed PTP1B",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "PTP1B localizes to inhibitory postsynapses of spinal SOM+ interneurons and directly binds GlyR alpha1 via its intracellular large loop, dephosphorylating Tyr339.",
+  "PTP1B negatively regulates glycinergic transmission; knockdown increases GlyR-mIPSC amplitudes.",
+  "CFA inflammation (and SNI) upregulates spinal PTP1B, causing glycinergic disinhibition, SOM+ interneuron hyperexcitability and mechanical (static and dynamic) allodynia; PTP1B knockdown or inhibitor XXII alleviates these.",
+  "PTP1B and GPR39 compete for GlyR alpha1 binding; GPR39 activation restores glycinergic inhibition."
+ ],
+ "novel_terms": [
+  "PTP1B-GlyR α1 interaction",
+  "GPR39-GlyR α1 competition",
+  "Tyr339 phosphorylation"
+ ]
+}

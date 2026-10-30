@@ -1,0 +1,130 @@
+{
+ "entities": [
+  {
+   "name": "lateral hypothalamic area",
+   "entity_type": "structure",
+   "aliases": [
+    "LHA"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "paraventricular thalamic nucleus",
+   "entity_type": "structure",
+   "aliases": [
+    "PVT"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "GAD+ neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "GABAergic neurons",
+    "glutamate decarboxylase-positive neurons"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "CaMKIIα+ neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "CaMKIIα",
+    "calcium/calmodulin-dependent protein kinase IIα-positive neurons"
+   ],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "GABAergic LHA-PVT pathway",
+   "entity_type": "pathway",
+   "aliases": [
+    "LHA-PVT pathway"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "c-FOS",
+   "entity_type": "molecule",
+   "aliases": [
+    "c-Fos"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "spared nerve injury",
+   "entity_type": "concept",
+   "aliases": [
+    "SNI"
+   ],
+   "compartment": "peripheral",
+   "mentions": 3
+  },
+  {
+   "name": "neuropathic pain",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 2
+  },
+  {
+   "name": "nociception",
+   "entity_type": "process",
+   "aliases": [
+    "pain modulation"
+   ],
+   "compartment": "systemic",
+   "mentions": 2
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "spared nerve injury",
+   "predicate": "activates",
+   "object": "GABAergic LHA-PVT pathway",
+   "sign": 1,
+   "evidence_quote": "These results collectively indicate that the GABAergic LHA-PVT pathway is activated in the SNI model of neuropathic pain",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "activates",
+   "object": "GAD+ neurons",
+   "sign": 1,
+   "evidence_quote": "in the spared nerve injury (SNI) mouse model of neuropathic pain, 37.26 ± 7.23% of GAD<sup>+</sup> neurons in the LHA were activated",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "GAD+ neurons",
+   "predicate": "interacts_with",
+   "object": "CaMKIIα+ neurons",
+   "sign": 0,
+   "evidence_quote": "these terminals established close appositions with calcium/calmodulin-dependent protein kinase IIα-positive (CaMKIIα<sup>+</sup>) neurons within the PVT",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "GABAergic LHA-PVT pathway",
+   "predicate": "modulates",
+   "object": "nociception",
+   "sign": 0,
+   "evidence_quote": "suggesting its involvement in the modulation of nociception",
+   "confidence": "LOW"
+  }
+ ],
+ "key_findings": [
+  "Calcium signals of GAD+ neurons in the LHA increase in response to innocuous and noxious stimulation.",
+  "In the SNI neuropathic pain model, 37.26% of LHA GAD+ neurons were c-FOS activated.",
+  "LHA GAD+ neuron axons project to the PVT and form close appositions with CaMKIIα+ PVT neurons.",
+  "19.45% of LHA-PVT projection neurons were GAD+/c-FOS+ double-labeled after SNI, indicating activation of the GABAergic LHA-PVT pathway in neuropathic pain."
+ ],
+ "novel_terms": [
+  "GABAergic LHA-PVT pathway"
+ ],
+ "pmid": "42520857",
+ "extracted_by": "claude-code-session"
+}

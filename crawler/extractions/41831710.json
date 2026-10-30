@@ -1,0 +1,32 @@
+{
+  "pmid": "41831710",
+  "extracted_by": "claude-code-session",
+  "entities": [
+    {"name": "remifentanil", "entity_type": "drug", "aliases": [], "compartment": "systemic", "mentions": 4},
+    {"name": "remifentanil-induced postoperative hyperalgesia", "entity_type": "symptom", "aliases": ["RIH"], "compartment": "systemic", "mentions": 8},
+    {"name": "ventrolateral periaqueductal gray", "entity_type": "structure", "aliases": ["vlPAG"], "compartment": "other", "mentions": 4},
+    {"name": "vlPAG glutamate neurons", "entity_type": "cell_type", "aliases": ["vlPAG-Glu", "Glu neurons"], "compartment": "other", "mentions": 6},
+    {"name": "vlPAG GABA neurons", "entity_type": "cell_type", "aliases": ["vlPAG-GABA", "GABA neurons"], "compartment": "other", "mentions": 6},
+    {"name": "GABA", "entity_type": "molecule", "aliases": ["gamma-aminobutyric acid"], "compartment": "other", "mentions": 1},
+    {"name": "glutamate", "entity_type": "molecule", "aliases": ["Glu"], "compartment": "other", "mentions": 1},
+    {"name": "c-Fos", "entity_type": "molecule", "aliases": ["immediate early protein"], "compartment": "other", "mentions": 1},
+    {"name": "mechanical hypersensitivity", "entity_type": "symptom", "aliases": ["decreased mechanical pain threshold"], "compartment": "peripheral", "mentions": 3},
+    {"name": "intrinsic excitability", "entity_type": "process", "aliases": [], "compartment": "other", "mentions": 2},
+    {"name": "presynaptic inhibition", "entity_type": "process", "aliases": [], "compartment": "other", "mentions": 1}
+  ],
+  "relationships": [
+    {"subject": "remifentanil-induced postoperative hyperalgesia", "predicate": "upregulates", "object": "c-Fos", "sign": 1, "evidence_quote": "The expression of immediate early protein (c-Fos) in the vlPAG was significantly upregulated", "confidence": "MEDIUM"},
+    {"subject": "vlPAG glutamate neurons", "predicate": "prevents", "object": "mechanical hypersensitivity", "sign": -1, "evidence_quote": "Chemical genetic activation of vlPAG-Glu or inhibition of vlPAG-GABA could alleviate hypersensitivity.", "confidence": "HIGH"},
+    {"subject": "vlPAG GABA neurons", "predicate": "causes", "object": "mechanical hypersensitivity", "sign": 1, "evidence_quote": "Chemical genetic activation of vlPAG-Glu or inhibition of vlPAG-GABA could alleviate hypersensitivity.", "confidence": "HIGH"},
+    {"subject": "remifentanil-induced postoperative hyperalgesia", "predicate": "activates", "object": "vlPAG glutamate neurons", "sign": 1, "evidence_quote": "RIH simultaneously excites vlPAG-Glu and vlPAG-GABA neurons", "confidence": "MEDIUM"},
+    {"subject": "remifentanil-induced postoperative hyperalgesia", "predicate": "activates", "object": "vlPAG GABA neurons", "sign": 1, "evidence_quote": "RIH simultaneously excites vlPAG-Glu and vlPAG-GABA neurons", "confidence": "MEDIUM"}
+  ],
+  "key_findings": [
+    "Remifentanil infusion combined with incisional surgery produces bilateral mechanical hypersensitivity (RIH) in mice.",
+    "c-Fos expression in the vlPAG is upregulated in RIH; both vlPAG-Glu and vlPAG-GABA neurons participate in RIH regulation.",
+    "Chemogenetic activation of vlPAG-Glu or inhibition of vlPAG-GABA neurons alleviates RIH hypersensitivity.",
+    "In RIH, vlPAG-Glu neurons show enhanced postsynaptic function and intrinsic excitability; vlPAG-GABA neurons show increased intrinsic excitability and reduced presynaptic inhibition.",
+    "Behavioral output depends on the relative balance of vlPAG-Glu and vlPAG-GABA activity."
+  ],
+  "novel_terms": ["remifentanil-induced postoperative hyperalgesia (RIH)"]
+}

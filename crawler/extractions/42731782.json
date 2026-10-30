@@ -1,0 +1,142 @@
+{
+ "entities": [
+  {
+   "name": "estrogen",
+   "entity_type": "molecule",
+   "aliases": [
+    "estradiol"
+   ],
+   "compartment": "systemic",
+   "mentions": 8
+  },
+  {
+   "name": "estrogen receptor inhibitor",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "PV interneurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Parvalbumin-positive interneurons",
+    "Parvalbumin"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "microglia",
+   "entity_type": "cell_type",
+   "aliases": [
+    "microglial activation"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "hippocampus",
+   "entity_type": "structure",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 4
+  },
+  {
+   "name": "hippocampal neuroinflammation",
+   "entity_type": "process",
+   "aliases": [
+    "neuroinflammation"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "cognitive dysfunction",
+   "entity_type": "symptom",
+   "aliases": [
+    "cognitive impairment"
+   ],
+   "compartment": "systemic",
+   "mentions": 7
+  },
+  {
+   "name": "chronic pain",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 6
+  },
+  {
+   "name": "sciatic nerve injury",
+   "entity_type": "concept",
+   "aliases": [
+    "SNI"
+   ],
+   "compartment": "peripheral",
+   "mentions": 3
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "sciatic nerve injury",
+   "predicate": "causes",
+   "object": "hippocampal neuroinflammation",
+   "sign": 1,
+   "evidence_quote": "The SNI model could induce hippocampal neuroinflammation and cognitive dysfunction in male mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "sciatic nerve injury",
+   "predicate": "causes",
+   "object": "cognitive dysfunction",
+   "sign": 1,
+   "evidence_quote": "The SNI model could induce hippocampal neuroinflammation and cognitive dysfunction in male mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "estrogen",
+   "predicate": "prevents",
+   "object": "cognitive dysfunction",
+   "sign": -1,
+   "evidence_quote": "estrogen supplementation could improve cognitive function",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "estrogen receptor inhibitor",
+   "predicate": "causes",
+   "object": "hippocampal neuroinflammation",
+   "sign": 1,
+   "evidence_quote": "Administration of the estrogen receptor inhibitor to female mice with chronic pain could cause hippocampal neuroinflammation and cognitive impairment",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "estrogen",
+   "predicate": "inhibits",
+   "object": "PV interneurons",
+   "sign": -1,
+   "evidence_quote": "Estrogen alleviated chronic pain-induced cognitive dysfunction by suppressing the neuroinflammation-mediated increase in the excitability of PV interneurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "PV interneurons",
+   "predicate": "causes",
+   "object": "cognitive dysfunction",
+   "sign": 1,
+   "evidence_quote": "Chemogenetically inhibiting the excitability of hippocampal PV interneurons rescued cognitive impairments in male mice that underwent SNI surgery",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "SNI induced hippocampal neuroinflammation and cognitive dysfunction in male mice; males were more susceptible than females.",
+  "Estrogen supplementation improved cognitive function in SNI male mice, while estrogen receptor inhibition in female SNI mice caused neuroinflammation and cognitive impairment.",
+  "Hippocampal estrogen content negatively correlated with microglia number.",
+  "Chemogenetic inhibition of hippocampal PV interneuron excitability rescued SNI-induced cognitive impairment.",
+  "Estrogen acts by suppressing the neuroinflammation-mediated increase in PV interneuron excitability."
+ ],
+ "novel_terms": [
+  "chronic pain-triggered cognitive dysfunction"
+ ],
+ "pmid": "42731782",
+ "extracted_by": "claude-code-session"
+}

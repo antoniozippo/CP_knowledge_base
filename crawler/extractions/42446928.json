@@ -1,0 +1,294 @@
+{
+ "entities": [
+  {
+   "name": "PF glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "PFGlu",
+    "parafascicular nucleus neurons"
+   ],
+   "compartment": "other",
+   "mentions": 30
+  },
+  {
+   "name": "Sp5O GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Sp5OGABA"
+   ],
+   "compartment": "other",
+   "mentions": 15
+  },
+  {
+   "name": "Sp5O glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Sp5OGlu"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "lPBN glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "lPBNGlu",
+    "PBNslGlu"
+   ],
+   "compartment": "other",
+   "mentions": 10
+  },
+  {
+   "name": "Sp5O parvalbumin neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Sp5OPV",
+    "PV neurons"
+   ],
+   "compartment": "other",
+   "mentions": 4
+  },
+  {
+   "name": "orofacial pain",
+   "entity_type": "symptom",
+   "aliases": [
+    "hyperalgesia",
+    "trigeminal neuralgia pain"
+   ],
+   "compartment": "peripheral",
+   "mentions": 20
+  },
+  {
+   "name": "anxiety",
+   "entity_type": "symptom",
+   "aliases": [
+    "anxiety-like behavior",
+    "pain-related anxiety"
+   ],
+   "compartment": "other",
+   "mentions": 20
+  },
+  {
+   "name": "trigeminal neuralgia",
+   "entity_type": "symptom",
+   "aliases": [
+    "TN",
+    "CION"
+   ],
+   "compartment": "peripheral",
+   "mentions": 15
+  },
+  {
+   "name": "picrotoxin",
+   "entity_type": "drug",
+   "aliases": [
+    "PTX"
+   ],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "GABAA receptor",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "CNQX",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "AMPA receptor",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "APV",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "NMDA receptor",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "tetrodotoxin",
+   "entity_type": "drug",
+   "aliases": [
+    "TTX"
+   ],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "sodium channel",
+   "entity_type": "channel",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "Col25a1",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "Syn2",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "Parvalbumin",
+   "entity_type": "molecule",
+   "aliases": [
+    "PV"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "Somatostatin",
+   "entity_type": "molecule",
+   "aliases": [
+    "SST"
+   ],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "GAD67",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "Sp5O GABAergic neurons",
+   "predicate": "inhibits",
+   "object": "PF glutamatergic neurons",
+   "sign": -1,
+   "evidence_quote": "indicating that Sp5OGABA neurons directly inhibit PFGlu neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PF glutamatergic neurons",
+   "predicate": "causes",
+   "object": "orofacial pain",
+   "sign": 1,
+   "evidence_quote": "Together, these results demonstrate that heightened excitability of PFGlu neurons is both necessary and sufficient to drive orofacial pain and comorbid anxiety following CION.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PF glutamatergic neurons",
+   "predicate": "causes",
+   "object": "anxiety",
+   "sign": 1,
+   "evidence_quote": "Together, these results demonstrate that heightened excitability of PFGlu neurons is both necessary and sufficient to drive orofacial pain and comorbid anxiety following CION.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Sp5O GABAergic neurons",
+   "predicate": "prevents",
+   "object": "orofacial pain",
+   "sign": -1,
+   "evidence_quote": "Optogenetic activation of Sp5OGABA-PF terminals selectively increased orofacial pain thresholds and reduced face-grooming duration in CION mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Sp5O parvalbumin neurons",
+   "predicate": "prevents",
+   "object": "orofacial pain",
+   "sign": -1,
+   "evidence_quote": "optogenetic activation of Sp5OPV terminals in the PF significantly elevated orofacial pain thresholds in CION mice without altering anxiety-like behaviors",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "Sp5O glutamatergic neurons",
+   "predicate": "activates",
+   "object": "lPBN glutamatergic neurons",
+   "sign": 1,
+   "evidence_quote": "These results not only confirm the excitatory effect of Sp5OGlu-lPBN input on PF-projecting lPBN neurons in vivo but also demonstrate that this pathway selectively contributes to pain-related anxiety.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "lPBN glutamatergic neurons",
+   "predicate": "causes",
+   "object": "anxiety",
+   "sign": 1,
+   "evidence_quote": "Optogenetic inhibition of the Sp5OGlu-lPBNGlu-PFGlu pathway selectively alleviated anxiety-like behaviors",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "trigeminal neuralgia",
+   "predicate": "activates",
+   "object": "PF glutamatergic neurons",
+   "sign": 1,
+   "evidence_quote": "suggesting elevated intrinsic excitability of PFGlu neurons after CION",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "picrotoxin",
+   "predicate": "inhibits",
+   "object": "GABAA receptor",
+   "sign": -1,
+   "evidence_quote": "Application of the GABAA receptor blocker picrotoxin (PTX) abolished these currents, verifying their GABAergic origin",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CNQX",
+   "predicate": "inhibits",
+   "object": "AMPA receptor",
+   "sign": -1,
+   "evidence_quote": "These oEPSCs were completely abolished by coapplication of the AMPA receptor antagonist 6-cyano-7-nitroquinoxaline-2,3-dione (CNQX) and NMDA receptor antagonist D-2-amino-5-phosphonovaleric acid (APV)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "APV",
+   "predicate": "inhibits",
+   "object": "NMDA receptor",
+   "sign": -1,
+   "evidence_quote": "These oEPSCs were completely abolished by coapplication of the AMPA receptor antagonist 6-cyano-7-nitroquinoxaline-2,3-dione (CNQX) and NMDA receptor antagonist D-2-amino-5-phosphonovaleric acid (APV)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "tetrodotoxin",
+   "predicate": "inhibits",
+   "object": "sodium channel",
+   "sign": -1,
+   "evidence_quote": "The oIPSCs were abolished after the application of the sodium channel blocker tetrodotoxin (TTX), which blocks APs in all neurons",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "PF gray matter volume is reduced in TN patients; PF glutamatergic neurons become hyperexcitable after CION and are necessary and sufficient for orofacial pain and anxiety.",
+  "Sp5O GABAergic (largely PV+) neurons directly inhibit a lateral PF pain-ensemble; this inhibition is diminished after CION via a presynaptic mechanism.",
+  "A glutamatergic Sp5O-lPBN-mPF pathway drives a distinct anxiety-encoding PF ensemble marked by Col25a1 and Syn2.",
+  "The anxiety ensemble is engaged later than the pain ensemble, earlier in females; mPF forms an lPBN-mPF-lPBN excitatory feedback loop."
+ ],
+ "novel_terms": [
+  "PF pain-ensemble",
+  "PF anxiety-ensemble",
+  "lPBN-mPF-lPBN feedback loop",
+  "Col25a1",
+  "Syn2"
+ ],
+ "pmid": "42446928",
+ "extracted_by": "claude-code-session"
+}

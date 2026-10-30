@@ -1,0 +1,417 @@
+{
+ "entities": [
+  {
+   "name": "STN glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "STN CaMKII neurons",
+    "STNGlu",
+    "subthalamic nucleus glutamatergic neurons"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "subthalamic nucleus",
+   "entity_type": "structure",
+   "aliases": [
+    "STN"
+   ],
+   "compartment": "other",
+   "mentions": 10
+  },
+  {
+   "name": "ventral pallidum",
+   "entity_type": "structure",
+   "aliases": [
+    "VP"
+   ],
+   "compartment": "other",
+   "mentions": 20
+  },
+  {
+   "name": "STN-VP projection",
+   "entity_type": "pathway",
+   "aliases": [
+    "STNGlu-VP projection",
+    "STNGlu-VPChAT pathway"
+   ],
+   "compartment": "other",
+   "mentions": 12
+  },
+  {
+   "name": "VP cholinergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "ChAT neurons",
+    "VPChAT"
+   ],
+   "compartment": "other",
+   "mentions": 25
+  },
+  {
+   "name": "VP GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Vgat neurons"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "VP glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "Vglut2 neurons",
+    "VP Glu neurons"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "acetylcholine",
+   "entity_type": "molecule",
+   "aliases": [
+    "ACh"
+   ],
+   "compartment": "other",
+   "mentions": 12
+  },
+  {
+   "name": "nAChR",
+   "entity_type": "receptor",
+   "aliases": [
+    "nicotinic acetylcholine receptor",
+    "nicotinic receptors"
+   ],
+   "compartment": "other",
+   "mentions": 15
+  },
+  {
+   "name": "α4 nAChR",
+   "entity_type": "receptor",
+   "aliases": [
+    "Chrna4",
+    "alpha4 nicotinic receptor"
+   ],
+   "compartment": "other",
+   "mentions": 12
+  },
+  {
+   "name": "α7 nAChR",
+   "entity_type": "receptor",
+   "aliases": [
+    "Chrna7",
+    "alpha7 nicotinic receptor"
+   ],
+   "compartment": "other",
+   "mentions": 10
+  },
+  {
+   "name": "AMPA receptor",
+   "entity_type": "receptor",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "CNQX",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 4
+  },
+  {
+   "name": "mecamylamine",
+   "entity_type": "drug",
+   "aliases": [
+    "MEC"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "DHβE",
+   "entity_type": "drug",
+   "aliases": [
+    "dihydro-β-erythroidine"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "MLA",
+   "entity_type": "drug",
+   "aliases": [
+    "methyllycaconitine"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "RJR-2403",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "PNU-282987",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "varenicline",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "spared nerve injury",
+   "entity_type": "concept",
+   "aliases": [
+    "SNI"
+   ],
+   "compartment": "peripheral",
+   "mentions": 15
+  },
+  {
+   "name": "neuropathic pain",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 8
+  },
+  {
+   "name": "mechanical allodynia",
+   "entity_type": "symptom",
+   "aliases": [
+    "reduced paw withdrawal threshold"
+   ],
+   "compartment": "systemic",
+   "mentions": 4
+  },
+  {
+   "name": "thermal hypersensitivity",
+   "entity_type": "symptom",
+   "aliases": [
+    "reduced paw withdrawal latency"
+   ],
+   "compartment": "systemic",
+   "mentions": 3
+  },
+  {
+   "name": "hyperalgesia",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 6
+  },
+  {
+   "name": "muscarinic acetylcholine receptor",
+   "entity_type": "receptor",
+   "aliases": [
+    "mAChR",
+    "Chrm3",
+    "Chrm4"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "STN glutamatergic neurons",
+   "predicate": "activates",
+   "object": "VP cholinergic neurons",
+   "sign": 1,
+   "evidence_quote": "Optogenetic stimulation of ChR2-labeled STN-VP projection evoked excitatory postsynaptic currents (EPSCs) in mCherry-labeled VP cholinergic neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CNQX",
+   "predicate": "inhibits",
+   "object": "AMPA receptor",
+   "sign": -1,
+   "evidence_quote": "but were eliminated by CNQX (20 μM), an AMPA receptor antagonist",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "STN-VP projection",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "unilateral optogenetic stimulation (5 ms, 20 Hz, 21.72 mW/mm2) of the STNGlu-VP projection reduced paw withdrawal threshold (PWT)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "STN-VP projection",
+   "predicate": "activates",
+   "object": "VP cholinergic neurons",
+   "sign": 1,
+   "evidence_quote": "These data further confirm that the STN-VP projection provides pain signal to VP cholinergic neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "VP cholinergic neurons",
+   "predicate": "releases",
+   "object": "acetylcholine",
+   "sign": 1,
+   "evidence_quote": "VP cholinergic neurons were a major source of acetylcholine released in the VP upon pain stimulation",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "activates",
+   "object": "VP cholinergic neurons",
+   "sign": 1,
+   "evidence_quote": "In neuropathic pain mouse models, VP cholinergic neurons became hyperactive and released more acetylcholine in the VP",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "VP cholinergic neurons",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "stimulating these neurons by locally injecting CNO (3 µM) caused mechanical allodynia",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "acetylcholine",
+   "predicate": "activates",
+   "object": "nAChR",
+   "sign": 1,
+   "evidence_quote": "These data suggest that ACh puff-induced inward currents are primarily mediated by nAChRs on VP neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "mecamylamine",
+   "predicate": "inhibits",
+   "object": "nAChR",
+   "sign": -1,
+   "evidence_quote": "the currents were almost eliminated by 10 μM mecamylamine (MEC), a broad-spectrum antagonist of nAChRs",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "DHβE",
+   "predicate": "inhibits",
+   "object": "α4 nAChR",
+   "sign": -1,
+   "evidence_quote": "we injected DHβE (antagonist of α4 nAChRs)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "MLA",
+   "predicate": "inhibits",
+   "object": "α7 nAChR",
+   "sign": -1,
+   "evidence_quote": "MLA (antagonist of α7 nAChRs)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "RJR-2403",
+   "predicate": "activates",
+   "object": "α4 nAChR",
+   "sign": 1,
+   "evidence_quote": "RJR-2403 (agonist of α4 nAChRs)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "PNU-282987",
+   "predicate": "activates",
+   "object": "α7 nAChR",
+   "sign": 1,
+   "evidence_quote": "PNU-282987 (agonist of α7 nAChRs)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "α4 nAChR",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "activation of α4 nAChRs in the VP significantly reduced mechanical PWT and thermal PWL on both hind paws",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "α4 nAChR",
+   "predicate": "causes",
+   "object": "thermal hypersensitivity",
+   "sign": 1,
+   "evidence_quote": "activation of α4 nAChRs in the VP significantly reduced mechanical PWT and thermal PWL on both hind paws",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "α7 nAChR",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "activation of α7 nAChRs in the VP significantly reduced mechanical PWT, but not thermal PWL, on both hind paws",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "upregulates",
+   "object": "α4 nAChR",
+   "sign": 1,
+   "evidence_quote": "in SNI mice, mRNA levels of Chrna4 subunit were elevated in GABAergic neurons, reduced in glutamatergic neurons, but were not altered in cholinergic neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "downregulates",
+   "object": "α7 nAChR",
+   "sign": -1,
+   "evidence_quote": "mRNA levels of Chrna7 gene were reduced in cholinergic and glutamatergic neurons, but were not altered in GABAergic neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "activates",
+   "object": "VP GABAergic neurons",
+   "sign": 1,
+   "evidence_quote": "These modifications were accompanied by hyperexcitability in VP GABAergic neurons and hypoactivity in VP Glu neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "inhibits",
+   "object": "VP glutamatergic neurons",
+   "sign": -1,
+   "evidence_quote": "These modifications were accompanied by hyperexcitability in VP GABAergic neurons and hypoactivity in VP Glu neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "α4 nAChR",
+   "predicate": "causes",
+   "object": "hyperalgesia",
+   "sign": 1,
+   "evidence_quote": "Reversal of upregulated α4 nAChRs on VP GABAergic neurons, but not that of downregulated α4 and α7 nAChRs on VP Glu neurons, attenuated the severity of hyperalgesia in neuropathic pain",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "varenicline",
+   "predicate": "activates",
+   "object": "α4 nAChR",
+   "sign": 1,
+   "evidence_quote": "α4 nAChR agonists (50 μM RJR-2403 and 100 μM varenicline)",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "key_findings": [
+  "VP cholinergic neurons receive functional monosynaptic glutamatergic input from STN CaMKII neurons; optogenetic stimulation of the STNGlu-VP projection reduces mechanical thresholds, which is attenuated by chemogenetic inhibition of VP cholinergic neurons.",
+  "VP cholinergic neurons are the major source of pain-evoked ACh release in the VP, and ACh release is enhanced in SNI mice.",
+  "α4 and α7 nAChRs are the major functional nAChRs in VP cholinergic, GABAergic and glutamatergic neurons; their activation in the VP causes mechanical (and for α4 thermal) hypersensitivity.",
+  "In SNI, Chrna4 is upregulated in VP GABAergic neurons and downregulated in VP glutamatergic neurons; Chrna7 is reduced in cholinergic and glutamatergic neurons.",
+  "SNI causes hyperexcitability of VP GABAergic neurons and hypoactivity of VP glutamatergic neurons.",
+  "shRNA knockdown of α4 nAChR in VP GABAergic neurons attenuates hyperalgesia in neuropathic pain."
+ ],
+ "novel_terms": [
+  "STNGlu-VPChAT pathway",
+  "VP cholinergic circuit"
+ ],
+ "pmid": "42545964",
+ "extracted_by": "claude-code-session"
+}

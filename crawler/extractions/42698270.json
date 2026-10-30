@@ -1,0 +1,181 @@
+{
+ "entities": [
+  {
+   "name": "PIC GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "posterior insular cortex GABAergic neurons",
+    "GAD2 neurons"
+   ],
+   "compartment": "other",
+   "mentions": 40
+  },
+  {
+   "name": "posterior insular cortex",
+   "entity_type": "structure",
+   "aliases": [
+    "PIC",
+    "pIC"
+   ],
+   "compartment": "other",
+   "mentions": 15
+  },
+  {
+   "name": "GABA",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 4
+  },
+  {
+   "name": "piriform cortex",
+   "entity_type": "structure",
+   "aliases": [
+    "Pir"
+   ],
+   "compartment": "other",
+   "mentions": 8
+  },
+  {
+   "name": "secondary somatosensory cortex",
+   "entity_type": "structure",
+   "aliases": [
+    "S2"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "posterior thalamic nuclear group",
+   "entity_type": "structure",
+   "aliases": [
+    "PO"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "parafascicular thalamic nucleus",
+   "entity_type": "structure",
+   "aliases": [
+    "PAF"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "caudate putamen",
+   "entity_type": "structure",
+   "aliases": [
+    "CPu"
+   ],
+   "compartment": "other",
+   "mentions": 7
+  },
+  {
+   "name": "external globus pallidus",
+   "entity_type": "structure",
+   "aliases": [
+    "GPe"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "ventral pallidum",
+   "entity_type": "structure",
+   "aliases": [
+    "VP"
+   ],
+   "compartment": "other",
+   "mentions": 7
+  },
+  {
+   "name": "amygdala",
+   "entity_type": "structure",
+   "aliases": [
+    "CeA",
+    "BLA"
+   ],
+   "compartment": "other",
+   "mentions": 12
+  },
+  {
+   "name": "anterior insular cortex",
+   "entity_type": "structure",
+   "aliases": [
+    "AIC"
+   ],
+   "compartment": "other",
+   "mentions": 5
+  },
+  {
+   "name": "pain perception",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 4
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "piriform cortex",
+   "predicate": "interacts_with",
+   "object": "PIC GABAergic neurons",
+   "sign": 0,
+   "evidence_quote": "with densest inputs from the piriform cortex (Pir) and secondary somatosensory cortex (S2) of the isocortex",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "secondary somatosensory cortex",
+   "predicate": "interacts_with",
+   "object": "PIC GABAergic neurons",
+   "sign": 0,
+   "evidence_quote": "with densest inputs from the piriform cortex (Pir) and secondary somatosensory cortex (S2) of the isocortex",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "posterior thalamic nuclear group",
+   "predicate": "interacts_with",
+   "object": "PIC GABAergic neurons",
+   "sign": 0,
+   "evidence_quote": "In the thalamus, the top inputs were the PO (8.54% ± 0.35%), PAF (4.29% ± 1.16%), MG (3.01% ± 0.47%), and VPM (2.41% ± 0.28%)",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "PIC GABAergic neurons",
+   "predicate": "interacts_with",
+   "object": "caudate putamen",
+   "sign": 0,
+   "evidence_quote": "with densest projections to the caudate putamen (CPu), external globus pallidus (GPe), and ventral pallidum (VP) of the basal ganglia",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "PIC GABAergic neurons",
+   "predicate": "interacts_with",
+   "object": "external globus pallidus",
+   "sign": 0,
+   "evidence_quote": "with densest projections to the caudate putamen (CPu), external globus pallidus (GPe), and ventral pallidum (VP) of the basal ganglia",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "PIC GABAergic neurons",
+   "predicate": "interacts_with",
+   "object": "ventral pallidum",
+   "sign": 0,
+   "evidence_quote": "with densest projections to the caudate putamen (CPu), external globus pallidus (GPe), and ventral pallidum (VP) of the basal ganglia",
+   "confidence": "MEDIUM"
+  }
+ ],
+ "key_findings": [
+  "Rabies tracing identified 45 input nuclei to PIC GABAergic neurons, densest from Pir and S2 of the isocortex and thalamic PO and PAF, with ipsilateral preference.",
+  "Anterograde tracing revealed 18 output targets of PIC GABAergic neurons, densest in CPu, GPe and VP of the basal ganglia and amygdala subnuclei.",
+  "The thalamus provides dense inputs to PIC GABAergic neurons but receives no outputs; the isocortex is input-dominant while basal ganglia and amygdala are output-dominant.",
+  "PIC GABAergic neurons include long-range projection neurons, contrary to an earlier report of no long-range projections."
+ ],
+ "novel_terms": [
+  "PIC GABAergic long-range projections"
+ ],
+ "pmid": "42698270",
+ "extracted_by": "claude-code-session"
+}

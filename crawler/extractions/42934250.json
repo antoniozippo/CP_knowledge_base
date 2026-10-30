@@ -1,0 +1,306 @@
+{
+ "entities": [
+  {
+   "name": "early-life pain",
+   "entity_type": "concept",
+   "aliases": [
+    "juvenile inflammatory pain",
+    "early-life inflammatory pain"
+   ],
+   "compartment": "systemic",
+   "mentions": 10
+  },
+  {
+   "name": "CFA",
+   "entity_type": "drug",
+   "aliases": [
+    "complete Freund's adjuvant"
+   ],
+   "compartment": "peripheral",
+   "mentions": 20
+  },
+  {
+   "name": "anterior cingulate cortex",
+   "entity_type": "structure",
+   "aliases": [
+    "ACC"
+   ],
+   "compartment": "ACC",
+   "mentions": 40
+  },
+  {
+   "name": "ACC CaMKII+ excitatory neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "CaMKII⁺ neurons",
+    "CaMKII",
+    "excitatory neurons"
+   ],
+   "compartment": "ACC",
+   "mentions": 20
+  },
+  {
+   "name": "ACC GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "inhibitory GABAergic neurons",
+    "Vgat neurons"
+   ],
+   "compartment": "ACC",
+   "mentions": 20
+  },
+  {
+   "name": "glutamate",
+   "entity_type": "molecule",
+   "aliases": [
+    "Glu"
+   ],
+   "compartment": "ACC",
+   "mentions": 12
+  },
+  {
+   "name": "GABA",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 10
+  },
+  {
+   "name": "glutamate receptor",
+   "entity_type": "receptor",
+   "aliases": [
+    "AMPA receptor"
+   ],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "GABA receptor",
+   "entity_type": "receptor",
+   "aliases": [
+    "GABAA receptor benzodiazepine site"
+   ],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "CX546",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 2
+  },
+  {
+   "name": "flumazenil",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 2
+  },
+  {
+   "name": "deep brain stimulation",
+   "entity_type": "concept",
+   "aliases": [
+    "DBS"
+   ],
+   "compartment": "ACC",
+   "mentions": 8
+  },
+  {
+   "name": "social deficit",
+   "entity_type": "symptom",
+   "aliases": [
+    "social preference deficit"
+   ],
+   "compartment": "systemic",
+   "mentions": 20
+  },
+  {
+   "name": "social preference",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "systemic",
+   "mentions": 10
+  },
+  {
+   "name": "hyperalgesia",
+   "entity_type": "symptom",
+   "aliases": [],
+   "compartment": "peripheral",
+   "mentions": 1
+  },
+  {
+   "name": "excitatory/inhibitory imbalance",
+   "entity_type": "concept",
+   "aliases": [
+    "E/I imbalance"
+   ],
+   "compartment": "ACC",
+   "mentions": 5
+  },
+  {
+   "name": "arginine",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "serotonin",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "choline",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "leucine",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "ACC",
+   "mentions": 1
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "early-life pain",
+   "predicate": "causes",
+   "object": "social deficit",
+   "sign": 1,
+   "evidence_quote": "we found that early-life pain experience induces a specific and enduring social deficit in adulthood",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CFA",
+   "predicate": "causes",
+   "object": "hyperalgesia",
+   "sign": 1,
+   "evidence_quote": "indicating that CFA injection was sufficient to induce hyperalgesia in mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "early-life pain",
+   "predicate": "causes",
+   "object": "excitatory/inhibitory imbalance",
+   "sign": 1,
+   "evidence_quote": "This deficit originates from a persistent excitatory/inhibitory (E/I) imbalance within the anterior cingulate cortex (ACC)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "early-life pain",
+   "predicate": "downregulates",
+   "object": "ACC CaMKII+ excitatory neurons",
+   "sign": -1,
+   "evidence_quote": "the CFA group had a significantly reduced number of CaMKII⁺ neurons and a significantly increased number of GABAergic neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "early-life pain",
+   "predicate": "upregulates",
+   "object": "ACC GABAergic neurons",
+   "sign": 1,
+   "evidence_quote": "the CFA group had a significantly reduced number of CaMKII⁺ neurons and a significantly increased number of GABAergic neurons",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "ACC CaMKII+ excitatory neurons",
+   "predicate": "activates",
+   "object": "social preference",
+   "sign": 1,
+   "evidence_quote": "these results indicate that the normal activity of ACC CaMKII⁺ neurons is necessary for maintaining social preference",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "ACC GABAergic neurons",
+   "predicate": "causes",
+   "object": "social deficit",
+   "sign": 1,
+   "evidence_quote": "proving that enhanced function of ACC GABAergic neurons is sufficient to cause social deficits",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "early-life pain",
+   "predicate": "upregulates",
+   "object": "glutamate",
+   "sign": 1,
+   "evidence_quote": "a central finding being the simultaneous upregulation of total levels of both the excitatory neurotransmitter, glutamate, and the inhibitory neurotransmitter, GABA",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "early-life pain",
+   "predicate": "upregulates",
+   "object": "GABA",
+   "sign": 1,
+   "evidence_quote": "a central finding being the simultaneous upregulation of total levels of both the excitatory neurotransmitter, glutamate, and the inhibitory neurotransmitter, GABA",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "CX546",
+   "predicate": "activates",
+   "object": "glutamate receptor",
+   "sign": 1,
+   "evidence_quote": "After injecting CFA mice with a glutamate receptor agonist (CX546)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "CX546",
+   "predicate": "prevents",
+   "object": "social deficit",
+   "sign": -1,
+   "evidence_quote": "After injecting CFA mice with a glutamate receptor agonist (CX546), we observed that their social behavior deficit was effectively rescued",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "flumazenil",
+   "predicate": "inhibits",
+   "object": "GABA receptor",
+   "sign": -1,
+   "evidence_quote": "When another group of CFA mice was injected with a GABA receptor antagonist (Flumazenil)",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "flumazenil",
+   "predicate": "prevents",
+   "object": "social deficit",
+   "sign": -1,
+   "evidence_quote": "When another group of CFA mice was injected with a GABA receptor antagonist (Flumazenil), their social deficit was also significantly improved",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "deep brain stimulation",
+   "predicate": "activates",
+   "object": "ACC CaMKII+ excitatory neurons",
+   "sign": 1,
+   "evidence_quote": "deep brain stimulation (DBS) targeting the ACC also activated excitatory neurons and successfully reversed this social deficit",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "deep brain stimulation",
+   "predicate": "prevents",
+   "object": "social deficit",
+   "sign": -1,
+   "evidence_quote": "deep brain stimulation (DBS) targeting the ACC also activated excitatory neurons and successfully reversed this social deficit",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "CFA-induced inflammatory pain at P10 (critical window before P12) causes a persistent, non-sex-specific social preference deficit in adult mice without long-term anxiety or altered basal nociception.",
+  "Early-life pain reduces ACC CaMKII+ neuron numbers and increases ACC GABAergic neuron numbers, producing an E/I imbalance.",
+  "During social approach, ACC CaMKII+ neuron activity and glutamate release are diminished while GABAergic neurons fail to reduce their activity in CFA mice.",
+  "Chemogenetic/optogenetic activation of ACC CaMKII+ neurons or inhibition of ACC GABAergic neurons rescues the social deficit; activating ACC GABAergic neurons in naive mice induces it.",
+  "Targeted metabolomics showed elevated total glutamate and GABA, arginine and serotonin, and reduced choline and leucine in the ACC of CFA mice.",
+  "Intra-ACC CX546 or flumazenil and 66 µA ACC DBS ameliorate the social deficit; DBS activates ACC excitatory neurons."
+ ],
+ "novel_terms": [
+  "early-life pain induced social deficit",
+  "ACC hypoexcitation and hyperinhibition"
+ ],
+ "pmid": "42934250",
+ "extracted_by": "claude-code-session"
+}

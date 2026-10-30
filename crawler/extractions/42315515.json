@@ -1,0 +1,196 @@
+{
+ "entities": [
+  {
+   "name": "dexmedetomidine",
+   "entity_type": "drug",
+   "aliases": [
+    "DEX"
+   ],
+   "compartment": "systemic",
+   "mentions": 30
+  },
+  {
+   "name": "α2A adrenergic receptor",
+   "entity_type": "receptor",
+   "aliases": [
+    "α2A receptor",
+    "Adra2a"
+   ],
+   "compartment": "other",
+   "mentions": 10
+  },
+  {
+   "name": "LSD GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "LSDGABA",
+    "lateral septum GABAergic neurons",
+    "LS GABA"
+   ],
+   "compartment": "other",
+   "mentions": 30
+  },
+  {
+   "name": "mechanical allodynia",
+   "entity_type": "symptom",
+   "aliases": [
+    "pain-like behavior"
+   ],
+   "compartment": "peripheral",
+   "mentions": 10
+  },
+  {
+   "name": "sleep disruption",
+   "entity_type": "symptom",
+   "aliases": [
+    "sleep disturbance"
+   ],
+   "compartment": "systemic",
+   "mentions": 15
+  },
+  {
+   "name": "yohimbine",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "spared nerve injury",
+   "entity_type": "process",
+   "aliases": [
+    "SNI"
+   ],
+   "compartment": "peripheral",
+   "mentions": 20
+  },
+  {
+   "name": "LPO glutamatergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "LPOGlu"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "LPO GABAergic neurons",
+   "entity_type": "cell_type",
+   "aliases": [
+    "LPOGABA"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "c-Fos",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "ACC",
+   "entity_type": "structure",
+   "aliases": [
+    "anterior cingulate cortex"
+   ],
+   "compartment": "ACC",
+   "mentions": 1
+  },
+  {
+   "name": "GABA",
+   "entity_type": "molecule",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 3
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "dexmedetomidine",
+   "predicate": "activates",
+   "object": "α2A adrenergic receptor",
+   "sign": 1,
+   "evidence_quote": "It is well known that dexmedetomidine is a highly selective α2A adrenergic receptor agonist",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "dexmedetomidine",
+   "predicate": "inhibits",
+   "object": "LSD GABAergic neurons",
+   "sign": -1,
+   "evidence_quote": "Together, these findings indicate that dexmedetomidine inhibits the hyperactivity of LSDGABA neurons in SNI mice.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "dexmedetomidine",
+   "predicate": "prevents",
+   "object": "mechanical allodynia",
+   "sign": -1,
+   "evidence_quote": "Intra-LSD injection of dexmedetomidine alleviated mechanical allodynia, increased NREM sleep time, and decreased wake time in SNI mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "dexmedetomidine",
+   "predicate": "prevents",
+   "object": "sleep disruption",
+   "sign": -1,
+   "evidence_quote": "Intra-LSD injection of dexmedetomidine alleviated mechanical allodynia, increased NREM sleep time, and decreased wake time in SNI mice",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "LSD GABAergic neurons",
+   "predicate": "causes",
+   "object": "mechanical allodynia",
+   "sign": 1,
+   "evidence_quote": "Together, these results provide evidence that elevated LSDGABA excitability is sufficient to drive the comorbidity of chronic pain and sleep disruption.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "LSD GABAergic neurons",
+   "predicate": "causes",
+   "object": "sleep disruption",
+   "sign": 1,
+   "evidence_quote": "Together, these results provide evidence that elevated LSDGABA excitability is sufficient to drive the comorbidity of chronic pain and sleep disruption.",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "LSD GABAergic neurons",
+   "predicate": "expresses",
+   "object": "α2A adrenergic receptor",
+   "sign": 0,
+   "evidence_quote": "we observed robust α2A receptor expression in the LSD, with 96.4% of LSD GABAergic neurons colocalizing with α2A receptors",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "yohimbine",
+   "predicate": "inhibits",
+   "object": "α2A adrenergic receptor",
+   "sign": -1,
+   "evidence_quote": "The results showed that pre-injection of α2 adrenergic receptor antagonist yohimbine significantly inhibited the improving effect of dexmedetomidine on mechanical allodynia and sleep disruption",
+   "confidence": "MEDIUM"
+  },
+  {
+   "subject": "spared nerve injury",
+   "predicate": "activates",
+   "object": "LSD GABAergic neurons",
+   "sign": 1,
+   "evidence_quote": "The results indicate the increases of GABAergic neuronal activity within the LSD region following nerve injury.",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "SNI induces mechanical allodynia and sleep disruption comorbidity, with hyperactivity of dorsal lateral septum GABAergic neurons.",
+  "Chemogenetic/optogenetic inhibition of LSD GABAergic neurons relieves allodynia and sleep disruption; activation induces both in naive mice.",
+  "Dexmedetomidine (25 ug/kg i.p. or intra-LSD) reduces LSD GABAergic hyperactivity via α2A adrenergic receptors, relieving pain and sleep disruption; blocked by yohimbine or α2A knockdown.",
+  "LS GABA to LPO glutamatergic and LPO GABAergic circuits mediate allodynia and sleep disruption, respectively."
+ ],
+ "novel_terms": [
+  "LSGABA-LPOGlu circuit",
+  "LSGABA-LPOGABA circuit",
+  "pain-sleep comorbidity"
+ ],
+ "pmid": "42315515",
+ "extracted_by": "claude-code-session"
+}

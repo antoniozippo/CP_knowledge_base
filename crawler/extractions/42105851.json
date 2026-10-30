@@ -1,0 +1,174 @@
+{
+ "pmid": "42105851",
+ "extracted_by": "claude-code-session",
+ "entities": [
+  {
+   "name": "KCC2",
+   "entity_type": "channel",
+   "aliases": [
+    "K+-Cl- cotransporter 2",
+    "KCC"
+   ],
+   "compartment": "other",
+   "mentions": 10
+  },
+  {
+   "name": "furosemide",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "VU0240551",
+   "entity_type": "drug",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 1
+  },
+  {
+   "name": "DHPG",
+   "entity_type": "drug",
+   "aliases": [
+    "3,5-dihydroxyphenylglycine"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "group I mGluR",
+   "entity_type": "receptor",
+   "aliases": [
+    "group I metabotropic glutamate receptor"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "long-term potentiation",
+   "entity_type": "process",
+   "aliases": [
+    "LTP"
+   ],
+   "compartment": "other",
+   "mentions": 6
+  },
+  {
+   "name": "long-term depression",
+   "entity_type": "process",
+   "aliases": [
+    "LTD"
+   ],
+   "compartment": "other",
+   "mentions": 4
+  },
+  {
+   "name": "GABAergic inhibition",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "synaptic plasticity",
+   "entity_type": "process",
+   "aliases": [],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "spinal trigeminal subnucleus caudalis",
+   "entity_type": "structure",
+   "aliases": [
+    "Vc"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  },
+  {
+   "name": "trigeminal subnucleus interpolaris",
+   "entity_type": "structure",
+   "aliases": [
+    "Vi"
+   ],
+   "compartment": "other",
+   "mentions": 3
+  },
+  {
+   "name": "trigeminal subnucleus oralis",
+   "entity_type": "structure",
+   "aliases": [
+    "Vo"
+   ],
+   "compartment": "other",
+   "mentions": 2
+  }
+ ],
+ "relationships": [
+  {
+   "subject": "KCC2",
+   "predicate": "activates",
+   "object": "GABAergic inhibition",
+   "sign": 1,
+   "evidence_quote": "is critical for maintaining low intracellular chloride levels and ensuring hyperpolarizing GABAergic inhibition",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "furosemide",
+   "predicate": "inhibits",
+   "object": "KCC2",
+   "sign": -1,
+   "evidence_quote": "furosemide, an inhibitor for non‑selective cation-chloride cotransporters including KCC2",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "furosemide",
+   "predicate": "inhibits",
+   "object": "long-term potentiation",
+   "sign": -1,
+   "evidence_quote": "significantly reduced the magnitude of HFS-induced LTP",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "DHPG",
+   "predicate": "activates",
+   "object": "group I mGluR",
+   "sign": 1,
+   "evidence_quote": "3,5-dihydroxyphenylglycine (DHPG), a group I mGluR agonist",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "DHPG",
+   "predicate": "causes",
+   "object": "long-term potentiation",
+   "sign": 1,
+   "evidence_quote": "Under control conditions, DHPG induced LTP in six out of ten neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "VU0240551",
+   "predicate": "inhibits",
+   "object": "KCC2",
+   "sign": -1,
+   "evidence_quote": "whereas KCC2 blockade with VU0240551 predominantly induced DHPG-LTD in six of eleven neurons",
+   "confidence": "HIGH"
+  },
+  {
+   "subject": "KCC2",
+   "predicate": "modulates",
+   "object": "synaptic plasticity",
+   "sign": 0,
+   "evidence_quote": "These findings indicate that acute KCC2 blockade alters both the magnitude and direction of synaptic plasticity in excitatory and inhibitory transmission within the spinal trigeminal nucleus.",
+   "confidence": "HIGH"
+  }
+ ],
+ "key_findings": [
+  "HFS of deep Vc induces LTP in Vi neurons; furosemide (KCC2 blockade) reduces LTP magnitude and converts it to LTD in 4/9 neurons.",
+  "DHPG (group I mGluR agonist) induces LTP in Vo neurons under control conditions but predominantly LTD during KCC2 blockade with VU0240551.",
+  "Furosemide enhances HFS-induced suppression (LTD) of GABAergic inhibitory responses in Vi neurons."
+ ],
+ "novel_terms": [
+  "DHPG-LTD",
+  "trigeminal Vc-Vi/Vo ascending pathway"
+ ]
+}
