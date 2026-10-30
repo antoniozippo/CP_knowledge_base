@@ -3,6 +3,7 @@
 import json
 import hashlib
 import logging
+import re
 import time
 from pathlib import Path
 from typing import Optional
@@ -11,6 +12,23 @@ import requests
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
+
+# One content budget for every paper (the old 8k/30k split cut a 29k paper
+# to 8k while keeping 30k of a 31k one). ~6k tokens of paper text.
+MAX_CONTENT_CHARS = 24000
+LLM_TIMEOUT_S = 300
+
+# Predicates whose direction is fixed by the verb; the LLM-reported sign is
+# overridden by these. The rest (binds, modulates, ...) keep the LLM sign.
+PREDICATE_SIGN = {
+    "activates": 1, "upregulates": 1, "releases": 1, "recruits": 1,
+    "activates_pathway": 1, "causes": 1,
+    "inhibits": -1, "downregulates": -1, "degrades": -1,
+    "inhibits_pathway": -1, "prevents": -1,
+}
+
+_THINK_RE = re.compile(r"<(think|thought)>.*?</\1>", re.DOTALL | re.IGNORECASE)
+_QUOTE_NORM_RE = re.compile(r"[\W_]+")
 
 
 class ExtractedEntity(BaseModel):
@@ -64,6 +82,18 @@ COMPARTMENTS (use exactly these):
 - peripheral: peripheral nervous system
 - systemic: whole-body or systemic
 - other: unmatched or unclear
+
+RELATIONSHIPS:
+- subject is the entity that ACTS; object is the entity acted upon. Write
+  "TNF-alpha downregulates KCC2", never "KCC2 is downregulated by TNF-alpha"
+  as KCC2 -> TNF-alpha.
+- sign: +1 if more subject means more/activated object; -1 if more subject
+  means less/inhibited object; 0 for binding, association or unclear direction.
+- Only relationships the paper itself reports (its own results or clearly
+  stated established facts), not speculation.
+- evidence_quote: copy one sentence or clause VERBATIM from the Content
+  (exact words, no paraphrase). Relationships whose quote is not found in the
+  Content are discarded.
 
 OUTPUT ONLY valid JSON. No markdown fences, no commentary.
 """
@@ -122,6 +152,8 @@ class LLMExtractor:
         self.cache_dir = cache_dir or Path("crawler/cache")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.call_count = 0
+        self.dropped_unverified = 0
+        self.sign_overridden = 0
 
     def _build_prompt(self, content: str, pmid: str, title: str,
                       theme_entities: list[str] | None = None) -> str:
@@ -155,7 +187,7 @@ class LLMExtractor:
             "temperature": 0,
         }
         try:
-            resp = requests.post(url, json=payload, timeout=120)
+            resp = requests.post(url, json=payload, timeout=LLM_TIMEOUT_S)
             resp.raise_for_status()
             data = resp.json()
         except requests.RequestException as exc:
@@ -168,32 +200,11 @@ class LLMExtractor:
             logger.error("Unexpected LLM response structure: %s", json.dumps(data)[:500])
             return None
 
-        # Strip markdown fences if present
-        text = raw_text.strip()
-        if text.startswith("```"):
-            # Remove opening fence (possibly with language tag)
-            first_newline = text.index("\n")
-            text = text[first_newline + 1:]
-        if text.endswith("```"):
-            text = text[:-3]
-        text = text.strip()
-
-        # Some models output <thought> blocks before JSON — strip them
-        if "<thought>" in text and "</thought>" in text:
-            thought_end = text.index("</thought>") + len("</thought>")
-            text = text[thought_end:].strip()
-        elif text.startswith("<thought>"):
-            # No closing tag — try to find JSON start
-            bracket_pos = text.find("{")
-            if bracket_pos >= 0:
-                text = text[bracket_pos:]
-
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError as exc:
-            logger.error("Failed to parse LLM JSON output: %s\nRaw output (first 500 chars): %s",
-                         exc, text[:500])
-            return None
+        parsed = parse_json_object(raw_text or "")
+        if parsed is None:
+            logger.error("Failed to parse LLM JSON output (first 500 chars): %s",
+                         (raw_text or "")[:500])
+        return parsed
 
     def _check_cache(self, pmid: str, content_hash: str) -> Optional[dict]:
         """Check if a cached extraction exists for this PMID + content hash."""
@@ -246,38 +257,31 @@ class LLMExtractor:
         Args:
             pmid: PubMed ID.
             title: Paper title.
-            content: Full text or abstract.
+            content: Full text or abstract, best sections first.
             theme_entities: Optional list of theme-relevant entity names.
-            max_budget: If >0, raise RuntimeError when call_count reaches this.
+            max_budget: If >0, raise RuntimeError when a real LLM call would
+                exceed it (cache hits are free).
 
         Returns:
-            ExtractionResult or None on failure.
+            ExtractionResult (after verify_relationships) or None on failure.
         """
-        if max_budget > 0 and self.call_count >= max_budget:
-            raise RuntimeError(
-                f"LLM budget exhausted ({self.call_count}/{max_budget} calls)"
-            )
-
+        if len(content) > MAX_CONTENT_CHARS:
+            content = content[:MAX_CONTENT_CHARS] + "\n\n[... truncated for LLM context ...]"
         content_hash = hashlib.md5(content.encode()).hexdigest()[:12]
 
-        # Check cache
         cached = self._check_cache(pmid, content_hash)
         if cached is not None:
             logger.debug("Cache hit for PMID %s", pmid)
             validated = self._validate_result(cached)
             if validated is not None:
-                return validated
+                return self._verified(validated, content)
             logger.warning("Cached result invalid for PMID %s, re-extracting", pmid)
 
-        # Truncate content for LLM context
-        if len(content) > 30000:
-            content = content[:30000] + "\n\n[... truncated for LLM context ...]"
-        elif len(content) > 8000 and len(content) <= 30000:
-            # Likely abstract-only; still truncate at 8000
-            content = content[:8000] + "\n\n[... truncated ...]"
-
+        if max_budget > 0 and self.call_count >= max_budget:
+            raise RuntimeError(
+                f"LLM budget exhausted ({self.call_count}/{max_budget} calls)"
+            )
         prompt = self._build_prompt(content, pmid, title, theme_entities)
-
         self.call_count += 1
         raw = self._call_llm(prompt)
         if raw is None:
@@ -291,10 +295,75 @@ class LLMExtractor:
         if result is None:
             return None
 
+        # cache the raw model output; verification is re-applied on every load
         self._save_cache(pmid, content_hash, raw)
+        result = self._verified(result, content)
         logger.info("Extracted %d entities, %d relationships from PMID %s",
-                     len(result.entities), len(result.relationships), pmid)
+                    len(result.entities), len(result.relationships), pmid)
         return result
+
+    def _verified(self, result: ExtractionResult, content: str) -> ExtractionResult:
+        result, stats = verify_relationships(result, content)
+        self.dropped_unverified += stats["dropped_unverified"]
+        self.sign_overridden += stats["sign_overridden"]
+        return result
+
+
+def parse_json_object(raw_text: str) -> dict | None:
+    """The JSON object in a model reply, tolerating fences and think blocks.
+
+    Qwen3-style models emit <think>...</think> before the answer; the
+    object is taken from the first "{" to the last "}".
+    """
+    text = _THINK_RE.sub("", raw_text)
+    start, end = text.find("{"), text.rfind("}")
+    if start == -1 or end <= start:
+        return None
+    try:
+        parsed = json.loads(text[start:end + 1])
+    except json.JSONDecodeError:
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
+def _norm_for_quote(text: str) -> str:
+    """Case-, punctuation- and whitespace-insensitive form for quote lookup."""
+    return " ".join(_QUOTE_NORM_RE.sub(" ", text.lower()).split())
+
+
+def verify_relationships(
+    result: ExtractionResult, content: str
+) -> tuple[ExtractionResult, dict]:
+    """Keep only relationships whose evidence_quote occurs in the content.
+
+    Matching ignores case, punctuation and whitespace, nothing else, so a
+    paraphrased or invented quote is dropped. Predicates with a fixed
+    direction (PREDICATE_SIGN) set the sign; other signs are clamped to
+    -1/0/1. Subjects/objects missing from the entity list are added so
+    the matcher can resolve them. Returns (result, stats).
+    """
+    haystack = _norm_for_quote(content)
+    kept: list[ExtractedRelationship] = []
+    stats = {"dropped_unverified": 0, "sign_overridden": 0}
+    for rel in result.relationships:
+        quote = _norm_for_quote(rel.evidence_quote)
+        if len(quote) < 15 or quote not in haystack:
+            stats["dropped_unverified"] += 1
+            continue
+        fixed = PREDICATE_SIGN.get(rel.predicate.strip().lower())
+        sign = fixed if fixed is not None else max(-1, min(1, int(rel.sign)))
+        if sign != rel.sign:
+            stats["sign_overridden"] += 1
+        kept.append(rel.model_copy(update={"sign": sign, "pmid": result.pmid}))
+    names = {e.name for e in result.entities}
+    extra = [
+        ExtractedEntity(name=n)
+        for rel in kept for n in (rel.subject, rel.object)
+        if n and n not in names and not names.add(n)
+    ]
+    return result.model_copy(
+        update={"relationships": kept, "entities": [*result.entities, *extra]}
+    ), stats
 
 
 def extract_batch(

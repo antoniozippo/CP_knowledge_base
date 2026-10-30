@@ -27,7 +27,7 @@ LLM_OUTPUT = {
             "predicate": "downregulates",
             "object": "KCC2",
             "sign": -1,
-            "evidence_quote": "Val66Met carriers showed reduced KCC2.",
+            "evidence_quote": "KCC2 is reduced in BDNF Val66Met carriers.",
             "confidence": "HIGH",
         }
     ],
@@ -152,6 +152,20 @@ def test_each_theme_searched_with_its_own_id(workspace, llm_calls, monkeypatch):
     assert [(c["id"], c["keywords"]) for c in seen] == [("T01", ["KCC2"]), ("T02", ["NLRP3"])]
 
 
+def test_relationship_with_paraphrased_quote_adds_no_edge(workspace, monkeypatch):
+    tmp, themes = workspace
+    paraphrased = {**LLM_OUTPUT, "relationships": [
+        {**LLM_OUTPUT["relationships"][0], "evidence_quote": "Val66Met carriers showed reduced KCC2."}
+    ]}
+    monkeypatch.setattr(LLMExtractor, "_call_llm", lambda self, prompt: json.loads(json.dumps(paraphrased)))
+    _stub_io(monkeypatch, [_meta()], [_content()])
+
+    assert run.run_pipeline(_args(), themes=themes) == 0
+
+    graph = json.loads((tmp / "graphify-out/graph_v2.json").read_text())
+    assert [l for l in graph["links"] if l.get("origin") == "auto_crawled"] == []
+
+
 def test_prompt_contains_paper_title_and_text(workspace, llm_calls, monkeypatch):
     _, themes = workspace
     _stub_io(monkeypatch, [_meta()], [_content()])
@@ -272,3 +286,25 @@ def test_failing_gate_aborts_before_any_git_command(workspace, llm_calls, monkey
 
     assert run.run_pipeline(_args(no_commit=False), themes=themes) == 1
     assert git_calls == []
+
+
+def test_cached_papers_still_processed_after_budget_is_spent(workspace, llm_calls, monkeypatch):
+    _, _ = workspace
+    metas = [_meta(pmid="1", title="t1"), _meta(pmid="2", title="t2")]
+    contents = [_content(pmid="1", abstract="KCC2 is reduced in BDNF Val66Met carriers. one"),
+                _content(pmid="2", abstract="KCC2 is reduced in BDNF Val66Met carriers. two")]
+    _stub_io(monkeypatch, metas, contents)
+    run.run_pipeline(_args(budget=1, no_commit=True, dry_run=False), themes=THEMES_TWO)
+    assert len(llm_calls) == 1  # paper 2 deferred
+    # next run, budget 1 again: paper 1 is a free cache hit, paper 2 gets the call
+    import crawler.search as search
+    monkeypatch.setattr(search, "_load_processed_pmids", lambda: set())
+    monkeypatch.setattr(run, "_load_processed_pmids", lambda: set())
+    run.run_pipeline(_args(budget=1), themes=THEMES_TWO)
+    assert len(llm_calls) == 2
+
+
+def test_inputs_put_results_and_discussion_before_methods():
+    sections = {"Methods": "M.", "Introduction": "I.", "Results": "R.", "Discussion": "D.", "Other": "O."}
+    (item,) = run.build_extraction_inputs([_meta()], [_content(abstract="A.", sections=sections)])
+    assert item["content"] == "A.\n\nR.\n\nD.\n\nI.\n\nO.\n\nM."

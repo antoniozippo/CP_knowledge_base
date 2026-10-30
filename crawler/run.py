@@ -19,7 +19,7 @@ import yaml
 
 from crawler.search import search_theme, PaperMeta, _load_processed_pmids, _save_processed_pmids
 from crawler.fetcher import fetch_papers, PaperContent
-from crawler.extractor import LLMExtractor, extract_batch
+from crawler.extractor import LLMExtractor
 from crawler.matcher import EntityMatcher
 from crawler.updater import GraphUpdater
 from crawler.discovery import MeshDiscovery
@@ -40,12 +40,27 @@ def load_themes(themes_path: str = "crawler/themes.yaml") -> dict:
     return yaml.safe_load(Path(themes_path).read_text()) or {}
 
 
+# Full-text sections in the order they reach the LLM's content budget:
+# findings first, background next, methods last. Unlisted names rank 3.
+SECTION_PRIORITY = (
+    ("result", 0), ("discussion", 1), ("conclusion", 1), ("summary", 1),
+    ("introduction", 2), ("background", 2), ("method", 4), ("material", 4),
+)
+
+
+def _section_rank(name: str) -> int:
+    lower = name.lower()
+    return next((rank for marker, rank in SECTION_PRIORITY if marker in lower), 3)
+
+
 def build_extraction_inputs(metas: list[PaperMeta], contents: list[PaperContent]) -> list[dict]:
     """Join search metadata and fetched content into extractor input dicts.
 
     Each dict has the keys extract_batch expects: pmid, title, content. Content
     is the abstract (falling back to the PubMed record's abstract) followed by
-    any full-text sections. Contents without matching metadata are skipped.
+    any full-text sections, results and discussion before introduction and
+    methods (stable within a rank), so truncation drops the least useful text.
+    Contents without matching metadata are skipped.
     """
     meta_by_pmid = {m.pmid: m for m in metas}
     inputs = []
@@ -55,7 +70,8 @@ def build_extraction_inputs(metas: list[PaperMeta], contents: list[PaperContent]
             log.warning(f"  No search metadata for PMID {c.pmid}; skipping")
             continue
         parts = [c.abstract_text or meta.abstract]
-        parts.extend((c.fulltext_sections or {}).values())
+        sections = (c.fulltext_sections or {}).items()
+        parts.extend(text for _, text in sorted(sections, key=lambda kv: _section_rank(kv[0])))
         inputs.append({
             "pmid": c.pmid,
             "title": meta.title,
@@ -112,6 +128,7 @@ def run_pipeline(args, themes=None):
 
     # --- Phase 3: Extract ---
     log.info("=== Phase 3: LLM Entity/Relationship Extraction ===")
+    extractor = None
     if args.dry_run:
         log.info("  DRY RUN — skipping LLM extraction")
         extractions = []
@@ -129,24 +146,39 @@ def run_pipeline(args, themes=None):
             max_tokens=args.llm_max_tokens,
             cache_dir=Path("crawler/cache"),
         )
-        all_extractions = []
-        for theme_id, theme_config in themes.items():
-            theme_entities = theme_config.get("entities", [])
-            theme_terms = [e.lower() for e in theme_entities]
-            theme_papers = [
-                i for i in to_extract
-                if any(t in i["content"].lower() for t in theme_terms)
-            ]
-            log.info(f"  Extracting from {len(theme_papers)} papers for {theme_id}")
-            extracted = extract_batch(
-                theme_papers, theme_config, args.llm_endpoint, args.llm_model,
-                budget=args.budget,
-                cache_dir=Path("crawler/cache"),
-                extractor=extractor,
-            )
-            all_extractions.extend(extracted)
-        extractions = all_extractions
-        log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls)")
+        # Each paper is extracted once, focused on the entities of every
+        # theme it mentions (it used to go once per matching theme, and the
+        # duplicates all reached the graph updater).
+        focused = []
+        for paper in to_extract:
+            text = paper["content"].lower()
+            focus = list(dict.fromkeys(
+                e for t in themes.values() for e in t.get("entities", [])
+                if any(x.lower() in text for x in t.get("entities", []))
+            ))
+            if focus:
+                focused.append((paper, focus))
+        log.info(f"  {len(focused)} papers mention a theme entity; "
+                 f"{len(to_extract) - len(focused)} skipped as off-theme")
+        extractions = []
+        deferred = 0
+        for paper, focus in focused:
+            try:
+                result = extractor.extract(
+                    pmid=paper["pmid"], title=paper["title"], content=paper["content"],
+                    theme_entities=focus, max_budget=args.budget,
+                )
+            except RuntimeError:
+                deferred += 1  # budget spent; cached papers above still went through
+                continue
+            if result is not None and (result.entities or result.relationships):
+                extractions.append(result)
+        if deferred:
+            log.warning(f"  LLM budget of {args.budget} calls reached; "
+                        f"{deferred} papers deferred to the next run")
+        log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls); "
+                 f"{extractor.dropped_unverified} relationships dropped (quote not in paper), "
+                 f"{extractor.sign_overridden} signs set from predicate")
 
 
     # --- Phase 4: Match ---
@@ -210,6 +242,8 @@ def run_pipeline(args, themes=None):
         "papers_fetched": len(contents),
         "fulltext_count": fulltext_count,
         "extractions": len(extractions),
+        "llm_calls": extractor.call_count if extractor else 0,
+        "relationships_dropped_unverified": extractor.dropped_unverified if extractor else 0,
         "new_entities": new_entities,
         "new_edges": new_edges,
         "conflicts": conflict_summary,
