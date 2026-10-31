@@ -76,3 +76,12 @@ def test_single_content_budget_and_cached_results_reverified(tmp_path, monkeypat
     assert len(prompts) == 3
     assert [r.sign for r in again.relationships] == [-1]
     assert e.dropped_unverified == 4
+
+
+def test_quotes_match_across_inline_markup_in_the_source():
+    content = "Infiltrating CD8<sup>+</sup> T cells rose (<i>P</i> < 0.05) after SNI."
+    verified, stats = ex.verify_relationships(result(
+        rel("Infiltrating CD8+ T cells rose (P < 0.05) after SNI"),
+        rel("Infiltrating CD8<sup>+</sup> T cells rose"),
+    ), content)
+    assert len(verified.relationships) == 2 and stats["dropped_unverified"] == 0

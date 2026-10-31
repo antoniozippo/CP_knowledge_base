@@ -29,6 +29,8 @@ PREDICATE_SIGN = {
 
 _THINK_RE = re.compile(r"<(think|thought)>.*?</\1>", re.DOTALL | re.IGNORECASE)
 _QUOTE_NORM_RE = re.compile(r"[\W_]+")
+# inline markup PubMed leaves in some abstracts ("CD8<sup>+</sup>", "<i>P</i>")
+_TAG_RE = re.compile(r"</?[A-Za-z][^<>]{0,40}>")
 
 
 class ExtractedEntity(BaseModel):
@@ -345,8 +347,9 @@ def parse_json_object(raw_text: str) -> dict | None:
 
 
 def _norm_for_quote(text: str) -> str:
-    """Case-, punctuation- and whitespace-insensitive form for quote lookup."""
-    return " ".join(_QUOTE_NORM_RE.sub(" ", text.lower()).split())
+    """Case-, punctuation-, whitespace- and inline-tag-insensitive form for
+    quote lookup ("CD8+ T cells" matches "CD8<sup>+</sup> T cells")."""
+    return " ".join(_QUOTE_NORM_RE.sub(" ", _TAG_RE.sub("", text).lower()).split())
 
 
 def verify_relationships(
