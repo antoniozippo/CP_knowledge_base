@@ -4,7 +4,9 @@ Paste into a new cloud session on branch `claude/happy-dijkstra-wounz6`,
 replacing `{SHARDS}` (one or more shard numbers 0-37, e.g. `5 and 6`) and
 `{MODEL}` (`opus` or `sonnet`). The wave of 2026-10-30 measured, per paper
 (API-equivalent): opus $0.14 / ~6 relationships, sonnet $0.05 / ~2.5 but
-with skimming of long papers, hence the full-read rule below.
+with skimming of long papers, hence the full-read rule below (with it:
+~3.8 relationships/paper). Four parallel sessions exhausted the 5-hour
+usage window in ~7 minutes, hence the commit-every-20-papers rule.
 
 ---
 
@@ -37,6 +39,11 @@ means the shard currently being processed.
      cell-type qualifiers in entity names when the finding is specific to
      them (e.g. "VP GABAergic neurons", not "neurons").
    - Do not commit; report pmids written and relationship counts.
+   Save progress often: whenever two batches (20 papers) have finished,
+   run the check below, fix problems in the files written so far, and do
+   step 6 (commit + push) for those files. A usage limit can stop the
+   session at any moment; only pushed files survive it. When resuming
+   after a stop, re-run materialize: papers already pushed are skipped.
 4. `python3 crawler/agent_extract.py check --shard {SHARD}`: fix every
    `invalid_json`, `schema_error` and dropped quote (correct the quote to the
    exact wording or delete the relationship) until it is clean for every
