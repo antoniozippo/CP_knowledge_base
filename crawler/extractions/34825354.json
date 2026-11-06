@@ -1,0 +1,1 @@
+{"entities":[{"name":"TRPV1","entity_type":"channel","compartment":"peripheral","mentions":1},{"name":"TRPM8","entity_type":"channel","compartment":"peripheral","mentions":1},{"name":"PIEZO2","entity_type":"channel","compartment":"peripheral","mentions":1}],"relationships":[],"key_findings":[],"novel_terms":[],"pmid":"34825354","extracted_by":"claude-code-session"}
