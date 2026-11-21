@@ -343,6 +343,59 @@ def test_real_graph_review_findings_no_longer_merge(real, name, wrong):
     assert wrong.lower() not in (real.match_entity(name).matched_label or "").lower()
 
 
+# --- one-word symbols written with other punctuation ----------------------------------------
+
+@pytest.mark.parametrize("name, label", [
+    ("MMP9", "Matrix Metalloproteinase-9 (MMP-9)"), ("VEGF-A", "Vascular Endothelial Growth Factor A (VEGFA)"),
+    ("HIF-1α", "Hypoxia-Inducible Factor 1 Alpha (HIF1α)"), ("TLR-4", "TLR4 (Toll-like Receptor 4)"),
+    ("Tnfα", "Tumor Necrosis Factor Alpha (TNF-α)"), ("COX2", "COX-2 (Cyclooxygenase-2)"),
+    ("PSD95", "PSD-95 (Postsynaptic Density Scaffold Protein)"), ("Tie-2", "Tie2 Receptor"),
+    ("P2X7R", "P2X7 Receptor (P2RX7)"), ("TIMP1", "TIMP-1"), ("IL1β", "IL-1beta (NLRP3 effector cytokine)"),
+])
+def test_a_symbol_spelled_with_other_punctuation_merges(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label, "o": "BDNF"})
+    assert m.match_entity(name).matched_node_id == "n"
+
+
+def test_a_receptor_symbol_stays_the_receptor_and_does_not_become_its_ligand(tmp_path, monkeypatch):
+    labels = {"lig": "CSF1 (Colony-Stimulating Factor 1)", "rec": "CSF1R (receptor tyrosine kinase)", "o": "Other"}
+    m = _build(tmp_path, monkeypatch, labels, edges=[("lig", "o")] * 6)      # the ligand is better connected
+    assert m.match_entity("CSF1R").matched_node_id == "rec"
+    assert m.match_entity("CSF-1").matched_node_id == "lig"
+
+
+def test_a_trailing_receptor_r_is_dropped_only_when_no_node_owns_the_name(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "P2X4 Receptor"})
+    assert m.match_entity("P2X4R").matched_node_id == "n"
+
+
+def test_a_family_node_is_not_the_symbol_of_one_member(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "BCL-2 Family Proteins (BAX, BAK, BIM, BCL-2, BCL-xL)"})
+    assert m.match_entity("Bcl2").status == "NO_MATCH"
+
+
+def test_the_symbol_rule_does_not_touch_multi_word_names(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "TLR4 (Toll-like Receptor 4)"})
+    assert m.match_entity("TLR 4 signaling cascade").status == "NO_MATCH"
+
+
+def test_a_no_merge_entry_blocks_every_spelling_of_the_name(tmp_path, monkeypatch):
+    labels = {"r": "IGF1 Receptor (IGF1R)", "l": "Insulin-like Growth Factor 1 (IGF1)"}
+    m = _build_nm(tmp_path, monkeypatch, labels, {"r": ["igf1"]})
+    for spelling in ("IGF1", "IGF-1", "igf-1"):
+        assert m.match_entity(spelling).matched_node_id == "l"
+
+
+@pytest.mark.parametrize("name, expected", [
+    ("HIF-1α", "Hypoxia-Inducible Factor 1 Alpha"), ("P2X7R", "P2X7 Receptor"), ("P2X4R", "P2X4 Receptor"),
+    ("MMP9", "MMP-9"), ("COX2", "COX-2"), ("TNFα", "Tumor Necrosis Factor Alpha"), ("IGF-1", "Insulin-like Growth Factor 1"),
+    ("CSF1R", "CSF1R"), ("TLR-4", "TLR4"), ("PSD95", "PSD-95"), ("gepants", "Gepants"), ("CGRP receptor antagonists", "Gepants"),
+    ("Protein kinase C", "PKC"),
+])
+def test_real_graph_duplicate_spellings_now_resolve_to_the_curated_node(real, name, expected):
+    assert (real.match_entity(name).matched_label or "").startswith(expected)
+
+
 # --- auto-crawled nodes are reached by exact label only ------------------------
 # Their labels are free text; a short name must not merge into a longer one.
 

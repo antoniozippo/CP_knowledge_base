@@ -56,7 +56,8 @@ def skeleton(text: str) -> str:
     """Ordered content words with generic words dropped, joined without separators:
     "Caspase-3" and "caspase3" give "caspase3"; "EP2 receptor" gives "ep2"."""
     tokens = (stem(t) for t in _TOKEN_RE.findall(text.lower().translate(_GREEK)))
-    return "".join(t for t in tokens if t not in STOPWORDS and t not in GENERIC_TOKENS)
+    # a one-letter token is part of a symbol ("VEGF-A", "tenascin-C"), not an article
+    return "".join(t for t in tokens if (t not in STOPWORDS or len(t) == 1) and t not in GENERIC_TOKENS)
 
 
 def is_spelling_variant(a: str, b: str) -> bool:

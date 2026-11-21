@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -30,6 +31,23 @@ logger = logging.getLogger(__name__)
 ALIASES_PATH = Path("crawler/aliases.yaml")
 CONTEXT_NODES_PATH = Path("crawler/context_nodes.yaml")
 NO_MERGE_PATH = Path("crawler/no_merge.yaml")
+
+
+# a head with one of these words names a group, not a gene: "BCL-2 Family Proteins" is not "Bcl2"
+_NOT_A_SYMBOL = frozenset({"family", "complex", "axis", "pathway", "signaling", "signalling", "cascade", "protein"})
+
+
+def _symbol_forms(name_key: str, owners: dict[str, set[str]]) -> frozenset[str]:
+    """Skeletons a one-word name may be a symbol for. A trailing receptor "R" after a digit is
+    dropped ("p2x7r" -> "p2x7") only when no node owns the name as written, so "CSF1R" stays
+    the receptor and does not become the CSF1 ligand. Empty for a multi-word name."""
+    if " " in name_key:
+        return frozenset()
+    sk = skeleton(name_key)
+    if len(sk) >= 3 and sk in owners:
+        return frozenset({sk})
+    stripped = re.sub(r"(\d[a-z]?)r$", r"\1", sk)
+    return frozenset(f for f in {sk, stripped} if len(f) >= 3)
 
 
 def is_crawled(node: dict) -> bool:
@@ -94,6 +112,9 @@ class EntityMatcher:
         self._head_all: dict[str, frozenset[str]] = {}
         self._label_all: dict[str, frozenset[str]] = {}
         self._head_is_symbol: dict[str, bool] = {}   # head is one word: "KCC2", "IL-1beta"
+        # id -> skeletons of the head and of one-word "(...)" groups: "MMP-9" and "MMP9" share "mmp9"
+        self._symbols: dict[str, frozenset[str]] = {}
+        self._symbol_owners: dict[str, set[str]] = {}
         self._degree = degree
         for node in self.nodes:
             label = node.get("label", "")
@@ -102,6 +123,11 @@ class EntityMatcher:
             self._forms[node["id"]] = (distinctive_tokens(head_text), parens)
             self._head_all[node["id"]] = content_tokens(head_text)
             self._head_is_symbol[node["id"]] = not head_text.strip().count(" ")
+            head_symbol = set() if content_tokens(head_text) & _NOT_A_SYMBOL else {skeleton(head_text)}
+            symbols = head_symbol | {skeleton(g) for g in PAREN_GROUP_RE.findall(label) if " " not in g.strip()}
+            self._symbols[node["id"]] = frozenset(k for k in symbols if len(k) >= 3)
+            for k in self._symbols[node["id"]]:
+                self._symbol_owners.setdefault(k, set()).add(node["id"])
             self._label_all[node["id"]] = content_tokens(label)
 
         self.aliases = self._load_aliases()
@@ -119,7 +145,8 @@ class EntityMatcher:
         return frozenset(entry["id"] for entry in loaded.get("context_nodes", []) if entry.get("id"))
 
     def _load_no_merge(self) -> frozenset[tuple[str, str]]:
-        """(lowercased name, node id) pairs the loose rules must not merge (no_merge.yaml)."""
+        """(name skeleton, node id) pairs the loose rules must not merge (no_merge.yaml): every spelling
+        of a listed name is blocked ("IGF1" also blocks "IGF-1")."""
         if not NO_MERGE_PATH.exists():
             return frozenset()
         try:
@@ -128,7 +155,7 @@ class EntityMatcher:
             logger.warning("Failed to load no-merge pairs from %s: %s", NO_MERGE_PATH, exc)
             return frozenset()
         return frozenset(
-            (str(name).strip().lower(), entry["node"])
+            (skeleton(str(name)), entry["node"])
             for entry in loaded.get("no_merge", []) if entry.get("node")
             for name in entry.get("names", [])
         )
@@ -208,6 +235,8 @@ class EntityMatcher:
         """
         wanted_full = content_tokens(name)
         name_key = name.strip().lower()
+        name_skel = skeleton(name_key)
+        symbol_forms = _symbol_forms(name_key, self._symbol_owners)
         wanted = wanted_full - GENERIC_TOKENS
         if not is_informative(wanted):
             return []
@@ -215,7 +244,7 @@ class EntityMatcher:
         for node in self.nodes:
             if is_crawled(node) or node["id"] in self.context_node_ids:
                 continue
-            if (name_key, node["id"]) in self._no_merge:
+            if (name_skel, node["id"]) in self._no_merge:
                 continue
             head, parens = self._forms[node["id"]]
             coverage = 0.0
@@ -226,6 +255,10 @@ class EntityMatcher:
             # (Potassium-Chloride Cotransporter)"); a phrase matching a descriptive group
             # ("(Neurite Outgrowth)", "(diabetic neuropathy)") is not an alias.
             if wanted_full in parens and (" " not in name_key or self._head_is_symbol[node["id"]]):
+                coverage = 1.0
+            # a one-word symbol written with other punctuation: "MMP9" for "MMP-9", "VEGF-A" for "VEGFA",
+            # "P2X7R" for "P2X7 Receptor"
+            if coverage < 1.0 and symbol_forms & self._symbols[node["id"]]:
                 coverage = 1.0
             if coverage >= MIN_COVERAGE and self._qualifiers_ok(wanted_full, node):
                 key = (coverage, self._degree.get(node["id"], 0), -len(node.get("label", "")))
@@ -266,7 +299,7 @@ class EntityMatcher:
             node = self.norm_labels[label]
             if DIGITS_RE.findall(label) != digits or not self._qualifiers_ok(name_tokens, node):
                 continue
-            if (name_lower, node["id"]) in self._no_merge:
+            if (name_skeleton, node["id"]) in self._no_merge:
                 continue
             # the ratio only finds candidates; the name must be the label spelled differently
             # ("caspase3" / "Caspase-3"), not a different short identifier ("EP2" / "Tie2")
