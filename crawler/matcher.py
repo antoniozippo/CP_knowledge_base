@@ -12,6 +12,7 @@ from crawler.classify import normalize_label
 from crawler.default_aliases import DEFAULT_ALIASES
 from crawler.records import EdgeMatch, EntityMatch
 from crawler.tokens import (
+    CLASS_QUALIFIERS,
     DIGITS_RE,
     FUZZY_THRESHOLD,
     GENERIC_TOKENS,
@@ -82,12 +83,17 @@ class EntityMatcher:
                 degree[end] = degree.get(end, 0) + 1
         # id -> (distinctive head tokens, full content-token sets of (...) groups)
         self._forms: dict[str, tuple[frozenset[str], list[frozenset[str]]]] = {}
+        # id -> content tokens of the head / of the whole label, generic words kept
+        self._head_all: dict[str, frozenset[str]] = {}
+        self._label_all: dict[str, frozenset[str]] = {}
         self._degree = degree
         for node in self.nodes:
             label = node.get("label", "")
             head_text = label.split("(")[0].strip() or label
             parens = [content_tokens(g) for g in PAREN_GROUP_RE.findall(label)]
             self._forms[node["id"]] = (distinctive_tokens(head_text), parens)
+            self._head_all[node["id"]] = content_tokens(head_text)
+            self._label_all[node["id"]] = content_tokens(label)
 
         self.aliases = self._load_aliases()
         self._alias_groups = self._build_alias_groups()
@@ -141,6 +147,15 @@ class EntityMatcher:
         the updater de-duplicates the nodes it creates."""
         return self.norm_labels.get(name_lower) or self._crawled_by_key.get(normalize_label(name_lower))
 
+    def _qualifiers_ok(self, name_tokens: frozenset[str], node: dict) -> bool:
+        """False when the name says "receptor", "inhibitor", "antagonist", "agonist",
+        "blocker" or "neurons" and the node does not (see CLASS_QUALIFIERS)."""
+        for q in name_tokens & CLASS_QUALIFIERS:
+            have = self._label_all if q == "receptor" else self._head_all
+            if q not in have.get(node["id"], frozenset()):
+                return False
+        return True
+
     def _token_candidates(self, name: str) -> list[tuple[tuple, dict]]:
         """Nodes this name may merge into, each with a ranking key.
 
@@ -168,7 +183,7 @@ class EntityMatcher:
                 coverage = len(wanted) / len(head)
             if wanted_full in parens:
                 coverage = 1.0
-            if coverage >= MIN_COVERAGE:
+            if coverage >= MIN_COVERAGE and self._qualifiers_ok(wanted_full, node):
                 key = (coverage, self._degree.get(node["id"], 0), -len(node.get("label", "")))
                 found.append((key, node))
         return found
@@ -198,12 +213,14 @@ class EntityMatcher:
         if not self._loose_labels:
             return None
         digits = DIGITS_RE.findall(name_lower)
+        name_tokens = content_tokens(name_lower)
         for label, score, _ in process.extract(
             name_lower, self._loose_labels, scorer=fuzz.ratio,
             score_cutoff=threshold, limit=5,
         ):
-            if DIGITS_RE.findall(label) == digits:
-                return (self.norm_labels[label], score)
+            node = self.norm_labels[label]
+            if DIGITS_RE.findall(label) == digits and self._qualifiers_ok(name_tokens, node):
+                return (node, score)
         return None
 
     def match_entity(self, name: str) -> EntityMatch:

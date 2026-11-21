@@ -125,6 +125,55 @@ def test_alias_never_crosses_into_a_sibling_gene(tmp_path, monkeypatch):
     assert m.match_entity("P2RX7").matched_node_id == "b"
 
 
+# --- class qualifiers: "X receptor / inhibitors / antagonists / neurons" is not X ----
+
+@pytest.mark.parametrize("name, label", [
+    ("CGRP receptor", "CGRP (Calcitonin Gene-Related Peptide)"),
+    ("CGRP receptor antagonists", "CGRP (Calcitonin Gene-Related Peptide)"),
+    ("TRPV1 antagonists", "TRPV1 (Transient Receptor Potential Vanilloid 1)"),
+    ("TRPV1 agonists", "TRPV1 (Transient Receptor Potential Vanilloid 1)"),
+    ("ROCK inhibitors", "ROCK (ROCK1/ROCK2)"),
+    ("COX-2 inhibitors", "COX-2 (Cyclooxygenase-2)"),
+    ("NLRP3 inhibitor", "MCC950 (NLRP3 Inhibitor)"),
+    ("spinal dorsal horn neurons", "Spinal Dorsal Horn Kalirin-7"),
+    ("Nav1.8+ neurons", "Nav1.8 (SCN10A voltage-gated sodium channel)"),
+    ("TNF-alpha receptor", "TNF-α (Pro-Inflammatory Cytokine)"),
+])
+def test_name_with_a_class_qualifier_does_not_merge_into_a_node_without_it(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label})
+    assert m.match_entity(name).status == "NO_MATCH"
+
+
+@pytest.mark.parametrize("name, label", [
+    ("TrkB receptor", "TrkB Receptor (TrkB.FL)"),
+    ("TLR4 receptor", "TLR4 (Toll-like Receptor 4)"),           # "receptor" in the description
+    ("dorsal horn neurons", "Dorsal Horn Neurons"),
+    ("TRPV1 antagonists", "TRPV1 Antagonists (class)"),
+    ("CGRP receptor", "CGRP Receptor (CLR/RAMP1 Heterodimer)"),
+])
+def test_name_with_a_class_qualifier_still_merges_into_a_node_that_has_it(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label})
+    assert m.match_entity(name).matched_node_id == "n"
+
+
+def test_class_qualifier_picks_the_receptor_node_over_the_ligand_node(tmp_path, monkeypatch):
+    labels = {"lig": "CGRP (Calcitonin Gene-Related Peptide)", "rec": "CGRP Receptor (CLR/RAMP1 Heterodimer)", "o": "Other"}
+    m = _build(tmp_path, monkeypatch, labels, edges=[("lig", "o")] * 5)   # the ligand has the higher degree
+    assert m.match_entity("CGRP receptor").matched_node_id == "rec"
+    assert m.match_entity("CGRP").matched_node_id == "lig"
+
+
+def test_class_qualifier_blocks_the_fuzzy_rule_too(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "P2X7 Receptor Antagonist"})
+    assert m.match_entity("P2X7 Receptor Antagonists").matched_node_id == "n"      # same qualifiers
+    assert m.match_entity("P2X7 Receptor Agonist").status == "NO_MATCH"            # one letter's worth of fuzz, opposite meaning
+
+
+def test_exact_label_still_wins_over_the_qualifier_rule(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "CGRP inhibitors"})
+    assert m.match_entity("CGRP inhibitors").status == "EXACT"
+
+
 # --- auto-crawled nodes are reached by exact label only ------------------------
 # Their labels are free text; a short name must not merge into a longer one.
 

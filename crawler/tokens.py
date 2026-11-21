@@ -10,6 +10,12 @@ GENERIC_TOKENS = frozenset({
     "expression", "activation", "inhibitor", "antagonist", "agonist", "axis",
     "cascade", "complex", "family", "level", "gtpase",
 })
+# Words that say what kind of thing a name is. "CGRP receptor antagonists" is not
+# CGRP, and "NLRP3 inhibitor" is not the drug MCC950: a name carrying one of these
+# may only merge into a node that carries it too ("receptor" anywhere in the
+# label, since "TLR4 (Toll-like Receptor 4)" is a receptor; the others in the head,
+# since a "(NLRP3 Inhibitor)" description makes a specific drug, not the class).
+CLASS_QUALIFIERS = frozenset({"receptor", "inhibitor", "antagonist", "agonist", "blocker", "neuron"})
 STOPWORDS = frozenset({"of", "for", "and", "the", "in", "by", "to", "with", "via", "a", "an", "on", "or", "as"})
 # Fraction of a node's head tokens the extracted name must cover to merge.
 MIN_COVERAGE = 0.6
