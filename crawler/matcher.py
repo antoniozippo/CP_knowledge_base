@@ -26,6 +26,7 @@ from crawler.tokens import (
 logger = logging.getLogger(__name__)
 
 ALIASES_PATH = Path("crawler/aliases.yaml")
+CONTEXT_NODES_PATH = Path("crawler/context_nodes.yaml")
 
 
 def is_crawled(node: dict) -> bool:
@@ -56,6 +57,7 @@ class EntityMatcher:
         # Auto-crawled nodes: the updater's normalized key → node. They are kept
         # apart so a curated node always wins a collision and the loose rules
         # (token, fuzzy) only ever see curated labels.
+        self.context_node_ids = self._load_context_node_ids()
         self.norm_labels: dict[str, dict] = {}
         self._crawled_by_key: dict[str, dict] = {}
         for node in self.nodes:
@@ -66,7 +68,8 @@ class EntityMatcher:
                 self._crawled_by_key.setdefault(nl, node)
             else:
                 self.norm_labels[nl] = node
-        self._loose_labels = list(self.norm_labels)
+        self._loose_labels = [nl for nl, node in self.norm_labels.items()
+                              if node["id"] not in self.context_node_ids]
 
         # Build lookup: node id → node
         self.nodes_by_id: dict[str, dict] = {n["id"]: n for n in self.nodes}
@@ -97,6 +100,17 @@ class EntityMatcher:
 
         self.aliases = self._load_aliases()
         self._alias_groups = self._build_alias_groups()
+
+    def _load_context_node_ids(self) -> frozenset[str]:
+        """Ids of curated nodes the loose rules must not merge into (context_nodes.yaml)."""
+        if not CONTEXT_NODES_PATH.exists():
+            return frozenset()
+        try:
+            loaded = yaml.safe_load(CONTEXT_NODES_PATH.read_text()) or {}
+        except Exception as exc:
+            logger.warning("Failed to load context nodes from %s: %s", CONTEXT_NODES_PATH, exc)
+            return frozenset()
+        return frozenset(entry["id"] for entry in loaded.get("context_nodes", []) if entry.get("id"))
 
     def _load_aliases(self) -> dict[str, list[str]]:
         """Load alias registry. Falls back to built-in defaults if no file exists."""
@@ -161,7 +175,9 @@ class EntityMatcher:
 
         Auto-crawled nodes never qualify: their labels are free text, and a short
         name would merge into a longer one ("spinal cord" into "spinal cord
-        injury"). They are reached by exact label only. A node qualifies when the
+        injury"). They are reached by exact label only. So are the curated nodes
+        listed in context_nodes.yaml, whose label carries a context the general name
+        lacks ("Cannabidiol (CBD) as PPARγ Agonist"). A node qualifies when the
         name's distinctive tokens sit inside its head
         (the label before the first "(") and cover at least MIN_COVERAGE of it,
         or when the name's tokens, generic words included, equal the content of a
@@ -175,7 +191,7 @@ class EntityMatcher:
             return []
         found = []
         for node in self.nodes:
-            if is_crawled(node):
+            if is_crawled(node) or node["id"] in self.context_node_ids:
                 continue
             head, parens = self._forms[node["id"]]
             coverage = 0.0

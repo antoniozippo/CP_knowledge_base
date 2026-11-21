@@ -174,6 +174,70 @@ def test_exact_label_still_wins_over_the_qualifier_rule(tmp_path, monkeypatch):
     assert m.match_entity("CGRP inhibitors").status == "EXACT"
 
 
+# --- context-specific curated nodes (crawler/context_nodes.yaml) ---------------------
+
+def _build_ctx(tmp_path, monkeypatch, labels, ctx_ids):
+    cfg = tmp_path / "context_nodes.yaml"
+    cfg.write_text(yaml.safe_dump({"context_nodes": [{"id": i, "note": "test"} for i in ctx_ids]}))
+    monkeypatch.setattr(matcher_module, "CONTEXT_NODES_PATH", cfg)
+    return _build(tmp_path, monkeypatch, labels)
+
+
+def test_general_name_does_not_merge_into_a_context_node(tmp_path, monkeypatch):
+    m = _build_ctx(tmp_path, monkeypatch, {"c": "Cannabidiol (CBD) as PPARγ Agonist", "p": "PPARγ"}, ["c"])
+    assert m.match_entity("cannabidiol").status == "NO_MATCH"
+    assert m.match_entity("CBD").status == "NO_MATCH"          # would hit the "(CBD)" group otherwise
+
+
+def test_context_node_is_still_reached_by_its_exact_label(tmp_path, monkeypatch):
+    m = _build_ctx(tmp_path, monkeypatch, {"c": "Cannabidiol (CBD) as PPARγ Agonist"}, ["c"])
+    result = m.match_entity("Cannabidiol (CBD) as PPARγ Agonist")
+    assert (result.status, result.matched_node_id) == ("EXACT", "c")
+
+
+def test_context_node_is_still_reached_through_an_alias(tmp_path, monkeypatch):
+    cfg = tmp_path / "context_nodes.yaml"
+    cfg.write_text(yaml.safe_dump({"context_nodes": [{"id": "c"}]}))
+    monkeypatch.setattr(matcher_module, "CONTEXT_NODES_PATH", cfg)
+    m = _build(tmp_path, monkeypatch, {"c": "ERK5 Pathway (CX3CL1 context)"}, aliases={"CX3CL1-ERK5": ["ERK5 Pathway (CX3CL1 context)"]})
+    assert m.match_entity("CX3CL1-ERK5").matched_node_id == "c"
+
+
+def test_general_name_falls_back_to_the_general_node_not_the_context_one(tmp_path, monkeypatch):
+    labels = {"ctx": "NF-κB Pathway (Bradykinin Context)", "gen": "NF-κB"}
+    m = _build_ctx(tmp_path, monkeypatch, labels, ["ctx"])
+    assert m.match_entity("NF-κB signaling").matched_node_id == "gen"
+
+
+def test_context_node_is_not_a_fuzzy_target(tmp_path, monkeypatch):
+    m = _build_ctx(tmp_path, monkeypatch, {"c": "ERK5 Pathway Context"}, ["c"])
+    assert m.match_entity("ERK5 Pathway Contexts").status == "NO_MATCH"
+
+
+def test_every_context_node_in_the_config_exists_in_the_real_graph(curated_graph_file):
+    ids = EntityMatcher(graph_path=str(curated_graph_file)).context_node_ids
+    nodes = {n["id"] for n in json.loads(curated_graph_file.read_text())["nodes"]}
+    assert ids and ids <= nodes, sorted(ids - nodes)
+
+
+@pytest.mark.parametrize("name", [
+    "cannabidiol", "Cannabidiol", "CBD", "NF-κB pathway", "NF-κB signaling", "ERK5",
+    "mitochondrial dysfunction", "MAPK pathway", "JAK/STAT3 signaling", "Nrf2/HO-1",
+])
+def test_real_graph_general_names_do_not_land_on_a_context_node(real, name):
+    assert real.match_entity(name).matched_node_id not in real.context_node_ids
+
+
+@pytest.mark.parametrize("name, expected", [
+    ("spinal microglia", "Spinal Microglia (Activated)"),
+    ("chronic pain", "Chronic Pain Neurobiology"),
+    ("CaMKII", "CaMKII (LTP Kinase"),
+    ("pyroptosis", "Pyroptosis (P2X7-GSDMD"),
+])
+def test_real_graph_nodes_whose_qualifier_is_not_a_context_still_merge(real, name, expected):
+    assert (real.match_entity(name).matched_label or "").startswith(expected)
+
+
 # --- auto-crawled nodes are reached by exact label only ------------------------
 # Their labels are free text; a short name must not merge into a longer one.
 

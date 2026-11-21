@@ -35,6 +35,7 @@ GENE_SYNONYMS = {"slc12a5": "kcc2"}
 ACRONYM_ALIASES = {
     "brain derived neurotrophic factor": "bdnf",
     "vascular endothelial growth factor a": "vegfa",
+    "cannabidiol": "cbd",
 }
 SPELLING_VARIANTS = {"isation": "ization"}
 # ---------------------------------------------------------------------------

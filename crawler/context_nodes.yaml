@@ -1,0 +1,31 @@
+# Curated nodes whose label carries a context the general name does not: a mechanism
+# ("as PPARγ Agonist"), a tissue or cell type ("in GABAergic Neurons") or a
+# signalling context ("(Bradykinin Context)").
+#
+# The matcher reaches these nodes only by exact label or alias. The token and fuzzy
+# rules skip them, so a paper about "cannabidiol" (or "NF-κB signaling") is not
+# attached to the PPARγ-agonist (or bradykinin) node. The general name becomes its own
+# node instead; a missed merge is preferred to a wrong one.
+#
+# Rule used to list a node: fewer than half of the papers whose entities the old
+# matcher merged into it mention its qualifier anywhere in the text (full crawl of
+# 2026-11, 3,768 papers). Nodes above that line stay mergeable: Spinal Microglia
+# (Activated) 98%, CaMKII (LTP Kinase) 78%, Pyroptosis (P2X7-GSDMD) 53% (borderline),
+# and the Chronic Pain hub, whose qualifier is a mind-map provenance tag, not a context.
+context_nodes:
+  - id: ppary_cannabidiol
+    note: "Cannabidiol (CBD) as PPARγ Agonist; PPAR in 36% of 45 papers (92 endpoints)"
+  - id: bradykinin_nf_kb_pathway
+    note: "NF-κB Pathway (Bradykinin Context); bradykinin in 11% of 23 papers (28 endpoints)"
+  - id: GABA_apoptosis_mitochondrial_dysfunction
+    note: "Mitochondrial Dysfunction in GABAergic Neurons; GABA in 50% of 4 papers"
+  - id: cx3cl1_cx3cr1_erk5
+    note: "ERK5 Pathway (CX3CL1 context); CX3CL1 in 0% of 1 paper"
+  - id: ppary_nrf2_ho1
+    note: "Nrf2/HO-1 Antioxidant Pathway (PPARγ); PPAR in 7% of 11 papers (14 endpoints)"
+  - id: ana_12_MAPK_pathway
+    note: "MAPK Pathway (TrkB Downstream Effector); TrkB/BDNF in 23% of 10 papers (13 endpoints)"
+  - id: il6_jak_stat3
+    note: "JAK/STAT3 pathway (IL-6 downstream); IL-6 in 38% of 8 papers"
+  - id: cx3cl1_cx3cr1_tgfb_smad
+    note: "TGF-beta/Smad2/3 (CX3CL1 neuroprotection); CX3CL1 in 0% of 1 paper"
