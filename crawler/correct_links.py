@@ -6,6 +6,8 @@ Two kinds of correction:
 1. Listed corrections (crawler/review/extraction_corrections_2026-11.yaml): a relationship,
    named by PMID + verbatim quote + its extracted fields, is dropped or replaced. The change is
    written to crawler/extractions/<pmid>.json, so a re-merge reproduces it, and to the graph.
+   A replacement may move a finding to a context-specific node (`new_node`), created as the
+   crawler would create it.
 2. The sign rule (crawler/extractor.py:normalize_sign): where an extracted sign contradicted its
    direction verb, the verb's sign used to win. Links built that way move to the extracted sign
    with the predicate "modulates", which is what a re-merge now produces.
@@ -31,6 +33,8 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from crawler.classify import (  # noqa: E402
+    COMPARTMENT_RULES, ENTITY_TYPE_RULES, first_match, node_id_from_name, normalize_label)
 from crawler.extractor import PREDICATE_SIGN, normalize_sign  # noqa: E402
 
 DEFAULT_GRAPH = Path("graphify-out/graph_v2.json")
@@ -64,6 +68,15 @@ def correct_extraction(data, corr):
         data["relationships"] = [r for r in rels if r is not hit[0]]
     else:
         hit[0].update(corr["now"])
+        # a renamed endpoint keeps its entity record (type, compartment), so a re-merge types it alike
+        entities = data.setdefault("entities", [])
+        names = {e.get("name") for e in entities}
+        for side in ("subject", "object"):
+            old, new = corr["was"][side], corr["now"][side]
+            if new != old and new not in names:
+                base = next((e for e in entities if e.get("name") == old), {"entity_type": "molecule", "compartment": "other"})
+                entities.append({**{k: v for k, v in base.items() if k != "aliases"}, "name": new, "mentions": 1})
+                names.add(new)
     return "applied"
 
 
@@ -166,6 +179,34 @@ class GraphEditor:
         return {**self.graph, "links": [l for i, l in enumerate(self.links) if i not in self.dead]}
 
 
+def crawled_node(name, entity_type, compartment, pmid):
+    """A node as crawler/updater.py:add_node makes it."""
+    return {
+        "label": name.strip(), "file_type": "crawled", "source_file": None, "source_location": None,
+        "source_url": None, "captured_at": datetime.now(timezone.utc).isoformat(), "author": None,
+        "contributor": "auto_crawler", "community": -1, "norm_label": normalize_label(name.strip()),
+        "id": node_id_from_name(name), "merged_from": [],
+        "entity_type": first_match(name.lower(), ENTITY_TYPE_RULES) or entity_type or "concept",
+        "compartment": first_match(name.lower(), COMPARTMENT_RULES) or compartment or "other",
+        "tier": "peripheral", "source_pmid": str(pmid), "source_doi": "",
+    }
+
+
+def ensure_nodes(graph, corrections):
+    """Add the crawled nodes that replacements name in `new_node`, if missing."""
+    ids = {n["id"] for n in graph["nodes"]}
+    for corr in corrections:
+        spec = corr.get("new_node")
+        if not spec:
+            continue
+        node = crawled_node(spec["name"], spec.get("entity_type"), spec.get("compartment"), corr["pmid"])
+        if node["id"] not in (corr["graph"]["source"], corr["graph"]["target"]):
+            raise ValueError(f"new_node '{spec['name']}' becomes '{node['id']}', which the correction does not use")
+        if node["id"] not in ids:
+            graph["nodes"].append(node)
+            ids.add(node["id"])
+
+
 def apply_listed(editor, corrections, note):
     for corr in corrections:
         was = corr["was"]
@@ -221,7 +262,9 @@ def last_conflict_position(path=DEFAULT_CONFLICTS):
 def correct_graph(graph, corrections, fixes, protect_through=-1,
                   listed_note="crawler/review/extraction_corrections_2026-11.yaml",
                   rule_note="sign contradicted the verb (crawler/extractor.py:normalize_sign)"):
-    editor = GraphEditor({**graph, "links": [json.loads(json.dumps(l)) for l in graph["links"]]}, protect_through)
+    graph = {**graph, "nodes": list(graph["nodes"]), "links": [json.loads(json.dumps(l)) for l in graph["links"]]}
+    ensure_nodes(graph, corrections)
+    editor = GraphEditor(graph, protect_through)
     apply_listed(editor, corrections, listed_note)
     apply_sign_rule(editor, fixes, rule_note)
     return editor.result(), editor.log
@@ -239,7 +282,11 @@ def main(argv=None):
     if report.get("missing"):
         print("  not found:", report["missing"])
     graph = json.loads(args.graph.read_text(encoding="utf-8"))
+    n_nodes = len(graph["nodes"])
     new_graph, log = correct_graph(graph, corrections, sign_rule_fixes(), last_conflict_position())
+    if len(new_graph["nodes"]) != n_nodes:
+        print(f"graph: {len(new_graph['nodes']) - n_nodes} node(s) added")
+        log = log or [("node", -1, "", "added")]
     for action, i, pmid, what in log:
         print(f"  {action:8s} link #{i} PMID {pmid}: {what}")
     print(f"graph: {len(log)} corrections, links {len(graph['links'])} -> {len(new_graph['links'])}")

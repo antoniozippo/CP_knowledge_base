@@ -1,5 +1,6 @@
-# Corrections to relationships the extractor got wrong, found by the 2026-11 review of
-# auto-crawled links (crawler/review/curated_links_review_2026-11.csv, verdict WRONG).
+# Corrections to relationships the extractor got wrong or stated without their context, found by
+# the 2026-11 review of auto-crawled links (crawler/review/curated_links_review_2026-11.csv,
+# verdict WRONG) and by later checks of surprising results (AM1241 below).
 # crawler/correct_links.py applies them to crawler/extractions/<pmid>.json, so a re-merge
 # reproduces them, and to graphify-out/graph_v2.json.
 #
@@ -7,6 +8,9 @@
 # action: replace  the relationship takes the fields in `now`; `graph` names the node ids the
 #                  corrected link joins
 # graph_was names the node ids of the link that holds the wrong relationship today.
+# new_node: a replacement that moves a finding to a context-specific node names it here; the
+#           node is created as the crawler would create it (the label must not rely on a
+#           "(...)" qualifier: the crawler's name key drops brackets).
 #
 # Two more review errors (Nav1.7 -> congenital insensitivity to pain, resiniferatoxin -> CGRP)
 # are not listed: the extractor had the right sign (-1) and the predicate's fixed sign
@@ -146,3 +150,121 @@
   action: drop
   reason: 'Null result recorded as a relation: alpha-CGRP knockout mice did not differ from wild type
     after nerve ligation.'
+- pmid: '33131746'
+  quote: an i.t. non-analgesic dose of AM1241 induces microglial activation and IL-1β TNF-α upregulation
+    in SC and DRG via the CB2 receptor pathway
+  was:
+    subject: AM1241
+    predicate: activates
+    object: microglial activation
+    sign: 1
+  graph_was:
+    source: CRAWLED_am1241
+    target: CRAWLED_microglial_activation
+  action: replace
+  now:
+    subject: Low-dose intrathecal AM1241 with morphine
+    predicate: activates
+    object: microglial activation
+    sign: 1
+  graph:
+    source: CRAWLED_low_dose_intrathecal_am1241_with_morphine
+    target: CRAWLED_microglial_activation
+  new_node:
+    name: Low-dose intrathecal AM1241 with morphine
+    entity_type: drug
+    compartment: dorsal_horn
+  reason: 'Context dropped: Ma et al. 2021 gave rats with cancer pain daily intrathecal morphine, plus
+    AM1241 at 0.03-0.07 ug, a dose the authors call non-analgesic. At that dose spinal and DRG TLR4, p38
+    MAPK, microglial markers, IL-1b and TNF-alpha rose, through CB2. Filed under plain AM1241 the two
+    links outweighed three papers showing anti-inflammatory effects at analgesic doses and turned AM1241
+    pain-raising (+2.2; -8.9 without them). The finding moves to its own node.'
+- pmid: '33131746'
+  quote: The expression of TLR4, p38 MAPK, microglial markers, IL-1β, and TNF-α was significantly higher
+    in AM1241-pretreated groups than in the vehicle group
+  was:
+    subject: AM1241
+    predicate: upregulates
+    object: TNF-alpha
+    sign: 1
+  graph_was:
+    source: CRAWLED_am1241
+    target: TNF_TNF_alpha
+  action: replace
+  now:
+    subject: Low-dose intrathecal AM1241 with morphine
+    predicate: upregulates
+    object: TNF-alpha
+    sign: 1
+  graph:
+    source: CRAWLED_low_dose_intrathecal_am1241_with_morphine
+    target: TNF_TNF_alpha
+  new_node:
+    name: Low-dose intrathecal AM1241 with morphine
+    entity_type: drug
+    compartment: dorsal_horn
+  reason: 'Context dropped: Ma et al. 2021 gave rats with cancer pain daily intrathecal morphine, plus
+    AM1241 at 0.03-0.07 ug, a dose the authors call non-analgesic. At that dose spinal and DRG TLR4, p38
+    MAPK, microglial markers, IL-1b and TNF-alpha rose, through CB2. Filed under plain AM1241 the two
+    links outweighed three papers showing anti-inflammatory effects at analgesic doses and turned AM1241
+    pain-raising (+2.2; -8.9 without them). The finding moves to its own node.'
+- pmid: '33131746'
+  quote: The expression of TLR4, p38 MAPK, microglial markers, IL-1β, and TNF-α was significantly higher
+    in AM1241-pretreated groups than in the vehicle group
+  was:
+    subject: AM1241
+    predicate: upregulates
+    object: TLR4
+    sign: 1
+  graph_was:
+    source: CRAWLED_am1241
+    target: tlr4_tlr4
+  action: replace
+  now:
+    subject: Low-dose intrathecal AM1241 with morphine
+    predicate: upregulates
+    object: TLR4
+    sign: 1
+  graph:
+    source: CRAWLED_low_dose_intrathecal_am1241_with_morphine
+    target: tlr4_tlr4
+  new_node:
+    name: Low-dose intrathecal AM1241 with morphine
+    entity_type: drug
+    compartment: dorsal_horn
+  reason: 'Context dropped: Ma et al. 2021 gave rats with cancer pain daily intrathecal morphine, plus
+    AM1241 at 0.03-0.07 ug, a dose the authors call non-analgesic. At that dose spinal and DRG TLR4, p38
+    MAPK, microglial markers, IL-1b and TNF-alpha rose, through CB2. Filed under plain AM1241 the two
+    links outweighed three papers showing anti-inflammatory effects at analgesic doses and turned AM1241
+    pain-raising (+2.2; -8.9 without them). The finding moves to its own node.'
+- pmid: '34602367'
+  quote: Patients with severe pain exhibited significantly lower TNFα levels (p=0.04) and trended toward
+    lower IL-6 levels (p=0.07) and substance P levels (p=0.06) compared to no or moderate pain (Table
+    3).
+  was:
+    subject: TNF-alpha
+    predicate: modulates
+    object: chronic pancreatitis pain
+    sign: -1
+  graph_was:
+    source: TNF_TNF_alpha
+    target: CRAWLED_chronic_pancreatitis_pain
+  action: drop
+  reason: 'Correlation recorded as an effect: in patients with chronic pancreatitis, those with severe
+    pain had significantly lower TNF-alpha (p=0.04) than those with no or moderate pain. Levels measured
+    once, by pain category; nothing was manipulated.'
+- pmid: '34602367'
+  quote: Interestingly, patients with lower levels of these markers but higher IL-8, IL-4 and CGRP levels
+    tended to fall into the severe pain category.
+  was:
+    subject: CGRP
+    predicate: modulates
+    object: chronic pancreatitis pain
+    sign: 1
+  graph_was:
+    source: shared_cgrp
+    target: CRAWLED_chronic_pancreatitis_pain
+  action: drop
+  reason: 'Correlation recorded as an effect: in patients with chronic pancreatitis, those with severe
+    pain had higher CGRP, IL-8 and IL-4 levels and lower levels of the other markers, a tendency. Levels
+    measured once, by pain category; nothing was manipulated.'

@@ -65746,6 +65746,25 @@
       "tier": "peripheral",
       "source_pmid": "34671215",
       "source_doi": ""
+    },
+    {
+      "label": "Low-dose intrathecal AM1241 with morphine",
+      "file_type": "crawled",
+      "source_file": null,
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-11-21T22:01:45.219486+00:00",
+      "author": null,
+      "contributor": "auto_crawler",
+      "community": -1,
+      "norm_label": "low dose intrathecal am1241 with morphine",
+      "id": "CRAWLED_low_dose_intrathecal_am1241_with_morphine",
+      "merged_from": [],
+      "entity_type": "drug",
+      "compartment": "dorsal_horn",
+      "tier": "peripheral",
+      "source_pmid": "33131746",
+      "source_doi": ""
     }
   ],
   "links": [
@@ -134933,62 +134952,6 @@
       ]
     },
     {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "TNF_TNF_alpha",
-      "target": "CRAWLED_chronic_pancreatitis_pain",
-      "sign": -1,
-      "origin": "auto_crawled",
-      "quote": "Patients with severe pain exhibited significantly lower TNFα levels (p=0.04) and trended toward lower IL-6 levels (p=0.07) and substance P levels (p=0.06) compared to no or moderate pain (Table 3).",
-      "source_ref": null,
-      "source_pmid": "34602367",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.144447+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "34602367",
-          "doi": "",
-          "quote": "Patients with severe pain exhibited significantly lower TNFα levels (p=0.04) and trended toward lower IL-6 levels (p=0.07) and substance P levels (p=0.06) compared to no or moderate pain (Table 3).",
-          "predicate": "modulates",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:25.144447+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "shared_cgrp",
-      "target": "CRAWLED_chronic_pancreatitis_pain",
-      "sign": 1,
-      "origin": "auto_crawled",
-      "quote": "Interestingly, patients with lower levels of these markers but higher IL-8, IL-4 and CGRP levels tended to fall into the severe pain category.",
-      "source_ref": null,
-      "source_pmid": "34602367",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.144524+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "34602367",
-          "doi": "",
-          "quote": "Interestingly, patients with lower levels of these markers but higher IL-8, IL-4 and CGRP levels tended to fall into the severe pain category.",
-          "predicate": "modulates",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.144524+00:00"
-        }
-      ]
-    },
-    {
       "relation": "inhibits_pathway",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
@@ -141962,7 +141925,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "CRAWLED_am1241",
+      "source": "CRAWLED_low_dose_intrathecal_am1241_with_morphine",
       "target": "TNF_TNF_alpha",
       "sign": 1,
       "origin": "auto_crawled",
@@ -141979,7 +141942,8 @@
           "quote": "The expression of TLR4, p38 MAPK, microglial markers, IL-1β, and TNF-α was significantly higher in AM1241-pretreated groups than in the vehicle group",
           "predicate": "upregulates",
           "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.182562+00:00"
+          "crawled_at": "2026-11-21T20:00:25.182562+00:00",
+          "corrected": "crawler/review/extraction_corrections_2026-11.yaml"
         }
       ]
     },
@@ -141990,7 +141954,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "CRAWLED_am1241",
+      "source": "CRAWLED_low_dose_intrathecal_am1241_with_morphine",
       "target": "tlr4_tlr4",
       "sign": 1,
       "origin": "auto_crawled",
@@ -142007,7 +141971,8 @@
           "quote": "The expression of TLR4, p38 MAPK, microglial markers, IL-1β, and TNF-α was significantly higher in AM1241-pretreated groups than in the vehicle group",
           "predicate": "upregulates",
           "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.182642+00:00"
+          "crawled_at": "2026-11-21T20:00:25.182642+00:00",
+          "corrected": "crawler/review/extraction_corrections_2026-11.yaml"
         }
       ]
     },

@@ -133,3 +133,35 @@ def test_sign_rule_fixes_skip_quotes_that_back_several_relationships(tmp_path):
             {"subject": "D", "predicate": "prevents", "object": "E", "sign": 1, "evidence_quote": "alone"}]
     (tmp_path / "9.json").write_text(json.dumps({"pmid": "9", "relationships": rels}))
     assert cl.sign_rule_fixes(tmp_path) == [("9", "alone", -1, "modulates", 1)]
+
+
+def test_a_finding_moves_to_a_new_context_node_created_as_the_crawler_would():
+    corr = replace("7", "q7", "drug", "tnf", 1, cl.node_id_from_name("Low-dose drug with morphine"), "tnf", 1)
+    corr["new_node"] = {"name": "Low-dose drug with morphine", "entity_type": "drug", "compartment": "dorsal_horn"}
+    graph = {"nodes": [{"id": "drug"}, {"id": "tnf"}], "links": [crawled("drug", "tnf", 1, papers=(("7", "q7"),))]}
+    out, _ = cl.correct_graph(graph, [corr], [], -1)
+    node = out["nodes"][-1]
+    assert node["id"] == "CRAWLED_low_dose_drug_with_morphine" and node["label"] == "Low-dose drug with morphine"
+    assert node["file_type"] == "crawled" and node["entity_type"] == "drug" and node["source_pmid"] == "7"
+    assert ends(out["links"]) == [("CRAWLED_low_dose_drug_with_morphine", "tnf", 1)]
+    again, log = cl.correct_graph(out, [corr], [], -1)
+    assert again["nodes"] == out["nodes"] and log == []
+
+
+def test_a_new_node_whose_id_the_correction_does_not_use_is_an_error():
+    corr = replace("7", "q7", "drug", "tnf", 1, "elsewhere", "tnf", 1)
+    corr["new_node"] = {"name": "Low-dose drug with morphine"}
+    with pytest.raises(ValueError, match="does not use"):
+        cl.correct_graph({"nodes": [], "links": []}, [corr], [], -1)
+
+
+def test_a_renamed_endpoint_keeps_its_entity_record_in_the_extraction(tmp_path):
+    rel = {"subject": "AM1241", "predicate": "upregulates", "object": "TLR4", "sign": 1, "evidence_quote": "q1"}
+    ents = [{"name": "AM1241", "entity_type": "drug", "compartment": "dorsal_horn", "mentions": 4, "aliases": ["x"]}]
+    (tmp_path / "1.json").write_text(json.dumps({"pmid": "1", "entities": ents, "relationships": [rel]}))
+    corr = [{"pmid": "1", "quote": "q1", "action": "replace", "was": {k: rel[k] for k in cl.FIELDS},
+             "now": dict({k: rel[k] for k in cl.FIELDS}, subject="Low-dose AM1241")}]
+    cl.correct_extraction_files(corr, tmp_path)
+    data = json.loads((tmp_path / "1.json").read_text())
+    assert data["entities"][-1] == {"name": "Low-dose AM1241", "entity_type": "drug", "compartment": "dorsal_horn", "mentions": 1}
+    assert data["relationships"][0]["subject"] == "Low-dose AM1241"

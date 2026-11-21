@@ -1,118 +1,118 @@
 # Signed-path inference over the knowledge graph
 
-Signed graph: 5397 links (5144 crawled and unreviewed, 253 curated) over 3140 nodes; 151 pain nodes. Excluded: {'refuted': 8, 'null_result_wording': 58}.
+Signed graph: 5395 links (5142 crawled and unreviewed, 253 curated) over 3140 nodes; 151 pain nodes. Excluded: {'refuted': 8, 'null_result_wording': 58}.
 
 **Every inference below is a hypothesis built from signs composed along paths; most links are crawled and unreviewed.** The calibration section says how far to trust them.
 
 ## 0. Calibration: does composing signs along paths reproduce known links?
 
 - two-hop paths predict a direct link's sign (curated): **88%** (30/34)
-- two-hop paths predict a direct link's sign (crawled): **90%** (1352/1501)
-- two-hop paths predict a direct link's sign (all): **90%** (1382/1535)
-- ... with at least 1 supporting two-hop path(s): 90% (1382/1535)
-- ... with at least 2 supporting two-hop path(s): 92% (519/562)
-- ... with at least 3 supporting two-hop path(s): 93% (248/266)
+- two-hop paths predict a direct link's sign (crawled): **90%** (1356/1501)
+- two-hop paths predict a direct link's sign (all): **90%** (1386/1535)
+- ... with at least 1 supporting two-hop path(s): 90% (1386/1535)
+- ... with at least 2 supporting two-hop path(s): 93% (519/560)
+- ... with at least 3 supporting two-hop path(s): 94% (248/265)
 - leave-one-out, 128 drugs with a known direct effect on pain (that link removed, the effect re-predicted from the other paths): known analgesics predicted analgesic 95% (117/123), known pain-raising drugs predicted pain-raising 80% (4/5). **But the method calls 87% of all drugs analgesic**, so recovering known analgesics is almost uninformative: the crawl is selection-biased, since a drug that appears in a pain paper is mostly being studied as an analgesic.
-- discrimination: a known analgesic scores lower (more analgesic) than a drug with no direct pain link with probability **0.61** (AUC; 123 known analgesics vs 806 others; 0.5 is chance, and drugs with more links tend to score more extreme, which inflates it)
+- discrimination: a known analgesic scores lower (more analgesic) than a drug with no direct pain link with probability **0.61** (AUC; 123 known analgesics vs 807 others; 0.5 is chance, and drugs with more links tend to score more extreme, which inflates it)
 - the clearest check is the rare opposite call: 30 drugs are predicted pain-raising (section 1 lists them), and they should be known pain inducers
 
-Outcome set for ranking: the 20 best-evidenced pain nodes (Activity-induced muscle pain, Cisplatin-induced mechanical and cold allodynia, Mechanical Allodynia, Neuropathic Pain, Oxaliplatin-induced mechanical allodynia, Vincristine-induced mechanical allodynia, acute pain, allodynia, bone cancer pain, cancer pain, central post-stroke pain, chronic pancreatitis pain, ...). Each outcome counts at most 1, so reaching a hub that fans out to many pain nodes does not inflate a score.
+Outcome set for ranking: the 20 best-evidenced pain nodes (Activity-induced muscle pain, Cisplatin-induced mechanical and cold allodynia, Diabetic neuropathic pain, Mechanical Allodynia, Neuropathic Pain, Oxaliplatin-induced mechanical allodynia, Vincristine-induced mechanical allodynia, acute pain, allodynia, bone cancer pain, cancer pain, central post-stroke pain, ...). Each outcome counts at most 1, so reaching a hub that fans out to many pain nodes does not inflate a score.
 
 ## 1. Predicted drug effects on pain (paths up to 4 links)
 
-1001 drugs reach the core pain nodes. **Novel analgesic candidates** (net score <= -1, >=2 independent mediators, >=80% of reached pain nodes agree, no direct drug -> pain link in the graph): 282. *Read this as a literature-weighted ranking, not a prediction: the AUC above is only 0.61, because most drugs in a pain crawl are analgesics.* Strongest:
+1002 drugs reach the core pain nodes. **Novel analgesic candidates** (net score <= -1, >=2 independent mediators, >=80% of reached pain nodes agree, no direct drug -> pain link in the graph): 283. *Read this as a literature-weighted ranking, not a prediction: the AUC above is only 0.61, because most drugs in a pain crawl are analgesics.* Strongest:
 
 | drug | score | pain nodes (-/+) | mediators | shortest strong path |
 |---|---|---|---|---|
-| emodin | -13.31 | 18/1 | 9 | emodin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| Paeoniflorin | -13.28 | 18/1 | 9 | Paeoniflorin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| ferulic acid | -12.04 | 19/0 | 5 | ferulic acid --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| AICAR | -11.78 | 17/0 | 6 | AICAR --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| ADM_12 | -11.73 | 18/1 | 4 | ADM_12 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| Linarin | -11.65 | 18/0 | 5 | Linarin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| JQ1 | -11.64 | 19/1 | 5 | JQ1 --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| naringin | -11.59 | 17/1 | 5 | naringin --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| GTS-21 | -11.23 | 18/1 | 4 | GTS-21 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| TAK242 | -11.16 | 18/1 | 4 | TAK242 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| resveratrol | -11.13 | 17/0 | 8 | resveratrol --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| Euphorbium total triterpenes | -11.09 | 17/1 | 4 | Euphorbium total triterpenes --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| CYM51010 | -11.08 | 18/0 | 4 | CYM51010 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| Gastrodin | -10.87 | 17/1 | 7 | Gastrodin --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| Brilliant Blue G | -10.84 | 17/1 | 5 | Brilliant Blue G --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| emodin | -13.80 | 19/0 | 9 | emodin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| Paeoniflorin | -13.52 | 19/0 | 9 | Paeoniflorin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| JQ1 | -12.04 | 20/0 | 5 | JQ1 --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| ADM_12 | -11.98 | 19/0 | 4 | ADM_12 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| AICAR | -11.94 | 18/0 | 6 | AICAR --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| ferulic acid | -11.93 | 19/0 | 5 | ferulic acid --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| naringin | -11.75 | 18/0 | 5 | naringin --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| Linarin | -11.72 | 19/0 | 5 | Linarin --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| TAK242 | -11.56 | 19/0 | 4 | TAK242 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| GTS-21 | -11.53 | 19/0 | 4 | GTS-21 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| Brilliant Blue G | -11.39 | 18/0 | 5 | Brilliant Blue G --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| Euphorbium total triterpenes | -11.26 | 18/0 | 4 | Euphorbium total triterpenes --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| CYM51010 | -11.13 | 18/0 | 4 | CYM51010 --(-)--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| MSC-EVs | -11.01 | 19/0 | 3 | MSC-EVs --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| Gastrodin | -11.01 | 18/0 | 7 | Gastrodin --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
 
 **Drugs predicted to worsen pain** (score >= 1, >=2 mediators, >=80% agreement): 30. Strongest:
 
 | drug | score | direct link | shortest strong path |
 |---|---|---|---|
-| paclitaxel | +15.08 | [1] | paclitaxel --+--> Mechanical Allodynia |
-| oxaliplatin | +14.37 | [1] | oxaliplatin --+--> Mechanical Allodynia |
-| morphine | +12.61 | none | morphine --+--> TLR4 --+--> tactile allodynia |
-| vincristine | +11.98 | none | vincristine --+--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
-| nitroglycerin | +11.83 | none | nitroglycerin --+--> CGRP --+--> cold allodynia |
-| capsaicin | +11.10 | [-1] | capsaicin --+--> CGRP --+--> cold allodynia |
-| nitrogen mustard | +10.54 | none | nitrogen mustard --+--> NLRP3 Inflammasome --+--> Neuropathic Pain |
-| BzATP | +7.60 | none | BzATP --+--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| paclitaxel | +15.68 | [1] | paclitaxel --+--> Mechanical Allodynia |
+| oxaliplatin | +14.57 | [1] | oxaliplatin --+--> Mechanical Allodynia |
+| morphine | +13.19 | none | morphine --+--> TLR4 --+--> tactile allodynia |
+| nitroglycerin | +12.36 | none | nitroglycerin --+--> CGRP --+--> cold allodynia |
+| vincristine | +11.95 | none | vincristine --+--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
+| capsaicin | +11.03 | [-1] | capsaicin --+--> CGRP --+--> cold allodynia |
+| nitrogen mustard | +10.47 | none | nitrogen mustard --+--> NLRP3 Inflammasome --+--> Neuropathic Pain |
+| Low-dose intrathecal AM1241 with morphine | +9.68 | none | Low-dose intrathecal AM1241 with morphine --+--> Tumor Necrosis Factor Alpha --+--> Mechanical Allodynia |
 
 **Double-edged drugs** (the direct link says one thing, the other paths the opposite; 5): a context-dependent effect, or an off-target liability.
 
 | drug | direct link | score from other paths | shortest opposing path |
 |---|---|---|---|
-| capsaicin | analgesic | +11.1 | capsaicin --+--> CGRP --+--> cold allodynia |
-| propofol | analgesic | +5.7 | propofol --+--> Bradykinin --+--> Cisplatin-induced mechanical and cold allodynia |
-| ADU-S100 | analgesic | +4.4 | ADU-S100 --+--> IL-1beta --+--> Activity-induced muscle pain |
+| capsaicin | analgesic | +11.0 | capsaicin --+--> CGRP --+--> cold allodynia |
+| propofol | analgesic | +5.5 | propofol --+--> Bradykinin --+--> Cisplatin-induced mechanical and cold allodynia |
+| ADU-S100 | analgesic | +4.5 | ADU-S100 --+--> IL-1beta --+--> Activity-induced muscle pain |
 | CYN154806 | pain-raising | -3.3 | CYN154806 --(-)--> CGRP --+--> cold allodynia |
-| Simvastatin | analgesic | +2.5 | Simvastatin --+--> TRPV1 --+--> cancer pain |
+| Simvastatin | analgesic | +2.3 | Simvastatin --+--> TRPV1 --+--> cancer pain |
 
 ## 2. Targets: what drives pain, and what no drug yet hits
 
 | target | drives pain (score) | core pain nodes driven | drugs inhibiting it |
 |---|---|---|---|
-| Tumor Necrosis Factor Alpha (molecule) | 11.86 | 19 | 187 |
-| TLR4 (receptor) | 10.49 | 17 | 66 |
-| IL-1beta (concept) | 9.21 | 16 | 39 |
-| P2X4 Receptor (channel) | 9.14 | 17 | 7 |
-| NLRP3 Inflammasome (concept) | 8.15 | 16 | 125 |
-| TRPV1 (channel) | 7.45 | 18 | 113 |
-| CGRP (molecule) | 7.39 | 15 | 99 |
-| HMGB1 (concept) | 7.08 | 16 | 16 |
-| Spinal Microglia (cell_type) | 6.96 | 16 | 20 |
-| p38 MAPK (molecule) | 6.74 | 16 | 19 |
-| Vascular Endothelial Growth Factor A (concept) | 6.72 | 18 | 42 |
-| P2X7 Receptor (channel) | 6.53 | 16 | 9 |
-| NGF (molecule) | 6.28 | 15 | 0 |
-| Prostaglandin E2 (concept) | 6.23 | 15 | 54 |
-| TRPV4 (channel) | 6.17 | 17 | 1 |
+| Tumor Necrosis Factor Alpha (molecule) | 11.60 | 19 | 187 |
+| TLR4 (receptor) | 11.05 | 18 | 66 |
+| P2X4 Receptor (channel) | 9.51 | 18 | 7 |
+| IL-1beta (concept) | 9.31 | 17 | 39 |
+| NLRP3 Inflammasome (concept) | 8.35 | 16 | 125 |
+| CGRP (molecule) | 7.50 | 16 | 99 |
+| Spinal Microglia (cell_type) | 7.43 | 17 | 20 |
+| TRPV1 (channel) | 7.35 | 17 | 113 |
+| HMGB1 (concept) | 7.35 | 16 | 16 |
+| P2X7 Receptor (channel) | 7.15 | 17 | 9 |
+| p38 MAPK (molecule) | 6.91 | 17 | 19 |
+| Vascular Endothelial Growth Factor A (concept) | 6.59 | 18 | 42 |
+| NF-κB (concept) | 6.41 | 16 | 38 |
+| FTO (molecule) | 6.38 | 17 | 0 |
+| NGF (molecule) | 6.00 | 14 | 0 |
 
-**Druggable gaps** (drives >=2 core pain nodes, no inhibiting drug in the graph): 67. Top:
+**Druggable gaps** (drives >=2 core pain nodes, no inhibiting drug in the graph): 65. Top:
 
-- NGF (molecule): score 6.28, drives 15 core pain nodes
-- FTO (molecule): score 6.13, drives 17 core pain nodes
-- miR-30b-5p (molecule): score 4.72, drives 17 core pain nodes
-- galectin-3 (molecule): score 4.63, drives 15 core pain nodes
-- spinal HDAC6 (molecule): score 4.12, drives 16 core pain nodes
-- RUNX1 (molecule): score 4.05, drives 15 core pain nodes
-- EZH2 (molecule): score 3.59, drives 15 core pain nodes
-- NR2B (receptor): score 3.23, drives 15 core pain nodes
-- DNMT1 (molecule): score 3.23, drives 15 core pain nodes
-- B2 Receptor (receptor): score 3.09, drives 14 core pain nodes
+- FTO (molecule): score 6.38, drives 17 core pain nodes
+- NGF (molecule): score 6.00, drives 14 core pain nodes
+- galectin-3 (molecule): score 4.84, drives 15 core pain nodes
+- miR-30b-5p (molecule): score 4.77, drives 17 core pain nodes
+- spinal HDAC6 (molecule): score 4.24, drives 16 core pain nodes
+- RUNX1 (molecule): score 3.99, drives 15 core pain nodes
+- EZH2 (molecule): score 3.80, drives 15 core pain nodes
+- DNMT1 (molecule): score 3.34, drives 15 core pain nodes
+- ATP (molecule): score 3.16, drives 13 core pain nodes
+- NR2B (receptor): score 3.15, drives 14 core pain nodes
 
-**Inducers** (nothing in the graph acts on them, so they are inputs, not targets): Chronic Constriction Injury (10.4), LPS (9.7), Spared Nerve Injury (8.3), Chikungunya virus (6.8), IL-33 (5.4), multiple lesion inductions (5.4), microglial Orai1 (5.0), disulfide HMGB1 (4.9), feline odontoclastic resorptive lesion (4.9), Heme (4.9)
+**Inducers** (nothing in the graph acts on them, so they are inputs, not targets): Chronic Constriction Injury (10.5), LPS (10.1), Spared Nerve Injury (8.8), Chikungunya virus (7.1), IL-33 (5.3), multiple lesion inductions (5.3), microglial Orai1 (5.2), disulfide HMGB1 (5.1), feline odontoclastic resorptive lesion (5.1), Heme (5.1)
 
 
-**Pain-suppressing nodes** (raising them lowers pain): PPARγ (-6.92), CB2 (-6.59), Nrf2 (-5.82), IL-10 (-4.68), TSG-6 (-3.76), endoglin (-3.72), SIRT1 (-3.71), beta-hydroxybutyrate (-3.68), SIRT6 (-3.32), FOXA2 (-3.23)
+**Pain-suppressing nodes** (raising them lowers pain): PPARγ (-7.37), CB2 (-6.98), Nrf2 (-5.94), IL-10 (-4.86), endoglin (-3.90), beta-hydroxybutyrate (-3.79), TSG-6 (-3.75), SIRT1 (-3.64), SIRT6 (-3.62), FOXA2 (-3.34)
 
 ## 3. Chokepoints between nerve-injury models and pain
 
-22 injury nodes, 35536 pain-promoting paths (up to 5 links). Share of the weighted flow passing through each node:
+22 injury nodes, 34860 pain-promoting paths (up to 5 links). Share of the weighted flow passing through each node:
 
-- Tumor Necrosis Factor Alpha (molecule): 51%
+- Tumor Necrosis Factor Alpha (molecule): 50%
 - TRPV1 (channel): 39%
-- CGRP (molecule): 34%
 - NLRP3 Inflammasome (concept): 34%
+- CGRP (molecule): 32%
 - IL-1beta (concept): 19%
 - TLR4 (receptor): 18%
-- Brain-Derived Neurotrophic Factor (molecule): 10%
-- Nav1.7 (channel): 7%
+- Brain-Derived Neurotrophic Factor (molecule): 11%
+- Nav1.7 (channel): 8%
 - Vascular Endothelial Growth Factor A (concept): 7%
 - NGF (molecule): 7%
 - Hypoxia-Inducible Factor 1 Alpha (concept): 6%
