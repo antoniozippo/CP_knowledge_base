@@ -13,3 +13,12 @@ Verdicts
 - `OVERSTATED`: direction right, predicate stronger than the evidence (hedged, correlation coded as causal, "contributes" coded as "causes").
 - `WEAK`: the quote does not name an endpoint, is a hypothesis, or cannot be checked from the quote.
 - `WRONG`: wrong sign or direction, an entity merged into the wrong node, or a null result recorded as a relation.
+
+## After the matcher fixes
+The review found 23 `WRONG` links: 13 were entities merged into the wrong node and 10 were
+extraction errors. The matcher fixes (stricter fuzzy and parenthetical matching, `crawler/no_merge.yaml`)
+and the re-merge that followed removed all 13 entity-merge errors. The 10 extraction errors remain
+(4 null results recorded as relations, 3 reversed directions, 3 wrong signs).
+
+`graph_link_index` refers to the graph at the commit that added the CSV. The re-merge re-ordered
+the crawled links, so find a row in the current graph by `pmid` + `quote` + endpoint labels, not by index.
