@@ -1,0 +1,4616 @@
+generated_at: '2026-11-21T16:38:56.758904+00:00'
+total_discovered: 296
+terms:
+- mesh_term: Hyperalgesia
+  frequency: 868
+  adjacent_themes: []
+  example_pmids:
+  - '31221045'
+  - '32222846'
+  - '32533604'
+  - '32557241'
+  - '32594130'
+  suggested_keywords:
+  - Hyperalgesia neuropathic pain
+  - Hyperalgesia spinal cord pain
+  - Hyperalgesia dorsal horn
+  - Hyperalgesia microglia
+  status: PENDING_REVIEW
+- mesh_term: Pain
+  frequency: 817
+  adjacent_themes: []
+  example_pmids:
+  - '32374414'
+  - '32483053'
+  - '32524649'
+  - '32542515'
+  - '32729340'
+  suggested_keywords:
+  - Pain neuropathic pain
+  - Pain spinal cord pain
+  - Pain dorsal horn
+  - Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Signal Transduction
+  frequency: 681
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '32408781'
+  - '32744065'
+  - '32860901'
+  - '32955611'
+  suggested_keywords:
+  - Signal Transduction neuropathic pain
+  - Signal Transduction spinal cord pain
+  - Signal Transduction dorsal horn
+  - Signal Transduction microglia
+  status: PENDING_REVIEW
+- mesh_term: Inflammation
+  frequency: 485
+  adjacent_themes: []
+  example_pmids:
+  - '31872780'
+  - '32557241'
+  - '32828139'
+  - '32860901'
+  - '32905811'
+  suggested_keywords:
+  - Inflammation neuropathic pain
+  - Inflammation spinal cord pain
+  - Inflammation dorsal horn
+  - Inflammation microglia
+  status: PENDING_REVIEW
+- mesh_term: Chronic Pain
+  frequency: 440
+  adjacent_themes: []
+  example_pmids:
+  - '32222846'
+  - '32777329'
+  - '32796318'
+  - '32820550'
+  - '32901371'
+  suggested_keywords:
+  - Chronic Pain neuropathic pain
+  - Chronic Pain spinal cord pain
+  - Chronic Pain dorsal horn
+  - Chronic Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Spinal Cord
+  frequency: 387
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '31899978'
+  - '32222846'
+  - '32306148'
+  - '32557241'
+  - '32744065'
+  suggested_keywords:
+  - Spinal Cord neuropathic pain
+  - Spinal Cord spinal cord pain
+  - Spinal Cord dorsal horn
+  - Spinal Cord microglia
+  status: PENDING_REVIEW
+- mesh_term: Analgesics
+  frequency: 385
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '31872780'
+  - '32408781'
+  - '32857181'
+  - '32935647'
+  suggested_keywords:
+  - Analgesics neuropathic pain
+  - Analgesics spinal cord pain
+  - Analgesics dorsal horn
+  - Analgesics microglia
+  status: PENDING_REVIEW
+- mesh_term: Neurons
+  frequency: 321
+  adjacent_themes:
+  - T01
+  example_pmids:
+  - '31911635'
+  - '32524649'
+  - '32621322'
+  - '32810328'
+  - '32853530'
+  suggested_keywords:
+  - Neurons neuropathic pain
+  - Neurons spinal cord pain
+  - Neurons dorsal horn
+  - Neurons microglia
+  status: PENDING_REVIEW
+- mesh_term: Migraine Disorders
+  frequency: 266
+  adjacent_themes: []
+  example_pmids:
+  - '31989282'
+  - '32639078'
+  - '32814432'
+  - '32909437'
+  - '32985222'
+  suggested_keywords:
+  - Migraine Disorders neuropathic pain
+  - Migraine Disorders spinal cord pain
+  - Migraine Disorders dorsal horn
+  - Migraine Disorders microglia
+  status: PENDING_REVIEW
+- mesh_term: NF-kappa B
+  frequency: 220
+  adjacent_themes: []
+  example_pmids:
+  - '33091488'
+  - '33180213'
+  - '33259457'
+  - '33340158'
+  - '33352238'
+  suggested_keywords:
+  - NF-kappa B neuropathic pain
+  - NF-kappa B spinal cord pain
+  - NF-kappa B dorsal horn
+  - NF-kappa B microglia
+  status: PENDING_REVIEW
+- mesh_term: Cytokines
+  frequency: 215
+  adjacent_themes: []
+  example_pmids:
+  - '31872780'
+  - '32306148'
+  - '32856747'
+  - '32889847'
+  - '33009636'
+  suggested_keywords:
+  - Cytokines neuropathic pain
+  - Cytokines spinal cord pain
+  - Cytokines dorsal horn
+  - Cytokines microglia
+  status: PENDING_REVIEW
+- mesh_term: Intervertebral Disc Degeneration
+  frequency: 199
+  adjacent_themes: []
+  example_pmids:
+  - '32255531'
+  - '32856747'
+  - '33007412'
+  - '33416131'
+  - '33445782'
+  suggested_keywords:
+  - Intervertebral Disc Degeneration neuropathic pain
+  - Intervertebral Disc Degeneration spinal cord pain
+  - Intervertebral Disc Degeneration dorsal horn
+  - Intervertebral Disc Degeneration microglia
+  status: PENDING_REVIEW
+- mesh_term: Sensory Receptor Cells
+  frequency: 185
+  adjacent_themes:
+  - T03
+  - T04
+  - T07
+  - T08
+  example_pmids:
+  - '32255531'
+  - '32306148'
+  - '33045060'
+  - '33198614'
+  - '33367648'
+  suggested_keywords:
+  - Sensory Receptor Cells neuropathic pain
+  - Sensory Receptor Cells spinal cord pain
+  - Sensory Receptor Cells dorsal horn
+  - Sensory Receptor Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Oxidative Stress
+  frequency: 183
+  adjacent_themes: []
+  example_pmids:
+  - '32578137'
+  - '32683581'
+  - '33027641'
+  - '33253369'
+  - '33569042'
+  suggested_keywords:
+  - Oxidative Stress neuropathic pain
+  - Oxidative Stress spinal cord pain
+  - Oxidative Stress dorsal horn
+  - Oxidative Stress microglia
+  status: PENDING_REVIEW
+- mesh_term: Treatment Outcome
+  frequency: 174
+  adjacent_themes: []
+  example_pmids:
+  - '32027775'
+  - '32542515'
+  - '32875492'
+  - '32880099'
+  - '32909437'
+  suggested_keywords:
+  - Treatment Outcome neuropathic pain
+  - Treatment Outcome spinal cord pain
+  - Treatment Outcome dorsal horn
+  - Treatment Outcome microglia
+  status: PENDING_REVIEW
+- mesh_term: Nociception
+  frequency: 166
+  adjacent_themes: []
+  example_pmids:
+  - '31872780'
+  - '32222846'
+  - '32255531'
+  - '32750173'
+  - '32773604'
+  suggested_keywords:
+  - Nociception neuropathic pain
+  - Nociception spinal cord pain
+  - Nociception dorsal horn
+  - Nociception microglia
+  status: PENDING_REVIEW
+- mesh_term: Anti-Inflammatory Agents
+  frequency: 162
+  adjacent_themes: []
+  example_pmids:
+  - '32935647'
+  - '32964315'
+  - '33053380'
+  - '33212290'
+  - '33253369'
+  suggested_keywords:
+  - Anti-Inflammatory Agents neuropathic pain
+  - Anti-Inflammatory Agents spinal cord pain
+  - Anti-Inflammatory Agents dorsal horn
+  - Anti-Inflammatory Agents microglia
+  status: PENDING_REVIEW
+- mesh_term: Inflammasomes
+  frequency: 162
+  adjacent_themes: []
+  example_pmids:
+  - '33000169'
+  - '33434563'
+  - '33508403'
+  - '33609693'
+  - '33639149'
+  suggested_keywords:
+  - Inflammasomes neuropathic pain
+  - Inflammasomes spinal cord pain
+  - Inflammasomes dorsal horn
+  - Inflammasomes microglia
+  status: PENDING_REVIEW
+- mesh_term: Nociceptors
+  frequency: 159
+  adjacent_themes: []
+  example_pmids:
+  - '32306148'
+  - '32741955'
+  - '32773598'
+  - '32958958'
+  - '33007412'
+  suggested_keywords:
+  - Nociceptors neuropathic pain
+  - Nociceptors spinal cord pain
+  - Nociceptors dorsal horn
+  - Nociceptors microglia
+  status: PENDING_REVIEW
+- mesh_term: Neuroinflammatory Diseases
+  frequency: 156
+  adjacent_themes: []
+  example_pmids:
+  - '33009262'
+  - '33083995'
+  - '33774154'
+  - '34162288'
+  - '34176097'
+  suggested_keywords:
+  - Neuroinflammatory Diseases neuropathic pain
+  - Neuroinflammatory Diseases spinal cord pain
+  - Neuroinflammatory Diseases dorsal horn
+  - Neuroinflammatory Diseases microglia
+  status: PENDING_REVIEW
+- mesh_term: Osteoarthritis
+  frequency: 156
+  adjacent_themes: []
+  example_pmids:
+  - '32772139'
+  - '33158879'
+  - '33227396'
+  - '33227439'
+  - '33229973'
+  suggested_keywords:
+  - Osteoarthritis neuropathic pain
+  - Osteoarthritis spinal cord pain
+  - Osteoarthritis dorsal horn
+  - Osteoarthritis microglia
+  status: PENDING_REVIEW
+- mesh_term: Interleukin-6
+  frequency: 152
+  adjacent_themes: []
+  example_pmids:
+  - '32255531'
+  - '32557241'
+  - '32744065'
+  - '32856747'
+  - '32860901'
+  suggested_keywords:
+  - Interleukin-6 neuropathic pain
+  - Interleukin-6 spinal cord pain
+  - Interleukin-6 dorsal horn
+  - Interleukin-6 microglia
+  status: PENDING_REVIEW
+- mesh_term: Spinal Cord Dorsal Horn
+  frequency: 143
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32306148'
+  - '32621322'
+  - '33009636'
+  - '33045156'
+  - '33127810'
+  suggested_keywords:
+  - Spinal Cord Dorsal Horn neuropathic pain
+  - Spinal Cord Dorsal Horn spinal cord pain
+  - Spinal Cord Dorsal Horn dorsal horn
+  - Spinal Cord Dorsal Horn microglia
+  status: PENDING_REVIEW
+- mesh_term: Headache
+  frequency: 140
+  adjacent_themes: []
+  example_pmids:
+  - '31989282'
+  - '32379592'
+  - '32542515'
+  - '32814432'
+  - '32867531'
+  suggested_keywords:
+  - Headache neuropathic pain
+  - Headache spinal cord pain
+  - Headache dorsal horn
+  - Headache microglia
+  status: PENDING_REVIEW
+- mesh_term: Quality of Life
+  frequency: 138
+  adjacent_themes: []
+  example_pmids:
+  - '31899978'
+  - '32116074'
+  - '33180113'
+  - '33412435'
+  - '33426614'
+  suggested_keywords:
+  - Quality of Life neuropathic pain
+  - Quality of Life spinal cord pain
+  - Quality of Life dorsal horn
+  - Quality of Life microglia
+  status: PENDING_REVIEW
+- mesh_term: MicroRNAs
+  frequency: 134
+  adjacent_themes: []
+  example_pmids:
+  - '32495225'
+  - '32557241'
+  - '32621322'
+  - '32860901'
+  - '32889066'
+  suggested_keywords:
+  - MicroRNAs neuropathic pain
+  - MicroRNAs spinal cord pain
+  - MicroRNAs dorsal horn
+  - MicroRNAs microglia
+  status: PENDING_REVIEW
+- mesh_term: Macrophages
+  frequency: 133
+  adjacent_themes: []
+  example_pmids:
+  - '32796317'
+  - '33528898'
+  - '33739978'
+  - '33893883'
+  - '33916734'
+  suggested_keywords:
+  - Macrophages neuropathic pain
+  - Macrophages spinal cord pain
+  - Macrophages dorsal horn
+  - Macrophages microglia
+  status: PENDING_REVIEW
+- mesh_term: Brain
+  frequency: 133
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '32989649'
+  - '32990925'
+  - '33064807'
+  - '33152384'
+  - '33271186'
+  suggested_keywords:
+  - Brain neuropathic pain
+  - Brain spinal cord pain
+  - Brain dorsal horn
+  - Brain microglia
+  status: PENDING_REVIEW
+- mesh_term: NAV1.7 Voltage-Gated Sodium Channel
+  frequency: 133
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33086288'
+  - '33227509'
+  - '33232657'
+  - '33389681'
+  - '33427574'
+  suggested_keywords:
+  - NAV1.7 Voltage-Gated Sodium Channel neuropathic pain
+  - NAV1.7 Voltage-Gated Sodium Channel spinal cord pain
+  - NAV1.7 Voltage-Gated Sodium Channel dorsal horn
+  - NAV1.7 Voltage-Gated Sodium Channel microglia
+  status: PENDING_REVIEW
+- mesh_term: Cannabinoids
+  frequency: 130
+  adjacent_themes: []
+  example_pmids:
+  - '32027775'
+  - '32483053'
+  - '32524649'
+  - '32673642'
+  - '32804775'
+  suggested_keywords:
+  - Cannabinoids neuropathic pain
+  - Cannabinoids spinal cord pain
+  - Cannabinoids dorsal horn
+  - Cannabinoids microglia
+  status: PENDING_REVIEW
+- mesh_term: Cells, Cultured
+  frequency: 122
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '32255531'
+  - '32905811'
+  - '33009636'
+  - '33099751'
+  - '33340495'
+  suggested_keywords:
+  - Cells, Cultured neuropathic pain
+  - Cells, Cultured spinal cord pain
+  - Cells, Cultured dorsal horn
+  - Cells, Cultured microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptor, Cannabinoid, CB1
+  frequency: 121
+  adjacent_themes:
+  - T03
+  - T07
+  - T08
+  example_pmids:
+  - '32027775'
+  - '32804775'
+  - '33152384'
+  - '33271186'
+  - '33332002'
+  suggested_keywords:
+  - Receptor, Cannabinoid, CB1 neuropathic pain
+  - Receptor, Cannabinoid, CB1 spinal cord pain
+  - Receptor, Cannabinoid, CB1 dorsal horn
+  - Receptor, Cannabinoid, CB1 microglia
+  status: PENDING_REVIEW
+- mesh_term: Analgesics, Opioid
+  frequency: 118
+  adjacent_themes: []
+  example_pmids:
+  - '31964652'
+  - '32594130'
+  - '32623788'
+  - '32820550'
+  - '32880099'
+  suggested_keywords:
+  - Analgesics, Opioid neuropathic pain
+  - Analgesics, Opioid spinal cord pain
+  - Analgesics, Opioid dorsal horn
+  - Analgesics, Opioid microglia
+  status: PENDING_REVIEW
+- mesh_term: Pain Measurement
+  frequency: 118
+  adjacent_themes: []
+  example_pmids:
+  - '32750173'
+  - '32880099'
+  - '32940205'
+  - '32989649'
+  - '33006141'
+  suggested_keywords:
+  - Pain Measurement neuropathic pain
+  - Pain Measurement spinal cord pain
+  - Pain Measurement dorsal horn
+  - Pain Measurement microglia
+  status: PENDING_REVIEW
+- mesh_term: Interleukin-1beta
+  frequency: 118
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '32470939'
+  - '32901371'
+  - '33010450'
+  - '33131746'
+  suggested_keywords:
+  - Interleukin-1beta neuropathic pain
+  - Interleukin-1beta spinal cord pain
+  - Interleukin-1beta dorsal horn
+  - Interleukin-1beta microglia
+  status: PENDING_REVIEW
+- mesh_term: Nucleus Pulposus
+  frequency: 118
+  adjacent_themes: []
+  example_pmids:
+  - '32242977'
+  - '33455530'
+  - '33471211'
+  - '33486545'
+  - '33533018'
+  suggested_keywords:
+  - Nucleus Pulposus neuropathic pain
+  - Nucleus Pulposus spinal cord pain
+  - Nucleus Pulposus dorsal horn
+  - Nucleus Pulposus microglia
+  status: PENDING_REVIEW
+- mesh_term: Biomarkers
+  frequency: 117
+  adjacent_themes: []
+  example_pmids:
+  - '32027775'
+  - '32729340'
+  - '32875492'
+  - '32902792'
+  - '33009262'
+  suggested_keywords:
+  - Biomarkers neuropathic pain
+  - Biomarkers spinal cord pain
+  - Biomarkers dorsal horn
+  - Biomarkers microglia
+  status: PENDING_REVIEW
+- mesh_term: Diabetic Neuropathies
+  frequency: 116
+  adjacent_themes: []
+  example_pmids:
+  - '32683581'
+  - '32996600'
+  - '33127810'
+  - '33618606'
+  - '33639149'
+  suggested_keywords:
+  - Diabetic Neuropathies neuropathic pain
+  - Diabetic Neuropathies spinal cord pain
+  - Diabetic Neuropathies dorsal horn
+  - Diabetic Neuropathies microglia
+  status: PENDING_REVIEW
+- mesh_term: Apoptosis
+  frequency: 114
+  adjacent_themes: []
+  example_pmids:
+  - '33223115'
+  - '33421931'
+  - '33455530'
+  - '33485977'
+  - '33486545'
+  suggested_keywords:
+  - Apoptosis neuropathic pain
+  - Apoptosis spinal cord pain
+  - Apoptosis dorsal horn
+  - Apoptosis microglia
+  status: PENDING_REVIEW
+- mesh_term: Sciatic Nerve
+  frequency: 112
+  adjacent_themes: []
+  example_pmids:
+  - '31221045'
+  - '32533604'
+  - '32621322'
+  - '32739615'
+  - '32857181'
+  suggested_keywords:
+  - Sciatic Nerve neuropathic pain
+  - Sciatic Nerve spinal cord pain
+  - Sciatic Nerve dorsal horn
+  - Sciatic Nerve microglia
+  status: PENDING_REVIEW
+- mesh_term: Peripheral Nerve Injuries
+  frequency: 112
+  adjacent_themes: []
+  example_pmids:
+  - '32621322'
+  - '32744065'
+  - '33000169'
+  - '33253785'
+  - '33290758'
+  suggested_keywords:
+  - Peripheral Nerve Injuries neuropathic pain
+  - Peripheral Nerve Injuries spinal cord pain
+  - Peripheral Nerve Injuries dorsal horn
+  - Peripheral Nerve Injuries microglia
+  status: PENDING_REVIEW
+- mesh_term: Dinoprostone
+  frequency: 109
+  adjacent_themes: []
+  example_pmids:
+  - '33203743'
+  - '33212290'
+  - '33340158'
+  - '33352238'
+  - '33510215'
+  suggested_keywords:
+  - Dinoprostone neuropathic pain
+  - Dinoprostone spinal cord pain
+  - Dinoprostone dorsal horn
+  - Dinoprostone microglia
+  status: PENDING_REVIEW
+- mesh_term: Pain Management
+  frequency: 107
+  adjacent_themes: []
+  example_pmids:
+  - '32729340'
+  - '32909437'
+  - '32955611'
+  - '33358978'
+  - '33372782'
+  suggested_keywords:
+  - Pain Management neuropathic pain
+  - Pain Management spinal cord pain
+  - Pain Management dorsal horn
+  - Pain Management microglia
+  status: PENDING_REVIEW
+- mesh_term: Behavior, Animal
+  frequency: 106
+  adjacent_themes: []
+  example_pmids:
+  - '32408781'
+  - '32470939'
+  - '32741955'
+  - '32857181'
+  - '32889847'
+  suggested_keywords:
+  - Behavior, Animal neuropathic pain
+  - Behavior, Animal spinal cord pain
+  - Behavior, Animal dorsal horn
+  - Behavior, Animal microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptor, Cannabinoid, CB2
+  frequency: 106
+  adjacent_themes:
+  - T03
+  - T07
+  - T08
+  example_pmids:
+  - '32027775'
+  - '32804775'
+  - '33131746'
+  - '33360803'
+  - '33450277'
+  suggested_keywords:
+  - Receptor, Cannabinoid, CB2 neuropathic pain
+  - Receptor, Cannabinoid, CB2 spinal cord pain
+  - Receptor, Cannabinoid, CB2 dorsal horn
+  - Receptor, Cannabinoid, CB2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Endocannabinoids
+  frequency: 104
+  adjacent_themes: []
+  example_pmids:
+  - '32639078'
+  - '33348434'
+  - '33466734'
+  - '33537936'
+  - '33560661'
+  suggested_keywords:
+  - Endocannabinoids neuropathic pain
+  - Endocannabinoids spinal cord pain
+  - Endocannabinoids dorsal horn
+  - Endocannabinoids microglia
+  status: PENDING_REVIEW
+- mesh_term: Capsaicin
+  frequency: 103
+  adjacent_themes: []
+  example_pmids:
+  - '32483053'
+  - '33007786'
+  - '33023902'
+  - '33045060'
+  - '33181192'
+  suggested_keywords:
+  - Capsaicin neuropathic pain
+  - Capsaicin spinal cord pain
+  - Capsaicin dorsal horn
+  - Capsaicin microglia
+  status: PENDING_REVIEW
+- mesh_term: Lipopolysaccharides
+  frequency: 102
+  adjacent_themes: []
+  example_pmids:
+  - '33010450'
+  - '33212290'
+  - '33389386'
+  - '33510215'
+  - '33528898'
+  suggested_keywords:
+  - Lipopolysaccharides neuropathic pain
+  - Lipopolysaccharides spinal cord pain
+  - Lipopolysaccharides dorsal horn
+  - Lipopolysaccharides microglia
+  status: PENDING_REVIEW
+- mesh_term: NAV1.8 Voltage-Gated Sodium Channel
+  frequency: 102
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33086288'
+  - '33227509'
+  - '33315536'
+  - '33389681'
+  - '33515125'
+  suggested_keywords:
+  - NAV1.8 Voltage-Gated Sodium Channel neuropathic pain
+  - NAV1.8 Voltage-Gated Sodium Channel spinal cord pain
+  - NAV1.8 Voltage-Gated Sodium Channel dorsal horn
+  - NAV1.8 Voltage-Gated Sodium Channel microglia
+  status: PENDING_REVIEW
+- mesh_term: NF-E2-Related Factor 2
+  frequency: 96
+  adjacent_themes:
+  - T03
+  - T04
+  - T07
+  - T10
+  example_pmids:
+  - '32820550'
+  - '33027641'
+  - '33340158'
+  - '33395186'
+  - '33543180'
+  suggested_keywords:
+  - NF-E2-Related Factor 2 neuropathic pain
+  - NF-E2-Related Factor 2 spinal cord pain
+  - NF-E2-Related Factor 2 dorsal horn
+  - NF-E2-Related Factor 2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Pain Threshold
+  frequency: 93
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '32557241'
+  - '32741955'
+  - '32889847'
+  - '32989649'
+  suggested_keywords:
+  - Pain Threshold neuropathic pain
+  - Pain Threshold spinal cord pain
+  - Pain Threshold dorsal horn
+  - Pain Threshold microglia
+  status: PENDING_REVIEW
+- mesh_term: Sirtuin 1
+  frequency: 91
+  adjacent_themes: []
+  example_pmids:
+  - '32683581'
+  - '33009636'
+  - '33395186'
+  - '33433144'
+  - '33448323'
+  suggested_keywords:
+  - Sirtuin 1 neuropathic pain
+  - Sirtuin 1 spinal cord pain
+  - Sirtuin 1 dorsal horn
+  - Sirtuin 1 microglia
+  status: PENDING_REVIEW
+- mesh_term: Prospective Studies
+  frequency: 90
+  adjacent_themes: []
+  example_pmids:
+  - '33009262'
+  - '33350542'
+  - '33385348'
+  - '33395413'
+  - '34318540'
+  suggested_keywords:
+  - Prospective Studies neuropathic pain
+  - Prospective Studies spinal cord pain
+  - Prospective Studies dorsal horn
+  - Prospective Studies microglia
+  status: PENDING_REVIEW
+- mesh_term: Molecular Docking Simulation
+  frequency: 90
+  adjacent_themes: []
+  example_pmids:
+  - '33493520'
+  - '33645090'
+  - '33774271'
+  - '34207748'
+  - '34681877'
+  suggested_keywords:
+  - Molecular Docking Simulation neuropathic pain
+  - Molecular Docking Simulation spinal cord pain
+  - Molecular Docking Simulation dorsal horn
+  - Molecular Docking Simulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Reactive Oxygen Species
+  frequency: 89
+  adjacent_themes:
+  - T08
+  example_pmids:
+  - '32729340'
+  - '33253369'
+  - '33774149'
+  - '34183051'
+  - '34238748'
+  suggested_keywords:
+  - Reactive Oxygen Species neuropathic pain
+  - Reactive Oxygen Species spinal cord pain
+  - Reactive Oxygen Species dorsal horn
+  - Reactive Oxygen Species microglia
+  status: PENDING_REVIEW
+- mesh_term: Antineoplastic Agents
+  frequency: 88
+  adjacent_themes: []
+  example_pmids:
+  - '32701635'
+  - '33227509'
+  - '33246167'
+  - '33487088'
+  - '33613570'
+  suggested_keywords:
+  - Antineoplastic Agents neuropathic pain
+  - Antineoplastic Agents spinal cord pain
+  - Antineoplastic Agents dorsal horn
+  - Antineoplastic Agents microglia
+  status: PENDING_REVIEW
+- mesh_term: Chondrocytes
+  frequency: 88
+  adjacent_themes: []
+  example_pmids:
+  - '33227396'
+  - '33229973'
+  - '33359852'
+  - '33430899'
+  - '33448323'
+  suggested_keywords:
+  - Chondrocytes neuropathic pain
+  - Chondrocytes spinal cord pain
+  - Chondrocytes dorsal horn
+  - Chondrocytes microglia
+  status: PENDING_REVIEW
+- mesh_term: Morphine
+  frequency: 86
+  adjacent_themes: []
+  example_pmids:
+  - '32533604'
+  - '32594130'
+  - '32880099'
+  - '32926257'
+  - '33131746'
+  suggested_keywords:
+  - Morphine neuropathic pain
+  - Morphine spinal cord pain
+  - Morphine dorsal horn
+  - Morphine microglia
+  status: PENDING_REVIEW
+- mesh_term: Peripheral Nervous System Diseases
+  frequency: 86
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '32750173'
+  - '33166641'
+  - '33227509'
+  - '33596149'
+  suggested_keywords:
+  - Peripheral Nervous System Diseases neuropathic pain
+  - Peripheral Nervous System Diseases spinal cord pain
+  - Peripheral Nervous System Diseases dorsal horn
+  - Peripheral Nervous System Diseases microglia
+  status: PENDING_REVIEW
+- mesh_term: Postoperative Pain
+  frequency: 85
+  adjacent_themes: []
+  example_pmids:
+  - '32495225'
+  - '32701657'
+  - '32739615'
+  - '33730389'
+  - '33730999'
+  suggested_keywords:
+  - Postoperative Pain neuropathic pain
+  - Postoperative Pain spinal cord pain
+  - Postoperative Pain dorsal horn
+  - Postoperative Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Antibodies, Monoclonal
+  frequency: 83
+  adjacent_themes: []
+  example_pmids:
+  - '32867531'
+  - '33347632'
+  - '33615840'
+  - '33772636'
+  - '33824222'
+  suggested_keywords:
+  - Antibodies, Monoclonal neuropathic pain
+  - Antibodies, Monoclonal spinal cord pain
+  - Antibodies, Monoclonal dorsal horn
+  - Antibodies, Monoclonal microglia
+  status: PENDING_REVIEW
+- mesh_term: Magnetic Resonance Imaging
+  frequency: 81
+  adjacent_themes: []
+  example_pmids:
+  - '32279144'
+  - '32542515'
+  - '33064807'
+  - '33241956'
+  - '33314765'
+  suggested_keywords:
+  - Magnetic Resonance Imaging neuropathic pain
+  - Magnetic Resonance Imaging spinal cord pain
+  - Magnetic Resonance Imaging dorsal horn
+  - Magnetic Resonance Imaging microglia
+  status: PENDING_REVIEW
+- mesh_term: Anxiety
+  frequency: 80
+  adjacent_themes: []
+  example_pmids:
+  - '31911635'
+  - '32940205'
+  - '33000169'
+  - '33064807'
+  - '33583095'
+  suggested_keywords:
+  - Anxiety neuropathic pain
+  - Anxiety spinal cord pain
+  - Anxiety dorsal horn
+  - Anxiety microglia
+  status: PENDING_REVIEW
+- mesh_term: Spinal Cord Injuries
+  frequency: 80
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32853793'
+  - '32935647'
+  - '32964315'
+  - '33357207'
+  - '33360969'
+  suggested_keywords:
+  - Spinal Cord Injuries neuropathic pain
+  - Spinal Cord Injuries spinal cord pain
+  - Spinal Cord Injuries dorsal horn
+  - Spinal Cord Injuries microglia
+  status: PENDING_REVIEW
+- mesh_term: Astrocytes
+  frequency: 79
+  adjacent_themes: []
+  example_pmids:
+  - '33253369'
+  - '33401784'
+  - '33611790'
+  - '33788643'
+  - '34176097'
+  suggested_keywords:
+  - Astrocytes neuropathic pain
+  - Astrocytes spinal cord pain
+  - Astrocytes dorsal horn
+  - Astrocytes microglia
+  status: PENDING_REVIEW
+- mesh_term: Paclitaxel
+  frequency: 76
+  adjacent_themes: []
+  example_pmids:
+  - '32965065'
+  - '33128175'
+  - '33549629'
+  - '33550530'
+  - '33734317'
+  suggested_keywords:
+  - Paclitaxel neuropathic pain
+  - Paclitaxel spinal cord pain
+  - Paclitaxel dorsal horn
+  - Paclitaxel microglia
+  status: PENDING_REVIEW
+- mesh_term: Endometriosis
+  frequency: 76
+  adjacent_themes: []
+  example_pmids:
+  - '33152545'
+  - '33355352'
+  - '33673857'
+  - '33875460'
+  - '34281974'
+  suggested_keywords:
+  - Endometriosis neuropathic pain
+  - Endometriosis spinal cord pain
+  - Endometriosis dorsal horn
+  - Endometriosis microglia
+  status: PENDING_REVIEW
+- mesh_term: Diabetes Mellitus, Experimental
+  frequency: 75
+  adjacent_themes: []
+  example_pmids:
+  - '32683581'
+  - '32804775'
+  - '33027641'
+  - '33618606'
+  - '33639149'
+  suggested_keywords:
+  - Diabetes Mellitus, Experimental neuropathic pain
+  - Diabetes Mellitus, Experimental spinal cord pain
+  - Diabetes Mellitus, Experimental dorsal horn
+  - Diabetes Mellitus, Experimental microglia
+  status: PENDING_REVIEW
+- mesh_term: RNA, Messenger
+  frequency: 75
+  adjacent_themes:
+  - T06
+  - T09
+  example_pmids:
+  - '32557241'
+  - '32741955'
+  - '32856747'
+  - '33468207'
+  - '33596205'
+  suggested_keywords:
+  - RNA, Messenger neuropathic pain
+  - RNA, Messenger spinal cord pain
+  - RNA, Messenger dorsal horn
+  - RNA, Messenger microglia
+  status: PENDING_REVIEW
+- mesh_term: Intervertebral Disc
+  frequency: 74
+  adjacent_themes: []
+  example_pmids:
+  - '32856747'
+  - '33007412'
+  - '33416131'
+  - '33445782'
+  - '33647863'
+  suggested_keywords:
+  - Intervertebral Disc neuropathic pain
+  - Intervertebral Disc spinal cord pain
+  - Intervertebral Disc dorsal horn
+  - Intervertebral Disc microglia
+  status: PENDING_REVIEW
+- mesh_term: Cancer Pain
+  frequency: 73
+  adjacent_themes: []
+  example_pmids:
+  - '33131746'
+  - '33469141'
+  - '34015320'
+  - '34071008'
+  - '34176097'
+  suggested_keywords:
+  - Cancer Pain neuropathic pain
+  - Cancer Pain spinal cord pain
+  - Cancer Pain dorsal horn
+  - Cancer Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Electroacupuncture
+  frequency: 73
+  adjacent_themes: []
+  example_pmids:
+  - '32744065'
+  - '33422528'
+  - '33577869'
+  - '33626989'
+  - '34062076'
+  suggested_keywords:
+  - Electroacupuncture neuropathic pain
+  - Electroacupuncture spinal cord pain
+  - Electroacupuncture dorsal horn
+  - Electroacupuncture microglia
+  status: PENDING_REVIEW
+- mesh_term: Antioxidants
+  frequency: 73
+  adjacent_themes: []
+  example_pmids:
+  - '32683581'
+  - '33079239'
+  - '33359866'
+  - '33618606'
+  - '33619645'
+  suggested_keywords:
+  - Antioxidants neuropathic pain
+  - Antioxidants spinal cord pain
+  - Antioxidants dorsal horn
+  - Antioxidants microglia
+  status: PENDING_REVIEW
+- mesh_term: Cartilage, Articular
+  frequency: 73
+  adjacent_themes: []
+  example_pmids:
+  - '32772139'
+  - '33158879'
+  - '33229973'
+  - '33563041'
+  - '33609695'
+  suggested_keywords:
+  - Cartilage, Articular neuropathic pain
+  - Cartilage, Articular spinal cord pain
+  - Cartilage, Articular dorsal horn
+  - Cartilage, Articular microglia
+  status: PENDING_REVIEW
+- mesh_term: Plant Extracts
+  frequency: 73
+  adjacent_themes: []
+  example_pmids:
+  - '31221045'
+  - '31872780'
+  - '33027641'
+  - '33223115'
+  - '33340158'
+  suggested_keywords:
+  - Plant Extracts neuropathic pain
+  - Plant Extracts spinal cord pain
+  - Plant Extracts dorsal horn
+  - Plant Extracts microglia
+  status: PENDING_REVIEW
+- mesh_term: Calcium
+  frequency: 72
+  adjacent_themes: []
+  example_pmids:
+  - '32578137'
+  - '32780479'
+  - '33468207'
+  - '33806699'
+  - '34082635'
+  suggested_keywords:
+  - Calcium neuropathic pain
+  - Calcium spinal cord pain
+  - Calcium dorsal horn
+  - Calcium microglia
+  status: PENDING_REVIEW
+- mesh_term: Depression
+  frequency: 71
+  adjacent_themes: []
+  example_pmids:
+  - '33000169'
+  - '33245982'
+  - '33253785'
+  - '33544194'
+  - '34024172'
+  suggested_keywords:
+  - Depression neuropathic pain
+  - Depression spinal cord pain
+  - Depression dorsal horn
+  - Depression microglia
+  status: PENDING_REVIEW
+- mesh_term: DNA Methylation
+  frequency: 69
+  adjacent_themes:
+  - T09
+  example_pmids:
+  - '32750173'
+  - '32796318'
+  - '33025139'
+  - '33227439'
+  - '33245982'
+  suggested_keywords:
+  - DNA Methylation neuropathic pain
+  - DNA Methylation spinal cord pain
+  - DNA Methylation dorsal horn
+  - DNA Methylation microglia
+  status: PENDING_REVIEW
+- mesh_term: Retrospective Studies
+  frequency: 69
+  adjacent_themes: []
+  example_pmids:
+  - '32116074'
+  - '32657647'
+  - '33165298'
+  - '33347632'
+  - '33563041'
+  suggested_keywords:
+  - Retrospective Studies neuropathic pain
+  - Retrospective Studies spinal cord pain
+  - Retrospective Studies dorsal horn
+  - Retrospective Studies microglia
+  status: PENDING_REVIEW
+- mesh_term: Dose-Response Relationship, Drug
+  frequency: 69
+  adjacent_themes: []
+  example_pmids:
+  - '32880099'
+  - '33027641'
+  - '33152334'
+  - '33290343'
+  - '33298520'
+  suggested_keywords:
+  - Dose-Response Relationship, Drug neuropathic pain
+  - Dose-Response Relationship, Drug spinal cord pain
+  - Dose-Response Relationship, Drug dorsal horn
+  - Dose-Response Relationship, Drug microglia
+  status: PENDING_REVIEW
+- mesh_term: Cannabinoid Receptor Agonists
+  frequency: 69
+  adjacent_themes:
+  - T03
+  - T07
+  - T08
+  example_pmids:
+  - '32804775'
+  - '33152384'
+  - '33271186'
+  - '33348434'
+  - '33482616'
+  suggested_keywords:
+  - Cannabinoid Receptor Agonists neuropathic pain
+  - Cannabinoid Receptor Agonists spinal cord pain
+  - Cannabinoid Receptor Agonists dorsal horn
+  - Cannabinoid Receptor Agonists microglia
+  status: PENDING_REVIEW
+- mesh_term: HEK293 Cells
+  frequency: 68
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33298520'
+  - '33450052'
+  - '33540826'
+  - '33566299'
+  - '33682420'
+  suggested_keywords:
+  - HEK293 Cells neuropathic pain
+  - HEK293 Cells spinal cord pain
+  - HEK293 Cells dorsal horn
+  - HEK293 Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Hippocampus
+  frequency: 67
+  adjacent_themes: []
+  example_pmids:
+  - '31911635'
+  - '32857181'
+  - '32868749'
+  - '32901371'
+  - '32905811'
+  suggested_keywords:
+  - Hippocampus neuropathic pain
+  - Hippocampus spinal cord pain
+  - Hippocampus dorsal horn
+  - Hippocampus microglia
+  status: PENDING_REVIEW
+- mesh_term: STAT3 Transcription Factor
+  frequency: 67
+  adjacent_themes:
+  - T03
+  - T04
+  - T09
+  - T10
+  example_pmids:
+  - '32242977'
+  - '32744065'
+  - '33223115'
+  - '33300076'
+  - '33345380'
+  suggested_keywords:
+  - STAT3 Transcription Factor neuropathic pain
+  - STAT3 Transcription Factor spinal cord pain
+  - STAT3 Transcription Factor dorsal horn
+  - STAT3 Transcription Factor microglia
+  status: PENDING_REVIEW
+- mesh_term: Arthritis, Rheumatoid
+  frequency: 67
+  adjacent_themes: []
+  example_pmids:
+  - '32828139'
+  - '33053380'
+  - '33200731'
+  - '33367912'
+  - '33412435'
+  suggested_keywords:
+  - Arthritis, Rheumatoid neuropathic pain
+  - Arthritis, Rheumatoid spinal cord pain
+  - Arthritis, Rheumatoid dorsal horn
+  - Arthritis, Rheumatoid microglia
+  status: PENDING_REVIEW
+- mesh_term: Action Potentials
+  frequency: 66
+  adjacent_themes: []
+  example_pmids:
+  - '33043468'
+  - '33166641'
+  - '33586515'
+  - '33779126'
+  - '33853615'
+  suggested_keywords:
+  - Action Potentials neuropathic pain
+  - Action Potentials spinal cord pain
+  - Action Potentials dorsal horn
+  - Action Potentials microglia
+  status: PENDING_REVIEW
+- mesh_term: Up-Regulation
+  frequency: 66
+  adjacent_themes: []
+  example_pmids:
+  - '32557241'
+  - '32741955'
+  - '32955611'
+  - '32985377'
+  - '33314662'
+  suggested_keywords:
+  - Up-Regulation neuropathic pain
+  - Up-Regulation spinal cord pain
+  - Up-Regulation dorsal horn
+  - Up-Regulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Freund's Adjuvant
+  frequency: 65
+  adjacent_themes: []
+  example_pmids:
+  - '33253369'
+  - '33290343'
+  - '33388315'
+  - '33464388'
+  - '33541257'
+  suggested_keywords:
+  - Freund's Adjuvant neuropathic pain
+  - Freund's Adjuvant spinal cord pain
+  - Freund's Adjuvant dorsal horn
+  - Freund's Adjuvant microglia
+  status: PENDING_REVIEW
+- mesh_term: Cyclooxygenase 2
+  frequency: 65
+  adjacent_themes: []
+  example_pmids:
+  - '32557241'
+  - '33049240'
+  - '33212290'
+  - '33340158'
+  - '33352238'
+  suggested_keywords:
+  - Cyclooxygenase 2 neuropathic pain
+  - Cyclooxygenase 2 spinal cord pain
+  - Cyclooxygenase 2 dorsal horn
+  - Cyclooxygenase 2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Analgesia
+  frequency: 63
+  adjacent_themes: []
+  example_pmids:
+  - '32408781'
+  - '33181192'
+  - '33239391'
+  - '33414207'
+  - '33414216'
+  suggested_keywords:
+  - Analgesia neuropathic pain
+  - Analgesia spinal cord pain
+  - Analgesia dorsal horn
+  - Analgesia microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Line
+  frequency: 63
+  adjacent_themes:
+  - T02
+  - T04
+  example_pmids:
+  - '33027641'
+  - '33448323'
+  - '33590786'
+  - '33607128'
+  - '33774143'
+  suggested_keywords:
+  - Cell Line neuropathic pain
+  - Cell Line spinal cord pain
+  - Cell Line dorsal horn
+  - Cell Line microglia
+  status: PENDING_REVIEW
+- mesh_term: Trigeminal Ganglion
+  frequency: 63
+  adjacent_themes: []
+  example_pmids:
+  - '32853530'
+  - '33283622'
+  - '33326336'
+  - '33605657'
+  - '33836649'
+  suggested_keywords:
+  - Trigeminal Ganglion neuropathic pain
+  - Trigeminal Ganglion spinal cord pain
+  - Trigeminal Ganglion dorsal horn
+  - Trigeminal Ganglion microglia
+  status: PENDING_REVIEW
+- mesh_term: Brain-Derived Neurotrophic Factor
+  frequency: 62
+  adjacent_themes:
+  - T03
+  - T04
+  - T10
+  example_pmids:
+  - '33009262'
+  - '33245982'
+  - '33705592'
+  - '33840672'
+  - '33963520'
+  suggested_keywords:
+  - Brain-Derived Neurotrophic Factor neuropathic pain
+  - Brain-Derived Neurotrophic Factor spinal cord pain
+  - Brain-Derived Neurotrophic Factor dorsal horn
+  - Brain-Derived Neurotrophic Factor microglia
+  status: PENDING_REVIEW
+- mesh_term: Calcitonin Gene-Related Peptide Receptor Antagonists
+  frequency: 62
+  adjacent_themes:
+  - T03
+  - T07
+  - T08
+  - T09
+  example_pmids:
+  - '32909437'
+  - '33426614'
+  - '33550872'
+  - '33648385'
+  - '33772636'
+  suggested_keywords:
+  - Calcitonin Gene-Related Peptide Receptor Antagonists neuropathic pain
+  - Calcitonin Gene-Related Peptide Receptor Antagonists spinal cord pain
+  - Calcitonin Gene-Related Peptide Receptor Antagonists dorsal horn
+  - Calcitonin Gene-Related Peptide Receptor Antagonists microglia
+  status: PENDING_REVIEW
+- mesh_term: Drugs, Chinese Herbal
+  frequency: 61
+  adjacent_themes: []
+  example_pmids:
+  - '33083995'
+  - '33352238'
+  - '33573686'
+  - '33645090'
+  - '34329717'
+  suggested_keywords:
+  - Drugs, Chinese Herbal neuropathic pain
+  - Drugs, Chinese Herbal spinal cord pain
+  - Drugs, Chinese Herbal dorsal horn
+  - Drugs, Chinese Herbal microglia
+  status: PENDING_REVIEW
+- mesh_term: Anti-Inflammatory Agents, Non-Steroidal
+  frequency: 61
+  adjacent_themes: []
+  example_pmids:
+  - '33290343'
+  - '33542016'
+  - '33543180'
+  - '33829413'
+  - '33875460'
+  suggested_keywords:
+  - Anti-Inflammatory Agents, Non-Steroidal neuropathic pain
+  - Anti-Inflammatory Agents, Non-Steroidal spinal cord pain
+  - Anti-Inflammatory Agents, Non-Steroidal dorsal horn
+  - Anti-Inflammatory Agents, Non-Steroidal microglia
+  status: PENDING_REVIEW
+- mesh_term: Trigeminal Neuralgia
+  frequency: 60
+  adjacent_themes:
+  - T01
+  - T02
+  - T03
+  - T04
+  - T05
+  - T06
+  - T07
+  - T08
+  - T09
+  - T10
+  example_pmids:
+  - '33283622'
+  - '33515176'
+  - '33862118'
+  - '33893246'
+  - '34000891'
+  suggested_keywords:
+  - Trigeminal Neuralgia neuropathic pain
+  - Trigeminal Neuralgia spinal cord pain
+  - Trigeminal Neuralgia dorsal horn
+  - Trigeminal Neuralgia microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Differentiation
+  frequency: 60
+  adjacent_themes:
+  - T02
+  - T04
+  example_pmids:
+  - '33479807'
+  - '33659900'
+  - '33737175'
+  - '33806897'
+  - '33929316'
+  suggested_keywords:
+  - Cell Differentiation neuropathic pain
+  - Cell Differentiation spinal cord pain
+  - Cell Differentiation dorsal horn
+  - Cell Differentiation microglia
+  status: PENDING_REVIEW
+- mesh_term: TRPA1 Cation Channel
+  frequency: 60
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33227509'
+  - '33540826'
+  - '33693534'
+  - '33806000'
+  - '34015320'
+  suggested_keywords:
+  - TRPA1 Cation Channel neuropathic pain
+  - TRPA1 Cation Channel spinal cord pain
+  - TRPA1 Cation Channel dorsal horn
+  - TRPA1 Cation Channel microglia
+  status: PENDING_REVIEW
+- mesh_term: Ligands
+  frequency: 60
+  adjacent_themes: []
+  example_pmids:
+  - '33348434'
+  - '33537936'
+  - '33545794'
+  - '33647863'
+  - '33727337'
+  suggested_keywords:
+  - Ligands neuropathic pain
+  - Ligands spinal cord pain
+  - Ligands dorsal horn
+  - Ligands microglia
+  status: PENDING_REVIEW
+- mesh_term: Hypoxia-Inducible Factor 1, alpha Subunit
+  frequency: 60
+  adjacent_themes:
+  - T03
+  - T04
+  - T10
+  example_pmids:
+  - '32242977'
+  - '33455530'
+  - '33486545'
+  - '33533018'
+  - '33537810'
+  suggested_keywords:
+  - Hypoxia-Inducible Factor 1, alpha Subunit neuropathic pain
+  - Hypoxia-Inducible Factor 1, alpha Subunit spinal cord pain
+  - Hypoxia-Inducible Factor 1, alpha Subunit dorsal horn
+  - Hypoxia-Inducible Factor 1, alpha Subunit microglia
+  status: PENDING_REVIEW
+- mesh_term: Double-Blind Method
+  frequency: 59
+  adjacent_themes: []
+  example_pmids:
+  - '32542515'
+  - '33423550'
+  - '33543763'
+  - '33824222'
+  - '34252914'
+  suggested_keywords:
+  - Double-Blind Method neuropathic pain
+  - Double-Blind Method spinal cord pain
+  - Double-Blind Method dorsal horn
+  - Double-Blind Method microglia
+  status: PENDING_REVIEW
+- mesh_term: Mesenchymal Stem Cells
+  frequency: 59
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33009636'
+  - '33430899'
+  - '33471211'
+  - '33479807'
+  - '33582958'
+  suggested_keywords:
+  - Mesenchymal Stem Cells neuropathic pain
+  - Mesenchymal Stem Cells spinal cord pain
+  - Mesenchymal Stem Cells dorsal horn
+  - Mesenchymal Stem Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Autophagy
+  frequency: 58
+  adjacent_themes: []
+  example_pmids:
+  - '33402188'
+  - '33455530'
+  - '33485977'
+  - '33486545'
+  - '33641628'
+  suggested_keywords:
+  - Autophagy neuropathic pain
+  - Autophagy spinal cord pain
+  - Autophagy dorsal horn
+  - Autophagy microglia
+  status: PENDING_REVIEW
+- mesh_term: Gene Expression Regulation
+  frequency: 58
+  adjacent_themes:
+  - T07
+  - T09
+  example_pmids:
+  - '32222846'
+  - '32557241'
+  - '32902792'
+  - '33010450'
+  - '33227396'
+  suggested_keywords:
+  - Gene Expression Regulation neuropathic pain
+  - Gene Expression Regulation spinal cord pain
+  - Gene Expression Regulation dorsal horn
+  - Gene Expression Regulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Mitochondria
+  frequency: 57
+  adjacent_themes: []
+  example_pmids:
+  - '32683581'
+  - '33395186'
+  - '33641628'
+  - '33770505'
+  - '34162415'
+  suggested_keywords:
+  - Mitochondria neuropathic pain
+  - Mitochondria spinal cord pain
+  - Mitochondria dorsal horn
+  - Mitochondria microglia
+  status: PENDING_REVIEW
+- mesh_term: Synapses
+  frequency: 56
+  adjacent_themes: []
+  example_pmids:
+  - '31911635'
+  - '33099751'
+  - '33230002'
+  - '33239525'
+  - '33590786'
+  suggested_keywords:
+  - Synapses neuropathic pain
+  - Synapses spinal cord pain
+  - Synapses dorsal horn
+  - Synapses microglia
+  status: PENDING_REVIEW
+- mesh_term: Chronic Disease
+  frequency: 56
+  adjacent_themes: []
+  example_pmids:
+  - '33402188'
+  - '33468207'
+  - '33555527'
+  - '33626986'
+  - '33687402'
+  suggested_keywords:
+  - Chronic Disease neuropathic pain
+  - Chronic Disease spinal cord pain
+  - Chronic Disease dorsal horn
+  - Chronic Disease microglia
+  status: PENDING_REVIEW
+- mesh_term: Pyroptosis
+  frequency: 56
+  adjacent_themes: []
+  example_pmids:
+  - '32926257'
+  - '33933989'
+  - '34412584'
+  - '34419568'
+  - '34515922'
+  suggested_keywords:
+  - Pyroptosis neuropathic pain
+  - Pyroptosis spinal cord pain
+  - Pyroptosis dorsal horn
+  - Pyroptosis microglia
+  status: PENDING_REVIEW
+- mesh_term: Antibodies, Monoclonal, Humanized
+  frequency: 56
+  adjacent_themes: []
+  example_pmids:
+  - '32813153'
+  - '32814432'
+  - '33593077'
+  - '34160456'
+  - '34424593'
+  suggested_keywords:
+  - Antibodies, Monoclonal, Humanized neuropathic pain
+  - Antibodies, Monoclonal, Humanized spinal cord pain
+  - Antibodies, Monoclonal, Humanized dorsal horn
+  - Antibodies, Monoclonal, Humanized microglia
+  status: PENDING_REVIEW
+- mesh_term: Posterior Horn Cells
+  frequency: 55
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33045156'
+  - '33169292'
+  - '33428497'
+  - '33431693'
+  - '33498178'
+  suggested_keywords:
+  - Posterior Horn Cells neuropathic pain
+  - Posterior Horn Cells spinal cord pain
+  - Posterior Horn Cells dorsal horn
+  - Posterior Horn Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Proto-Oncogene Proteins c-akt
+  frequency: 55
+  adjacent_themes:
+  - T05
+  example_pmids:
+  - '32242977'
+  - '33628591'
+  - '33774143'
+  - '35202714'
+  - '35333664'
+  suggested_keywords:
+  - Proto-Oncogene Proteins c-akt neuropathic pain
+  - Proto-Oncogene Proteins c-akt spinal cord pain
+  - Proto-Oncogene Proteins c-akt dorsal horn
+  - Proto-Oncogene Proteins c-akt microglia
+  status: PENDING_REVIEW
+- mesh_term: Mutation
+  frequency: 55
+  adjacent_themes: []
+  example_pmids:
+  - '32671729'
+  - '32813153'
+  - '33241956'
+  - '33593422'
+  - '33929316'
+  suggested_keywords:
+  - Mutation neuropathic pain
+  - Mutation spinal cord pain
+  - Mutation dorsal horn
+  - Mutation microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptors, N-Methyl-D-Aspartate
+  frequency: 54
+  adjacent_themes:
+  - T07
+  - T08
+  - T09
+  example_pmids:
+  - '33099751'
+  - '33760644'
+  - '34024172'
+  - '34051267'
+  - '34252035'
+  suggested_keywords:
+  - Receptors, N-Methyl-D-Aspartate neuropathic pain
+  - Receptors, N-Methyl-D-Aspartate spinal cord pain
+  - Receptors, N-Methyl-D-Aspartate dorsal horn
+  - Receptors, N-Methyl-D-Aspartate microglia
+  status: PENDING_REVIEW
+- mesh_term: Inflammation Mediators
+  frequency: 54
+  adjacent_themes:
+  - T08
+  example_pmids:
+  - '31221045'
+  - '32889847'
+  - '33091488'
+  - '33223115'
+  - '33264122'
+  suggested_keywords:
+  - Inflammation Mediators neuropathic pain
+  - Inflammation Mediators spinal cord pain
+  - Inflammation Mediators dorsal horn
+  - Inflammation Mediators microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Proliferation
+  frequency: 54
+  adjacent_themes:
+  - T02
+  - T04
+  example_pmids:
+  - '32242977'
+  - '33222263'
+  - '33469141'
+  - '33471211'
+  - '33485977'
+  suggested_keywords:
+  - Cell Proliferation neuropathic pain
+  - Cell Proliferation spinal cord pain
+  - Cell Proliferation dorsal horn
+  - Cell Proliferation microglia
+  status: PENDING_REVIEW
+- mesh_term: Skin
+  frequency: 53
+  adjacent_themes: []
+  example_pmids:
+  - '32996600'
+  - '33501656'
+  - '33582958'
+  - '33769365'
+  - '33800730'
+  suggested_keywords:
+  - Skin neuropathic pain
+  - Skin spinal cord pain
+  - Skin dorsal horn
+  - Skin microglia
+  status: PENDING_REVIEW
+- mesh_term: Osteoarthritis, Knee
+  frequency: 52
+  adjacent_themes: []
+  example_pmids:
+  - '34063083'
+  - '34298911'
+  - '34310345'
+  - '34805399'
+  - '34921052'
+  suggested_keywords:
+  - Osteoarthritis, Knee neuropathic pain
+  - Osteoarthritis, Knee spinal cord pain
+  - Osteoarthritis, Knee dorsal horn
+  - Osteoarthritis, Knee microglia
+  status: PENDING_REVIEW
+- mesh_term: Voltage-Gated Sodium Channels
+  frequency: 52
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32773604'
+  - '32868747'
+  - '33043468'
+  - '33075312'
+  - '33166641'
+  suggested_keywords:
+  - Voltage-Gated Sodium Channels neuropathic pain
+  - Voltage-Gated Sodium Channels spinal cord pain
+  - Voltage-Gated Sodium Channels dorsal horn
+  - Voltage-Gated Sodium Channels microglia
+  status: PENDING_REVIEW
+- mesh_term: Voltage-Gated Sodium Channel Blockers
+  frequency: 52
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33075312'
+  - '33227509'
+  - '33298520'
+  - '33543763'
+  - '33682420'
+  suggested_keywords:
+  - Voltage-Gated Sodium Channel Blockers neuropathic pain
+  - Voltage-Gated Sodium Channel Blockers spinal cord pain
+  - Voltage-Gated Sodium Channel Blockers dorsal horn
+  - Voltage-Gated Sodium Channel Blockers microglia
+  status: PENDING_REVIEW
+- mesh_term: gamma-Aminobutyric Acid
+  frequency: 51
+  adjacent_themes:
+  - T08
+  example_pmids:
+  - '33401784'
+  - '33431693'
+  - '33586515'
+  - '33897893'
+  - '34174096'
+  suggested_keywords:
+  - gamma-Aminobutyric Acid neuropathic pain
+  - gamma-Aminobutyric Acid spinal cord pain
+  - gamma-Aminobutyric Acid dorsal horn
+  - gamma-Aminobutyric Acid microglia
+  status: PENDING_REVIEW
+- mesh_term: Synaptic Transmission
+  frequency: 51
+  adjacent_themes: []
+  example_pmids:
+  - '33401784'
+  - '33533533'
+  - '33590786'
+  - '33770505'
+  - '33786823'
+  suggested_keywords:
+  - Synaptic Transmission neuropathic pain
+  - Synaptic Transmission spinal cord pain
+  - Synaptic Transmission dorsal horn
+  - Synaptic Transmission microglia
+  status: PENDING_REVIEW
+- mesh_term: Peptides
+  frequency: 51
+  adjacent_themes: []
+  example_pmids:
+  - '32306148'
+  - '33006141'
+  - '33427574'
+  - '33493520'
+  - '33831573'
+  suggested_keywords:
+  - Peptides neuropathic pain
+  - Peptides spinal cord pain
+  - Peptides dorsal horn
+  - Peptides microglia
+  status: PENDING_REVIEW
+- mesh_term: Neuroprotective Agents
+  frequency: 50
+  adjacent_themes: []
+  example_pmids:
+  - '32964315'
+  - '33470764'
+  - '33618606'
+  - '33897893'
+  - '34169409'
+  suggested_keywords:
+  - Neuroprotective Agents neuropathic pain
+  - Neuroprotective Agents spinal cord pain
+  - Neuroprotective Agents dorsal horn
+  - Neuroprotective Agents microglia
+  status: PENDING_REVIEW
+- mesh_term: Membrane Proteins
+  frequency: 49
+  adjacent_themes:
+  - T05
+  example_pmids:
+  - '33212290'
+  - '33455530'
+  - '33478555'
+  - '33543180'
+  - '33897893'
+  suggested_keywords:
+  - Membrane Proteins neuropathic pain
+  - Membrane Proteins spinal cord pain
+  - Membrane Proteins dorsal horn
+  - Membrane Proteins microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Line, Tumor
+  frequency: 49
+  adjacent_themes:
+  - T02
+  - T03
+  - T04
+  example_pmids:
+  - '32557241'
+  - '33010019'
+  - '33253369'
+  - '33485977'
+  - '33626373'
+  suggested_keywords:
+  - Cell Line, Tumor neuropathic pain
+  - Cell Line, Tumor spinal cord pain
+  - Cell Line, Tumor dorsal horn
+  - Cell Line, Tumor microglia
+  status: PENDING_REVIEW
+- mesh_term: Down-Regulation
+  frequency: 49
+  adjacent_themes: []
+  example_pmids:
+  - '33151463'
+  - '33166664'
+  - '33283990'
+  - '33340498'
+  - '33352238'
+  suggested_keywords:
+  - Down-Regulation neuropathic pain
+  - Down-Regulation spinal cord pain
+  - Down-Regulation dorsal horn
+  - Down-Regulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Cannabidiol
+  frequency: 49
+  adjacent_themes: []
+  example_pmids:
+  - '33332000'
+  - '33332002'
+  - '34065479'
+  - '34115948'
+  - '34131037'
+  suggested_keywords:
+  - Cannabidiol neuropathic pain
+  - Cannabidiol spinal cord pain
+  - Cannabidiol dorsal horn
+  - Cannabidiol microglia
+  status: PENDING_REVIEW
+- mesh_term: Neuroglia
+  frequency: 48
+  adjacent_themes: []
+  example_pmids:
+  - '32853530'
+  - '32964315'
+  - '33083995'
+  - '33389681'
+  - '33531894'
+  suggested_keywords:
+  - Neuroglia neuropathic pain
+  - Neuroglia spinal cord pain
+  - Neuroglia dorsal horn
+  - Neuroglia microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptors, G-Protein-Coupled
+  frequency: 48
+  adjacent_themes:
+  - T02
+  - T03
+  - T05
+  - T07
+  - T08
+  example_pmids:
+  - '32741955'
+  - '33421487'
+  - '33468207'
+  - '33745983'
+  - '34244727'
+  suggested_keywords:
+  - Receptors, G-Protein-Coupled neuropathic pain
+  - Receptors, G-Protein-Coupled spinal cord pain
+  - Receptors, G-Protein-Coupled dorsal horn
+  - Receptors, G-Protein-Coupled microglia
+  status: PENDING_REVIEW
+- mesh_term: Case-Control Studies
+  frequency: 48
+  adjacent_themes: []
+  example_pmids:
+  - '33064807'
+  - '33649986'
+  - '33929316'
+  - '34035803'
+  - '34182103'
+  suggested_keywords:
+  - Case-Control Studies neuropathic pain
+  - Case-Control Studies spinal cord pain
+  - Case-Control Studies dorsal horn
+  - Case-Control Studies microglia
+  status: PENDING_REVIEW
+- mesh_term: Sodium Channel Blockers
+  frequency: 48
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32773604'
+  - '33086288'
+  - '33450052'
+  - '33515125'
+  - '33808667'
+  suggested_keywords:
+  - Sodium Channel Blockers neuropathic pain
+  - Sodium Channel Blockers spinal cord pain
+  - Sodium Channel Blockers dorsal horn
+  - Sodium Channel Blockers microglia
+  status: PENDING_REVIEW
+- mesh_term: Facial Pain
+  frequency: 47
+  adjacent_themes: []
+  example_pmids:
+  - '32853530'
+  - '33515176'
+  - '33611790'
+  - '33792957'
+  - '33836649'
+  suggested_keywords:
+  - Facial Pain neuropathic pain
+  - Facial Pain spinal cord pain
+  - Facial Pain dorsal horn
+  - Facial Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Oxaliplatin
+  frequency: 47
+  adjacent_themes: []
+  example_pmids:
+  - '33494465'
+  - '33656514'
+  - '33772465'
+  - '33774154'
+  - '34032956'
+  suggested_keywords:
+  - Oxaliplatin neuropathic pain
+  - Oxaliplatin spinal cord pain
+  - Oxaliplatin dorsal horn
+  - Oxaliplatin microglia
+  status: PENDING_REVIEW
+- mesh_term: Structure-Activity Relationship
+  frequency: 47
+  adjacent_themes: []
+  example_pmids:
+  - '33360803'
+  - '33528898'
+  - '33809109'
+  - '33917187'
+  - '34202183'
+  suggested_keywords:
+  - Structure-Activity Relationship neuropathic pain
+  - Structure-Activity Relationship spinal cord pain
+  - Structure-Activity Relationship dorsal horn
+  - Structure-Activity Relationship microglia
+  status: PENDING_REVIEW
+- mesh_term: Janus Kinase 2
+  frequency: 47
+  adjacent_themes:
+  - T05
+  - T09
+  example_pmids:
+  - '32744065'
+  - '33223115'
+  - '33241956'
+  - '33421931'
+  - '33423550'
+  suggested_keywords:
+  - Janus Kinase 2 neuropathic pain
+  - Janus Kinase 2 spinal cord pain
+  - Janus Kinase 2 dorsal horn
+  - Janus Kinase 2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Prefrontal Cortex
+  frequency: 46
+  adjacent_themes: []
+  example_pmids:
+  - '32441222'
+  - '32796318'
+  - '32901371'
+  - '33737061'
+  - '33762214'
+  suggested_keywords:
+  - Prefrontal Cortex neuropathic pain
+  - Prefrontal Cortex spinal cord pain
+  - Prefrontal Cortex dorsal horn
+  - Prefrontal Cortex microglia
+  status: PENDING_REVIEW
+- mesh_term: Neoplasms
+  frequency: 46
+  adjacent_themes: []
+  example_pmids:
+  - '32671729'
+  - '33246167'
+  - '33485977'
+  - '33487088'
+  - '33613570'
+  suggested_keywords:
+  - Neoplasms neuropathic pain
+  - Neoplasms spinal cord pain
+  - Neoplasms dorsal horn
+  - Neoplasms microglia
+  status: PENDING_REVIEW
+- mesh_term: Spinal Nerves
+  frequency: 46
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33196963'
+  - '33221486'
+  - '33421931'
+  - '33478555'
+  - '33508403'
+  suggested_keywords:
+  - Spinal Nerves neuropathic pain
+  - Spinal Nerves spinal cord pain
+  - Spinal Nerves dorsal horn
+  - Spinal Nerves microglia
+  status: PENDING_REVIEW
+- mesh_term: Phosphatidylinositol 3-Kinases
+  frequency: 46
+  adjacent_themes:
+  - T05
+  - T09
+  example_pmids:
+  - '32242977'
+  - '32820550'
+  - '33628591'
+  - '35042769'
+  - '35109876'
+  suggested_keywords:
+  - Phosphatidylinositol 3-Kinases neuropathic pain
+  - Phosphatidylinositol 3-Kinases spinal cord pain
+  - Phosphatidylinositol 3-Kinases dorsal horn
+  - Phosphatidylinositol 3-Kinases microglia
+  status: PENDING_REVIEW
+- mesh_term: Transient Receptor Potential Channels
+  frequency: 46
+  adjacent_themes:
+  - T03
+  - T06
+  - T07
+  - T08
+  example_pmids:
+  - '33515176'
+  - '33568699'
+  - '34015320'
+  - '34418512'
+  - '34861342'
+  suggested_keywords:
+  - Transient Receptor Potential Channels neuropathic pain
+  - Transient Receptor Potential Channels spinal cord pain
+  - Transient Receptor Potential Channels dorsal horn
+  - Transient Receptor Potential Channels microglia
+  status: PENDING_REVIEW
+- mesh_term: Optogenetics
+  frequency: 45
+  adjacent_themes: []
+  example_pmids:
+  - '32958958'
+  - '33414216'
+  - '33739978'
+  - '33911247'
+  - '34042586'
+  suggested_keywords:
+  - Optogenetics neuropathic pain
+  - Optogenetics spinal cord pain
+  - Optogenetics dorsal horn
+  - Optogenetics microglia
+  status: PENDING_REVIEW
+- mesh_term: p38 Mitogen-Activated Protein Kinases
+  frequency: 45
+  adjacent_themes:
+  - T02
+  - T03
+  - T05
+  - T09
+  example_pmids:
+  - '30554535'
+  - '33027641'
+  - '33083995'
+  - '33131746'
+  - '33516738'
+  suggested_keywords:
+  - p38 Mitogen-Activated Protein Kinases neuropathic pain
+  - p38 Mitogen-Activated Protein Kinases spinal cord pain
+  - p38 Mitogen-Activated Protein Kinases dorsal horn
+  - p38 Mitogen-Activated Protein Kinases microglia
+  status: PENDING_REVIEW
+- mesh_term: Transcriptome
+  frequency: 44
+  adjacent_themes: []
+  example_pmids:
+  - '33025139'
+  - '33253785'
+  - '33692491'
+  - '33726849'
+  - '34402860'
+  suggested_keywords:
+  - Transcriptome neuropathic pain
+  - Transcriptome spinal cord pain
+  - Transcriptome dorsal horn
+  - Transcriptome microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptors, Opioid, mu
+  frequency: 44
+  adjacent_themes:
+  - T07
+  - T08
+  example_pmids:
+  - '33010019'
+  - '33203743'
+  - '33341652'
+  - '33367648'
+  - '33639684'
+  suggested_keywords:
+  - Receptors, Opioid, mu neuropathic pain
+  - Receptors, Opioid, mu spinal cord pain
+  - Receptors, Opioid, mu dorsal horn
+  - Receptors, Opioid, mu microglia
+  status: PENDING_REVIEW
+- mesh_term: Bone Neoplasms
+  frequency: 43
+  adjacent_themes: []
+  example_pmids:
+  - '34176097'
+  - '34315904'
+  - '34493431'
+  - '34671215'
+  - '34723483'
+  suggested_keywords:
+  - Bone Neoplasms neuropathic pain
+  - Bone Neoplasms spinal cord pain
+  - Bone Neoplasms dorsal horn
+  - Bone Neoplasms microglia
+  status: PENDING_REVIEW
+- mesh_term: Histones
+  frequency: 43
+  adjacent_themes: []
+  example_pmids:
+  - '33669046'
+  - '33735658'
+  - '34020664'
+  - '34349258'
+  - '34397151'
+  suggested_keywords:
+  - Histones neuropathic pain
+  - Histones spinal cord pain
+  - Histones dorsal horn
+  - Histones microglia
+  status: PENDING_REVIEW
+- mesh_term: Nerve Tissue Proteins
+  frequency: 43
+  adjacent_themes:
+  - T05
+  example_pmids:
+  - '32557241'
+  - '32868747'
+  - '33478555'
+  - '33529752'
+  - '33609640'
+  suggested_keywords:
+  - Nerve Tissue Proteins neuropathic pain
+  - Nerve Tissue Proteins spinal cord pain
+  - Nerve Tissue Proteins dorsal horn
+  - Nerve Tissue Proteins microglia
+  status: PENDING_REVIEW
+- mesh_term: Nerve Growth Factor
+  frequency: 43
+  adjacent_themes:
+  - T03
+  - T04
+  - T10
+  example_pmids:
+  - '32856747'
+  - '33009262'
+  - '33091488'
+  - '33469141'
+  - '33787562'
+  suggested_keywords:
+  - Nerve Growth Factor neuropathic pain
+  - Nerve Growth Factor spinal cord pain
+  - Nerve Growth Factor dorsal horn
+  - Nerve Growth Factor microglia
+  status: PENDING_REVIEW
+- mesh_term: Sodium Chloride
+  frequency: 42
+  adjacent_themes:
+  - T01
+  - T06
+  example_pmids:
+  - '32056510'
+  - '33180113'
+  - '33400427'
+  - '33454970'
+  - '34214069'
+  suggested_keywords:
+  - Sodium Chloride neuropathic pain
+  - Sodium Chloride spinal cord pain
+  - Sodium Chloride dorsal horn
+  - Sodium Chloride microglia
+  status: PENDING_REVIEW
+- mesh_term: Low Back Pain
+  frequency: 42
+  adjacent_themes: []
+  example_pmids:
+  - '32255531'
+  - '32856747'
+  - '32955611'
+  - '33007412'
+  - '33400427'
+  suggested_keywords:
+  - Low Back Pain neuropathic pain
+  - Low Back Pain spinal cord pain
+  - Low Back Pain dorsal horn
+  - Low Back Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Neural Pathways
+  frequency: 41
+  adjacent_themes:
+  - T01
+  - T02
+  - T03
+  - T04
+  - T05
+  - T06
+  - T07
+  - T08
+  - T09
+  - T10
+  example_pmids:
+  - '33314765'
+  - '33591273'
+  - '34042586'
+  - '34637906'
+  - '34665863'
+  suggested_keywords:
+  - Neural Pathways neuropathic pain
+  - Neural Pathways spinal cord pain
+  - Neural Pathways dorsal horn
+  - Neural Pathways microglia
+  status: PENDING_REVIEW
+- mesh_term: Interleukin-10
+  frequency: 41
+  adjacent_themes: []
+  example_pmids:
+  - '33568652'
+  - '33621215'
+  - '33862171'
+  - '34111331'
+  - '34390739'
+  suggested_keywords:
+  - Interleukin-10 neuropathic pain
+  - Interleukin-10 spinal cord pain
+  - Interleukin-10 dorsal horn
+  - Interleukin-10 microglia
+  status: PENDING_REVIEW
+- mesh_term: Arthritis, Experimental
+  frequency: 41
+  adjacent_themes: []
+  example_pmids:
+  - '33053380'
+  - '33223115'
+  - '33367912'
+  - '33897685'
+  - '34015701'
+  suggested_keywords:
+  - Arthritis, Experimental neuropathic pain
+  - Arthritis, Experimental spinal cord pain
+  - Arthritis, Experimental dorsal horn
+  - Arthritis, Experimental microglia
+  status: PENDING_REVIEW
+- mesh_term: Acid Sensing Ion Channels
+  frequency: 41
+  adjacent_themes:
+  - T06
+  - T09
+  example_pmids:
+  - '33258401'
+  - '33314662'
+  - '33729158'
+  - '33853615'
+  - '34062742'
+  suggested_keywords:
+  - Acid Sensing Ion Channels neuropathic pain
+  - Acid Sensing Ion Channels spinal cord pain
+  - Acid Sensing Ion Channels dorsal horn
+  - Acid Sensing Ion Channels microglia
+  status: PENDING_REVIEW
+- mesh_term: Visceral Pain
+  frequency: 40
+  adjacent_themes: []
+  example_pmids:
+  - '33483524'
+  - '33705592'
+  - '33760644'
+  - '33863856'
+  - '33949202'
+  suggested_keywords:
+  - Visceral Pain neuropathic pain
+  - Visceral Pain spinal cord pain
+  - Visceral Pain dorsal horn
+  - Visceral Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Sex Characteristics
+  frequency: 40
+  adjacent_themes: []
+  example_pmids:
+  - '32741955'
+  - '32750173'
+  - '33309016'
+  - '33846230'
+  - '33892155'
+  suggested_keywords:
+  - Sex Characteristics neuropathic pain
+  - Sex Characteristics spinal cord pain
+  - Sex Characteristics dorsal horn
+  - Sex Characteristics microglia
+  status: PENDING_REVIEW
+- mesh_term: Wound Healing
+  frequency: 40
+  adjacent_themes: []
+  example_pmids:
+  - '33582958'
+  - '34033524'
+  - '35176324'
+  - '35495890'
+  - '35612602'
+  suggested_keywords:
+  - Wound Healing neuropathic pain
+  - Wound Healing spinal cord pain
+  - Wound Healing dorsal horn
+  - Wound Healing microglia
+  status: PENDING_REVIEW
+- mesh_term: Myeloid Differentiation Factor 88
+  frequency: 40
+  adjacent_themes:
+  - T03
+  - T04
+  - T10
+  example_pmids:
+  - '33389386'
+  - '33673857'
+  - '33892155'
+  - '34229178'
+  - '34416296'
+  suggested_keywords:
+  - Myeloid Differentiation Factor 88 neuropathic pain
+  - Myeloid Differentiation Factor 88 spinal cord pain
+  - Myeloid Differentiation Factor 88 dorsal horn
+  - Myeloid Differentiation Factor 88 microglia
+  status: PENDING_REVIEW
+- mesh_term: Misoprostol
+  frequency: 40
+  adjacent_themes: []
+  example_pmids:
+  - '32491923'
+  - '33063314'
+  - '33065578'
+  - '33278292'
+  - '33285100'
+  suggested_keywords:
+  - Misoprostol neuropathic pain
+  - Misoprostol spinal cord pain
+  - Misoprostol dorsal horn
+  - Misoprostol microglia
+  status: PENDING_REVIEW
+- mesh_term: Fibromyalgia
+  frequency: 39
+  adjacent_themes: []
+  example_pmids:
+  - '32940205'
+  - '33409721'
+  - '33422528'
+  - '33476653'
+  - '33759219'
+  suggested_keywords:
+  - Fibromyalgia neuropathic pain
+  - Fibromyalgia spinal cord pain
+  - Fibromyalgia dorsal horn
+  - Fibromyalgia microglia
+  status: PENDING_REVIEW
+- mesh_term: Cross-Sectional Studies
+  frequency: 39
+  adjacent_themes: []
+  example_pmids:
+  - '33009262'
+  - '33639684'
+  - '33724462'
+  - '33759219'
+  - '33974918'
+  suggested_keywords:
+  - Cross-Sectional Studies neuropathic pain
+  - Cross-Sectional Studies spinal cord pain
+  - Cross-Sectional Studies dorsal horn
+  - Cross-Sectional Studies microglia
+  status: PENDING_REVIEW
+- mesh_term: Hydrogels
+  frequency: 38
+  adjacent_themes: []
+  example_pmids:
+  - '33120198'
+  - '33831573'
+  - '33930731'
+  - '34156535'
+  - '34458364'
+  suggested_keywords:
+  - Hydrogels neuropathic pain
+  - Hydrogels spinal cord pain
+  - Hydrogels dorsal horn
+  - Hydrogels microglia
+  status: PENDING_REVIEW
+- mesh_term: RNA, Small Interfering
+  frequency: 38
+  adjacent_themes:
+  - T06
+  - T09
+  example_pmids:
+  - '33283990'
+  - '33415686'
+  - '33550530'
+  - '33694132'
+  - '33766679'
+  suggested_keywords:
+  - RNA, Small Interfering neuropathic pain
+  - RNA, Small Interfering spinal cord pain
+  - RNA, Small Interfering dorsal horn
+  - RNA, Small Interfering microglia
+  status: PENDING_REVIEW
+- mesh_term: Phenotype
+  frequency: 38
+  adjacent_themes: []
+  example_pmids:
+  - '32813153'
+  - '32964315'
+  - '33290758'
+  - '33316378'
+  - '33473114'
+  suggested_keywords:
+  - Phenotype neuropathic pain
+  - Phenotype spinal cord pain
+  - Phenotype dorsal horn
+  - Phenotype microglia
+  status: PENDING_REVIEW
+- mesh_term: Periaqueductal Gray
+  frequency: 37
+  adjacent_themes: []
+  example_pmids:
+  - '32483053'
+  - '33745983'
+  - '34817244'
+  - '34980925'
+  - '35132099'
+  suggested_keywords:
+  - Periaqueductal Gray neuropathic pain
+  - Periaqueductal Gray spinal cord pain
+  - Periaqueductal Gray dorsal horn
+  - Periaqueductal Gray microglia
+  status: PENDING_REVIEW
+- mesh_term: Acute Pain
+  frequency: 37
+  adjacent_themes: []
+  example_pmids:
+  - '32901371'
+  - '32965065'
+  - '33675141'
+  - '34347648'
+  - '34492212'
+  suggested_keywords:
+  - Acute Pain neuropathic pain
+  - Acute Pain spinal cord pain
+  - Acute Pain dorsal horn
+  - Acute Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Piperidines
+  frequency: 37
+  adjacent_themes: []
+  example_pmids:
+  - '32909437'
+  - '33450277'
+  - '33550872'
+  - '33648385'
+  - '33682420'
+  suggested_keywords:
+  - Piperidines neuropathic pain
+  - Piperidines spinal cord pain
+  - Piperidines dorsal horn
+  - Piperidines microglia
+  status: PENDING_REVIEW
+- mesh_term: Transcription Factors
+  frequency: 35
+  adjacent_themes:
+  - T10
+  example_pmids:
+  - '33025139'
+  - '33166664'
+  - '33395186'
+  - '33669046'
+  - '34349258'
+  suggested_keywords:
+  - Transcription Factors neuropathic pain
+  - Transcription Factors spinal cord pain
+  - Transcription Factors dorsal horn
+  - Transcription Factors microglia
+  status: PENDING_REVIEW
+- mesh_term: Edema
+  frequency: 35
+  adjacent_themes: []
+  example_pmids:
+  - '32495225'
+  - '33010450'
+  - '33053380'
+  - '33212290'
+  - '33528898'
+  suggested_keywords:
+  - Edema neuropathic pain
+  - Edema spinal cord pain
+  - Edema dorsal horn
+  - Edema microglia
+  status: PENDING_REVIEW
+- mesh_term: Aggrecans
+  frequency: 35
+  adjacent_themes: []
+  example_pmids:
+  - '33227396'
+  - '33229973'
+  - '33706752'
+  - '33787997'
+  - '33877647'
+  suggested_keywords:
+  - Aggrecans neuropathic pain
+  - Aggrecans spinal cord pain
+  - Aggrecans dorsal horn
+  - Aggrecans microglia
+  status: PENDING_REVIEW
+- mesh_term: HMGB1 Protein
+  frequency: 35
+  adjacent_themes:
+  - T02
+  - T03
+  - T05
+  example_pmids:
+  - '32374414'
+  - '32796317'
+  - '33151463'
+  - '33180213'
+  - '33611840'
+  suggested_keywords:
+  - HMGB1 Protein neuropathic pain
+  - HMGB1 Protein spinal cord pain
+  - HMGB1 Protein dorsal horn
+  - HMGB1 Protein microglia
+  status: PENDING_REVIEW
+- mesh_term: Stress, Psychological
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '33271186'
+  - '33314662'
+  - '34620725'
+  - '34622454'
+  - '34704719'
+  suggested_keywords:
+  - Stress, Psychological neuropathic pain
+  - Stress, Psychological spinal cord pain
+  - Stress, Psychological dorsal horn
+  - Stress, Psychological microglia
+  status: PENDING_REVIEW
+- mesh_term: Amygdala
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '33404979'
+  - '33611790'
+  - '33949202'
+  - '34225977'
+  - '34245841'
+  suggested_keywords:
+  - Amygdala neuropathic pain
+  - Amygdala spinal cord pain
+  - Amygdala dorsal horn
+  - Amygdala microglia
+  status: PENDING_REVIEW
+- mesh_term: Irritable Bowel Syndrome
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '33023902'
+  - '33760644'
+  - '33863856'
+  - '33949202'
+  - '34620725'
+  suggested_keywords:
+  - Irritable Bowel Syndrome neuropathic pain
+  - Irritable Bowel Syndrome spinal cord pain
+  - Irritable Bowel Syndrome dorsal horn
+  - Irritable Bowel Syndrome microglia
+  status: PENDING_REVIEW
+- mesh_term: Ion Channels
+  frequency: 34
+  adjacent_themes:
+  - T06
+  - T09
+  example_pmids:
+  - '33007412'
+  - '33007786'
+  - '33323031'
+  - '33893246'
+  - '34183051'
+  suggested_keywords:
+  - Ion Channels neuropathic pain
+  - Ion Channels spinal cord pain
+  - Ion Channels dorsal horn
+  - Ion Channels microglia
+  status: PENDING_REVIEW
+- mesh_term: Gastrointestinal Microbiome
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '32889847'
+  - '33352238'
+  - '34403381'
+  - '35027074'
+  - '35167867'
+  suggested_keywords:
+  - Gastrointestinal Microbiome neuropathic pain
+  - Gastrointestinal Microbiome spinal cord pain
+  - Gastrointestinal Microbiome dorsal horn
+  - Gastrointestinal Microbiome microglia
+  status: PENDING_REVIEW
+- mesh_term: Central Nervous System Sensitization
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '32773598'
+  - '33402188'
+  - '33759294'
+  - '34507588'
+  - '34543689'
+  suggested_keywords:
+  - Central Nervous System Sensitization neuropathic pain
+  - Central Nervous System Sensitization spinal cord pain
+  - Central Nervous System Sensitization dorsal horn
+  - Central Nervous System Sensitization microglia
+  status: PENDING_REVIEW
+- mesh_term: Constriction
+  frequency: 34
+  adjacent_themes: []
+  example_pmids:
+  - '32533604'
+  - '32857181'
+  - '32868749'
+  - '32889066'
+  - '33000169'
+  suggested_keywords:
+  - Constriction neuropathic pain
+  - Constriction spinal cord pain
+  - Constriction dorsal horn
+  - Constriction microglia
+  status: PENDING_REVIEW
+- mesh_term: Cognitive Dysfunction
+  frequency: 33
+  adjacent_themes: []
+  example_pmids:
+  - '33613570'
+  - '34360612'
+  - '35738416'
+  - '35780081'
+  - '37345838'
+  suggested_keywords:
+  - Cognitive Dysfunction neuropathic pain
+  - Cognitive Dysfunction spinal cord pain
+  - Cognitive Dysfunction dorsal horn
+  - Cognitive Dysfunction microglia
+  status: PENDING_REVIEW
+- mesh_term: Pruritus
+  frequency: 33
+  adjacent_themes: []
+  example_pmids:
+  - '32777329'
+  - '33247430'
+  - '33367648'
+  - '33468207'
+  - '33501656'
+  suggested_keywords:
+  - Pruritus neuropathic pain
+  - Pruritus spinal cord pain
+  - Pruritus dorsal horn
+  - Pruritus microglia
+  status: PENDING_REVIEW
+- mesh_term: RNA, Long Noncoding
+  frequency: 33
+  adjacent_themes:
+  - T06
+  - T09
+  example_pmids:
+  - '32860901'
+  - '33151463'
+  - '33227439'
+  - '33340495'
+  - '33479807'
+  suggested_keywords:
+  - RNA, Long Noncoding neuropathic pain
+  - RNA, Long Noncoding spinal cord pain
+  - RNA, Long Noncoding dorsal horn
+  - RNA, Long Noncoding microglia
+  status: PENDING_REVIEW
+- mesh_term: MAP Kinase Signaling System
+  frequency: 33
+  adjacent_themes:
+  - T05
+  - T09
+  example_pmids:
+  - '32242977'
+  - '32557241'
+  - '33609640'
+  - '33953740'
+  - '34067828'
+  suggested_keywords:
+  - MAP Kinase Signaling System neuropathic pain
+  - MAP Kinase Signaling System spinal cord pain
+  - MAP Kinase Signaling System dorsal horn
+  - MAP Kinase Signaling System microglia
+  status: PENDING_REVIEW
+- mesh_term: Cannabis
+  frequency: 33
+  adjacent_themes: []
+  example_pmids:
+  - '32673642'
+  - '33246167'
+  - '33332000'
+  - '33332002'
+  - '33466734'
+  suggested_keywords:
+  - Cannabis neuropathic pain
+  - Cannabis spinal cord pain
+  - Cannabis dorsal horn
+  - Cannabis microglia
+  status: PENDING_REVIEW
+- mesh_term: Substance P
+  frequency: 32
+  adjacent_themes: []
+  example_pmids:
+  - '31899978'
+  - '32639078'
+  - '33053380'
+  - '33549629'
+  - '34454375'
+  suggested_keywords:
+  - Substance P neuropathic pain
+  - Substance P spinal cord pain
+  - Substance P dorsal horn
+  - Substance P microglia
+  status: PENDING_REVIEW
+- mesh_term: Nanoparticles
+  frequency: 32
+  adjacent_themes: []
+  example_pmids:
+  - '33229973'
+  - '35104595'
+  - '35434932'
+  - '35477924'
+  - '35532094'
+  suggested_keywords:
+  - Nanoparticles neuropathic pain
+  - Nanoparticles spinal cord pain
+  - Nanoparticles dorsal horn
+  - Nanoparticles microglia
+  status: PENDING_REVIEW
+- mesh_term: Ferroptosis
+  frequency: 32
+  adjacent_themes: []
+  example_pmids:
+  - '33864570'
+  - '35755168'
+  - '37099926'
+  - '38105511'
+  - '38334255'
+  suggested_keywords:
+  - Ferroptosis neuropathic pain
+  - Ferroptosis spinal cord pain
+  - Ferroptosis dorsal horn
+  - Ferroptosis microglia
+  status: PENDING_REVIEW
+- mesh_term: Human Umbilical Vein Endothelial Cells
+  frequency: 32
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33870647'
+  - '33899541'
+  - '34062414'
+  - '34329717'
+  - '34732147'
+  suggested_keywords:
+  - Human Umbilical Vein Endothelial Cells neuropathic pain
+  - Human Umbilical Vein Endothelial Cells spinal cord pain
+  - Human Umbilical Vein Endothelial Cells dorsal horn
+  - Human Umbilical Vein Endothelial Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: RAW 264.7 Cells
+  frequency: 32
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '32964315'
+  - '33212290'
+  - '33528898'
+  - '33540826'
+  - '33804203'
+  suggested_keywords:
+  - RAW 264.7 Cells neuropathic pain
+  - RAW 264.7 Cells spinal cord pain
+  - RAW 264.7 Cells dorsal horn
+  - RAW 264.7 Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Calcium Channels, T-Type
+  frequency: 32
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33283622'
+  - '33422652'
+  - '33507062'
+  - '34286406'
+  - '34450183'
+  suggested_keywords:
+  - Calcium Channels, T-Type neuropathic pain
+  - Calcium Channels, T-Type spinal cord pain
+  - Calcium Channels, T-Type dorsal horn
+  - Calcium Channels, T-Type microglia
+  status: PENDING_REVIEW
+- mesh_term: Adenosine Triphosphate
+  frequency: 31
+  adjacent_themes: []
+  example_pmids:
+  - '33169292'
+  - '33626989'
+  - '33641628'
+  - '33897685'
+  - '34086763'
+  suggested_keywords:
+  - Adenosine Triphosphate neuropathic pain
+  - Adenosine Triphosphate spinal cord pain
+  - Adenosine Triphosphate dorsal horn
+  - Adenosine Triphosphate microglia
+  status: PENDING_REVIEW
+- mesh_term: Serotonin
+  frequency: 31
+  adjacent_themes: []
+  example_pmids:
+  - '32901371'
+  - '33568652'
+  - '33705592'
+  - '34454926'
+  - '34628738'
+  suggested_keywords:
+  - Serotonin neuropathic pain
+  - Serotonin spinal cord pain
+  - Serotonin dorsal horn
+  - Serotonin microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptors, Opioid
+  frequency: 31
+  adjacent_themes:
+  - T07
+  - T08
+  example_pmids:
+  - '32926257'
+  - '33010019'
+  - '33340498'
+  - '33545158'
+  - '33648029'
+  suggested_keywords:
+  - Receptors, Opioid neuropathic pain
+  - Receptors, Opioid spinal cord pain
+  - Receptors, Opioid dorsal horn
+  - Receptors, Opioid microglia
+  status: PENDING_REVIEW
+- mesh_term: Dysmenorrhea
+  frequency: 31
+  adjacent_themes: []
+  example_pmids:
+  - '33152545'
+  - '33645090'
+  - '33875460'
+  - '34008281'
+  - '34528140'
+  suggested_keywords:
+  - Dysmenorrhea neuropathic pain
+  - Dysmenorrhea spinal cord pain
+  - Dysmenorrhea dorsal horn
+  - Dysmenorrhea microglia
+  status: PENDING_REVIEW
+- mesh_term: Disease Progression
+  frequency: 31
+  adjacent_themes: []
+  example_pmids:
+  - '32860901'
+  - '33469141'
+  - '33691773'
+  - '34015701'
+  - '34284715'
+  suggested_keywords:
+  - Disease Progression neuropathic pain
+  - Disease Progression spinal cord pain
+  - Disease Progression dorsal horn
+  - Disease Progression microglia
+  status: PENDING_REVIEW
+- mesh_term: Neuroimmunomodulation
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33613570'
+  - '34398188'
+  - '34411562'
+  - '34440650'
+  - '34445252'
+  suggested_keywords:
+  - Neuroimmunomodulation neuropathic pain
+  - Neuroimmunomodulation spinal cord pain
+  - Neuroimmunomodulation dorsal horn
+  - Neuroimmunomodulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Glutamic Acid
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '34042586'
+  - '34082805'
+  - '34111331'
+  - '34252037'
+  - '34445124'
+  suggested_keywords:
+  - Glutamic Acid neuropathic pain
+  - Glutamic Acid spinal cord pain
+  - Glutamic Acid dorsal horn
+  - Glutamic Acid microglia
+  status: PENDING_REVIEW
+- mesh_term: Aging
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33341652'
+  - '33706946'
+  - '34082805'
+  - '34284114'
+  - '34480023'
+  suggested_keywords:
+  - Aging neuropathic pain
+  - Aging spinal cord pain
+  - Aging dorsal horn
+  - Aging microglia
+  status: PENDING_REVIEW
+- mesh_term: Molecular Structure
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33360803'
+  - '33528898'
+  - '33687402'
+  - '33809109'
+  - '33917187'
+  suggested_keywords:
+  - Molecular Structure neuropathic pain
+  - Molecular Structure spinal cord pain
+  - Molecular Structure dorsal horn
+  - Molecular Structure microglia
+  status: PENDING_REVIEW
+- mesh_term: Cystitis, Interstitial
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33009262'
+  - '33737012'
+  - '33787562'
+  - '34694138'
+  - '35387668'
+  suggested_keywords:
+  - Cystitis, Interstitial neuropathic pain
+  - Cystitis, Interstitial spinal cord pain
+  - Cystitis, Interstitial dorsal horn
+  - Cystitis, Interstitial microglia
+  status: PENDING_REVIEW
+- mesh_term: Cellular Senescence
+  frequency: 30
+  adjacent_themes:
+  - T02
+  example_pmids:
+  - '33448323'
+  - '33647863'
+  - '34480023'
+  - '35426375'
+  - '35707832'
+  suggested_keywords:
+  - Cellular Senescence neuropathic pain
+  - Cellular Senescence spinal cord pain
+  - Cellular Senescence dorsal horn
+  - Cellular Senescence microglia
+  status: PENDING_REVIEW
+- mesh_term: Sulfonamides
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33478555'
+  - '33656514'
+  - '33682420'
+  - '33712283'
+  - '33785039'
+  suggested_keywords:
+  - Sulfonamides neuropathic pain
+  - Sulfonamides spinal cord pain
+  - Sulfonamides dorsal horn
+  - Sulfonamides microglia
+  status: PENDING_REVIEW
+- mesh_term: Colon
+  frequency: 30
+  adjacent_themes: []
+  example_pmids:
+  - '33352238'
+  - '33483524'
+  - '33863856'
+  - '33949202'
+  - '34620725'
+  suggested_keywords:
+  - Colon neuropathic pain
+  - Colon spinal cord pain
+  - Colon dorsal horn
+  - Colon microglia
+  status: PENDING_REVIEW
+- mesh_term: Randomized Controlled Trials as Topic
+  frequency: 29
+  adjacent_themes: []
+  example_pmids:
+  - '33180113'
+  - '33423550'
+  - '33426614'
+  - '33648029'
+  - '33824222'
+  suggested_keywords:
+  - Randomized Controlled Trials as Topic neuropathic pain
+  - Randomized Controlled Trials as Topic spinal cord pain
+  - Randomized Controlled Trials as Topic dorsal horn
+  - Randomized Controlled Trials as Topic microglia
+  status: PENDING_REVIEW
+- mesh_term: Injections, Spinal
+  frequency: 29
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32750173'
+  - '33006141'
+  - '33009636'
+  - '33367648'
+  - '33537798'
+  suggested_keywords:
+  - Injections, Spinal neuropathic pain
+  - Injections, Spinal spinal cord pain
+  - Injections, Spinal dorsal horn
+  - Injections, Spinal microglia
+  status: PENDING_REVIEW
+- mesh_term: Gene Expression Profiling
+  frequency: 29
+  adjacent_themes:
+  - T07
+  - T09
+  example_pmids:
+  - '33227396'
+  - '34402860'
+  - '34586697'
+  - '35030976'
+  - '35054943'
+  suggested_keywords:
+  - Gene Expression Profiling neuropathic pain
+  - Gene Expression Profiling spinal cord pain
+  - Gene Expression Profiling dorsal horn
+  - Gene Expression Profiling microglia
+  status: PENDING_REVIEW
+- mesh_term: Flavonoids
+  frequency: 29
+  adjacent_themes: []
+  example_pmids:
+  - '31221045'
+  - '33549629'
+  - '33933989'
+  - '33961144'
+  - '34371251'
+  suggested_keywords:
+  - Flavonoids neuropathic pain
+  - Flavonoids spinal cord pain
+  - Flavonoids dorsal horn
+  - Flavonoids microglia
+  status: PENDING_REVIEW
+- mesh_term: Collagen
+  frequency: 29
+  adjacent_themes: []
+  example_pmids:
+  - '32772139'
+  - '33212290'
+  - '33946919'
+  - '34202183'
+  - '34328823'
+  suggested_keywords:
+  - Collagen neuropathic pain
+  - Collagen spinal cord pain
+  - Collagen dorsal horn
+  - Collagen microglia
+  status: PENDING_REVIEW
+- mesh_term: Synovial Membrane
+  frequency: 29
+  adjacent_themes: []
+  example_pmids:
+  - '32828139'
+  - '33229973'
+  - '33359852'
+  - '33430899'
+  - '33820439'
+  suggested_keywords:
+  - Synovial Membrane neuropathic pain
+  - Synovial Membrane spinal cord pain
+  - Synovial Membrane dorsal horn
+  - Synovial Membrane microglia
+  status: PENDING_REVIEW
+- mesh_term: Cerebral Cortex
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '33808020'
+  - '34008281'
+  - '34099009'
+  - '34205372'
+  - '34274349'
+  suggested_keywords:
+  - Cerebral Cortex neuropathic pain
+  - Cerebral Cortex spinal cord pain
+  - Cerebral Cortex dorsal horn
+  - Cerebral Cortex microglia
+  status: PENDING_REVIEW
+- mesh_term: Phosphorylation
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '33006141'
+  - '33404979'
+  - '33549727'
+  - '33555527'
+  - '33669046'
+  suggested_keywords:
+  - Phosphorylation neuropathic pain
+  - Phosphorylation spinal cord pain
+  - Phosphorylation dorsal horn
+  - Phosphorylation microglia
+  status: PENDING_REVIEW
+- mesh_term: Docosahexaenoic Acids
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '33023902'
+  - '33687402'
+  - '33813057'
+  - '35109876'
+  - '35487301'
+  suggested_keywords:
+  - Docosahexaenoic Acids neuropathic pain
+  - Docosahexaenoic Acids spinal cord pain
+  - Docosahexaenoic Acids dorsal horn
+  - Docosahexaenoic Acids microglia
+  status: PENDING_REVIEW
+- mesh_term: Botulinum Toxins, Type A
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '34000998'
+  - '34409517'
+  - '34448754'
+  - '34477213'
+  - '35017698'
+  suggested_keywords:
+  - Botulinum Toxins, Type A neuropathic pain
+  - Botulinum Toxins, Type A spinal cord pain
+  - Botulinum Toxins, Type A dorsal horn
+  - Botulinum Toxins, Type A microglia
+  status: PENDING_REVIEW
+- mesh_term: Diabetes Mellitus
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '32810328'
+  - '32996600'
+  - '34238748'
+  - '34330066'
+  - '34879806'
+  suggested_keywords:
+  - Diabetes Mellitus neuropathic pain
+  - Diabetes Mellitus spinal cord pain
+  - Diabetes Mellitus dorsal horn
+  - Diabetes Mellitus microglia
+  status: PENDING_REVIEW
+- mesh_term: Nitric Oxide
+  frequency: 28
+  adjacent_themes: []
+  example_pmids:
+  - '32408781'
+  - '32964315'
+  - '33528898'
+  - '33536347'
+  - '33648029'
+  suggested_keywords:
+  - Nitric Oxide neuropathic pain
+  - Nitric Oxide spinal cord pain
+  - Nitric Oxide dorsal horn
+  - Nitric Oxide microglia
+  status: PENDING_REVIEW
+- mesh_term: Schwann Cells
+  frequency: 28
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33469141'
+  - '34736244'
+  - '34902518'
+  - '35115501'
+  - '35499270'
+  suggested_keywords:
+  - Schwann Cells neuropathic pain
+  - Schwann Cells spinal cord pain
+  - Schwann Cells dorsal horn
+  - Schwann Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Movement
+  frequency: 28
+  adjacent_themes:
+  - T02
+  - T04
+  example_pmids:
+  - '32964315'
+  - '33009246'
+  - '33222263'
+  - '33582958'
+  - '33774812'
+  suggested_keywords:
+  - Cell Movement neuropathic pain
+  - Cell Movement spinal cord pain
+  - Cell Movement dorsal horn
+  - Cell Movement microglia
+  status: PENDING_REVIEW
+- mesh_term: Polymorphism, Single Nucleotide
+  frequency: 28
+  adjacent_themes:
+  - T10
+  example_pmids:
+  - '33434563'
+  - '33706752'
+  - '33982552'
+  - '34162438'
+  - '34875034'
+  suggested_keywords:
+  - Polymorphism, Single Nucleotide neuropathic pain
+  - Polymorphism, Single Nucleotide spinal cord pain
+  - Polymorphism, Single Nucleotide dorsal horn
+  - Polymorphism, Single Nucleotide microglia
+  status: PENDING_REVIEW
+- mesh_term: Axons
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '32470939'
+  - '33734317'
+  - '34174096'
+  - '34262056'
+  - '34542046'
+  suggested_keywords:
+  - Axons neuropathic pain
+  - Axons spinal cord pain
+  - Axons dorsal horn
+  - Axons microglia
+  status: PENDING_REVIEW
+- mesh_term: Long-Term Potentiation
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33190318'
+  - '34024172'
+  - '34082635'
+  - '34289348'
+  - '34364898'
+  suggested_keywords:
+  - Long-Term Potentiation neuropathic pain
+  - Long-Term Potentiation spinal cord pain
+  - Long-Term Potentiation dorsal horn
+  - Long-Term Potentiation microglia
+  status: PENDING_REVIEW
+- mesh_term: Sirtuin 3
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33127810'
+  - '36030144'
+  - '36092157'
+  - '36130801'
+  - '37099926'
+  suggested_keywords:
+  - Sirtuin 3 neuropathic pain
+  - Sirtuin 3 spinal cord pain
+  - Sirtuin 3 dorsal horn
+  - Sirtuin 3 microglia
+  status: PENDING_REVIEW
+- mesh_term: Drug Tolerance
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33131746'
+  - '33482616'
+  - '33549727'
+  - '33607128'
+  - '34042586'
+  suggested_keywords:
+  - Drug Tolerance neuropathic pain
+  - Drug Tolerance spinal cord pain
+  - Drug Tolerance dorsal horn
+  - Drug Tolerance microglia
+  status: PENDING_REVIEW
+- mesh_term: Nociceptive Pain
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '32408781'
+  - '33053380'
+  - '33152334'
+  - '33227509'
+  - '33345854'
+  suggested_keywords:
+  - Nociceptive Pain neuropathic pain
+  - Nociceptive Pain spinal cord pain
+  - Nociceptive Pain dorsal horn
+  - Nociceptive Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Endometrium
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33152545'
+  - '33355352'
+  - '33454970'
+  - '33962548'
+  - '34638893'
+  suggested_keywords:
+  - Endometrium neuropathic pain
+  - Endometrium spinal cord pain
+  - Endometrium dorsal horn
+  - Endometrium microglia
+  status: PENDING_REVIEW
+- mesh_term: Intervertebral Disc Displacement
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33007412'
+  - '33609694'
+  - '33774812'
+  - '34689354'
+  - '34894100'
+  suggested_keywords:
+  - Intervertebral Disc Displacement neuropathic pain
+  - Intervertebral Disc Displacement spinal cord pain
+  - Intervertebral Disc Displacement dorsal horn
+  - Intervertebral Disc Displacement microglia
+  status: PENDING_REVIEW
+- mesh_term: COVID-19
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '32379592'
+  - '32990925'
+  - '33368288'
+  - '33630183'
+  - '33787218'
+  suggested_keywords:
+  - COVID-19 neuropathic pain
+  - COVID-19 spinal cord pain
+  - COVID-19 dorsal horn
+  - COVID-19 microglia
+  status: PENDING_REVIEW
+- mesh_term: Amides
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '33671213'
+  - '33808667'
+  - '35881914'
+  - '36032152'
+  - '36657299'
+  suggested_keywords:
+  - Amides neuropathic pain
+  - Amides spinal cord pain
+  - Amides dorsal horn
+  - Amides microglia
+  status: PENDING_REVIEW
+- mesh_term: Dronabinol
+  frequency: 27
+  adjacent_themes: []
+  example_pmids:
+  - '32673642'
+  - '33332000'
+  - '33332002'
+  - '33348434'
+  - '33741446'
+  suggested_keywords:
+  - Dronabinol neuropathic pain
+  - Dronabinol spinal cord pain
+  - Dronabinol dorsal horn
+  - Dronabinol microglia
+  status: PENDING_REVIEW
+- mesh_term: Symporters
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33316378'
+  - '33388315'
+  - '33596149'
+  - '33953740'
+  - '34048740'
+  suggested_keywords:
+  - Symporters neuropathic pain
+  - Symporters spinal cord pain
+  - Symporters dorsal horn
+  - Symporters microglia
+  status: PENDING_REVIEW
+- mesh_term: TRPM Cation Channels
+  frequency: 26
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32578137'
+  - '32780479'
+  - '32955611'
+  - '34199936'
+  - '34608291'
+  suggested_keywords:
+  - TRPM Cation Channels neuropathic pain
+  - TRPM Cation Channels spinal cord pain
+  - TRPM Cation Channels dorsal horn
+  - TRPM Cation Channels microglia
+  status: PENDING_REVIEW
+- mesh_term: Carrageenan
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33212290'
+  - '33470759'
+  - '33498178'
+  - '33545158'
+  - '33671213'
+  suggested_keywords:
+  - Carrageenan neuropathic pain
+  - Carrageenan spinal cord pain
+  - Carrageenan dorsal horn
+  - Carrageenan microglia
+  status: PENDING_REVIEW
+- mesh_term: Brain Mapping
+  frequency: 26
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33395413'
+  - '33939212'
+  - '34008281'
+  - '34035803'
+  - '34050215'
+  suggested_keywords:
+  - Brain Mapping neuropathic pain
+  - Brain Mapping spinal cord pain
+  - Brain Mapping dorsal horn
+  - Brain Mapping microglia
+  status: PENDING_REVIEW
+- mesh_term: Pain Perception
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33595765'
+  - '33740349'
+  - '33762214'
+  - '33856345'
+  - '33949202'
+  suggested_keywords:
+  - Pain Perception neuropathic pain
+  - Pain Perception spinal cord pain
+  - Pain Perception dorsal horn
+  - Pain Perception microglia
+  status: PENDING_REVIEW
+- mesh_term: Gene Expression
+  frequency: 26
+  adjacent_themes:
+  - T07
+  - T09
+  example_pmids:
+  - '32027775'
+  - '33049240'
+  - '33245982'
+  - '33271186'
+  - '33341652'
+  suggested_keywords:
+  - Gene Expression neuropathic pain
+  - Gene Expression spinal cord pain
+  - Gene Expression dorsal horn
+  - Gene Expression microglia
+  status: PENDING_REVIEW
+- mesh_term: Genetic Predisposition to Disease
+  frequency: 26
+  adjacent_themes:
+  - T09
+  example_pmids:
+  - '33025139'
+  - '33227439'
+  - '33473114'
+  - '33596149'
+  - '33918736'
+  suggested_keywords:
+  - Genetic Predisposition to Disease neuropathic pain
+  - Genetic Predisposition to Disease spinal cord pain
+  - Genetic Predisposition to Disease dorsal horn
+  - Genetic Predisposition to Disease microglia
+  status: PENDING_REVIEW
+- mesh_term: Pelvic Pain
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33152545'
+  - '33815658'
+  - '34035803'
+  - '34418127'
+  - '35077502'
+  suggested_keywords:
+  - Pelvic Pain neuropathic pain
+  - Pelvic Pain spinal cord pain
+  - Pelvic Pain dorsal horn
+  - Pelvic Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: AMP-Activated Protein Kinases
+  frequency: 26
+  adjacent_themes:
+  - T02
+  - T03
+  - T05
+  - T09
+  example_pmids:
+  - '33639149'
+  - '35351574'
+  - '35526468'
+  - '35543972'
+  - '35669720'
+  suggested_keywords:
+  - AMP-Activated Protein Kinases neuropathic pain
+  - AMP-Activated Protein Kinases spinal cord pain
+  - AMP-Activated Protein Kinases dorsal horn
+  - AMP-Activated Protein Kinases microglia
+  status: PENDING_REVIEW
+- mesh_term: Furans
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33359866'
+  - '33656514'
+  - '33785039'
+  - '35757727'
+  - '36044079'
+  suggested_keywords:
+  - Furans neuropathic pain
+  - Furans spinal cord pain
+  - Furans dorsal horn
+  - Furans microglia
+  status: PENDING_REVIEW
+- mesh_term: Arachidonic Acids
+  frequency: 26
+  adjacent_themes: []
+  example_pmids:
+  - '33560661'
+  - '33713246'
+  - '33749323'
+  - '33783763'
+  - '33826922'
+  suggested_keywords:
+  - Arachidonic Acids neuropathic pain
+  - Arachidonic Acids spinal cord pain
+  - Arachidonic Acids dorsal horn
+  - Arachidonic Acids microglia
+  status: PENDING_REVIEW
+- mesh_term: Parvalbumins
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33596149'
+  - '33815658'
+  - '34042586'
+  - '34311052'
+  - '34326298'
+  suggested_keywords:
+  - Parvalbumins neuropathic pain
+  - Parvalbumins spinal cord pain
+  - Parvalbumins dorsal horn
+  - Parvalbumins microglia
+  status: PENDING_REVIEW
+- mesh_term: Pyramidal Cells
+  frequency: 25
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '34082805'
+  - '34507588'
+  - '34852233'
+  - '35093140'
+  - '35384934'
+  suggested_keywords:
+  - Pyramidal Cells neuropathic pain
+  - Pyramidal Cells spinal cord pain
+  - Pyramidal Cells dorsal horn
+  - Pyramidal Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Chemokine CCL2
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33946919'
+  - '34774500'
+  - '35775484'
+  - '36233356'
+  - '36470227'
+  suggested_keywords:
+  - Chemokine CCL2 neuropathic pain
+  - Chemokine CCL2 spinal cord pain
+  - Chemokine CCL2 dorsal horn
+  - Chemokine CCL2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Homeostasis
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33630183'
+  - '34232260'
+  - '34502379'
+  - '34591994'
+  - '35077007'
+  suggested_keywords:
+  - Homeostasis neuropathic pain
+  - Homeostasis spinal cord pain
+  - Homeostasis dorsal horn
+  - Homeostasis microglia
+  status: PENDING_REVIEW
+- mesh_term: Thalamus
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '32810328'
+  - '33230002'
+  - '33239525'
+  - '33395413'
+  - '33940974'
+  suggested_keywords:
+  - Thalamus neuropathic pain
+  - Thalamus spinal cord pain
+  - Thalamus dorsal horn
+  - Thalamus microglia
+  status: PENDING_REVIEW
+- mesh_term: Patch-Clamp Techniques
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33203743'
+  - '33760644'
+  - '34067828'
+  - '34111331'
+  - '34272314'
+  suggested_keywords:
+  - Patch-Clamp Techniques neuropathic pain
+  - Patch-Clamp Techniques spinal cord pain
+  - Patch-Clamp Techniques dorsal horn
+  - Patch-Clamp Techniques microglia
+  status: PENDING_REVIEW
+- mesh_term: Nitroglycerin
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '32639078'
+  - '33402188'
+  - '33856345'
+  - '34893074'
+  - '34979902'
+  suggested_keywords:
+  - Nitroglycerin neuropathic pain
+  - Nitroglycerin spinal cord pain
+  - Nitroglycerin dorsal horn
+  - Nitroglycerin microglia
+  status: PENDING_REVIEW
+- mesh_term: Pyridines
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '32909437'
+  - '33264122'
+  - '33426614'
+  - '33450277'
+  - '33482616'
+  suggested_keywords:
+  - Pyridines neuropathic pain
+  - Pyridines spinal cord pain
+  - Pyridines dorsal horn
+  - Pyridines microglia
+  status: PENDING_REVIEW
+- mesh_term: Fibroblasts
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33596205'
+  - '33813057'
+  - '33820439'
+  - '34202183'
+  - '34831458'
+  suggested_keywords:
+  - Fibroblasts neuropathic pain
+  - Fibroblasts spinal cord pain
+  - Fibroblasts dorsal horn
+  - Fibroblasts microglia
+  status: PENDING_REVIEW
+- mesh_term: Protein Binding
+  frequency: 25
+  adjacent_themes:
+  - T02
+  - T03
+  - T05
+  example_pmids:
+  - '33917187'
+  - '33970188'
+  - '34151302'
+  - '34229010'
+  - '34319232'
+  suggested_keywords:
+  - Protein Binding neuropathic pain
+  - Protein Binding spinal cord pain
+  - Protein Binding dorsal horn
+  - Protein Binding microglia
+  status: PENDING_REVIEW
+- mesh_term: Prostatitis
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33815658'
+  - '34035803'
+  - '34418127'
+  - '35693826'
+  - '35755168'
+  suggested_keywords:
+  - Prostatitis neuropathic pain
+  - Prostatitis spinal cord pain
+  - Prostatitis dorsal horn
+  - Prostatitis microglia
+  status: PENDING_REVIEW
+- mesh_term: Urinary Bladder
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33737012'
+  - '33749323'
+  - '34514879'
+  - '34555210'
+  - '34772694'
+  suggested_keywords:
+  - Urinary Bladder neuropathic pain
+  - Urinary Bladder spinal cord pain
+  - Urinary Bladder dorsal horn
+  - Urinary Bladder microglia
+  status: PENDING_REVIEW
+- mesh_term: Lumbar Vertebrae
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '33609694'
+  - '33759484'
+  - '35634490'
+  - '36199783'
+  - '36277021'
+  suggested_keywords:
+  - Lumbar Vertebrae neuropathic pain
+  - Lumbar Vertebrae spinal cord pain
+  - Lumbar Vertebrae dorsal horn
+  - Lumbar Vertebrae microglia
+  status: PENDING_REVIEW
+- mesh_term: Glucosides
+  frequency: 25
+  adjacent_themes: []
+  example_pmids:
+  - '30554535'
+  - '32683581'
+  - '33639149'
+  - '34626306'
+  - '34844873'
+  suggested_keywords:
+  - Glucosides neuropathic pain
+  - Glucosides spinal cord pain
+  - Glucosides dorsal horn
+  - Glucosides microglia
+  status: PENDING_REVIEW
+- mesh_term: NAV1.9 Voltage-Gated Sodium Channel
+  frequency: 25
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '33227509'
+  - '33515125'
+  - '33636225'
+  - '33752606'
+  - '33998011'
+  suggested_keywords:
+  - NAV1.9 Voltage-Gated Sodium Channel neuropathic pain
+  - NAV1.9 Voltage-Gated Sodium Channel spinal cord pain
+  - NAV1.9 Voltage-Gated Sodium Channel dorsal horn
+  - NAV1.9 Voltage-Gated Sodium Channel microglia
+  status: PENDING_REVIEW
+- mesh_term: Gabapentin
+  frequency: 24
+  adjacent_themes: []
+  example_pmids:
+  - '33152334'
+  - '33862171'
+  - '34244365'
+  - '34369317'
+  - '34648902'
+  suggested_keywords:
+  - Gabapentin neuropathic pain
+  - Gabapentin spinal cord pain
+  - Gabapentin dorsal horn
+  - Gabapentin microglia
+  status: PENDING_REVIEW
+- mesh_term: Somatosensory Cortex
+  frequency: 24
+  adjacent_themes: []
+  example_pmids:
+  - '32279144'
+  - '33595765'
+  - '33853400'
+  - '33957613'
+  - '34050215'
+  suggested_keywords:
+  - Somatosensory Cortex neuropathic pain
+  - Somatosensory Cortex spinal cord pain
+  - Somatosensory Cortex dorsal horn
+  - Somatosensory Cortex microglia
+  status: PENDING_REVIEW
+- mesh_term: Transcranial Magnetic Stimulation
+  frequency: 24
+  adjacent_themes: []
+  example_pmids:
+  - '32542515'
+  - '33625934'
+  - '33635391'
+  - '33737061'
+  - '34217600'
+  suggested_keywords:
+  - Transcranial Magnetic Stimulation neuropathic pain
+  - Transcranial Magnetic Stimulation spinal cord pain
+  - Transcranial Magnetic Stimulation dorsal horn
+  - Transcranial Magnetic Stimulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Receptors, Purinergic P2X7
+  frequency: 24
+  adjacent_themes:
+  - T03
+  - T07
+  - T08
+  example_pmids:
+  - '33402188'
+  - '33626989'
+  - '33963520'
+  - '34208781'
+  - '34799827'
+  suggested_keywords:
+  - Receptors, Purinergic P2X7 neuropathic pain
+  - Receptors, Purinergic P2X7 spinal cord pain
+  - Receptors, Purinergic P2X7 dorsal horn
+  - Receptors, Purinergic P2X7 microglia
+  status: PENDING_REVIEW
+- mesh_term: Genetic Therapy
+  frequency: 24
+  adjacent_themes:
+  - T09
+  example_pmids:
+  - '32671729'
+  - '32875492'
+  - '33229973'
+  - '33283990'
+  - '33596149'
+  suggested_keywords:
+  - Genetic Therapy neuropathic pain
+  - Genetic Therapy spinal cord pain
+  - Genetic Therapy dorsal horn
+  - Genetic Therapy microglia
+  status: PENDING_REVIEW
+- mesh_term: Cell Survival
+  frequency: 24
+  adjacent_themes:
+  - T02
+  - T04
+  example_pmids:
+  - '33222263'
+  - '33471211'
+  - '33528898'
+  - '33846774'
+  - '34284715'
+  suggested_keywords:
+  - Cell Survival neuropathic pain
+  - Cell Survival spinal cord pain
+  - Cell Survival dorsal horn
+  - Cell Survival microglia
+  status: PENDING_REVIEW
+- mesh_term: Histone Deacetylase Inhibitors
+  frequency: 24
+  adjacent_themes:
+  - T09
+  example_pmids:
+  - '33529752'
+  - '33856345'
+  - '34298911'
+  - '34547384'
+  - '34915156'
+  suggested_keywords:
+  - Histone Deacetylase Inhibitors neuropathic pain
+  - Histone Deacetylase Inhibitors spinal cord pain
+  - Histone Deacetylase Inhibitors dorsal horn
+  - Histone Deacetylase Inhibitors microglia
+  status: PENDING_REVIEW
+- mesh_term: Polyunsaturated Alkamides
+  frequency: 24
+  adjacent_themes: []
+  example_pmids:
+  - '33560661'
+  - '33713246'
+  - '33826922'
+  - '33845074'
+  - '33932409'
+  suggested_keywords:
+  - Polyunsaturated Alkamides neuropathic pain
+  - Polyunsaturated Alkamides spinal cord pain
+  - Polyunsaturated Alkamides dorsal horn
+  - Polyunsaturated Alkamides microglia
+  status: PENDING_REVIEW
+- mesh_term: CRISPR-Cas Systems
+  frequency: 24
+  adjacent_themes:
+  - T03
+  example_pmids:
+  - '32671729'
+  - '33455878'
+  - '33473114'
+  - '33712750'
+  - '34544832'
+  suggested_keywords:
+  - CRISPR-Cas Systems neuropathic pain
+  - CRISPR-Cas Systems spinal cord pain
+  - CRISPR-Cas Systems dorsal horn
+  - CRISPR-Cas Systems microglia
+  status: PENDING_REVIEW
+- mesh_term: Sirtuins
+  frequency: 24
+  adjacent_themes: []
+  example_pmids:
+  - '33127810'
+  - '34787870'
+  - '35351574'
+  - '35379148'
+  - '35616799'
+  suggested_keywords:
+  - Sirtuins neuropathic pain
+  - Sirtuins spinal cord pain
+  - Sirtuins dorsal horn
+  - Sirtuins microglia
+  status: PENDING_REVIEW
+- mesh_term: Diabetes Mellitus, Type 2
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '32875492'
+  - '33027641'
+  - '33127810'
+  - '33618606'
+  - '33639149'
+  suggested_keywords:
+  - Diabetes Mellitus, Type 2 neuropathic pain
+  - Diabetes Mellitus, Type 2 spinal cord pain
+  - Diabetes Mellitus, Type 2 dorsal horn
+  - Diabetes Mellitus, Type 2 microglia
+  status: PENDING_REVIEW
+- mesh_term: Nerve Regeneration
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '32470939'
+  - '34262056'
+  - '34440655'
+  - '34902518'
+  - '35109876'
+  suggested_keywords:
+  - Nerve Regeneration neuropathic pain
+  - Nerve Regeneration spinal cord pain
+  - Nerve Regeneration dorsal horn
+  - Nerve Regeneration microglia
+  status: PENDING_REVIEW
+- mesh_term: Pyrimidines
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '33423550'
+  - '33482616'
+  - '34544461'
+  - '34998817'
+  - '36439691'
+  suggested_keywords:
+  - Pyrimidines neuropathic pain
+  - Pyrimidines spinal cord pain
+  - Pyrimidines dorsal horn
+  - Pyrimidines microglia
+  status: PENDING_REVIEW
+- mesh_term: Abortion, Induced
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '33063314'
+  - '33278292'
+  - '33285100'
+  - '33930380'
+  - '33957651'
+  suggested_keywords:
+  - Abortion, Induced neuropathic pain
+  - Abortion, Induced spinal cord pain
+  - Abortion, Induced dorsal horn
+  - Abortion, Induced microglia
+  status: PENDING_REVIEW
+- mesh_term: Abdominal Pain
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '33241956'
+  - '33314662'
+  - '33542016'
+  - '34445965'
+  - '34775196'
+  suggested_keywords:
+  - Abdominal Pain neuropathic pain
+  - Abdominal Pain spinal cord pain
+  - Abdominal Pain dorsal horn
+  - Abdominal Pain microglia
+  status: PENDING_REVIEW
+- mesh_term: Central Nervous System
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '32584191'
+  - '33049240'
+  - '33083995'
+  - '33459557'
+  - '34424117'
+  suggested_keywords:
+  - Central Nervous System neuropathic pain
+  - Central Nervous System spinal cord pain
+  - Central Nervous System dorsal horn
+  - Central Nervous System microglia
+  status: PENDING_REVIEW
+- mesh_term: Fibrosis
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '32964315'
+  - '33611840'
+  - '33649986'
+  - '34101158'
+  - '34420462'
+  suggested_keywords:
+  - Fibrosis neuropathic pain
+  - Fibrosis spinal cord pain
+  - Fibrosis dorsal horn
+  - Fibrosis microglia
+  status: PENDING_REVIEW
+- mesh_term: Cohort Studies
+  frequency: 23
+  adjacent_themes: []
+  example_pmids:
+  - '33025139'
+  - '33929316'
+  - '34786970'
+  - '35987334'
+  - '36115715'
+  suggested_keywords:
+  - Cohort Studies neuropathic pain
+  - Cohort Studies spinal cord pain
+  - Cohort Studies dorsal horn
+  - Cohort Studies microglia
+  status: PENDING_REVIEW
+- mesh_term: Alternative Splicing
+  frequency: 23
+  adjacent_themes:
+  - T06
+  example_pmids:
+  - '32780479'
+  - '33010019'
+  - '33323031'
+  - '33850082'
+  - '33938719'
+  suggested_keywords:
+  - Alternative Splicing neuropathic pain
+  - Alternative Splicing spinal cord pain
+  - Alternative Splicing dorsal horn
+  - Alternative Splicing microglia
+  status: PENDING_REVIEW
+- mesh_term: Parabrachial Nucleus
+  frequency: 22
+  adjacent_themes: []
+  example_pmids:
+  - '33524449'
+  - '33591273'
+  - '34376756'
+  - '35027408'
+  - '35134251'
+  suggested_keywords:
+  - Parabrachial Nucleus neuropathic pain
+  - Parabrachial Nucleus spinal cord pain
+  - Parabrachial Nucleus dorsal horn
+  - Parabrachial Nucleus microglia
+  status: PENDING_REVIEW
+- mesh_term: Acupuncture Therapy
+  frequency: 22
+  adjacent_themes: []
+  example_pmids:
+  - '32796318'
+  - '33969586'
+  - '34628738'
+  - '35015875'
+  - '35399845'
+  suggested_keywords:
+  - Acupuncture Therapy neuropathic pain
+  - Acupuncture Therapy spinal cord pain
+  - Acupuncture Therapy dorsal horn
+  - Acupuncture Therapy microglia
+  status: PENDING_REVIEW
+- mesh_term: Drug Delivery Systems
+  frequency: 22
+  adjacent_themes: []
+  example_pmids:
+  - '32739615'
+  - '33229973'
+  - '33549629'
+  - '33569042'
+  - '33740349'
+  suggested_keywords:
+  - Drug Delivery Systems neuropathic pain
+  - Drug Delivery Systems spinal cord pain
+  - Drug Delivery Systems dorsal horn
+  - Drug Delivery Systems microglia
+  status: PENDING_REVIEW
+- mesh_term: Angiogenesis Inhibitors
+  frequency: 22
+  adjacent_themes: []
+  example_pmids:
+  - '32657647'
+  - '33165298'
+  - '33631912'
+  - '33727454'
+  - '34160456'
+  suggested_keywords:
+  - Angiogenesis Inhibitors neuropathic pain
+  - Angiogenesis Inhibitors spinal cord pain
+  - Angiogenesis Inhibitors dorsal horn
+  - Angiogenesis Inhibitors microglia
+  status: PENDING_REVIEW
+- mesh_term: Proto-Oncogene Proteins c-fos
+  frequency: 21
+  adjacent_themes:
+  - T05
+  example_pmids:
+  - '33253785'
+  - '34061020'
+  - '34347648'
+  - '34930957'
+  - '35053363'
+  suggested_keywords:
+  - Proto-Oncogene Proteins c-fos neuropathic pain
+  - Proto-Oncogene Proteins c-fos spinal cord pain
+  - Proto-Oncogene Proteins c-fos dorsal horn
+  - Proto-Oncogene Proteins c-fos microglia
+  status: PENDING_REVIEW
+- mesh_term: Time Factors
+  frequency: 21
+  adjacent_themes:
+  - T10
+  example_pmids:
+  - '32875492'
+  - '33482616'
+  - '33515411'
+  - '33671213'
+  - '33762214'
+  suggested_keywords:
+  - Time Factors neuropathic pain
+  - Time Factors spinal cord pain
+  - Time Factors dorsal horn
+  - Time Factors microglia
+  status: PENDING_REVIEW
+- mesh_term: Cisplatin
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '33613570'
+  - '33656514'
+  - '34652301'
+  - '35033381'
+  - '35081661'
+  suggested_keywords:
+  - Cisplatin neuropathic pain
+  - Cisplatin spinal cord pain
+  - Cisplatin dorsal horn
+  - Cisplatin microglia
+  status: PENDING_REVIEW
+- mesh_term: Molecular Dynamics Simulation
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '33372782'
+  - '33887904'
+  - '34700256'
+  - '35011399'
+  - '35227761'
+  suggested_keywords:
+  - Molecular Dynamics Simulation neuropathic pain
+  - Molecular Dynamics Simulation spinal cord pain
+  - Molecular Dynamics Simulation dorsal horn
+  - Molecular Dynamics Simulation microglia
+  status: PENDING_REVIEW
+- mesh_term: Arthralgia
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '33073324'
+  - '33359852'
+  - '33482616'
+  - '33596205'
+  - '33897685'
+  suggested_keywords:
+  - Arthralgia neuropathic pain
+  - Arthralgia spinal cord pain
+  - Arthralgia dorsal horn
+  - Arthralgia microglia
+  status: PENDING_REVIEW
+- mesh_term: Analgesics, Non-Narcotic
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '33227509'
+  - '33740349'
+  - '34547384'
+  - '34643849'
+  - '36849491'
+  suggested_keywords:
+  - Analgesics, Non-Narcotic neuropathic pain
+  - Analgesics, Non-Narcotic spinal cord pain
+  - Analgesics, Non-Narcotic dorsal horn
+  - Analgesics, Non-Narcotic microglia
+  status: PENDING_REVIEW
+- mesh_term: Molecular Targeted Therapy
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '32955611'
+  - '33007412'
+  - '33647863'
+  - '33788741'
+  - '34203854'
+  suggested_keywords:
+  - Molecular Targeted Therapy neuropathic pain
+  - Molecular Targeted Therapy spinal cord pain
+  - Molecular Targeted Therapy dorsal horn
+  - Molecular Targeted Therapy microglia
+  status: PENDING_REVIEW
+- mesh_term: Janus Kinase 1
+  frequency: 21
+  adjacent_themes:
+  - T05
+  - T09
+  example_pmids:
+  - '33423550'
+  - '37643592'
+  - '37871805'
+  - '37994949'
+  - '38115742'
+  suggested_keywords:
+  - Janus Kinase 1 neuropathic pain
+  - Janus Kinase 1 spinal cord pain
+  - Janus Kinase 1 dorsal horn
+  - Janus Kinase 1 microglia
+  status: PENDING_REVIEW
+- mesh_term: Aminopyridines
+  frequency: 21
+  adjacent_themes: []
+  example_pmids:
+  - '35695059'
+  - '37004962'
+  - '38238800'
+  - '38591338'
+  - '39030571'
+  suggested_keywords:
+  - Aminopyridines neuropathic pain
+  - Aminopyridines spinal cord pain
+  - Aminopyridines dorsal horn
+  - Aminopyridines microglia
+  status: PENDING_REVIEW
+- mesh_term: Central Amygdaloid Nucleus
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '34174041'
+  - '34272314'
+  - '34685624'
+  - '35679996'
+  - '36269044'
+  suggested_keywords:
+  - Central Amygdaloid Nucleus neuropathic pain
+  - Central Amygdaloid Nucleus spinal cord pain
+  - Central Amygdaloid Nucleus dorsal horn
+  - Central Amygdaloid Nucleus microglia
+  status: PENDING_REVIEW
+- mesh_term: Neurodegenerative Diseases
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '33190318'
+  - '33845074'
+  - '34265833'
+  - '34332924'
+  - '34424117'
+  suggested_keywords:
+  - Neurodegenerative Diseases neuropathic pain
+  - Neurodegenerative Diseases spinal cord pain
+  - Neurodegenerative Diseases dorsal horn
+  - Neurodegenerative Diseases microglia
+  status: PENDING_REVIEW
+- mesh_term: Muscle, Skeletal
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '33470759'
+  - '33726849'
+  - '34233552'
+  - '35122221'
+  - '35831667'
+  suggested_keywords:
+  - Muscle, Skeletal neuropathic pain
+  - Muscle, Skeletal spinal cord pain
+  - Muscle, Skeletal dorsal horn
+  - Muscle, Skeletal microglia
+  status: PENDING_REVIEW
+- mesh_term: Stroke
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '33677111'
+  - '34229178'
+  - '34454522'
+  - '34751447'
+  - '36293444'
+  suggested_keywords:
+  - Stroke neuropathic pain
+  - Stroke spinal cord pain
+  - Stroke dorsal horn
+  - Stroke microglia
+  status: PENDING_REVIEW
+- mesh_term: Pyrazoles
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '33450277'
+  - '33749323'
+  - '33783763'
+  - '33917187'
+  - '34844727'
+  suggested_keywords:
+  - Pyrazoles neuropathic pain
+  - Pyrazoles spinal cord pain
+  - Pyrazoles dorsal horn
+  - Pyrazoles microglia
+  status: PENDING_REVIEW
+- mesh_term: Hot Temperature
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '32857181'
+  - '33079239'
+  - '34245979'
+  - '34274349'
+  - '34492212'
+  suggested_keywords:
+  - Hot Temperature neuropathic pain
+  - Hot Temperature spinal cord pain
+  - Hot Temperature dorsal horn
+  - Hot Temperature microglia
+  status: PENDING_REVIEW
+- mesh_term: Superoxide Dismutase
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '33079239'
+  - '33359866'
+  - '35399845'
+  - '35509836'
+  - '35586674'
+  suggested_keywords:
+  - Superoxide Dismutase neuropathic pain
+  - Superoxide Dismutase spinal cord pain
+  - Superoxide Dismutase dorsal horn
+  - Superoxide Dismutase microglia
+  status: PENDING_REVIEW
+- mesh_term: Induced Pluripotent Stem Cells
+  frequency: 20
+  adjacent_themes:
+  - T04
+  example_pmids:
+  - '33659900'
+  - '34736244'
+  - '34930944'
+  - '35478041'
+  - '38538988'
+  suggested_keywords:
+  - Induced Pluripotent Stem Cells neuropathic pain
+  - Induced Pluripotent Stem Cells spinal cord pain
+  - Induced Pluripotent Stem Cells dorsal horn
+  - Induced Pluripotent Stem Cells microglia
+  status: PENDING_REVIEW
+- mesh_term: Mitophagy
+  frequency: 20
+  adjacent_themes: []
+  example_pmids:
+  - '34162415'
+  - '34398134'
+  - '36731149'
+  - '36806345'
+  - '38320636'
+  suggested_keywords:
+  - Mitophagy neuropathic pain
+  - Mitophagy spinal cord pain
+  - Mitophagy dorsal horn
+  - Mitophagy microglia
+  status: PENDING_REVIEW
+- mesh_term: Binding Sites
+  frequency: 20
+  adjacent_themes:
+  - T05
+  example_pmids:
+  - '33372782'
+  - '33450052'
+  - '33887904'
+  - '34681877'
+  - '34684770'
+  suggested_keywords:
+  - Binding Sites neuropathic pain
+  - Binding Sites spinal cord pain
+  - Binding Sites dorsal horn
+  - Binding Sites microglia
+  status: PENDING_REVIEW

@@ -1,0 +1,33 @@
+conflicts:
+- conflict_id: CONFLICT-0001
+  edge_index: 820
+  subject_label: Brain-Derived Neurotrophic Factor (BDNF)
+  object_label: KCC2 (Potassium-Chloride Cotransporter)
+  current_sign: -1
+  current_validation: UNREVIEWED
+  new_sign: 1
+  new_evidence_quote: which in turn increases KCC2 expression and activity
+  new_pmid: '40906931'
+  recommendation: AUTO_UPDATE
+  detected_at: '2026-11-21T16:38:54.095055+00:00'
+  resolved: false
+  resolution: null
+  resolved_at: null
+  reviewer_notes: null
+- conflict_id: CONFLICT-0002
+  edge_index: 820
+  subject_label: Brain-Derived Neurotrophic Factor (BDNF)
+  object_label: KCC2 (Potassium-Chloride Cotransporter)
+  current_sign: -1
+  current_validation: UNREVIEWED
+  new_sign: 1
+  new_evidence_quote: BDNF has been shown to up-regulate KCC2 and attenuate both nociceptive
+    sensitization and spasticity after SCI
+  new_pmid: '36139484'
+  recommendation: AUTO_UPDATE
+  detected_at: '2026-11-21T16:38:54.130806+00:00'
+  resolved: false
+  resolution: null
+  resolved_at: null
+  reviewer_notes: null
+last_updated: '2026-11-21T16:38:54.131037+00:00'
