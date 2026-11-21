@@ -114,6 +114,15 @@ def test_outcome_nodes_include_disease_concepts_but_not_affect_or_mindmap_nodes(
     assert sg.pain == {"np", "ma"}
 
 
+def test_a_pain_word_inside_another_word_or_meaning_its_absence_is_not_a_pain_outcome():
+    nodes = [node("cal", "Calpain (Ca-Dependent Cysteine Protease)", "concept"),
+             node("cip", "Congenital insensitivity to pain", "concept"),
+             node("pf", "painful small fiber neuropathy", "symptom"),
+             node("np", "Neuropathic Pain", "concept"), node("ma", "Mechanical Allodynia", "symptom"),
+             node("an", "Analgesia", "symptom")]
+    assert build(nodes, []).pain == {"pf", "np", "ma"}
+
+
 def test_feedback_loop_sign_is_the_product_of_its_links():
     nodes = [node("a"), node("b"), node("c")]
     sg = build(nodes, [link("a", "b", -1), link("b", "c", -1), link("c", "a", 1)])      # two inhibitory

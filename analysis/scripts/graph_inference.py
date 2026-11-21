@@ -47,6 +47,11 @@ PATH_DECAY = 0.7     # a path of n links counts PATH_DECAY ** (n - 1)
 
 PAIN_LABELS = ("allodynia", "hyperalgesia", "pain")
 AFFECT_LABELS = ("anxiety", "aversi", "depress", "fear", "affective")
+# a pain word at the start of a word ("pain", "painful", "allodynia"), never inside one ("Calpain"), and
+# never a term meaning its absence ("congenital insensitivity to pain", "analgesia")
+PAIN_WORD = re.compile(r"\bpain|allodynia|hyperalgesia", re.I)
+PAIN_NAME_END = re.compile(r"(\bpain|allodynia|hyperalgesia)$", re.I)
+NO_PAIN = re.compile(r"insensitiv|analges|\bfree\b|relief", re.I)
 EXCLUDED_LABEL = re.compile(r"^rationale:|\bantibody\b|\bmab\b|antagonist|inhibitor|blocker", re.I)
 INJURY_LABEL = re.compile(
     r"nerve injury|constriction injury|\bcci\b|spared nerve|\bsni\b|nerve ligation|\bsnl\b|"
@@ -153,10 +158,10 @@ class SignedGraph:
         for nid, n in self.nodes.items():
             lab = n["label"].lower()
             head = lab.split("(")[0].strip()
-            symptom = self.etype(nid) == "symptom" and any(s in lab for s in PAIN_LABELS)
-            disease = self.etype(nid) == "concept" and head.endswith(("pain", "allodynia", "hyperalgesia"))
-            if ((symptom or disease) and not any(s in lab for s in AFFECT_LABELS)
-                    and not EXCLUDED_LABEL.search(n["label"])):
+            symptom = self.etype(nid) == "symptom" and PAIN_WORD.search(lab)
+            disease = self.etype(nid) == "concept" and PAIN_NAME_END.search(head)
+            if ((symptom or disease) and not any(x in lab for x in AFFECT_LABELS)
+                    and not EXCLUDED_LABEL.search(n["label"]) and not NO_PAIN.search(lab)):
                 ids.add(nid)
         return ids
 
