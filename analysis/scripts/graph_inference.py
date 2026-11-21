@@ -19,7 +19,7 @@ the source raises (+1) or lowers (-1) the target) and answers five questions:
 
 Link weights (0-1): curated links by validation status; crawled links by supporting papers,
 lower when the quote is hedged. Excluded: REFUTED links, links the 2026-11 review marked
-WRONG (crawler/review/), crawled links whose quote reports a null result.
+WRONG and not yet fixed (crawler/review/), crawled links whose quote reports a null result.
 
 Everything is deterministic. Usage:
   python3 analysis/scripts/graph_inference.py [--graph PATH] [--review PATH]
@@ -98,12 +98,14 @@ def link_weight(link):
 
 
 def load_wrong_links(review_path):
-    """(pmid, quote) of crawled links the review marked WRONG."""
+    """(pmid, quote) of crawled links the review marked WRONG and that are not yet fixed (a row's
+    `fixed` column says how a fixed one was corrected; its quote now sits on the right link)."""
     path = Path(review_path)
     if not path.exists():
         return set()
     with open(path, newline="", encoding="utf-8") as fh:
-        return {(r["pmid"], r["quote"]) for r in csv.DictReader(fh) if r["verdict"] == "WRONG"}
+        return {(r["pmid"], r["quote"]) for r in csv.DictReader(fh)
+                if r["verdict"] == "WRONG" and not (r.get("fixed") or "").strip()}
 
 
 class SignedGraph:

@@ -1,0 +1,148 @@
+# Corrections to relationships the extractor got wrong, found by the 2026-11 review of
+# auto-crawled links (crawler/review/curated_links_review_2026-11.csv, verdict WRONG).
+# crawler/correct_links.py applies them to crawler/extractions/<pmid>.json, so a re-merge
+# reproduces them, and to graphify-out/graph_v2.json.
+#
+# action: drop     the relationship is removed (a null result or a co-occurrence, not an effect)
+# action: replace  the relationship takes the fields in `now`; `graph` names the node ids the
+#                  corrected link joins
+# graph_was names the node ids of the link that holds the wrong relationship today.
+#
+# Two more review errors (Nav1.7 -> congenital insensitivity to pain, resiniferatoxin -> CGRP)
+# are not listed: the extractor had the right sign (-1) and the predicate's fixed sign
+# overrode it. crawler/extractor.py:normalize_sign now keeps such a sign, and
+# correct_links.py re-applies that rule to links already in the graph.
+
+- pmid: '41977367'
+  quote: The transition from an excitatory GABAergic response to a mature inhibitory response is dependent
+    upon the simultaneous down-regulation of NKCC1 and the up-regulation of KCC2
+  was:
+    subject: NKCC1
+    predicate: downregulates
+    object: KCC2
+    sign: -1
+  graph_was:
+    source: KCC2_enhancers_new_NKCC1
+    target: BDNF_TrkB_KCC2
+  action: drop
+  reason: 'Co-regulation, not an effect: NKCC1 falls and KCC2 rises together as GABA becomes inhibitory
+    during maturation; the quote says nothing about NKCC1 repressing KCC2. The link keeps its other paper
+    (41929507).'
+- pmid: '35775903'
+  quote: pre‐treatment with the TRPV1 antagonist A425619 (1 μM; Zhang et al., 2011) significantly attenuated
+    the proportion of neurons responding to TNFα
+  was:
+    subject: TRPV1
+    predicate: modulates
+    object: TNF-alpha
+    sign: 1
+  graph_was:
+    source: trpv1_trpv1
+    target: TNF_TNF_alpha
+  action: replace
+  now:
+    subject: TNF-alpha
+    predicate: modulates
+    object: TRPV1
+    sign: 1
+  graph:
+    source: TNF_TNF_alpha
+    target: trpv1_trpv1
+  reason: 'Direction reversed: a TRPV1 antagonist reduced the neurons responding to TNF-alpha, so TNF-alpha
+    acts through TRPV1. The evidence joins the existing TNF-alpha -> TRPV1 (+1) link; TRPV1 -> TNF-alpha
+    keeps its other paper (37744324).'
+- pmid: '33380567'
+  quote: TLR4 was mainly expressed in spinal microglia, but not astrocytes or neurons.
+  was:
+    subject: TLR4
+    predicate: expresses
+    object: spinal microglia
+    sign: 0
+  graph_was:
+    source: tlr4_tlr4
+    target: CSF1-CSF1R_SpinalMicroglia
+  action: replace
+  now:
+    subject: spinal microglia
+    predicate: expresses
+    object: TLR4
+    sign: 0
+  graph:
+    source: CSF1-CSF1R_SpinalMicroglia
+    target: tlr4_tlr4
+  reason: 'Direction reversed: spinal microglia express TLR4.'
+- pmid: '34927536'
+  quote: It was shown that the expression of Nav1.7 was mainly on CGRP positive cells.
+  was:
+    subject: Nav1.7
+    predicate: expresses
+    object: CGRP
+    sign: 0
+  graph_was:
+    source: shared_nav17
+    target: shared_cgrp
+  action: replace
+  now:
+    subject: CGRP+ DRG neurons
+    predicate: expresses
+    object: Nav1.7
+    sign: 0
+  graph:
+    source: CRAWLED_cgrp_drg_neurons
+    target: shared_nav17
+  reason: 'Direction and entity: Nav1.7 was found mainly on CGRP-positive DRG neurons (immunofluorescence
+    in DRG); the peptide CGRP does not express a channel.'
+- pmid: '40100256'
+  quote: Therefore, Substance P and CGRPα are dispensable for some forms of neurogenic inflammation.
+  was:
+    subject: Substance P
+    predicate: modulates
+    object: neurogenic inflammation
+    sign: 0
+  graph_was:
+    source: substance_p_nk1_sp
+    target: cgrp_neurogenic_inflammation
+  action: drop
+  reason: 'Null result recorded as a relation: Substance P and CGRP-alpha are dispensable for some forms
+    of neurogenic inflammation.'
+- pmid: '38076807'
+  quote: Substance P and CGRPα are therefore not essential for mechanical or cold allodynia.
+  was:
+    subject: Substance P
+    predicate: modulates
+    object: neuropathic pain
+    sign: 0
+  graph_was:
+    source: substance_p_nk1_sp
+    target: ana_12_neuropathic_pain
+  action: drop
+  reason: 'Null result recorded as a relation: Substance P and CGRP-alpha are not essential for mechanical
+    or cold allodynia.'
+- pmid: '38338764'
+  quote: Importantly, B1R expression was not affected in THΔB2R mice (Figure 1D), indicating the absence
+    of compensatory adaptations of the KKS.
+  was:
+    subject: bradykinin B2 receptor
+    predicate: modulates
+    object: bradykinin B1 receptor
+    sign: 0
+  graph_was:
+    source: Bradykinin_B2Receptor
+    target: Bradykinin_B1Receptor
+  action: drop
+  reason: 'Null result recorded as a relation: B1 receptor expression was not affected in B2 receptor-deficient
+    mice.'
+- pmid: '35367570'
+  quote: Spontaneous pain behavior and mechanical and thermal hyperalgesia after PSNL were not different
+    between αCGRP knockout mice and WT mice throughout the observation period.
+  was:
+    subject: CGRP
+    predicate: modulates
+    object: neuropathic pain
+    sign: 0
+  graph_was:
+    source: shared_cgrp
+    target: ana_12_neuropathic_pain
+  action: drop
+  reason: 'Null result recorded as a relation: alpha-CGRP knockout mice did not differ from wild type
+    after nerve ligation.'

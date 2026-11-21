@@ -63,7 +63,10 @@ Curated node merges (`analysis/claims/node_merges.yaml`, for example PPAR-gamma
 folded into PPARγ) are already in the committed graph. If you re-merge the crawl
 into an older copy of the graph, run `python3 analysis/scripts/merge_nodes.py`
 before committing; it is idempotent and leaves positions named in
-`crawler/conflicts.yaml` alone.
+`crawler/conflicts.yaml` alone. Corrections to wrong extractions
+(`crawler/review/extraction_corrections_2026-11.yaml`) are already written into
+`crawler/extractions/`; `python3 crawler/correct_links.py` re-applies them and the
+extractor's sign rule to a graph built before them.
 
 ## Alternative: extraction by Claude Code sessions (Claude subscription, no API key)
 

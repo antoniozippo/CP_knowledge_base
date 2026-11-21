@@ -120,6 +120,8 @@ def load_triage(review_path):
     out = {}
     with open(path, newline="", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
+            if (r.get("fixed") or "").strip():
+                continue                        # corrected since: the verdict no longer describes the link
             out[(r["pmid"], r["quote"], r["source"], r["target"])] = (AI_CODES.get(r["verdict"], 0), r["reason"])
     return out
 

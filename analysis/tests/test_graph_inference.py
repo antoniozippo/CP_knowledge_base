@@ -232,3 +232,13 @@ def test_paths_between_finds_signed_paths_and_respects_the_evidence_filter():
     assert len(gi.paths_between(sg, "a", "c", 3)) == 2
     assert len(gi.paths_between(sg, "a", "c", 3, gi.make_edge_ok(min_papers=2))) == 1     # the single-paper hop drops out
     assert gi.paths_between(sg, "a", "a", 3) == []
+
+
+def test_a_wrong_link_marked_fixed_is_no_longer_excluded(tmp_path):
+    review = tmp_path / "review.csv"
+    with open(review, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=["pmid", "quote", "verdict", "fixed"])
+        w.writeheader()
+        w.writerow({"pmid": "1", "quote": "A raises B.", "verdict": "WRONG", "fixed": ""})
+        w.writerow({"pmid": "2", "quote": "C raises D.", "verdict": "WRONG", "fixed": "reversed"})
+    assert gi.load_wrong_links(review) == {("1", "A raises B.")}

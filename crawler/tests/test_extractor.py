@@ -37,15 +37,34 @@ def test_quote_must_occur_in_content_ignoring_case_and_punctuation():
     assert stats["dropped_unverified"] == 2
 
 
-def test_fixed_direction_predicates_set_the_sign_others_keep_it():
+def test_direction_verbs_supply_a_missing_sign_others_keep_it():
     q = "TNF-alpha strongly reduced KCC2 expression"
     verified, stats = ex.verify_relationships(result(
-        rel(q, predicate="downregulates", sign=1),
+        rel(q, predicate="downregulates", sign=0),
         rel(q, predicate="modulates", sign=-1),
         rel(q, predicate="binds", sign=5),
     ), CONTENT)
-    assert [r.sign for r in verified.relationships] == [-1, -1, 1]
-    assert stats["sign_overridden"] == 2
+    assert [(r.predicate, r.sign) for r in verified.relationships] == [("downregulates", -1), ("modulates", -1), ("binds", 1)]
+    assert stats["sign_overridden"] == 2 and stats["verb_replaced"] == 0
+
+
+def test_a_sign_that_contradicts_its_verb_wins_and_the_verb_becomes_modulates():
+    # "Loss-of-function mutations in Nav1.7 cause CIP" is extracted as causes, -1; "RTX depleted
+    # CGRP" as releases, -1. The sign is the net effect the prompt asks for, so it is kept.
+    q = "TNF-alpha strongly reduced KCC2 expression"
+    verified, stats = ex.verify_relationships(result(
+        rel(q, predicate="causes", sign=-1),
+        rel(q, predicate="prevents", sign=1),
+        rel(q, predicate="inhibits", sign=-1),          # agrees: unchanged
+    ), CONTENT)
+    assert [(r.predicate, r.sign) for r in verified.relationships] == [("modulates", -1), ("modulates", 1), ("inhibits", -1)]
+    assert stats["verb_replaced"] == 2 and stats["sign_overridden"] == 0
+
+
+def test_normalize_sign_clamps_and_keeps_free_predicates():
+    assert ex.normalize_sign("binds", 3) == ("binds", 1)
+    assert ex.normalize_sign("Activates", 0) == ("Activates", 1)
+    assert ex.normalize_sign("activates", -1) == ("modulates", -1)
 
 
 def test_relationship_endpoints_added_to_entities():

@@ -18,8 +18,11 @@ logger = logging.getLogger(__name__)
 MAX_CONTENT_CHARS = 24000
 LLM_TIMEOUT_S = 300
 
-# Predicates whose direction is fixed by the verb; the LLM-reported sign is
-# overridden by these. The rest (binds, modulates, ...) keep the LLM sign.
+# Predicates whose verb implies a direction. The verb supplies the sign when the
+# extraction gives none (0). When the extraction's sign contradicts the verb, the sign
+# wins and the predicate becomes "modulates": the prompt defines the sign as the net
+# effect, and the verb is the coarser signal ("causes" a breakdown, "prevents" a loss,
+# "releases" for a depletion). Other predicates (binds, modulates, ...) keep the sign.
 PREDICATE_SIGN = {
     "activates": 1, "upregulates": 1, "releases": 1, "recruits": 1,
     "activates_pathway": 1, "causes": 1,
@@ -163,6 +166,7 @@ class LLMExtractor:
         self.extractions_dir: Optional[Path] = None
         self.dropped_unverified = 0
         self.sign_overridden = 0
+        self.verb_replaced = 0
 
     def _build_prompt(self, content: str, pmid: str, title: str,
                       theme_entities: list[str] | None = None) -> str:
@@ -326,6 +330,7 @@ class LLMExtractor:
         result, stats = verify_relationships(result, content)
         self.dropped_unverified += stats["dropped_unverified"]
         self.sign_overridden += stats["sign_overridden"]
+        self.verb_replaced += stats["verb_replaced"]
         return result
 
 
@@ -352,30 +357,45 @@ def _norm_for_quote(text: str) -> str:
     return " ".join(_QUOTE_NORM_RE.sub(" ", _TAG_RE.sub("", text).lower()).split())
 
 
+def normalize_sign(predicate: str, sign) -> tuple[str, int]:
+    """(predicate, sign) for an extracted relationship (see PREDICATE_SIGN): the sign is
+    clamped to -1/0/1; a direction verb supplies a missing sign; a sign that contradicts
+    the verb is kept and the verb becomes "modulates"."""
+    sign = max(-1, min(1, int(sign)))
+    fixed = PREDICATE_SIGN.get(predicate.strip().lower())
+    if fixed is None:
+        return predicate, sign
+    if sign == 0:
+        return predicate, fixed
+    if sign != fixed:
+        return "modulates", sign
+    return predicate, sign
+
+
 def verify_relationships(
     result: ExtractionResult, content: str
 ) -> tuple[ExtractionResult, dict]:
     """Keep only relationships whose evidence_quote occurs in the content.
 
     Matching ignores case, punctuation and whitespace, nothing else, so a
-    paraphrased or invented quote is dropped. Predicates with a fixed
-    direction (PREDICATE_SIGN) set the sign; other signs are clamped to
-    -1/0/1. Subjects/objects missing from the entity list are added so
-    the matcher can resolve them. Returns (result, stats).
+    paraphrased or invented quote is dropped. Signs are set by
+    normalize_sign. Subjects/objects missing from the entity list are added
+    so the matcher can resolve them. Returns (result, stats).
     """
     haystack = _norm_for_quote(content)
     kept: list[ExtractedRelationship] = []
-    stats = {"dropped_unverified": 0, "sign_overridden": 0}
+    stats = {"dropped_unverified": 0, "sign_overridden": 0, "verb_replaced": 0}
     for rel in result.relationships:
         quote = _norm_for_quote(rel.evidence_quote)
         if len(quote) < 15 or quote not in haystack:
             stats["dropped_unverified"] += 1
             continue
-        fixed = PREDICATE_SIGN.get(rel.predicate.strip().lower())
-        sign = fixed if fixed is not None else max(-1, min(1, int(rel.sign)))
+        predicate, sign = normalize_sign(rel.predicate, rel.sign)
         if sign != rel.sign:
             stats["sign_overridden"] += 1
-        kept.append(rel.model_copy(update={"sign": sign, "pmid": result.pmid}))
+        if predicate != rel.predicate:
+            stats["verb_replaced"] += 1
+        kept.append(rel.model_copy(update={"predicate": predicate, "sign": sign, "pmid": result.pmid}))
     names = {e.name for e in result.entities}
     extra = [
         ExtractedEntity(name=n)

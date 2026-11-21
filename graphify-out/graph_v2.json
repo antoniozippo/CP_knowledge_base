@@ -79601,21 +79601,13 @@
       "target": "BDNF_TrkB_KCC2",
       "sign": -1,
       "origin": "auto_crawled",
-      "quote": "The transition from an excitatory GABAergic response to a mature inhibitory response is dependent upon the simultaneous down-regulation of NKCC1 and the up-regulation of KCC2",
+      "quote": "An increase in NKCC1 expression was accompanied by suppressed KCC2 expression.",
       "source_ref": null,
-      "source_pmid": "41977367",
+      "source_pmid": "41929507",
       "source_doi": "",
       "validation_status": "UNREVIEWED",
       "crawled_at": "2026-11-21T20:00:24.906973+00:00",
       "crawler_evidence": [
-        {
-          "pmid": "41977367",
-          "doi": "",
-          "quote": "The transition from an excitatory GABAergic response to a mature inhibitory response is dependent upon the simultaneous down-regulation of NKCC1 and the up-regulation of KCC2",
-          "predicate": "downregulates",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:24.906973+00:00"
-        },
         {
           "pmid": "41929507",
           "doi": "",
@@ -94344,7 +94336,7 @@
       ]
     },
     {
-      "relation": "activates_pathway",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -94352,7 +94344,7 @@
       "weight": null,
       "source": "CRAWLED_cd44",
       "target": "trpv1_trpv1",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "These results suggest that CLARIX FLO/HHP suppresses TRPV1 through a CD44-dependent mechanism.",
       "source_ref": null,
@@ -94365,9 +94357,10 @@
           "pmid": "41977284",
           "doi": "",
           "quote": "These results suggest that CLARIX FLO/HHP suppresses TRPV1 through a CD44-dependent mechanism.",
-          "predicate": "activates_pathway",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:24.962263+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:24.962263+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -97087,7 +97080,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -97095,7 +97088,7 @@
       "weight": null,
       "source": "CRAWLED_cyclophilin_a",
       "target": "BBB_blood_spinal_cord_barrier",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "the CypA-MMP9 signaling pathway is responsible for CCI-induced NP in mice by impairing the structure and function of the BSCB",
       "source_ref": null,
@@ -97108,9 +97101,10 @@
           "pmid": "38009963",
           "doi": "",
           "quote": "the CypA-MMP9 signaling pathway is responsible for CCI-induced NP in mice by impairing the structure and function of the BSCB",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:24.972760+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:24.972760+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -104510,7 +104504,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -104518,7 +104512,7 @@
       "weight": null,
       "source": "ana_12_NLRP3_inflammasome",
       "target": "CRAWLED_gabaergic_neurons",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "Elevated ROS levels result in the activation of the NLRP3 inflammasome, which then triggers GABAergic neuron pyroptosis, thereby promoting chronic pain (37).",
       "source_ref": null,
@@ -104531,9 +104525,10 @@
           "pmid": "42459688",
           "doi": "",
           "quote": "Elevated ROS levels result in the activation of the NLRP3 inflammasome, which then triggers GABAergic neuron pyroptosis, thereby promoting chronic pain (37).",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.004580+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.004580+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -105714,7 +105709,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -105722,7 +105717,7 @@
       "weight": null,
       "source": "tlr4_tlr4",
       "target": "CRAWLED_intraepidermal_nerve_fiber_density",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "TLR4 deletion was also protective in preserving nerve fiber density in the epidermis in males",
       "source_ref": null,
@@ -105735,9 +105730,10 @@
           "pmid": "41167527",
           "doi": "",
           "quote": "TLR4 deletion was also protective in preserving nerve fiber density in the epidermis in males",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.011299+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.011299+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -120034,7 +120030,7 @@
       ]
     },
     {
-      "relation": "prevents",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -120042,7 +120038,7 @@
       "weight": null,
       "source": "p2x7_p2x7",
       "target": "CRAWLED_activity_induced_muscle_pain",
-      "sign": -1,
+      "sign": 1,
       "origin": "auto_crawled",
       "quote": "Injection of the P2X7, NLRP3 and Caspase-1 inhibitors in the muscle prior to induction of the activity-induced muscle pain model, dose-dependently prevented the decrease in MWT ipsilaterally in male mice, but not in female mice",
       "source_ref": null,
@@ -120055,9 +120051,10 @@
           "pmid": "36930885",
           "doi": "",
           "quote": "Injection of the P2X7, NLRP3 and Caspase-1 inhibitors in the muscle prior to induction of the activity-induced muscle pain model, dose-dependently prevented the decrease in MWT ipsilaterally in male mice, but not in female mice",
-          "predicate": "prevents",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:25.071784+00:00"
+          "predicate": "modulates",
+          "sign": 1,
+          "crawled_at": "2026-11-21T20:00:25.071784+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -128324,21 +128321,13 @@
       "target": "TNF_TNF_alpha",
       "sign": 1,
       "origin": "auto_crawled",
-      "quote": "pre‐treatment with the TRPV1 antagonist A425619 (1 μM; Zhang et al., 2011) significantly attenuated the proportion of neurons responding to TNFα",
+      "quote": "TRPV1 promotes TNF-α production and is also induced by TNF-α",
       "source_ref": null,
-      "source_pmid": "35775903",
+      "source_pmid": "37744324",
       "source_doi": "",
       "validation_status": "UNREVIEWED",
       "crawled_at": "2026-11-21T20:00:25.108911+00:00",
       "crawler_evidence": [
-        {
-          "pmid": "35775903",
-          "doi": "",
-          "quote": "pre‐treatment with the TRPV1 antagonist A425619 (1 μM; Zhang et al., 2011) significantly attenuated the proportion of neurons responding to TNFα",
-          "predicate": "modulates",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.108911+00:00"
-        },
         {
           "pmid": "37744324",
           "doi": "",
@@ -141580,8 +141569,8 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "tlr4_tlr4",
-      "target": "CSF1-CSF1R_SpinalMicroglia",
+      "source": "CSF1-CSF1R_SpinalMicroglia",
+      "target": "tlr4_tlr4",
       "sign": 0,
       "origin": "auto_crawled",
       "quote": "TLR4 was mainly expressed in spinal microglia, but not astrocytes or neurons.",
@@ -141597,7 +141586,8 @@
           "quote": "TLR4 was mainly expressed in spinal microglia, but not astrocytes or neurons.",
           "predicate": "expresses",
           "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.180419+00:00"
+          "crawled_at": "2026-11-21T20:00:25.180419+00:00",
+          "corrected": "crawler/review/extraction_corrections_2026-11.yaml"
         }
       ]
     },
@@ -144316,7 +144306,7 @@
       ]
     },
     {
-      "relation": "prevents",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -144324,7 +144314,7 @@
       "weight": null,
       "source": "CRAWLED_stem_cell_derived_exosomes",
       "target": "BBB_blood_spinal_cord_barrier",
-      "sign": -1,
+      "sign": 1,
       "origin": "auto_crawled",
       "quote": "Exosomes also preserve blood-spinal cord barrier integrity through regulation of endothelial cells, pericytes, matrix metalloproteinases, and vascular signaling",
       "source_ref": null,
@@ -144337,9 +144327,10 @@
           "pmid": "42802738",
           "doi": "",
           "quote": "Exosomes also preserve blood-spinal cord barrier integrity through regulation of endothelial cells, pericytes, matrix metalloproteinases, and vascular signaling",
-          "predicate": "prevents",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:25.198953+00:00"
+          "predicate": "modulates",
+          "sign": 1,
+          "crawled_at": "2026-11-21T20:00:25.198953+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -148131,7 +148122,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -148139,7 +148130,7 @@
       "weight": null,
       "source": "CRAWLED_sleep_restriction",
       "target": "BBB_blood_spinal_cord_barrier",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "Both the BSCB and BBB were significantly broken after 48-h of SR compared with mice in the CON group",
       "source_ref": null,
@@ -148152,9 +148143,10 @@
           "pmid": "38715017",
           "doi": "",
           "quote": "Both the BSCB and BBB were significantly broken after 48-h of SR compared with mice in the CON group",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.226769+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.226769+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -150695,7 +150687,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -150703,7 +150695,7 @@
       "weight": null,
       "source": "tlr4_hmgb1",
       "target": "BBB_blood_brain_barrier",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "entry into the CSF can destroy the blood-brain barrier and aggravate brain injuries",
       "source_ref": null,
@@ -150716,9 +150708,10 @@
           "pmid": "35715656",
           "doi": "",
           "quote": "entry into the CSF can destroy the blood-brain barrier and aggravate brain injuries",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.246951+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.246951+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -155622,7 +155615,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -155630,7 +155623,7 @@
       "weight": null,
       "source": "CRAWLED_hyperperfusion",
       "target": "BBB_blood_brain_barrier",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "blood-brain barrier breakdown can result from hyperperfusion and increased cerebral perfusion pressure leading to extravasation of plasma and macromolecules into the interstitial space through tight junction proteins [32]",
       "source_ref": null,
@@ -155643,9 +155636,10 @@
           "pmid": "33630183",
           "doi": "",
           "quote": "blood-brain barrier breakdown can result from hyperperfusion and increased cerebral perfusion pressure leading to extravasation of plasma and macromolecules into the interstitial space through tight junction proteins [32]",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.286851+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.286851+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -155986,7 +155980,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -155994,7 +155988,7 @@
       "weight": null,
       "source": "CRAWLED_pathogenic_cd4_t_cells",
       "target": "BBB_blood_brain_barrier",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "After pathogenic CD4+ T cell accumulates, the BBB is breached due to various cytokines including NFκB and STAT stimulators from pathogenic CD4+ T cells",
       "source_ref": null,
@@ -156007,9 +156001,10 @@
           "pmid": "35003096",
           "doi": "",
           "quote": "After pathogenic CD4+ T cell accumulates, the BBB is breached due to various cytokines including NFκB and STAT stimulators from pathogenic CD4+ T cells",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.295109+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.295109+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -159942,70 +159937,6 @@
           "sign": 1,
           "relation_type": "CONFIRMS",
           "crawled_at": "2026-11-21T20:00:25.603947+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "causes",
-      "confidence": "INFERRED",
-      "confidence_score": 0.7000000000000002,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "shared_nav17",
-      "target": "ZFHX2_congenital_insensitivity_to_pain",
-      "sign": 1,
-      "origin": "auto_crawled",
-      "quote": "Loss-of-function recessive mutations in NaV1.7 (also known as PN1) were found to cause Congenital insensitivity to pain (CIP) [60].",
-      "source_ref": null,
-      "source_pmid": "42796305",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.327708+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "42796305",
-          "doi": "",
-          "quote": "Loss-of-function recessive mutations in NaV1.7 (also known as PN1) were found to cause Congenital insensitivity to pain (CIP) [60].",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.327708+00:00"
-        },
-        {
-          "pmid": "40283194",
-          "doi": "",
-          "quote": "or loss-of-function mutations (reduced Nav1.7 activity), causing congenital insensitivity to pain (CIP) [18]",
-          "predicate": "causes",
-          "sign": 1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:25.392466+00:00"
-        },
-        {
-          "pmid": "40206072",
-          "doi": "",
-          "quote": "loss-of-function mutations in Nav1.7 result in congenital insensitivity to pain (CIP)",
-          "predicate": "causes",
-          "sign": 1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:25.403886+00:00"
-        },
-        {
-          "pmid": "37352856",
-          "doi": "",
-          "quote": "Loss-of-function mutations in Nav1.7, a voltage-gated sodium channel, cause congenital insensitivity to pain (CIP) in humans",
-          "predicate": "causes",
-          "sign": 1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:25.477178+00:00"
-        },
-        {
-          "pmid": "34090020",
-          "doi": "",
-          "quote": "Presenting as congenital insensitivity to pain, three unrelated probands carried biallelic loss-of-function mutations in SCN9A.",
-          "predicate": "causes",
-          "sign": 1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:25.603439+00:00"
         }
       ]
     },
@@ -175741,34 +175672,6 @@
       ]
     },
     {
-      "relation": "releases",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "trpv1_rtx",
-      "target": "shared_cgrp",
-      "sign": 1,
-      "origin": "auto_crawled",
-      "quote": "RTX, however, did deplete substance P (SP) and CGRP from bladder afferents [88,122].",
-      "source_ref": null,
-      "source_pmid": "37894723",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.475323+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "37894723",
-          "doi": "",
-          "quote": "RTX, however, did deplete substance P (SP) and CGRP from bladder afferents [88,122].",
-          "predicate": "releases",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.475323+00:00"
-        }
-      ]
-    },
-    {
       "relation": "upregulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
@@ -179836,6 +179739,15 @@
           "sign": -1,
           "relation_type": "CONFIRMS",
           "crawled_at": "2026-11-21T20:00:25.805697+00:00"
+        },
+        {
+          "pmid": "37894723",
+          "doi": "",
+          "quote": "RTX, however, did deplete substance P (SP) and CGRP from bladder afferents [88,122].",
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.475323+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -196611,34 +196523,6 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "substance_p_nk1_sp",
-      "target": "cgrp_neurogenic_inflammation",
-      "sign": 0,
-      "origin": "auto_crawled",
-      "quote": "Therefore, Substance P and CGRPα are dispensable for some forms of neurogenic inflammation.",
-      "source_ref": null,
-      "source_pmid": "40100256",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.722576+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "40100256",
-          "doi": "",
-          "quote": "Therefore, Substance P and CGRPα are dispensable for some forms of neurogenic inflammation.",
-          "predicate": "modulates",
-          "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.722576+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
       "source": "CRAWLED_cgrpα",
       "target": "ana_12_neuropathic_pain",
       "sign": 0,
@@ -197738,34 +197622,6 @@
           "predicate": "causes",
           "sign": 1,
           "crawled_at": "2026-11-21T20:00:25.735600+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "substance_p_nk1_sp",
-      "target": "ana_12_neuropathic_pain",
-      "sign": 0,
-      "origin": "auto_crawled",
-      "quote": "Substance P and CGRPα are therefore not essential for mechanical or cold allodynia.",
-      "source_ref": null,
-      "source_pmid": "38076807",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.735623+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "38076807",
-          "doi": "",
-          "quote": "Substance P and CGRPα are therefore not essential for mechanical or cold allodynia.",
-          "predicate": "modulates",
-          "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.735623+00:00"
         }
       ]
     },
@@ -200813,34 +200669,6 @@
           "predicate": "modulates",
           "sign": 1,
           "crawled_at": "2026-11-21T20:00:25.778979+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "Bradykinin_B2Receptor",
-      "target": "Bradykinin_B1Receptor",
-      "sign": 0,
-      "origin": "auto_crawled",
-      "quote": "Importantly, B1R expression was not affected in THΔB2R mice (Figure 1D), indicating the absence of compensatory adaptations of the KKS.",
-      "source_ref": null,
-      "source_pmid": "38338764",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.779000+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "38338764",
-          "doi": "",
-          "quote": "Importantly, B1R expression was not affected in THΔB2R mice (Figure 1D), indicating the absence of compensatory adaptations of the KKS.",
-          "predicate": "modulates",
-          "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.779000+00:00"
         }
       ]
     },
@@ -207979,34 +207807,6 @@
       ]
     },
     {
-      "relation": "modulates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.5,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "shared_cgrp",
-      "target": "ana_12_neuropathic_pain",
-      "sign": 0,
-      "origin": "auto_crawled",
-      "quote": "Spontaneous pain behavior and mechanical and thermal hyperalgesia after PSNL were not different between αCGRP knockout mice and WT mice throughout the observation period.",
-      "source_ref": null,
-      "source_pmid": "35367570",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.887180+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "35367570",
-          "doi": "",
-          "quote": "Spontaneous pain behavior and mechanical and thermal hyperalgesia after PSNL were not different between αCGRP knockout mice and WT mice throughout the observation period.",
-          "predicate": "modulates",
-          "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.887180+00:00"
-        }
-      ]
-    },
-    {
       "relation": "downregulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
@@ -209329,8 +209129,8 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "shared_nav17",
-      "target": "shared_cgrp",
+      "source": "CRAWLED_cgrp_drg_neurons",
+      "target": "shared_nav17",
       "sign": 0,
       "origin": "auto_crawled",
       "quote": "It was shown that the expression of Nav1.7 was mainly on CGRP positive cells.",
@@ -209346,7 +209146,8 @@
           "quote": "It was shown that the expression of Nav1.7 was mainly on CGRP positive cells.",
           "predicate": "expresses",
           "sign": 0,
-          "crawled_at": "2026-11-21T20:00:25.909036+00:00"
+          "crawled_at": "2026-11-21T20:00:25.909036+00:00",
+          "corrected": "crawler/review/extraction_corrections_2026-11.yaml"
         }
       ]
     },
@@ -222923,7 +222724,7 @@
       ]
     },
     {
-      "relation": "prevents",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -222931,7 +222732,7 @@
       "weight": null,
       "source": "CRAWLED_thymoquinone",
       "target": "hdac_sirt1",
-      "sign": -1,
+      "sign": 1,
       "origin": "auto_crawled",
       "quote": "However, co-treatment with PTX + TQ prevented this downregulation (p = 0.018 vs. PTX and p > 0.05 vs. CTRL), suggesting a potential association between SIRT1 preservation and the neuroprotective effect of TQ observed at this timepoint (Figure 3).",
       "source_ref": null,
@@ -222944,9 +222745,10 @@
           "pmid": "42793114",
           "doi": "",
           "quote": "However, co-treatment with PTX + TQ prevented this downregulation (p = 0.018 vs. PTX and p > 0.05 vs. CTRL), suggesting a potential association between SIRT1 preservation and the neuroprotective effect of TQ observed at this timepoint (Figure 3).",
-          "predicate": "prevents",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:26.082046+00:00"
+          "predicate": "modulates",
+          "sign": 1,
+          "crawled_at": "2026-11-21T20:00:26.082046+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -237417,7 +237219,7 @@
       ]
     },
     {
-      "relation": "causes",
+      "relation": "modulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
@@ -237425,7 +237227,7 @@
       "weight": null,
       "source": "TNF_TNF_alpha",
       "target": "PV_interneurons_PV_interneurons",
-      "sign": 1,
+      "sign": -1,
       "origin": "auto_crawled",
       "quote": "also promotes necroptosis of parvalbumin-expressing interneurons",
       "source_ref": null,
@@ -237438,9 +237240,10 @@
           "pmid": "42511969",
           "doi": "",
           "quote": "also promotes necroptosis of parvalbumin-expressing interneurons",
-          "predicate": "causes",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:26.290006+00:00"
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:26.290006+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     },
@@ -243189,6 +242992,75 @@
           "predicate": "upregulates",
           "sign": 1,
           "crawled_at": "2026-11-21T20:00:26.385711+00:00"
+        }
+      ]
+    },
+    {
+      "relation": "modulates",
+      "confidence": "INFERRED",
+      "confidence_score": 0.5,
+      "source_file": null,
+      "source_location": null,
+      "weight": null,
+      "source": "shared_nav17",
+      "target": "ZFHX2_congenital_insensitivity_to_pain",
+      "sign": -1,
+      "origin": "auto_crawled",
+      "quote": "Presenting as congenital insensitivity to pain, three unrelated probands carried biallelic loss-of-function mutations in SCN9A.",
+      "source_ref": null,
+      "source_pmid": "34090020",
+      "source_doi": "",
+      "validation_status": "UNREVIEWED",
+      "crawled_at": "2026-11-21T21:53:41.230461+00:00",
+      "crawler_evidence": [
+        {
+          "pmid": "34090020",
+          "doi": "",
+          "quote": "Presenting as congenital insensitivity to pain, three unrelated probands carried biallelic loss-of-function mutations in SCN9A.",
+          "predicate": "modulates",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:25.603439+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
+        },
+        {
+          "pmid": "37352856",
+          "doi": "",
+          "quote": "Loss-of-function mutations in Nav1.7, a voltage-gated sodium channel, cause congenital insensitivity to pain (CIP) in humans",
+          "predicate": "modulates",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:25.477178+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
+        },
+        {
+          "pmid": "40206072",
+          "doi": "",
+          "quote": "loss-of-function mutations in Nav1.7 result in congenital insensitivity to pain (CIP)",
+          "predicate": "modulates",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:25.403886+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
+        },
+        {
+          "pmid": "40283194",
+          "doi": "",
+          "quote": "or loss-of-function mutations (reduced Nav1.7 activity), causing congenital insensitivity to pain (CIP) [18]",
+          "predicate": "modulates",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:25.392466+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
+        },
+        {
+          "pmid": "42796305",
+          "doi": "",
+          "quote": "Loss-of-function recessive mutations in NaV1.7 (also known as PN1) were found to cause Congenital insensitivity to pain (CIP) [60].",
+          "predicate": "modulates",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.327708+00:00",
+          "corrected": "sign contradicted the verb (crawler/extractor.py:normalize_sign)"
         }
       ]
     }

@@ -220,7 +220,8 @@ def run_pipeline(args, themes=None):
                         f"deferred to the next run")
         log.info(f"  Extracted from {len(extractions)} papers ({extractor.call_count} LLM calls); "
                  f"{extractor.dropped_unverified} relationships dropped (quote not in paper), "
-                 f"{extractor.sign_overridden} signs set from predicate")
+                 f"{extractor.sign_overridden} signs set from predicate, "
+                 f"{extractor.verb_replaced} verbs replaced by 'modulates' (sign contradicted the verb)")
 
 
     # --- Phase 4: Match ---

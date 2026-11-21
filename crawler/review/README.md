@@ -17,8 +17,25 @@ Verdicts
 ## After the matcher fixes
 The review found 23 `WRONG` links: 13 were entities merged into the wrong node and 10 were
 extraction errors. The matcher fixes (stricter fuzzy and parenthetical matching, `crawler/no_merge.yaml`)
-and the re-merge that followed removed all 13 entity-merge errors. The 10 extraction errors remain
-(4 null results recorded as relations, 3 reversed directions, 3 wrong signs).
+and the re-merge that followed removed all 13 entity-merge errors: each of those quotes now sits on
+a link between the right nodes.
+
+## Extraction errors fixed
+The 10 extraction errors are fixed; the `fixed` column says how, and `graph_inference.py` stops
+excluding a row once it is filled in.
+- 8 were the extractor's own mistakes, corrected in `extraction_corrections_2026-11.yaml`:
+  4 null results and 1 co-regulation dropped (SP and CGRP "dispensable" or "not essential", B1R
+  "not affected", alpha-CGRP knockouts "not different", NKCC1 and KCC2 changing together), and
+  3 reversed (TNF-alpha acts through TRPV1; spinal microglia express TLR4; CGRP+ DRG neurons
+  express Nav1.7).
+- 2 (Nav1.7 -> congenital insensitivity to pain, resiniferatoxin -> CGRP) had the right sign in
+  the extraction (-1); the fixed sign of the verb ("causes", "releases") overrode it. That rule
+  is changed (`crawler/extractor.py:normalize_sign`): a sign that contradicts its verb is kept and
+  the verb becomes "modulates". The same override had flipped 14 more papers on 10 other links
+  (for example "HMGB1 destroys the blood-brain barrier" stored as +1, "P2X7 inhibitors prevented
+  muscle pain" stored as P2X7 preventing pain); they are corrected too.
+
+`crawler/correct_links.py` applies both to `crawler/extractions/` and the graph, and is idempotent.
 
 `graph_link_index` refers to the graph at the commit that added the CSV. The re-merge re-ordered
 the crawled links, so find a row in the current graph by `pmid` + `quote` + endpoint labels, not by index.
