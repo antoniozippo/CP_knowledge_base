@@ -10,10 +10,15 @@ conflicts:
   new_pmid: '40906931'
   recommendation: AUTO_UPDATE
   detected_at: '2026-11-21T16:38:54.095055+00:00'
-  resolved: false
-  resolution: null
-  resolved_at: null
-  reviewer_notes: null
+  resolved: true
+  resolution: KEEP_CURRENT
+  resolved_at: '2026-11-21T16:59:03.444415+00:00'
+  reviewer_notes: Context-dependent, not a contradiction. PMID 40906931 only mentions
+    in its introduction that activity-based therapy raises BDNF, which in turn raises
+    KCC2 (citing Beverungen 2020, Li 2022, Tashiro 2015); BDNF is not otherwise studied
+    there. The curated edge is injury-related, microglia-derived BDNF acting on TrkB
+    in the dorsal horn, which the 13 attached papers support. Sign kept at -1; do
+    not auto-update.
 - conflict_id: CONFLICT-0002
   edge_index: 820
   subject_label: Brain-Derived Neurotrophic Factor (BDNF)
@@ -26,8 +31,13 @@ conflicts:
   new_pmid: '36139484'
   recommendation: AUTO_UPDATE
   detected_at: '2026-11-21T16:38:54.130806+00:00'
-  resolved: false
-  resolution: null
-  resolved_at: null
-  reviewer_notes: null
-last_updated: '2026-11-21T16:38:54.131037+00:00'
+  resolved: true
+  resolution: KEEP_CURRENT
+  resolved_at: '2026-11-21T16:59:03.446165+00:00'
+  reviewer_notes: 'Context-dependent, not a contradiction. PMID 36139484 is a review
+    that states the context dependence itself: BDNF up-regulates KCC2 after spinal
+    cord injury (its refs 3 and 97) and down-regulates it without injury (ref 108),
+    and exercise-driven BDNF does not cause the adverse effect. The same paper is
+    already attached to this edge as supporting evidence (-1, no-injury case). Sign
+    kept at -1; do not auto-update.'
+last_updated: '2026-11-21T16:59:03.446195+00:00'
