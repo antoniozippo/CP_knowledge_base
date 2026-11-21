@@ -8,6 +8,7 @@ from typing import Optional
 import yaml
 from rapidfuzz import fuzz, process
 
+from crawler.classify import normalize_label
 from crawler.default_aliases import DEFAULT_ALIASES
 from crawler.records import EdgeMatch, EntityMatch
 from crawler.tokens import (
@@ -24,6 +25,11 @@ from crawler.tokens import (
 logger = logging.getLogger(__name__)
 
 ALIASES_PATH = Path("crawler/aliases.yaml")
+
+
+def is_crawled(node: dict) -> bool:
+    """A node the crawler created itself (free-text label, never reviewed)."""
+    return node.get("file_type") == "crawled"
 
 
 def _field(obj, name: str, default):
@@ -45,12 +51,21 @@ class EntityMatcher:
         self.nodes: list[dict] = self.graph.get("nodes", [])
         self.links: list[dict] = self.graph.get("links", [])
 
-        # Build lookup: norm_label (lowercase) → node id
+        # Curated nodes: lowercased label → node (what the graph stores as norm_label).
+        # Auto-crawled nodes: the updater's normalized key → node. They are kept
+        # apart so a curated node always wins a collision and the loose rules
+        # (token, fuzzy) only ever see curated labels.
         self.norm_labels: dict[str, dict] = {}
+        self._crawled_by_key: dict[str, dict] = {}
         for node in self.nodes:
             nl = node.get("norm_label", "").lower()
-            if nl:
+            if not nl:
+                continue
+            if is_crawled(node):
+                self._crawled_by_key.setdefault(nl, node)
+            else:
                 self.norm_labels[nl] = node
+        self._loose_labels = list(self.norm_labels)
 
         # Build lookup: node id → node
         self.nodes_by_id: dict[str, dict] = {n["id"]: n for n in self.nodes}
@@ -121,13 +136,18 @@ class EntityMatcher:
         return {name: frozenset(members) for members in groups.values() for name in members}
 
     def _match_exact(self, name_lower: str) -> Optional[dict]:
-        """Try exact norm_label match."""
-        return self.norm_labels.get(name_lower)
+        """Exact label match: a curated node by lowercased label, else a crawled
+        node by the updater's normalized key (punctuation, synonyms), which is how
+        the updater de-duplicates the nodes it creates."""
+        return self.norm_labels.get(name_lower) or self._crawled_by_key.get(normalize_label(name_lower))
 
     def _token_candidates(self, name: str) -> list[tuple[tuple, dict]]:
         """Nodes this name may merge into, each with a ranking key.
 
-        A node qualifies when the name's distinctive tokens sit inside its head
+        Auto-crawled nodes never qualify: their labels are free text, and a short
+        name would merge into a longer one ("spinal cord" into "spinal cord
+        injury"). They are reached by exact label only. A node qualifies when the
+        name's distinctive tokens sit inside its head
         (the label before the first "(") and cover at least MIN_COVERAGE of it,
         or when the name's tokens, generic words included, equal the content of a
         "(...)" group (a symbol alias such as "(SCN9A)"; "(RhoA Inhibitor)" is
@@ -140,6 +160,8 @@ class EntityMatcher:
             return []
         found = []
         for node in self.nodes:
+            if is_crawled(node):
+                continue
             head, parens = self._forms[node["id"]]
             coverage = 0.0
             if head and wanted <= head:
@@ -173,11 +195,11 @@ class EntityMatcher:
 
         "Caspase-1" and "Caspase-3" score 89 but are different genes.
         """
-        if not self.norm_labels:
+        if not self._loose_labels:
             return None
         digits = DIGITS_RE.findall(name_lower)
         for label, score, _ in process.extract(
-            name_lower, list(self.norm_labels), scorer=fuzz.ratio,
+            name_lower, self._loose_labels, scorer=fuzz.ratio,
             score_cutoff=threshold, limit=5,
         ):
             if DIGITS_RE.findall(label) == digits:

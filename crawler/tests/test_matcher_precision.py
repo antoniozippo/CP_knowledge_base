@@ -9,12 +9,18 @@ import pytest
 import yaml
 
 from crawler import matcher as matcher_module
+from crawler.classify import normalize_label
 from crawler.matcher import EntityMatcher
 
 
-def _build(tmp_path, monkeypatch, labels, edges=(), aliases=None):
-    """labels: {node_id: label}; edges: [(source_id, target_id)] for degree."""
+def _build(tmp_path, monkeypatch, labels, edges=(), aliases=None, crawled=None, crawled_first=False):
+    """labels: {node_id: label}; edges: [(source_id, target_id)] for degree;
+    crawled: {node_id: label} of nodes the crawler itself created."""
     nodes = [{"id": i, "label": lab, "norm_label": lab.lower()} for i, lab in labels.items()]
+    # the updater stores crawled nodes under its normalized key ("Nav1.6" -> "nav1 6")
+    extra = [{"id": i, "label": lab, "norm_label": normalize_label(lab), "file_type": "crawled"}
+             for i, lab in (crawled or {}).items()]
+    nodes = extra + nodes if crawled_first else nodes + extra
     links = [{"source": s, "target": t, "relation": "r", "sign": 0} for s, t in edges]
     graph = tmp_path / "graph.json"
     graph.write_text(json.dumps({"nodes": nodes, "links": links}))
@@ -119,11 +125,58 @@ def test_alias_never_crosses_into_a_sibling_gene(tmp_path, monkeypatch):
     assert m.match_entity("P2RX7").matched_node_id == "b"
 
 
+# --- auto-crawled nodes are reached by exact label only ------------------------
+# Their labels are free text; a short name must not merge into a longer one.
+
+def test_short_name_does_not_merge_into_a_longer_crawled_label(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"b": "BDNF"},
+               crawled={"c1": "spinal cord injury", "c2": "dorsal root ganglion electrical stimulation"})
+    assert m.match_entity("spinal cord").status == "NO_MATCH"
+    assert m.match_entity("dorsal root ganglion").status == "NO_MATCH"
+
+
+def test_near_spelling_does_not_fuzzy_merge_into_a_crawled_label(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"b": "BDNF"}, crawled={"c": "Substance P release"})
+    assert m.match_entity("Substance P releas").status == "NO_MATCH"
+
+
+def test_crawled_node_is_found_by_its_exact_label(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"b": "BDNF"}, crawled={"c": "Nav1.6"})
+    result = m.match_entity("Nav1.6")
+    assert (result.status, result.matched_node_id) == ("EXACT", "c")
+
+
+def test_crawled_node_is_found_despite_punctuation(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"b": "BDNF"}, crawled={"c": "feed-forward inhibition"})
+    assert m.match_entity("Feed forward inhibition").matched_node_id == "c"
+
+
+def test_every_crawled_node_in_the_real_graph_resolves_to_itself():
+    # Otherwise the next crawl would create a duplicate of a node it already made.
+    m = EntityMatcher(graph_path="graphify-out/graph_v2.json")
+    for node in (n for n in m.nodes if matcher_module.is_crawled(n)):
+        hit = m.match_entity(node["label"])
+        assert hit.matched_node_id == node["id"] or not matcher_module.is_crawled(
+            m.nodes_by_id[hit.matched_node_id]), node["label"]
+
+
+@pytest.mark.parametrize("crawled_first", [False, True])
+def test_curated_node_wins_a_label_collision(tmp_path, monkeypatch, crawled_first):
+    m = _build(tmp_path, monkeypatch, {"curated": "Nav1.7"}, crawled={"crawled": "Nav1.7"},
+               crawled_first=crawled_first)
+    assert m.match_entity("Nav1.7").matched_node_id == "curated"
+
+
+def test_curated_nodes_still_match_loosely_next_to_crawled_ones(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"r": "RhoA GTPase"}, crawled={"c": "RhoA signalling in spinal cord"})
+    assert m.match_entity("RhoA").matched_node_id == "r"
+
+
 # --- real graph: false merges seen in the survey -------------------------------
 
 @pytest.fixture(scope="module")
-def real():
-    return EntityMatcher(graph_path="graphify-out/graph_v2.json")
+def real(curated_graph_file):
+    return EntityMatcher(graph_path=str(curated_graph_file))
 
 
 @pytest.mark.parametrize("name", [

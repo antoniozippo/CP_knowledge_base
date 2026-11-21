@@ -93,9 +93,9 @@ def test_inputs_skip_content_without_matching_meta():
 # --- full pipeline with stubbed search / fetch / LLM -------------------------
 
 @pytest.fixture
-def workspace(tmp_path, monkeypatch):
+def workspace(tmp_path, monkeypatch, curated_graph_file):
     (tmp_path / "graphify-out").mkdir()
-    shutil.copy(REPO / "graphify-out/graph_v2.json", tmp_path / "graphify-out/graph_v2.json")
+    shutil.copy(curated_graph_file, tmp_path / "graphify-out/graph_v2.json")
     (tmp_path / "crawler/logs").mkdir(parents=True)
     themes = {"T01": {"name": "kcc2_test", "keywords": ["KCC2"], "mesh_terms": [], "entities": ["KCC2"]}}
     (tmp_path / "crawler/themes.yaml").write_text(yaml.safe_dump(themes))

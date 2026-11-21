@@ -358,7 +358,10 @@ class TestRealGraphSmoke:
             if c.get("kind") == "edge"
             and verdict_map.get(c["id"], "UNREVIEWED") != "UNREVIEWED"
         ]
-        annotated = sum(1 for l in data["links"] if "validation_status" in l)
+        # Links the crawler added (origin auto_crawled) carry UNREVIEWED until a
+        # reviewer rules on them; verdicts apply to the curated links only.
+        curated = [l for l in data["links"] if l.get("origin") != "auto_crawled"]
+        annotated = sum(1 for l in curated if "validation_status" in l)
         # Every reviewable edge claim must land on at least one link.
         assert annotated >= len(reviewed) - 2
         allowed = {
@@ -370,7 +373,7 @@ class TestRealGraphSmoke:
         }
         assert all(
             l["validation_status"] in allowed
-            for l in data["links"]
+            for l in curated
             if "validation_status" in l
         )
 
@@ -381,7 +384,9 @@ class TestRealGraphSmoke:
         for before, after in zip(orig["links"], new["links"]):
             expected = dict(before)
             status = after.get("validation_status")
-            if status is not None:
+            # Only a status the script wrote must be a verdict; a crawler-set
+            # UNREVIEWED on an auto_crawled link passes through untouched.
+            if status is not None and status != before.get("validation_status"):
                 assert status in {
                     "CONFIRMED",
                     "EXTENDED",

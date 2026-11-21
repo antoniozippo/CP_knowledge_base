@@ -11,15 +11,14 @@ from crawler.extractor import ExtractedEntity, ExtractedRelationship, Extraction
 from crawler.matcher import EntityMatch, EntityMatcher
 from crawler.updater import GraphUpdater
 
-REAL_GRAPH = Path("graphify-out/graph_v2.json")
 PMID = "99999901"
 NEW_ENTITY = "Zorblax-9"
 
 
 @pytest.fixture
-def graph_copy(tmp_path):
+def graph_copy(tmp_path, curated_graph_file):
     target = tmp_path / "graph_v2.json"
-    shutil.copy(REAL_GRAPH, target)
+    shutil.copy(curated_graph_file, target)
     return target
 
 
