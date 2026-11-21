@@ -20,7 +20,7 @@ pathological_rules:
   direction: up
   magnitude_hint: null
 inbound_edges:
-- source_id: PPARy_PPARgamma
+- source_id: ppary_ppary
   relation: inhibits
   sign: -1
   weight: 0.9

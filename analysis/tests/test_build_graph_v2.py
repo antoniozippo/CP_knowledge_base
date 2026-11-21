@@ -93,6 +93,10 @@ class TestNormalizeLabel:
     def test_british_spelling_folds_to_american(self):
         assert bg.normalize_label("Central sensitisation") == "central sensitization"
 
+    def test_ppar_gamma_spellings_fold_together(self):
+        key = bg.normalize_label("PPARγ (Peroxisome Proliferator-Activated Receptor Gamma)")
+        assert bg.normalize_label("PPAR-gamma") == key == "pparγ"
+
     def test_qualifier_parenthetical_does_not_cause_acronym_merge(self):
         assert bg.normalize_label("Fasudil (ROCK Inhibitor)") == "fasudil"
 

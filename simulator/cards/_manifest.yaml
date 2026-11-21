@@ -1,13 +1,13 @@
-generated_at_utc: '2026-10-30T15:45:33Z'
-input_graph_sha256: 351a8de0b3a264cb994cf6679e18f8f8752d72f437f5a6f663b3affd632d5cea
+generated_at_utc: '2026-11-21T21:41:01Z'
+input_graph_sha256: 58289967c0041d2909a25bde66248a9f4bdaa753e0dbb572b009a7383d0837f5
 counts_by_tier:
-  HUB: 9
-  MID: 124
+  HUB: 10
+  MID: 122
   PERIPHERAL: 242
 counts_by_entity_type:
   cell_type: 18
   channel: 34
-  concept: 114
+  concept: 113
   drug: 46
   molecule: 70
   pathway: 15
@@ -84,7 +84,7 @@ cards:
   sha256: 17f0a8bba06dd9d3e4176a792112f89b0c4098b7129b44d32e0cc843fe16af0f
 - id: CSF1-CSF1R_SpinalMicroglia
   file: CSF1_CSF1R_SpinalMicroglia.yaml
-  sha256: 6c385f40fdef53a3e61c3bcea4a260ea92be39ea88cc77e76229f6b781e58674
+  sha256: 17933ae8ac83a33e2b71df5a80915595ad60dd5e74484dc576cf3f1e20fc6ff5
 - id: DRGX_ASO_therapy
   file: DRGX_ASO_therapy.yaml
   sha256: 7a5a790641215a736d9c8e3fe10c7cbdfdc419b972a64fc26faa9b785f734bbe
@@ -174,7 +174,7 @@ cards:
   sha256: 731cd90f84717a2a90a08e64464f67f1e3dd395413e755a87e6f972e5e600728
 - id: JAK-STAT_JAKSTAT3Axis
   file: JAK_STAT_JAKSTAT3Axis.yaml
-  sha256: e6377a7ce1f0bf00d21e13122ddece84d4a198a55f3b78cb418dc7791da67f42
+  sha256: 9ad4b18e3e2a1c4908b453a65a394a5274abf247c476cb57bbfa0675db3ce7c4
 - id: KCC2_enhancers_new_NKCC1
   file: KCC2_enhancers_new_NKCC1.yaml
   sha256: 0a1fd87a5c4454029c5e7d25649d7d602cab82e9f80c0d9074715a6229a3ac99
@@ -253,9 +253,6 @@ cards:
 - id: PNN_ECM_tenascin_R
   file: PNN_ECM_tenascin_R.yaml
   sha256: 02ff1dc4cc0ea6c8279b39b89b1347853aa9ada6f66ec6fbcd483648f44ab50e
-- id: PPARy_PPARgamma
-  file: PPARy_PPARgamma.yaml
-  sha256: 5d58422bf9f208f955fc86b01b4d8f3ef037d148065038215b19e2120be86b4d
 - id: PV_interneurons_CP_AMPARs
   file: PV_interneurons_CP_AMPARs.yaml
   sha256: fe9a0d1d5c12adb99018d2a6c69c89eeab818b59b6b044a0f03cc2b0a605db1f
@@ -909,7 +906,7 @@ cards:
   sha256: 7ae8313dabbb90a7033ea07a58132b5afefd02dfb44465f72dba3d4f266af790
 - id: ppary_ppary
   file: ppary_ppary.yaml
-  sha256: 7fb0d2d613e7a02c1d04baba1043b0641e1db8675cbf5bb8e82ac7b4912df690
+  sha256: 61b4c72bb2621e6e7778d889005c73f6539a4c985dce2403b780685c58f11090
 - id: ppary_rosiglitazone
   file: ppary_rosiglitazone.yaml
   sha256: b1300b13a0a2bd29ede517d0e38f79f28f5faea1f5f693c9d8034b6611fab65d
@@ -1014,7 +1011,7 @@ cards:
   sha256: 09f788c9e2435e288fc379a0a25d5025e57bb90f1e6a6eebc66731b28a3dd30d
 - id: shared_central_sensitization
   file: shared_central_sensitization.yaml
-  sha256: 750bab40edbc3ea2f0da0449bb5bb335ef4059fede53bdf9fc098b020e688588
+  sha256: 49ce2ef341a1d89d29a0453acd8a382fe39136b995c0c0d703ebe95cc0bda56b
 - id: shared_cgrp
   file: shared_cgrp.yaml
   sha256: 2776435536afd7c59a2e3e134a41254a1345d2b691e63a93ecf573e9011ea9b5
@@ -1141,8 +1138,9 @@ cards:
 - id: wnt_wnt
   file: wnt_wnt.yaml
   sha256: 91f6343dcbcbfc44f6968581f8a49fd29da3b9da9ea3aa12d19a2d10dafc3c1b
-card_set_hash: 0ce39d7814d59e552f710db1742c956def6e1513693d479bd368aa91ffda8c29
+card_set_hash: a5e4f0ebe7d22a482abdec5958602443e9e3e67e297fc54e0aa1c3ea2582bd11
 dropped_refuted_rules: 8
 mixed_annotated: 5
 unresolved_endpoint_drops: 27
-stale_files_removed: []
+stale_files_removed:
+- PPARy_PPARgamma.yaml

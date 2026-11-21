@@ -53,8 +53,17 @@ conflicts:
   new_pmid: '39467998'
   recommendation: AUTO_UPDATE
   detected_at: '2026-11-21T20:01:07.718893+00:00'
-  resolved: false
-  resolution: null
-  resolved_at: null
-  reviewer_notes: null
-last_updated: '2026-11-21T20:01:07.718948+00:00'
+  resolved: true
+  resolution: KEEP_CURRENT
+  resolved_at: '2026-11-21T21:38:15.025182+00:00'
+  reviewer_notes: 'Context-dependent, not a contradiction. PMID 39467998 studies tendon
+    stem/progenitor cells from diabetic rats under hyperoxia (osteogenic differentiation
+    and tendon calcification, not pain). There, raised ROS (hyperoxia, or H2O2 added
+    under low oxygen and high glucose: the ''LO-HG + H2O2'' group) lowered HIF-1a
+    protein through ubiquitin-proteasome degradation, with no change in HIF-1a mRNA.
+    The curated edge describes the nerve-injury setting, where ROS inhibit the prolyl
+    hydroxylases and stabilize HIF-1a even in normoxia (hif1a.md). Both directions
+    are real; which one holds depends on oxygen tension and tissue. Sign kept at +1;
+    do not auto-update. The tendon finding is not added as a link because its setting
+    lies outside the pain graph.'
+last_updated: '2026-11-21T21:38:15.025242+00:00'

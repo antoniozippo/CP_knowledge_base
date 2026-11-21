@@ -155,6 +155,7 @@ GENE_SYNONYMS = {
 ACRONYM_ALIASES = {
     "brain derived neurotrophic factor": "bdnf",
     "vascular endothelial growth factor a": "vegfa",
+    "ppar gamma": "pparγ",       # "PPAR-gamma" and "PPARγ (...)": one receptor (analysis/claims/node_merges.yaml)
 }
 
 SPELLING_VARIANTS = {

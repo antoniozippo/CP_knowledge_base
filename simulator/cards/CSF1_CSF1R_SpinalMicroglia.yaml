@@ -38,7 +38,7 @@ inbound_edges:
   weight: 0.9
   validation_status: null
   neutral_ok: false
-- source_id: PPARy_PPARgamma
+- source_id: ppary_ppary
   relation: inhibits
   sign: -1
   weight: 0.9

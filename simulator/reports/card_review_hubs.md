@@ -1,6 +1,6 @@
 # Hub agent card review digest
 
-generated: 2026-10-30T15:45:33Z
+generated: 2026-11-21T21:41:01Z
 
 Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran with --hub-enrich.
 
@@ -112,6 +112,16 @@ Proposed normal roles are `<LLM_ENRICH>` placeholders unless the builder ran wit
   - `RULE-karilin7_Kalirin7-05` [up] Kalirin-7 (GEF for Rac1/RhoG) rationale for Rac1–PAK–LIMK–cofilin pathway
     - claim_refs: EC-0067 (CONFIRMED)
   - `RULE-karilin7_Kalirin7-06` [up] Kalirin-7 (GEF for Rac1/RhoG) causes Spinal Pronociceptive Kalirin-7 Role
+    - claim_refs: (none)
+
+## ppary_ppary (PPARγ (Peroxisome Proliferator-Activated Receptor Gamma))
+
+- tier: HUB | entity_type: receptor | compartment: other | community: 3
+- proposed_normal_role: <LLM_ENRICH>
+- pathological rules (2):
+  - `RULE-ppary_ppary-01` [down] PPARγ (Peroxisome Proliferator-Activated Receptor Gamma) inhibits Spinal Microglia (Activated)
+    - claim_refs: (none)
+  - `RULE-ppary_ppary-02` [down] PPARγ (Peroxisome Proliferator-Activated Receptor Gamma) inhibits IL-6/JAK2/STAT3 Axis
     - claim_refs: (none)
 
 ## rage_rage (RAGE (Receptor for Advanced Glycation End-products / AGER))

@@ -1,0 +1,21 @@
+# Curated node merges applied to graphify-out/graph_v2.json by
+# analysis/scripts/merge_nodes.py.
+#
+# Each entry folds the `absorbs` nodes into `survivor`: their links move to the
+# survivor, links that become identical are folded into one with their crawler
+# evidence kept, and the absorbed nodes are removed. Used where one entity
+# reached the graph twice under different spellings that label normalization
+# does not join. The tool is idempotent; rerun it after any re-merge of the
+# crawl that starts from an older graph.
+
+- survivor: ppary_ppary
+  absorbs:
+    - PPARy_PPARgamma
+  source_ref: PPARy.md
+  rationale: >-
+    PPARy.md produced two nodes for one receptor: "PPARγ (Peroxisome
+    Proliferator-Activated Receptor Gamma)" and "PPAR-gamma". Both carried
+    curated and crawled links (agonists that activate it, its inhibition of
+    spinal microglia, JAK/STAT3 and NLRP3), so no path saw all of PPARγ's
+    evidence at once. The receptor node keeps its id and label; PPAR-gamma,
+    PPARγ and PPARG reach it through crawler/aliases.yaml.

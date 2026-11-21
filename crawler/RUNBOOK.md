@@ -59,6 +59,12 @@ New links are `UNREVIEWED` and stay out of the simulator's agent cards
 (`simulator/build_cards.py: simulation_eligible`) until a reviewer sets a
 `validation_status`; evidence on existing links is in `crawler_evidence`.
 
+Curated node merges (`analysis/claims/node_merges.yaml`, for example PPAR-gamma
+folded into PPARγ) are already in the committed graph. If you re-merge the crawl
+into an older copy of the graph, run `python3 analysis/scripts/merge_nodes.py`
+before committing; it is idempotent and leaves positions named in
+`crawler/conflicts.yaml` alone.
+
 ## Alternative: extraction by Claude Code sessions (Claude subscription, no API key)
 
 `crawler/agent_extract.py` replaces steps 3-4: Claude Code cloud sessions do

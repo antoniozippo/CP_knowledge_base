@@ -5926,7 +5926,10 @@
       "id": "ppary_ppary",
       "entity_type": "receptor",
       "compartment": "other",
-      "tier": "mid"
+      "tier": "hub",
+      "merged_from": [
+        "PPARy_PPARgamma"
+      ]
     },
     {
       "label": "Pioglitazone (PPARγ Agonist)",
@@ -8729,22 +8732,6 @@
       "entity_type": "receptor",
       "compartment": "other",
       "tier": "peripheral"
-    },
-    {
-      "label": "PPAR-gamma",
-      "file_type": "document",
-      "source_file": "PPARy.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "PPARy_PPARgamma",
-      "community": 1,
-      "norm_label": "ppar-gamma",
-      "entity_type": "concept",
-      "compartment": "other",
-      "tier": "mid"
     },
     {
       "label": "RhoA/ROCK Pathway",
@@ -76801,7 +76788,7 @@
       "source_location": null,
       "weight": 1.0,
       "source": "shared_central_sensitization",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": -1
     },
     {
@@ -76897,7 +76884,7 @@
       "source_file": "PPARy.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CSF1-CSF1R_SpinalMicroglia",
       "sign": -1
     },
@@ -76930,7 +76917,7 @@
       "source_file": "PPARy.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "JAK-STAT_JAKSTAT3Axis",
       "sign": -1
     },
@@ -95221,7 +95208,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CRAWLED_axl",
       "sign": 0,
       "origin": "auto_crawled",
@@ -95249,7 +95236,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CRAWLED_axl",
       "sign": 1,
       "origin": "auto_crawled",
@@ -95277,7 +95264,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CRAWLED_autophagy",
       "sign": 1,
       "origin": "auto_crawled",
@@ -95305,7 +95292,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CRAWLED_ferroptosis",
       "sign": -1,
       "origin": "auto_crawled",
@@ -95333,7 +95320,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "CRAWLED_gpx4",
       "sign": 1,
       "origin": "auto_crawled",
@@ -95362,7 +95349,7 @@
       "source_location": null,
       "weight": null,
       "source": "ppary_pioglitazone",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "pioglitazone alleviates IVDD progression by inhibiting ECM degradation and ferroptosis in IVD tissues",
@@ -95379,6 +95366,23 @@
           "predicate": "activates",
           "sign": 1,
           "crawled_at": "2026-11-21T20:00:24.966436+00:00"
+        },
+        {
+          "pmid": "42144710",
+          "doi": "",
+          "quote": "thiazolidinediones (PIOG) activatesPPARG/PPARγ (peroxisome proliferator activated receptor gamma) to promotemitophagic flux",
+          "predicate": "activates",
+          "sign": 1,
+          "crawled_at": "2026-11-21T20:00:25.953531+00:00"
+        },
+        {
+          "pmid": "36369249",
+          "doi": "",
+          "quote": "We further evaluated the effects of pioglitazone, an agonist for PPARγ, on the number of PPARγ-positive Vc neurons.",
+          "predicate": "activates",
+          "sign": 1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:26.033656+00:00"
         }
       ]
     },
@@ -212389,43 +212393,6 @@
       ]
     },
     {
-      "relation": "activates",
-      "confidence": "INFERRED",
-      "confidence_score": 0.55,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "ppary_pioglitazone",
-      "target": "ppary_ppary",
-      "sign": 1,
-      "origin": "auto_crawled",
-      "quote": "thiazolidinediones (PIOG) activatesPPARG/PPARγ (peroxisome proliferator activated receptor gamma) to promotemitophagic flux",
-      "source_ref": null,
-      "source_pmid": "42144710",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.953531+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "42144710",
-          "doi": "",
-          "quote": "thiazolidinediones (PIOG) activatesPPARG/PPARγ (peroxisome proliferator activated receptor gamma) to promotemitophagic flux",
-          "predicate": "activates",
-          "sign": 1,
-          "crawled_at": "2026-11-21T20:00:25.953531+00:00"
-        },
-        {
-          "pmid": "36369249",
-          "doi": "",
-          "quote": "We further evaluated the effects of pioglitazone, an agonist for PPARγ, on the number of PPARγ-positive Vc neurons.",
-          "predicate": "activates",
-          "sign": 1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:26.033656+00:00"
-        }
-      ]
-    },
-    {
       "relation": "upregulates",
       "confidence": "INFERRED",
       "confidence_score": 0.5,
@@ -213207,7 +213174,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_hyodeoxycholic_acid",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "HDCA treatment reversed the SNL-induced decrease in PPAR-γ levels and activation of MMP-9 and MMP-2",
@@ -213319,7 +213286,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_alpha_lipoic_acid",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "ALA enhanced the level of PPAR-γ, facilitated the nuclear translocation of Nrf2 and inhibited NF-κB activation",
@@ -213431,7 +213398,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_ibuprofen",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "Our findings indicate that ibuprofen and indomethacin promote axonal growth through PPARγ activation, independent of COX inhibition",
@@ -213458,7 +213425,7 @@
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "RhoA_ROCK_RhoA",
       "sign": -1,
       "origin": "auto_crawled",
@@ -214324,6 +214291,32 @@
           "sign": -1,
           "relation_type": "CONFIRMS",
           "crawled_at": "2026-11-21T20:00:26.037332+00:00"
+        },
+        {
+          "pmid": "40594232",
+          "doi": "",
+          "quote": "Western blotting confirmed that GW9662 inhibited NAR-mediated PPARγ transcriptional activity (Fig. 4D).",
+          "predicate": "inhibits",
+          "sign": -1,
+          "crawled_at": "2026-11-21T20:00:25.985122+00:00"
+        },
+        {
+          "pmid": "37440558",
+          "doi": "",
+          "quote": "co-administration of GW9662 with emodin mitigated the restorative potential of emodin treatment",
+          "predicate": "inhibits",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:26.029313+00:00"
+        },
+        {
+          "pmid": "34233552",
+          "doi": "",
+          "quote": "Blocking the PPAR-γ pathway, though administration of GW9662, counteracted pioglitazone protective effects.",
+          "predicate": "inhibits",
+          "sign": -1,
+          "relation_type": "CONFIRMS",
+          "crawled_at": "2026-11-21T20:00:26.054651+00:00"
         }
       ]
     },
@@ -214829,7 +214822,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_cbd",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 0,
       "origin": "auto_crawled",
       "quote": "CBD and CBDA have an affinity for this receptor, inhibiting the transcription and translation of inflammatory genes",
@@ -215304,7 +215297,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_naringin",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "After NAR treatment, the PPARγ levels increased in a dose-dependent manner (Fig. 3C and D).",
@@ -215355,57 +215348,11 @@
     {
       "relation": "inhibits",
       "confidence": "INFERRED",
-      "confidence_score": 0.6000000000000001,
-      "source_file": null,
-      "source_location": null,
-      "weight": null,
-      "source": "CRAWLED_gw9662",
-      "target": "PPARy_PPARgamma",
-      "sign": -1,
-      "origin": "auto_crawled",
-      "quote": "Western blotting confirmed that GW9662 inhibited NAR-mediated PPARγ transcriptional activity (Fig. 4D).",
-      "source_ref": null,
-      "source_pmid": "40594232",
-      "source_doi": "",
-      "validation_status": "UNREVIEWED",
-      "crawled_at": "2026-11-21T20:00:25.985122+00:00",
-      "crawler_evidence": [
-        {
-          "pmid": "40594232",
-          "doi": "",
-          "quote": "Western blotting confirmed that GW9662 inhibited NAR-mediated PPARγ transcriptional activity (Fig. 4D).",
-          "predicate": "inhibits",
-          "sign": -1,
-          "crawled_at": "2026-11-21T20:00:25.985122+00:00"
-        },
-        {
-          "pmid": "37440558",
-          "doi": "",
-          "quote": "co-administration of GW9662 with emodin mitigated the restorative potential of emodin treatment",
-          "predicate": "inhibits",
-          "sign": -1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:26.029313+00:00"
-        },
-        {
-          "pmid": "34233552",
-          "doi": "",
-          "quote": "Blocking the PPAR-γ pathway, though administration of GW9662, counteracted pioglitazone protective effects.",
-          "predicate": "inhibits",
-          "sign": -1,
-          "relation_type": "CONFIRMS",
-          "crawled_at": "2026-11-21T20:00:26.054651+00:00"
-        }
-      ]
-    },
-    {
-      "relation": "inhibits",
-      "confidence": "INFERRED",
       "confidence_score": 0.5,
       "source_file": null,
       "source_location": null,
       "weight": null,
-      "source": "PPARy_PPARgamma",
+      "source": "ppary_ppary",
       "target": "ana_12_NLRP3_inflammasome",
       "sign": -1,
       "origin": "auto_crawled",
@@ -215574,7 +215521,7 @@
       "source_location": null,
       "weight": null,
       "source": "cb2_beta_caryophyllene",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "BCP is a known peroxisome proliferator-activated receptor gamma (PPAR-γ) agonist, contributing to anti-inflammatory and metabolic regulation [36]",
@@ -219026,7 +218973,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_emodin",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 1,
       "origin": "auto_crawled",
       "quote": "Pioglitazone (10 mg/kg) and Emodin (50 mg/kg) treatment significantly up-regulated PPAR-γ levels as compared to disease treated group (P < 0.001)",
@@ -222647,7 +222594,7 @@
       "source_location": null,
       "weight": null,
       "source": "CRAWLED_cannabinoids",
-      "target": "PPARy_PPARgamma",
+      "target": "ppary_ppary",
       "sign": 0,
       "origin": "auto_crawled",
       "quote": "Cannabis and its constituents can modulate multiple cancer related pathways such as PKB, AMPK, CAMKK-β, mTOR, PDHK, HIF-1α, and PPAR-γ",

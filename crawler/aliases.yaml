@@ -54,7 +54,11 @@ EDN1: Endothelin-1
 EDNRA: ETA Receptor
 EDNRB: ETB Receptor
 PTGS2: COX-2
-PPARG: PPAR-gamma
+PPARG:
+- "PPARγ (Peroxisome Proliferator-Activated Receptor Gamma)"
+- PPAR-gamma
+- PPAR gamma
+- PPARγ
 NFE2L2: Nrf2
 SOD2: SOD2
 CAT: Catalase
