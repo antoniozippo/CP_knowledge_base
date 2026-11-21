@@ -40,4 +40,21 @@ conflicts:
     and exercise-driven BDNF does not cause the adverse effect. The same paper is
     already attached to this edge as supporting evidence (-1, no-injury case). Sign
     kept at -1; do not auto-update.'
-last_updated: '2026-11-21T16:59:03.446195+00:00'
+- conflict_id: CONFLICT-0003
+  edge_index: 825
+  subject_label: Reactive Oxygen Species (ROS) and Oxidative Stress
+  object_label: "Hypoxia-Inducible Factor 1 Alpha (HIF1\u03B1)"
+  current_sign: 1
+  current_validation: UNREVIEWED
+  new_sign: -1
+  new_evidence_quote: "However, WB (p<0.0001; Figure S6B,C) and ICF (p<0.05; Figure\
+    \ S6D,E) results showed that the protein expression of HIF\u20101a was significantly\
+    \ decreased in the LO\u2010HG + H2O2 group."
+  new_pmid: '39467998'
+  recommendation: AUTO_UPDATE
+  detected_at: '2026-11-21T20:01:07.718893+00:00'
+  resolved: false
+  resolution: null
+  resolved_at: null
+  reviewer_notes: null
+last_updated: '2026-11-21T20:01:07.718948+00:00'
