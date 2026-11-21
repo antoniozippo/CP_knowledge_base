@@ -1,0 +1,57 @@
+# Reviewed (name -> curated node) pairs the token and fuzzy rules must not merge. Exact
+# label and alias-registry hits are unaffected. Names are matched lowercased.
+#
+# Each entry was a wrong merge found in the review of the 2026-11 crawl
+# (crawler/review/README.md): the name is a family, a general term, a different molecule
+# or an ambiguous acronym, and the node is a member, a specific model or intervention, or
+# something else. The matcher prefers a missed merge to a wrong one, so these names become
+# their own nodes instead.
+no_merge:
+  - node: karilin7_SNI
+    names: ["nerve injury"]
+    reason: "general term merged into the Spared Nerve Injury model (CCI, SNL, PSL are nerve injuries too); 11 endpoints"
+  - node: PNN_ECM_CSPGs
+    names: ["chondroitin sulfate"]
+    reason: "the glycosaminoglycan/drug, not the proteoglycans; chondroitin sulfate treatment became 'CSPGs attenuate neuropathic pain'"
+  - node: cav32_cav32
+    names: ["t-type calcium channels"]
+    reason: "the family (Cav3.1/3.2/3.3) merged into one member"
+  - node: PNN_ECM_MMP9
+    names: ["matrix metalloproteinases"]
+    reason: "the family merged into MMP-9"
+  - node: PNN_ECM_MMP2
+    names: ["matrix metalloproteinases"]
+    reason: "the family merged into another member (MMP-2) once the MMP-9 pair was blocked"
+  - node: pnn_ecm_mmp9
+    names: ["matrix metalloproteinases"]
+    reason: "the family merged into the second MMP-9 node"
+  - node: proposal_cpt_sst_silencing
+    names: ["sst interneurons"]
+    reason: "a cell type merged into an intervention node (SST+ Interneuron Silencing)"
+  - node: tspo_ampk_pgc1a
+    names: ["pgc-1α", "pgc-1alpha"]
+    reason: "the gene merged into the AMPK-PGC-1α axis node"
+  - node: ppary_pgc1a
+    names: ["pgc-1α", "pgc-1alpha"]
+    reason: "the gene merged into the PGC-1α mitochondrial-biogenesis process node"
+  - node: karilin7_DendriticSpineLoss
+    names: ["dendritic spines"]
+    reason: "the structure merged into 'Dendritic Spine Loss (ACC Layer II/III Pyramidal)'"
+  - node: karilin7_DBS_ACC
+    names: ["deep brain stimulation"]
+    reason: "DBS in general merged into DBS of the ACC"
+  - node: insights_x_lamina_I_dual_hit_LaminaIProjectionNeurons
+    names: ["lamina i projection neurons"]
+    reason: "all lamina I projection neurons merged into the spinoparabrachial subset"
+  - node: IGF1_2_IGF1R
+    names: ["igf1"]
+    reason: "the ligand merged into its receptor"
+  - node: microbio_mitophagy_defects
+    names: ["microglial mitophagy"]
+    reason: "the process merged into a 'defects' node"
+  - node: autophagy-apoptosis_inhibition_mPTP
+    names: ["mptp"]
+    reason: "ambiguous acronym: the Parkinson neurotoxin MPTP vs the mitochondrial permeability transition pore (mPTP); the reviewed links were the neurotoxin"
+  - node: closure_ACC_PresynapticLTP
+    names: ["acc ltp", "presynaptic ltp"]
+    reason: "LTP in general (or outside the ACC) merged into the ACC presynaptic mechanism"

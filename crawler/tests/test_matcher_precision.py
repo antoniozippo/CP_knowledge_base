@@ -10,6 +10,7 @@ import yaml
 
 from crawler import matcher as matcher_module
 from crawler.classify import normalize_label
+from crawler.tokens import is_spelling_variant, skeleton
 from crawler.matcher import EntityMatcher
 
 
@@ -236,6 +237,110 @@ def test_real_graph_general_names_do_not_land_on_a_context_node(real, name):
 ])
 def test_real_graph_nodes_whose_qualifier_is_not_a_context_still_merge(real, name, expected):
     assert (real.match_entity(name).matched_label or "").startswith(expected)
+
+
+# --- fuzzy rule: a spelling variant, never a different short identifier ----------------
+
+@pytest.mark.parametrize("a, b", [
+    ("caspase3", "caspase-3"), ("TREM-2", "TREM2"), ("neuro-inflammation", "Neuroinflammation"),
+    ("NFκB", "NF-κB"), ("Rho/Rock pathway", "RhoA/ROCK Pathway"), ("SST2A receptor", "SSTR2a Receptor"),
+    ("parvalbumin interneurons", "Parvalbumin (PV) Interneurons"),
+])
+def test_spelling_variants_are_recognised(a, b):
+    assert is_spelling_variant(skeleton(a), skeleton(b)) or is_spelling_variant(skeleton(a), skeleton(b.split("(")[0] + b.split(")")[-1]))
+
+
+@pytest.mark.parametrize("a, b", [
+    ("EP2 receptor", "Tie2 receptor"), ("MT2 receptor", "Tie2 receptor"), ("PAC1 receptor", "EphA1 receptor"),
+    ("tenascin-C", "Tenascin-R"), ("Rho GTPase", "RhoA GTPase"), ("Caspase-1", "Caspase-3"),
+    ("lamina I spino-PAG projection neurons", "Lamina I Spinoparabrachial Projection Neurons"),
+    ("RhoA/YAP signaling pathway", "RhoA/ROCK Signalling Pathway"),
+])
+def test_different_short_identifiers_are_not_spelling_variants(a, b):
+    assert not is_spelling_variant(skeleton(a), skeleton(b))
+
+
+@pytest.mark.parametrize("name, label", [
+    ("EP2 receptor", "Tie2 Receptor"), ("MT2 receptor", "Tie2 Receptor"), ("PAC1 receptor", "EphA1 Receptor"),
+    ("tenascin-C", "Tenascin-R"),
+])
+def test_fuzzy_rule_does_not_merge_short_identifiers_that_differ(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label})
+    assert m.match_entity(name).status == "NO_MATCH"
+
+
+def test_fuzzy_rule_still_merges_a_spelling_variant(tmp_path, monkeypatch):
+    m = _build(tmp_path, monkeypatch, {"n": "Caspase-3", "o": "Parvalbumin (PV) Interneurons"})
+    assert m.match_entity("caspase3").matched_node_id == "n"
+    assert m.match_entity("parvalbumin interneurons").matched_node_id == "o"
+
+
+# --- a "(...)" group is an alias only for a symbol or an expansion, not a description ----
+
+@pytest.mark.parametrize("name, label", [
+    ("neurite outgrowth", "DRG Kalirin-7 (Neurite Outgrowth)"),
+    ("cognitive deficits", "Hippocampus Kalirin-7 (Cognitive Deficits)"),
+    ("diabetic neuropathy", "O-GlcNAc Glycosylation of Cav3.2 (diabetic neuropathy)"),
+    ("pain chronification", "CXCL12/CXCR4 Positive-Feedback Loop (pain chronification)"),
+])
+def test_a_descriptive_parenthetical_phrase_is_not_an_alias(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label})
+    assert m.match_entity(name).status == "NO_MATCH"
+
+
+@pytest.mark.parametrize("name, label", [
+    ("SCN9A", "Nav1.7 (SCN9A)"),                                  # a symbol in the group
+    ("TNF-alpha", "Tumor Necrosis Factor Alpha (TNF-α)"),         # one-word symbol, multi-word head
+    ("IGF1R", "IGF1 Receptor (IGF1R)"),
+    ("Potassium-Chloride Cotransporter", "KCC2 (Potassium-Chloride Cotransporter)"),   # expansion of a one-word head
+])
+def test_a_symbol_or_expansion_in_parentheses_is_still_an_alias(tmp_path, monkeypatch, name, label):
+    m = _build(tmp_path, monkeypatch, {"n": label})
+    assert m.match_entity(name).matched_node_id == "n"
+
+
+# --- reviewed no-merge pairs (crawler/no_merge.yaml) ---------------------------------
+
+def _build_nm(tmp_path, monkeypatch, labels, pairs):
+    cfg = tmp_path / "no_merge.yaml"
+    cfg.write_text(yaml.safe_dump({"no_merge": [{"node": n, "names": names, "reason": "test"} for n, names in pairs.items()]}))
+    monkeypatch.setattr(matcher_module, "NO_MERGE_PATH", cfg)
+    return _build(tmp_path, monkeypatch, labels)
+
+
+def test_a_listed_pair_is_not_merged_by_the_loose_rules(tmp_path, monkeypatch):
+    m = _build_nm(tmp_path, monkeypatch, {"s": "Spared Nerve Injury (SNI) Model"}, {"s": ["nerve injury"]})
+    assert m.match_entity("nerve injury").status == "NO_MATCH"
+    assert m.match_entity("Nerve Injury").status == "NO_MATCH"            # matched lowercased
+
+
+def test_a_listed_pair_does_not_affect_other_names_or_nodes(tmp_path, monkeypatch):
+    labels = {"s": "Spared Nerve Injury (SNI) Model", "c": "Chronic Constriction Injury (CCI) Model"}
+    m = _build_nm(tmp_path, monkeypatch, labels, {"s": ["nerve injury"]})
+    assert m.match_entity("spared nerve injury").matched_node_id == "s"
+    assert m.match_entity("chronic constriction injury").matched_node_id == "c"
+
+
+def test_a_listed_pair_is_still_reached_by_exact_label(tmp_path, monkeypatch):
+    m = _build_nm(tmp_path, monkeypatch, {"n": "Nerve Injury"}, {"n": ["nerve injury"]})
+    assert m.match_entity("nerve injury").status == "EXACT"
+
+
+def test_the_listed_pairs_exist_in_the_real_graph(curated_graph_file):
+    m = EntityMatcher(graph_path=str(curated_graph_file))
+    assert m._no_merge, "no_merge.yaml is empty or missing"
+    assert {node for _, node in m._no_merge} <= set(m.nodes_by_id), sorted({n for _, n in m._no_merge} - set(m.nodes_by_id))
+
+
+@pytest.mark.parametrize("name, wrong", [
+    ("nerve injury", "Spared Nerve Injury"), ("chondroitin sulfate", "Proteoglycans"), ("T-type calcium channels", "Cav3.2"),
+    ("matrix metalloproteinases", "Matrix Metalloproteinase"), ("SST interneurons", "Silencing"), ("PGC-1α", "PGC-1"),
+    ("MPTP", "Permeability"), ("deep brain stimulation", "Stimulation of ACC"), ("EP2 receptor", "Tie2"), ("MT2 receptor", "Tie2"),
+    ("PAC1 receptor", "EphA1"), ("tenascin-C", "Tenascin-R"), ("diabetic neuropathy", "O-GlcNAc"), ("neurite outgrowth", "Kalirin-7"),
+    ("cognitive deficits", "Kalirin-7"), ("IGF1", "Receptor"), ("lamina I projection neurons", "Spinoparabrachial"), ("ACC LTP", "Presynaptic"),
+])
+def test_real_graph_review_findings_no_longer_merge(real, name, wrong):
+    assert wrong.lower() not in (real.match_entity(name).matched_label or "").lower()
 
 
 # --- auto-crawled nodes are reached by exact label only ------------------------

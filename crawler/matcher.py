@@ -21,12 +21,15 @@ from crawler.tokens import (
     content_tokens,
     distinctive_tokens,
     is_informative,
+    is_spelling_variant,
+    skeleton,
 )
 
 logger = logging.getLogger(__name__)
 
 ALIASES_PATH = Path("crawler/aliases.yaml")
 CONTEXT_NODES_PATH = Path("crawler/context_nodes.yaml")
+NO_MERGE_PATH = Path("crawler/no_merge.yaml")
 
 
 def is_crawled(node: dict) -> bool:
@@ -58,6 +61,7 @@ class EntityMatcher:
         # apart so a curated node always wins a collision and the loose rules
         # (token, fuzzy) only ever see curated labels.
         self.context_node_ids = self._load_context_node_ids()
+        self._no_merge = self._load_no_merge()
         self.norm_labels: dict[str, dict] = {}
         self._crawled_by_key: dict[str, dict] = {}
         for node in self.nodes:
@@ -89,6 +93,7 @@ class EntityMatcher:
         # id -> content tokens of the head / of the whole label, generic words kept
         self._head_all: dict[str, frozenset[str]] = {}
         self._label_all: dict[str, frozenset[str]] = {}
+        self._head_is_symbol: dict[str, bool] = {}   # head is one word: "KCC2", "IL-1beta"
         self._degree = degree
         for node in self.nodes:
             label = node.get("label", "")
@@ -96,6 +101,7 @@ class EntityMatcher:
             parens = [content_tokens(g) for g in PAREN_GROUP_RE.findall(label)]
             self._forms[node["id"]] = (distinctive_tokens(head_text), parens)
             self._head_all[node["id"]] = content_tokens(head_text)
+            self._head_is_symbol[node["id"]] = not head_text.strip().count(" ")
             self._label_all[node["id"]] = content_tokens(label)
 
         self.aliases = self._load_aliases()
@@ -111,6 +117,21 @@ class EntityMatcher:
             logger.warning("Failed to load context nodes from %s: %s", CONTEXT_NODES_PATH, exc)
             return frozenset()
         return frozenset(entry["id"] for entry in loaded.get("context_nodes", []) if entry.get("id"))
+
+    def _load_no_merge(self) -> frozenset[tuple[str, str]]:
+        """(lowercased name, node id) pairs the loose rules must not merge (no_merge.yaml)."""
+        if not NO_MERGE_PATH.exists():
+            return frozenset()
+        try:
+            loaded = yaml.safe_load(NO_MERGE_PATH.read_text()) or {}
+        except Exception as exc:
+            logger.warning("Failed to load no-merge pairs from %s: %s", NO_MERGE_PATH, exc)
+            return frozenset()
+        return frozenset(
+            (str(name).strip().lower(), entry["node"])
+            for entry in loaded.get("no_merge", []) if entry.get("node")
+            for name in entry.get("names", [])
+        )
 
     def _load_aliases(self) -> dict[str, list[str]]:
         """Load alias registry. Falls back to built-in defaults if no file exists."""
@@ -186,6 +207,7 @@ class EntityMatcher:
         then graph degree, then the shorter label.
         """
         wanted_full = content_tokens(name)
+        name_key = name.strip().lower()
         wanted = wanted_full - GENERIC_TOKENS
         if not is_informative(wanted):
             return []
@@ -193,11 +215,17 @@ class EntityMatcher:
         for node in self.nodes:
             if is_crawled(node) or node["id"] in self.context_node_ids:
                 continue
+            if (name_key, node["id"]) in self._no_merge:
+                continue
             head, parens = self._forms[node["id"]]
             coverage = 0.0
             if head and wanted <= head:
                 coverage = len(wanted) / len(head)
-            if wanted_full in parens:
+            # A "(...)" group is an alias only when the name is a one-word symbol ("SCN9A",
+            # "TNF-alpha") or the label's head is one word and the group its expansion ("KCC2
+            # (Potassium-Chloride Cotransporter)"); a phrase matching a descriptive group
+            # ("(Neurite Outgrowth)", "(diabetic neuropathy)") is not an alias.
+            if wanted_full in parens and (" " not in name_key or self._head_is_symbol[node["id"]]):
                 coverage = 1.0
             if coverage >= MIN_COVERAGE and self._qualifiers_ok(wanted_full, node):
                 key = (coverage, self._degree.get(node["id"], 0), -len(node.get("label", "")))
@@ -230,13 +258,22 @@ class EntityMatcher:
             return None
         digits = DIGITS_RE.findall(name_lower)
         name_tokens = content_tokens(name_lower)
+        name_skeleton = skeleton(name_lower)
         for label, score, _ in process.extract(
             name_lower, self._loose_labels, scorer=fuzz.ratio,
             score_cutoff=threshold, limit=5,
         ):
             node = self.norm_labels[label]
-            if DIGITS_RE.findall(label) == digits and self._qualifiers_ok(name_tokens, node):
-                return (node, score)
+            if DIGITS_RE.findall(label) != digits or not self._qualifiers_ok(name_tokens, node):
+                continue
+            if (name_lower, node["id"]) in self._no_merge:
+                continue
+            # the ratio only finds candidates; the name must be the label spelled differently
+            # ("caspase3" / "Caspase-3"), not a different short identifier ("EP2" / "Tie2")
+            if not any(is_spelling_variant(name_skeleton, skeleton(form))
+                       for form in (PAREN_GROUP_RE.sub(" ", label), label)):
+                continue
+            return (node, score)
         return None
 
     def match_entity(self, name: str) -> EntityMatch:

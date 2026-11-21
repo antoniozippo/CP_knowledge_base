@@ -50,3 +50,30 @@ def distinctive_tokens(text: str) -> frozenset[str]:
 def is_informative(tokens: frozenset[str]) -> bool:
     """Enough signal to merge on; rejects empty sets and lone single letters."""
     return sum(len(t) for t in tokens) >= 3
+
+
+def skeleton(text: str) -> str:
+    """Ordered content words with generic words dropped, joined without separators:
+    "Caspase-3" and "caspase3" give "caspase3"; "EP2 receptor" gives "ep2"."""
+    tokens = (stem(t) for t in _TOKEN_RE.findall(text.lower().translate(_GREEK)))
+    return "".join(t for t in tokens if t not in STOPWORDS and t not in GENERIC_TOKENS)
+
+
+def is_spelling_variant(a: str, b: str) -> bool:
+    """True when two skeletons are the same name written differently: equal, or the
+    shorter (at least 5 characters) is the longer minus 1 letter (2 when it has 8 or
+    more), never a digit. A substitution is never a variant: "tenascinc" vs
+    "tenascinr", "ep2" vs "tie2" and "pac1" vs "epha1" are different proteins."""
+    if a == b:
+        return bool(a)
+    short, long_ = (a, b) if len(a) <= len(b) else (b, a)
+    if len(short) < 5 or len(long_) - len(short) > (1 if len(short) < 8 else 2):
+        return False
+    i = 0
+    skipped = []
+    for ch in long_:
+        if i < len(short) and ch == short[i]:
+            i += 1
+        else:
+            skipped.append(ch)
+    return i == len(short) and not any(c.isdigit() for c in skipped)
