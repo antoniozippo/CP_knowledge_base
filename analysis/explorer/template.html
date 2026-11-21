@@ -4,9 +4,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: one working column. A search box leads, the selected node's verdict and its evidence follow,
-   and two more tabs hold the precomputed findings and the reading guide.
-   Palette: cool slate ground, cobalt for what you can press, and two signal hues that mean one thing
+/* One working column. A row of tabs leads, one row of settings (pain type, evidence, plain language) sits
+   under it, and each tab answers a different question for a different reader.
+   Palette: cool slate ground, cobalt for what you can press, two signal hues that mean one thing
    everywhere: rust = raises pain, teal = lowers pain. */
 :root {
   --bg: #f3f6f7; --surface: #ffffff; --surface-2: #e9eff1; --ink: #132029; --muted: #566772; --line: #d3dce1;
@@ -30,14 +30,15 @@
 [hidden] { display: none !important; }
 body { background: var(--bg); color: var(--ink); font: 400 15px/1.5 var(--font-ui); margin: 0;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 56px; }
-.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 18px; }
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+.wrap > * { min-width: 0; }
 h1, h2, h3 { margin: 0; line-height: 1.2; text-wrap: balance; }
 h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
 h2 { font-size: 21px; font-weight: 600; }
 h3 { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 p { margin: 0; max-width: 68ch; }
 a { color: var(--accent); }
-button { font: inherit; color: inherit; }
+button, select, input { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 .mono { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
 .muted { color: var(--muted); }
@@ -45,24 +46,40 @@ header { display: grid; gap: 6px; }
 header p { color: var(--muted); }
 .banner { background: var(--warn-soft); color: var(--ink); border: 1px solid var(--warn); border-radius: 8px; padding: 10px 14px; font-size: 14px; max-width: none; }
 .banner b { color: var(--warn); }
-.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-.tabs button { background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 14px; cursor: pointer; font-weight: 500; color: var(--muted); }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: thin; }
+.tabs button { flex: none; white-space: nowrap; background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 12px; cursor: pointer; font-weight: 500; color: var(--muted); }
 .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 .tabs button:hover { color: var(--ink); }
-.panel { display: grid; gap: 18px; min-width: 0; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.panel { display: grid; gap: 18px; min-width: 0; align-content: start; grid-template-columns: minmax(0, 1fr); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 12px; min-width: 0; align-content: start; grid-template-columns: minmax(0, 1fr); }
 .grid2 { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
-/* search */
-.search { position: relative; display: grid; gap: 10px; }
-.search input { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
-.search input::placeholder { color: var(--muted); }
-.results { position: absolute; top: 50px; left: 0; right: 0; z-index: 5; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+/* settings bar */
+.settings { display: flex; gap: 10px 22px; flex-wrap: wrap; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+.set { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); min-width: 0; }
+.set select { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; color: var(--ink); max-width: 100%; min-width: 0; flex: 1; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { background: var(--surface); border: 0; border-right: 1px solid var(--line); padding: 6px 10px; cursor: pointer; font-size: 13px; color: var(--muted); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.check input { width: 16px; height: 16px; accent-color: var(--accent); }
+/* pickers */
+.picker { position: relative; }
+.picker input, .fld { width: 100%; font: inherit; padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+.picker input::placeholder, .fld::placeholder { color: var(--muted); }
+.results { position: absolute; top: 48px; left: 0; right: 0; z-index: 5; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0,0,0,.14); max-height: 360px; overflow-y: auto; list-style: none; margin: 0; padding: 4px; }
 .results li { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; padding: 8px 10px; border-radius: 6px; cursor: pointer; }
 .results li[aria-selected="true"], .results li:hover { background: var(--accent-soft); }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-size: 13px; }
 .chip:hover { border-color: var(--accent); color: var(--accent); }
+.btn { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 13px; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 600; }
+.btn.primary:hover { color: var(--surface); filter: brightness(1.08); }
+.btn:disabled { opacity: .5; cursor: default; }
+.row { display: flex; gap: 8px 12px; flex-wrap: wrap; align-items: center; min-width: 0; }
+.field { display: grid; gap: 4px; font-size: 13px; color: var(--muted); min-width: 0; }
 /* badges */
 .tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .tag { font: 500 11px/1 var(--font-data); letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
@@ -78,19 +95,23 @@ header p { color: var(--muted); }
 .stat { display: grid; gap: 2px; border-left: 2px solid var(--line); padding-left: 10px; }
 .stat b { font: 500 22px/1.1 var(--font-data); font-variant-numeric: tabular-nums; }
 .stat span { font-size: 12px; color: var(--muted); }
-/* diverging chart */
+.plainbox { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; font-size: 16px; max-width: 70ch; }
+/* charts */
 .chartwrap { overflow-x: auto; }
 svg.chart { display: block; width: 100%; min-width: 520px; max-width: 760px; height: auto; }
 svg .t { fill: var(--ink); font: 12px var(--font-ui); } svg .tm { fill: var(--muted); font: 11px var(--font-data); }
 svg .ax { stroke: var(--line); stroke-width: 1; } svg .zero { stroke: var(--muted); stroke-width: 1; }
-svg .barL { fill: var(--lowers); } svg .barR { fill: var(--raises); } svg .barA { fill: var(--accent); }
+svg .barL { fill: var(--lowers); } svg .barR { fill: var(--raises); } svg .barA { fill: var(--accent); } svg .barC { fill: var(--muted); }
 /* tables */
 .tablewrap { overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
 th { text-align: left; font: 600 11px/1.2 var(--font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th button { background: none; border: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; cursor: pointer; }
+th button:hover, th button[aria-pressed="true"] { color: var(--accent); }
 td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 td.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 th.num { text-align: right; }
+tr.dim td { opacity: .45; }
 .link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
 .link:hover { text-decoration-color: currentColor; }
 /* paths */
@@ -114,6 +135,36 @@ th.num { text-align: right; }
 .ev .src { font: 12px var(--font-data); color: var(--muted); }
 .meter { display: inline-block; width: 44px; height: 6px; border-radius: 3px; background: var(--surface-2); vertical-align: middle; overflow: hidden; }
 .meter i { display: block; height: 100%; background: var(--muted); }
+/* start */
+.hero { display: grid; gap: 8px; }
+.hero h2 { font-size: 24px; }
+.roles { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.role { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 8px; align-content: start; text-align: left; cursor: pointer; }
+.role:hover { border-color: var(--accent); }
+.role b { font-size: 16px; } .role span { font-size: 13px; color: var(--muted); } .role em { font-style: normal; font-size: 13px; color: var(--accent); }
+.glance { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+/* pain types */
+.pgrid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: grid; gap: 6px; text-align: left; cursor: pointer; align-content: start; }
+.pcard:hover { border-color: var(--accent); }
+.pcard[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.pcard b { font-size: 15px; } .pcard .small { font-size: 12px; color: var(--muted); }
+.covbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: var(--surface-2); }
+.covbar i { display: block; height: 100%; } .covbar .a { background: var(--accent); } .covbar .b { background: var(--muted); opacity: .55; }
+/* compare */
+.matrix td, .matrix th { padding: 6px 8px 6px 0; }
+.matrix th:not(:first-child), .matrix td.num { text-align: center; }
+.cell { text-align: center; border-radius: 4px; font: 12px var(--font-data); padding: 5px 4px; min-width: 52px; }
+/* review */
+.votes { display: flex; gap: 6px; flex-wrap: wrap; }
+.vbtn { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 13px; }
+.vbtn:hover { border-color: var(--accent); }
+.vbtn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.vbtn[aria-pressed="true"].bad { background: var(--raises-soft); border-color: var(--raises); color: var(--raises); }
+.vbtn:disabled { opacity: .5; cursor: default; }
+.rv { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+.rv blockquote { margin: 0; padding-left: 12px; border-left: 3px solid var(--line); font-size: 14px; max-width: 80ch; }
+.rv .note-in { max-width: 420px; padding: 6px 10px; font-size: 13px; }
 /* misc */
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 .section-title { display: grid; gap: 4px; }
@@ -121,8 +172,9 @@ th.num { text-align: right; }
 .big3 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
 .big3 .card b.n { font: 500 34px/1 var(--font-data); font-variant-numeric: tabular-nums; }
 ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76ch; }
+dl.gloss { margin: 0; display: grid; gap: 10px; max-width: 76ch; } dl.gloss dt { font-weight: 600; } dl.gloss dd { margin: 0; color: var(--muted); }
 .loopline { display: flex; gap: 4px 6px; flex-wrap: wrap; align-items: center; }
-.theme { position: absolute; right: 0; top: 0; }
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 13px; z-index: 20; }
 @media (prefers-reduced-motion: no-preference) { .results, .path { animation: rise .14s ease-out; } @keyframes rise { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } } }
 </style>
 
@@ -131,87 +183,158 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
     <h1>Pain Graph Explorer</h1>
     <p id="subtitle">Loading the graph…</p>
   </header>
-  <p class="banner"><b>Read every result as a hypothesis.</b> Most links come from crawled papers nobody has reviewed yet. Open a path to see the quote behind each link.</p>
+  <p class="banner"><b>A research map, not medical advice.</b> Most links come from papers read by software and not yet checked by a person. Read every result as a hypothesis, and open a path to see the quote behind each link.</p>
   <nav class="tabs" role="tablist" aria-label="Views">
-    <button role="tab" id="tab-explore" aria-selected="true" aria-controls="panel-explore" data-tab="explore">Explore a node</button>
+    <button role="tab" id="tab-start" aria-selected="true" aria-controls="panel-start" data-tab="start">Start</button>
+    <button role="tab" id="tab-explore" aria-selected="false" aria-controls="panel-explore" data-tab="explore">Explore</button>
+    <button role="tab" id="tab-connect" aria-selected="false" aria-controls="panel-connect" data-tab="connect">Connect &amp; compare</button>
+    <button role="tab" id="tab-rank" aria-selected="false" aria-controls="panel-rank" data-tab="rank">Rank</button>
+    <button role="tab" id="tab-types" aria-selected="false" aria-controls="panel-types" data-tab="types">Pain types</button>
+    <button role="tab" id="tab-review" aria-selected="false" aria-controls="panel-review" data-tab="review">Review</button>
+    <button role="tab" id="tab-landscape" aria-selected="false" aria-controls="panel-landscape" data-tab="landscape">Landscape</button>
     <button role="tab" id="tab-findings" aria-selected="false" aria-controls="panel-findings" data-tab="findings">Findings</button>
-    <button role="tab" id="tab-guide" aria-selected="false" aria-controls="panel-guide" data-tab="guide">How to read it</button>
+    <button role="tab" id="tab-guide" aria-selected="false" aria-controls="panel-guide" data-tab="guide">Guide</button>
   </nav>
+  <div class="settings" id="settings" hidden>
+    <label class="set" id="set-fam">Pain type <select id="fam" aria-label="Pain type"></select></label>
+    <div class="set" id="set-ev" role="group" aria-label="Evidence to use"><span>Evidence</span>
+      <span class="seg">
+        <button data-ev="all" aria-pressed="true" title="Every signed link in the graph">All</button>
+        <button data-ev="corroborated" aria-pressed="false" title="Curated links, plus crawled links backed by two or more papers and not hedged">Corroborated</button>
+        <button data-ev="curated" aria-pressed="false" title="Only links an expert curated. These reach very few drugs.">Curated only</button>
+      </span></div>
+    <label class="set check" id="set-plain"><input type="checkbox" id="plain"> Plain language</label>
+  </div>
 
-  <section class="panel" id="panel-explore" role="tabpanel" aria-labelledby="tab-explore">
-    <div class="search">
-      <label for="q" class="muted" style="font-size:13px">Search a drug, target, cell or pathway</label>
-      <input id="q" type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="results" aria-autocomplete="list" placeholder="for example morphine, NLRP3, TRPV1, electroacupuncture" disabled>
-      <ul class="results" id="results" role="listbox" hidden></ul>
-      <div class="chips" id="examples"><span class="muted" style="font-size:13px">Try</span></div>
-    </div>
+  <section class="panel" id="panel-start" role="tabpanel" aria-labelledby="tab-start"></section>
+  <section class="panel" id="panel-explore" role="tabpanel" aria-labelledby="tab-explore" hidden>
+    <div class="row" style="flex-wrap:nowrap"><div id="exp-picker" style="flex:1;min-width:0"></div><button class="btn" id="share" title="Copy a link to this view">Copy link</button></div>
+    <div class="chips" id="examples"><span class="muted" style="font-size:13px">Try</span></div>
     <div id="detail"></div>
   </section>
+  <section class="panel" id="panel-connect" role="tabpanel" aria-labelledby="tab-connect" hidden></section>
+  <section class="panel" id="panel-rank" role="tabpanel" aria-labelledby="tab-rank" hidden></section>
+  <section class="panel" id="panel-types" role="tabpanel" aria-labelledby="tab-types" hidden></section>
+  <section class="panel" id="panel-review" role="tabpanel" aria-labelledby="tab-review" hidden></section>
+  <section class="panel" id="panel-landscape" role="tabpanel" aria-labelledby="tab-landscape" hidden></section>
   <section class="panel" id="panel-findings" role="tabpanel" aria-labelledby="tab-findings" hidden></section>
   <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" hidden></section>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 </div>
 
 <script>
 (function () {
   'use strict';
-  var N = [], E = [], F = null, out = [], inn = [], dist = [], deg = [], core = new Set();
+  var ARTIFACT_URL = 'https://claude.ai/artifact/BgqP6fvqVhZVmxqwXXUxHM';
+  var TABS = ['start', 'explore', 'connect', 'rank', 'types', 'review', 'landscape', 'findings', 'guide'];
+  var EVS = ['all', 'corroborated', 'curated'];
+  var EV_LABEL = { all: 'all evidence', corroborated: 'corroborated evidence', curated: 'curated evidence only' };
+  var N = [], E = [], F = null, FAM = null, REV = null, NS = 0;
+  var out = [], inn = [], uout = [], uin = [], deg = [], bySlug = {}, byFam = {}, famOf = [];
+  var S = { tab: 'start', sel: null, fam: 'any', ev: 'all', plain: false, cA: null, cB: null, cmode: 'path', cmp: [], clen: 4 };
   var $ = function (s, r) { return (r || document).querySelector(s); };
-  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var short = function (label) { return label.split(' (')[0]; };
   var f1 = function (x) { return (x < 0 ? '−' : x > 0 ? '+' : '') + Math.abs(x).toFixed(1); };
+  var f2 = function (x) { return (x < 0 ? '−' : x > 0 ? '+' : '') + Math.abs(x).toFixed(2); };
   var pct = function (a, b) { return b ? Math.round(100 * a / b) + '%' : 'n/a'; };
+  var cap1 = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
   var isDrug = function (i) { return (N[i][4] & 1) !== 0; };
+  var isInducer = function (i) { return (N[i][4] & 2) !== 0; };
   var isPain = function (i) { return (N[i][4] & 4) !== 0; };
+  var norm = function (s) { return s.toLowerCase().replace(/[^a-z0-9α-ω]/g, ''); };
+  var lsGet = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  var lsSet = function (k, v) { try { localStorage.setItem(k, v); } catch (e) { /* storage can be blocked */ } };
+  var toastTimer = null;
+  function toast(msg) { var t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2200); }
+  function copy(text, what) {
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta); toast(ok ? (what || 'Copied') + ' to the clipboard' : 'Copying is blocked here. Select the text and copy it by hand.');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast((what || 'Copied') + ' to the clipboard'); }, fallback);
+    else fallback();
+  }
+  function tsv(rows) { return rows.map(function (r) { return r.map(function (c) { return String(c).replace(/[\t\r\n]+/g, ' '); }).join('\t'); }).join('\n'); }
+
+  /* ---------- pain types and evidence filters ---------- */
+  function famOutcomes(key) { return key === 'any' ? F.meta.core : byFam[key].outcomes; }
+  function famName(key) { return key === 'any' ? 'Any pain' : byFam[key].label; }
+  function famPhrase(key) { return key === 'any' ? 'pain' : famName(key).charAt(0).toLowerCase() + famName(key).slice(1); }
+  function isThin(f) { return f.stats.links_in < 20; }
+  function thinNote(key) { var f = byFam[key]; return f && isThin(f) ? 'Only ' + f.stats.links_in + ' links point at this pain type, so most of what follows reaches it through general pain hubs such as TNF-α and TRPV1. Read it as a pointer, not as evidence specific to this type.' : ''; }
+  function okFn(ev) {
+    if (ev === 'curated') return function (k) { return E[k][4] === 1; };
+    if (ev === 'corroborated') return function (k) { var e = E[k]; return e[4] === 1 || (e[8] >= 1 && !e[10]); };
+    return null;
+  }
 
   /* ---------- the same algorithm as analysis/scripts/graph_inference.py ---------- */
   function buildIndex() {
-    out = N.map(function () { return []; }); inn = N.map(function () { return []; }); deg = N.map(function () { return 0; });
-    E.forEach(function (e, k) { out[e[0]].push(k); inn[e[1]].push(k); deg[e[0]]++; deg[e[1]]++; });
-    core = new Set(F.meta.core);
-    dist = new Array(N.length);
-    var frontier = F.meta.core.slice();
+    out = N.map(function () { return []; }); inn = N.map(function () { return []; }); uout = N.map(function () { return []; }); uin = N.map(function () { return []; }); deg = N.map(function () { return 0; });
+    E.forEach(function (e, k) {
+      deg[e[0]]++; deg[e[1]]++;
+      if (k < NS) { out[e[0]].push(k); inn[e[1]].push(k); } else { uout[e[0]].push(k); uin[e[1]].push(k); }
+    });
+  }
+  function bfs(targets, ok) {
+    var dist = new Int16Array(N.length).fill(-1), frontier = targets.slice();
     frontier.forEach(function (c) { dist[c] = 0; });
     while (frontier.length) {
       var next = [];
-      frontier.forEach(function (node) { inn[node].forEach(function (k) { var s = E[k][0]; if (dist[s] === undefined) { dist[s] = dist[node] + 1; next.push(s); } }); });
+      frontier.forEach(function (node) { inn[node].forEach(function (k) { if (ok && !ok(k)) return; var s = E[k][0]; if (dist[s] < 0) { dist[s] = dist[node] + 1; next.push(s); } }); });
       frontier = next;
     }
+    return dist;
   }
+  var ctxCache = {};
+  function makeCtx(outcomes, ev) { var ok = okFn(ev); return { outcomes: new Set(outcomes), list: outcomes, ok: ok, dist: bfs(outcomes, ok), ev: ev }; }
+  function ctx(fam, ev) { var key = fam + '|' + ev; if (!ctxCache[key]) ctxCache[key] = makeCtx(famOutcomes(fam), ev); return ctxCache[key]; }
   function pathSign(p) { var s = 1; for (var j = 0; j < p.length; j++) s *= E[p[j]][2]; return s; }
   function pathWeight(p) { var w = Math.pow(F.meta.decay, p.length - 1); for (var j = 0; j < p.length; j++) w *= E[p[j]][3]; return w; }
-  function enumPaths(start, maxLen) {
-    var res = [], stack = [];
-    if (dist[start] === undefined || core.has(start)) return res;
+  function enumPaths(start, maxLen, cx, cap) {
+    var res = [], stack = [], ok = cx.ok, limit = cap || 60000;
+    if (cx.dist[start] < 0 || cx.outcomes.has(start)) return res;
     var visited = new Uint8Array(N.length); visited[start] = 1;
     (function walk(node) {
       var edges = out[node];
       for (var a = 0; a < edges.length; a++) {
-        var k = edges[a], nxt = E[k][1];
+        if (res.length >= limit) return;
+        var k = edges[a];
+        if (ok && !ok(k)) continue;
+        var nxt = E[k][1];
         if (visited[nxt]) continue;
-        if (core.has(nxt)) { res.push(stack.concat(k)); continue; }
-        var left = maxLen - stack.length - 1;
-        if (left < 1 || isDrug(nxt) || (dist[nxt] === undefined ? 99 : dist[nxt]) > left) continue;
+        if (cx.outcomes.has(nxt)) { res.push(stack.concat(k)); continue; }
+        var left = maxLen - stack.length - 1, d = cx.dist[nxt];
+        if (left < 1 || isDrug(nxt) || (d < 0 ? 99 : d) > left) continue;
         visited[nxt] = 1; stack.push(k); walk(nxt); stack.pop(); visited[nxt] = 0;
       }
     })(start);
     return res;
   }
-  function analyze(i) {
-    var drug = isDrug(i), maxLen = drug ? F.meta.max_len : F.meta.target_len, paths = enumPaths(i, maxLen);
+  function analyze(i, cx) {
+    var drug = isDrug(i), maxLen = drug ? F.meta.max_len : F.meta.target_len, paths = enumPaths(i, maxLen, cx);
     var per = new Map();
     paths.forEach(function (p) { var o = E[p[p.length - 1]][1]; per.set(o, (per.get(o) || 0) + pathSign(p) * pathWeight(p)); });
     var score = 0, neg = 0, pos = 0;
     per.forEach(function (v) { score += Math.tanh(v); if (v < -0.05) neg++; if (v > 0.05) pos++; });
     var dominant = score < 0 ? -1 : 1, med = new Set();
     paths.forEach(function (p) { if (p.length > 1 && pathSign(p) === dominant) med.add(E[p[0]][1]); });
-    var dir = new Set(); out[i].forEach(function (k) { if (isPain(E[k][1])) dir.add(E[k][2]); });
-    return { i: i, drug: drug, score: score, neg: neg, pos: pos, per: per, paths: paths, mediators: med.size,
+    var dir = new Set(); out[i].forEach(function (k) { if (isPain(E[k][1]) && (!cx.ok || cx.ok(k))) dir.add(E[k][2]); });
+    return { i: i, drug: drug, score: score, neg: neg, pos: pos, per: per, paths: paths, mediators: med.size, cx: cx,
              direct: Array.from(dir).sort(function (a, b) { return a - b; }), agreement: neg + pos ? Math.max(neg, pos) / (neg + pos) : 0 };
+  }
+  function between(a, b, maxLen, ev) {
+    if (a === b) return [];
+    var cx = makeCtx([b], ev);
+    return enumPaths(a, maxLen, cx, 20000);
   }
 
   /* ---------- rendering helpers ---------- */
   function nodeBtn(i, cls) { return '<button class="node ' + (cls || '') + '" data-node="' + i + '" title="' + esc(N[i][1]) + '">' + esc(short(N[i][1])) + '</button>'; }
-  function nodeLink(i) { return '<button class="link" data-node="' + i + '">' + esc(short(N[i][1])) + '</button>'; }
+  function nodeLink(i) { return '<button class="link" data-node="' + i + '" title="' + esc(N[i][1]) + '">' + esc(short(N[i][1])) + '</button>'; }
   function role(i) { var f = N[i][4], r = []; if ((f & 1) && N[i][2] !== 'drug') r.push('drug'); if (f & 4) r.push('pain outcome'); else if (f & 2) r.push('inducer'); return r; }
   function srcHtml(e) {
     var m = /^PMID (\d+)$/.exec(e[5]);
@@ -222,7 +345,8 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
     var e = E[k], cls = e[2] > 0 ? 'raises' : 'lowers', status = e[7];
     var tagCls = status === 'unreviewed' ? 'unrev' : 'cur';
     return '<li class="ev ' + cls + '"><div class="ev-top">' + nodeLink(e[0]) + '<span class="arrow ' + cls + '">' + (e[2] > 0 ? 'raises' : 'lowers') + '</span>' + nodeLink(e[1]) +
-      '<span class="tag ' + tagCls + '">' + esc(status) + '</span><span class="meter" title="link weight ' + e[3].toFixed(2) + '"><i style="width:' + Math.round(e[3] * 100) + '%"></i></span></div>' +
+      '<span class="tag ' + tagCls + '">' + esc(status) + '</span>' + (e[10] ? '<span class="tag unrev" title="The quote uses hedged wording such as may or suggests">hedged</span>' : '') +
+      '<span class="meter" title="link weight ' + e[3].toFixed(2) + '"><i style="width:' + Math.round(e[3] * 100) + '%"></i></span></div>' +
       '<div class="src">' + srcHtml(e) + '</div>' + (e[6] ? '<blockquote>“' + esc(e[6]) + '”</blockquote>' : '') + '</li>';
   }
   function chain(p) {
@@ -238,31 +362,42 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
       '<div class="chain">' + chain(p) + '</div></header><details' + (open ? ' open' : '') + '><summary>Evidence for each link</summary><ul class="evs">' + p.map(evidence).join('') + '</ul></details></article>';
   }
   function chartOutcomes(a) {
-    var rows = F.meta.core.map(function (c) { return { c: c, v: a.per.has(c) ? Math.tanh(a.per.get(c)) : null }; })
-      .sort(function (x, y) { return (y.v === null ? -9 : Math.abs(y.v)) - (x.v === null ? -9 : Math.abs(x.v)) || x.c - y.c; });
+    var rows = a.cx.list.filter(function (c) { return a.per.has(c); }).map(function (c) { return { c: c, v: Math.tanh(a.per.get(c)) }; })
+      .sort(function (x, y) { return Math.abs(y.v) - Math.abs(x.v) || x.c - y.c; });
+    var missing = a.cx.list.length - rows.length;
     var labelW = 250, plotW = 360, rowH = 24, top = 22, W = labelW + plotW + 60, H = top + rows.length * rowH + 22, zero = labelW + plotW / 2, half = plotW / 2 - 6;
-    var svg = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Effect on each core pain node, from lowers pain on the left to raises pain on the right">';
+    var svg = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Effect on each pain node of the chosen type, from lowers pain on the left to raises pain on the right">';
     [-1, -0.5, 0, 0.5, 1].forEach(function (t) { var x = zero + t * half; svg += '<line class="' + (t === 0 ? 'zero' : 'ax') + '" x1="' + x + '" x2="' + x + '" y1="' + (top - 6) + '" y2="' + (H - 18) + '"/><text class="tm" x="' + x + '" y="' + (H - 4) + '" text-anchor="middle">' + (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t) + '</text>'; });
     svg += '<text class="tm" x="' + (zero - half) + '" y="10">← lowers pain</text><text class="tm" x="' + (zero + half) + '" y="10" text-anchor="end">raises pain →</text>';
     rows.forEach(function (r, j) {
       var y = top + j * rowH, lab = short(N[r.c][1]); if (lab.length > 38) lab = lab.slice(0, 37) + '…';
-      svg += '<text class="t" x="' + (labelW - 8) + '" y="' + (y + 14) + '" text-anchor="end">' + esc(lab) + '</text>';
-      if (r.v === null) svg += '<text class="tm" x="' + (zero + 6) + '" y="' + (y + 14) + '">no path</text>';
-      else { var w = Math.abs(r.v) * half, x = r.v < 0 ? zero - w : zero; svg += '<rect class="' + (r.v < 0 ? 'barL' : 'barR') + '" x="' + x + '" y="' + (y + 3) + '" width="' + Math.max(w, 1) + '" height="' + (rowH - 8) + '" rx="2"><title>' + esc(N[r.c][1]) + ': ' + r.v.toFixed(2) + '</title></rect>'; }
+      var w = Math.abs(r.v) * half, x = r.v < 0 ? zero - w : zero;
+      svg += '<text class="t" x="' + (labelW - 8) + '" y="' + (y + 14) + '" text-anchor="end">' + esc(lab) + '</text><rect class="' + (r.v < 0 ? 'barL' : 'barR') + '" x="' + x + '" y="' + (y + 3) + '" width="' + Math.max(w, 1) + '" height="' + (rowH - 8) + '" rx="2"><title>' + esc(N[r.c][1]) + ': ' + r.v.toFixed(2) + '</title></rect>';
+    });
+    return '<div class="chartwrap">' + svg + '</svg></div>' + (missing ? '<p class="note">' + missing + ' of the ' + a.cx.list.length + ' pain nodes in this type have no path from here.</p>' : '');
+  }
+  function profileChart(i) {
+    var rows = [{ key: 'any' }].concat(FAM.families.filter(function (f) { return f.key !== 'any'; }).map(function (f) { return { key: f.key }; }));
+    rows.forEach(function (r) { var a = analyze(i, ctx(r.key, S.ev)); r.a = a; r.m = a.cx.list.length ? a.score / a.cx.list.length : 0; r.reached = a.neg + a.pos; });
+    var labelW = 250, plotW = 360, rowH = 26, top = 22, W = labelW + plotW + 90, H = top + rows.length * rowH + 22, zero = labelW + plotW / 2, half = plotW / 2 - 6;
+    var svg = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Average effect on each pain type">';
+    [-1, 0, 1].forEach(function (t) { var x = zero + t * half; svg += '<line class="' + (t === 0 ? 'zero' : 'ax') + '" x1="' + x + '" x2="' + x + '" y1="' + (top - 6) + '" y2="' + (H - 18) + '"/>'; });
+    svg += '<text class="tm" x="' + (zero - half) + '" y="10">← lowers</text><text class="tm" x="' + (zero + half) + '" y="10" text-anchor="end">raises →</text>';
+    rows.forEach(function (r, j) {
+      var y = top + j * rowH, lab = famName(r.key); if (lab.length > 38) lab = lab.slice(0, 37) + '…';
+      svg += '<text class="t" x="' + (labelW - 8) + '" y="' + (y + 16) + '" text-anchor="end">' + esc(lab) + '</text>';
+      if (!r.a.paths.length) { svg += '<text class="tm" x="' + (zero + 6) + '" y="' + (y + 16) + '">no path</text>'; return; }
+      var v = Math.max(-1, Math.min(1, r.m * 2)), w = Math.abs(v) * half, x = v < 0 ? zero - w : zero;
+      svg += '<rect class="' + (v < 0 ? 'barL' : 'barR') + '" x="' + x + '" y="' + (y + 4) + '" width="' + Math.max(w, 1) + '" height="' + (rowH - 10) + '" rx="2"><title>' + esc(famName(r.key)) + ': score ' + r.a.score.toFixed(2) + ', lowers ' + r.a.neg + ' and raises ' + r.a.pos + ' of ' + r.a.cx.list.length + ' pain nodes</title></rect>';
+      svg += '<text class="tm" x="' + (zero + half + 8) + '" y="' + (y + 16) + '">' + r.a.neg + '↓ ' + r.a.pos + '↑</text>';
     });
     return '<div class="chartwrap">' + svg + '</svg></div>';
   }
-
-  /* ---------- explore ---------- */
-  function neighbours(i, dir) {
-    var list = (dir === 'out' ? out[i] : inn[i]).slice().sort(function (a, b) { return E[b][3] - E[a][3] || a - b; });
-    if (!list.length) return '<p class="note">None.</p>';
-    var rows = list.slice(0, 12).map(function (k) {
-      var e = E[k], other = dir === 'out' ? e[1] : e[0];
-      return '<tr><td>' + nodeLink(other) + '</td><td><span class="arrow ' + (e[2] > 0 ? 'raises' : 'lowers') + '">' + (e[2] > 0 ? 'raises' : 'lowers') + '</span></td><td class="num">' + e[3].toFixed(2) + '</td><td><span class="tag ' + (e[7] === 'unreviewed' ? 'unrev' : 'cur') + '">' + esc(e[7]) + '</span></td></tr>';
-    }).join('');
-    return '<div class="tablewrap"><table><thead><tr><th>' + (dir === 'out' ? 'Acts on' : 'Acted on by') + '</th><th>Effect</th><th class="num">Weight</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      (list.length > 12 ? '<p class="note">' + (list.length - 12) + ' more links not shown.</p>' : '');
+  function support(a, curN, papers, strong, thinType) {
+    if (!strong) return ['none', 'No clear effect'];
+    if (a.mediators >= 3 && a.agreement >= 0.8 && (curN >= 2 || papers >= 5) && !thinType) return ['strong', 'Well supported'];
+    if (a.mediators >= 2 && a.agreement >= 0.7) return ['limited', 'Some support'];
+    return ['thin', 'Thin support'];
   }
   function pickPaths(a, n) {
     var dominant = a.score < 0 ? -1 : 1, seen = new Set(), res = [];
@@ -270,81 +405,561 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
     ranked.forEach(function (p) { var key = E[p[0]][1] + '>' + E[p[p.length - 1]][1]; if (res.length < n && !seen.has(key)) { seen.add(key); res.push(p); } });
     return res;
   }
-  function mediatorTable(a) {
+  function mediatorList(a) {
     var m = new Map();
     a.paths.forEach(function (p) { if (p.length > 1) { var t = E[p[0]][1], r = m.get(t) || { s: 0, n: 0, papers: new Set() }; r.s += pathSign(p) * pathWeight(p); r.n++; p.forEach(function (k) { if (E[k][5].indexOf('PMID') === 0) r.papers.add(E[k][5]); }); m.set(t, r); } });
-    var rows = Array.from(m.entries()).sort(function (x, y) { return Math.abs(y[1].s) - Math.abs(x[1].s) || x[0] - y[0]; }).slice(0, 8);
+    return Array.from(m.entries()).sort(function (x, y) { return Math.abs(y[1].s) - Math.abs(x[1].s) || x[0] - y[0]; });
+  }
+  function mediatorTable(a) {
+    var rows = mediatorList(a).slice(0, 8);
     if (!rows.length) return '';
     return '<div class="card"><h3>First steps that carry the effect</h3><div class="tablewrap"><table><thead><tr><th>Mediator</th><th class="num">Net</th><th class="num">Paths</th><th class="num">Papers</th></tr></thead><tbody>' +
       rows.map(function (r) { return '<tr><td>' + nodeLink(r[0]) + '</td><td class="num" style="color:var(' + (r[1].s < 0 ? '--lowers' : '--raises') + ')">' + f1(r[1].s) + '</td><td class="num">' + r[1].n + '</td><td class="num">' + r[1].papers.size + '</td></tr>'; }).join('') +
       '</tbody></table></div></div>';
   }
-  function showNode(i, push) {
-    state.sel = i;
-    var a = analyze(i), n = N[i], tags = '<span class="tag ' + (n[3] ? 'cur' : '') + '">' + (n[3] ? 'curated node' : 'crawled node') + '</span><span class="tag">' + esc(n[2] || 'unknown type') + '</span>' +
+  function neighbours(i, dir, cx) {
+    var list = (dir === 'out' ? out[i] : inn[i]).slice().sort(function (a, b) { return E[b][3] - E[a][3] || a - b; });
+    if (!list.length) return '<p class="note">None.</p>';
+    var rows = list.slice(0, 12).map(function (k) {
+      var e = E[k], other = dir === 'out' ? e[1] : e[0], off = cx && cx.ok && !cx.ok(k);
+      return '<tr' + (off ? ' class="dim" title="Left out by the evidence setting"' : '') + '><td>' + nodeLink(other) + '</td><td><span class="arrow ' + (e[2] > 0 ? 'raises' : 'lowers') + '">' + (e[2] > 0 ? 'raises' : 'lowers') + '</span></td><td class="num">' + e[3].toFixed(2) + '</td><td><span class="tag ' + (e[7] === 'unreviewed' ? 'unrev' : 'cur') + '">' + esc(e[7]) + '</span></td></tr>';
+    }).join('');
+    return '<div class="tablewrap"><table><thead><tr><th>' + (dir === 'out' ? 'Acts on' : 'Acted on by') + '</th><th>Effect</th><th class="num">Weight</th><th>Status</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      (list.length > 12 ? '<p class="note">' + (list.length - 12) + ' more links not shown.</p>' : '');
+  }
+  function related(i) {
+    var ks = uout[i].concat(uin[i]);
+    if (!ks.length) return '';
+    var rows = ks.slice(0, 30).map(function (k) { var e = E[k], other = e[0] === i ? e[1] : e[0]; return nodeBtn(other) + '<span class="tag">' + esc((e[9] || 'related').replace(/_/g, ' ')) + '</span>'; }).join('');
+    return '<div class="card"><h3>Also connected, direction unknown</h3><p class="note">Links such as binds, interacts with or is conceptually related to. They carry no sign, so they never enter a score.</p><div class="tags">' + rows + '</div>' + (ks.length > 30 ? '<p class="note">' + (ks.length - 30) + ' more not shown.</p>' : '') + '</div>';
+  }
+
+  /* ---------- plain-language text ---------- */
+  function plainText(a, uniq, curN, papers) {
+    var name = '<b>' + esc(short(N[a.i][1])) + '</b>', ph = esc(famPhrase(S.fam)), dirn = a.score < 0 ? 'lower' : 'higher', strong = Math.abs(a.score) >= 1;
+    var meds = mediatorList(a).filter(function (r) { return (r[1].s < 0) === (a.score < 0); }).slice(0, 3).map(function (r) { return '<b>' + esc(short(N[r[0]][1])) + '</b>'; });
+    var lead;
+    if (!strong) lead = name + ' has no clear effect on ' + ph + ' in this graph. The routes that lead from it point in different directions, or are too weak to count.';
+    else if (a.drug) lead = 'In the research this graph was built from, ' + name + ' goes with <b>' + dirn + ' ' + ph + '</b>, through ' + a.mediators + ' separate route' + (a.mediators === 1 ? '' : 's') + '.';
+    else lead = a.score > 0 ? name + ' tends to <b>push ' + ph + ' up</b>: raising it goes with more pain in ' + a.pos + ' pain measure' + (a.pos === 1 ? '' : 's') + '.' : name + ' tends to <b>hold ' + ph + ' down</b>: raising it goes with less pain in ' + a.neg + ' pain measure' + (a.neg === 1 ? '' : 's') + '.';
+    var via = strong && meds.length ? '<p>The strongest routes pass through ' + meds.join(', ') + '.</p>' : '';
+    var ev = '<p>' + curN + ' of the ' + uniq + ' links behind this were checked by an expert. The rest come from ' + papers + ' paper' + (papers === 1 ? '' : 's') + ' read by software and not yet checked by a person.</p>';
+    var caution = a.drug ? '<p class="note">For a drug, this reflects what the papers studied. A drug can show up as raising pain because papers describe a side effect (opioid-induced hyperalgesia is one) or a lab finding that differs from what happens in people. It does not say whether the drug will help you. Talk to a clinician about treatment.</p>'
+      : '<p class="note">This summarises published research, often from lab and animal studies. It is not advice about treatment.</p>';
+    return '<div class="plainbox"><p>' + lead + '</p>' + via + ev + caution + '</div>';
+  }
+
+  /* ---------- explore ---------- */
+  function actions(i) {
+    return '<div class="row"><button class="btn" data-act="connectFrom" data-i="' + i + '">Find a path to…</button><button class="btn" data-act="compareAdd" data-i="' + i + '">Compare with others</button></div>';
+  }
+  function showNode(i) {
+    S.sel = i; syncHash();
+    var cx = ctx(S.fam, S.ev), a = analyze(i, cx), n = N[i];
+    var tags = '<span class="tag ' + (n[3] ? 'cur' : '') + '">' + (n[3] ? 'curated node' : 'crawled node') + '</span><span class="tag">' + esc(n[2] || 'unknown type') + '</span>' +
       role(i).map(function (r) { return '<span class="tag">' + esc(r) + '</span>'; }).join('');
     var h = '<div class="card"><div class="section-title"><h2>' + esc(n[1]) + '</h2><div class="tags">' + tags + '</div></div>';
-    if (core.has(i) || isPain(i)) {
-      h += '<p class="note">This is a pain outcome, so the question here is what drives it. See what acts on it below, or search a drug or target to see its effect on pain.</p></div>';
-      h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in') + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out') + '</div></div>';
+    if (isPain(i)) {
+      var kinds = famOf[i].map(function (k) { return '<span class="tag cur">' + esc(famName(k)) + '</span>'; }).join('');
+      h += '<p class="note">This is a pain outcome, so the question here is what drives it. See what acts on it below, or search a drug or target to see its effect on pain.</p>' + (kinds ? '<div class="tags">' + kinds + '</div>' : '') + '</div>';
+      h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in', cx) + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out', cx) + '</div></div>' + related(i);
       $('#detail').innerHTML = h; return;
     }
     if (!a.paths.length) {
-      h += '<p class="empty">No signed path reaches the core pain nodes within ' + (a.drug ? F.meta.max_len : F.meta.target_len) + ' links, so the graph cannot say what this does to pain.</p></div>';
-      h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in') + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out') + '</div></div>';
+      var offer = S.ev !== 'all' ? ' <button class="link" data-setev="all">Try all evidence</button>.' : '';
+      h += '<p class="empty">No signed path reaches ' + esc(famPhrase(S.fam)) + ' within ' + (a.drug ? F.meta.max_len : F.meta.target_len) + ' links using ' + EV_LABEL[S.ev] + ', so the graph cannot say what this does to it.' + offer + '</p>' + actions(i) + '</div>';
+      h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in', cx) + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out', cx) + '</div></div>' + related(i);
       $('#detail').innerHTML = h; return;
     }
-    var strong = Math.abs(a.score) >= 1, dirn = a.score < 0 ? 'lowers' : 'raises', verb, what = a.drug ? 'Predicted to ' : (a.score > 0 ? 'Drives pain' : 'Suppresses pain');
-    verb = !strong ? 'No clear effect on pain from the graph.' : a.drug ? what + (a.score < 0 ? 'lower' : 'raise') + ' pain.' : what + '.';
+    var strong = Math.abs(a.score) >= 1, dirn = a.score < 0 ? 'lowers' : 'raises';
     var allEdges = a.paths.reduce(function (acc, p) { return acc.concat(p); }, []), uniq = Array.from(new Set(allEdges));
     var curN = uniq.filter(function (k) { return E[k][4] === 1; }).length, papers = new Set(uniq.filter(function (k) { return E[k][5].indexOf('PMID') === 0; }).map(function (k) { return E[k][5]; }));
+    var sup = support(a, curN, papers.size, Math.abs(a.score) >= 1, !!thinNote(S.fam));
+    var verb = !strong ? 'No clear effect on ' + famPhrase(S.fam) + ' from the graph.' : a.drug ? 'Predicted to ' + (a.score < 0 ? 'lower' : 'raise') + ' ' + famPhrase(S.fam) + '.' : (a.score > 0 ? 'Drives ' : 'Suppresses ') + famPhrase(S.fam) + '.';
     var directTxt = a.direct.length ? 'The graph also holds a direct link to a pain node (' + a.direct.map(function (s) { return s < 0 ? 'lowers' : 'raises'; }).join(' and ') + ').' : 'No direct link to a pain node in the graph.';
     var disagree = a.direct.length === 1 && ((a.direct[0] < 0 && a.score >= 0.5) || (a.direct[0] > 0 && a.score <= -0.5));
-    h += '<div class="verdict"><div class="line ' + (strong ? dirn : '') + '">' + esc(verb) + '</div><div class="stats">' +
+    h += '<div class="tags"><span class="tag ' + (sup[0] === 'strong' ? 'cur' : sup[0] === 'thin' ? 'unrev' : '') + '" title="Counted from the paths: independent first steps, agreement, curated links and papers. A rule of thumb, not a statistic.">' + sup[1] + '</span><span class="tag">' + esc(famName(S.fam)) + '</span>' + (thinNote(S.fam) ? '<span class="tag unrev">thin pain type</span>' : '') + '<span class="tag">' + esc(EV_LABEL[S.ev]) + '</span></div>' + (thinNote(S.fam) ? '<p class="note" style="color:var(--warn)">' + esc(thinNote(S.fam)) + '</p>' : '');
+    h += '<div class="verdict"><div class="line ' + (strong ? dirn : '') + '">' + esc(verb) + '</div>' + (S.plain ? plainText(a, uniq.length, curN, papers.size) : '<div class="stats">' +
       '<div class="stat"><b style="color:var(' + (a.score < 0 ? '--lowers' : '--raises') + ')">' + f1(a.score) + '</b><span>score (each pain node counts at most 1)</span></div>' +
-      '<div class="stat"><b>' + a.neg + ' / ' + a.pos + '</b><span>core pain nodes lowered / raised</span></div>' +
+      '<div class="stat"><b>' + a.neg + ' / ' + a.pos + '</b><span>pain nodes lowered / raised</span></div>' +
       '<div class="stat"><b>' + a.mediators + '</b><span>independent first steps</span></div>' +
       '<div class="stat"><b>' + pct(Math.round(a.agreement * 100), 100) + '</b><span>of reached nodes agree</span></div></div>' +
-      '<p class="note">' + esc(directTxt) + ' Across all ' + a.paths.length + ' paths, ' + curN + ' of ' + uniq.length + ' distinct links are curated; the rest come from ' + papers.size + ' unreviewed paper' + (papers.size === 1 ? '' : 's') + '.</p>' +
-      (disagree ? '<p class="note" style="color:var(--warn)"><b>Double-edged:</b> the direct link says one thing and the other paths say the opposite. That usually means a context-dependent effect or an off-target liability.</p>' : '') + '</div></div>';
-    h += '<div class="card"><h3>Effect on each core pain node</h3>' + chartOutcomes(a) + '<p class="note">Bars show tanh of the summed signed path weights, so a node reached by many agreeing paths saturates at ±1. Core nodes are the ' + F.meta.core.length + ' pain nodes with the most evidence.</p></div>';
+      '<p class="note">' + esc(directTxt) + ' Across all ' + a.paths.length + ' paths, ' + curN + ' of ' + uniq.length + ' distinct links are curated; the rest come from ' + papers.size + ' unreviewed paper' + (papers.size === 1 ? '' : 's') + '.</p>') +
+      (disagree ? '<p class="note" style="color:var(--warn)"><b>Double-edged:</b> the direct link says one thing and the other paths say the opposite. That usually means a context-dependent effect or an off-target liability.</p>' : '') + actions(i) + '</div></div>';
+    h += '<div class="card"><h3>Across pain types</h3>' + profileChart(i) + '<p class="note">Bar length is the average effect on the pain nodes of each type (score divided by their number, doubled so a clear effect fills the bar). The counts show pain nodes lowered ↓ and raised ↑. Types with few links are thin evidence.</p></div>';
+    h += '<div class="card"><h3>Effect on each pain node: ' + esc(famName(S.fam)) + '</h3>' + chartOutcomes(a) + '<p class="note">Bars show tanh of the summed signed path weights, so a node reached by many agreeing paths saturates at ±1.</p></div>';
     h += mediatorTable(a);
     var top = pickPaths(a, 6);
     h += '<div class="section-title"><h3>Strongest paths in the direction of the verdict</h3><p class="note">Shortest and heaviest first, one per first step and pain node. Open a path for the quote behind each link.</p></div>' + top.map(function (p, j) { return pathCard(p, j === 0); }).join('');
-    h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in') + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out') + '</div></div>';
+    h += '<div class="grid2"><div class="card"><h3>Acted on by</h3>' + neighbours(i, 'in', cx) + '</div><div class="card"><h3>Acts on</h3>' + neighbours(i, 'out', cx) + '</div></div>' + related(i);
     $('#detail').innerHTML = h;
   }
 
-  /* ---------- search ---------- */
-  var state = { sel: null, tab: 'explore', active: -1, hits: [] };
-  function norm(s) { return s.toLowerCase().replace(/[^a-z0-9α-ω]/g, ''); }
-  function search(q) {
+  /* ---------- pickers ---------- */
+  var pickN = 0;
+  function search(q, filter) {
     var nq = norm(q); if (!nq) return [];
     var hits = [];
-    for (var i = 0; i < N.length; i++) { var l = N[i].nl; var p = l.indexOf(nq); if (p >= 0) hits.push({ i: i, rank: (p === 0 ? 0 : 1) * 1e6 - deg[i] + l.length / 100 }); }
+    for (var i = 0; i < N.length; i++) {
+      if (filter && !filter(i)) continue;
+      var l = N[i].nl, p = l.indexOf(nq); if (p < 0) continue;
+      var rank = N[i].ns === nq ? -1 : p === 0 ? 0 : N[i].words.some(function (w) { return w.indexOf(nq) === 0; }) ? 1 : 2;
+      hits.push({ i: i, rank: rank * 1e6 - deg[i] + l.length / 100 });
+    }
     return hits.sort(function (a, b) { return a.rank - b.rank; }).slice(0, 12).map(function (h) { return h.i; });
   }
-  function renderResults() {
-    var ul = $('#results'); ul.hidden = !state.hits.length; $('#q').setAttribute('aria-expanded', String(!ul.hidden));
-    ul.innerHTML = state.hits.map(function (i, j) { return '<li role="option" id="opt' + j + '" data-i="' + i + '" aria-selected="' + (j === state.active) + '"><span>' + esc(N[i][1]) + '</span><span class="tag">' + esc(role(i)[0] || N[i][2] || 'node') + '</span></li>'; }).join('');
+  function makePicker(host, o) {
+    var id = 'pk' + (++pickN);
+    host.classList.add('picker');
+    host.innerHTML = '<input type="search" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + id + '" aria-label="' + esc(o.label || o.placeholder) + '" placeholder="' + esc(o.placeholder) + '"><ul class="results" id="' + id + '" role="listbox" hidden></ul>';
+    var input = $('input', host), ul = $('ul', host), hits = [], active = -1;
+    function draw() {
+      ul.hidden = !hits.length; input.setAttribute('aria-expanded', String(!ul.hidden));
+      ul.innerHTML = hits.map(function (i, j) { return '<li role="option" data-i="' + i + '" aria-selected="' + (j === active) + '"><span>' + esc(N[i][1]) + '</span><span class="tag">' + esc(role(i)[0] || N[i][2] || 'node') + '</span></li>'; }).join('');
+    }
+    function pick(i) { input.value = N[i][1]; hits = []; active = -1; draw(); o.onPick(i); }
+    input.addEventListener('input', function () { hits = search(input.value, o.filter); active = -1; draw(); });
+    input.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowDown' && hits.length) { ev.preventDefault(); active = (active + 1) % hits.length; draw(); }
+      else if (ev.key === 'ArrowUp' && hits.length) { ev.preventDefault(); active = (active - 1 + hits.length) % hits.length; draw(); }
+      else if (ev.key === 'Enter' && hits.length) { ev.preventDefault(); pick(hits[Math.max(active, 0)]); }
+      else if (ev.key === 'Escape') { hits = []; draw(); }
+    });
+    ul.addEventListener('mousedown', function (ev) { var li = ev.target.closest('li'); if (li) { ev.preventDefault(); pick(+li.dataset.i); } });
+    document.addEventListener('click', function (ev) { if (!host.contains(ev.target) && hits.length) { hits = []; draw(); } });
+    return { set: function (i) { input.value = i === null || i === undefined ? '' : N[i][1]; }, input: input };
   }
-  function choose(i) { $('#q').value = N[i][1]; state.hits = []; state.active = -1; renderResults(); if (state.tab !== 'explore') setTab('explore'); showNode(i); }
-  function wireSearch() {
-    var q = $('#q');
-    q.addEventListener('input', function () { state.hits = search(q.value); state.active = -1; renderResults(); });
-    q.addEventListener('keydown', function (ev) {
-      if (ev.key === 'ArrowDown' && state.hits.length) { ev.preventDefault(); state.active = (state.active + 1) % state.hits.length; renderResults(); }
-      else if (ev.key === 'ArrowUp' && state.hits.length) { ev.preventDefault(); state.active = (state.active - 1 + state.hits.length) % state.hits.length; renderResults(); }
-      else if (ev.key === 'Enter' && state.hits.length) { ev.preventDefault(); choose(state.hits[Math.max(state.active, 0)]); }
-      else if (ev.key === 'Escape') { state.hits = []; renderResults(); }
+  function find(name) { var h = search(name); return h.length ? h[0] : null; }
+
+  /* ---------- routing: the address holds the view, so a copied link reopens it ---------- */
+  function hashFor() {
+    var p = [S.tab], slug = function (i) { return N[i][7]; };
+    if (S.tab === 'explore' && S.sel !== null) p.push(slug(S.sel), S.fam, S.ev);
+    else if (S.tab === 'connect') { if (S.cmode === 'compare' && S.cmp.length) { p.push('compare'); S.cmp.forEach(function (i) { p.push(slug(i)); }); p.push(S.fam, S.ev); } else if (S.cA !== null && S.cB !== null) p.push(slug(S.cA), slug(S.cB), S.ev, 'len' + S.clen); }
+    else if (S.tab === 'rank' || S.tab === 'types') p.push(S.fam, S.ev);
+    return p.join('-');
+  }
+  function syncHash() {
+    var h = hashFor();
+    if (location.hash.slice(1) !== h) { try { history.replaceState(null, '', '#' + h); } catch (e) { /* the frame may not allow it */ } }
+  }
+  function applyHash() {
+    var parts = location.hash.slice(1).split('-').filter(Boolean), tab = parts[0];
+    if (TABS.indexOf(tab) < 0) return false;
+    var nodes = [];
+    if (tab === 'connect') S.cmode = parts.indexOf('compare') >= 0 ? 'compare' : 'path';
+    parts.slice(1).forEach(function (t) {
+      if (bySlug[t] !== undefined) nodes.push(bySlug[t]);
+      else if (t === 'any' || byFam[t]) S.fam = t;
+      else if (EVS.indexOf(t) >= 0) S.ev = t;
+      else if (/^len[234]$/.test(t)) S.clen = +t.slice(3);
     });
-    $('#results').addEventListener('mousedown', function (ev) { var li = ev.target.closest('li'); if (li) { ev.preventDefault(); choose(+li.dataset.i); } });
-    document.addEventListener('click', function (ev) {
-      var b = ev.target.closest('[data-node]'); if (b) { choose(+b.dataset.node); window.scrollTo({ top: 0 }); return; }
-      if (!ev.target.closest('.search')) { state.hits = []; renderResults(); }
+    if (tab === 'explore' && nodes.length) S.sel = nodes[0];
+    if (tab === 'connect') { if (S.cmode === 'compare') S.cmp = nodes.slice(0, 5); else if (nodes.length >= 2) { S.cA = nodes[0]; S.cB = nodes[1]; S.cmode = 'path'; } }
+    S.tab = tab;
+    return true;
+  }
+
+  /* ---------- settings bar ---------- */
+  function syncBar() {
+    var needs = { explore: 'fam ev plain', connect: S.cmode === 'compare' ? 'fam ev plain' : 'ev plain', rank: 'fam ev', types: 'ev plain' }[S.tab] || '';
+    $('#settings').hidden = !needs;
+    ['fam', 'ev', 'plain'].forEach(function (k) { $('#set-' + k).hidden = needs.split(' ').indexOf(k) < 0; });
+    $('#fam').value = S.fam; $('#plain').checked = S.plain;
+    $$('#set-ev [data-ev]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.ev === S.ev)); });
+  }
+  function wireBar() {
+    var sel = $('#fam');
+    sel.innerHTML = FAM.families.map(function (f) { return '<option value="' + f.key + '">' + esc(famName(f.key)) + (isThin(f) ? ' · thin evidence' : '') + '</option>'; }).join('');
+    sel.addEventListener('change', function () { S.fam = sel.value; refresh(); });
+    $$('#set-ev [data-ev]').forEach(function (b) { b.addEventListener('click', function () { S.ev = b.dataset.ev; lsSet('pge.ev', S.ev); refresh(); }); });
+    $('#plain').addEventListener('change', function () { S.plain = $('#plain').checked; lsSet('pge.plain', S.plain ? '1' : '0'); refresh(); });
+  }
+  function setEv(ev) { S.ev = ev; refresh(); }
+
+  /* ---------- tabs ---------- */
+  var built = {};
+  function setTab(t) {
+    S.tab = t;
+    TABS.forEach(function (k) { var on = k === t; $('#tab-' + k).setAttribute('aria-selected', String(on)); $('#tab-' + k).tabIndex = on ? 0 : -1; $('#panel-' + k).hidden = !on; });
+    var cur = $('#tab-' + t); if (cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    refresh();
+  }
+  function refresh() {
+    syncBar();
+    var t = S.tab;
+    if (t === 'start') renderStart();
+    else if (t === 'explore') { if (S.sel !== null) { exp.set(S.sel); showNode(S.sel); } else $('#detail').innerHTML = '<p class="empty">Search any drug, target, cell or pathway to see what the graph says it does to pain, and why.</p>'; }
+    else if (t === 'connect') renderConnect();
+    else if (t === 'rank') renderRank();
+    else if (t === 'types') renderTypes();
+    else if (t === 'review') renderReview();
+    else if (t === 'landscape') renderLandscape();
+    else if (t === 'findings') { if (!built.findings) { renderFindings(); built.findings = true; } }
+    else if (t === 'guide') { if (!built.guide) { renderGuide(); built.guide = true; } }
+    syncHash();
+  }
+  function go(tab, preset) {
+    if (preset) Object.keys(preset).forEach(function (k) { S[k] = preset[k]; });
+    if (preset && preset.plain !== undefined) lsSet('pge.plain', S.plain ? '1' : '0');
+    setTab(tab); window.scrollTo({ top: 0 });
+  }
+  function openNode(i) { S.sel = i; go('explore'); }
+
+  /* ---------- start ---------- */
+  var ROLES = [];
+  function buildRoles() {
+    var m = find('morphine'), tnf = find('TNF-α') || find('TNF'), nav = find('Nav1.7');
+    ROLES = [
+      { t: 'I live with pain, or care for someone who does', s: 'What does the research say about a treatment or a cause, in plain words?', go: 'Look up a treatment', tab: 'explore', pre: { plain: true, ev: 'corroborated', sel: m } },
+      { t: 'I treat patients', s: 'How does a drug act on one pain type, and how does it compare with another?', go: 'Compare drugs', tab: 'connect', pre: { cmode: 'compare', cmp: ['morphine', 'gabapentin', 'duloxetine'].map(find).filter(function (x) { return x !== null; }), plain: false } },
+      { t: 'I research pain mechanisms', s: 'What drives a pain type, and where do the papers disagree?', go: 'Open the pain types', tab: 'types', pre: { fam: 'neuropathic', plain: false } },
+      { t: 'I look for new treatments', s: 'Which drivers of pain have no drug in the graph, and which drugs act through many routes?', go: 'Rank targets', tab: 'rank', pre: { fam: 'any', plain: false, ev: 'all' }, after: function () { RK.kind = 'targets'; RK.dir = 'raise'; RK.gap = true; renderRank(); } },
+      { t: 'I check the evidence', s: 'Which links carry the most weight and have the least checking?', go: 'Open the review queue', tab: 'review', pre: {} },
+      { t: 'I decide what to fund or study', s: 'Which pain types are thinly covered, and where is the evidence one paper deep?', go: 'See the landscape', tab: 'landscape', pre: {} },
+      { t: 'I teach or learn pain biology', s: 'How does one signal reach pain, and through which steps?', go: 'Trace a path', tab: 'connect', pre: { cmode: 'path', cA: tnf, cB: find('Mechanical Allodynia'), plain: true } },
+      { t: 'I work with data or build tools', s: 'How is the graph scored, and how far can it be trusted?', go: 'Read the guide', tab: 'guide', pre: {} }
+    ];
+  }
+  function renderStart() {
+    var m = F.meta, unrev = m.crawled;
+    var h = '<div class="hero"><h2>What do you want to find out?</h2><p class="muted">The graph joins ' + m.nodes.toLocaleString() + ' things named in chronic-pain research (drugs, receptors, cells, pathways, symptoms) by ' + m.links.toLocaleString() + ' links that say one thing raises or lowers another. Pick the description closest to you.</p></div>';
+    h += '<div class="roles">' + ROLES.map(function (r, j) { return '<button class="role" data-role="' + j + '"><b>' + esc(r.t) + '</b><span>' + esc(r.s) + '</span><em>' + esc(r.go) + ' →</em></button>'; }).join('') + '</div>';
+    h += '<div class="card"><h3>At a glance</h3><div class="glance">' +
+      '<div class="stat"><b>' + m.nodes.toLocaleString() + '</b><span>nodes</span></div><div class="stat"><b>' + m.links.toLocaleString() + '</b><span>signed links</span></div>' +
+      '<div class="stat"><b>' + FAM.families.length + '</b><span>pain types</span></div><div class="stat"><b>' + pct(unrev, m.links) + '</b><span>of links not yet checked by a person</span></div></div>' +
+      '<p class="note">Everything here comes from published papers. Links that experts curated are weighed more, and links backed by two or more papers more than links from one.</p></div>';
+    $('#panel-start').innerHTML = h;
+  }
+
+  /* ---------- connect & compare ---------- */
+  var pkA = null, pkB = null, pkC = null, connectBuilt = false;
+  function renderConnect() {
+    var p = $('#panel-connect');
+    if (!connectBuilt) {
+      p.innerHTML = '<div class="row"><span class="seg" role="group" aria-label="Tool"><button data-cmode="path">How does A affect B?</button><button data-cmode="compare">Compare nodes</button></span></div><div id="cn-path"></div><div id="cn-compare" hidden></div>';
+      $$('[data-cmode]', p).forEach(function (b) { b.addEventListener('click', function () { S.cmode = b.dataset.cmode; refresh(); }); });
+      $('#cn-path').innerHTML = '<div class="grid2"><div class="field">From<div id="pk-a"></div></div><div class="field">To<div id="pk-b"></div></div></div>' +
+        '<div class="row"><label class="set">Longest path <select id="clen"><option value="2">2 links</option><option value="3">3 links</option><option value="4">4 links</option></select></label><button class="btn" id="swap">Swap</button></div><div id="path-out"></div>';
+      pkA = makePicker($('#pk-a'), { placeholder: 'A: a drug, target or injury model', label: 'From node', onPick: function (i) { S.cA = i; renderPath(); syncHash(); } });
+      pkB = makePicker($('#pk-b'), { placeholder: 'B: a target, pathway or pain outcome', label: 'To node', onPick: function (i) { S.cB = i; renderPath(); syncHash(); } });
+      $('#clen').addEventListener('change', function () { S.clen = +$('#clen').value; renderPath(); syncHash(); });
+      $('#swap').addEventListener('click', function () { var t = S.cA; S.cA = S.cB; S.cB = t; renderConnect(); });
+      $('#cn-compare').innerHTML = '<div class="field">Add a node to compare (up to 5)<div id="pk-c"></div></div><div class="chips" id="cmp-chips"></div><div id="cmp-out"></div>';
+      pkC = makePicker($('#pk-c'), { placeholder: 'Add a drug or target', label: 'Add a node', filter: function (i) { return !isPain(i); }, onPick: function (i) { if (S.cmp.indexOf(i) < 0 && S.cmp.length < 5) S.cmp.push(i); pkC.set(null); renderCompare(); syncHash(); } });
+      connectBuilt = true;
+    }
+    $$('[data-cmode]', p).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.cmode === S.cmode)); });
+    $('#cn-path').hidden = S.cmode !== 'path'; $('#cn-compare').hidden = S.cmode !== 'compare';
+    syncBar();
+    if (S.cmode === 'path') { pkA.set(S.cA); pkB.set(S.cB); $('#clen').value = String(S.clen); renderPath(); } else renderCompare();
+  }
+  function renderPath() {
+    var box = $('#path-out');
+    if (S.cA === null || S.cB === null) { box.innerHTML = '<p class="empty">Pick a start and an end. Try a drug and a pain outcome, or a cytokine and a channel.</p>'; return; }
+    if (S.cA === S.cB) { box.innerHTML = '<p class="empty">Pick two different nodes.</p>'; return; }
+    var paths = between(S.cA, S.cB, S.clen, S.ev), a = N[S.cA][1], b = N[S.cB][1];
+    var pos = paths.filter(function (p) { return pathSign(p) > 0; }), neg = paths.filter(function (p) { return pathSign(p) < 0; });
+    var net = paths.reduce(function (s, p) { return s + pathSign(p) * pathWeight(p); }, 0);
+    if (!paths.length) {
+      var via = S.cmode === 'path' && S.ev !== 'all' ? ' <button class="link" data-setev="all">Try all evidence</button>.' : '';
+      box.innerHTML = '<div class="card"><p class="empty">No signed path of up to ' + S.clen + ' links joins <b>' + esc(short(a)) + '</b> to <b>' + esc(short(b)) + '</b> using ' + EV_LABEL[S.ev] + '. Try a longer path' + (S.ev !== 'all' ? ', or' : '.') + via + '</p>' + (uout[S.cA].concat(uin[S.cA]).length ? '<p class="note">The two nodes may still be tied by links with no direction; open ' + 'the first node in Explore to see them.</p>' : '') + '</div>'; return;
+    }
+    var dirn = Math.abs(net) < 0.05 ? 'has no clear net effect on' : net < 0 ? 'tends to lower' : 'tends to raise';
+    var h = '<div class="card"><div class="verdict"><div class="line ' + (Math.abs(net) < 0.05 ? '' : net < 0 ? 'lowers' : 'raises') + '">' + esc(short(a)) + ' ' + dirn + ' ' + esc(short(b)) + '.</div><div class="stats">' +
+      '<div class="stat"><b>' + paths.length + '</b><span>paths of up to ' + S.clen + ' links</span></div><div class="stat"><b style="color:var(--raises)">' + pos.length + '</b><span>raising paths</span></div>' +
+      '<div class="stat"><b style="color:var(--lowers)">' + neg.length + '</b><span>lowering paths</span></div><div class="stat"><b>' + f2(net) + '</b><span>net weight (sign × weight, summed)</span></div></div>' +
+      (pos.length && neg.length ? '<p class="note" style="color:var(--warn)"><b>Mixed:</b> both raising and lowering paths exist. That points to a context-dependent relationship, or to a link that needs checking.</p>' : '') + '</div></div>';
+    function show(list, title) {
+      if (!list.length) return '';
+      var seen = new Set(), best = list.slice().sort(function (x, y) { return x.length - y.length || pathWeight(y) - pathWeight(x); }).filter(function (p) { var k = E[p[0]][1]; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 4);
+      return '<div class="section-title"><h3>' + title + '</h3></div>' + best.map(function (p, j) { return pathCard(p, j === 0 && best.length && list === (net >= 0 ? pos : neg)); }).join('');
+    }
+    h += show(pos, 'Strongest raising paths') + show(neg, 'Strongest lowering paths');
+    box.innerHTML = h;
+  }
+  function renderCompare() {
+    var chips = $('#cmp-chips'), box = $('#cmp-out');
+    chips.innerHTML = S.cmp.map(function (i, j) { return '<button class="chip" data-rm="' + j + '" title="Remove">' + esc(short(N[i][1])) + ' ×</button>'; }).join('') +
+      (S.cmp.length ? '' : '<span class="muted" style="font-size:13px">Try</span>') + (S.cmp.length ? '' : '<button class="chip" data-preset="drugs">morphine, gabapentin, duloxetine</button>');
+    if (S.cmp.length < 2) { box.innerHTML = '<p class="empty">Add at least two nodes to compare them against ' + esc(famPhrase(S.fam)) + '.</p>'; return; }
+    var cx = ctx(S.fam, S.ev), res = S.cmp.map(function (i) { return analyze(i, cx); });
+    var outs = cx.list.filter(function (c) { return res.some(function (a) { return a.per.has(c); }); }).sort(function (x, y) {
+      var sx = res.reduce(function (s, a) { return s + Math.abs(a.per.has(x) ? Math.tanh(a.per.get(x)) : 0); }, 0), sy = res.reduce(function (s, a) { return s + Math.abs(a.per.has(y) ? Math.tanh(a.per.get(y)) : 0); }, 0);
+      return sy - sx || x - y;
     });
-    var ex = ['morphine', 'simvastatin', 'capsaicin', 'TNF', 'NLRP3', 'TLR4', 'electroacupuncture', 'PPAR-gamma'], box = $('#examples');
-    ex.forEach(function (name) { var hit = search(name)[0]; if (hit !== undefined) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = name; b.addEventListener('click', function () { choose(hit); }); box.appendChild(b); } });
+    var head = '<tr><th></th>' + res.map(function (a) { return '<th>' + nodeLink(a.i) + '</th>'; }).join('') + '</tr>';
+    var sum = function (label, f, cls) { return '<tr><td><b>' + label + '</b></td>' + res.map(function (a) { return '<td class="num"' + (cls ? ' style="color:var(' + cls(a) + ')"' : '') + '>' + f(a) + '</td>'; }).join('') + '</tr>'; };
+    var body = sum('Score', function (a) { return a.paths.length ? f1(a.score) : 'no path'; }, function (a) { return a.score < 0 ? '--lowers' : '--raises'; }) +
+      sum('Lowers / raises', function (a) { return a.paths.length ? a.neg + ' / ' + a.pos : '–'; }) + sum('Independent steps', function (a) { return a.paths.length ? a.mediators : '–'; }) +
+      sum('Direct link', function (a) { return a.direct.length ? a.direct.map(function (s) { return s < 0 ? 'lowers' : 'raises'; }).join(', ') : 'none'; });
+    body += outs.map(function (c) {
+      return '<tr><td>' + nodeLink(c) + '</td>' + res.map(function (a) {
+        if (!a.per.has(c)) return '<td><div class="cell muted">–</div></td>';
+        var v = Math.tanh(a.per.get(c)), col = v < 0 ? '--lowers' : '--raises';
+        return '<td><div class="cell" style="background:color-mix(in srgb, var(' + col + ') ' + Math.round(Math.min(1, Math.abs(v)) * 70) + '%, transparent);color:var(--ink)" title="' + esc(short(N[a.i][1])) + ' on ' + esc(N[c][1]) + '">' + f2(v) + '</div></td>';
+      }).join('') + '</tr>';
+    }).join('');
+    box.innerHTML = '<div class="card"><div class="section-title"><h3>' + esc(famName(S.fam)) + ' · ' + esc(EV_LABEL[S.ev]) + '</h3><p class="note">Each cell is the effect on one pain node, from −1 (lowers, teal) to +1 (raises, rust). Pain nodes none of them reach are left out.</p></div><div class="tablewrap"><table class="matrix"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' +
+      '<div class="row"><button class="btn" id="cmp-copy">Copy as table</button></div></div>';
+    $('#cmp-copy').addEventListener('click', function () {
+      var rows = [[''].concat(res.map(function (a) { return N[a.i][1]; }))];
+      rows.push(['Score'].concat(res.map(function (a) { return a.score.toFixed(2); })));
+      outs.forEach(function (c) { rows.push([N[c][1]].concat(res.map(function (a) { return a.per.has(c) ? Math.tanh(a.per.get(c)).toFixed(2) : ''; }))); });
+      copy(tsv(rows), 'Comparison');
+    });
+  }
+
+  /* ---------- rank ---------- */
+  var RK = { kind: 'drugs', dir: 'lower', min: 2, novel: false, gap: false, q: '', sort: 'score', shown: 50 };
+  var GAP_TYPES = ['molecule', 'receptor', 'channel', 'pathway'];
+  function rankRows() {
+    var data = FAM.rows[S.fam + '|' + S.ev], rows = [], nq = norm(RK.q);
+    if (!data) return rows;
+    if (RK.kind === 'drugs') {
+      data.drugs.forEach(function (r) { rows.push({ i: r[0], net: r[1], pos: r[2], neg: r[3], steps: r[4], direct: r[5], inh: 0 }); });
+    } else {
+      data.targets.forEach(function (r) { var ind = isInducer(r[0]); if ((RK.kind === 'inducers') === ind) rows.push({ i: r[0], net: r[1], pos: r[2], neg: r[3], steps: RK.dir === 'lower' ? r[3] : r[2], direct: 0, inh: r[4] }); });
+    }
+    rows = rows.filter(function (r) {
+      if (RK.dir === 'lower' && r.net > -1) return false;
+      if (RK.dir === 'raise' && r.net < 1) return false;
+      if (RK.dir === 'either' && Math.abs(r.net) < 1) return false;
+      var steps = RK.kind === 'drugs' ? r.steps : (r.net < 0 ? r.neg : r.pos);
+      if (steps < RK.min) return false;
+      if (RK.novel && r.direct !== 0) return false;
+      if (RK.gap && (r.inh > 0 || GAP_TYPES.indexOf(N[r.i][2]) < 0)) return false;
+      if (nq && N[r.i].nl.indexOf(nq) < 0) return false;
+      return true;
+    });
+    var cmp = { score: function (x, y) { return RK.dir === 'lower' ? x.net - y.net : RK.dir === 'raise' ? y.net - x.net : Math.abs(y.net) - Math.abs(x.net); },
+      steps: function (x, y) { return y.steps - x.steps; }, name: function (x, y) { return N[x.i][1].localeCompare(N[y.i][1]); } }[RK.sort];
+    return rows.sort(function (x, y) { return cmp(x, y) || x.i - y.i; });
+  }
+  var rankBuilt = false;
+  function renderRank() {
+    var p = $('#panel-rank');
+    if (!rankBuilt) {
+      p.innerHTML = '<div class="card"><div class="section-title"><h2>Rank by effect on a pain type</h2><p class="note" id="rk-note"></p></div><div class="row" id="rk-ctl"></div><div id="rk-table"></div></div>';
+      $('#rk-ctl').innerHTML =
+        '<label class="field">Show<select id="rk-kind"><option value="drugs">Drugs</option><option value="targets">Targets and mechanisms</option><option value="inducers">Inducers and injury models</option></select></label>' +
+        '<label class="field">Effect<select id="rk-dir"><option value="lower">Lowers pain</option><option value="raise">Raises pain</option><option value="either">Either</option></select></label>' +
+        '<label class="field">At least<select id="rk-min"><option value="1">1 step or pain node</option><option value="2">2</option><option value="3">3</option><option value="5">5</option></select></label>' +
+        '<label class="field">Filter<input class="fld" id="rk-q" type="search" placeholder="name contains…" style="padding:6px 10px"></label>' +
+        '<label class="set check" id="rk-novel-l"><input type="checkbox" id="rk-novel"> No direct pain link (novel)</label><label class="set check" id="rk-gap-l"><input type="checkbox" id="rk-gap"> No inhibiting drug (gap)</label>' +
+        '<button class="btn" id="rk-copy">Copy as table</button>';
+      var rerender = function () { RK.shown = 50; renderRank(); };
+      $('#rk-kind').addEventListener('change', function () { RK.kind = $('#rk-kind').value; if (RK.kind !== 'targets') RK.gap = false; if (RK.kind === 'targets' && RK.dir === 'lower') { /* keep */ } rerender(); });
+      $('#rk-dir').addEventListener('change', function () { RK.dir = $('#rk-dir').value; rerender(); });
+      $('#rk-min').addEventListener('change', function () { RK.min = +$('#rk-min').value; rerender(); });
+      $('#rk-q').addEventListener('input', function () { RK.q = $('#rk-q').value; rerender(); });
+      $('#rk-novel').addEventListener('change', function () { RK.novel = $('#rk-novel').checked; rerender(); });
+      $('#rk-gap').addEventListener('change', function () { RK.gap = $('#rk-gap').checked; rerender(); });
+      $('#rk-copy').addEventListener('click', function () { var rows = rankRows(); copy(tsv([['node', 'type', 'score', 'pain nodes lowered', 'pain nodes raised', 'independent steps', 'direct link', 'inhibiting drugs']].concat(rows.map(function (r) { return [N[r.i][1], N[r.i][2], r.net.toFixed(2), r.neg, r.pos, r.steps, r.direct === 0 ? 'none' : r.direct === 2 ? 'both' : r.direct < 0 ? 'lowers' : 'raises', r.inh]; }))), rows.length + ' rows'); });
+      p.addEventListener('click', function (ev) {
+        var b = ev.target.closest('[data-sort]'); if (b) { RK.sort = b.dataset.sort; renderRank(); }
+        if (ev.target.closest('#rk-more')) { RK.shown += 50; renderRank(); }
+      });
+      rankBuilt = true;
+    }
+    $('#rk-kind').value = RK.kind; $('#rk-dir').value = RK.dir; $('#rk-min').value = String(RK.min); $('#rk-q').value = RK.q; $('#rk-novel').checked = RK.novel; $('#rk-gap').checked = RK.gap;
+    $('#rk-novel-l').hidden = RK.kind !== 'drugs'; $('#rk-gap-l').hidden = RK.kind !== 'targets';
+    var rows = rankRows(), f = byFam[S.fam] || null;
+    var thin = thinNote(S.fam) ? ' ' + thinNote(S.fam) : '';
+    var drugs = RK.kind === 'drugs';
+    $('#rk-note').textContent = famName(S.fam) + ' · ' + EV_LABEL[S.ev] + ' · ' + rows.length + ' ' + (drugs ? 'drugs' : RK.kind === 'targets' ? 'targets' : 'inducers') + ' match. Score is the sum, over pain nodes, of tanh of the signed path weights.' + (drugs ? '' : ' For targets, “raises pain” means that raising the node raises pain.') + thin;
+    var sortBtn = function (k, label, cls) { return '<th class="' + (cls || '') + '"><button data-sort="' + k + '" aria-pressed="' + (RK.sort === k) + '">' + label + '</button></th>'; };
+    var head = '<tr>' + sortBtn('name', drugs ? 'Drug' : 'Node') + sortBtn('score', 'Score', 'num') + '<th class="num">Lowered / raised</th>' + sortBtn('steps', drugs ? 'Steps' : 'Pain nodes', 'num') + (drugs ? '<th>Direct link</th>' : '<th class="num">Drugs inhibiting</th>') + '</tr>';
+    var show = rows.slice(0, RK.shown);
+    var body = show.map(function (r) {
+      return '<tr><td>' + nodeLink(r.i) + '</td><td class="num" style="color:var(' + (r.net < 0 ? '--lowers' : '--raises') + ')">' + f1(r.net) + '</td><td class="num">' + r.neg + ' / ' + r.pos + '</td><td class="num">' + r.steps + '</td><td' + (drugs ? '' : ' class="num"') + '>' +
+        (drugs ? (r.direct === 0 ? '<span class="muted">none</span>' : r.direct === 2 ? 'both' : r.direct < 0 ? 'lowers' : 'raises') : r.inh) + '</td></tr>';
+    }).join('');
+    $('#rk-table').innerHTML = rows.length ? '<div class="tablewrap"><table><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' + (rows.length > show.length ? '<div class="row"><button class="btn" id="rk-more">Show 50 more (' + (rows.length - show.length) + ' left)</button></div>' : '') :
+      '<p class="empty">Nothing matches. Loosen a filter' + (S.ev !== 'all' ? ' or <button class="link" data-setev="all">use all evidence</button>' : '') + '.</p>';
+  }
+
+  /* ---------- pain types ---------- */
+  function covLabel(f) { return f.stats.links_in >= 100 ? ['Well covered', 'cur'] : f.stats.links_in >= 20 ? ['Moderate', ''] : ['Thin', 'unrev']; }
+  function renderTypes() {
+    var maxIn = Math.max.apply(null, FAM.families.map(function (f) { return f.stats.links_in; }));
+    var h = '<div class="section-title"><h2>Pain types</h2><p class="note">A pain type is a set of pain nodes named alike (the rule is in the guide). A node can sit in several. Coverage is the number of links into the type: a thin type gives pointers, not conclusions.</p></div><div class="pgrid">' +
+      FAM.families.map(function (f) {
+        var c = covLabel(f), s = f.stats, cur = s.curated_in, cr = s.links_in - cur;
+        return '<button class="pcard" data-fam="' + f.key + '" aria-pressed="' + (S.fam === f.key) + '"><b>' + esc(famName(f.key)) + '</b><span class="tags"><span class="tag ' + c[1] + '">' + c[0] + '</span><span class="tag">' + s.outcomes + ' pain nodes</span></span>' +
+          '<span class="covbar" title="' + cur + ' curated and ' + cr + ' crawled links into this type"><i class="a" style="width:' + (cur / maxIn * 100) + '%"></i><i class="b" style="width:' + (cr / maxIn * 100) + '%"></i></span>' +
+          '<span class="small">' + s.links_in + ' links in · ' + s.papers + ' papers' + (isThin(f) ? ' · too few to rank on' : ' · ' + s.drugs_lower + ' drugs lower · ' + s.drugs_raise + ' raise') + '</span></button>';
+      }).join('') + '</div>';
+    var f = byFam[S.fam] || FAM.families[0], data = FAM.rows[f.key + '|' + S.ev] || { drugs: [], targets: [] };
+    var drivers = data.targets.filter(function (r) { return !isInducer(r[0]) && r[1] >= 2 && r[2] >= 2; }).sort(function (a, b) { return b[1] - a[1] || a[0] - b[0]; });
+    var supp = data.targets.filter(function (r) { return !isInducer(r[0]) && r[1] <= -2 && r[3] >= 2; }).sort(function (a, b) { return a[1] - b[1] || a[0] - b[0]; });
+    var gaps = drivers.filter(function (r) { return r[4] === 0 && GAP_TYPES.indexOf(N[r[0]][2]) >= 0; });
+    var lower = data.drugs.filter(function (r) { return r[1] <= -1 && r[4] >= 2; }).sort(function (a, b) { return a[1] - b[1] || a[0] - b[0]; });
+    var raise = data.drugs.filter(function (r) { return r[1] >= 1 && r[4] >= 2; }).sort(function (a, b) { return b[1] - a[1] || a[0] - b[0]; });
+    var list = function (rows, fmt, n) { return rows.length ? '<div class="tablewrap"><table><tbody>' + rows.slice(0, n).map(function (r) { return '<tr><td>' + nodeLink(r[0]) + '</td><td class="num" style="color:var(' + (r[1] < 0 ? '--lowers' : '--raises') + ')">' + f1(r[1]) + '</td><td class="num">' + fmt(r) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<p class="note">None.</p>'; };
+    var c = covLabel(f);
+    h += '<div class="card"><div class="section-title"><h2>' + esc(famName(f.key)) + '</h2><div class="tags"><span class="tag ' + c[1] + '">' + c[0] + ' coverage</span><span class="tag">' + esc(EV_LABEL[S.ev]) + '</span></div></div>';
+    if (S.plain) h += '<div class="plainbox"><p>' + f.stats.links_in + ' links from ' + f.stats.papers + ' papers describe what drives ' + esc(famPhrase(f.key)) + '. ' + (drivers.length ? 'The best-supported drivers are ' + drivers.slice(0, 3).map(function (r) { return '<b>' + esc(short(N[r[0]][1])) + '</b>'; }).join(', ') + '. ' : 'No driver has two or more routes to it yet. ') + (isThin(f) ? 'That is little evidence, so treat this as a pointer for further reading.' : '') + '</p></div>';
+    if (thinNote(f.key)) h += '<p class="note" style="color:var(--warn)"><b>Thin evidence.</b> ' + esc(thinNote(f.key)) + '</p>';
+    h += '<div class="section-title"><h3>Pain nodes in this type</h3></div><div class="tags">' + f.outcomes.slice().sort(function (a, b) { return deg[b] - deg[a]; }).map(function (i) { return nodeBtn(i); }).join('') + '</div></div>';
+    h += '<div class="grid2"><div class="card"><div class="section-title"><h3>What drives it</h3><p class="note">Targets by summed effect, at least two pain nodes. ' + drivers.length + ' in total.</p></div>' + list(drivers, function (r) { return r[2] + ' nodes'; }, 10) + '</div>' +
+      '<div class="card"><div class="section-title"><h3>Raising these lowers it</h3><p class="note">' + supp.length + ' in total.</p></div>' + list(supp, function (r) { return r[3] + ' nodes'; }, 10) + '</div></div>';
+    h += '<div class="grid2"><div class="card"><div class="section-title"><h3>Drugs predicted to lower it</h3><p class="note">Score −1 or lower, two or more independent steps. ' + lower.length + ' in total.</p></div>' + list(lower, function (r) { return r[4] + ' steps'; }, 10) + '<div class="row"><button class="btn" data-rankgo="drugs-lower">See all in Rank</button></div></div>' +
+      '<div class="card"><div class="section-title"><h3>Drugs predicted to raise it</h3><p class="note">The rare opposite call: known inducers and off-target liabilities. ' + raise.length + ' in total.</p></div>' + list(raise, function (r) { return r[4] + ' steps'; }, 10) + '</div></div>';
+    h += '<div class="card"><div class="section-title"><h3>Drivers with no inhibiting drug in the graph</h3><p class="note">' + gaps.length + ' molecules, receptors, channels or pathways. A gap in the graph is not always a gap in the clinic: the drug may simply not be in it.</p></div>' + list(gaps, function (r) { return r[2] + ' nodes'; }, 10) + '<div class="row"><button class="btn" data-rankgo="targets-gap">See all in Rank</button></div></div>';
+    $('#panel-types').innerHTML = h;
+  }
+
+  /* ---------- review (shared votes) ---------- */
+  var VERDICTS = [['ok', 'Correct'], ['sign', 'Wrong sign'], ['rev', 'Reversed'], ['none', 'Not a relationship'], ['unsure', 'Unsure']];
+  var BAD = { sign: 1, rev: 1, none: 1 };
+  var AI_NAMES = ['', 'OK', 'Context-limited', 'Overstated', 'Weak', 'Wrong'];
+  var FLAG_NAMES = [[1, 'Hedged wording'], [2, 'One paper'], [4, 'Quote names neither node'], [8, 'Quote names one node only'], [16, 'Opposite sign also in graph']];
+  var RV = { filter: 'all', shown: 20 };
+  var store = { mode: 'none', canWrite: false, uid: null, mine: {}, tally: {}, voters: 0, db: null, exists: false, chain: Promise.resolve(), error: '' };
+  function loadLocal() { try { store.mine = JSON.parse(lsGet('pge.votes') || '{}') || {}; } catch (e) { store.mine = {}; } }
+  function saveLocal() { lsSet('pge.votes', JSON.stringify(store.mine)); }
+  function tallyFrom(docs) {
+    var tally = {}, voters = 0, mine = null;
+    docs.forEach(function (d) {
+      var items = (d.data() || {}).items || {}, any = false;
+      Object.keys(items).forEach(function (k) { var v = items[k]; if (!v || !v.v) return; any = true; var t = tally[k] || (tally[k] = {}); t[v.v] = (t[v.v] || 0) + 1; });
+      if (any) voters++;
+      if (d.id === store.uid) { mine = items; store.exists = true; }
+    });
+    store.tally = tally; store.voters = voters;
+    if (mine) { var m = {}; Object.keys(mine).forEach(function (k) { if (mine[k] && mine[k].v) m[k] = mine[k]; }); store.mine = m; }
+  }
+  function initStore(claude) {
+    loadLocal(); store.mode = 'local';
+    if (!claude) return Promise.resolve();
+    return Promise.all([claude.use('db'), claude.use('user')]).then(function (r) {
+      var db = r[0], user = r[1];
+      if (!db || !user) return;
+      return Promise.resolve(user.id()).then(function (uid) {
+        if (!uid) return;
+        store.uid = uid; store.db = db; store.mode = 'shared'; store.mine = {};
+        return Promise.resolve(user.can('data.write')).then(function (can) { store.canWrite = can !== false; }).catch(function () { store.canWrite = true; }).then(function () {
+          var timer = setTimeout(function () { store.error = 'The shared votes have not answered yet. What you see may be out of date.'; if (S.tab === 'review') renderReview(); }, 10000);
+          db.collection('votes').onSnapshot(function (snap) { clearTimeout(timer); store.error = ''; tallyFrom(snap.docs); if (S.tab === 'review') renderReview(); },
+            function (err) { clearTimeout(timer); store.error = 'The shared votes could not be read (' + (err && err.code || 'error') + ').'; store.mode = 'local'; loadLocal(); if (S.tab === 'review') renderReview(); });
+        });
+      });
+    }).catch(function () { store.mode = 'local'; });
+  }
+  function castVote(key, verdict, note) {
+    var vote = verdict ? { v: verdict, n: (note || '').slice(0, 140), t: Date.now() } : null;
+    if (store.mode === 'local') { if (vote) store.mine[key] = vote; else delete store.mine[key]; saveLocal(); renderReview(); return; }
+    var prev = store.mine[key]; if (vote) store.mine[key] = vote; else delete store.mine[key];
+    renderReview();
+    var ref = store.db.collection('votes').doc(store.uid), patch = {}; patch[key] = vote;
+    store.chain = store.chain.then(function () {
+      var write = store.exists ? ref.update({ items: patch }) : ref.set({ items: patch }).then(function () { store.exists = true; });
+      return write;
+    }).catch(function (err) {
+      if (prev) store.mine[key] = prev; else delete store.mine[key];
+      toast(err && err.code === 'invalid_argument' ? 'You can look at votes but not add them. Ask the owner for Contributor access.' : 'The vote did not save. Try again.');
+      renderReview();
+    });
+  }
+  function voteFor(key) { return store.mine[key] || null; }
+  function reviewRows() {
+    var rows = REV.rows.map(function (r) { return { k: r[0], impact: r[1], flags: r[2], ai: r[3], why: r[4], key: E[r[0]][11] }; });
+    var f = RV.filter;
+    return rows.filter(function (r) {
+      if (f === 'mine') return !voteFor(r.key);
+      if (f === 'flagged') return r.flags !== 0;
+      if (f === 'ai') return r.ai >= 3;
+      if (f === 'voted') return !!store.tally[r.key] || !!voteFor(r.key);
+      return true;
+    });
+  }
+  function tallyText(key) {
+    var t = store.mode === 'shared' ? store.tally[key] : null;
+    if (!t) return '';
+    return VERDICTS.filter(function (v) { return t[v[0]]; }).map(function (v) { return t[v[0]] + ' ' + v[1].toLowerCase(); }).join(' · ');
+  }
+  function reviewCard(r, maxImpact) {
+    var e = E[r.k], mine = voteFor(r.key), cls = e[2] > 0 ? 'raises' : 'lowers', can = store.mode === 'local' || store.canWrite;
+    var tags = FLAG_NAMES.filter(function (f) { return r.flags & f[0]; }).map(function (f) { return '<span class="tag unrev">' + f[1] + '</span>'; }).join('') +
+      (r.ai ? '<span class="tag ' + (r.ai >= 3 ? 'raises' : 'cur') + '" title="' + esc(r.why) + '">AI triage: ' + AI_NAMES[r.ai] + '</span>' : '');
+    var votes = VERDICTS.map(function (v) { return '<button class="vbtn ' + (BAD[v[0]] ? 'bad' : '') + '" data-vote="' + v[0] + '" aria-pressed="' + (!!mine && mine.v === v[0]) + '"' + (can ? '' : ' disabled') + '>' + v[1] + '</button>'; }).join('');
+    var tl = tallyText(r.key);
+    return '<article class="rv" data-key="' + r.key + '"><div class="chain">' + nodeBtn(e[0]) + '<span class="arrow ' + cls + '">' + (e[2] > 0 ? 'raises' : 'lowers') + ' →</span>' + nodeBtn(e[1], 'end') + '</div>' +
+      '<blockquote>“' + esc(e[6]) + '”<div class="src">' + srcHtml(e) + '</div></blockquote>' +
+      '<div class="tags">' + tags + '<span class="tag" title="Summed weight of the drug-to-pain and injury-to-pain paths that use this link">impact ' + Math.round(r.impact) + '</span><span class="meter" title="relative impact"><i style="width:' + Math.round(r.impact / maxImpact * 100) + '%"></i></span></div>' +
+      (r.why ? '<p class="note">AI triage: ' + esc(r.why) + '</p>' : '') +
+      '<div class="votes" role="group" aria-label="Your verdict on this link">' + votes + '</div>' +
+      (mine ? '<input class="fld note-in" data-note placeholder="Add a note (optional, 140 characters)" maxlength="140" value="' + esc(mine.n || '') + '"' + (can ? '' : ' disabled') + '>' : '') +
+      (tl ? '<p class="note">Reviewers so far: ' + esc(tl) + '</p>' : '') + '</article>';
+  }
+  var reviewBuilt = false;
+  function renderReview() {
+    var p = $('#panel-review');
+    if (!reviewBuilt) {
+      p.innerHTML = '<div class="section-title"><h2>Review the links that matter most</h2><p class="note">These links come from crawled papers and have not been checked. They are ranked by impact: how much of the drug-to-pain and injury-to-pain evidence runs through them. A wrong link high on this list distorts many results. Read the quote, decide whether it supports the arrow, and vote.</p></div><div class="card" id="rv-status"></div><div class="row"><span class="seg" role="group" aria-label="Filter" id="rv-filter"></span></div><div id="rv-list" class="panel"></div><div class="row" id="rv-more-row"></div><div class="card" id="rv-results"></div>';
+      $('#rv-filter').innerHTML = [['all', 'All'], ['mine', 'Not yet voted by me'], ['flagged', 'Flagged'], ['ai', 'AI triage doubtful'], ['voted', 'Has votes']].map(function (f) { return '<button data-rvf="' + f[0] + '">' + f[1] + '</button>'; }).join('');
+      p.addEventListener('click', function (ev) {
+        var f = ev.target.closest('[data-rvf]'); if (f) { RV.filter = f.dataset.rvf; RV.shown = 20; renderReview(); return; }
+        if (ev.target.closest('#rv-more')) { RV.shown += 20; renderReview(); return; }
+        var b = ev.target.closest('[data-vote]');
+        if (b && !b.disabled) { var card = b.closest('[data-key]'), key = card.dataset.key, cur = voteFor(key), same = cur && cur.v === b.dataset.vote; castVote(key, same ? null : b.dataset.vote, cur && !same ? cur.n : ''); }
+        if (ev.target.closest('#rv-copy')) copy(resultsTsv(), 'Review results');
+        if (ev.target.closest('#rv-copy-mine')) copy(resultsTsv(true), 'Your votes');
+      });
+      p.addEventListener('change', function (ev) { var n = ev.target.closest('[data-note]'); if (n) { var key = n.closest('[data-key]').dataset.key, cur = voteFor(key); if (cur && n.value !== (cur.n || '')) castVote(key, cur.v, n.value); } });
+      reviewBuilt = true;
+    }
+    var rows = reviewRows(), maxImpact = REV.rows.length ? REV.rows[0][1] : 1, myCount = Object.keys(store.mine).length;
+    var statusText = store.mode === 'shared' ? (store.canWrite ? 'Votes are shared with everyone who opens this page. ' + store.voters + ' reviewer' + (store.voters === 1 ? ' has' : 's have') + ' voted so far.' : 'You can see the votes but not add your own. Ask the owner for Contributor access.')
+      : 'Votes stay in this browser, because the shared store is not available here. Copy them out when you finish.';
+    $('#rv-status').innerHTML = '<div class="row"><b>' + myCount + '</b> of ' + REV.rows.length + ' reviewed by you</div><p class="note">' + esc(statusText) + (store.error ? ' ' + esc(store.error) : '') + '</p>' +
+      '<details><summary class="note" style="cursor:pointer">What the verdicts mean</summary><ul class="plain"><li><b>Correct</b>: the quote supports this direction and sign.</li><li><b>Wrong sign</b>: the quote says the opposite (raises where the quote says lowers).</li><li><b>Reversed</b>: the effect runs the other way, from B to A.</li><li><b>Not a relationship</b>: a null result, a correlation, or a statement that does not link the two.</li><li><b>Unsure</b>: you cannot tell from the quote.</li></ul></details>';
+    $$('#rv-filter button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.rvf === RV.filter)); });
+    $('#rv-list').innerHTML = rows.length ? rows.slice(0, RV.shown).map(function (r) { return reviewCard(r, maxImpact); }).join('') : '<p class="empty">Nothing here for this filter.</p>';
+    $('#rv-more-row').innerHTML = rows.length > RV.shown ? '<button class="btn" id="rv-more">Show 20 more (' + (rows.length - RV.shown) + ' left)</button>' : '';
+    var voted = REV.rows.filter(function (r) { return store.tally[E[r[0]][11]]; });
+    var needs = voted.filter(function (r) { var t = store.tally[E[r[0]][11]]; return (t.sign || 0) + (t.rev || 0) + (t.none || 0) > (t.ok || 0); });
+    $('#rv-results').innerHTML = '<h3>Results</h3><p class="note">' + (store.mode === 'shared' ? voted.length + ' links have votes; ' + needs.length + ' have more “wrong” votes than “correct” ones and need fixing in the graph.' : 'Shared results appear here when the shared store is available.') + '</p><div class="row">' + (store.mode === 'shared' ? '<button class="btn" id="rv-copy">Copy all results</button>' : '') + '<button class="btn" id="rv-copy-mine">Copy my votes</button></div>';
+  }
+  function resultsTsv(mineOnly) {
+    var head = ['link key', 'source', 'target', 'sign', 'pmid', 'quote', 'my verdict', 'my note', 'ok', 'wrong sign', 'reversed', 'not a relationship', 'unsure', 'ai triage'];
+    var rows = [head];
+    REV.rows.forEach(function (r) {
+      var e = E[r[0]], key = e[11], mine = voteFor(key), t = store.mode === 'shared' ? (store.tally[key] || {}) : {};
+      if (mineOnly ? !mine : (!mine && !Object.keys(t).length)) return;
+      rows.push([key, N[e[0]][1], N[e[1]][1], e[2], (/^PMID (\d+)/.exec(e[5]) || [0, ''])[1], e[6], mine ? mine.v : '', mine ? mine.n || '' : '', t.ok || 0, t.sign || 0, t.rev || 0, t.none || 0, t.unsure || 0, r[3] ? AI_NAMES[r[3]] : '']);
+    });
+    return tsv(rows);
+  }
+
+  /* ---------- landscape ---------- */
+  function barRows(rows, max, cls) {
+    var labelW = 230, plotW = 380, rowH = 24, W = labelW + plotW + 70, H = rows.length * rowH + 6;
+    var svg = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Bar chart">';
+    rows.forEach(function (r, j) {
+      var y = j * rowH, lab = r.label.length > 34 ? r.label.slice(0, 33) + '…' : r.label, w = Math.min(r.v, max) / max * plotW;
+      svg += '<text class="t" x="' + (labelW - 8) + '" y="' + (y + 16) + '" text-anchor="end">' + esc(lab) + '</text><rect class="' + (cls || 'barA') + '" x="' + labelW + '" y="' + (y + 4) + '" width="' + Math.max(w, 1) + '" height="' + (rowH - 9) + '" rx="2"/><text class="tm" x="' + (labelW + w + 6) + '" y="' + (y + 16) + '">' + r.v.toLocaleString() + '</text>';
+    });
+    return '<div class="chartwrap">' + svg + '</svg></div>';
+  }
+  function renderLandscape() {
+    var m = F.meta, depth = { 1: 0, 2: 0, 3: 0 }, status = {}, types = {};
+    for (var k = 0; k < NS; k++) { var e = E[k]; if (e[4] === 0) depth[Math.min(3, 1 + e[8])]++; status[e[7]] = (status[e[7]] || 0) + 1; }
+    N.forEach(function (n) { types[n[2] || 'unknown'] = (types[n[2] || 'unknown'] || 0) + 1; });
+    var fams = FAM.families.filter(function (f) { return f.key !== 'any'; }).slice().sort(function (a, b) { return b.stats.links_in - a.stats.links_in; });
+    var maxIn = fams[0].stats.links_in;
+    var h = '<div class="section-title"><h2>Where the evidence is, and where it is thin</h2><p class="note">For anyone deciding what to read, check or fund next.</p></div>';
+    h += '<div class="big3"><div class="card"><h3>Single-paper links</h3><b class="n">' + pct(depth[1], m.crawled) + '</b><p class="note">of crawled links rest on one paper. ' + depth[2].toLocaleString() + ' have two and ' + depth[3].toLocaleString() + ' have three or more. Switching Evidence to Corroborated drops the single-paper links.</p></div>' +
+      '<div class="card"><h3>Not yet checked</h3><b class="n">' + pct(m.crawled, m.links) + '</b><p class="note">of signed links come from papers read by software. ' + m.curated.toLocaleString() + ' were curated, and ' + (status.confirmed || 0) + ' of those confirmed against the literature.</p></div>' +
+      '<div class="card"><h3>Reached by curated links alone</h3><b class="n">' + m.curated_only_drugs + '</b><p class="note">drugs have a route to pain using curated links only. The graph’s reach on drugs rests on crawled evidence.</p></div></div>';
+    h += '<div class="card"><div class="section-title"><h3>Links into each pain type</h3><p class="note">Links whose target is a pain node of that type. A short bar means a type the graph cannot yet speak about.</p></div>' + barRows(fams.map(function (f) { return { label: famName(f.key), v: f.stats.links_in }; }), maxIn) + '</div>';
+    h += '<div class="card"><div class="section-title"><h3>Pain types compared</h3></div><div class="tablewrap"><table><thead><tr><th>Type</th><th class="num">Links in</th><th class="num">Curated</th><th class="num">Papers</th><th class="num">Drivers</th><th class="num">Drugs lower</th><th class="num">Gaps</th><th>Coverage</th></tr></thead><tbody>' +
+      fams.map(function (f) { var c = covLabel(f), s = f.stats; return '<tr><td><button class="link" data-typego="' + f.key + '">' + esc(famName(f.key)) + '</button></td><td class="num">' + s.links_in + '</td><td class="num">' + s.curated_in + '</td><td class="num">' + s.papers + '</td><td class="num">' + s.drivers + '</td><td class="num">' + s.drugs_lower + '</td><td class="num">' + s.gaps + '</td><td><span class="tag ' + c[1] + '">' + c[0] + '</span></td></tr>'; }).join('') + '</tbody></table></div></div>';
+    var tyRows = Object.keys(types).map(function (t) { return { label: t, v: types[t] }; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 12);
+    h += '<div class="grid2"><div class="card"><div class="section-title"><h3>What the nodes are</h3></div>' + barRows(tyRows, tyRows[0].v, 'barC') + '</div>' +
+      '<div class="card"><div class="section-title"><h3>Links by review status</h3></div>' + barRows(Object.keys(status).map(function (s) { return { label: s.replace(/_/g, ' '), v: status[s] }; }).sort(function (a, b) { return b.v - a.v; }), status.unreviewed, 'barC') + '</div></div>';
+    $('#panel-landscape').innerHTML = h;
   }
 
   /* ---------- findings ---------- */
@@ -367,13 +982,13 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
       svg += '<text class="t" x="' + (labelW - 8) + '" y="' + (y + 16) + '" text-anchor="end">' + esc(lab) + '</text><rect class="barA" x="' + labelW + '" y="' + (y + 4) + '" width="' + w + '" height="' + (rowH - 10) + '" rx="2"/><text class="tm" x="' + (labelW + w + 6) + '" y="' + (y + 16) + '">' + Math.round(r.share * 100) + '%</text>'; });
     return '<div class="chartwrap">' + svg + '</svg></div>';
   }
-  function loopLine(l) { return '<div class="loopline">' + l.nodes.map(function (n, j) { return nodeBtn(n) + '<span class="arrow raises">→</span>'; }).join('') + nodeBtn(l.nodes[0]) + '<span class="muted mono" style="font-size:12px">weight ' + l.weight.toFixed(2) + (l.inhibitory ? ', ' + l.inhibitory + ' inhibitory' : '') + '</span></div>'; }
+  function loopLine(l) { return '<div class="loopline">' + l.nodes.map(function (n) { return nodeBtn(n) + '<span class="arrow raises">→</span>'; }).join('') + nodeBtn(l.nodes[0]) + '<span class="muted mono" style="font-size:12px">weight ' + l.weight.toFixed(2) + (l.inhibitory ? ', ' + l.inhibitory + ' inhibitory' : '') + '</span></div>'; }
   function renderFindings() {
-    var c = F.calibration, m = F.meta, a = c.two_hop.all, h = '';
+    var c = F.calibration, a = c.two_hop.all, h = '';
     h += '<div class="big3"><div class="card"><h3>Signs compose</h3><b class="n">' + pct(a[0], a[1]) + '</b><p class="note">A direct link’s sign is predicted correctly from its two-hop paths, ' + a[0].toLocaleString() + ' of ' + a[1].toLocaleString() + ' times. With three or more agreeing paths: ' + pct(c.by_support['3'][0], c.by_support['3'][1]) + '.</p></div>' +
       '<div class="card"><h3>Drug ranking is weak</h3><b class="n">' + c.auc.toFixed(2) + '</b><p class="note">AUC for telling known analgesics from other drugs (0.5 is chance). A drug in a pain paper is mostly studied as an analgesic, so the graph leans that way.</p></div>' +
       '<div class="card"><h3>Drugs called pain-raising</h3><b class="n">' + F.pain_raising.length + '</b><p class="note">Reading the list by hand, most are established inducers or genuine off-target liabilities, and a few look wrong. Table below.</p></div></div>';
-    h += '<div class="card"><div class="section-title"><h2>Drugs predicted to raise pain</h2><p class="note">Score of +1 or more, at least two independent first steps, at least 80% of reached pain nodes agree. The rare opposite call is the most informative check of the method: chemotherapies, nitroglycerin, capsaicin, BzATP and CFA appear, and so do opioid-induced hyperalgesia (morphine, fentanyl) and channel-activating off-target effects (simvastatin and TRPV1, amitriptyline and TRPA1, clotrimazole and TRPV1).</p></div>' + drugTable(F.pain_raising.slice(0, 15), true) + '</div>';
+    h += '<div class="card"><div class="section-title"><h2>Drugs predicted to raise pain</h2><p class="note">Score of +1 or more, at least two independent first steps, at least 80% of reached pain nodes agree. The rare opposite call is the most informative check of the method: chemotherapies (paclitaxel, oxaliplatin, vincristine, cisplatin), nitroglycerin, capsaicin, BzATP and CFA appear, and so do the opioids morphine and fentanyl, which fits opioid-induced hyperalgesia. A few entries look wrong or are tool compounds, so read the list as a check on the method, not as a safety finding.</p></div>' + drugTable(F.pain_raising.slice(0, 15), true) + '</div>';
     h += '<div class="card"><div class="section-title"><h2>Double-edged drugs</h2><p class="note">The direct link says one thing, the other paths the opposite: a context-dependent effect, or an off-target liability.</p></div>' + drugTable(F.double_edged, true) + '</div>';
     h += '<div class="grid2"><div class="card"><div class="section-title"><h2>What drives pain</h2><p class="note">Targets by summed effect on the core pain nodes.</p></div>' + targetTable(F.drivers) + '</div>' +
       '<div class="card"><div class="section-title"><h2>Chokepoints</h2><p class="note">Share of the weighted pain-promoting flow from ' + F.chokepoints.sources + ' nerve-injury models (' + F.chokepoints.paths.toLocaleString() + ' paths) that passes through each node. Partly a measure of how much each node is studied.</p></div>' + chokeChart(F.chokepoints.ranked) + '</div></div>';
@@ -384,47 +999,106 @@ ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76
     h += '<div class="card"><div class="section-title"><h2>Novel analgesic candidates</h2><p class="note">' + F.n_candidates + ' drugs with a net analgesic score, two or more independent first steps, 80% agreement and no direct pain link. Read this as a literature-weighted ranking, not a prediction (AUC ' + c.auc.toFixed(2) + ').</p></div>' + drugTable(F.candidates, true) + '</div>';
     $('#panel-findings').innerHTML = h;
   }
+
+  /* ---------- guide ---------- */
   function renderGuide() {
     var c = F.calibration, m = F.meta;
-    $('#panel-guide').innerHTML = '<div class="card"><h2>How a result is computed</h2><ul class="plain">' +
+    $('#panel-guide').innerHTML =
+      '<div class="card"><h2>Who this is for</h2><ul class="plain">' +
+      '<li><b>People with pain and their carers</b>: turn on Plain language and look up a treatment or a cause. The text says what the research reports, how many separate routes support it, and how much of it a person has checked.</li>' +
+      '<li><b>Clinicians</b>: Explore shows a drug across all pain types at once; Connect &amp; compare puts several drugs side by side.</li>' +
+      '<li><b>Researchers</b>: Pain types lists what drives each type and where a driver has no drug; Connect traces how one signal reaches another.</li>' +
+      '<li><b>Drug discovery</b>: Rank filters drugs and targets by effect, route count, novelty (no direct pain link) and gaps (no inhibiting drug).</li>' +
+      '<li><b>Curators</b>: Review ranks unchecked links by how much evidence runs through them and records your verdicts.</li>' +
+      '<li><b>Funders and planners</b>: Landscape shows how deep the evidence is for each pain type.</li>' +
+      '<li><b>Developers</b>: the scoring lives in <span class="mono">analysis/scripts/graph_inference.py</span>; this page repeats it in JavaScript and is checked against it.</li></ul></div>' +
+      '<div class="card"><h2>How a result is computed</h2><ul class="plain">' +
       '<li>Every signed link reads “A raises B” (+) or “A lowers B” (−). A path’s sign is the product of its link signs, so a drug that lowers a mediator that raises pain lowers pain.</li>' +
       '<li>A path’s weight is the product of its link weights, scaled by ' + m.decay + ' for each extra link. Curated links weigh 0.6 to 0.95 by review status. Crawled links weigh more when more papers support them and less when the quote is hedged.</li>' +
-      '<li>For each of the ' + m.core.length + ' best-evidenced pain nodes the summed signed path weight is squashed with tanh, so a hub that fans out to many pain nodes cannot inflate a score. The score is the sum over those nodes.</li>' +
-      '<li>Drugs use paths of up to ' + m.max_len + ' links, other nodes up to ' + m.target_len + '. Drugs are never intermediate steps.</li></ul></div>' +
-      '<div class="card"><h2>What the graph holds</h2><p>' + m.links.toLocaleString() + ' signed links over ' + m.nodes.toLocaleString() + ' nodes: ' + m.curated.toLocaleString() + ' curated and ' + m.crawled.toLocaleString() + ' crawled from papers and not yet reviewed. Left out: ' +
-      Object.keys(m.excluded).map(function (k) { return m.excluded[k] + ' ' + k.replace(/_/g, ' '); }).join(', ') + '. Unsigned links (binds, interacts with) carry no direction and are not used.</p></div>' +
+      '<li>For each pain node of the chosen type the summed signed path weight is squashed with tanh, so a hub that fans out to many pain nodes cannot inflate a score. The score is the sum over those nodes.</li>' +
+      '<li>Drugs use paths of up to ' + m.max_len + ' links, other nodes up to ' + m.target_len + '. Drugs are never intermediate steps.</li>' +
+      '<li><b>Evidence settings.</b> All uses every signed link. Corroborated keeps curated links and crawled links backed by two or more papers whose quote is not hedged. Curated only keeps expert-curated links.</li></ul></div>' +
+      '<div class="card"><h2>Pain types</h2><p class="note">A pain type is the set of pain nodes whose name matches a short list of words: mechanical (mechanical, tactile, touch, von Frey), cold (cold, thermal, heat), cancer, chemotherapy, diabetic, headache (migraine, trigeminal, orofacial), joint (arthritis, inflammatory, CFA), visceral (bladder, colitis, pelvic), central (spinal cord, stroke, post-surgical) and neuropathic (nerve injury, SNI, CCI). “Any pain” is the ' + m.core.length + ' pain nodes with the most evidence. Types with fewer than three pain nodes are left out, and a node can sit in several types.</p></div>' +
+      '<div class="card"><h2>What the graph holds</h2><p>' + m.links.toLocaleString() + ' signed links over ' + m.nodes.toLocaleString() + ' nodes: ' + m.curated.toLocaleString() + ' curated and ' + m.crawled.toLocaleString() + ' crawled from papers and not yet reviewed. Another ' + m.unsigned.toLocaleString() + ' links (binds, interacts with) carry no direction and are shown on a node’s page but never scored. Left out of every score: ' +
+      Object.keys(m.excluded).map(function (k) { return m.excluded[k] + ' ' + k.replace(/_/g, ' '); }).join(', ') + '.</p></div>' +
       '<div class="card"><h2>How far to trust it</h2><ul class="plain">' +
       '<li><b>Sign composition works.</b> Two-hop paths reproduce a direct link’s sign ' + pct(c.two_hop.all[0], c.two_hop.all[1]) + ' of the time (' + pct(c.two_hop.curated[0], c.two_hop.curated[1]) + ' for curated links alone, ' + c.two_hop.curated[1] + ' cases).</li>' +
       '<li><b>Ranking drugs as analgesics is weak.</b> AUC ' + c.auc.toFixed(2) + ', and the method calls ' + Math.round(c.base_rate * 100) + '% of all drugs analgesic. The crawl is biased toward drugs studied as analgesics.</li>' +
       '<li><b>Opposite calls are informative.</b> The ' + F.pain_raising.length + ' drugs predicted to raise pain are mostly known inducers or off-target liabilities.</li>' +
       '<li><b>Hubs dominate.</b> TNF-α, TRPV1, NLRP3 and CGRP sit on most paths partly because they are studied most.</li>' +
-      '<li><b>Errors exist.</b> A review of 504 links between curated nodes found 77% fully supported by their quote, 18% overstated, weak or context-limited, and 4.6% wrong. One example: a quote reading “patients with severe pain had <i>lower</i> TNFα” was coded as TNF lowering pain.</li></ul></div>' +
-      '<div class="card"><h2>Duplicate nodes</h2><p class="note">' + F.duplicates.length + ' or more crawled nodes name the same entity as a curated node under another spelling, so their links never reach it. This view shows the graph as it is.</p></div>';
+      '<li><b>Thin pain types mislead.</b> Diabetic neuropathic pain has a handful of links; its rankings are pointers at most.</li>' +
+      '<li><b>Animal and lab work dominates.</b> A path says what papers report, not what happens in a patient.</li>' +
+      '<li><b>Errors exist.</b> A review of 504 links between curated nodes found 77% fully supported by their quote, 18% overstated, weak or context-limited, and 4.6% wrong. One example: a quote reading “patients with severe pain had <i>lower</i> TNFα” was coded as TNF lowering pain. That is what the Review tab is for.</li></ul></div>' +
+      '<div class="card"><h2>Words used here</h2><dl class="gloss">' +
+      '<dt>Score</dt><dd>Sum over pain nodes of tanh of the signed path weights. Negative lowers pain, positive raises it.</dd>' +
+      '<dt>Independent steps</dt><dd>How many different first links out of the node carry the effect. More steps means the result does not hang on one paper.</dd>' +
+      '<dt>Direct link</dt><dd>A link from the node straight to a pain node.</dd>' +
+      '<dt>Novel</dt><dd>A drug with a computed effect and no direct link to pain.</dd>' +
+      '<dt>Gap</dt><dd>A driver of pain that no drug in the graph inhibits.</dd>' +
+      '<dt>Inducer</dt><dd>Something nothing in the graph acts on, such as an injury model or LPS.</dd>' +
+      '<dt>Hedged</dt><dd>The quote says may, might, suggests or similar.</dd>' +
+      '<dt>Curated and crawled</dt><dd>Curated links were entered and checked by hand. Crawled links were read from papers by software.</dd>' +
+      '<dt>Impact (Review)</dt><dd>Summed weight of the drug-to-pain and injury-to-pain paths that use a link.</dd></dl></div>';
   }
 
-  /* ---------- tabs, boot ---------- */
-  function setTab(t) {
-    state.tab = t;
-    ['explore', 'findings', 'guide'].forEach(function (k) { var on = k === t; $('#tab-' + k).setAttribute('aria-selected', String(on)); $('#panel-' + k).hidden = !on; });
-    if (location.hash.slice(1) !== t) { try { history.replaceState(null, '', '#' + t); } catch (e) { location.hash = t; } }
+  /* ---------- events, boot ---------- */
+  var exp = null;
+  function wireEvents() {
+    document.addEventListener('click', function (ev) {
+      var t = ev.target, b;
+      if ((b = t.closest('[data-node]'))) { openNode(+b.dataset.node); return; }
+      if ((b = t.closest('[data-setev]'))) { setEv(b.dataset.setev); return; }
+      if ((b = t.closest('[data-role]'))) { var r = ROLES[+b.dataset.role], pre = {}; Object.keys(r.pre).forEach(function (k) { pre[k] = Array.isArray(r.pre[k]) ? r.pre[k].slice() : r.pre[k]; }); if (pre.sel === null) delete pre.sel; go(r.tab, pre); if (r.after) r.after(); return; }
+      if ((b = t.closest('[data-act]'))) {
+        var i = +b.dataset.i;
+        if (b.dataset.act === 'connectFrom') { S.cmode = 'path'; S.cA = i; S.cB = null; go('connect'); }
+        else { S.cmode = 'compare'; if (S.cmp.indexOf(i) < 0) S.cmp.push(i); S.cmp = S.cmp.slice(-5); go('connect'); }
+        return;
+      }
+      if ((b = t.closest('[data-rm]'))) { S.cmp.splice(+b.dataset.rm, 1); renderCompare(); syncHash(); return; }
+      if ((b = t.closest('[data-preset]'))) { S.cmp = ['morphine', 'gabapentin', 'duloxetine'].map(find).filter(function (x) { return x !== null; }); renderCompare(); syncHash(); return; }
+      if ((b = t.closest('[data-fam]'))) { S.fam = b.dataset.fam; refresh(); return; }
+      if ((b = t.closest('[data-typego]'))) { S.fam = b.dataset.typego; go('types'); return; }
+      if ((b = t.closest('[data-rankgo]'))) { var k = b.dataset.rankgo; RK.kind = k.indexOf('drugs') === 0 ? 'drugs' : 'targets'; RK.dir = k === 'drugs-lower' ? 'lower' : 'raise'; RK.gap = k === 'targets-gap'; RK.novel = false; RK.q = ''; RK.min = 2; RK.shown = 50; go('rank'); return; }
+    });
+    $$('.tabs button').forEach(function (b) {
+      b.addEventListener('click', function () { setTab(b.dataset.tab); });
+      b.addEventListener('keydown', function (ev) {
+        var j = TABS.indexOf(b.dataset.tab), d = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { ev.preventDefault(); var nb = $('#tab-' + TABS[(j + d + TABS.length) % TABS.length]); nb.focus(); setTab(TABS[(j + d + TABS.length) % TABS.length]); }
+      });
+    });
+    $('#share').addEventListener('click', function () { syncHash(); copy(ARTIFACT_URL + '#' + hashFor(), 'Link'); });
+    window.addEventListener('hashchange', function () { var h = location.hash.slice(1); if (h !== hashFor() && applyHash()) setTab(S.tab); });
   }
-  function boot(data) {
-    N = data[0]; E = data[1]; F = data[2];
-    N.forEach(function (n) { n.nl = norm(n[1]); });
-    buildIndex();
-    $('#subtitle').textContent = F.meta.links.toLocaleString() + ' signed links between ' + F.meta.nodes.toLocaleString() + ' nodes, ' + F.meta.curated + ' curated and ' + F.meta.crawled.toLocaleString() + ' from crawled papers. Search any node to see what the graph says it does to pain, and why.';
-    $('#q').disabled = false;
-    wireSearch(); renderFindings(); renderGuide();
-    document.querySelectorAll('.tabs button').forEach(function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
-    var start = (location.hash.slice(1) || 'explore'); if (['explore', 'findings', 'guide'].indexOf(start) < 0) start = 'explore';
-    setTab(start);
-    var first = search('morphine')[0]; if (first !== undefined) { $('#q').value = N[first][1]; showNode(first); }
-    window.addEventListener('hashchange', function () { var h = location.hash.slice(1); if (['explore', 'findings', 'guide'].indexOf(h) >= 0 && h !== state.tab) setTab(h); });
+  function boot(data, claude) {
+    N = data[0]; E = data[1]; F = data[2]; FAM = data[3]; REV = data[4]; NS = F.meta.links;
+    N.forEach(function (n, i) { n.nl = norm(n[1]); n.ns = norm(short(n[1])); n.words = n[1].toLowerCase().split(/[^a-z0-9α-ω]+/).filter(Boolean); bySlug[n[7]] = i; });
+    FAM.families.forEach(function (f) { byFam[f.key] = f; });
+    famOf = N.map(function () { return []; });
+    FAM.families.forEach(function (f) { if (f.key !== 'any') f.outcomes.forEach(function (i) { famOf[i].push(f.key); }); });
+    buildIndex(); buildRoles();
+    S.plain = lsGet('pge.plain') === '1'; var ev = lsGet('pge.ev'); if (EVS.indexOf(ev) >= 0) S.ev = ev;
+    $('#subtitle').textContent = F.meta.links.toLocaleString() + ' signed links between ' + F.meta.nodes.toLocaleString() + ' nodes. Find what the literature says raises or lowers pain, and see the quote behind each link.';
+    wireBar();
+    exp = makePicker($('#exp-picker'), { placeholder: 'Search a drug, target, cell, pathway or pain outcome', label: 'Search the graph', onPick: function (i) { S.sel = i; showNode(i); } });
+    ['morphine', 'simvastatin', 'capsaicin', 'TNF-α', 'NLRP3', 'TLR4', 'electroacupuncture', 'PPAR-gamma'].forEach(function (name) { var hit = find(name); if (hit !== null) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = name; b.addEventListener('click', function () { openNode(hit); }); $('#examples').appendChild(b); } });
+    wireEvents();
+    var fromHash = applyHash();
+    setTab(fromHash ? S.tab : 'start');
+    initStore(claude).then(function () { if (S.tab === 'review') renderReview(); });
   }
-  var ready = Promise.all(['nodes.json', 'edges.json', 'findings.json'].map(function (f) { return fetch(f).then(function (r) { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); }); }))
-    .then(function (d) { boot(d); return true; })
+  var claude = window.claude && window.claude.use ? window.claude : null;
+  var ready = Promise.all(['nodes.json', 'edges.json', 'findings.json', 'families.json', 'review.json'].map(function (f) { return fetch(f).then(function (r) { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); }); }))
+    .then(function (d) { boot(d, claude); return true; })
     .catch(function (err) { $('#subtitle').textContent = 'The graph data did not load (' + err.message + '). Reload the page.'; return false; });
-  window.Explorer = { ready: ready, analyze: function (i) { var a = analyze(i); return { score: a.score, neg: a.neg, pos: a.pos, mediators: a.mediators, n_paths: a.paths.length, direct: a.direct, agreement: a.agreement }; },
-    index: function (id) { return N.findIndex(function (n) { return n[0] === id; }); } };
+  window.Explorer = {
+    ready: ready, state: S,
+    analyze: function (i, fam, ev) { var a = analyze(i, ctx(fam || 'any', ev || 'all')); return { score: a.score, neg: a.neg, pos: a.pos, mediators: a.mediators, n_paths: a.paths.length, direct: a.direct, agreement: a.agreement }; },
+    between: function (a, b, maxLen, ev) { var ps = between(a, b, maxLen, ev || 'all'); return { n: ps.length, net: ps.reduce(function (s, p) { return s + pathSign(p) * pathWeight(p); }, 0), pos: ps.filter(function (p) { return pathSign(p) > 0; }).length }; },
+    rows: function (fam, ev) { return FAM.rows[fam + '|' + ev]; }, rowsAll: function () { return FAM.rows; },
+    index: function (id) { return N.findIndex(function (n) { return n[0] === id; }); },
+    votes: store
+  };
 })();
 </script>

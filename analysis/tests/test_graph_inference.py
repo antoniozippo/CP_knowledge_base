@@ -179,3 +179,56 @@ def test_report_runs_end_to_end_on_a_small_graph():
         assert heading in md
     assert -1 < drugs["d"]["net"] < 0 and drugs["d"]["mediators"] == 2     # below the report's -1 candidate threshold
     assert any(len(c["nodes"]) == 2 and c["sign"] > 0 for c in loops)      # TNF <-> IL-6 reinforce each other
+
+
+def evidence(*pmids):
+    return [{"pmid": p, "quote": "q"} for p in pmids]
+
+
+def test_a_crawled_links_evidence_list_already_holds_its_own_paper():
+    one = crawled("a", "b", 1, pmid="1", crawler_evidence=evidence("1"))
+    two = crawled("a", "b", 1, pmid="1", crawler_evidence=evidence("1", "2"))
+    bare = crawled("a", "b", 1, pmid="1")
+    assert gi.crawled_papers(one) == 1 and gi.crawled_papers(two) == 2 and gi.crawled_papers(bare) == 1
+    assert gi.link_weight(one) == pytest.approx(gi.link_weight(bare))             # same single paper
+    assert gi.link_weight(two) == pytest.approx(gi.link_weight(one) + 0.07)       # each paper adds 0.07
+
+
+def test_the_corroborated_filter_keeps_curated_links_and_links_with_two_papers_that_are_not_hedged():
+    ok = gi.make_edge_ok(min_papers=2, no_hedged=True)
+    sg = build([node("a"), node("b"), node("c"), node("d"), node("e")], [
+        crawled("a", "b", 1, crawler_evidence=evidence("1")),                                   # one paper
+        crawled("a", "c", 1, crawler_evidence=evidence("1", "2")),                              # two papers
+        crawled("a", "d", 1, quote="A may raise D.", crawler_evidence=evidence("1", "2")),      # hedged
+        link("a", "e", 1, validation_status="CONFIRMED")])                                      # curated
+    kept = {e[1] for e in sg.edges if ok(e)}
+    assert kept == {"c", "e"}
+
+
+def test_pain_types_collect_pain_nodes_by_name_and_need_three_of_them():
+    nodes = [node("m1", "Mechanical Allodynia", "symptom"), node("m2", "mechanical hyperalgesia", "symptom"),
+             node("m3", "tactile allodynia", "symptom"), node("c1", "cold allodynia", "symptom"), node("a")]
+    sg = build(nodes, [])
+    fams = {key: ids for key, _, ids in gi.pain_families(sg)}
+    assert fams["mechanical"] == {"m1", "m2", "m3"}
+    assert "cold" not in fams                                  # one pain node is not a type
+
+
+def test_a_pain_type_changes_which_nodes_count_as_outcomes():
+    nodes = [node("d", "drugX", "drug"), node("a"), node("m1", "mechanical allodynia", "symptom"),
+             node("m2", "mechanical hyperalgesia", "symptom"), node("m3", "tactile pain", "symptom"),
+             node("c1", "cold allodynia", "symptom")]
+    sg = build(nodes, [link("d", "a", -1), link("a", "m1", 1), link("a", "c1", 1)])
+    mech = gi.drug_effects(sg, outcomes={"m1", "m2", "m3"})
+    cold = gi.drug_effects(sg, outcomes={"c1"})
+    assert mech["d"]["n_neg"] == 1 and cold["d"]["n_neg"] == 1
+    assert [e[1] for p in mech["d"]["paths"] for e in p] == ["a", "m1"]
+    assert [e[1] for p in cold["d"]["paths"] for e in p] == ["a", "c1"]
+
+
+def test_paths_between_finds_signed_paths_and_respects_the_evidence_filter():
+    sg = build([node("a"), node("b"), node("c")], [crawled("a", "b", 1, crawler_evidence=evidence("1")), link("b", "c", -1),
+                                                    link("a", "c", 1)])
+    assert len(gi.paths_between(sg, "a", "c", 3)) == 2
+    assert len(gi.paths_between(sg, "a", "c", 3, gi.make_edge_ok(min_papers=2))) == 1     # the single-paper hop drops out
+    assert gi.paths_between(sg, "a", "a", 3) == []

@@ -73,11 +73,17 @@ def is_crawled_link(link):
     return link.get("origin") == "auto_crawled"
 
 
+def crawled_papers(link):
+    """Papers behind a crawled link. Its crawler_evidence list already holds the paper it came from,
+    so the count is the list's length (at least 1)."""
+    return max(1, len(link.get("crawler_evidence", [])))
+
+
 def link_weight(link):
     """Confidence in a link, 0-1 (see module docstring)."""
-    extra = len(link.get("crawler_evidence", []))
+    extra = len(link.get("crawler_evidence", []))      # for a curated link: papers added by the crawler
     if is_crawled_link(link):
-        w = min(0.45 + 0.07 * (1 + extra), 0.9)
+        w = min(0.45 + 0.07 * crawled_papers(link), 0.9)
         if HEDGE.search(link.get("quote", "")):
             w -= 0.15
         return max(w, 0.2)
@@ -165,29 +171,33 @@ class SignedGraph:
                 ids.add(nid)
         return ids
 
-    def distance_to(self, targets):
-        """Fewest links from each node to any of `targets`."""
+    def distance_to(self, targets, edge_ok=None):
+        """Fewest links from each node to any of `targets`, over the links `edge_ok` admits."""
         dist = {t: 0 for t in targets}
         frontier = list(targets)
         while frontier:
             nxt = []
             for node in frontier:
-                for s, _, _, _, _ in self.inn.get(node, ()):
+                for edge in self.inn.get(node, ()):
+                    s = edge[0]
+                    if edge_ok and not edge_ok(edge):
+                        continue
                     if s not in dist:
                         dist[s] = dist[node] + 1
                         nxt.append(s)
             frontier = nxt
         return dist
 
-    def paths(self, start, targets, max_len, dist, skip=None):
+    def paths(self, start, targets, max_len, dist, skip=None, edge_ok=None):
         """Simple paths start -> any target (stopping at the first target reached).
-        Drugs and targets are never intermediates. `skip(edge)` drops links (leave-one-out)."""
+        Drugs and targets are never intermediates. `skip(edge)` drops links (leave-one-out);
+        `edge_ok(edge)` keeps only the links it admits (an evidence filter)."""
         found = []
 
         def walk(node, visited, edges):
             for e in self.out.get(node, ()):
                 nxt = e[1]
-                if nxt in visited or (skip and skip(e)):
+                if nxt in visited or (skip and skip(e)) or (edge_ok and not edge_ok(e)):
                     continue
                 if nxt in targets:
                     found.append(edges + [e])
@@ -234,6 +244,68 @@ def describe_path(sg, path, quotes=True):
     return " ".join(parts), steps
 
 
+def edge_papers(edge):
+    """Papers behind a link: crawled links count the papers in their evidence list; a curated
+    link is not counted in papers (reported as a large number so a minimum never drops it)."""
+    link = edge[4]
+    return crawled_papers(link) if is_crawled_link(link) else 99
+
+
+def edge_hedged(edge):
+    link = edge[4]
+    return is_crawled_link(link) and bool(HEDGE.search(link.get("quote", "")))
+
+
+def make_edge_ok(curated_only=False, min_papers=1, no_hedged=False):
+    """An evidence filter over links, or None when nothing is filtered."""
+    if not curated_only and min_papers <= 1 and not no_hedged:
+        return None
+
+    def ok(edge):
+        if curated_only and is_crawled_link(edge[4]):
+            return False
+        if edge_papers(edge) < min_papers:
+            return False
+        return not (no_hedged and edge_hedged(edge))
+    return ok
+
+
+# pain types: a node can belong to several. The first, "any", is the ranking set used elsewhere.
+PAIN_FAMILIES = (
+    ("mechanical", "Mechanical allodynia and hypersensitivity", r"mechanical|tactile|punctate|touch|von frey"),
+    ("cold", "Cold and thermal pain", r"cold|thermal|heat|hot plate"),
+    ("cancer", "Cancer pain", r"cancer|tumou?r|metasta"),
+    ("chemo", "Chemotherapy-induced pain", r"cisplatin|oxaliplatin|paclitaxel|vincristine|bortezomib|chemotherap|cipn|taxol"),
+    ("diabetic", "Diabetic neuropathic pain", r"diabet"),
+    ("headache", "Migraine, headache and orofacial pain", r"migraine|headache|trigeminal|orofacial|dural|facial"),
+    ("joint", "Joint and inflammatory pain", r"arthrit|joint|inflammatory|cfa|carrageenan|knee|osteo"),
+    ("visceral", "Visceral and pelvic pain", r"visceral|pancrea|bladder|abdominal|colit|pelvic|endometrio|dysmenorr|cystitis|bowel"),
+    ("central", "Central and post-injury pain", r"central|spinal cord|stroke|thalamic|post-?injury|post-?surgical|postoperative|incision"),
+    ("neuropathic", "Neuropathic pain", r"neuropath|nerve injury|nerve ligation|\bsni\b|\bcci\b"),
+)
+
+
+def pain_families(sg):
+    """[(key, label, outcome node ids)] for the pain types with at least three pain nodes."""
+    fams = [("any", "Any pain (the 20 best-evidenced pain nodes)", set(sg.core))]
+    for key, label, pattern in PAIN_FAMILIES:
+        rx = re.compile(pattern, re.I)
+        members = {n for n in sg.pain if rx.search(sg.label(n))}
+        if len(members) >= 3:
+            fams.append((key, label, members))
+    return fams
+
+
+def paths_between(sg, a, b, max_len=MAX_LEN, edge_ok=None):
+    """Simple signed paths a -> b of up to max_len links (drugs are never intermediate steps)."""
+    if a == b:
+        return []
+    dist = sg.distance_to({b}, edge_ok)
+    if a not in dist:
+        return []
+    return sg.paths(a, {b}, max_len, dist, edge_ok=edge_ok)
+
+
 # ---------------------------------------------------------------------------- analyses
 
 
@@ -254,19 +326,20 @@ def summarise(paths, sg):
     return per, score, neg, pos
 
 
-def drug_effects(sg, skip_direct=False):
-    """Per drug: effect on the core pain nodes. With skip_direct, the drug's own links to pain
-    nodes are ignored (leave-one-out)."""
-    dist = sg.distance_to(sg.core)
+def drug_effects(sg, skip_direct=False, outcomes=None, edge_ok=None):
+    """Per drug: effect on the `outcomes` pain nodes (default: the core set). With skip_direct, the
+    drug's own links to pain nodes are ignored (leave-one-out)."""
+    outcomes = sg.core if outcomes is None else outcomes
+    dist = sg.distance_to(outcomes, edge_ok)
     results = {}
     for nid in sorted(sg.drugs):
         if nid not in dist:
             continue
         skip = (lambda e, nid=nid: e[0] == nid and e[1] in sg.pain) if skip_direct else None
-        paths = sg.paths(nid, sg.core, MAX_LEN, dist, skip)
+        paths = sg.paths(nid, outcomes, MAX_LEN, dist, skip, edge_ok)
         if not paths:
             continue
-        direct = [e for e in sg.out[nid] if e[1] in sg.pain]
+        direct = [e for e in sg.out[nid] if e[1] in sg.pain and (not edge_ok or edge_ok(e))]
         per, score, neg, pos = summarise(paths, sg)
         dominant = -1 if score < 0 else 1
         mediators = {p[0][1] for p in paths if len(p) > 1 and path_sign(p) == dominant}
@@ -285,18 +358,21 @@ def double_edged(drugs):
     return sorted(rows, key=lambda x: (-abs(x[1]["net"]), x[0]))
 
 
-def target_effects(sg):
-    """Per non-drug node: effect on the core pain nodes, and the drugs that inhibit it."""
-    dist = sg.distance_to(sg.core)
+def target_effects(sg, outcomes=None, edge_ok=None):
+    """Per non-drug node: effect on the `outcomes` pain nodes (default: the core set), and the drugs
+    that inhibit it."""
+    outcomes = sg.core if outcomes is None else outcomes
+    dist = sg.distance_to(outcomes, edge_ok)
     inhibitors = defaultdict(set)
-    for s, t, sign, w, link in sg.edges:
-        if s in sg.drugs and sign < 0:
+    for edge in sg.edges:
+        s, t, sign = edge[0], edge[1], edge[2]
+        if s in sg.drugs and sign < 0 and (not edge_ok or edge_ok(edge)):
             inhibitors[t].add(s)
     rows = {}
     for nid in sorted(sg.nodes):
         if nid in sg.drugs or nid in sg.pain or nid not in dist:
             continue
-        paths = sg.paths(nid, sg.core, TARGET_LEN, dist)
+        paths = sg.paths(nid, outcomes, TARGET_LEN, dist, edge_ok=edge_ok)
         if not paths:
             continue
         per, score, neg, pos = summarise(paths, sg)
