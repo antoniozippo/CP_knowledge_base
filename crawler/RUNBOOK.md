@@ -69,8 +69,26 @@ merged into the graph: they are experiments for testing the functional model
 (`analysis/functional/`). Extractions written before 2026-11-27 have none; a pilot
 on cached papers is in `crawler/review/combination_pilot_2026-11.json`. About
 1,170 cached papers (240 rodent nerve-injury papers) contain combination
-wording, many of them background mentions, and are the candidates for a
-re-extraction pass.
+wording, many of them background mentions.
+
+**Combinations pass.** For papers extracted before combinations existed, a
+second pass asks only for combination experiments and writes
+`crawler/extractions/combinations/<pmid>.json` (keys `pmid`, `extracted_by`,
+`pass`, `combinations`), leaving the main extraction files alone. Its prompt
+reads up to 40,000 characters of each paper, results first, wrapped so that no
+line exceeds 1,000 characters.
+
+1. `python3 crawler/agent_extract.py plan-combinations` chooses cached papers
+   with a rodent species and a nerve-injury model in the abstract or methods
+   (the functional model's context, `analysis/perturbation/config.yaml`) whose
+   text matches `COMBINATION_WORDING`, and writes
+   `crawler/agent_work/combinations_plan.json` (240 papers, 6 shards of 40).
+2. Per worker session: `materialize --combinations --shard N`, then
+   `crawler/agent_work/combo_shard_NNN/INSTRUCTIONS.md`, then
+   `check --combinations --shard N`; the brief is
+   `crawler/agent_work/COMBINATIONS_WORKER_PROMPT.md`.
+3. `python3 crawler/agent_extract.py status --combinations` shows progress
+   and the number of experiments listed.
 
 Curated node merges (`analysis/claims/node_merges.yaml`, for example PPAR-gamma
 folded into PPARγ) are already in the committed graph. If you re-merge the crawl

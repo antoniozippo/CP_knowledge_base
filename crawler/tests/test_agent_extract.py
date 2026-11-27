@@ -78,3 +78,49 @@ def test_check_reports_combinations_kept_dropped_and_malformed(tmp_path, monkeyp
 
 def test_instructions_mention_combinations():
     assert "`combinations`" in ae.INSTRUCTIONS
+
+
+# ---------------------------------------------------------------- the combinations pass
+
+COMBO = {"interventions": [{"agent": "minocycline", "action": "drug"}, {"agent": "Cx3cr1-/-", "action": "loss"}],
+         "readout": "mechanical allodynia", "interaction": "occlusion",
+         "evidence_quote": "TNF-alpha strongly reduced KCC2 expression"}
+
+
+def test_check_combinations_reads_the_separate_folder(tmp_path, monkeypatch):
+    monkeypatch.setattr(ae, "COMBINATIONS_DIR", tmp_path)
+    (tmp_path / "1.json").write_text(json.dumps({"pmid": "1", "pass": "combinations", "combinations": [
+        COMBO, {**COMBO, "evidence_quote": "an invented sentence"}, {**COMBO, "interventions": [{"agent": "x"}]}]}))
+    (tmp_path / "2.json").write_text(json.dumps({"pmid": "2", "pass": "combinations", "combinations": []}))
+    (tmp_path / "3.json").write_text(json.dumps({"pmid": "3", "relationships": []}))
+    report = ae.check_combinations("1", CONTENT)
+    assert (report["combinations"], report["combinations_kept"], report["combinations_malformed"]) == (2, 1, 1)
+    assert report["dropped_quotes"] == ["an invented sentence"]
+    assert ae.check_combinations("2", CONTENT) == {"pmid": "2", "status": "ok", "combinations": 0,
+                                                   "combinations_kept": 0, "dropped_quotes": []}
+    assert ae.check_combinations("3", CONTENT)["status"] == "schema_error"
+    assert ae.check_combinations("4", CONTENT)["status"] == "missing"
+
+
+def test_wrapping_keeps_lines_readable_and_quotes_verifiable():
+    line = ("TNF-alpha strongly reduced KCC2 expression in the dorsal horn. " * 60).strip()
+    wrapped = ae._wrap("Title\n\n" + line, width=200)
+    assert max(len(x) for x in wrapped.split("\n")) <= 200
+    assert wrapped.startswith("Title\n\n")
+    assert " ".join(wrapped.split()) == " ".join(("Title " + line).split())
+
+
+def test_combination_wording_finds_experiments_and_skips_plain_text():
+    hits = ["Co-administration of A and B", "the drugs acted synergistically",
+            "in Nlrp3-/- mice the drug failed to reduce allodynia", "naloxone reversed the analgesic effect of EA"]
+    assert all(ae.COMBINATION_WORDING.search(t) for t in hits)
+    assert not ae.COMBINATION_WORDING.search("TNF-alpha reduced KCC2 expression after nerve injury")
+
+
+def test_combination_prompt_and_instructions_ask_only_for_combinations():
+    from crawler.extractor import build_combination_prompt
+    prompt = build_combination_prompt("CONTENT", "1", "T")
+    assert "COMBINATION EXPERIMENTS:" in prompt and '"combinations"' in prompt
+    assert '"relationships"' not in prompt and "as above" not in prompt
+    text = ae.COMBO_INSTRUCTIONS.format(system=ae._COMBINATION_SYSTEM_PROMPT.strip())
+    assert "crawler/extractions/combinations/<pmid>.json" in text and "check --combinations" in text

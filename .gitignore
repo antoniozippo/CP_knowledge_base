@@ -33,4 +33,5 @@ crawler/logs/crawler.log
 
 # per-shard prompt/content files written by crawler/agent_extract.py materialize
 crawler/agent_work/shard_*/
+crawler/agent_work/combo_shard_*/
 analysis/explorer/dist/

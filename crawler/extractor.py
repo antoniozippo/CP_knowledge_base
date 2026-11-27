@@ -93,7 +93,36 @@ class ExtractionResult(BaseModel):
     novel_terms: list[str] = Field(default_factory=list)
 
 
-_SYSTEM_PROMPT = """\
+_COMBINATION_RULES = """\
+COMBINATION EXPERIMENTS (list them in "combinations"; most papers have none):
+- Only experiments the paper itself ran in which two or more interventions were
+  given together and one readout was measured: two drugs; a drug given to
+  knockout, knockdown or transgenic animals; a drug together with an antagonist
+  or inhibitor used to test its mechanism ("the effect of X was reversed by Y").
+  A genotype counts as an intervention ("Nlrp3-/- mice", action "loss").
+- interventions: each with its agent as named, its target when the paper says
+  what it acts on, action (loss = knockout, knockdown, siRNA, inhibitor,
+  antagonist; gain = overexpression, agonist, recombinant protein; drug = a
+  compound whose target is not stated) and dose and route as written.
+- readout_direction: how the readout moved with the combination compared with
+  the untreated (injured) control: +1 rose, -1 fell, 0 no change or unclear.
+  singles: the same for each intervention given alone, in the same order; 0 when
+  it did not change the readout or was not reported.
+- interaction, compared with the single interventions:
+  synergy (more than the sum of the single effects, or the paper says synergy,
+  or an isobologram shows it); additive (about the sum); sub_additive (more than
+  either alone, less than the sum); no_added_effect (no more than the stronger
+  single); occlusion (one intervention abolishes or prevents the other's effect,
+  e.g. a drug that works in wild-type animals has no effect in knockouts);
+  antagonism (the combination does less than one intervention alone); unclear
+  (singles not compared). interaction_basis: "stated" when the paper says it or
+  tests it statistically, "inferred" when you derived it from reported numbers.
+- magnitude, model and species as written; evidence_quote VERBATIM as above,
+  the sentence that reports the combination result.
+- Keep the single-intervention findings in "relationships" as usual.
+"""
+
+_SYSTEM_PROMPT_TEMPLATE = """\
 You are a biomedical entity and relationship extractor. Your task is to extract \
 biological entities and regulatory relationships from PubMed paper content.
 
@@ -130,35 +159,59 @@ RELATIONSHIPS:
   (exact words, no paraphrase). Relationships whose quote is not found in the
   Content are discarded.
 
-COMBINATION EXPERIMENTS (list them in "combinations"; most papers have none):
-- Only experiments the paper itself ran in which two or more interventions were
-  given together and one readout was measured: two drugs; a drug given to
-  knockout, knockdown or transgenic animals; a drug together with an antagonist
-  or inhibitor used to test its mechanism ("the effect of X was reversed by Y").
-  A genotype counts as an intervention ("Nlrp3-/- mice", action "loss").
-- interventions: each with its agent as named, its target when the paper says
-  what it acts on, action (loss = knockout, knockdown, siRNA, inhibitor,
-  antagonist; gain = overexpression, agonist, recombinant protein; drug = a
-  compound whose target is not stated) and dose and route as written.
-- readout_direction: how the readout moved with the combination compared with
-  the untreated (injured) control: +1 rose, -1 fell, 0 no change or unclear.
-  singles: the same for each intervention given alone, in the same order; 0 when
-  it did not change the readout or was not reported.
-- interaction, compared with the single interventions:
-  synergy (more than the sum of the single effects, or the paper says synergy,
-  or an isobologram shows it); additive (about the sum); sub_additive (more than
-  either alone, less than the sum); no_added_effect (no more than the stronger
-  single); occlusion (one intervention abolishes or prevents the other's effect,
-  e.g. a drug that works in wild-type animals has no effect in knockouts);
-  antagonism (the combination does less than one intervention alone); unclear
-  (singles not compared). interaction_basis: "stated" when the paper says it or
-  tests it statistically, "inferred" when you derived it from reported numbers.
-- magnitude, model and species as written; evidence_quote VERBATIM as above,
-  the sentence that reports the combination result.
-- Keep the single-intervention findings in "relationships" as usual.
-
+{combination_rules}
 OUTPUT ONLY valid JSON. No markdown fences, no commentary.
 """
+_SYSTEM_PROMPT = _SYSTEM_PROMPT_TEMPLATE.format(combination_rules=_COMBINATION_RULES)
+
+# a pass that adds combination experiments to papers already extracted (crawler/agent_extract.py
+# plan-combinations): the same rules, only the combinations asked for
+_COMBINATION_SYSTEM_PROMPT = """\
+You are a biomedical extractor. From a PubMed paper's content, list the combination
+experiments the paper itself ran, by the rules below. Most papers have none: an empty list
+is a correct answer.
+
+""" + _COMBINATION_RULES.replace(' (list them in "combinations"; most papers have none)', "").replace(
+    "- Keep the single-intervention findings in \"relationships\" as usual.\n", "").replace(
+    "evidence_quote VERBATIM as above", "evidence_quote copied VERBATIM from the Content") + """
+OUTPUT ONLY valid JSON. No markdown fences, no commentary.
+"""
+
+_COMBINATION_USER_TEMPLATE = """\
+List the combination experiments in this PubMed paper.
+
+Paper PMID: {pmid}
+Title: {title}
+
+Content:
+{content}
+
+Return a JSON object with exactly this structure (an empty list when there are none):
+{{
+  "combinations": [
+    {{
+      "interventions": [
+        {{"agent": "string", "target": "string", "action": "loss|gain|drug|unspecified", "dose": "string"}}
+      ],
+      "readout": "string",
+      "readout_direction": 0,
+      "singles": [0],
+      "interaction": "synergy|additive|sub_additive|no_added_effect|occlusion|antagonism|unclear",
+      "interaction_basis": "stated|inferred",
+      "magnitude": "string",
+      "model": "string",
+      "species": "string",
+      "evidence_quote": "verbatim sentence reporting the combination result",
+      "confidence": "HIGH|MEDIUM|LOW"
+    }}
+  ]
+}}
+"""
+
+
+def build_combination_prompt(content: str, pmid: str, title: str) -> str:
+    return _COMBINATION_SYSTEM_PROMPT + "\n" + _COMBINATION_USER_TEMPLATE.format(pmid=pmid, title=title, content=content)
+
 
 _USER_PROMPT_TEMPLATE = """\
 Extract biological entities and regulatory relationships from this PubMed paper.
