@@ -58,8 +58,8 @@ Rules (the same system prompt the API extractor uses):
 {system}
 
 File format: one JSON object with the keys `entities`, `relationships`,
-`key_findings`, `novel_terms` as in the prompt, plus `"pmid"` and
-`"extracted_by": "claude-code-session"`. No markdown fences.
+`combinations`, `key_findings`, `novel_terms` as in the prompt, plus `"pmid"`
+and `"extracted_by": "claude-code-session"`. No markdown fences.
 
 Quality bar:
 - `evidence_quote` must be copied character for character from the Content
@@ -67,6 +67,10 @@ Quality bar:
   Relationships that fail this are discarded at merge time.
 - Prefer fewer, well-supported relationships over many weak ones; an empty
   `relationships` list is a valid answer for an off-topic paper.
+- `combinations` is empty for most papers. List an experiment only when the
+  paper gave two or more interventions together (two drugs, a drug in knockout
+  animals, a drug with an antagonist) and reports the readout; its
+  `evidence_quote` follows the same verbatim rule.
 - After writing a batch, run `python3 crawler/agent_extract.py check --shard N`
   and fix anything it reports.
 """
@@ -157,9 +161,16 @@ def check_extraction(pmid: str, content: str) -> dict:
     verified, _ = verify_relationships(result, content)
     kept_quotes = {r.evidence_quote for r in verified.relationships}
     dropped = [r.evidence_quote for r in result.relationships if r.evidence_quote not in kept_quotes]
-    return {"pmid": pmid, "status": "ok", "entities": len(result.entities),
-            "relationships": len(result.relationships), "kept": len(verified.relationships),
-            "dropped_quotes": dropped}
+    kept_combo = {c.evidence_quote for c in verified.combinations}
+    dropped += [c.evidence_quote for c in result.combinations if c.evidence_quote not in kept_combo]
+    malformed = len(raw.get("combinations") or []) - len(result.combinations)
+    report = {"pmid": pmid, "status": "ok", "entities": len(result.entities),
+              "relationships": len(result.relationships), "kept": len(verified.relationships),
+              "combinations": len(result.combinations), "combinations_kept": len(verified.combinations),
+              "dropped_quotes": dropped}
+    if malformed:
+        report["combinations_malformed"] = malformed        # fewer than two interventions, no readout or no quote
+    return report
 
 
 def cmd_check(args) -> int:
@@ -176,10 +187,12 @@ def cmd_check(args) -> int:
         by_status[r["status"]] = by_status.get(r["status"], 0) + 1
     kept = sum(r.get("kept", 0) for r in reports)
     total = sum(r.get("relationships", 0) for r in reports)
+    ckept = sum(r.get("combinations_kept", 0) for r in reports)
+    ctotal = sum(r.get("combinations", 0) for r in reports)
     for r in reports:
-        if r["status"] != "ok" or r.get("dropped_quotes"):
+        if r["status"] != "ok" or r.get("dropped_quotes") or r.get("combinations_malformed"):
             print(json.dumps(r))
-    print(f"shard {args.shard}: {by_status}; relationships kept {kept}/{total}")
+    print(f"shard {args.shard}: {by_status}; relationships kept {kept}/{total}; combinations kept {ckept}/{ctotal}")
     return 0 if by_status.get("ok", 0) == len(reports) else 1
 
 

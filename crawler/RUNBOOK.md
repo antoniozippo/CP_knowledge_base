@@ -59,6 +59,19 @@ New links are `UNREVIEWED` and stay out of the simulator's agent cards
 (`simulator/build_cards.py: simulation_eligible`) until a reviewer sets a
 `validation_status`; evidence on existing links is in `crawler_evidence`.
 
+Extractions also carry `combinations`: experiments in which two or more
+interventions were given together (two drugs, a drug in knockout or knockdown
+animals, a drug with an antagonist that tests its mechanism), with the readout,
+how it moved under the combination and under each intervention alone, and the
+interaction (synergy, additive, sub_additive, no_added_effect, occlusion,
+antagonism, unclear). Their quotes pass the same verbatim check. They are not
+merged into the graph: they are experiments for testing the functional model
+(`analysis/functional/`). Extractions written before 2026-11-27 have none; a pilot
+on cached papers is in `crawler/review/combination_pilot_2026-11.json`. About
+1,170 cached papers (240 rodent nerve-injury papers) contain combination
+wording, many of them background mentions, and are the candidates for a
+re-extraction pass.
+
 Curated node merges (`analysis/claims/node_merges.yaml`, for example PPAR-gamma
 folded into PPARγ) are already in the committed graph. If you re-merge the crawl
 into an older copy of the graph, run `python3 analysis/scripts/merge_nodes.py`

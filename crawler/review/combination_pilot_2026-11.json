@@ -1,0 +1,135 @@
+{
+ "about": "Pilot of the combination-experiment schema (crawler/extractor.py, 2026-11-27): records filled by hand from cached paper text, as a worker session would, then run through the quote verifier. Not merged into the graph. 33493520 is a negative example: its 'synergistically' is about peptide mutations.",
+ "papers": {
+  "38831315": [
+   {
+    "interventions": [
+     {
+      "agent": "IL-24",
+      "action": "gain",
+      "dose": "150 ng/ml"
+     },
+     {
+      "agent": "IL-22R1-siRNA",
+      "target": "IL-22R1",
+      "action": "loss"
+     }
+    ],
+    "readout": "T-type calcium current (trigeminal ganglion neurons)",
+    "readout_direction": 0,
+    "singles": [
+     1,
+     0
+    ],
+    "interaction": "occlusion",
+    "interaction_basis": "stated",
+    "magnitude": "increase of 2.9 ± 0.8% vs 30.6 ± 4.3% with control siRNA",
+    "model": "trigeminal ganglion neurons",
+    "species": "mouse",
+    "evidence_quote": "IL-24 at 150 ng/ml enhanced T-currents in either IL-20R1-siRNA- or its negative control (NC-siRNA)-treated TG neurons (Fig. 2E), while knockdown of IL-22R1 completely abolished the IL-24–induced T-current response (increase of 2.9 ± 0.8%; Fig. 2F)",
+    "confidence": "HIGH"
+   },
+   {
+    "interventions": [
+     {
+      "agent": "IL-24",
+      "action": "gain",
+      "dose": "150 ng/ml"
+     },
+     {
+      "agent": "bafetinib",
+      "target": "Lyn",
+      "action": "loss",
+      "dose": "1 µM"
+     }
+    ],
+    "readout": "T-type calcium current (trigeminal ganglion neurons)",
+    "readout_direction": 0,
+    "singles": [
+     1,
+     0
+    ],
+    "interaction": "occlusion",
+    "interaction_basis": "stated",
+    "magnitude": "increase of 2.3 ± 1.7%",
+    "model": "trigeminal ganglion neurons",
+    "species": "mouse",
+    "evidence_quote": "when TG neurons were pretreated with the small-molecule Lyn inhibitor bafetinib (1 µM), the IL-24-induced increase in T-currents was completely abolished (increase of 2.3 ± 1.7%; Fig. 3F)",
+    "confidence": "HIGH"
+   },
+   {
+    "interventions": [
+     {
+      "agent": "IL-24",
+      "action": "gain",
+      "dose": "150 ng/ml"
+     },
+     {
+      "agent": "Lyn-siRNA",
+      "target": "Lyn",
+      "action": "loss"
+     }
+    ],
+    "readout": "T-type calcium current (trigeminal ganglion neurons)",
+    "readout_direction": 0,
+    "singles": [
+     1,
+     0
+    ],
+    "interaction": "occlusion",
+    "interaction_basis": "stated",
+    "magnitude": "increase of 3.5 ± 1.2%",
+    "model": "trigeminal ganglion neurons",
+    "species": "mouse",
+    "evidence_quote": "IL-24 at 150 ng/ml enhanced T-currents in NC-siRNA-treated TG neurons (Fig. 3H), while knockdown of Lyn completely abolished the IL-24–induced T-current response (increase of 3.5 ± 1.2%; Fig. 3H)",
+    "confidence": "HIGH"
+   }
+  ],
+  "33927244": [
+   {
+    "interventions": [
+     {
+      "agent": "N-demethylsinomenine",
+      "action": "drug",
+      "dose": "40 mg/kg"
+     },
+     {
+      "agent": "bicuculline",
+      "target": "GABA-A receptor",
+      "action": "loss"
+     }
+    ],
+    "readout": "mechanical allodynia",
+    "readout_direction": 0,
+    "singles": [
+     -1,
+     0
+    ],
+    "interaction": "occlusion",
+    "interaction_basis": "stated",
+    "model": "CCI and CFA",
+    "species": "mouse",
+    "evidence_quote": "bicuculline blocked the anti-allodynic effects of N-demethylsinomenine (40 mg/kg) in CCI-operated (left) and CFA-treated (right) mice",
+    "confidence": "HIGH"
+   }
+  ],
+  "33493520": []
+ },
+ "verification": {
+  "38831315": {
+   "records": 3,
+   "quotes_verified": 3,
+   "dropped": 0
+  },
+  "33927244": {
+   "records": 1,
+   "quotes_verified": 1,
+   "dropped": 0
+  },
+  "33493520": {
+   "records": 0,
+   "quotes_verified": 0,
+   "dropped": 0
+  }
+ }
+}

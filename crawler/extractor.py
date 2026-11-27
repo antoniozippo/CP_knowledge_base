@@ -54,11 +54,41 @@ class ExtractedRelationship(BaseModel):
     pmid: str = ""
 
 
+INTERVENTION_ACTIONS = ("loss", "gain", "drug", "unspecified")
+INTERACTIONS = ("synergy", "additive", "sub_additive", "no_added_effect", "occlusion", "antagonism", "unclear")
+
+
+class Intervention(BaseModel):
+    """One of the interventions of a combination experiment."""
+    agent: str                      # as the paper names it: a drug, "Nlrp3-/- mice", "TLR4 siRNA"
+    target: str = ""                # what it acts on, when the paper says ("NLRP3"); empty for the agent itself
+    action: str = "unspecified"     # loss (knockout, knockdown, inhibitor, antagonist), gain, drug, unspecified
+    dose: str = ""                  # dose and route as written, when given
+
+
+class CombinationExperiment(BaseModel):
+    """Two or more interventions given together (two drugs, a drug in a knockout animal, a drug
+    with an antagonist that tests its mechanism) and one readout."""
+    interventions: list[Intervention]
+    readout: str                    # what was measured: "mechanical allodynia", "spinal TNF-alpha"
+    readout_direction: int = 0      # combination vs untreated injured control: +1 rose, -1 fell, 0 no change or unclear
+    singles: list[int] = Field(default_factory=list)   # each intervention alone, same order: +1, -1, 0 (or no change/not reported)
+    interaction: str = "unclear"    # one of INTERACTIONS
+    interaction_basis: str = "stated"   # stated (the paper's words or statistics) or inferred (from reported numbers)
+    magnitude: str = ""             # numbers as written, when given
+    model: str = ""                 # the experimental model as named ("CCI rats")
+    species: str = ""
+    evidence_quote: str
+    confidence: str = "MEDIUM"
+    pmid: str = ""
+
+
 class ExtractionResult(BaseModel):
     pmid: str
     title: str
     entities: list[ExtractedEntity] = Field(default_factory=list)
     relationships: list[ExtractedRelationship] = Field(default_factory=list)
+    combinations: list[CombinationExperiment] = Field(default_factory=list)
     key_findings: list[str] = Field(default_factory=list)
     novel_terms: list[str] = Field(default_factory=list)
 
@@ -100,6 +130,33 @@ RELATIONSHIPS:
   (exact words, no paraphrase). Relationships whose quote is not found in the
   Content are discarded.
 
+COMBINATION EXPERIMENTS (list them in "combinations"; most papers have none):
+- Only experiments the paper itself ran in which two or more interventions were
+  given together and one readout was measured: two drugs; a drug given to
+  knockout, knockdown or transgenic animals; a drug together with an antagonist
+  or inhibitor used to test its mechanism ("the effect of X was reversed by Y").
+  A genotype counts as an intervention ("Nlrp3-/- mice", action "loss").
+- interventions: each with its agent as named, its target when the paper says
+  what it acts on, action (loss = knockout, knockdown, siRNA, inhibitor,
+  antagonist; gain = overexpression, agonist, recombinant protein; drug = a
+  compound whose target is not stated) and dose and route as written.
+- readout_direction: how the readout moved with the combination compared with
+  the untreated (injured) control: +1 rose, -1 fell, 0 no change or unclear.
+  singles: the same for each intervention given alone, in the same order; 0 when
+  it did not change the readout or was not reported.
+- interaction, compared with the single interventions:
+  synergy (more than the sum of the single effects, or the paper says synergy,
+  or an isobologram shows it); additive (about the sum); sub_additive (more than
+  either alone, less than the sum); no_added_effect (no more than the stronger
+  single); occlusion (one intervention abolishes or prevents the other's effect,
+  e.g. a drug that works in wild-type animals has no effect in knockouts);
+  antagonism (the combination does less than one intervention alone); unclear
+  (singles not compared). interaction_basis: "stated" when the paper says it or
+  tests it statistically, "inferred" when you derived it from reported numbers.
+- magnitude, model and species as written; evidence_quote VERBATIM as above,
+  the sentence that reports the combination result.
+- Keep the single-intervention findings in "relationships" as usual.
+
 OUTPUT ONLY valid JSON. No markdown fences, no commentary.
 """
 
@@ -132,6 +189,23 @@ Return a JSON object with exactly this structure:
       "object": "entity_name",
       "sign": 0,
       "evidence_quote": "relevant quote from text",
+      "confidence": "HIGH|MEDIUM|LOW"
+    }}
+  ],
+  "combinations": [
+    {{
+      "interventions": [
+        {{"agent": "string", "target": "string", "action": "loss|gain|drug|unspecified", "dose": "string"}}
+      ],
+      "readout": "string",
+      "readout_direction": 0,
+      "singles": [0],
+      "interaction": "synergy|additive|sub_additive|no_added_effect|occlusion|antagonism|unclear",
+      "interaction_basis": "stated|inferred",
+      "magnitude": "string",
+      "model": "string",
+      "species": "string",
+      "evidence_quote": "verbatim sentence reporting the combination result",
       "confidence": "HIGH|MEDIUM|LOW"
     }}
   ],
@@ -258,6 +332,9 @@ class LLMExtractor:
                 relationships=[
                     ExtractedRelationship(**r) for r in raw.get("relationships", [])
                 ],
+                combinations=[
+                    c for c in (parse_combination(x) for x in raw.get("combinations", []) or []) if c
+                ],
                 key_findings=raw.get("key_findings", []),
                 novel_terms=raw.get("novel_terms", []),
             )
@@ -372,14 +449,55 @@ def normalize_sign(predicate: str, sign) -> tuple[str, int]:
     return predicate, sign
 
 
+def _clamp(v) -> int:
+    try:
+        return max(-1, min(1, int(v)))
+    except (TypeError, ValueError):
+        return 0
+
+
+def parse_combination(raw) -> Optional["CombinationExperiment"]:
+    """A combination record coerced to the schema: unknown actions and interactions become
+    "unspecified" and "unclear", directions are clamped to -1/0/1, `singles` is padded or cut to
+    one entry per intervention. None when it has fewer than two interventions or no quote."""
+    if not isinstance(raw, dict):
+        return None
+    try:
+        items = [i if isinstance(i, dict) else {"agent": str(i)} for i in raw.get("interventions") or []]
+        interventions = []
+        for i in items:
+            action = str(i.get("action", "unspecified")).strip().lower()
+            interventions.append(Intervention(agent=str(i.get("agent", "")).strip(), target=str(i.get("target", "") or ""),
+                                              action=action if action in INTERVENTION_ACTIONS else "unspecified",
+                                              dose=str(i.get("dose", "") or "")))
+        interventions = [i for i in interventions if i.agent]
+        if len(interventions) < 2 or not raw.get("evidence_quote") or not raw.get("readout"):
+            return None
+        singles = [_clamp(s) for s in (raw.get("singles") or [])][:len(interventions)]
+        singles += [0] * (len(interventions) - len(singles))
+        interaction = str(raw.get("interaction", "unclear")).strip().lower().replace("-", "_").replace(" ", "_")
+        basis = str(raw.get("interaction_basis", "stated")).strip().lower()
+        return CombinationExperiment(
+            interventions=interventions, readout=str(raw["readout"]).strip(),
+            readout_direction=_clamp(raw.get("readout_direction", 0)), singles=singles,
+            interaction=interaction if interaction in INTERACTIONS else "unclear",
+            interaction_basis=basis if basis in ("stated", "inferred") else "stated",
+            magnitude=str(raw.get("magnitude", "") or ""), model=str(raw.get("model", "") or ""),
+            species=str(raw.get("species", "") or ""), evidence_quote=str(raw["evidence_quote"]),
+            confidence=str(raw.get("confidence", "MEDIUM") or "MEDIUM"))
+    except Exception as exc:  # noqa: BLE001 - a malformed record is dropped, not the paper
+        logger.warning("Combination record dropped: %s", exc)
+        return None
+
+
 def verify_relationships(
     result: ExtractionResult, content: str
 ) -> tuple[ExtractionResult, dict]:
     """Keep only relationships whose evidence_quote occurs in the content.
 
     Matching ignores case, punctuation and whitespace, nothing else, so a
-    paraphrased or invented quote is dropped. Signs are set by
-    normalize_sign. Subjects/objects missing from the entity list are added
+    paraphrased or invented quote is dropped; combination experiments are held
+    to the same quote check. Signs are set by normalize_sign. Subjects/objects missing from the entity list are added
     so the matcher can resolve them. Returns (result, stats).
     """
     haystack = _norm_for_quote(content)
@@ -396,6 +514,14 @@ def verify_relationships(
         if predicate != rel.predicate:
             stats["verb_replaced"] += 1
         kept.append(rel.model_copy(update={"predicate": predicate, "sign": sign, "pmid": result.pmid}))
+    combos = []
+    stats["combinations_dropped_unverified"] = 0
+    for combo in result.combinations:
+        quote = _norm_for_quote(combo.evidence_quote)
+        if len(quote) < 15 or quote not in haystack:
+            stats["combinations_dropped_unverified"] += 1
+            continue
+        combos.append(combo.model_copy(update={"pmid": result.pmid}))
     names = {e.name for e in result.entities}
     extra = [
         ExtractedEntity(name=n)
@@ -403,7 +529,7 @@ def verify_relationships(
         if n and n not in names and not names.add(n)
     ]
     return result.model_copy(
-        update={"relationships": kept, "entities": [*result.entities, *extra]}
+        update={"relationships": kept, "combinations": combos, "entities": [*result.entities, *extra]}
     ), stats
 
 

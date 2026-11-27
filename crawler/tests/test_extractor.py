@@ -104,3 +104,58 @@ def test_quotes_match_across_inline_markup_in_the_source():
         rel("Infiltrating CD8<sup>+</sup> T cells rose"),
     ), content)
     assert len(verified.relationships) == 2 and stats["dropped_unverified"] == 0
+
+
+# ---------------------------------------------------------------- combination experiments
+
+COMBO_CONTENT = ("Results: MCC950 reduced mechanical allodynia in wild-type mice after CCI, but MCC950 had no "
+                 "effect on allodynia in Nlrp3-/- mice. Co-administration of gabapentin and morphine produced "
+                 "a synergistic reduction of allodynia.")
+
+
+def combo(**kw):
+    base = {"interventions": [{"agent": "MCC950", "target": "NLRP3", "action": "loss"},
+                              {"agent": "Nlrp3-/- mice", "target": "NLRP3", "action": "loss"}],
+            "readout": "mechanical allodynia", "readout_direction": -1, "singles": [-1, -1],
+            "interaction": "occlusion", "interaction_basis": "stated", "model": "CCI", "species": "mouse",
+            "evidence_quote": "MCC950 had no effect on allodynia in Nlrp3-/- mice"}
+    base.update(kw)
+    return base
+
+
+def test_a_combination_record_is_coerced_to_the_schema():
+    c = ex.parse_combination(combo(interaction="Sub-additive", readout_direction=5, singles=[-1],
+                                   interventions=[{"agent": "A", "action": "Inhibitor"}, {"agent": "B", "action": "gain"}]))
+    assert c.interaction == "sub_additive" and c.readout_direction == 1
+    assert c.singles == [-1, 0]                                  # padded to one per intervention
+    assert [i.action for i in c.interventions] == ["unspecified", "gain"]
+    assert ex.parse_combination(combo(interaction="strongly synergistic")).interaction == "unclear"
+
+
+def test_a_combination_needs_two_interventions_a_readout_and_a_quote():
+    assert ex.parse_combination(combo(interventions=[{"agent": "MCC950"}])) is None
+    assert ex.parse_combination(combo(readout="")) is None
+    assert ex.parse_combination(combo(evidence_quote="")) is None
+    assert ex.parse_combination("not a record") is None
+
+
+def test_combination_quotes_are_verified_like_relationships():
+    raw = {"pmid": "7", "title": "t", "entities": [], "relationships": [], "combinations": [
+        combo(), combo(interaction="synergy", evidence_quote="Co-administration of gabapentin and morphine produced a synergistic reduction of allodynia"),
+        combo(evidence_quote="MCC950 needs NLRP3 to relieve pain in knockout mice")]}       # paraphrase
+    result = ex.LLMExtractor()._validate_result(raw)
+    verified, stats = ex.verify_relationships(result, COMBO_CONTENT)
+    assert [c.interaction for c in verified.combinations] == ["occlusion", "synergy"]
+    assert stats["combinations_dropped_unverified"] == 1
+    assert all(c.pmid == "7" for c in verified.combinations)
+
+
+def test_old_extractions_without_combinations_still_load():
+    result = ex.LLMExtractor()._validate_result({"pmid": "1", "entities": [], "relationships": []})
+    assert result.combinations == []
+
+
+def test_the_prompt_asks_for_combinations_and_defines_the_classes():
+    for word in ("COMBINATION EXPERIMENTS", "occlusion", "synergy", "sub_additive", "no_added_effect", "antagonism"):
+        assert word in ex._SYSTEM_PROMPT
+    assert '"combinations"' in ex._USER_PROMPT_TEMPLATE

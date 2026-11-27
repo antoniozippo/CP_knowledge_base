@@ -59,3 +59,22 @@ def test_truncation_matches_the_extractor(tmp_path):
 def test_instructions_carry_the_extractor_rules():
     text = ae.INSTRUCTIONS.format(system=ae._SYSTEM_PROMPT.strip())
     assert "VERBATIM" in text and "crawler/extractions/<pmid>.json" in text
+
+
+def test_check_reports_combinations_kept_dropped_and_malformed(tmp_path, monkeypatch):
+    monkeypatch.setattr(ae, "EXTRACTIONS_DIR", tmp_path)
+    content = CONTENT + " Gabapentin had no further effect in KCC2 knockdown rats."
+    good = {"interventions": [{"agent": "gabapentin"}, {"agent": "KCC2 knockdown", "action": "loss"}],
+            "readout": "allodynia", "interaction": "occlusion",
+            "evidence_quote": "Gabapentin had no further effect in KCC2 knockdown rats"}
+    write_extraction(tmp_path, "1", [GOOD])
+    data = json.loads((tmp_path / "1.json").read_text())
+    data["combinations"] = [good, {**good, "evidence_quote": "gabapentin needs KCC2"}, {**good, "interventions": [{"agent": "x"}]}]
+    (tmp_path / "1.json").write_text(json.dumps(data))
+    report = ae.check_extraction("1", content)
+    assert (report["combinations"], report["combinations_kept"], report["combinations_malformed"]) == (2, 1, 1)
+    assert "gabapentin needs KCC2" in report["dropped_quotes"]
+
+
+def test_instructions_mention_combinations():
+    assert "`combinations`" in ae.INSTRUCTIONS
