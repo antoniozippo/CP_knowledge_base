@@ -12,6 +12,11 @@ Signed graph: 5395 links (5142 crawled and unreviewed, 253 curated) over 3140 no
 - ... with at least 1 supporting two-hop path(s): 90% (1386/1535)
 - ... with at least 2 supporting two-hop path(s): 93% (519/560)
 - ... with at least 3 supporting two-hop path(s): 94% (248/265)
+- **but most of that agreement is base rate.** Baselines on the same links (analysis/scripts/calibration_baselines.py):
+  - majority sign: 59.7%; composition with signs shuffled across links: 49.6%; shuffled within each source's out-links: 72.9%
+  - all paths (n = 1466): composition 91%, the source node's usual sign alone 86%; where they disagree (192), composition is right 68%
+  - paths from papers other than the link's own (n = 747): composition 87%, the source node's usual sign alone 85%; where they disagree (120), composition is right 58%
+  - so composition adds little beyond "drugs usually inhibit, cytokines usually raise", and close to nothing once a paper reporting all the steps itself is set aside
 - leave-one-out, 128 drugs with a known direct effect on pain (that link removed, the effect re-predicted from the other paths): known analgesics predicted analgesic 95% (117/123), known pain-raising drugs predicted pain-raising 80% (4/5). **But the method calls 87% of all drugs analgesic**, so recovering known analgesics is almost uninformative: the crawl is selection-biased, since a drug that appears in a pain paper is mostly being studied as an analgesic.
 - discrimination: a known analgesic scores lower (more analgesic) than a drug with no direct pain link with probability **0.61** (AUC; 123 known analgesics vs 807 others; 0.5 is chance, and drugs with more links tend to score more extreme, which inflates it)
 - the clearest check is the rare opposite call: 30 drugs are predicted pain-raising (section 1 lists them), and they should be known pain inducers

@@ -232,7 +232,7 @@ def build_data(graph, review_path=gi.DEFAULT_REVIEW):
             "two_hop": cal["two_hop"], "by_support": {str(k): v for k, v in cal["two_hop_by_support"].items()},
             "loo": {f"{a}/{b}": v for (a, b), v in cal["loo"].items()}, "loo_n": cal["loo_n"],
             "base_rate": round(cal["base_rate_negative"], 3), "auc": round(cal["auc"], 3), "auc_n": list(cal["auc_n"]),
-            "n_pain_raising": cal["n_pain_raising"],
+            "n_pain_raising": cal["n_pain_raising"], "baselines": cal["baselines"],
         },
         "pain_raising": [drug_row(n, r, 1) for n, r in raising],
         "double_edged": [drug_row(n, r, 1 if r["direct"] == [-1] else -1) for n, r in double],

@@ -476,7 +476,9 @@ def calibration(sg):
     wins = sum((a < o) + 0.5 * (a == o) for a in analgesics for o in others)
     auc = wins / (len(analgesics) * len(others)) if analgesics and others else float("nan")
     raising = sorted(n for n, r in full.items() if r["net"] >= 1.0 and r["mediators"] >= 2 and r["agreement"] >= 0.8)
-    return {"two_hop": buckets, "two_hop_by_support": by_support, "loo": dict(hits), "loo_n": len(known),
+    import calibration_baselines  # here, not at the top: it imports this module
+    baselines = calibration_baselines.compare(sg, shuffles=10)
+    return {"two_hop": buckets, "two_hop_by_support": by_support, "baselines": baselines, "loo": dict(hits), "loo_n": len(known),
             "base_rate_negative": base_neg, "auc": auc, "auc_n": (len(analgesics), len(others)),
             "n_pain_raising": len(raising)}
 
@@ -555,6 +557,19 @@ def render_markdown(sg, drugs, targets, choke, loops, cal, top=15):
         add(f"- two-hop paths predict a direct link's sign ({k}): **{pct(a_, n)}** ({a_}/{n})")
     for n, (a_, m) in sorted(cal["two_hop_by_support"].items()):
         add(f"- ... with at least {n} supporting two-hop path(s): {pct(a_, m)} ({a_}/{m})")
+    b = cal["baselines"]
+    add("- **but most of that agreement is base rate.** Baselines on the same links "
+        "(analysis/scripts/calibration_baselines.py):")
+    add(f"  - majority sign: {100 * b['majority']:.1f}%; composition with signs shuffled across links: "
+        f"{100 * b['shuffled_all']:.1f}%; shuffled within each source's out-links: {100 * b['shuffled_within_source']:.1f}%")
+    for key, title in (("all_paths", "all paths"), ("independent_paths", "paths from papers other than the link's own")):
+        h = b[key]
+        if h["n"]:
+            add(f"  - {title} (n = {h['n']}): composition {pct(h['composition'], h['n'])}, the source node's usual sign "
+                f"alone {pct(h['source'], h['n'])}; where they disagree ({h['disagree']}), composition is right "
+                f"{pct(h['composition_right_when_disagree'], h['disagree'])}")
+    add("  - so composition adds little beyond \"drugs usually inhibit, cytokines usually raise\", and close to "
+        "nothing once a paper reporting all the steps itself is set aside")
     hits, tot = cal["loo"], cal["loo_n"]
     analg = hits.get((-1, -1), 0) + hits.get((-1, 1), 0)
     pro_ = hits.get((1, 1), 0) + hits.get((1, -1), 0)
