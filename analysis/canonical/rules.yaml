@@ -1,0 +1,4 @@
+# Per-node overrides of the default combination rule (config.yaml: activators OR, inhibitors AND NOT).
+# Format, when needed:  <canonical id>: {rule: "<logic expression over input ids>", source: "<evidence>"}
+# None yet: the default applies to every node until the expert review of phase 1 asks otherwise.
+{}

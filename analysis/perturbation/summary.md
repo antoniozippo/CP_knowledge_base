@@ -2,22 +2,22 @@
 
 Context: rodent peripheral nerve injury. Built by `analysis/scripts/build_perturbation_cases.py` from `crawler/extractions/`; see `README.md` for the rules.
 
-- candidate cases (a perturbation quote whose readout is pain behaviour or a marker): 774
-- primary cases: 190 from 146 papers, 150 actors
-- split by PubMed entry order: build 145, test 45 (PMID >= 40209863)
+- candidate cases (a perturbation quote whose readout is pain behaviour or a marker): 768
+- primary cases: 189 from 145 papers, 149 actors
+- split by PubMed entry order: build 144, test 45 (PMID >= 40209863)
 
 ## Why candidates were excluded
 
 | Status | Cases |
 |---|---|
-| excluded: other or unstated model | 268 |
-| primary | 190 |
-| excluded: other model (quote) | 130 |
+| excluded: other or unstated model | 265 |
+| primary | 189 |
+| excluded: other model (quote) | 129 |
 | excluded: actor not in graph | 77 |
 | excluded: drug and its own target | 44 |
 | excluded: perturbation unclear | 34 |
 | excluded: cell culture (quote) | 11 |
-| excluded: nerve injury, species unclear | 10 |
+| excluded: nerve injury, species unclear | 9 |
 | excluded: null result | 7 |
 | excluded: review or background statement | 2 |
 | excluded: actor is the readout | 1 |
@@ -26,7 +26,7 @@ Context: rodent peripheral nerve injury. Built by `analysis/scripts/build_pertur
 
 | Readout | Modality | Cases | Papers |
 |---|---|---|---|
-| pain | mechanical | 82 | 73 |
+| pain | mechanical | 81 | 72 |
 | pain | general | 27 | 26 |
 | TNF-alpha | - | 26 | 25 |
 | NLRP3 | - | 17 | 16 |
@@ -42,13 +42,13 @@ Context: rodent peripheral nerve injury. Built by `analysis/scripts/build_pertur
 
 | Perturbation | Cases | Readout rose | Readout fell |
 |---|---|---|---|
-| drug | 113 | 10 | 103 |
+| drug | 112 | 10 | 102 |
 | gain | 21 | 9 | 12 |
 | loss | 56 | 11 | 45 |
 
 ## Implied signs
 
-Raising the actor raises the readout in 64 cases and lowers it in 126 (66% share the commoner sign, the majority baseline).
+Raising the actor raises the readout in 64 cases and lowers it in 125 (66% share the commoner sign, the majority baseline).
 
 ## Do papers agree with each other?
 

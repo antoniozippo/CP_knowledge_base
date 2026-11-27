@@ -1,0 +1,31 @@
+# Primary targets of drugs that the validation set tests but the literature graph gives no target
+# for. Read by analysis/scripts/build_canonical.py as drug -> target links (tier D).
+#
+# Source: textbook pharmacology, entered by hand (Claude, 2026-11-27) because ChEMBL could not be
+# reached from the build environment. Only compounds with a well-established primary target are
+# listed; natural products, mixtures, formulations and research compounds with unclear targets are
+# left out on purpose. Check every entry against ChEMBL mechanisms before relying on it.
+#
+# <graph node id>: [{target: <HGNC symbol or graph node id>, action: <...>, sign: +1 activates / -1 inhibits}]
+
+CRAWLED_adu_s100: [{target: STING1, action: agonist, sign: 1}]
+CRAWLED_ag490: [{target: JAK2, action: inhibitor, sign: -1}]
+CRAWLED_at_rvd1: [{target: FPR2, action: agonist, sign: 1}]
+CRAWLED_atpa: [{target: GRIK1, action: agonist, sign: 1}]
+CRAWLED_bont_e: [{target: SNAP25, action: cleaves (inactivates), sign: -1}]
+CRAWLED_c646: [{target: EP300, action: inhibitor, sign: -1}]
+CRAWLED_cm4620: [{target: ORAI1, action: inhibitor, sign: -1}]
+CRAWLED_gsk_j4: [{target: KDM6B, action: inhibitor, sign: -1}]
+CRAWLED_il_1ra: [{target: IL1R1, action: antagonist, sign: -1}]
+CRAWLED_int_777: [{target: GPBAR1, action: agonist, sign: 1}]
+CRAWLED_pap_1: [{target: KCNA3, action: blocker, sign: -1}]
+CRAWLED_pdtc: [{target: RELA, action: NF-kB inhibitor, sign: -1}]
+CRAWLED_rg108: [{target: DNMT1, action: inhibitor, sign: -1}]
+CRAWLED_s_ketamine: [{target: GRIN1, action: NMDA receptor antagonist, sign: -1}]
+CRAWLED_ticagrelor: [{target: P2RY12, action: antagonist, sign: -1}]
+TNF_XPro1595: [{target: TNF, action: soluble TNF blocker, sign: -1}]
+CRAWLED_deltorphin_ii: [{target: OPRD1, action: agonist, sign: 1}]
+CRAWLED_dicumarol: [{target: NQO1, action: inhibitor, sign: -1}]
+CRAWLED_tetrodotoxin: [{target: SCN9A, action: blocker, sign: -1}, {target: SCN8A, action: blocker, sign: -1}]
+CRAWLED_haat: [{target: ELANE, action: inhibitor, sign: -1}]
+CRAWLED_abscisic_acid: [{target: LANCL2, action: agonist (proposed receptor), sign: 1}]

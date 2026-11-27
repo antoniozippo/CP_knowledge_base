@@ -1,0 +1,80 @@
+# Explicit assignments of graph nodes to canonical nodes, applied before the automatic rules in
+# analysis/scripts/build_canonical.py (gene symbols from labels, pain behaviour to PAIN).
+#
+# map:      graph node id -> canonical id (a gene symbol, a readout id, or another graph node id)
+# unmapped: graph node ids the automatic rules must leave alone (their label names a gene, but the
+#           node is something else: a variant, a pathway, a cell population)
+#
+# These are judgement calls made while building the network (2026-11-27), not expert decisions.
+
+map:
+  # microglia as a cell population and microglial activation: one activity node
+  shared_microglia: MICROGLIA
+  CSF1-CSF1R_SpinalMicroglia: MICROGLIA
+  CRAWLED_microglial_activation: MICROGLIA
+  CRAWLED_microglia_activation: MICROGLIA
+  # duplicate TNF-alpha nodes from different dossiers
+  GABA_apoptosis_TNF_alpha: TNF
+  shared_tnfa: TNF
+
+unmapped:
+  - CRAWLED_cgrp            # labelled "CGRP(8-37)", an antagonist fragment, not CGRP
+  # Kalirin-7 pools split by region on purpose (analysis/claims/node_splits.yaml and the dossier):
+  # only the main node (karilin7_Kalirin7, the spinal pronociceptive pool) becomes KALRN
+  - karilin7_Kalirin7_ACC
+  - karilin7_Hippocampus
+  - karilin7_Amygdala_CeA
+  - karilin7_SpinalDorsalHorn
+  - karilin7_DRG
+  - karilin7_Kalirin7_KO
+  - karilin7_AAV_Kalirin7
+  - karilin7_shRNA_Kalirin7
+
+# names that label-to-symbol resolution cannot derive (normalized: upper case, no punctuation, Greek
+# letters spelled as their Latin initial) -> HGNC symbol. crawler/aliases.yaml is read as well.
+synonyms:
+  TNFA: TNF
+  TNFALPHA: TNF
+  TUMORNECROSISFACTORALPHA: TNF
+  IL1B: IL1B
+  IL1BETA: IL1B
+  INTERLEUKIN1BETA: IL1B
+  INTERLEUKIN6: IL6
+  KCC2: SLC12A5
+  NKCC1: SLC12A2
+  NAV17: SCN9A
+  NAV18: SCN10A
+  NAV19: SCN11A
+  CAV32: CACNA1H
+  MGLUR5: GRM5
+  ERALPHA: ESR1
+  IBA1: AIF1
+  SUBSTANCEP: TAC1
+  HO1: HMOX1
+  INOS: NOS2
+  COX2: PTGS2
+  P2X4R: P2RX4
+  P2X7R: P2RX7
+  P2X4: P2RX4
+  P2X7: P2RX7
+  TRKB: NTRK2
+  TRKA: NTRK1
+  PPARG: PPARG
+  PPARGAMMA: PPARG
+  HIF1A: HIF1A
+  HIF1ALPHA: HIF1A
+  GLUN2B: GRIN2B
+  NR2B: GRIN2B
+  GLUN2A: GRIN2A
+  NR2A: GRIN2A
+  AC1: ADCY1
+  CREB: CREB1
+  DYNAMIN1: DNM1
+  ADAR3: ADARB2
+  KIR41: KCNJ10
+  STING: STING1
+  P2Y12: P2RY12
+  KV13: KCNA3
+  TGR5: GPBAR1
+  JMJD3: KDM6B
+  P300: EP300

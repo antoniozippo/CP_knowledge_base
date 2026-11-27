@@ -49,7 +49,7 @@ readouts:
   # pain behaviour: a pain outcome node (graph_inference's rule) or a label naming a pain behaviour
   # (graph_inference misses "mechanical hypersensitivity"); modality from label, then quote
   pain_label: 'pain|allodynia|hyperalgesia|hypersensitivity|nocicepti|withdrawal threshold|withdrawal latency'
-  not_pain_label: 'anxiety|depress|memory|cognit|aversi|itch|insensitiv'
+  not_pain_label: 'anxiety|depress|memory|cognit|aversi|itch|insensitiv|neurobiology|mind map|concept|rationale|skill'
   modalities:
     mechanical: 'mechanical|tactile|punctate|touch|von frey|withdrawal threshold|\bPWT\b|allodynia'
     thermal: 'thermal|heat|hot plate|withdrawal latency|\bPWL\b|hargreaves'

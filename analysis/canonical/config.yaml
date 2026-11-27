@@ -1,0 +1,39 @@
+# Configuration for analysis/scripts/build_canonical.py: the canonical network for the functional
+# model (scope phase 1). Context: rodent peripheral nerve injury, the same as the validation set
+# (analysis/perturbation/), whose context rules this reuses.
+
+# canonical readout nodes and what maps to them (see node_map.yaml for explicit assignments)
+readouts:
+  PAIN: pain behaviour          # every pain-behaviour node (validation-set rule)
+  TNF: TNF-alpha
+  IL1B: IL-1beta
+  IL6: IL-6
+  NLRP3: NLRP3
+  BDNF: BDNF
+  TRPV1: TRPV1
+  SLC12A5: KCC2
+  MICROGLIA: microglial activation
+
+# evidence tiers of a literature link, from its papers (test-split papers are always removed)
+tiers:
+  T1: crawled, at least one paper in context (rodent nerve injury)
+  T2: dossier link (not refuted)
+  T3: crawled, no paper in context
+  P: prior knowledge (OmniPath consensus sign)
+
+prior:
+  path: analysis/canonical/prior/omnipath_signed.tsv.gz
+  source: OmniPath webservice, /interactions?genesymbols=yes&directed=yes&signed=yes&license=academic
+  retrieved: '2026-11-27'
+  # an OmniPath link is used when its curation effort reaches this (number of curated references)
+  min_curation_effort: 2
+
+network:
+  # nodes kept: those on a signed path of at most this many links from a validation-set actor to a readout
+  max_path_len: 3
+  # an OmniPath-only node (not in the literature graph) may sit on such a path only when allowed here
+  allow_prior_only_nodes: false
+
+# how a node combines its inputs (Netflux-style normalized-Hill logic, Kraeutler et al. 2010):
+# activators combine by OR, inhibitors by AND NOT. Per-node overrides go in rules.yaml.
+default_rule: activators OR, inhibitors AND NOT

@@ -48,18 +48,18 @@ Built by `analysis/scripts/build_perturbation_cases.py` from `crawler/extraction
 
 ## What the set is, honestly
 
-- **190 primary cases from 146 papers, 150 actors** (45 in the test split). The full numbers are in
+- **189 primary cases from 145 papers, 149 actors** (45 in the test split). The full numbers are in
   `summary.md`.
-- **Drug cases dominate**: 113 of 190, and the readout fell in 103 of them ("drug X reduced
+- **Drug cases dominate**: 112 of 189, and the readout fell in 102 of them ("drug X reduced
   allodynia"). Two thirds of cases share one implied sign, so a model that always predicts it
   scores 66%. The 77 knockdown and overexpression cases are more balanced and more informative.
 - **Most actors are tested once.** Only 9 pairs of papers studied the same actor and readout, so
   how often papers disagree, and therefore the ceiling any model can reach, cannot be estimated.
-- **Most cases are out of reach of the current graph.** Only 68 of 190 have a signed path of up to
-  four links from actor to readout without the case's own paper (18 of 77 knockdown or
-  overexpression cases, 50 of 113 drug cases). Many actors enter the graph only through the paper
-  that tests them. The canonical network (phase 1) has to cover these actors, and the drugs'
-  targets, for the cases to be usable.
+- **About half the cases are out of reach.** In the raw graph only 68 had a signed path from actor
+  to readout without the case's own paper. The canonical network (`analysis/canonical/`) raises
+  that to 89 of 189 (47% of build and test cases alike). The rest name actors that appear only in
+  the paper that tests them (non-coding RNAs, rat-specific genes, research compounds with unknown
+  targets). Phase 3 scores the 89 in `analysis/canonical/scorable_cases.csv`.
 - **Recall is limited.** 269 candidates were excluded because the paper's abstract and methods
   name no model, which is common for abstract-only papers (half the corpus). Some of them are
   nerve-injury experiments.
