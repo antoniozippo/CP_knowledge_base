@@ -1,0 +1,9 @@
+# The Netflux setting carried forward from phase 3, chosen on build cases only
+# (analysis/functional/results.md, parameter sweep) and read once on the test cases.
+# The default fixed before scoring (logic "or", basal 0.1, uniform weights) saturated; see README.md.
+logic: mean          # activity = basal + (1 - basal) * mean(activations), times 1 - mean(inhibitions)
+basal: 0.25          # input to every endogenous node; drugs, interventions and other diseases get none
+n: 1.4               # Hill exponent
+ec50: 0.5
+weights: tiered      # T1 1.0, T2 0.8, T3 0.5, P 0.6, D 1.0, L 1.0
+tiers: all
