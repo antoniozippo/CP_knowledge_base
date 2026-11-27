@@ -1,0 +1,89 @@
+# Configuration for analysis/scripts/build_perturbation_cases.py: which experiments count as
+# test cases for the functional model (phase 2 of the scope: rodent peripheral nerve injury,
+# mechanical allodynia plus a small set of measured markers).
+
+context:
+  name: rodent peripheral nerve injury
+  # a paper is in context when its abstract or methods name one of these models and a rodent
+  nerve_injury_models:
+    CCI: 'chronic constriction injur|\bCCI\b'
+    SNI: 'spared nerve injur|\bSNI\b'
+    SNL: 'spinal nerve ligation|\bSNL\b'
+    PSNL: 'partial sciatic nerve ligation|\bPSNL\b|\bPNL\b'
+    sciatic: 'sciatic nerve (?:injur|ligation|transection|crush|constriction)|nerve transection'
+    nerve injury: 'peripheral nerve injur|nerve[- ]injur'
+  species:
+    rat: '\brats?\b'
+    mouse: '\bmice\b|\bmouse\b|murine'
+    human: '\bpatients?\b|\bparticipants\b|\bhuman (?:subjects|volunteers|tissue|samples)\b'
+  rodent: [rat, mouse]
+  # a quote naming another organism is out of context, whatever the paper's abstract says
+  non_rodent_quote: 'zebrafish|drosophila|\bflies\b|c\. elegans|caenorhabditis|xenopus|\byeast\b'
+  # a quote describing cells in a dish is not an in vivo nerve-injury experiment
+  in_vitro_quote: '\bBV-?2\b|\bin vitro\b|cultured|primary culture|cell line|\bPC12\b|\bHEK|\bSH-SY5Y\b|\bRAW ?264'
+  # other models: a case whose quote names one of these (and no nerve-injury model) is out of
+  # context; a paper that also uses one is flagged "mixed models"
+  other_models:
+    inflammatory: 'complete freund|\bCFA\b|carrageenan|formalin|capsaicin-(?:induced|evoked)|IL-17A?-induced'
+    chemotherapy: 'paclitaxel|oxaliplatin|vincristine|cisplatin|bortezomib|chemotherapy-induced|\bCIPN\b'
+    diabetic: 'streptozotocin|\bSTZ\b|diabet'
+    cancer: 'bone cancer|cancer pain|tumou?r cell'
+    incision: 'incision|postoperative|post-operative|surgical pain'
+    spinal cord injury: 'spinal cord injur|\bSCI\b'
+    central post-stroke: 'post-stroke|\bCPSP\b|thalamic h(?:a)?emorrhage'
+    arthritis: 'arthritis|monoiodoacetate|\bMIA\b|osteoarthritis'
+    visceral: 'colitis|visceral|cystitis|pancreatitis|\bIBS\b'
+    headache: 'nitroglycerin|migraine|trigeminal|orofacial'
+    other disease: 'myocardial|infarct|cardiac|sepsis|septic|hepatic|renal|kidney|pulmonary'
+
+perturbation:
+  # an actor named with one of these words is the target of the experiment ("TLR4 siRNA")
+  loss_agent: 'si-?RNAs?|sh-?RNAs?|antisense|ASOs?|antagonists?|inhibitors?|knock-?outs?|knock-?downs?|KO|deficiency|deficient|-/-|blockade|blockers?|neutrali[sz]ing antibod(?:y|ies)|deletion|silencing|inhibition|ablation'
+  gain_agent: 'agonists?|activators?|overexpression|over-expression|mimics?|recombinant'
+  # words in a quote that say an experiment was done
+  any: 'knock-?out|knock-?down|si-?RNA|sh-?RNA|deficien\w+|-/-|null mice|antagonists?\b|antagonism|inhibitor|blockade|blocking|agonist|overexpress\w*|deletion|ablation|silenc\w+|neutrali[sz]\w+|intrathecal|microinjection|administration|treatment with|treated with|pretreatment'
+  loss_words: 'knock-?out|knock-?down|si-?RNA|sh-?RNA|deficien\w+|-/-|null mice|antagonists?\b|antagonism|inhibit\w*|blockade|block\w*|deletion|ablation|silenc\w+|neutrali[sz]\w+|loss of'
+  gain_words: 'overexpress\w*|over-express\w*|agonist|activat\w+ (?:of|with)|recombinant|exogenous|mimic'
+
+readouts:
+  # pain behaviour: a pain outcome node (graph_inference's rule) or a label naming a pain behaviour
+  # (graph_inference misses "mechanical hypersensitivity"); modality from label, then quote
+  pain_label: 'pain|allodynia|hyperalgesia|hypersensitivity|nocicepti|withdrawal threshold|withdrawal latency'
+  not_pain_label: 'anxiety|depress|memory|cognit|aversi|itch|insensitiv'
+  modalities:
+    mechanical: 'mechanical|tactile|punctate|touch|von frey|withdrawal threshold|\bPWT\b|allodynia'
+    thermal: 'thermal|heat|hot plate|withdrawal latency|\bPWL\b|hargreaves'
+    cold: 'cold|acetone'
+  # nodes whose rise means less pain: a withdrawal threshold or latency
+  inverted_readout_label: 'withdrawal threshold|withdrawal latency|nociceptive threshold|pain threshold|\bPWT\b|\bPWL\b|paw withdrawal|antinocicepti|analgesi'
+  # measured markers (node id: short name), chosen from what in-context experiments measure most
+  # (build_perturbation_cases.py --markers-only). CGRP is left out until "CGRP" stops grounding to the
+  # antagonist node CGRP(8-37) (crawled id CRAWLED_cgrp).
+  markers:
+    TNF_TNF_alpha: TNF-alpha
+    nlrp3_il1b: IL-1beta
+    il6_il6: IL-6
+    ana_12_NLRP3_inflammasome: NLRP3
+    assaying_molecularly_structural_plasticity_BDNF: BDNF
+    trpv1_trpv1: TRPV1
+    BDNF_TrkB_KCC2: KCC2
+    shared_microglia: microglial activation
+    CSF1-CSF1R_SpinalMicroglia: microglial activation
+  # a quote naming the actor as an antagonist, inhibitor, agonist or blocker of the readout describes
+  # the drug's own target: a model input, not a test of the network
+  marker_symbols:
+    TNF-alpha: 'TNF'
+    IL-1beta: 'IL-1'
+    IL-6: 'IL-6'
+    NLRP3: 'NLRP3'
+    BDNF: 'BDNF|TrkB'
+    TRPV1: 'TRPV1'
+    KCC2: 'KCC2'
+
+split:
+  # held out for testing: the most recent papers by PubMed entry order (PMID), this fraction
+  test_fraction: 0.25
+
+adjudication:
+  sample_size: 150
+  seed: 20261127

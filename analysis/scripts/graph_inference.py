@@ -61,7 +61,8 @@ NULL_WORDING = re.compile(
     r"no (?:significant|obvious|effect|difference|change)|not (?:affected|altered|changed|significantly|"
     r"different)|unchanged|failed to|without (?:affecting|altering)|independent of|no evidence)\b", re.I)
 DRUG_LABEL = re.compile(
-    r"inhibitor|antagonist|agonist|antibod|\bmab\b|blocker|enhancer|activator|resolvin|maresin|lipoxin|"
+    # whole words, so "inhibitory interneurons" and "transcriptional activator" are not drugs
+    r"\binhibitors?\b|\bantagonists?\b|\bagonists?\b|antibod|\bmab\b|\bblockers?\b|resolvin|maresin|lipoxin|"
     r"rimegepant|fingolimod|chondroitinase|fumarate|pioglitazone|rosiglitazone|capsaicin 8|ketamine|"
     r"resiniferatoxin|suzetrigine|caryophyllene|cannabidiol|infliximab|bevacizumab|galcanezumab|otilimab", re.I)
 N_CORE = 20          # pain nodes with the most evidence form the outcome set used for ranking

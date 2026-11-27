@@ -18,14 +18,14 @@ Signed graph: 5395 links (5142 crawled and unreviewed, 253 curated) over 3140 no
   - paths from papers other than the link's own (n = 747): composition 87%, the source node's usual sign alone 85%; where they disagree (120), composition is right 58%
   - so composition adds little beyond "drugs usually inhibit, cytokines usually raise", and close to nothing once a paper reporting all the steps itself is set aside
 - leave-one-out, 128 drugs with a known direct effect on pain (that link removed, the effect re-predicted from the other paths): known analgesics predicted analgesic 95% (117/123), known pain-raising drugs predicted pain-raising 80% (4/5). **But the method calls 87% of all drugs analgesic**, so recovering known analgesics is almost uninformative: the crawl is selection-biased, since a drug that appears in a pain paper is mostly being studied as an analgesic.
-- discrimination: a known analgesic scores lower (more analgesic) than a drug with no direct pain link with probability **0.61** (AUC; 123 known analgesics vs 807 others; 0.5 is chance, and drugs with more links tend to score more extreme, which inflates it)
-- the clearest check is the rare opposite call: 30 drugs are predicted pain-raising (section 1 lists them), and they should be known pain inducers
+- discrimination: a known analgesic scores lower (more analgesic) than a drug with no direct pain link with probability **0.61** (AUC; 123 known analgesics vs 805 others; 0.5 is chance, and drugs with more links tend to score more extreme, which inflates it)
+- the clearest check is the rare opposite call: 29 drugs are predicted pain-raising (section 1 lists them), and they should be known pain inducers
 
 Outcome set for ranking: the 20 best-evidenced pain nodes (Activity-induced muscle pain, Cisplatin-induced mechanical and cold allodynia, Diabetic neuropathic pain, Mechanical Allodynia, Neuropathic Pain, Oxaliplatin-induced mechanical allodynia, Vincristine-induced mechanical allodynia, acute pain, allodynia, bone cancer pain, cancer pain, central post-stroke pain, ...). Each outcome counts at most 1, so reaching a hub that fans out to many pain nodes does not inflate a score.
 
 ## 1. Predicted drug effects on pain (paths up to 4 links)
 
-1002 drugs reach the core pain nodes. **Novel analgesic candidates** (net score <= -1, >=2 independent mediators, >=80% of reached pain nodes agree, no direct drug -> pain link in the graph): 283. *Read this as a literature-weighted ranking, not a prediction: the AUC above is only 0.61, because most drugs in a pain crawl are analgesics.* Strongest:
+997 drugs reach the core pain nodes. **Novel analgesic candidates** (net score <= -1, >=2 independent mediators, >=80% of reached pain nodes agree, no direct drug -> pain link in the graph): 283. *Read this as a literature-weighted ranking, not a prediction: the AUC above is only 0.61, because most drugs in a pain crawl are analgesics.* Strongest:
 
 | drug | score | pain nodes (-/+) | mediators | shortest strong path |
 |---|---|---|---|---|
@@ -45,7 +45,7 @@ Outcome set for ranking: the 20 best-evidenced pain nodes (Activity-induced musc
 | MSC-EVs | -11.01 | 19/0 | 3 | MSC-EVs --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
 | Gastrodin | -11.01 | 18/0 | 7 | Gastrodin --(-)--> NLRP3 Inflammasome --+--> Neuropathic Pain |
 
-**Drugs predicted to worsen pain** (score >= 1, >=2 mediators, >=80% agreement): 30. Strongest:
+**Drugs predicted to worsen pain** (score >= 1, >=2 mediators, >=80% agreement): 29. Strongest:
 
 | drug | score | direct link | shortest strong path |
 |---|---|---|---|
@@ -108,7 +108,7 @@ Outcome set for ranking: the 20 best-evidenced pain nodes (Activity-induced musc
 
 ## 3. Chokepoints between nerve-injury models and pain
 
-22 injury nodes, 34860 pain-promoting paths (up to 5 links). Share of the weighted flow passing through each node:
+22 injury nodes, 34861 pain-promoting paths (up to 5 links). Share of the weighted flow passing through each node:
 
 - Tumor Necrosis Factor Alpha (molecule): 50%
 - TRPV1 (channel): 39%
