@@ -5,7 +5,10 @@ replacing `{SHARDS}` (shard numbers 0-5 of
 `crawler/agent_work/combinations_plan.json`, e.g. `0 and 1`) and `{MODEL}`
 (`sonnet` or `opus`). Each shard is 40 rodent nerve-injury papers whose text
 contains combination wording; prompts carry up to 40,000 characters of each
-paper (about twice the main pass), hence batches of 5.
+paper (about twice the main pass), hence batches of 5. The first launch
+(three sessions, 4 subagents each, 2026-11-27) hit the 5-hour usage limit
+in about 3 minutes before any push, hence at most 3 subagents and a push
+every 10 papers.
 
 ---
 
@@ -26,7 +29,7 @@ processed.
    `crawler/extractions/combinations/<pmid>.json` are skipped.
 3. The reading is done by subagents, which you are explicitly asked to use:
    split the prompt files into batches of 5 and give each batch to one
-   subagent (Agent tool, `model: "{MODEL}"`), at most 4 running at a time. You
+   subagent (Agent tool, `model: "{MODEL}"`), at most 3 running at a time. You
    only orchestrate: do not read the papers yourself. Give every subagent the
    INSTRUCTIONS.md path, its exact list of prompt files (check the list is
    filled in before launching), and these rules:
@@ -44,7 +47,7 @@ processed.
      direct results with the single interventions compared.
    - Write compact JSON (no indentation). Do not commit; report the pmids
      written and how many combinations each has.
-   Save progress often: whenever four batches (20 papers) have finished, run
+   Save progress often: whenever two batches (10 papers) have finished, run
    the check below, fix problems in the files written so far, and do step 6
    (commit + push) for those files. A usage limit can stop the session at
    any moment; only pushed files survive it. When resuming after a stop,
