@@ -1,0 +1,86 @@
+# How free-text intervention targets and agents in the combination records
+# (crawler/extractions/combinations/) map to HGNC symbols of the canonical network.
+# Entered by hand (Claude, 2026-11-28) from the most frequent strings; checked by nobody yet.
+# A key is a case-insensitive regular expression matched against the record's `target`, then its `agent`.
+# value: HGNC symbol; or {symbol: X, action: loss|gain} when the agent's name fixes the direction
+# (a drug with no stated action) and the record does not.
+targets:
+  '^dkk3$|^rdkk3': DKK3
+  '^cb2r?$|cannabinoid receptor 2|^cb2 ': CNR2
+  '^cb1r?$|cannabinoid receptor 1|^cb1 ': CNR1
+  '^(mu-?)?opioid receptors?$|^mor$|mu-opioid': OPRM1
+  '^trpv1$': TRPV1
+  '^kremen-?1$': KREMEN1
+  '^dvl-?1$': DVL1
+  '^nrf2$': NFE2L2
+  '^ppar-?(γ|gamma)$': PPARG
+  '^nrp-?1$': NRP1
+  '^vegf-?a$': VEGFA
+  '^cgrp receptor$': RAMP1
+  '^cgrp$': CALCA
+  '^bdnf$': BDNF
+  '^trkb$': NTRK2
+  '^snap-?25$': SNAP25
+  '^pi3k$': PIK3CA
+  '^hif-?1(α|a|alpha)': HIF1A
+  '^pd-?1$': PDCD1
+  '^nk1 receptor$|^nk1r?$': TACR1
+  '^p2x3$': P2RX3
+  '^alpha2a? adrenergic|alpha2-adrenoceptor|^α2': ADRA2A
+  '^nav1\.7$': SCN9A
+  '^nav1\.8$': SCN10A
+  '^ho-?1': HMOX1
+  '^vdr$': VDR
+  '^kcc2$': SLC12A5
+  '^sirt6$': SIRT6
+  '^sirt1$': SIRT1
+  '^sirt3$': SIRT3
+  '^spp1$': SPP1
+  '^sting$': STING1
+  '^oxtr$': OXTR
+  '^smad2$': SMAD2
+  '^ctrp3$': C1QTNF3
+  '^endoglin$': ENG
+  '^bet proteins$': BRD4
+  '^tlr4$': TLR4
+  '^nlrp3$': NLRP3
+  '^p2x7$': P2RX7
+  '^p2x4$': P2RX4
+  '^cx3cr1$': CX3CR1
+  '^stat3$': STAT3
+  '^mtor$': MTOR
+  '^ezh2$': EZH2
+  '^hdac2$': HDAC2
+  '^hdac6$': HDAC6
+  '^tnf': TNF
+  '^il-?1(β|b|beta)$': IL1B
+  '^il-?6$': IL6
+  '^microglia|^microglial activation': MICROGLIA
+  'alpha7 nachr': CHRNA7
+  '^β2-adrenergic receptor|^beta2-adrenergic': ADRB2
+  '^cannabinoid receptors$': CNR1
+  'gluk1': GRIK1
+  '^hdac$|histone deacetylase': HDAC2
+agents:
+  '^rapamycin$': {symbol: MTOR, action: loss}
+  '^formoterol$': {symbol: ADRB2, action: gain}
+  '^(thc|delta-?9-thc)$': {symbol: CNR1, action: gain}
+  '^saha$|^vorinostat$': {symbol: HDAC2, action: loss}
+  '^(atpa|kainic acid)$': {symbol: GRIK1, action: gain}
+  '^morphine$': {symbol: OPRM1, action: gain}
+  '^capsaicin$': {symbol: TRPV1, action: gain}
+  '^minocycline$': {symbol: MICROGLIA, action: loss}
+  '^naloxone$': {symbol: OPRM1, action: loss}
+  '^yohimbine$': {symbol: ADRA2A, action: loss}
+  '^rimonabant$': {symbol: CNR1, action: loss}
+  '^am630$': {symbol: CNR2, action: loss}
+  '^am281$': {symbol: CNR1, action: loss}
+  '^jwh-?133$': {symbol: CNR2, action: gain}
+  '^gw9662$': {symbol: PPARG, action: loss}
+  '^ml385$': {symbol: NFE2L2, action: loss}
+  '^pf-05089771$': {symbol: SCN9A, action: loss}
+  '^pf-04885614$': {symbol: SCN10A, action: loss}
+  '^olcegepant$': {symbol: RAMP1, action: loss}
+  '^aprepitant$': {symbol: TACR1, action: loss}
+  '^dexmedetomidine$': {symbol: ADRA2A, action: gain}
+  '^adu-s100$': {symbol: STING1, action: gain}

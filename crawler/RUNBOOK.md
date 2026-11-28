@@ -88,7 +88,8 @@ line exceeds 1,000 characters.
    `check --combinations --shard N`; the brief is
    `crawler/agent_work/COMBINATIONS_WORKER_PROMPT.md`.
 3. `python3 crawler/agent_extract.py status --combinations` shows progress
-   and the number of experiments listed.
+   and the number of experiments listed. The pass of 2026-11-27 covered all 240 papers (161 with at least
+   one combination, 635 records); its scoring is in `analysis/combinations/`.
 
 Curated node merges (`analysis/claims/node_merges.yaml`, for example PPAR-gamma
 folded into PPARγ) are already in the committed graph. If you re-merge the crawl
