@@ -1,0 +1,279 @@
+<title>Combination Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a bench-sheet tool. Record list on the left, one record and its answer form on the right; stacks at phone width. */
+:root {
+  --bg: #f5f7f9; --panel: #ffffff; --fg: #1b2430; --muted: #5b6878; --line: #d9e0e7;
+  --accent: #2f5d8a; --accent-soft: #e3ecf5; --mark: #fff1b8; --done: #2e7d4f; --p1: #b5462f; --p2: #a77514; --p3: #6b7787;
+  --sans: "IBM Plex Sans", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --serif: "Source Serif 4", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161c; --panel: #182029; --fg: #e3e9ef; --muted: #96a3b2; --line: #2a3542;
+  --accent: #7fb0e0; --accent-soft: #1f3247; --mark: #4a4120; --done: #6cc792; --p1: #e98a73; --p2: #e0b45a; --p3: #8d99a8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11161c; --panel: #182029; --fg: #e3e9ef; --muted: #96a3b2; --line: #2a3542;
+  --accent: #7fb0e0; --accent-soft: #1f3247; --mark: #4a4120; --done: #6cc792; --p1: #e98a73; --p2: #e0b45a; --p3: #8d99a8; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; justify-content: space-between; margin-bottom: 16px }
+h1 { font-size: 1.35rem; font-weight: 600; margin: 0; text-wrap: balance }
+.sub { color: var(--muted); margin: 2px 0 0; max-width: 70ch }
+.status { font: 13px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums }
+.banner { border: 1px solid var(--line); background: var(--panel); border-left: 4px solid var(--p2); padding: 10px 14px; margin-bottom: 14px; border-radius: 4px }
+.grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; align-items: start }
+@media (max-width: 820px) { .grid { grid-template-columns: minmax(0, 1fr) } .rail { max-height: 220px } }
+.rail { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; max-height: calc(100vh - 140px); overflow: auto; position: sticky; top: 12px }
+.rail button { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 26px minmax(0, 1fr) 16px; gap: 8px; align-items: center;
+  width: 100%; padding: 8px 12px; border-bottom: 1px solid var(--line); cursor: pointer; font-size: 13px }
+.rail button:hover { background: var(--accent-soft) }
+.rail button[aria-current="true"] { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent) }
+.rail button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px }
+.pri { font: 600 11px var(--mono); text-align: center; border-radius: 3px; padding: 1px 0; color: var(--panel) }
+.pri.p1 { background: var(--p1) } .pri.p2 { background: var(--p2) } .pri.p3 { background: var(--p3) }
+.rail .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+.rail .t small { display: block; color: var(--muted); font: 11px var(--mono) }
+.tick { color: var(--done); font-weight: 600 }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; min-width: 0 }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font: 12.5px var(--mono); color: var(--muted); margin-bottom: 10px }
+.meta a { color: var(--accent) }
+dl.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 0 0 14px }
+dt { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px }
+dd { margin: 0; font-weight: 500 }
+.excerpt { font: 16px/1.65 var(--serif); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; max-height: 340px; overflow: auto }
+.excerpt mark { background: var(--mark); color: inherit; padding: 1px 0 }
+.hint { color: var(--muted); font-size: 12.5px; margin: 6px 0 16px }
+form { display: grid; gap: 14px }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 6px }
+fieldset[disabled] { opacity: .45 }
+legend { font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 2px }
+legend small { font-weight: 400; color: var(--muted) }
+.opts { display: flex; flex-wrap: wrap; gap: 6px }
+.opts label { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 13.5px; background: var(--panel) }
+.opts input { accent-color: var(--accent); margin: 0 }
+.opts label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft) }
+.opts label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 1px }
+.defs { font-size: 12.5px; color: var(--muted); margin: 2px 0 0; max-width: 80ch }
+textarea { width: 100%; min-height: 64px; font: 14px var(--sans); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 14px }
+.btn { font: 500 14px var(--sans); border: 1px solid var(--line); background: var(--panel); color: var(--fg); border-radius: 4px; padding: 7px 14px; cursor: pointer }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--panel) }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.saved { font: 12.5px var(--mono); color: var(--muted) }
+.empty { color: var(--muted); padding: 30px 0; text-align: center }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Combination Review</h1>
+      <p class="sub">Check AI-extracted combination experiments from rodent nerve-injury papers. Read the highlighted quote in its context, then answer. Answers save as you go.</p>
+    </div>
+    <div class="status" id="status">Loading records…</div>
+  </header>
+  <div class="banner" id="banner" hidden></div>
+  <div class="grid">
+    <nav class="rail" id="rail" aria-label="Records"></nav>
+    <main class="card" id="card"><p class="empty">Loading records…</p></main>
+  </div>
+</div>
+
+<template id="formTpl">
+  <div class="meta"><span data-f="rec"></span><span>priority <b data-f="priority"></b></span><span data-f="why"></span><a data-f="pubmed" target="_blank" rel="noopener">PubMed</a></div>
+  <dl class="facts">
+    <dt>Interventions</dt><dd data-f="interventions"></dd>
+    <dt>Readout</dt><dd data-f="readout"></dd>
+    <dt>Model</dt><dd data-f="model"></dd>
+  </dl>
+  <div class="excerpt" data-f="excerpt"></div>
+  <p class="hint">The quote is highlighted inside about 700 characters of paper text on each side. The AI's own direction and interaction labels are hidden so they don't steer you.</p>
+  <form id="answer" autocomplete="off">
+    <fieldset><legend>Did the paper itself run this combination and report a result?</legend>
+      <div class="opts" data-name="ran_in_paper"></div>
+      <p class="defs">No = background, methods, another group's work or a hypothesis. The rest of the form then doesn't apply.</p>
+    </fieldset>
+    <fieldset id="rest">
+      <fieldset><legend>Are the interventions right <small>(agents, loss/gain/drug, targets, given together)</small>?</legend><div class="opts" data-name="interventions_ok"></div></fieldset>
+      <fieldset><legend>Is the readout the one the quote reports?</legend><div class="opts" data-name="readout_ok"></div></fieldset>
+      <fieldset><legend>Direction with the combination <small>vs injured, untreated control; of the named readout (a threshold that rose is up)</small></legend><div class="opts" data-name="direction_combination"></div></fieldset>
+      <fieldset><legend>Direction with the first intervention alone</legend><div class="opts" data-name="direction_a"></div></fieldset>
+      <fieldset><legend>Direction with the second intervention alone</legend><div class="opts" data-name="direction_b"></div></fieldset>
+      <fieldset><legend>Interaction</legend><div class="opts" data-name="interaction"></div>
+        <p class="defs">Synergy: more than the sum of the single effects (or shown by isobologram). Sub-additive: better than either alone, not more than the sum. No added effect: no better than the stronger one. Occlusion: one abolishes the other's effect (e.g. no effect in knockouts). Antagonism: the combination does less than one alone. Unclear: the text doesn't let you tell.</p></fieldset>
+      <fieldset><legend>In vivo, rodent, nerve-injury model?</legend><div class="opts" data-name="in_context"></div></fieldset>
+    </fieldset>
+    <fieldset><legend>Notes <small>(optional)</small></legend><textarea id="notes" aria-label="Notes"></textarea></fieldset>
+    <div class="bar">
+      <span class="saved" id="saved"></span>
+      <span style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn" id="prev">← Previous</button>
+        <button type="button" class="btn primary" id="next">Next →</button>
+        <button type="button" class="btn" id="copy">Copy my answers (CSV)</button>
+      </span>
+    </div>
+  </form>
+</template>
+
+<script>
+const CHOICES = {
+  ran_in_paper: [["y", "Yes"], ["n", "No"], ["unsure", "Unsure"]],
+  interventions_ok: [["y", "Yes"], ["n", "No"]],
+  readout_ok: [["y", "Yes"], ["n", "No"]],
+  direction_combination: [["1", "Up"], ["0", "No change"], ["-1", "Down"]],
+  direction_a: [["1", "Up"], ["0", "No change / not reported"], ["-1", "Down"]],
+  direction_b: [["1", "Up"], ["0", "No change / not reported"], ["-1", "Down"]],
+  interaction: [["synergy", "Synergy"], ["additive", "Additive"], ["sub_additive", "Sub-additive"], ["no_added_effect", "No added effect"],
+                ["occlusion", "Occlusion"], ["antagonism", "Antagonism"], ["unclear", "Unclear"]],
+  in_context: [["y", "Yes"], ["n", "No"]],
+};
+const FIELDS = Object.keys(CHOICES);
+let records = [], answers = {}, idx = 0, db = null, uid = null, canWrite = false, saveTimer = null, saving = Promise.resolve();
+const $ = (s, el = document) => el.querySelector(s);
+const statusEl = $("#status"), banner = $("#banner");
+
+function showBanner(text) { banner.textContent = text; banner.hidden = false; }
+function isDone(a) { return a && a.ran_in_paper && (a.ran_in_paper !== "y" || FIELDS.every(f => a[f] !== undefined && a[f] !== "")); }
+function updateStatus() {
+  const done = records.filter(r => isDone(answers[r.rec])).length;
+  statusEl.textContent = `${done} of ${records.length} answered` + (db && canWrite ? "" : " · not saving");
+}
+
+function renderRail() {
+  const rail = $("#rail"); rail.replaceChildren();
+  records.forEach((r, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("aria-current", i === idx ? "true" : "false");
+    const p = document.createElement("span"); p.className = "pri p" + r.priority; p.textContent = "P" + r.priority;
+    const t = document.createElement("span"); t.className = "t"; t.textContent = r.interventions;
+    const s = document.createElement("small"); s.textContent = r.rec; t.prepend(s);
+    const k = document.createElement("span"); k.className = "tick"; k.textContent = isDone(answers[r.rec]) ? "✓" : "";
+    b.append(p, t, k); b.addEventListener("click", () => go(i));
+    rail.append(b);
+  });
+}
+
+function excerpt(el, r) {
+  el.replaceChildren();
+  const ctx = r.context || "", probe = r.quote.split(/\s+/).slice(0, 8).join(" ");
+  const i = ctx.indexOf(probe);
+  if (i < 0) { const m = document.createElement("mark"); m.textContent = r.quote; el.append(m); return; }
+  const end = Math.min(ctx.length, i + r.quote.length);
+  const m = document.createElement("mark"); m.textContent = ctx.slice(i, end);
+  el.append(document.createTextNode((i > 0 ? "… " : "") + ctx.slice(0, i)), m, document.createTextNode(ctx.slice(end) + " …"));
+  requestAnimationFrame(() => { el.scrollTop = Math.max(0, m.offsetTop - el.offsetTop - 60); });
+}
+
+function renderCard() {
+  const r = records[idx], card = $("#card");
+  card.replaceChildren($("#formTpl").content.cloneNode(true));
+  const set = (f, v) => { const el = $(`[data-f="${f}"]`, card); if (el) el.textContent = v; };
+  set("rec", r.rec); set("priority", r.priority); set("why", r.why_selected);
+  set("interventions", r.interventions); set("readout", r.readout); set("model", [r.model, r.species].filter(Boolean).join(" · "));
+  const a = $('[data-f="pubmed"]', card);
+  if (/^https:\/\//.test(r.pubmed)) a.href = r.pubmed; else a.remove();
+  excerpt($('[data-f="excerpt"]', card), r);
+  const ans = answers[r.rec] || {};
+  for (const f of FIELDS) {
+    const box = $(`[data-name="${f}"]`, card);
+    for (const [v, label] of CHOICES[f]) {
+      const l = document.createElement("label"), inp = document.createElement("input");
+      inp.type = "radio"; inp.name = f; inp.value = v; inp.id = `${f}-${v}`; inp.checked = ans[f] === v;
+      inp.disabled = !(db && canWrite);
+      inp.addEventListener("change", () => edit(f, v));
+      l.append(inp, document.createTextNode(label)); box.append(l);
+    }
+  }
+  const notes = $("#notes", card); notes.value = ans.notes || ""; notes.disabled = !(db && canWrite);
+  notes.addEventListener("input", () => edit("notes", notes.value, 800));
+  $("#rest", card).disabled = ans.ran_in_paper === "n";
+  $("#prev", card).disabled = idx === 0; $("#next", card).disabled = idx === records.length - 1;
+  $("#prev", card).addEventListener("click", () => go(idx - 1));
+  $("#next", card).addEventListener("click", () => go(idx + 1));
+  $("#copy", card).addEventListener("click", copyCsv);
+  $("#saved", card).textContent = ans.updatedAt ? "Saved" : "";
+}
+
+function go(i) {
+  if (i < 0 || i >= records.length) return;
+  flush(); idx = i;
+  try { localStorage.setItem("review-idx", String(i)); } catch (e) {}
+  renderRail(); renderCard(); window.scrollTo({ top: 0 });
+}
+
+function edit(field, value, delay = 250) {
+  const rec = records[idx].rec;
+  answers[rec] = { ...(answers[rec] || {}), [field]: value };
+  if (field === "ran_in_paper") $("#rest").disabled = value === "n";
+  $("#saved").textContent = "Saving…";
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => save(rec), delay);
+  updateStatus();
+}
+function flush() { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; save(records[idx].rec); } }
+
+function save(rec) {
+  if (!db || !canWrite || !uid) return;
+  const data = { ...answers[rec], rec, updatedAt: new Date().toISOString() };
+  answers[rec] = data;
+  saving = saving.then(async () => {
+    try {
+      await db.doc(`reviews/${uid}/answers/${rec}`).set(data);
+      await db.doc(`reviews/${uid}`).set({ answered: records.filter(r => isDone(answers[r.rec])).length, updatedAt: data.updatedAt });
+      const s = $("#saved"); if (s && records[idx].rec === rec) s.textContent = "Saved";
+      renderRail();
+    } catch (e) {
+      const s = $("#saved"); if (s) s.textContent = "Not saved: " + (e && e.code === "invalid_argument" ? "you don't have permission to save answers" : "the connection failed; your answer stays on screen, try again");
+      if (e && e.code === "invalid_argument") { canWrite = false; showBanner("You can read the records but not save answers. Ask the owner to share this page with you as Contributor."); updateStatus(); }
+    }
+  });
+}
+
+async function copyCsv() {
+  const cols = ["rec", ...FIELDS, "notes"];
+  const esc = v => { const s = String(v ?? ""); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const lines = [cols.join(",")].concat(records.filter(r => answers[r.rec]).map(r => cols.map(c => esc(c === "rec" ? r.rec : answers[r.rec][c])).join(",")));
+  const text = lines.join("\n"), btn = $("#copy");
+  try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
+  catch (e) { const ta = $("#notes"); ta.value = text; ta.select(); btn.textContent = "Select-all copied into Notes box; copy it from there"; }
+  setTimeout(() => { const b = $("#copy"); if (b) b.textContent = "Copy my answers (CSV)"; }, 2500);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.closest("textarea")) return;
+  if (e.key === "ArrowRight" || e.key === "j") go(idx + 1);
+  if (e.key === "ArrowLeft" || e.key === "k") go(idx - 1);
+});
+
+async function start() {
+  try {
+    records = await (await fetch("records.json")).json();
+  } catch (e) { $("#card").innerHTML = '<p class="empty">The records could not be loaded. Reload the page.</p>'; statusEl.textContent = ""; return; }
+  try { const s = parseInt(localStorage.getItem("review-idx"), 10); if (s >= 0 && s < records.length) idx = s; } catch (e) {}
+  renderRail(); renderCard(); updateStatus();
+  const cl = window.claude;
+  const [dbNs, user] = cl ? await Promise.all([cl.use("db"), cl.use("user")]) : [null, null];
+  if (!dbNs || !user) { showBanner("Answers can't be saved in this view. Open the page signed in to claude.ai to review."); updateStatus(); return; }
+  db = dbNs; uid = await user.id();
+  const w = await user.can("data.write");
+  canWrite = w !== false;
+  if (!canWrite) showBanner("You can read the records but not save answers. Ask the owner to share this page with you as Contributor.");
+  let loaded = false;
+  const timer = setTimeout(() => { if (!loaded) showBanner("Your saved answers are taking long to load; new answers still save."); }, 10000);
+  db.collection(`reviews/${uid}/answers`).onSnapshot(snap => {
+    loaded = true; clearTimeout(timer);
+    const fresh = {};
+    snap.docs.forEach(d => { fresh[d.id] = d.data(); });
+    const cur = records[idx] && records[idx].rec;
+    const pending = saveTimer && cur ? answers[cur] : null;
+    answers = { ...fresh, ...(pending ? { [cur]: pending } : {}) };
+    renderRail(); if (!pending) renderCard(); updateStatus();
+  }, err => { loaded = true; clearTimeout(timer); showBanner("Saved answers could not be loaded: " + (err && err.message ? err.message : "connection problem") + ". New answers may not save."); });
+  renderCard(); updateStatus();
+}
+start();
+</script>

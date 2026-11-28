@@ -8,6 +8,10 @@ raters disagree or cannot help (`second_rater_results.md`), with the reason in `
 not shown. Rows are ordered by `priority` (1 = the AI raters split or found the text
 insufficient; do these first; 3 = all agree). Score it with
 `python3 analysis/scripts/prepare_combination_adjudication.py score analysis/combinations/adjudication_focused.csv`.
+Instead of the spreadsheet, the reviewer can use the review page
+(https://claude.ai/artifact/8aQeWq5hn3BdaTkS4yn4ZA, source in `review_page/`): one record at a time,
+the AI's direction and interaction labels hidden, answers saved per reviewer (`reviews/<reviewer>/answers/<rec>`;
+only the owner and editors read other reviewers' answers). Reviewers need Contributor access to save.
 The full 120-row sheet below is for a complete check.
 
 `adjudication_sample.csv`: 120 of the 635 records, one per row (45 are cases the model was scored on;
