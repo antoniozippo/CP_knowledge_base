@@ -64,7 +64,10 @@ scoring; none was selected on these cases (`results.md`, last table).
 ## Next steps (not started)
 
 1. Expert check of a sample of records: **prepared; human sheet not filled**. A local AI second rater
-   (Qwen) has rated all 120: `second_rater_results.md` (stated labels agree well, inferred ones do not). `adjudication_sample.csv` (120 records) and
+   (Qwen) has rated all 120: `second_rater_results.md` (stated labels agree well, inferred ones do not).
+   The human check is narrowed to 60 rows in `adjudication_focused.csv`. On stated labels only, without
+   sub-additive (47 cases, `results.md` last table), the verdict is unchanged: Netflux 1/47, structural
+   rule 8/47, always "less than additive" 43/47. `adjudication_sample.csv` (120 records) and
    `ADJUDICATION.md` (instructions); `prepare_combination_adjudication.py score` reads the filled sheet.
 2. Add the missing mechanism links (the two interventions of an occlusion record are connected by the
    paper's own mechanism claim) as a test of whether a model given them then reproduces the label;

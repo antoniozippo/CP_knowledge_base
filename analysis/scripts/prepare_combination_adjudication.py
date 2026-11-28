@@ -96,8 +96,8 @@ def prepare():
           "| context found:", sum(bool(r["context"]) for r in rows))
 
 
-def score():
-    rows = [r for r in csv.DictReader(open(SHEET, encoding="utf-8")) if r["expert_ran_in_paper"].strip()]
+def score(sheet=SHEET):
+    rows = [r for r in csv.DictReader(open(sheet, encoding="utf-8")) if r["expert_ran_in_paper"].strip()]
     if not rows:
         print("no filled rows")
         return
@@ -120,4 +120,8 @@ def score():
 
 
 if __name__ == "__main__":
-    {"prepare": prepare, "score": score}[sys.argv[1] if len(sys.argv) > 1 else "prepare"]()
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "prepare"
+    if cmd == "score":
+        score(Path(sys.argv[2]) if len(sys.argv) > 2 else SHEET)     # e.g. analysis/combinations/adjudication_focused.csv
+    else:
+        prepare()

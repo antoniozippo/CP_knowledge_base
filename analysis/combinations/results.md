@@ -51,3 +51,16 @@ Where netflux made a call: ('additive', 'less than additive') 29, ('additive', '
 
 Mediation: 12 of 62 classed pairs have one intervention upstream of the other.
 On the 47 cases whose interaction the paper states: netflux right on 1, majority right on 43.
+
+## Stated labels only, sub-additive dropped
+
+47 cases. Observed: less than additive 43, synergy 3, additive 1.
+
+| Rule | Right |
+|---|---|
+| mean | 1/47 = 2% (95% CI 0-11) |
+| or | 0/47 = 0% (95% CI 0-8) |
+| or-scaled | 1/47 = 2% (95% CI 0-11) |
+| mediation | 8/47 = 17% (95% CI 9-30) |
+| static paths | 1/47 = 2% (95% CI 0-11) |
+| always "less than additive" | 43/47 = 91% (95% CI 80-97) |

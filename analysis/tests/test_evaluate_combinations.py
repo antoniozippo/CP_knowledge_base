@@ -37,3 +37,13 @@ def test_adjudication_sheet_is_complete_and_blank_for_the_expert():
     assert len(rows) == 120 and len({r["rec"] for r in rows}) == 120
     assert all(r["quote"] and r["context"] and r["pubmed"].startswith("https://pubmed") for r in rows)
     assert not any(r[k] for r in rows for k in ("expert_ran_in_paper", "expert_interaction", "reviewer"))
+
+
+def test_focused_sheet_is_a_blank_subset_with_reasons():
+    import csv
+    d = Path(__file__).resolve().parents[1] / "combinations"
+    full = {r["rec"] for r in csv.DictReader(open(d / "adjudication_sample.csv", encoding="utf-8"))}
+    rows = list(csv.DictReader(open(d / "adjudication_focused.csv", encoding="utf-8")))
+    assert len(rows) == 60 and {r["rec"] for r in rows} <= full
+    assert all(r["why_selected"] for r in rows) and not any(r["expert_interaction"] for r in rows)
+    assert "interaction" not in rows[0]          # the AI raters' answers are not shown

@@ -310,6 +310,18 @@ def main():
     stated = [r for r in classed if r["basis"] == "stated"]
     L.append(f"On the {len(stated)} cases whose interaction the paper states: netflux right on "
              f"{sum(r['net_class'] == r['class'] for r in stated)}, majority right on {sum(r['class'] == top[0] for r in stated)}.")
+    # labels the paper states, without the sub-additive class (a second rater reproduced stated labels,
+    # kappa 0.71, but not inferred ones, 0.21, nor any sub-additive label: second_rater_results.md)
+    firm = [r for r in classed if r["basis"] == "stated" and r["interaction"] != "sub_additive"]
+    fd = Counter(r["class"] for r in firm)
+    L += ["", "## Stated labels only, sub-additive dropped", "",
+          f"{len(firm)} cases. Observed: " + ", ".join(f"{k} {v}" for k, v in fd.most_common()) + ".", "",
+          "| Rule | Right |", "|---|---|"]
+    for key in ("class_mean", "class_or", "class_or-scaled", "class_mediation", "static_class"):
+        L.append(f"| {key.replace('class_', '').replace('static_class', 'static paths')} | {fmt(sum(r[key] == r['class'] for r in firm), len(firm))} |")
+    if fd:
+        top_f = fd.most_common(1)[0]
+        L.append(f"| always \"{top_f[0]}\" | {fmt(top_f[1], len(firm))} |")
     (OUT / "results.md").write_text("\n".join(L) + "\n")
     print("\n".join(L))
 
