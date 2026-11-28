@@ -28,3 +28,12 @@ def test_mediation_rule_needs_a_path_between_the_interventions():
     assert ec.reaches(links, "a", "b") and not ec.reaches(links, "b", "a") and not ec.reaches(links, "a", "b", max_len=1)
     assert ec.mediation_class(links, "b", "a") == "less than additive"
     assert ec.mediation_class(links, "a", "c") == "additive"
+
+
+def test_adjudication_sheet_is_complete_and_blank_for_the_expert():
+    import csv
+    sheet = Path(__file__).resolve().parents[1] / "combinations" / "adjudication_sample.csv"
+    rows = list(csv.DictReader(open(sheet, encoding="utf-8")))
+    assert len(rows) == 120 and len({r["rec"] for r in rows}) == 120
+    assert all(r["quote"] and r["context"] and r["pubmed"].startswith("https://pubmed") for r in rows)
+    assert not any(r[k] for r in rows for k in ("expert_ran_in_paper", "expert_interaction", "reviewer"))

@@ -63,7 +63,8 @@ scoring; none was selected on these cases (`results.md`, last table).
 
 ## Next steps (not started)
 
-1. Expert check of a sample of records (interaction class and direction); the labels bound every figure.
+1. Expert check of a sample of records: **prepared, not done**. `adjudication_sample.csv` (120 records) and
+   `ADJUDICATION.md` (instructions); `prepare_combination_adjudication.py score` reads the filled sheet.
 2. Add the missing mechanism links (the two interventions of an occlusion record are connected by the
    paper's own mechanism claim) as a test of whether a model given them then reproduces the label;
    this uses the answer as an input and can only show consistency.
