@@ -44,9 +44,27 @@ static paths at direction.** Details in `results.md`.
   and 16 of 62 classed cases are inferred. Same-node pairs (drug and its own antagonist, 37) are excluded
   as untestable by clamping.
 
+## Step 2: can the model express occlusion when the structure allows it? (2026-11-28)
+
+Drugs are already clamped at their gene targets here, so what step 2 tests is the combination rule.
+Three Netflux rules (mean inputs, OR, OR scaled by input count) and a structural rule (an intervention
+that reaches the other within three links makes the pair less than additive) were declared before
+scoring; none was selected on these cases (`results.md`, last table).
+
+- **No Netflux rule predicts occlusion.** Across mean, OR and OR-scaled, "less than additive" is
+  called on none of the 52 cases that have it (OR also makes only 16 calls: it saturates). Mean and
+  OR-scaled call "additive" or "synergy" instead. Dynamics alone do not produce occlusion here.
+- **The structural rule is right when it applies and silent otherwise.** It finds an upstream pair in
+  12 of 62 classed cases and is right on 9 of the 12 less-than-additive ones it flags (precision 9/12).
+  It covers 9 of the 52 less-than-additive cases: for the rest, the network holds no path linking the
+  two interventions. Overall 10/62 (16%), against 84% for always answering "less than additive".
+- So the limit is missing links between the interventions, not the update rule. Occlusion cases are
+  mostly a drug and a second intervention on a mechanism the network does not connect.
+
 ## Next steps (not started)
 
 1. Expert check of a sample of records (interaction class and direction); the labels bound every figure.
-2. A model with explicit drug-target links and receptor mapping for the frequent agents, tested on the
-   same 72 cases, to see whether occlusion appears when the structure allows it.
+2. Add the missing mechanism links (the two interventions of an occlusion record are connected by the
+   paper's own mechanism claim) as a test of whether a model given them then reproduces the label;
+   this uses the answer as an input and can only show consistency.
 3. Magnitudes and time courses, which no extraction yet records.

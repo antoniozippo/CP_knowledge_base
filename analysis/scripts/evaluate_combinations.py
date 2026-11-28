@@ -119,7 +119,37 @@ def predict(network, nodes, exo, links_cache, pmid, cfg, a, b, readout):
     d = lambda act: -1 if act == "loss" else 1
     st = {k: fm.static_effect(links, s, readout, avoid=exo - {s}) * d(act) for k, (s, act) in (("a", a), ("b", b))}
     src = {k: fm.sign_of(fm.source_tendency(links, s)) * d(act) for k, (s, act) in (("a", a), ("b", b))}
-    return e, st, src
+    alt = {}
+    for name, extra in VARIANTS.items():
+        m = fm.NetfluxModel(nodes, links, exo, **{**{k: cfg[k] for k in ("basal", "n", "ec50", "logic")}, **extra})
+        b0 = m.steady_state()
+        ev = {k: float(m.steady_state(clamp(it))[r] - b0[r]) for k, it in (("a", [a]), ("b", [b]), ("ab", [a, b]))}
+        alt[name] = interaction_class(ev)
+    alt["mediation"] = mediation_class(links, a[0], b[0])
+    return e, st, src, alt
+
+
+VARIANTS = {"mean": {}, "or": {"logic": "or"}, "or-scaled": {"logic": "or-scaled"}}
+
+
+def reaches(links, source, target, max_len=3):
+    """Is there a directed path of at most max_len links from source to target?"""
+    out = {}
+    for s_, t, _, _ in links:
+        out.setdefault(s_, []).append(t)
+    frontier, seen = {source}, {source}
+    for _ in range(max_len):
+        frontier = {t for n in frontier for t in out.get(n, ()) if t not in seen}
+        if target in frontier:
+            return True
+        seen |= frontier
+    return False
+
+
+def mediation_class(links, a, b):
+    """Structural rule: when one intervention sits upstream of the other, the second can carry (or
+    cancel) the first's effect, so the pair is less than additive; independent actors add."""
+    return "less than additive" if reaches(links, a, b) or reaches(links, b, a) else "additive"
 
 
 def interaction_class(e):
@@ -198,7 +228,7 @@ def main():
         (sa, aa), (sb, ab_), ro = c["a"], c["b"], c["readout"]
         if not {sa, sb, ro} <= nodeset:
             continue
-        e, st, src = predict(network, nodes, exo, cache, rec["pmid"], model, c["a"], c["b"], ro)
+        e, st, src, alt = predict(network, nodes, exo, cache, rec["pmid"], model, c["a"], c["b"], ro)
         flip = -1 if c["inverted"] else 1
         singles = rec.get("singles") or []
         row = {"rec": rec["rec"], "pmid": rec["pmid"], "a": f"{aa} {sa}", "b": f"{ab_} {sb}", "readout": ro,
@@ -209,7 +239,7 @@ def main():
                "net_a": sgn(e["a"]), "net_b": sgn(e["b"]), "net_ab": sgn(e["ab"]),
                "static_a": sgn(st["a"]), "static_b": sgn(st["b"]), "static_ab": sgn(st["a"] + st["b"]),
                "source_a": src["a"], "source_b": src["b"], "source_ab": src["a"] + src["b"] and (1 if src["a"] + src["b"] > 0 else -1),
-               "net_class": interaction_class(e), "static_class": "additive", "e_a": round(e["a"], 5),
+               "net_class": interaction_class(e), **{f"class_{k}": v for k, v in alt.items()}, "static_class": "additive", "e_a": round(e["a"], 5),
                "e_b": round(e["b"], 5), "e_ab": round(e["ab"], 5), "quote": rec["evidence_quote"]}
         rows.append(row)
     funnel["scored (isolated nodes included; no path means no call)"] = len(rows)
@@ -267,6 +297,16 @@ def main():
     both = [r for r in classed if r["net_class"]]
     L += ["", "Where netflux made a call: " + (", ".join(f"{k} {v}" for k, v in Counter((r['net_class'], r['class']) for r in both).most_common()) or "none") +
           " (predicted, observed).", ""]
+    L += ["", "### Other combination rules and a structural rule", "",
+          "`or`: activators OR-ed (saturates); `or-scaled`: OR with inputs scaled by their number; `mediation`: less than "
+          "additive when one intervention reaches the other within three links, else additive. Declared before scoring; "
+          "no rule was selected on these cases.", "", "| Rule | Right | Calls | Per class (right/observed) |", "|---|---|---|---|"]
+    for key in ("class_mean", "class_or", "class_or-scaled", "class_mediation"):
+        called = [r for r in classed if r[key]]
+        per = ", ".join(f"{c} {sum(r[key] == c for r in classed if r['class'] == c)}/{n}" for c, n in dist.most_common())
+        L.append(f"| {key[6:]} | {fmt(sum(r[key] == r['class'] for r in classed), len(classed))} | {len(called)} | {per} |")
+    related = [r for r in classed if r["class_mediation"] == "less than additive"]
+    L.append(f"\nMediation: {len(related)} of {len(classed)} classed pairs have one intervention upstream of the other.")
     stated = [r for r in classed if r["basis"] == "stated"]
     L.append(f"On the {len(stated)} cases whose interaction the paper states: netflux right on "
              f"{sum(r['net_class'] == r['class'] for r in stated)}, majority right on {sum(r['class'] == top[0] for r in stated)}.")

@@ -37,4 +37,17 @@ Majority direction (-1) would be right on 24/33 (combination).
 
 Where netflux made a call: ('additive', 'less than additive') 29, ('additive', 'synergy') 9, ('additive', 'additive') 1 (predicted, observed).
 
+
+### Other combination rules and a structural rule
+
+`or`: activators OR-ed (saturates); `or-scaled`: OR with inputs scaled by their number; `mediation`: less than additive when one intervention reaches the other within three links, else additive. Declared before scoring; no rule was selected on these cases.
+
+| Rule | Right | Calls | Per class (right/observed) |
+|---|---|---|---|
+| mean | 1/62 = 2% (95% CI 0-9) | 39 | less than additive 0/52, synergy 0/9, additive 1/1 |
+| or | 0/62 = 0% (95% CI -0-6) | 16 | less than additive 0/52, synergy 0/9, additive 0/1 |
+| or-scaled | 1/62 = 2% (95% CI 0-9) | 40 | less than additive 0/52, synergy 0/9, additive 1/1 |
+| mediation | 10/62 = 16% (95% CI 9-27) | 62 | less than additive 9/52, synergy 0/9, additive 1/1 |
+
+Mediation: 12 of 62 classed pairs have one intervention upstream of the other.
 On the 47 cases whose interaction the paper states: netflux right on 1, majority right on 43.

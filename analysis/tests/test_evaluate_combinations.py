@@ -21,3 +21,10 @@ def test_observed_classes_collapse_the_four_non_additive_labels():
 
 def test_threshold_readouts_are_recognised():
     assert ec.THRESHOLD.search("paw withdrawal mechanical threshold") and not ec.THRESHOLD.search("mechanical allodynia")
+
+
+def test_mediation_rule_needs_a_path_between_the_interventions():
+    links = [("a", "m", 1, 1.0), ("m", "b", -1, 1.0), ("c", "r", 1, 1.0)]
+    assert ec.reaches(links, "a", "b") and not ec.reaches(links, "b", "a") and not ec.reaches(links, "a", "b", max_len=1)
+    assert ec.mediation_class(links, "b", "a") == "less than additive"
+    assert ec.mediation_class(links, "a", "c") == "additive"
