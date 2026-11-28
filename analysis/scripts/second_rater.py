@@ -22,11 +22,16 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SHEET = ROOT / "analysis" / "combinations" / "adjudication_sample.csv"
 OUT = ROOT / "analysis" / "combinations" / "adjudication_second_rater.csv"
+FOCUSED = ROOT / "analysis" / "combinations" / "adjudication_focused.csv"
+FOCUSED_OUT = ROOT / "analysis" / "combinations" / "adjudication_focused_rater.csv"
+# v2 (2026-11-28) adds the sentence on "better than either alone", the main disagreement of the v1 run
+PROMPT_VERSION = 2
 FIELDS = ["ran_in_paper", "interventions_ok", "readout_ok", "direction_combination", "direction_a",
           "direction_b", "interaction", "in_context"]
 INTERACTIONS = ("synergy", "additive", "sub_additive", "no_added_effect", "occlusion", "antagonism", "unclear")
@@ -48,7 +53,10 @@ and the text around it. Judge only from that text. Answer with one JSON object a
  "interaction": one of "synergy" (more than the sum), "additive", "sub_additive" (more than either
    alone, less than the sum), "no_added_effect" (no more than the stronger one), "occlusion" (one
    intervention abolishes the other's effect, e.g. no effect in knockouts), "antagonism" (the
-   combination does less than one alone), "unclear",
+   combination does less than one alone), "unclear". A combination that is better than either
+   intervention alone is "synergy" only when its effect exceeds the SUM of the two single effects (or
+   the paper shows synergy, e.g. by isobologram); better than either but not more than the sum is
+   "sub_additive"; when the single effects are not reported well enough to tell, "unclear".
  "in_context": true or false (in vivo, rodent, nerve-injury model),
  "reason": one short sentence
 }"""
@@ -190,17 +198,18 @@ def run(args):
     model = args.model or pick_model(endpoint)
     if not model:
         sys.exit(f"no model found at {endpoint} (tried /v1/models and /api/tags); pass --model")
-    rows = list(csv.DictReader(open(SHEET, encoding="utf-8")))
+    sheet_path, out_path = Path(args.sheet), Path(args.out)
+    rows = list(csv.DictReader(open(sheet_path, encoding="utf-8")))
     done = {}
-    if OUT.exists():
-        done = {r["rec"]: r for r in csv.DictReader(open(OUT, encoding="utf-8")) if r.get("interaction") or r.get("ran_in_paper")}
+    if out_path.exists():
+        done = {r["rec"]: r for r in csv.DictReader(open(out_path, encoding="utf-8")) if r.get("interaction") or r.get("ran_in_paper")}
     cols = ["rec", "pmid", "rater", *FIELDS, "reason", "error"]
     todo = [r for r in rows if r["rec"] not in done][: args.limit or None]
     asker = Asker(endpoint, model, args.timeout, args.max_tokens, args.think)
     print(f"model {model}; {len(done)} done, {len(todo)} to ask")
     results = dict(done)
     for i, row in enumerate(todo, 1):
-        rec = {"rec": row["rec"], "pmid": row["pmid"], "rater": model, "error": ""}
+        rec = {"rec": row["rec"], "pmid": row["pmid"], "rater": f"{model} (prompt v{PROMPT_VERSION}, thinking {'on' if args.think else 'off'})", "error": ""}
         for attempt in range(2):
             try:
                 raw = asker(prompt_for(row))
@@ -220,15 +229,16 @@ def run(args):
                 time.sleep(2)
         results[row["rec"]] = rec
         print(f"[{i}/{len(todo)}] {row['rec']}: {rec.get('interaction') or rec['error']}")
-        with open(OUT, "w", newline="", encoding="utf-8") as fh:      # written after every row: safe to stop
+        with open(out_path, "w", newline="", encoding="utf-8") as fh:      # written after every row: safe to stop
             w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
             w.writeheader()
             w.writerows(results[r["rec"]] for r in rows if r["rec"] in results)
 
 
-def score():
-    sheet = {r["rec"]: r for r in csv.DictReader(open(SHEET, encoding="utf-8"))}
-    ai = [r for r in csv.DictReader(open(OUT, encoding="utf-8")) if r.get("interaction") or r.get("ran_in_paper")]
+def score(sheet_path=SHEET, out_path=OUT):
+    sheet = {r["rec"]: r for r in csv.DictReader(open(sheet_path, encoding="utf-8"))}
+    ai = [r for r in csv.DictReader(open(out_path, encoding="utf-8")) if r.get("interaction") or r.get("ran_in_paper")]
+    print(f"rater: {ai[0]['rater'] if ai else '-'}")
     coarse = lambda x: "less than additive" if x in LESS else x
     print(f"second rater answered {len(ai)} of {len(sheet)} rows")
     ran = [r for r in ai if r["ran_in_paper"] == "y"]
@@ -241,8 +251,15 @@ def score():
     print(f"  vs extraction, interaction: exact {ex}/{len(pairs)}, coarse {co}/{len(pairs)}")
     d = [(a, s) for a, s in pairs if a["direction_combination"] != ""]
     print(f"  vs extraction, combination direction: {sum(a['direction_combination'] == str(s['extracted_direction_combination']) for a, s in d)}/{len(d)}")
-    from collections import Counter
     print("  second rater's classes:", dict(Counter(a["interaction"] for a, _ in pairs)))
+    if out_path != OUT and OUT.exists():
+        first = {r["rec"]: r for r in csv.DictReader(open(OUT, encoding="utf-8"))}
+        both = [(a, first[a["rec"]]) for a in ai if a["rec"] in first and a["interaction"]]
+        changed = [(a, f) for a, f in both if a["interaction"] != f["interaction"]]
+        print(f"  vs the first run (prompt v1, thinking off): same class on {len(both) - len(changed)}/{len(both)}; "
+              f"changes: {dict(Counter((f['interaction'], a['interaction']) for a, f in changed).most_common(8))}")
+        print(f"  says the paper did NOT run it: {sum(a['ran_in_paper'] == 'n' for a in ai)} (first run: "
+              f"{sum(first[a['rec']]['ran_in_paper'] == 'n' for a in ai if a['rec'] in first)})")
     human = [(a, sheet[a["rec"]]) for a in ai if sheet[a["rec"]].get("expert_interaction", "").strip()]
     if human:
         k = sum(a["interaction"] == s["expert_interaction"].strip() for a, s in human)
@@ -261,5 +278,13 @@ if __name__ == "__main__":
     p.add_argument("--debug", action="store_true", help="print every unparsable reply")
     p.add_argument("--think", action="store_true", help="let the model think (slower); by default /no_think is sent")
     p.add_argument("--score", action="store_true")
+    p.add_argument("--sheet", default=str(SHEET))
+    p.add_argument("--out", default=str(OUT))
+    p.add_argument("--focused", action="store_true",
+                   help="the 60-row focused sheet, thinking on, larger budget, answers in adjudication_focused_rater.csv")
     a = p.parse_args()
-    score() if a.score else run(a)
+    if a.focused:
+        a.sheet, a.out, a.think = str(FOCUSED), str(FOCUSED_OUT), True
+        a.max_tokens = max(a.max_tokens, 16000)
+        a.timeout = max(a.timeout, 1800)
+    score(Path(a.sheet), Path(a.out)) if a.score else run(a)
