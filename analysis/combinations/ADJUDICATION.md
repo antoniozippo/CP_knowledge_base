@@ -22,3 +22,19 @@ reports how often the paper ran the experiment, how often the interventions and 
 how often the interaction class and direction agree (exactly and on the three coarse classes: less than
 additive, additive, synergy). Those rates bound every figure in `results.md`; in particular, if "less than
 additive" labels are often really "unclear", the 84% majority baseline is itself an artefact.
+
+## Second rater: a local AI model
+
+`analysis/scripts/second_rater.py` asks a model served with an OpenAI-compatible API (llama.cpp, vLLM,
+LM Studio, Ollama) to fill the same fields, from the same quote and context. It is **not shown** the
+extracted directions or interaction class, so it is not anchored on them. Answers go to
+`adjudication_second_rater.csv`, never into the expert's sheet. Standard library only; rows already
+answered are skipped on a restart.
+
+    python3 analysis/scripts/second_rater.py --endpoint http://192.168.1.87:8888   # --limit 5 for a trial
+    python3 analysis/scripts/second_rater.py --score
+
+It must run on a machine that can reach the model (the address above is on the owner's local network,
+not reachable from cloud sessions). It is a second opinion, not an expert: its agreement with the
+extraction says how reproducible the labels are; its agreement with the human expert, once the sheet is
+filled, says how far an AI rater can stand in for one.
