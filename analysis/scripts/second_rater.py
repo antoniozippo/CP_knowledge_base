@@ -77,12 +77,14 @@ def pick_model(endpoint):
     return None
 
 
-def ask(endpoint, model, user, timeout):
+def ask(endpoint, model, user, timeout, max_tokens=4000):
     msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
     try:
         data = post(endpoint + "/v1/chat/completions",
-                    {"model": model, "messages": msgs, "temperature": 0, "max_tokens": 400}, timeout)
-        return data["choices"][0]["message"]["content"]
+                    {"model": model, "messages": msgs, "temperature": 0, "max_tokens": max_tokens}, timeout)
+        msg = data["choices"][0]["message"]
+        # some servers put a reasoning model's thinking (and sometimes the answer) in a separate field
+        return (msg.get("content") or "") + "\n" + (msg.get("reasoning_content") or msg.get("reasoning") or "")
     except urllib.error.HTTPError as exc:
         if exc.code != 404:
             raise
@@ -93,12 +95,18 @@ def ask(endpoint, model, user, timeout):
 
 def parse(text):
     text = re.sub(r"<think>.*?</think>", "", text or "", flags=re.S)       # reasoning models
-    m = re.search(r"\{.*\}", text, re.S)
-    if not m:
-        return None
-    try:
-        d = json.loads(m.group(0))
-    except json.JSONDecodeError:
+    text = re.sub(r"```(?:json)?", "", text)
+    d = None
+    # the last JSON object in the reply that holds an "interaction" key (thinking may contain others)
+    for m in reversed(list(re.finditer(r"\{[^{}]*\}", text, re.S))):
+        try:
+            cand = json.loads(m.group(0))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(cand, dict) and ("interaction" in cand or "ran_in_paper" in cand):
+            d = cand
+            break
+    if d is None:
         return None
     out = {}
     for k in ("ran_in_paper", "interventions_ok", "readout_ok", "in_context"):
@@ -138,11 +146,15 @@ def run(args):
         rec = {"rec": row["rec"], "pmid": row["pmid"], "rater": model, "error": ""}
         for attempt in range(2):
             try:
-                parsed = parse(ask(endpoint, model, prompt_for(row), args.timeout))
+                raw = ask(endpoint, model, prompt_for(row), args.timeout, args.max_tokens)
+                parsed = parse(raw)
                 if parsed:
                     rec.update(parsed)
+                    rec["error"] = ""
                     break
                 rec["error"] = "unparsable answer"
+                if args.debug or i == 1:
+                    print("---- raw reply (first 1500 characters) ----\n" + raw[:1500] + "\n----")
             except (urllib.error.URLError, OSError, KeyError, ValueError) as exc:
                 rec["error"] = str(exc)[:200]
                 time.sleep(2)
@@ -184,7 +196,9 @@ if __name__ == "__main__":
     p.add_argument("--endpoint", default="http://192.168.1.87:8888")
     p.add_argument("--model", default="")
     p.add_argument("--limit", type=int, default=0)
-    p.add_argument("--timeout", type=int, default=300)
+    p.add_argument("--timeout", type=int, default=600)
+    p.add_argument("--max-tokens", type=int, default=4000, help="room for a reasoning model's thinking")
+    p.add_argument("--debug", action="store_true", help="print every unparsable reply")
     p.add_argument("--score", action="store_true")
     a = p.parse_args()
     score() if a.score else run(a)
