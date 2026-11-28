@@ -86,20 +86,67 @@ def pick_model(endpoint):
     return None
 
 
-def ask(endpoint, model, user, timeout, max_tokens=4000):
-    msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
-    try:
-        data = post(endpoint + "/v1/chat/completions",
-                    {"model": model, "messages": msgs, "temperature": 0, "max_tokens": max_tokens}, timeout)
-        msg = data["choices"][0]["message"]
+SCHEMA = {
+    "name": "rating", "strict": True,
+    "schema": {
+        "type": "object", "additionalProperties": False,
+        "properties": {
+            "ran_in_paper": {"type": "boolean"}, "interventions_ok": {"type": "boolean"},
+            "readout_ok": {"type": "boolean"},
+            "direction_combination": {"type": "integer", "enum": [-1, 0, 1]},
+            "direction_a": {"type": "integer", "enum": [-1, 0, 1]},
+            "direction_b": {"type": "integer", "enum": [-1, 0, 1]},
+            "interaction": {"type": "string", "enum": list(INTERACTIONS)},
+            "in_context": {"type": "boolean"}, "reason": {"type": "string"},
+        },
+        "required": ["ran_in_paper", "interventions_ok", "readout_ok", "direction_combination", "direction_a",
+                     "direction_b", "interaction", "in_context", "reason"],
+    },
+}
+FOLLOW_UP = "Stop reasoning. Reply now with only the final JSON object, nothing else."
+
+
+class Asker:
+    """One chat call per question. Tries JSON-schema output (LM Studio, vLLM, llama.cpp) and drops it
+    if the server refuses; appends /no_think (Qwen) unless thinking is wanted; and when a reply ends
+    without a JSON object, asks once more for only the JSON, with the reply so far as context."""
+
+    def __init__(self, endpoint, model, timeout, max_tokens, think=False):
+        self.endpoint, self.model, self.timeout, self.max_tokens, self.think = endpoint, model, timeout, max_tokens, think
+        self.schema_ok = True
+        self.last_finish = ""
+
+    def chat(self, msgs, max_tokens):
+        payload = {"model": self.model, "messages": msgs, "temperature": 0, "max_tokens": max_tokens}
+        if self.schema_ok:
+            payload["response_format"] = {"type": "json_schema", "json_schema": SCHEMA}
+        try:
+            data = post(self.endpoint + "/v1/chat/completions", payload, self.timeout)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                data = post(self.endpoint + "/api/chat", {"model": self.model, "messages": msgs, "stream": False,
+                                                          "format": "json", "options": {"temperature": 0}}, self.timeout)
+                self.last_finish = data.get("done_reason", "")
+                return data["message"]["content"]
+            if self.schema_ok and exc.code in (400, 422, 500):
+                self.schema_ok = False               # this server does not take response_format
+                return self.chat(msgs, max_tokens)
+            raise
+        choice = data["choices"][0]
+        self.last_finish = choice.get("finish_reason") or ""
+        msg = choice["message"]
         # some servers put a reasoning model's thinking (and sometimes the answer) in a separate field
         return (msg.get("content") or "") + "\n" + (msg.get("reasoning_content") or msg.get("reasoning") or "")
-    except urllib.error.HTTPError as exc:
-        if exc.code != 404:
-            raise
-    data = post(endpoint + "/api/chat", {"model": model, "messages": msgs, "stream": False,
-                                         "options": {"temperature": 0}}, timeout)        # Ollama
-    return data["message"]["content"]
+
+    def __call__(self, user):
+        suffix = "" if self.think else " /no_think"
+        msgs = [{"role": "system", "content": SYSTEM + suffix}, {"role": "user", "content": user + suffix}]
+        raw = self.chat(msgs, self.max_tokens)
+        if parse(raw):
+            return raw
+        tail = raw[-6000:]
+        again = self.chat(msgs + [{"role": "assistant", "content": tail}, {"role": "user", "content": FOLLOW_UP + suffix}], 800)
+        return raw + "\n" + again
 
 
 def parse(text):
@@ -149,21 +196,25 @@ def run(args):
         done = {r["rec"]: r for r in csv.DictReader(open(OUT, encoding="utf-8")) if r.get("interaction") or r.get("ran_in_paper")}
     cols = ["rec", "pmid", "rater", *FIELDS, "reason", "error"]
     todo = [r for r in rows if r["rec"] not in done][: args.limit or None]
+    asker = Asker(endpoint, model, args.timeout, args.max_tokens, args.think)
     print(f"model {model}; {len(done)} done, {len(todo)} to ask")
     results = dict(done)
     for i, row in enumerate(todo, 1):
         rec = {"rec": row["rec"], "pmid": row["pmid"], "rater": model, "error": ""}
         for attempt in range(2):
             try:
-                raw = ask(endpoint, model, prompt_for(row), args.timeout, args.max_tokens)
+                raw = asker(prompt_for(row))
                 parsed = parse(raw)
                 if parsed:
                     rec.update(parsed)
                     rec["error"] = ""
+                    if attempt or i == 1:
+                        print(f"  (schema output {'on' if asker.schema_ok else 'off'}; finish reason '{asker.last_finish}')")
                     break
                 rec["error"] = "unparsable answer"
                 if args.debug or i == 1:
-                    print("---- raw reply (first 1500 characters) ----\n" + raw[:1500] + "\n----")
+                    print(f"---- unparsable reply: {len(raw)} characters, finish reason "
+                          f"'{asker.last_finish}'; last 1500 characters ----\n" + raw[-1500:] + "\n----")
             except (urllib.error.URLError, OSError, KeyError, ValueError) as exc:
                 rec["error"] = str(exc)[:200]
                 time.sleep(2)
@@ -208,6 +259,7 @@ if __name__ == "__main__":
     p.add_argument("--timeout", type=int, default=600)
     p.add_argument("--max-tokens", type=int, default=4000, help="room for a reasoning model's thinking")
     p.add_argument("--debug", action="store_true", help="print every unparsable reply")
+    p.add_argument("--think", action="store_true", help="let the model think (slower); by default /no_think is sent")
     p.add_argument("--score", action="store_true")
     a = p.parse_args()
     score() if a.score else run(a)
