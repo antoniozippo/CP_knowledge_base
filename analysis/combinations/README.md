@@ -63,7 +63,8 @@ scoring; none was selected on these cases (`results.md`, last table).
 
 ## Next steps (not started)
 
-1. Expert check of a sample of records: **prepared, not done**. `adjudication_sample.csv` (120 records) and
+1. Expert check of a sample of records: **prepared; human sheet not filled**. A local AI second rater
+   (Qwen) has rated all 120: `second_rater_results.md` (stated labels agree well, inferred ones do not). `adjudication_sample.csv` (120 records) and
    `ADJUDICATION.md` (instructions); `prepare_combination_adjudication.py score` reads the filled sheet.
 2. Add the missing mechanism links (the two interventions of an occlusion record are connected by the
    paper's own mechanism claim) as a test of whether a model given them then reproduces the label;
