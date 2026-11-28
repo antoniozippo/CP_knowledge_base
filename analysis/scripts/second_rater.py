@@ -2,12 +2,12 @@
 """A local AI model as a second rater of the combination records (phase 4, step 1).
 
 Reads analysis/combinations/adjudication_sample.csv and asks a model served with an OpenAI-compatible
-API (llama.cpp server, vLLM, LM Studio, Ollama's /v1, ...) to fill the same fields the human expert
+API (LM Studio by default, on port 1234; also llama.cpp, vLLM, Ollama) to fill the same fields the human expert
 fills (ADJUDICATION.md). The model sees the interventions, readout, quote and surrounding text but NOT
 the extracted directions or interaction class, so its answers are not anchored on them. Answers go to
 analysis/combinations/adjudication_second_rater.csv; the human sheet is never touched.
 
-  python3 analysis/scripts/second_rater.py --endpoint http://192.168.1.87:8888 [--model NAME] [--limit 5]
+  python3 analysis/scripts/second_rater.py --endpoint http://192.168.1.87:1234 [--model NAME] [--limit 5]
   python3 analysis/scripts/second_rater.py --score
 
 Only the standard library is used, so it runs on any machine with Python 3.9+ and this checkout.
@@ -66,14 +66,23 @@ def get(url, timeout=15):
 
 
 def pick_model(endpoint):
+    # LM Studio: /api/v0/models says which model is loaded; /v1/models lists every downloaded one
+    try:
+        items = get(endpoint + "/api/v0/models").get("data") or []
+        loaded = [m["id"] for m in items if m.get("state") == "loaded" and m.get("type") in ("llm", "vlm", None)]
+        if loaded:
+            return loaded[0]
+    except (urllib.error.URLError, ValueError, OSError, KeyError):
+        pass
     for path in ("/v1/models", "/api/tags"):
         try:
             data = get(endpoint + path)
         except (urllib.error.URLError, ValueError, OSError):
             continue
-        items = data.get("data") or data.get("models") or []
-        if items:
-            return items[0].get("id") or items[0].get("name")
+        names = [m.get("id") or m.get("name") for m in data.get("data") or data.get("models") or []]
+        names = [n for n in names if n and "embed" not in n.lower()]          # not an embedding model
+        if names:
+            return names[0]
     return None
 
 
@@ -193,7 +202,7 @@ def score():
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("--endpoint", default="http://192.168.1.87:8888")
+    p.add_argument("--endpoint", default="http://192.168.1.87:1234")
     p.add_argument("--model", default="")
     p.add_argument("--limit", type=int, default=0)
     p.add_argument("--timeout", type=int, default=600)

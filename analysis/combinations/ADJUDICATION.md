@@ -25,13 +25,13 @@ additive" labels are often really "unclear", the 84% majority baseline is itself
 
 ## Second rater: a local AI model
 
-`analysis/scripts/second_rater.py` asks a model served with an OpenAI-compatible API (llama.cpp, vLLM,
-LM Studio, Ollama) to fill the same fields, from the same quote and context. It is **not shown** the
+`analysis/scripts/second_rater.py` asks a model served with an OpenAI-compatible API (LM Studio by
+default; also llama.cpp, vLLM, Ollama) to fill the same fields, from the same quote and context. It is **not shown** the
 extracted directions or interaction class, so it is not anchored on them. Answers go to
 `adjudication_second_rater.csv`, never into the expert's sheet. Standard library only; rows already
 answered are skipped on a restart.
 
-    python3 analysis/scripts/second_rater.py --endpoint http://192.168.1.87:8888   # --limit 5 for a trial
+    python3 analysis/scripts/second_rater.py --endpoint http://192.168.1.87:1234   # --limit 5 for a trial
     python3 analysis/scripts/second_rater.py --score
 
 It must run on a machine that can reach the model (the address above is on the owner's local network,
