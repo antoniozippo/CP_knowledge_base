@@ -46,4 +46,4 @@ def test_focused_sheet_is_a_blank_subset_with_reasons():
     rows = list(csv.DictReader(open(d / "adjudication_focused.csv", encoding="utf-8")))
     assert len(rows) == 60 and {r["rec"] for r in rows} <= full
     assert all(r["why_selected"] for r in rows) and not any(r["expert_interaction"] for r in rows)
-    assert "interaction" not in rows[0]          # the AI raters' answers are not shown
+    assert "interaction" not in rows[0] and {r["priority"] for r in rows} <= {"1", "2", "3"}

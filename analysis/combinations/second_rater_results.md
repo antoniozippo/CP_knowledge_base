@@ -53,3 +53,28 @@ Confusion (rows extraction, columns Qwen):
    modelling; drop inferred labels and the sub-additive class until a human has checked them.
 2. The human check is still needed, now focused: the 37 inferred rows, the synergy / sub-additive rows,
    and the "paper ran it" question, where the AI rater gives no information.
+
+## Second run on the focused sheet (thinking on, clearer synergy definition)
+
+Same model, `qwen/qwen3.8-27b`, on the 60 rows of `adjudication_focused.csv`, with thinking on and a
+prompt (v2) that says "better than either alone" is synergy only when it exceeds the sum of the single
+effects (`second_rater.py --focused`, answers in `adjudication_focused_rater.csv`).
+
+- **Most hard rows cannot be decided from the text: 28 of 60 are now "unclear".** By selection reason:
+  inferred labels 12/16, inferred and on the boundary 13/21, boundary with a stated label 3/18, random
+  check 0/5. The papers do not report both single effects well enough to compare with their sum.
+- **The first run's synergy calls were mostly loose wording.** 16 classes changed; 11 of them were
+  synergy and became unclear (7) or sub-additive (4). The rest changed in both directions by one row.
+- **Extracted classes on these rows:** synergy 15 -> synergy 8, unclear 6, sub-additive 1; sub-additive
+  12 -> sub-additive 4, unclear 7, synergy 1; additive 6 -> additive 3, synergy 2, sub-additive 1;
+  occlusion 4/4 and no added effect 4/6 kept; antagonism 5 -> 1 kept.
+- **All three (extraction, run 1, run 2) agree on 27 rows**: unclear 8, synergy 8, occlusion 4, no added
+  effect 4, additive 3.
+- **Still uninformative on whether the paper ran the experiment** (0 of 60 "no" in both runs).
+
+So the stated synergy labels are about half right and inferred labels mostly cannot be checked from the
+text; the decision to model on stated labels without sub-additive stands, and synergy should be treated
+as provisional too. The focused sheet now has a `priority` column for the human reviewer: 1 for the 19
+rows where the raters split three ways or the second run found the text insufficient, 2 for the 14 with
+a partial split, 3 for the 27 where all three agree (lowest value to check, except for whether the paper
+ran it). The AI answers themselves are still not shown.

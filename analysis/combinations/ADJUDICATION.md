@@ -5,7 +5,8 @@ raters disagree or cannot help (`second_rater_results.md`), with the reason in `
 37 whose interaction the extraction inferred (21 of them also on the synergy / additive boundary),
 18 more on that boundary, and 5 random others for the question a second AI rater could not answer
 (did the paper itself run the experiment). Same columns and rules as below; the AI raters' answers are
-not shown. Score it with
+not shown. Rows are ordered by `priority` (1 = the AI raters split or found the text
+insufficient; do these first; 3 = all agree). Score it with
 `python3 analysis/scripts/prepare_combination_adjudication.py score analysis/combinations/adjudication_focused.csv`.
 The full 120-row sheet below is for a complete check.
 
